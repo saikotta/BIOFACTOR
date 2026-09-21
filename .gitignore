@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+public/frames150_backup/
+public/frames_old/
+public/frames_backup_before_clean_video/
+public/frames.zip
+new-growth-frames/
