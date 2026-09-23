@@ -31,69 +31,1355 @@ body {
   font-family: var(--font-poppins), system-ui, -apple-system, sans-serif;
 }
 
-/* About Hero Animations */
-@keyframes fadeSlideUp {
+/* About Section 1 Entrance Animations */
+@keyframes section1AtmosOpen {
   0% {
     opacity: 0;
-    transform: translateY(22px);
+    transform: scale(0.96);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
 }
 
-@keyframes ecosystemReveal {
+@keyframes heroLine1Entrance {
   0% {
     opacity: 0;
-    transform: translateY(18px) scale(0.985);
-    clip-path: polygon(0 15%, 100% 15%, 100% 100%, 0 100%);
+    transform: translate3d(0, 18px, 0);
   }
   100% {
-    opacity: 0.80;
-    transform: translateY(0) scale(1);
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 
-@keyframes pollenFloat {
+@keyframes heroLine2Entrance {
   0% {
-    transform: translateY(0) translateX(0);
-    opacity: 0.08;
-  }
-  50% {
-    transform: translateY(-25px) translateX(10px);
-    opacity: 0.25;
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+    clip-path: inset(0 100% 0 0);
   }
   100% {
-    transform: translateY(-50px) translateX(0);
-    opacity: 0.08;
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    clip-path: inset(0 0 0 0);
   }
 }
 
-.animate-fade-slide-up {
-  animation: fadeSlideUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+@keyframes heroFoundingEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
-.animate-ecosystem-reveal {
-  animation: ecosystemReveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+@keyframes ecosystemSoftMaterialize {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0) scale(0.985);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
 }
 
-.animate-pollen-float {
-  animation: pollenFloat 15s ease-in-out infinite;
+.animate-s1-atmos {
+  animation: section1AtmosOpen 1000ms cubic-bezier(0.22, 1, 0.36, 1) 0ms forwards;
+}
+
+.animate-s1-line1 {
+  animation: heroLine1Entrance 750ms cubic-bezier(0.22, 1, 0.36, 1) 100ms forwards;
+}
+
+.animate-s1-line2 {
+  animation: heroLine2Entrance 800ms cubic-bezier(0.22, 1, 0.36, 1) 250ms forwards;
+}
+
+.animate-s1-subtext {
+  animation: heroFoundingEntrance 600ms cubic-bezier(0.22, 1, 0.36, 1) 650ms forwards;
+}
+
+.animate-s1-ecosystem {
+  animation: ecosystemSoftMaterialize 1200ms cubic-bezier(0.22, 1, 0.36, 1) 300ms forwards;
 }
 
 .fill-mode-forwards {
   animation-fill-mode: forwards;
 }
 
+/* About Section 2 Cinematic Entrance Animations */
+@keyframes s2RearPhotoEntrance {
+  0% {
+    opacity: 0.55;
+    transform: translate3d(42px, 0, 0) scale(1.035);
+    filter: blur(1.5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes s2Para1Entrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes s2Para2Entrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes s2FarmerCardEntrance {
+  0% {
+    opacity: 0.35;
+    transform: translate3d(48px, 24px, 0) scale(1.045);
+    filter: blur(1px);
+    box-shadow: 0 4px 12px rgba(22, 70, 40, 0.03);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+    box-shadow: 0 14px 35px rgba(22, 70, 40, 0.08);
+  }
+}
+
+@keyframes s2HeadlineLineEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 85%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes s2ClosingCopyEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-s2-rear-photo {
+  animation: s2RearPhotoEntrance 1700ms cubic-bezier(0.16, 1, 0.3, 1) 0ms forwards;
+}
+
+.animate-s2-para-1 {
+  animation: s2Para1Entrance 1000ms cubic-bezier(0.22, 1, 0.36, 1) 350ms forwards;
+}
+
+.animate-s2-para-2 {
+  animation: s2Para2Entrance 1000ms cubic-bezier(0.22, 1, 0.36, 1) 600ms forwards;
+}
+
+.animate-s2-farmer-card {
+  animation: s2FarmerCardEntrance 1500ms cubic-bezier(0.16, 1, 0.3, 1) 500ms forwards;
+}
+
+.animate-s2-line-1 {
+  animation: s2HeadlineLineEntrance 1000ms cubic-bezier(0.16, 1, 0.3, 1) 1050ms forwards;
+}
+
+.animate-s2-line-2 {
+  animation: s2HeadlineLineEntrance 1000ms cubic-bezier(0.16, 1, 0.3, 1) 1300ms forwards;
+}
+
+.animate-s2-line-3 {
+  animation: s2HeadlineLineEntrance 1000ms cubic-bezier(0.16, 1, 0.3, 1) 1550ms forwards;
+}
+
+.animate-s2-line-4 {
+  animation: s2HeadlineLineEntrance 1000ms cubic-bezier(0.16, 1, 0.3, 1) 1800ms forwards;
+}
+
+.animate-s2-closing-copy {
+  animation: s2ClosingCopyEntrance 850ms cubic-bezier(0.22, 1, 0.36, 1) 2450ms forwards;
+}
+
+/* About Section 3 Cinematic Entrance Animations */
+@keyframes s3EyebrowEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+    letter-spacing: 0.12em;
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    letter-spacing: 0.06em;
+  }
+}
+
+@keyframes s3TitleEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes s3FieldWrapperReveal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes s3FieldImageSettle {
+  0% {
+    opacity: 0.65;
+    transform: scale(1.035);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes s3SoftEdgeSweep {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  30% {
+    opacity: 0.10;
+  }
+  90% {
+    opacity: 0.08;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+.animate-s3-eyebrow {
+  animation: s3EyebrowEntrance 650ms cubic-bezier(0.22, 1, 0.36, 1) 100ms forwards;
+}
+
+.animate-s3-title {
+  animation: s3TitleEntrance 850ms cubic-bezier(0.16, 1, 0.3, 1) 220ms forwards;
+}
+
+.animate-s3-field-wrapper {
+  animation: s3FieldWrapperReveal 1400ms cubic-bezier(0.16, 1, 0.3, 1) 350ms forwards;
+}
+
+.animate-s3-field-image {
+  animation: s3FieldImageSettle 1400ms cubic-bezier(0.16, 1, 0.3, 1) 350ms forwards;
+}
+
+.animate-s3-light-sweep {
+  animation: s3SoftEdgeSweep 1400ms cubic-bezier(0.16, 1, 0.3, 1) 350ms forwards;
+}
+
+/* About Section 4 Cinematic Entrance Animations */
+@keyframes s4DescEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 26px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes s4StatementEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 34px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes s4Card1Entrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(28px, -18px, 0) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes s4Card2Entrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(-30px, 8px, 0) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes s4Card3Entrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(26px, 10px, 0) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes s4Card4Entrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(-24px, 20px, 0) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes s4Card5Entrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes s4Card6Entrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(26px, 20px, 0) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes s4CardInnerSettle {
+  0% {
+    opacity: 0.65;
+    transform: translate3d(0, 6px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-s4-desc {
+  animation: s4DescEntrance 850ms cubic-bezier(0.22, 1, 0.36, 1) 100ms forwards;
+}
+
+.animate-s4-statement {
+  animation: s4StatementEntrance 950ms cubic-bezier(0.22, 1, 0.36, 1) 350ms forwards;
+}
+
+.animate-s4-card-1 {
+  animation: s4Card1Entrance 800ms cubic-bezier(0.16, 1, 0.3, 1) 300ms forwards;
+}
+
+.animate-s4-card-2 {
+  animation: s4Card2Entrance 800ms cubic-bezier(0.16, 1, 0.3, 1) 480ms forwards;
+}
+
+.animate-s4-card-3 {
+  animation: s4Card3Entrance 800ms cubic-bezier(0.16, 1, 0.3, 1) 620ms forwards;
+}
+
+.animate-s4-card-4 {
+  animation: s4Card4Entrance 800ms cubic-bezier(0.16, 1, 0.3, 1) 780ms forwards;
+}
+
+.animate-s4-card-5 {
+  animation: s4Card5Entrance 800ms cubic-bezier(0.16, 1, 0.3, 1) 920ms forwards;
+}
+
+.animate-s4-card-6 {
+  animation: s4Card6Entrance 800ms cubic-bezier(0.16, 1, 0.3, 1) 1060ms forwards;
+}
+
+.animate-s4-card-inner-1 { animation: s4CardInnerSettle 600ms cubic-bezier(0.16, 1, 0.3, 1) 420ms forwards; }
+.animate-s4-card-inner-2 { animation: s4CardInnerSettle 600ms cubic-bezier(0.16, 1, 0.3, 1) 600ms forwards; }
+.animate-s4-card-inner-3 { animation: s4CardInnerSettle 600ms cubic-bezier(0.16, 1, 0.3, 1) 740ms forwards; }
+.animate-s4-card-inner-4 { animation: s4CardInnerSettle 600ms cubic-bezier(0.16, 1, 0.3, 1) 900ms forwards; }
+.animate-s4-card-inner-5 { animation: s4CardInnerSettle 600ms cubic-bezier(0.16, 1, 0.3, 1) 1040ms forwards; }
+.animate-s4-card-inner-6 { animation: s4CardInnerSettle 600ms cubic-bezier(0.16, 1, 0.3, 1) 1180ms forwards; }
+
+/* About Section 5 Cinematic "Living Biology Comes into Focus" Entrance Animations */
+@keyframes s5MacroFocus {
+  0% {
+    opacity: 0.72;
+    transform: scale(1.075);
+    filter: blur(7px) saturate(0.82) brightness(0.88);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0) saturate(1) brightness(1);
+  }
+}
+
+@keyframes s5LightBloom {
+  0% {
+    opacity: 0;
+    transform: translate3d(-18px, 12px, 0) scale(0.75);
+  }
+  45% {
+    opacity: 0.20;
+    transform: translate3d(0, 0, 0) scale(1.15);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(16px, -8px, 0) scale(1.25);
+  }
+}
+
+@keyframes s5VisionLabelEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(-16px, 0, 0);
+    letter-spacing: 0.12em;
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    letter-spacing: 0.04em;
+  }
+}
+
+@keyframes s5HeadlineLine1Entrance {
+  0% {
+    opacity: 0.2;
+    transform: translate3d(0, 105%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes s5HeadlineLine2Entrance {
+  0% {
+    opacity: 0.2;
+    transform: translate3d(0, 105%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes s5VisionParaEntrance {
+  0% {
+    opacity: 0;
+    filter: blur(3px);
+    transform: translate3d(0, 14px, 0);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes s5BioTraceGrow {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  45% {
+    transform: scaleX(1);
+    opacity: 0.20;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+
+@keyframes s5MissionLabelEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(-14px, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes s5MissionParaEntrance {
+  0% {
+    opacity: 0;
+    filter: blur(2px);
+    transform: translate3d(0, 18px, 0);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes s5DraftBadgeEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.animate-s5-bee-focus {
+  animation: s5MacroFocus 1600ms cubic-bezier(0.16, 1, 0.3, 1) 0ms forwards;
+  will-change: transform, opacity, filter;
+}
+
+.animate-s5-light-bloom {
+  animation: s5LightBloom 1700ms cubic-bezier(0.16, 1, 0.3, 1) 0ms forwards;
+}
+
+.animate-s5-vision-label {
+  animation: s5VisionLabelEntrance 650ms cubic-bezier(0.22, 1, 0.36, 1) 300ms forwards;
+}
+
+.animate-s5-headline-line-1 {
+  animation: s5HeadlineLine1Entrance 900ms cubic-bezier(0.16, 1, 0.3, 1) 430ms forwards;
+}
+
+.animate-s5-headline-line-2 {
+  animation: s5HeadlineLine2Entrance 900ms cubic-bezier(0.16, 1, 0.3, 1) 590ms forwards;
+}
+
+.animate-s5-vision-para {
+  animation: s5VisionParaEntrance 850ms cubic-bezier(0.22, 1, 0.36, 1) 820ms forwards;
+}
+
+.animate-s5-bio-trace {
+  animation: s5BioTraceGrow 900ms cubic-bezier(0.22, 1, 0.36, 1) 950ms forwards;
+}
+
+.animate-s5-mission-label {
+  animation: s5MissionLabelEntrance 650ms cubic-bezier(0.22, 1, 0.36, 1) 1050ms forwards;
+}
+
+.animate-s5-mission-para {
+  animation: s5MissionParaEntrance 900ms cubic-bezier(0.22, 1, 0.36, 1) 1190ms forwards;
+}
+
+.animate-s5-draft-badge {
+  animation: s5DraftBadgeEntrance 550ms cubic-bezier(0.22, 1, 0.36, 1) 1550ms forwards;
+}
+
+/* About Section 6 Cinematic "The People Behind the Platform" Entrance Animations */
+@keyframes s6LeadershipLabelEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+    letter-spacing: 0.14em;
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    letter-spacing: 0.08em;
+  }
+}
+
+@keyframes s6TitleLine1Entrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 105%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes s6TitleLine2Entrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 105%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes s6Card1Entrance {
+  0% {
+    opacity: 0.25;
+    transform: translate3d(-28px, 55px, 0) scale(0.94) rotateX(5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotateX(0deg);
+  }
+}
+
+@keyframes s6Card2Entrance {
+  0% {
+    opacity: 0.25;
+    transform: translate3d(-10px, 55px, 0) scale(0.94) rotateX(5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotateX(0deg);
+  }
+}
+
+@keyframes s6Card3Entrance {
+  0% {
+    opacity: 0.25;
+    transform: translate3d(10px, 55px, 0) scale(0.94) rotateX(5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotateX(0deg);
+  }
+}
+
+@keyframes s6Card4Entrance {
+  0% {
+    opacity: 0.25;
+    transform: translate3d(28px, 55px, 0) scale(0.94) rotateX(5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotateX(0deg);
+  }
+}
+
+@keyframes s6SurfaceSweep {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  40% {
+    opacity: 0.14;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes s6NamePlateEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0) scale(0.985);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes s6NameRoleInnerSettle {
+  0% {
+    opacity: 0.65;
+    transform: translate3d(0, 5px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes s6GalleryLightPass {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  30% {
+    opacity: 0.08;
+  }
+  70% {
+    opacity: 0.06;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+.animate-s6-label {
+  animation: s6LeadershipLabelEntrance 600ms cubic-bezier(0.22, 1, 0.36, 1) 100ms forwards;
+}
+
+.animate-s6-title-1 {
+  animation: s6TitleLine1Entrance 800ms cubic-bezier(0.16, 1, 0.3, 1) 220ms forwards;
+}
+
+.animate-s6-title-2 {
+  animation: s6TitleLine2Entrance 800ms cubic-bezier(0.16, 1, 0.3, 1) 360ms forwards;
+}
+
+.animate-s6-card-1 {
+  animation: s6Card1Entrance 950ms cubic-bezier(0.16, 1, 0.3, 1) 520ms forwards;
+  transform-origin: center bottom;
+}
+
+.animate-s6-card-2 {
+  animation: s6Card2Entrance 950ms cubic-bezier(0.16, 1, 0.3, 1) 680ms forwards;
+  transform-origin: center bottom;
+}
+
+.animate-s6-card-3 {
+  animation: s6Card3Entrance 950ms cubic-bezier(0.16, 1, 0.3, 1) 840ms forwards;
+  transform-origin: center bottom;
+}
+
+.animate-s6-card-4 {
+  animation: s6Card4Entrance 950ms cubic-bezier(0.16, 1, 0.3, 1) 1000ms forwards;
+  transform-origin: center bottom;
+}
+
+.animate-s6-surface-1 { animation: s6SurfaceSweep 800ms cubic-bezier(0.16, 1, 0.3, 1) 680ms forwards; }
+.animate-s6-surface-2 { animation: s6SurfaceSweep 800ms cubic-bezier(0.16, 1, 0.3, 1) 840ms forwards; }
+.animate-s6-surface-3 { animation: s6SurfaceSweep 800ms cubic-bezier(0.16, 1, 0.3, 1) 1000ms forwards; }
+.animate-s6-surface-4 { animation: s6SurfaceSweep 800ms cubic-bezier(0.16, 1, 0.3, 1) 1160ms forwards; }
+
+.animate-s6-plate-1 { animation: s6NamePlateEntrance 650ms cubic-bezier(0.22, 1, 0.36, 1) 900ms forwards; }
+.animate-s6-plate-2 { animation: s6NamePlateEntrance 650ms cubic-bezier(0.22, 1, 0.36, 1) 1060ms forwards; }
+.animate-s6-plate-3 { animation: s6NamePlateEntrance 650ms cubic-bezier(0.22, 1, 0.36, 1) 1220ms forwards; }
+.animate-s6-plate-4 { animation: s6NamePlateEntrance 650ms cubic-bezier(0.22, 1, 0.36, 1) 1380ms forwards; }
+
+.animate-s6-plate-inner-1 { animation: s6NameRoleInnerSettle 500ms cubic-bezier(0.22, 1, 0.36, 1) 980ms forwards; }
+.animate-s6-plate-inner-2 { animation: s6NameRoleInnerSettle 500ms cubic-bezier(0.22, 1, 0.36, 1) 1140ms forwards; }
+.animate-s6-plate-inner-3 { animation: s6NameRoleInnerSettle 500ms cubic-bezier(0.22, 1, 0.36, 1) 1300ms forwards; }
+.animate-s6-plate-inner-4 { animation: s6NameRoleInnerSettle 500ms cubic-bezier(0.22, 1, 0.36, 1) 1460ms forwards; }
+
+.animate-s6-gallery-light {
+  animation: s6GalleryLightPass 1000ms cubic-bezier(0.16, 1, 0.3, 1) 1200ms forwards;
+}
+
+/* About Section 7 Cinematic "Our Journey" Entrance & Progressive Milestone Animations */
+@keyframes s7HeadingEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes s7PillActivate {
+  0% {
+    opacity: 0.35;
+    transform: scale(0.88);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes s7PillHalo {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  35% {
+    opacity: 0.28;
+    transform: scale(1.12);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes s7ImageRightEntrance {
+  0% {
+    opacity: 0.25;
+    transform: translate3d(-24px, 14px, 0) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes s7ImageLeftEntrance {
+  0% {
+    opacity: 0.25;
+    transform: translate3d(24px, 14px, 0) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes s7CopyEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes s7NodePulse {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+  40% {
+    opacity: 0.35;
+    transform: translate(-50%, -50%) scale(1.6);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2.0);
+  }
+}
+
+@keyframes s7TodayFinishingPulse {
+  0% {
+    opacity: 0;
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(21, 91, 42, 0.4);
+  }
+  40% {
+    opacity: 0.32;
+    transform: scale(1.04);
+    box-shadow: 0 0 14px 4px rgba(21, 91, 42, 0.25);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(21, 91, 42, 0);
+  }
+}
+
+.animate-s7-heading {
+  animation: s7HeadingEntrance 800ms cubic-bezier(0.16, 1, 0.3, 1) 0ms forwards;
+}
+
+.animate-s7-pill {
+  animation: s7PillActivate 650ms cubic-bezier(0.16, 1, 0.3, 1) 0ms forwards;
+}
+
+.animate-s7-pill-halo {
+  animation: s7PillHalo 750ms cubic-bezier(0.16, 1, 0.3, 1) 0ms forwards;
+}
+
+.animate-s7-image-right {
+  animation: s7ImageRightEntrance 800ms cubic-bezier(0.16, 1, 0.3, 1) 100ms forwards;
+}
+
+.animate-s7-image-left {
+  animation: s7ImageLeftEntrance 800ms cubic-bezier(0.16, 1, 0.3, 1) 100ms forwards;
+}
+
+.animate-s7-copy {
+  animation: s7CopyEntrance 700ms cubic-bezier(0.16, 1, 0.3, 1) 200ms forwards;
+}
+
+.animate-s7-pulse {
+  animation: s7NodePulse 700ms cubic-bezier(0.16, 1, 0.3, 1) 0ms forwards;
+}
+
+.animate-s7-today-pulse {
+  animation: s7TodayFinishingPulse 900ms cubic-bezier(0.16, 1, 0.3, 1) 350ms forwards;
+}
+
+.s7-pill-interactive {
+  transition: background-color 280ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 280ms ease;
+}
+
+@media (hover: hover) {
+  .group:hover .s7-pill-interactive {
+    background-color: #C79A32 !important;
+    color: #ffffff !important;
+    transform: scale(1.035) !important;
+    box-shadow: 0 5px 14px rgba(90, 70, 20, 0.14) !important;
+  }
+}
+
+/* Home Frame 2 Primordial Flow Directional Transformation Animations */
+@keyframes p2ParaEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes p2ArtworkEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0) scale(0.992);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes p2AtmosVeil {
+  0% {
+    opacity: 0;
+    transform: translate3d(-18px, 8px, 0);
+  }
+  50% {
+    opacity: 0.14;
+    transform: translate3d(-4px, 2px, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(10px, -4px, 0);
+  }
+}
+
+@keyframes p2MineralShimmer {
+  0% {
+    opacity: 0;
+    transform: translate3d(-15px, 15px, 0);
+  }
+  50% {
+    opacity: 0.20;
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(15px, -15px, 0);
+  }
+}
+
+@keyframes p2WaterFlow {
+  0% {
+    opacity: 0;
+    transform: translate3d(-35px, 0, 0) scaleX(0.85);
+  }
+  50% {
+    opacity: 0.18;
+    transform: translate3d(0, 0, 0) scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(35px, 0, 0) scaleX(1.05);
+  }
+}
+
+@keyframes p2EnergyBloom {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 0.20;
+    transform: scale(1.04);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+@keyframes p2EnergyStreak {
+  0% {
+    opacity: 0;
+    transform: translate3d(110%, 0, 0);
+  }
+  40% {
+    opacity: 0.16;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-160%, 0, 0);
+  }
+}
+
+@keyframes p2SystemResolve {
+  0% {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 0.08;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+@keyframes p2HeadlineEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes p2SubtitleEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-p2-para {
+  animation: p2ParaEntrance 700ms cubic-bezier(0.16, 1, 0.3, 1) 0ms forwards;
+  will-change: transform, opacity;
+}
+
+.animate-p2-artwork {
+  animation: p2ArtworkEntrance 900ms cubic-bezier(0.16, 1, 0.3, 1) 100ms forwards;
+  will-change: transform, opacity;
+}
+
+.animate-p2-atmos {
+  animation: p2AtmosVeil 900ms cubic-bezier(0.16, 1, 0.3, 1) 150ms forwards;
+  will-change: transform, opacity;
+}
+
+.animate-p2-mineral {
+  animation: p2MineralShimmer 600ms cubic-bezier(0.16, 1, 0.3, 1) 450ms forwards;
+  will-change: transform, opacity;
+}
+
+.animate-p2-water {
+  animation: p2WaterFlow 700ms cubic-bezier(0.16, 1, 0.3, 1) 750ms forwards;
+  will-change: transform, opacity;
+}
+
+.animate-p2-energy-bloom {
+  animation: p2EnergyBloom 700ms cubic-bezier(0.16, 1, 0.3, 1) 1050ms forwards;
+  will-change: transform, opacity;
+}
+
+.animate-p2-energy-streak {
+  animation: p2EnergyStreak 800ms cubic-bezier(0.16, 1, 0.3, 1) 1150ms forwards;
+  will-change: transform, opacity;
+}
+
+.animate-p2-system-resolve {
+  animation: p2SystemResolve 700ms cubic-bezier(0.16, 1, 0.3, 1) 1450ms forwards;
+  will-change: transform, opacity;
+}
+
+.animate-p2-headline {
+  animation: p2HeadlineEntrance 700ms cubic-bezier(0.16, 1, 0.3, 1) 1550ms forwards;
+  will-change: transform, opacity;
+}
+
+.animate-p2-subtitle {
+  animation: p2SubtitleEntrance 650ms cubic-bezier(0.16, 1, 0.3, 1) 1750ms forwards;
+  will-change: transform, opacity;
+}
+
+/* Post-Entrance Ambient Motion Pass */
+@keyframes atmosLightBreath {
+  0%, 100% {
+    opacity: 0.70;
+    transform: scale(1.0);
+    background-position: 42% 48%;
+  }
+  50% {
+    opacity: 1.0;
+    transform: scale(1.045);
+    background-position: 47% 45%;
+  }
+}
+
+@keyframes sunlightSweepTravel {
+  0% {
+    transform: translateX(-35%);
+  }
+  100% {
+    transform: translateX(45%);
+  }
+}
+
+@keyframes ecosystemLivingBreath {
+  0%, 100% {
+    transform: scale(1) translateX(0);
+  }
+  50% {
+    transform: scale(1.006) translateX(-3px);
+  }
+}
+
+@keyframes ecosystemGlowPulse {
+  0%, 100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+
+@keyframes pollenDriftA {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translate3d(18px, -35px, 0);
+    opacity: 0.45;
+  }
+  100% {
+    transform: translate3d(-8px, -70px, 0);
+    opacity: 0.15;
+  }
+}
+
+@keyframes pollenDriftB {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translate3d(-22px, -45px, 0);
+    opacity: 0.40;
+  }
+  100% {
+    transform: translate3d(12px, -85px, 0);
+    opacity: 0.10;
+  }
+}
+
+@keyframes farmerImageKenBurns {
+  0%, 100% {
+    transform: scale(1.0) translateX(0);
+  }
+  50% {
+    transform: scale(1.025) translateX(-4px);
+  }
+}
+
+@keyframes rearPhotoAmbientScale {
+  0%, 100% {
+    transform: scale(1.0);
+  }
+  50% {
+    transform: scale(1.015);
+  }
+}
+
+.animate-s1-atmos-breath {
+  animation: atmosLightBreath 9s ease-in-out infinite alternate;
+}
+
+.animate-s1-sunlight-sweep {
+  animation: sunlightSweepTravel 14s ease-in-out infinite alternate;
+}
+
+.animate-s1-ecosystem-breath {
+  transform-origin: bottom right;
+  animation: ecosystemLivingBreath 9s ease-in-out infinite alternate;
+}
+
+.animate-s1-ecosystem-glow {
+  animation: ecosystemGlowPulse 8s ease-in-out infinite alternate;
+}
+
+.animate-pollen-drift-a {
+  animation: pollenDriftA 11s ease-in-out infinite alternate;
+}
+
+.animate-pollen-drift-b {
+  animation: pollenDriftB 13s ease-in-out infinite alternate;
+}
+
+.animate-s2-farmer-kenburns {
+  animation: farmerImageKenBurns 11s ease-in-out infinite alternate;
+}
+
+.animate-s2-rear-ambient {
+  animation: rearPhotoAmbientScale 13s ease-in-out infinite alternate;
+}
+
+.is-paused * {
+  animation-play-state: paused !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .animate-fade-slide-up,
-  .animate-ecosystem-reveal,
-  .animate-pollen-float {
+  .animate-s1-atmos,
+  .animate-s1-line1,
+  .animate-s1-line2,
+  .animate-s1-subtext,
+  .animate-s1-ecosystem,
+  .animate-s1-atmos-breath,
+  .animate-s1-sunlight-sweep,
+  .animate-s1-ecosystem-breath,
+  .animate-s1-ecosystem-glow,
+  .animate-pollen-drift-a,
+  .animate-pollen-drift-b,
+  .animate-s2-farmer-kenburns,
+  .animate-s2-rear-ambient,
+  .animate-s3-eyebrow,
+  .animate-s3-title,
+  .animate-s3-field-wrapper,
+  .animate-s3-field-image,
+  .animate-s3-light-sweep,
+  .animate-s4-desc,
+  .animate-s4-statement,
+  .animate-s4-card-1,
+  .animate-s4-card-2,
+  .animate-s4-card-3,
+  .animate-s4-card-4,
+  .animate-s4-card-5,
+  .animate-s4-card-6,
+  .animate-s4-card-inner-1,
+  .animate-s4-card-inner-2,
+  .animate-s4-card-inner-3,
+  .animate-s4-card-inner-4,
+  .animate-s4-card-inner-5,
+  .animate-s4-card-inner-6,
+  .animate-s5-bee-focus,
+  .animate-s5-light-bloom,
+  .animate-s5-vision-label,
+  .animate-s5-headline-line-1,
+  .animate-s5-headline-line-2,
+  .animate-s5-vision-para,
+  .animate-s5-bio-trace,
+  .animate-s5-mission-label,
+  .animate-s5-mission-para,
+  .animate-s5-draft-badge,
+  .animate-s6-label,
+  .animate-s6-title-1,
+  .animate-s6-title-2,
+  .animate-s6-card-1,
+  .animate-s6-card-2,
+  .animate-s6-card-3,
+  .animate-s6-card-4,
+  .animate-s6-surface-1,
+  .animate-s6-surface-2,
+  .animate-s6-surface-3,
+  .animate-s6-surface-4,
+  .animate-s6-plate-1,
+  .animate-s6-plate-2,
+  .animate-s6-plate-3,
+  .animate-s6-plate-4,
+  .animate-s6-plate-inner-1,
+  .animate-s6-plate-inner-2,
+  .animate-s6-plate-inner-3,
+  .animate-s6-plate-inner-4,
+  .animate-s6-gallery-light,
+  .animate-s7-heading,
+  .animate-s7-pill,
+  .animate-s7-pill-halo,
+  .animate-s7-image-right,
+  .animate-s7-image-left,
+  .animate-s7-copy,
+  .animate-s7-pulse,
+  .animate-s7-today-pulse,
+  .animate-p2-para,
+  .animate-p2-artwork,
+  .animate-p2-atmos,
+  .animate-p2-mineral,
+  .animate-p2-water,
+  .animate-p2-energy-bloom,
+  .animate-p2-energy-streak,
+  .animate-p2-system-resolve,
+  .animate-p2-headline,
+  .animate-p2-subtitle,
+  .animate-pollen-float,
+  .animate-subtle-scale-drift {
     animation: none !important;
-    opacity: 0.80 !important;
+    opacity: 1 !important;
     transform: none !important;
     clip-path: none !important;
   }
 }
+
+@keyframes subtleScaleDrift {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.012);
+  }
+}
+
+.animate-subtle-scale-drift {
+  animation: subtleScaleDrift 15s ease-in-out infinite;
+}
+
+
+
+
+@keyframes subtleScaleDrift {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.012);
+  }
+}
+
+.animate-subtle-scale-drift {
+  animation: subtleScaleDrift 15s ease-in-out infinite;
+}
+
+
