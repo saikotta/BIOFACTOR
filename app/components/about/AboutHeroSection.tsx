@@ -69,7 +69,7 @@ export default function AboutHeroSection() {
   }, [prefersReducedMotion]);
 
   // Direct clamped scroll progress values for Section 1 exit transition into Section 2
-  const scrollProgress = Math.min(1, Math.max(0, scrollY / 450));
+  const scrollProgress = Math.min(1, Math.max(0, scrollY / 410));
   const textTranslateY = prefersReducedMotion ? 0 : scrollProgress * -20;
   const textOpacity = prefersReducedMotion ? 1 : 1 - scrollProgress * 0.28; // 1 -> 0.72
   const ecosystemScrollY = prefersReducedMotion ? 0 : scrollProgress * 12;
@@ -77,7 +77,7 @@ export default function AboutHeroSection() {
   return (
     <section
       ref={sectionRef}
-      className={`relative w-full h-auto min-h-[460px] md:h-[500px] lg:h-[520px] xl:h-[550px] 2xl:h-[550px] overflow-hidden select-none font-sans border-b border-[#147A46]/12 flex items-center justify-between ${
+      className={`relative w-full h-auto min-h-[420px] md:h-[430px] overflow-hidden select-none font-sans border-b border-[#147A46]/12 flex items-center justify-between ${
         !isInView ? "is-paused" : ""
       }`}
       style={{
@@ -102,7 +102,7 @@ export default function AboutHeroSection() {
         
         {/* Left Column: Masked Headline & Supporting Copy */}
         <div
-          className="w-full md:w-1/2 max-w-2xl py-8 md:py-10 flex flex-col items-start justify-center z-30"
+          className="w-full md:w-1/2 max-w-2xl py-5 md:py-6 flex flex-col items-start justify-center z-30"
           style={{
             transform: `translateY(${textTranslateY}px)`,
             opacity: textOpacity,

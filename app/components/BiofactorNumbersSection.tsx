@@ -235,7 +235,7 @@ export default function BiofactorNumbersSection() {
     <section
       ref={sectionRef}
       id="biofactor-numbers-section"
-      className="relative z-20 w-full h-[100%] lg:h-[400vh] bg-[#EAF3EA] text-[#0a1a14] overflow-visible select-none"
+      className="relative z-20 w-full h-[100%] lg:h-[400vh] bg-transparent text-[#0a1a14] overflow-visible select-none"
     >
       <style>{`
         @keyframes bioAmbientGlowBreathing {
@@ -305,74 +305,70 @@ export default function BiofactorNumbersSection() {
               </h2>
             </div>
 
-            {/* Left Middle: Approved Agriculture Visual Stage */}
-            <div
-              ref={leftStageRef}
-              className="relative w-full -mt-2 lg:-mt-3 mb-auto py-0 flex flex-col items-center justify-center min-h-[340px] sm:min-h-[380px] lg:min-h-[420px]"
-            >
-              {/* Soft Atmospheric Background Glow */}
-              <div
-                ref={ambientGlowRef}
-                className={`absolute inset-0 pointer-events-none z-0 bg-[radial-gradient(circle_at_50%_50%,rgba(34,197,94,0.18)_0%,rgba(16,185,129,0.06)_50%,transparent_75%)] transition-opacity duration-700 ${isRevealed ? "bio-ambient-glow-layer" : "opacity-0"
-                  }`}
-              />
+            {/* Left Middle & Lower: Microbiology & Conviction Copy Stage */}
+            <div className="space-y-6 lg:space-y-8 max-w-xl my-auto pt-4 sm:pt-6">
+              {/* 3 & 4. Microbiology Headings */}
+              <div className="space-y-1 sm:space-y-2">
+                {/* 3. Eyebrow: The turn */}
+                <div
+                  style={{
+                    opacity: isRevealed ? 1 : 0,
+                    transform: isRevealed ? "translateY(0)" : "translateY(12px)",
+                    transition: isRevealed ? "opacity 500ms ease-out 250ms, transform 500ms ease-out 250ms" : "none"
+                  }}
+                  className="text-xs sm:text-sm font-semibold tracking-widest uppercase text-[#4F7F62]"
+                >
+                  The turn
+                </div>
 
-              {/* Agriculture Visual Container with Broad Corner Radial Attenuation + Directional Fades & Overlays */}
+                {/* 3. Outlined Microbiology Heading */}
+                <div
+                  style={{
+                    opacity: isRevealed ? 1 : 0,
+                    transform: isRevealed ? "translateY(0)" : "translateY(16px)",
+                    transition: isRevealed ? "opacity 600ms ease-out 300ms, transform 600ms ease-out 300ms" : "none"
+                  }}
+                  className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extralight text-transparent [-webkit-text-stroke:1px_#355C49] tracking-tight leading-none pt-1"
+                >
+                  Microbiology
+                </div>
+
+                {/* 4. Bold Headline */}
+                <h3
+                  style={{
+                    opacity: isRevealed ? 1 : 0,
+                    transform: isRevealed ? "translateY(0)" : "translateY(18px)",
+                    transition: isRevealed ? "opacity 600ms ease-out 350ms, transform 600ms ease-out 350ms" : "none"
+                  }}
+                  className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tight text-[#102A20] leading-[1.1] pt-1"
+                >
+                  <div>This is where</div>
+                  <div>becomes technology.</div>
+                </h3>
+              </div>
+
+              {/* Lower Conviction Block with Thin Left Vertical Line */}
               <div
-                ref={logoWrapperRef}
-                className="relative z-10 w-full max-w-[630px] mx-auto flex justify-center items-center pointer-events-auto"
                 style={{
                   opacity: isRevealed ? 1 : 0,
-                  transform: isRevealed ? "translateY(0)" : "translateY(16px)",
-                  transition: isRevealed ? "opacity 700ms ease-out 250ms, transform 700ms cubic-bezier(0.16, 1, 0.3, 1) 250ms" : "none"
+                  transform: isRevealed ? "translateY(0)" : "translateY(20px)",
+                  transition: isRevealed ? "opacity 700ms ease-out 400ms, transform 700ms ease-out 400ms" : "none"
                 }}
+                className="border-l-2 border-[#4F9A4A]/40 pl-4 sm:pl-5 space-y-3.5 pt-1 max-w-md"
               >
-                {/* WRAPPER 1: Broad Elliptical Radial Corner Attenuation Mask */}
-                <div
-                  className="agri-oval-corner-mask relative w-full h-[320px] sm:h-[380px] lg:h-[430px] xl:h-[440px] flex justify-center items-center overflow-hidden"
-                  style={{
-                    WebkitMaskImage: "radial-gradient(ellipse 78% 72% at 50% 52%, black 0%, black 58%, rgba(0,0,0,0.95) 66%, rgba(0,0,0,0.75) 75%, rgba(0,0,0,0.40) 84%, rgba(0,0,0,0.12) 92%, transparent 100%)",
-                    maskImage: "radial-gradient(ellipse 78% 72% at 50% 52%, black 0%, black 58%, rgba(0,0,0,0.95) 66%, rgba(0,0,0,0.75) 75%, rgba(0,0,0,0.40) 84%, rgba(0,0,0,0.12) 92%, transparent 100%)"
-                  }}
-                >
-                  {/* WRAPPER 2: Horizontal Linear Directional Mask */}
-                  <div
-                    className="agri-horizontal-fade relative w-full h-full flex justify-center items-center overflow-hidden"
-                    style={{
-                      WebkitMaskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.7) 10%, black 22%, black 78%, rgba(0,0,0,0.7) 90%, transparent 100%)",
-                      maskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.7) 10%, black 22%, black 78%, rgba(0,0,0,0.7) 90%, transparent 100%)"
-                    }}
-                  >
-                    {/* WRAPPER 3: Vertical Linear Directional Mask */}
-                    <div
-                      className="agri-vertical-fade relative w-full h-full flex justify-center items-center overflow-hidden"
-                      style={{
-                        WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 10%, black 22%, black 65%, rgba(0,0,0,0.5) 82%, transparent 100%)",
-                        maskImage: "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 10%, black 22%, black 65%, rgba(0,0,0,0.5) 82%, transparent 100%)"
-                      }}
-                    >
-                      {/* Perimeter #EAF3EA Atmospheric Overlay Gradients */}
-                      <div className="absolute top-0 inset-x-0 h-14 bg-gradient-to-b from-[#EAF3EA] via-[#EAF3EA]/50 to-transparent pointer-events-none z-20" />
-                      <div className="absolute bottom-0 inset-x-0 h-20 bg-gradient-to-t from-[#EAF3EA] via-[#EAF3EA]/60 to-transparent pointer-events-none z-20" />
-                      <div className="absolute left-0 inset-y-0 w-12 bg-gradient-to-r from-[#EAF3EA] via-[#EAF3EA]/40 to-transparent pointer-events-none z-20" />
-                      <div className="absolute right-0 inset-y-0 w-12 bg-gradient-to-l from-[#EAF3EA] via-[#EAF3EA]/40 to-transparent pointer-events-none z-20" />
+                {/* Green Sentence: 2 lines on desktop */}
+                <p className="text-base text-[#4F9A4A] font-normal leading-[1.45]">
+                  At <strong className="font-semibold">Biofactor</strong>, we explore this frontier with<br className="hidden sm:inline" />
+                  one conviction:
+                </p>
 
-                      {/* Central Sharp Plant Image */}
-                      <img
-                        src="/images/biofactor-agri-science.png"
-                        alt="Biofactor Agricultural Science"
-                        className="w-full h-full object-cover object-center block border-0 shadow-none bg-transparent select-none pointer-events-none relative z-10"
-                      />
-                    </div>
-                  </div>
-                </div>
+                {/* Body Statement: 3 lines on desktop */}
+                <p className="text-base text-[#111111] font-normal leading-[1.45]">
+                  The more deeply we understand biology,<br className="hidden sm:inline" />
+                  the more <em className="italic">intelligently</em> we can innovate with<br className="hidden sm:inline" />
+                  it.
+                </p>
               </div>
-            </div>
-
-            {/* Left Bottom: Subtle Status Indicator */}
-            <div className="pt-2 text-xs font-medium text-emerald-900/60 uppercase tracking-wider flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
-              <span>Verified Corporate Records</span>
             </div>
 
           </div>

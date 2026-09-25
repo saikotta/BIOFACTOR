@@ -1,673 +1,263 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 
 export default function HowWeThinkSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [animActive, setAnimActive] = useState(false);
-
-  useEffect(() => {
-    // IntersectionObserver to pause when offscreen & restart animation from 0s when entering viewport
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (entry.isIntersecting) {
-          setAnimActive(false);
-          // Brief tick to restart CSS animation cycle from Microbe (0s)
-          requestAnimationFrame(() => {
-            setAnimActive(true);
-          });
-        } else {
-          setAnimActive(false);
-        }
-      },
-      { threshold: 0.05 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
   return (
     <section
-      ref={sectionRef}
       id="how-we-think-section"
-      className="relative z-20 w-full bg-[#EAF3EA] text-[#0A1F13] pt-6 sm:pt-8 lg:pt-10 pb-8 sm:pb-10 lg:pb-12 px-4 sm:px-6 lg:px-8 flex flex-col justify-start items-center overflow-hidden select-none"
+      className="relative z-20 w-full py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 overflow-hidden select-none"
     >
-      {/* SCOPED CSS ANIMATION STYLES PORTED FAITHFULLY FROM CLAUDE HTML REFERENCE */}
-      <style>{`
-        :root {
-          --metabiome-bg: #fbfbf9;
-          --metabiome-ink: #14231a;
-          --metabiome-leaf: #3c7a4e;
-          --metabiome-gold: #c9a24b;
-          --metabiome-spark: #fff6c9;
-          --metabiome-line: rgba(20,35,26,0.10);
-        }
+      {/* ================================================== */}
+      {/* SINGLE ROOT WHEAT BACKGROUND LAYER WITH CINEMATIC OVERLAY */}
+      {/* ================================================== */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <img
+          src="/images/how-we-think-wheat.jpg"
+          alt="Biofactor Biologicals Wheat Field Background"
+          className="w-full h-full object-cover object-center"
+        />
+        {/* Layered cinematic gradient overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: `
+              linear-gradient(90deg, rgba(4, 28, 19, 0.52) 0%, rgba(4, 28, 19, 0.32) 42%, rgba(4, 28, 19, 0.24) 70%, rgba(4, 28, 19, 0.36) 100%),
+              linear-gradient(180deg, rgba(3, 24, 16, 0.10) 0%, rgba(3, 24, 16, 0.18) 100%)
+            `,
+          }}
+        />
+      </div>
 
-        /* LEVEL 1: SPHERE SLOTS (POSITION ONLY & REFINED MASK SIZES) */
-        .sphere-slot {
-          position: absolute;
-          transform: translate(-50%, -50%);
-          pointer-events: none;
-          z-index: 10;
-        }
-        .sphere-slot.microbe    { left: 12.234%; top: 47.753%; width: 13.220%; aspect-ratio: 1/1; }
-        .sphere-slot.metabolite { left: 36.424%; top: 48.411%; width: 13.023%; aspect-ratio: 1/1; }
-        .sphere-slot.metabiome  { left: 62.229%; top: 49.068%; width: 13.023%; aspect-ratio: 1/1; }
-        .sphere-slot.intel      { left: 88.203%; top: 47.425%; width: 14.886%; aspect-ratio: 1/1; }
+      {/* ================================================== */}
+      {/* SECTION CONTENT CONTAINER (z-index 1 over wheat) */}
+      {/* ================================================== */}
+      <div className="relative z-10 max-w-[1400px] mx-auto w-full space-y-8 sm:space-y-10 lg:space-y-12">
+        {/* ================================================== */}
+        {/* 1. MAIN TWO-COLUMN AREA (Upper 50/50 Desktop) */}
+        {/* ================================================== */}
+        <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-12 w-full">
+          {/* LEFT COLUMN (~50% Width) */}
+          <div className="w-full lg:w-1/2 flex flex-col justify-start">
+            {/* Technical Mono Eyebrow */}
+            <div
+              className="text-[11px] sm:text-xs lg:text-[13px] font-medium uppercase tracking-[0.2em] text-[#A9E889] mb-3"
+              style={{
+                fontFamily:
+                  'ui-monospace, "SFMono-Regular", "Cascadia Code", "Roboto Mono", monospace',
+              }}
+            >
+              THE NEXT GENERATION OF TECHNOLOGY
+            </div>
 
-        /* LEVEL 2: SPHERE THUMP (ACTIVATION SCALE ONLY) */
-        .sphere-thump {
-          width: 100%;
-          height: 100%;
-          transform: scale(1);
-          transform-origin: 50% 50%;
-        }
-        .anim-running .sphere-thump.microbe-thump    { animation: sphereThump 6s ease-in-out infinite; animation-delay: 0s; }
-        .anim-running .sphere-thump.metabolite-thump { animation: sphereThump 6s ease-in-out infinite; animation-delay: 1.1s; }
-        .anim-running .sphere-thump.metabiome-thump  { animation: sphereThump 6s ease-in-out infinite; animation-delay: 2.2s; }
-        .anim-running .sphere-thump.intel-thump      { animation: sphereThump 6s ease-in-out infinite; animation-delay: 3.3s; }
+            {/* Editorial Serif Sentence 1 */}
+            <p
+              className="text-[clamp(24px,2.5vw,43px)] font-normal text-[#F4F5EC] tracking-[-0.02em] leading-[1.15]"
+              style={{
+                fontFamily: 'Georgia, "Times New Roman", serif',
+              }}
+            >
+              won’t be defined by what we build
+            </p>
 
-        @keyframes sphereThump {
-          0%     { transform: scale(1); }
-          17.5%  { transform: scale(1.025); }
-          20%    { transform: scale(1.08); }
-          24%    { transform: scale(1.02); }
-          30%    { transform: scale(1); }
-          100%   { transform: scale(1); }
-        }
+            {/* Oversized Sans Word */}
+            <div className="text-[clamp(72px,9vw,155px)] font-bold text-[#F4F5EC] tracking-[-0.055em] leading-[0.86] my-2 sm:my-3">
+              larger.
+            </div>
 
-        /* LEVEL 3: SPHERE SPIN (CONTINUOUS ROTATION & CIRCULAR CLIP MASK) */
-        .sphere-spin {
-          width: 100%;
-          height: 100%;
-          border-radius: 50%;
-          overflow: hidden;
-          position: relative;
-          transform-origin: 50% 50%;
-        }
+            {/* Editorial Serif Sentence 2 */}
+            <p
+              className="text-[clamp(24px,2.5vw,43px)] font-normal text-[#F4F5EC] tracking-[-0.02em] leading-[1.15]"
+              style={{
+                fontFamily: 'Georgia, "Times New Roman", serif',
+              }}
+            >
+              It will be defined by what we learn to
+              <br />
+              understand
+            </p>
+          </div>
 
-        /* REFINED BIOLOGICAL ROTATION SPEEDS: 28s, 32s, 30s, 34s */
-        .anim-running .spin-microbe    { animation: spinCW 28s linear infinite; }
-        .anim-running .spin-metabolite { animation: spinCCW 32s linear infinite; }
-        .anim-running .spin-metabiome  { animation: spinCW 30s linear infinite; }
-        .anim-running .spin-intel      { animation: spinCCW 34s linear infinite; }
+          {/* RIGHT COLUMN (~50% Width): Structurally Reserved for Future Image */}
+          <div className="w-full lg:w-1/2 pointer-events-none" />
+        </div>
 
-        @keyframes spinCW  { from { transform: rotate(0deg); }   to { transform: rotate(360deg); } }
-        @keyframes spinCCW { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+        {/* ================================================== */}
+        {/* 2. FULL-WIDTH 0–5 µm MEASURING SCALE */}
+        {/* ================================================== */}
+        <div className="w-full pt-2 sm:pt-4 pb-2">
+          <div className="relative w-full">
+            {/* Baseline & Ticks SVG */}
+            <svg
+              className="w-full h-7 text-[#F4F5EC]"
+              viewBox="0 0 1000 28"
+              preserveAspectRatio="none"
+            >
+              <line
+                x1="0"
+                y1="22"
+                x2="1000"
+                y2="22"
+                stroke="currentColor"
+                strokeWidth="2"
+                opacity="0.58"
+              />
+              <line x1="2" y1="8" x2="2" y2="22" stroke="currentColor" strokeWidth="2.5" opacity="0.75" />
+              <line x1="200" y1="8" x2="200" y2="22" stroke="currentColor" strokeWidth="2.5" opacity="0.75" />
+              <line x1="400" y1="8" x2="400" y2="22" stroke="currentColor" strokeWidth="2.5" opacity="0.75" />
+              <line x1="600" y1="8" x2="600" y2="22" stroke="currentColor" strokeWidth="2.5" opacity="0.75" />
+              <line x1="800" y1="8" x2="800" y2="22" stroke="currentColor" strokeWidth="2.5" opacity="0.75" />
+              <line x1="998" y1="8" x2="998" y2="22" stroke="currentColor" strokeWidth="2.5" opacity="0.75" />
+              {[...Array(25)].map((_, i) => {
+                const x = i * 40;
+                if (i % 5 === 0) return null;
+                return (
+                  <line
+                    key={i}
+                    x1={x}
+                    y1="14"
+                    x2={x}
+                    y2="22"
+                    stroke="currentColor"
+                    strokeWidth="1.2"
+                    opacity="0.4"
+                  />
+                );
+              })}
+            </svg>
+            {/* Ticks Labels: 0 through 5 µm */}
+            <div className="flex justify-between text-xs sm:text-sm font-mono font-bold text-[#A9E889]/85 pt-1 px-0.5">
+              <span>0</span>
+              <span>1 µm</span>
+              <span>2 µm</span>
+              <span>3 µm</span>
+              <span>4 µm</span>
+              <span>5 µm</span>
+            </div>
+          </div>
+        </div>
 
-        /* LEVEL 4: SPHERE CROP (POSITIONED ARTWORK & OVERSIZED SCALE) */
-        .sphere-crop-img {
-          position: absolute;
-          max-width: none !important;
-          height: auto !important;
-          display: block;
-          pointer-events: none;
-          user-select: none;
-          transform: scale(1.15);
-        }
+        {/* ================================================== */}
+        {/* 3. TRUE FULL-BLEED TRANSLUCENT BOTANICAL STRIP/RIBBON */}
+        {/* ================================================== */}
+        <div
+          className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] my-6 sm:my-8 border-t border-b border-[rgba(190,232,190,0.12)] rounded-none backdrop-blur-[8px]"
+          style={{ backgroundColor: "rgba(5, 48, 34, 0.82)" }}
+        >
+          <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-6 lg:px-12 py-5 sm:py-6 lg:py-7 min-h-[118px] md:min-h-[130px] flex items-center">
+            <div className="grid grid-cols-1 md:grid-cols-3 w-full gap-6 md:gap-0">
+              {/* Column 1 */}
+              <div className="md:border-r border-[rgba(220,240,220,0.18)] md:pr-8 flex flex-col justify-center border-b border-[rgba(220,240,220,0.12)] md:border-b-0 pb-3 md:pb-0">
+                <div
+                  className="text-[11px] sm:text-xs lg:text-[13px] font-medium uppercase tracking-[0.2em] text-[#A9E889] mb-1.5"
+                  style={{
+                    fontFamily:
+                      'ui-monospace, "SFMono-Regular", "Cascadia Code", "Roboto Mono", monospace',
+                  }}
+                >
+                  SYSTEM
+                </div>
+                <div className="text-2xl sm:text-[26px] lg:text-[28px] font-normal text-[#F4F5EC] tracking-[-0.025em] leading-[1.1]">
+                  Living systems.
+                </div>
+              </div>
 
-        .microbe-crop {
-          width: 756.43%;
-          left: -42.54%;
-          top: -72.51%;
-          transform-origin: 12.234% 47.753%;
-        }
-        .metabolite-crop {
-          width: 767.87%;
-          left: -229.69%;
-          top: -75.90%;
-          transform-origin: 36.424% 48.411%;
-        }
-        .metabiome-crop {
-          width: 767.87%;
-          left: -427.84%;
-          top: -77.61%;
-          transform-origin: 62.229% 49.068%;
-        }
-        .intel-crop {
-          width: 671.77%;
-          left: -542.52%;
-          top: -58.05%;
-          transform-origin: 88.203% 47.425%;
-        }
+              {/* Column 2 */}
+              <div className="md:px-8 flex flex-col justify-center md:border-r border-[rgba(220,240,220,0.18)] border-b border-[rgba(220,240,220,0.12)] md:border-b-0 pb-3 md:pb-0">
+                <div
+                  className="text-[11px] sm:text-xs lg:text-[13px] font-medium uppercase tracking-[0.2em] text-[#A9E889] mb-1.5"
+                  style={{
+                    fontFamily:
+                      'ui-monospace, "SFMono-Regular", "Cascadia Code", "Roboto Mono", monospace',
+                  }}
+                >
+                  SIGNAL
+                </div>
+                <div className="text-2xl sm:text-[26px] lg:text-[28px] font-normal text-[#F4F5EC] tracking-[-0.025em] leading-[1.1]">
+                  Microbial intelligence.
+                </div>
+              </div>
 
-        /* CHARGE / DISCHARGE GLOW - SOFT BIOLOGICAL BREATHING */
-        .glow {
-          position: absolute;
-          width: 15%;
-          aspect-ratio: 1/1;
-          border-radius: 50%;
-          transform: translate(-50%,-50%) scale(0.95);
-          filter: blur(13px) brightness(1.0);
-          opacity: 0;
-          mix-blend-mode: screen;
-          pointer-events: none;
-          z-index: 25;
-        }
-        .anim-running .glow {
-          animation: chargeDischarge 6s ease-in-out infinite;
-        }
-        .glow-microbe {
-          left: 12.239%; top: 47.740%;
-          background: radial-gradient(circle, rgba(255,246,201,0.85) 0%, rgba(120,200,140,0.5) 45%, rgba(120,200,140,0) 72%);
-          animation-delay: 0s;
-        }
-        .glow-metabolite {
-          left: 36.577%; top: 48.151%;
-          background: radial-gradient(circle, rgba(255,246,201,0.85) 0%, rgba(201,162,75,0.5) 45%, rgba(201,162,75,0) 72%);
-          animation-delay: 1.1s;
-        }
-        .glow-metabiome {
-          left: 62.262%; top: 49.247%;
-          background: radial-gradient(circle, rgba(255,246,201,0.85) 0%, rgba(120,200,140,0.5) 45%, rgba(120,200,140,0) 72%);
-          animation-delay: 2.2s;
-        }
-        .glow-intel {
-          left: 88.179%; top: 47.466%;
-          background: radial-gradient(circle, rgba(255,246,201,0.9) 0%, rgba(201,162,75,0.6) 45%, rgba(201,162,75,0) 72%);
-          animation-delay: 3.3s;
-        }
+              {/* Column 3 */}
+              <div className="md:pl-8 flex flex-col justify-center pt-2 md:pt-0">
+                <div
+                  className="text-[11px] sm:text-xs lg:text-[13px] font-medium uppercase tracking-[0.2em] text-[#A9E889] mb-1.5"
+                  style={{
+                    fontFamily:
+                      'ui-monospace, "SFMono-Regular", "Cascadia Code", "Roboto Mono", monospace',
+                  }}
+                >
+                  SCALE
+                </div>
+                <div className="text-2xl sm:text-[26px] lg:text-[28px] font-normal text-[#F4F5EC] tracking-[-0.025em] leading-[1.1]">
+                  Biological potential.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        @keyframes chargeDischarge {
-          0%     { opacity:0;    transform: translate(-50%,-50%) scale(0.95); filter: blur(13px) brightness(1.0); }
-          3%     { opacity:0.20; transform: translate(-50%,-50%) scale(1.02); filter: blur(13px) brightness(1.08); }
-          7%     { opacity:0.50; transform: translate(-50%,-50%) scale(1.20); filter: blur(11px) brightness(1.35); }
-          12%    { opacity:0.18; transform: translate(-50%,-50%) scale(1.05); filter: blur(13px) brightness(1.08); }
-          18%    { opacity:0;    transform: translate(-50%,-50%) scale(0.95); filter: blur(13px) brightness(1.0); }
-          100%   { opacity:0;    transform: translate(-50%,-50%) scale(0.95); filter: blur(13px) brightness(1.0); }
-        }
+        {/* ================================================== */}
+        {/* 4. LARGE CLOSING STATEMENT */}
+        {/* ================================================== */}
+        <div className="w-full mt-14 sm:mt-16 lg:mt-18 mb-14 sm:mb-16 text-left relative">
+          <h2
+            className="relative z-10 uppercase text-[#F4F5EC] text-[clamp(44px,6.2vw,108px)] tracking-[-0.045em] leading-[0.92] font-bold"
+            style={{
+              fontFamily: "var(--font-poppins), Poppins, sans-serif",
+              fontWeight: 700,
+              letterSpacing: "-0.045em",
+              lineHeight: 0.92,
+            }}
+          >
+            <div>THE NEXT BIG</div>
+            <div className="flex flex-wrap items-baseline gap-x-4 sm:gap-x-6 gap-y-2 mt-1 sm:mt-2">
+              <span>THING IS REALLY</span>
+              <span className="text-[#9DDC72] font-bold ml-1 sm:ml-2">
+                SMALL.
+              </span>
+            </div>
+          </h2>
+        </div>
 
-        /* RESTING BRIDGES */
-        .bridge {
-          fill: none;
-          stroke: url(#bridgeGrad);
-          stroke-width: 2.5;
-          stroke-linecap: round;
-          opacity: 0.18;
-        }
-
-        svg.wire {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          overflow: visible;
-          z-index: 20;
-        }
-
-        /* LABELS LIT RESPONSE */
-        .label-text-lit {
-          transition: color 0.4s ease, text-shadow 0.4s ease;
-        }
-        .anim-running .l-microbe-lit     { animation: label-lit 6s ease-in-out infinite; animation-delay: 0s; }
-        .anim-running .l-metabolite-lit  { animation: label-lit 6s ease-in-out infinite; animation-delay: 1.1s; }
-        .anim-running .l-metabiome-lit   { animation: label-lit 6s ease-in-out infinite; animation-delay: 2.2s; }
-        .anim-running .l-intel-lit       { animation: label-lit 6s ease-in-out infinite; animation-delay: 3.3s; }
-
-        @keyframes label-lit {
-          0%     { color: rgba(20,35,26,0.32); text-shadow: none; }
-          4%     { color: #14231a; text-shadow: 0 0 10px rgba(201,162,75,0.4); }
-          8%     { color: #14231a; text-shadow: 0 0 16px rgba(255,246,201,0.8); }
-          14%    { color: rgba(20,35,26,0.32); text-shadow: none; }
-          100%   { color: rgba(20,35,26,0.32); text-shadow: none; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .glow, .bridge { animation: none !important; opacity: 0 !important; }
-          .sphere-spin { animation: none !important; }
-        }
-      `}</style>
-
-      {/* SECTION CONTENT CONTAINER */}
-      <div className="w-full max-w-[1240px] w-[85vw] mx-auto flex flex-col items-start justify-start">
-        
-        {/* TOP COPY */}
-        <div className="w-full text-left flex flex-col items-start space-y-2 sm:space-y-2.5 z-10 mb-0">
-          <div className="flex items-center justify-start gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#07552D]" />
-            <span className="text-xs sm:text-sm font-semibold tracking-widest uppercase text-[#07552D] font-sans">
-              How We Think
+        {/* ================================================== */}
+        {/* 5. BRAND / CTA ROW */}
+        {/* ================================================== */}
+        <div className="w-full flex flex-col md:flex-row items-center justify-between gap-6 pt-6 mb-4 border-t border-[rgba(244,245,236,0.18)] mt-14 sm:mt-16">
+          {/* Middle / Left: Official Logo / Branding */}
+          <div className="flex items-center gap-3">
+            <img
+              src="/images/biofactor-official-logo.png"
+              alt="Biofactor Biologicals"
+              className="h-9 sm:h-11 w-auto object-contain brightness-200"
+            />
+            <span className="text-sm sm:text-base font-medium tracking-[0.12em] uppercase text-[#F4F5EC]/88">
+              BIOFACTOR BIOLOGICALS
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-extrabold tracking-tight text-[#0A1F13] leading-[1.08] max-w-[660px]">
-            Nature Works Through
-            <br /> Communities, Not
-            <br /> Single Organisms
-          </h2>
-
-          <p className="text-base sm:text-lg lg:text-[18px] font-normal text-[#2C3E35] leading-relaxed max-w-[740px]">
-            Microbes talking to minerals. Minerals feeding plants. Plants
-            feeding soil back. We call the unit of that conversation the
-            Metabiome — and it&apos;s the reason our products are built as
-            systems, not single-strain silver bullets.
-          </p>
-        </div>
-
-        {/* BIOLOGICAL SYSTEM ARTWORK & OVERLAY STAGE */}
-        <div className="relative w-full max-w-[1240px] w-[85vw] mx-auto flex flex-col items-center mt-6 sm:mt-7">
-          
-          {/* Viewport Box (aspect ratio 2153/415 exposes full artwork y=160 to y=575) */}
-          <div className="relative w-full overflow-hidden aspect-[2153/415]">
-            
-            {/* Shifted Wrapper (aspect-[2153/730], top: -38.554%) */}
-            <div
-              className={`absolute inset-x-0 w-full aspect-[2153/730] ${animActive ? "anim-running" : ""}`}
-              style={{ top: "-38.554%" }}
+          {/* Right: CTA Buttons */}
+          <div className="flex items-center gap-3 flex-wrap">
+            <a
+              href="/science-technology"
+              className="bg-[#A9E889] hover:bg-[#97d876] text-[#06271A] font-semibold text-xs sm:text-sm px-6 sm:px-7 h-[46px] sm:h-[50px] flex items-center justify-center rounded-lg transition-colors text-center shadow-sm"
             >
-              {/* 1. Base Clean PNG Artwork */}
-              <img
-                src="/images/metabiome-intelligence-system.png"
-                alt="Metabiome Intelligence System"
-                className="w-full h-full block select-none pointer-events-none"
-              />
-
-              {/* 2. ROTATING SPHERE VISUAL LAYERS (4-LEVEL NESTED ARCHITECTURE) */}
-              <div className="sphere-slot microbe">
-                <div className="sphere-thump microbe-thump">
-                  <div className="sphere-spin spin-microbe">
-                    <img
-                      src="/images/metabiome-intelligence-system.png"
-                      alt=""
-                      className="sphere-crop-img microbe-crop"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="sphere-slot metabolite">
-                <div className="sphere-thump metabolite-thump">
-                  <div className="sphere-spin spin-metabolite">
-                    <img
-                      src="/images/metabiome-intelligence-system.png"
-                      alt=""
-                      className="sphere-crop-img metabolite-crop"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="sphere-slot metabiome">
-                <div className="sphere-thump metabiome-thump">
-                  <div className="sphere-spin spin-metabiome">
-                    <img
-                      src="/images/metabiome-intelligence-system.png"
-                      alt=""
-                      className="sphere-crop-img metabiome-crop"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="sphere-slot intel">
-                <div className="sphere-thump intel-thump">
-                  <div className="sphere-spin spin-intel">
-                    <img
-                      src="/images/metabiome-intelligence-system.png"
-                      alt=""
-                      className="sphere-crop-img intel-crop"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* 3. SVG OVERLAY (Wire, Resting Bridges, Active Progressive Drawing Paths, & 16px Leading Comets) */}
-              <svg className="wire" viewBox="0 0 2153 730" fill="none">
-                <defs>
-                  <radialGradient id="cometGrad" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stopColor="#fff6c9" />
-                    <stop offset="40%" stopColor="#c9a24b" />
-                    <stop offset="70%" stopColor="#7ec88c" />
-                    <stop offset="100%" stopColor="rgba(126,200,140,0)" />
-                  </radialGradient>
-
-                  <linearGradient id="bridgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#fff6c9" />
-                    <stop offset="50%" stopColor="#c9a24b" />
-                    <stop offset="100%" stopColor="#7ec88c" />
-                  </linearGradient>
-
-                  <filter id="cometGlow" x="-600%" y="-600%" width="1300%" height="1300%" colorInterpolationFilters="sRGB">
-                    <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="wideBlur" />
-                    <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="tightBlur" />
-                    <feMerge>
-                      <feMergeNode in="wideBlur" />
-                      <feMergeNode in="tightBlur" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-
-                  <filter id="lineGlow" x="-150%" y="-400%" width="400%" height="900%" colorInterpolationFilters="sRGB">
-                    <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="b" />
-                    <feMerge>
-                      <feMergeNode in="b" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-
-                  {/* Paths Definition */}
-                  <path id="pathAB" d="M 427.5,348.5 C 480,376 560,402 626.5,351.5" />
-                  <path id="pathBC" d="M 948.5,351.5 C 1010,344 1092,388 1178.5,359.5" />
-                  <path id="pathCD" d="M 1502.5,359.5 C 1560,349 1652,396 1712.5,346.5" />
-                </defs>
-
-                {/* Main Resting Bridge Paths */}
-                <path d="M 427.5,348.5 C 480,376 560,402 626.5,351.5" className="bridge" filter="url(#lineGlow)" />
-                <path d="M 948.5,351.5 C 1010,344 1092,388 1178.5,359.5" className="bridge" filter="url(#lineGlow)" />
-                <path d="M 1502.5,359.5 C 1560,349 1652,396 1712.5,346.5" className="bridge" filter="url(#lineGlow)" />
-
-                {/* Active Transfer Progressive Drawing Paths & Leading Comets */}
-                {animActive && (
-                  <>
-                    {/* BRIDGE AB: Active 0.5s to 1.1s */}
-                    {/* Outer Soft Green Glow (stroke-width 16, #7ec88c, opacity 0.55) */}
-                    <path
-                      d="M 427.5,348.5 C 480,376 560,402 626.5,351.5"
-                      fill="none"
-                      stroke="#7ec88c"
-                      strokeWidth="16"
-                      strokeLinecap="round"
-                      filter="url(#lineGlow)"
-                      pathLength="1"
-                      strokeDasharray="1"
-                      strokeDashoffset="1"
-                    >
-                      <animate
-                        attributeName="stroke-dashoffset"
-                        values="1;1;0;0;1"
-                        keyTimes="0;0.0833;0.1833;0.2200;1"
-                        dur="6s"
-                        repeatCount="indefinite"
-                      />
-                      <animate
-                        attributeName="opacity"
-                        values="0;0;0.55;0.55;0;0"
-                        keyTimes="0;0.0833;0.0834;0.2000;0.2300;1"
-                        dur="6s"
-                        repeatCount="indefinite"
-                      />
-                    </path>
-
-                    {/* Inner Bright Core (stroke-width 8, #fff6c9, opacity 1) */}
-                    <path
-                      d="M 427.5,348.5 C 480,376 560,402 626.5,351.5"
-                      fill="none"
-                      stroke="#fff6c9"
-                      strokeWidth="8"
-                      strokeLinecap="round"
-                      filter="url(#lineGlow)"
-                      pathLength="1"
-                      strokeDasharray="1"
-                      strokeDashoffset="1"
-                    >
-                      <animate
-                        attributeName="stroke-dashoffset"
-                        values="1;1;0;0;1"
-                        keyTimes="0;0.0833;0.1833;0.2200;1"
-                        dur="6s"
-                        repeatCount="indefinite"
-                      />
-                      <animate
-                        attributeName="opacity"
-                        values="0;0;1;1;0;0"
-                        keyTimes="0;0.0833;0.0834;0.2000;0.2300;1"
-                        dur="6s"
-                        repeatCount="indefinite"
-                      />
-                    </path>
-
-                    {/* Leading Edge Comet AB (r=16) */}
-                    <circle r="16" fill="url(#cometGrad)" filter="url(#cometGlow)">
-                      <animateMotion
-                        dur="6s"
-                        repeatCount="indefinite"
-                        keyPoints="0;0;1;1;0"
-                        keyTimes="0;0.0833;0.1833;0.999;1"
-                        calcMode="linear"
-                      >
-                        <mpath href="#pathAB" />
-                      </animateMotion>
-                      <animate
-                        attributeName="opacity"
-                        values="0;0;1;1;0;0"
-                        keyTimes="0;0.0800;0.0833;0.1833;0.2000;1"
-                        dur="6s"
-                        repeatCount="indefinite"
-                      />
-                    </circle>
-
-                    {/* BRIDGE BC: Active 1.6s to 2.2s */}
-                    {/* Outer Soft Green Glow (stroke-width 16, #7ec88c, opacity 0.55) */}
-                    <path
-                      d="M 948.5,351.5 C 1010,344 1092,388 1178.5,359.5"
-                      fill="none"
-                      stroke="#7ec88c"
-                      strokeWidth="16"
-                      strokeLinecap="round"
-                      filter="url(#lineGlow)"
-                      pathLength="1"
-                      strokeDasharray="1"
-                      strokeDashoffset="1"
-                    >
-                      <animate
-                        attributeName="stroke-dashoffset"
-                        values="1;1;0;0;1"
-                        keyTimes="0;0.2667;0.3667;0.4000;1"
-                        dur="6s"
-                        repeatCount="indefinite"
-                      />
-                      <animate
-                        attributeName="opacity"
-                        values="0;0;0.55;0.55;0;0"
-                        keyTimes="0;0.2667;0.2668;0.3833;0.4133;1"
-                        dur="6s"
-                        repeatCount="indefinite"
-                      />
-                    </path>
-
-                    {/* Inner Bright Core (stroke-width 8, #fff6c9, opacity 1) */}
-                    <path
-                      d="M 948.5,351.5 C 1010,344 1092,388 1178.5,359.5"
-                      fill="none"
-                      stroke="#fff6c9"
-                      strokeWidth="8"
-                      strokeLinecap="round"
-                      filter="url(#lineGlow)"
-                      pathLength="1"
-                      strokeDasharray="1"
-                      strokeDashoffset="1"
-                    >
-                      <animate
-                        attributeName="stroke-dashoffset"
-                        values="1;1;0;0;1"
-                        keyTimes="0;0.2667;0.3667;0.4000;1"
-                        dur="6s"
-                        repeatCount="indefinite"
-                      />
-                      <animate
-                        attributeName="opacity"
-                        values="0;0;1;1;0;0"
-                        keyTimes="0;0.2667;0.2668;0.3833;0.4133;1"
-                        dur="6s"
-                        repeatCount="indefinite"
-                      />
-                    </path>
-
-                    {/* Leading Edge Comet BC (r=16) */}
-                    <circle r="16" fill="url(#cometGrad)" filter="url(#cometGlow)">
-                      <animateMotion
-                        dur="6s"
-                        repeatCount="indefinite"
-                        keyPoints="0;0;1;1;0"
-                        keyTimes="0;0.2667;0.3667;0.999;1"
-                        calcMode="linear"
-                      >
-                        <mpath href="#pathBC" />
-                      </animateMotion>
-                      <animate
-                        attributeName="opacity"
-                        values="0;0;1;1;0;0"
-                        keyTimes="0;0.2634;0.2667;0.3667;0.3833;1"
-                        dur="6s"
-                        repeatCount="indefinite"
-                      />
-                    </circle>
-
-                    {/* BRIDGE CD: Active 2.7s to 3.3s */}
-                    {/* Outer Soft Green Glow (stroke-width 16, #7ec88c, opacity 0.55) */}
-                    <path
-                      d="M 1502.5,359.5 C 1560,349 1652,396 1712.5,346.5"
-                      fill="none"
-                      stroke="#7ec88c"
-                      strokeWidth="16"
-                      strokeLinecap="round"
-                      filter="url(#lineGlow)"
-                      pathLength="1"
-                      strokeDasharray="1"
-                      strokeDashoffset="1"
-                    >
-                      <animate
-                        attributeName="stroke-dashoffset"
-                        values="1;1;0;0;1"
-                        keyTimes="0;0.4500;0.5500;0.5833;1"
-                        dur="6s"
-                        repeatCount="indefinite"
-                      />
-                      <animate
-                        attributeName="opacity"
-                        values="0;0;0.55;0.55;0;0"
-                        keyTimes="0;0.4500;0.4501;0.5667;0.5967;1"
-                        dur="6s"
-                        repeatCount="indefinite"
-                      />
-                    </path>
-
-                    {/* Inner Bright Core (stroke-width 8, #fff6c9, opacity 1) */}
-                    <path
-                      d="M 1502.5,359.5 C 1560,349 1652,396 1712.5,346.5"
-                      fill="none"
-                      stroke="#fff6c9"
-                      strokeWidth="8"
-                      strokeLinecap="round"
-                      filter="url(#lineGlow)"
-                      pathLength="1"
-                      strokeDasharray="1"
-                      strokeDashoffset="1"
-                    >
-                      <animate
-                        attributeName="stroke-dashoffset"
-                        values="1;1;0;0;1"
-                        keyTimes="0;0.4500;0.5500;0.5833;1"
-                        dur="6s"
-                        repeatCount="indefinite"
-                      />
-                      <animate
-                        attributeName="opacity"
-                        values="0;0;1;1;0;0"
-                        keyTimes="0;0.4500;0.4501;0.5667;0.5967;1"
-                        dur="6s"
-                        repeatCount="indefinite"
-                      />
-                    </path>
-
-                    {/* Leading Edge Comet CD (r=16) */}
-                    <circle r="16" fill="url(#cometGrad)" filter="url(#cometGlow)">
-                      <animateMotion
-                        dur="6s"
-                        repeatCount="indefinite"
-                        keyPoints="0;0;1;1;0"
-                        keyTimes="0;0.4500;0.5500;0.999;1"
-                        calcMode="linear"
-                      >
-                        <mpath href="#pathCD" />
-                      </animateMotion>
-                      <animate
-                        attributeName="opacity"
-                        values="0;0;1;1;0;0"
-                        keyTimes="0;0.4467;0.4500;0.5500;0.5667;1"
-                        dur="6s"
-                        repeatCount="indefinite"
-                      />
-                    </circle>
-                  </>
-                )}
-              </svg>
-
-              {/* 4. SOFT SPHERE ACTIVATION GLOWS (No large expanding rings) */}
-              <div className="glow glow-microbe" />
-              <div className="glow glow-metabolite" />
-              <div className="glow glow-metabiome" />
-              <div className="glow glow-intel" />
-            </div>
-
-          </div>
-
-          {/* SCIENTIFIC LABELS WITH REF-LIT ANIMATION */}
-          <div className="relative w-full mt-4 sm:mt-5 flex items-start">
-            
-            {/* MICROBE */}
-            <div className="absolute -translate-x-1/2" style={{ left: "12.87%" }}>
-              <span className={`text-[11px] sm:text-[12px] font-semibold tracking-[0.14em] leading-[1.2] uppercase text-center whitespace-nowrap block label-text-lit ${animActive ? "l-microbe-lit" : ""}`}>
-                Microbe
-              </span>
-            </div>
-
-            {/* METABOLITE */}
-            <div className="absolute -translate-x-1/2" style={{ left: "37.13%" }}>
-              <span className={`text-[11px] sm:text-[12px] font-semibold tracking-[0.14em] leading-[1.2] uppercase text-center whitespace-nowrap block label-text-lit ${animActive ? "l-metabolite-lit" : ""}`}>
-                Metabolite
-              </span>
-            </div>
-
-            {/* METABIOME */}
-            <div className="absolute -translate-x-1/2" style={{ left: "62.48%" }}>
-              <span className={`text-[11px] sm:text-[12px] font-semibold tracking-[0.14em] leading-[1.2] uppercase text-center whitespace-nowrap block label-text-lit ${animActive ? "l-metabiome-lit" : ""}`}>
-                Metabiome
-              </span>
-            </div>
-
-            {/* BIOLOGICAL INTELLIGENCE */}
-            <div className="absolute -translate-x-1/2" style={{ left: "87.16%" }}>
-              <span className={`text-[11px] sm:text-[12px] font-semibold tracking-[0.14em] leading-[1.2] uppercase text-center whitespace-nowrap block label-text-lit ${animActive ? "l-intel-lit" : ""}`}>
-                Biological Intelligence
-              </span>
-            </div>
-
-          </div>
-
-        </div>
-
-        {/* CTA BUTTON */}
-        <div className="w-full flex justify-start pt-10 sm:pt-11 lg:pt-12 z-10">
-          <button
-            type="button"
-            className="group inline-flex items-center gap-3 bg-[#07552D] hover:bg-[#054424] active:scale-[0.99] text-white text-base font-semibold px-7 h-[54px] rounded-lg transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer select-none"
-            onClick={() => {
-              // Interactive button action placeholder
-            }}
-          >
-            <span>Read about our approach</span>
-            <svg
-              className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2.2}
+              EXPLORE OUR SCIENCE
+            </a>
+            <a
+              href="#contact"
+              className="bg-[rgba(5,48,34,0.30)] border border-[rgba(244,245,236,0.55)] hover:bg-[rgba(5,48,34,0.50)] hover:border-[#F4F5EC] text-[#F4F5EC] font-semibold text-xs sm:text-sm px-6 sm:px-7 h-[46px] sm:h-[50px] flex items-center justify-center rounded-lg transition-colors text-center"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-              />
-            </svg>
-          </button>
+              WORK WITH US
+            </a>
+          </div>
         </div>
-
       </div>
     </section>
   );
 }
+
+
+
+
+
