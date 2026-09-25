@@ -8,9 +8,6 @@ export default function ChemistryFieldSection() {
   const fgRef = useRef<HTMLDivElement>(null);
   const lightLayerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  
-  const primaryBtnRef = useRef<HTMLAnchorElement>(null);
-  const secondaryBtnRef = useRef<HTMLAnchorElement>(null);
 
   const [isRevealed, setIsRevealed] = useState(false);
   const isPlayingRef = useRef(false);
@@ -27,12 +24,6 @@ export default function ChemistryFieldSection() {
   // Landscape Micro-Perspective lerp refs (rotateY max ±0.5deg, rotateX max ±0.35deg, lerp = 0.045)
   const targetPerspectiveRef = useRef({ rotX: 0, rotY: 0 });
   const currentPerspectiveRef = useRef({ rotX: 0, rotY: 0 });
-
-  // Magnetic button offset refs (max ±3px)
-  const primaryMagTarget = useRef({ x: 0, y: 0 });
-  const primaryMagCurrent = useRef({ x: 0, y: 0 });
-  const secondaryMagTarget = useRef({ x: 0, y: 0 });
-  const secondaryMagCurrent = useRef({ x: 0, y: 0 });
 
   // IntersectionObserver for entrance reveal & hysteresis replay
   useEffect(() => {
@@ -79,7 +70,7 @@ export default function ChemistryFieldSection() {
     };
   }, [isRevealed]);
 
-  // Single Unified rAF Loop for Parallax, Pointer Depth, Micro-Perspective, Interactive Sunlight & Exit Progression
+  // Single Unified rAF Loop for Parallax, Pointer Depth, Micro-Perspective & Exit Progression
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -154,25 +145,10 @@ export default function ChemistryFieldSection() {
         }
       }
 
-      // 8. Magnetic CTA Button Lerp (max ±3px)
-      const btnLerpSpeed = 0.12;
-      
-      primaryMagCurrent.current.x += (primaryMagTarget.current.x - primaryMagCurrent.current.x) * btnLerpSpeed;
-      primaryMagCurrent.current.y += (primaryMagTarget.current.y - primaryMagCurrent.current.y) * btnLerpSpeed;
-      if (primaryBtnRef.current) {
-        primaryBtnRef.current.style.transform = `translate3d(${primaryMagCurrent.current.x.toFixed(2)}px, ${primaryMagCurrent.current.y.toFixed(2)}px, 0)`;
-      }
-
-      secondaryMagCurrent.current.x += (secondaryMagTarget.current.x - secondaryMagTarget.current.x) * btnLerpSpeed;
-      secondaryMagCurrent.current.y += (secondaryMagTarget.current.y - secondaryMagTarget.current.y) * btnLerpSpeed;
-      if (secondaryBtnRef.current) {
-        secondaryBtnRef.current.style.transform = `translate3d(${secondaryMagCurrent.current.x.toFixed(2)}px, ${secondaryMagCurrent.current.y.toFixed(2)}px, 0)`;
-      }
-
       animFrameId = requestAnimationFrame(updateSection);
     };
 
-    // Pointer Event Listeners for Desktop Devices (Fine pointers only)
+    // Pointer Event Listeners for Desktop Devices
     const handleMouseMove = (e: MouseEvent) => {
       if (!sectionRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
@@ -184,17 +160,17 @@ export default function ChemistryFieldSection() {
         const centeredX = relativeX - 0.5;
         const centeredY = relativeY - 0.5;
         targetPointerRef.current = {
-          x: centeredX * 36, // ±18px
-          y: centeredY * 20  // ±10px
+          x: centeredX * 36,
+          y: centeredY * 20
         };
 
         // Micro-Perspective Rotation Target (rotateY ±0.5deg, rotateX ±0.35deg)
         targetPerspectiveRef.current = {
-          rotY: centeredX * 1.0,  // ±0.5deg
-          rotX: -centeredY * 0.7  // ±0.35deg
+          rotY: centeredX * 1.0,
+          rotX: -centeredY * 0.7
         };
 
-        // Interactive Sunlight Target (Follows pointer over middle/right region 25% - 95%)
+        // Interactive Sunlight Target
         targetLightRef.current = {
           x: Math.max(25, Math.min(95, relativeX * 100)),
           y: Math.max(10, Math.min(85, relativeY * 100))
@@ -224,118 +200,51 @@ export default function ChemistryFieldSection() {
     };
   }, []);
 
-  // Handlers for Magnetic CTA Buttons (Max ±3px)
-  const handleBtnMouseMove = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    targetRef: React.MutableRefObject<{ x: number; y: number }>
-  ) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const relX = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
-    const relY = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
-    targetRef.current = {
-      x: Math.max(-3, Math.min(3, relX * 3)),
-      y: Math.max(-3, Math.min(3, relY * 3))
-    };
-  };
-
-  const handleBtnMouseLeave = (
-    targetRef: React.MutableRefObject<{ x: number; y: number }>
-  ) => {
-    targetRef.current = { x: 0, y: 0 };
-  };
-
   return (
     <section
       ref={sectionRef}
       id="chemistry-field-section"
       className="relative z-20 w-full min-h-[760px] h-[95vh] lg:h-[100vh] overflow-hidden bg-black text-white flex items-center"
     >
-      {/* Keyframe stylesheet for 16s Idle Drift, Primary & Secondary Sunlight Blooms, and Atmospheric Light Travel */}
+      {/* Keyframe stylesheet */}
       <style>{`
-        /* 16s Slow Cinematic Idle Camera Drift */
         @keyframes cinematicIdleDrift {
-          0% {
-            transform: translate3d(0px, 0px, 0) scale(1);
-          }
-          33% {
-            transform: translate3d(-4px, -3px, 0) scale(1.004);
-          }
-          66% {
-            transform: translate3d(4px, -1.5px, 0) scale(1.002);
-          }
-          100% {
-            transform: translate3d(0px, 0px, 0) scale(1);
-          }
+          0% { transform: translate3d(0px, 0px, 0) scale(1); }
+          33% { transform: translate3d(-4px, -3px, 0) scale(1.004); }
+          66% { transform: translate3d(4px, -1.5px, 0) scale(1.002); }
+          100% { transform: translate3d(0px, 0px, 0) scale(1); }
         }
-
         .cinematic-idle-drift {
           animation: cinematicIdleDrift 16s ease-in-out infinite;
           will-change: transform;
         }
-
-        /* 8s Primary Sunlight Bloom (0.12 -> 0.24 opacity, 0.90 -> 1.12 scale) */
         @keyframes primarySunlightBloom {
-          0% {
-            transform: scale(0.90);
-            opacity: 0.12;
-          }
-          50% {
-            transform: scale(1.12);
-            opacity: 0.24;
-          }
-          100% {
-            transform: scale(0.90);
-            opacity: 0.12;
-          }
+          0% { transform: scale(0.90); opacity: 0.12; }
+          50% { transform: scale(1.12); opacity: 0.24; }
+          100% { transform: scale(0.90); opacity: 0.12; }
         }
-
         .primary-sunlight-bloom {
           animation: primarySunlightBloom 8s ease-in-out infinite;
           will-change: transform, opacity;
         }
-
-        /* 13s Secondary Atmospheric Glow (0.08 -> 0.15 opacity, 0.95 -> 1.05 scale) */
         @keyframes secondaryAtmosphericGlow {
-          0% {
-            transform: scale(0.95);
-            opacity: 0.08;
-          }
-          50% {
-            transform: scale(1.05);
-            opacity: 0.15;
-          }
-          100% {
-            transform: scale(0.95);
-            opacity: 0.08;
-          }
+          0% { transform: scale(0.95); opacity: 0.08; }
+          50% { transform: scale(1.05); opacity: 0.15; }
+          100% { transform: scale(0.95); opacity: 0.08; }
         }
-
         .secondary-atmospheric-glow {
           animation: secondaryAtmosphericGlow 13s ease-in-out infinite;
           will-change: transform, opacity;
         }
-
-        /* 14s Subtle Atmospheric Light Travel Across Crops */
         @keyframes atmosphericLightTravel {
-          0% {
-            transform: translate3d(-25%, 0, 0);
-            opacity: 0.04;
-          }
-          50% {
-            transform: translate3d(25%, 0, 0);
-            opacity: 0.08;
-          }
-          100% {
-            transform: translate3d(-25%, 0, 0);
-            opacity: 0.04;
-          }
+          0% { transform: translate3d(-25%, 0, 0); opacity: 0.04; }
+          50% { transform: translate3d(25%, 0, 0); opacity: 0.08; }
+          100% { transform: translate3d(-25%, 0, 0); opacity: 0.04; }
         }
-
         .atmospheric-light-travel {
           animation: atmosphericLightTravel 14s ease-in-out infinite;
           will-change: transform, opacity;
         }
-
         @media (prefers-reduced-motion: reduce) {
           .cinematic-idle-drift,
           .primary-sunlight-bloom,
@@ -349,7 +258,7 @@ export default function ChemistryFieldSection() {
         }
       `}</style>
 
-      {/* OUTER BACKGROUND CONTAINER (Handles 1400ms Camera Entrance Scale 1.075 -> 1.025, translateY 12px -> 0px) */}
+      {/* OUTER BACKGROUND CONTAINER */}
       <div 
         className="absolute inset-0 w-[105%] -left-[2.5%] h-[120%] -top-[10%] pointer-events-none select-none transition-transform duration-1400"
         style={{
@@ -360,10 +269,7 @@ export default function ChemistryFieldSection() {
           transitionDuration: "1400ms"
         }}
       >
-        {/* PARALLAX, POINTER DEPTH & MICRO-PERSPECTIVE WRAPPER (bgInnerRef: Receives 60px Scroll Parallax + Pointer Depth + Micro-Perspective) */}
         <div ref={bgInnerRef} className="w-full h-full">
-          
-          {/* IDLE DRIFT WRAPPER (className="cinematic-idle-drift": Receives 16s CSS Camera Drift) */}
           <div className="w-full h-full cinematic-idle-drift">
             <img
               src="/images/biofactor-field-premium.png"
@@ -371,28 +277,14 @@ export default function ChemistryFieldSection() {
               className="w-full h-full object-cover block border-0 shadow-none rounded-none"
             />
           </div>
-
         </div>
       </div>
 
       {/* MULTI-LAYERED CINEMATIC OVERLAYS */}
-      {/* 1. Left dark forest overlay - Refined center transparency to showcase more green field */}
       <div className="absolute inset-0 pointer-events-none z-10 bg-[linear-gradient(90deg,rgba(5,16,12,0.92)_0%,rgba(5,16,12,0.80)_25%,rgba(5,16,12,0.30)_50%,rgba(5,16,12,0)_80%)]" />
-      
-      {/* 2. Top & Bottom subtle atmospheric vignette */}
       <div className="absolute inset-0 pointer-events-none z-10 bg-[linear-gradient(180deg,rgba(0,0,0,0.5)_0%,rgba(0,0,0,0)_22%,rgba(0,0,0,0)_75%,rgba(0,0,0,0.65)_100%)]" />
-
-      {/* 3. SECONDARY ATMOSPHERIC GLOW (13s Slower broader ambient light at 85% 22%) */}
-      <div 
-        className="secondary-atmospheric-glow absolute inset-0 pointer-events-none z-10 bg-[radial-gradient(circle_at_85%_22%,rgba(255,230,160,0.16)_0%,rgba(255,200,110,0.05)_50%,transparent_80%)]" 
-      />
-
-      {/* 4. PRIMARY SUNLIGHT BLOOM (8s Warm golden light breathing overlay at 85% 22% sun location) */}
-      <div 
-        className="primary-sunlight-bloom absolute inset-0 pointer-events-none z-10 bg-[radial-gradient(circle_at_85%_22%,rgba(255,225,150,0.26)_0%,rgba(255,200,100,0.10)_38%,transparent_68%)]" 
-      />
-
-      {/* 5. INTERACTIVE SUNLIGHT FIELD (Very large 900px soft warm pointer illumination with 0.050 lerp & left text mask protection) */}
+      <div className="secondary-atmospheric-glow absolute inset-0 pointer-events-none z-10 bg-[radial-gradient(circle_at_85%_22%,rgba(255,230,160,0.16)_0%,rgba(255,200,110,0.05)_50%,transparent_80%)]" />
+      <div className="primary-sunlight-bloom absolute inset-0 pointer-events-none z-10 bg-[radial-gradient(circle_at_85%_22%,rgba(255,225,150,0.26)_0%,rgba(255,200,100,0.10)_38%,transparent_68%)]" />
       <div 
         ref={lightLayerRef}
         className="interactive-sunlight-field absolute inset-0 pointer-events-none z-12 hidden md:block"
@@ -402,124 +294,192 @@ export default function ChemistryFieldSection() {
           maskImage: "linear-gradient(90deg, transparent 0%, transparent 32%, black 50%, black 100%)"
         }}
       />
-
-      {/* 6. ATMOSPHERIC LIGHT TRAVEL ACROSS CROPS (14s Soft horizontal sunlight shift over middle-right) */}
-      <div 
-        className="atmospheric-light-travel absolute inset-y-0 right-0 w-[60%] pointer-events-none z-10 bg-[linear-gradient(90deg,transparent_0%,rgba(255,235,180,0.06)_45%,rgba(255,235,180,0.09)_55%,transparent_100%)]"
-      />
-
-      {/* 7. FOREGROUND ATMOSPHERIC DEPTH LAYER (78px total travel parallax on lower 30% of viewport) */}
+      <div className="atmospheric-light-travel absolute inset-y-0 right-0 w-[60%] pointer-events-none z-10 bg-[linear-gradient(90deg,transparent_0%,rgba(255,235,180,0.06)_45%,rgba(255,235,180,0.09)_55%,transparent_100%)]" />
       <div 
         ref={fgRef}
         className="absolute inset-x-0 bottom-0 h-[30%] pointer-events-none z-15 bg-[linear-gradient(0deg,rgba(3,12,9,0.35)_0%,rgba(3,12,9,0.12)_50%,transparent_100%)]"
       />
 
-      {/* MAIN CONTENT CONTAINER (Positioned Left-Middle with generous rightward offset & Exit Progression) */}
+      {/* MAIN CONTENT CONTAINER */}
       <div 
         ref={contentRef}
-        className="relative z-20 w-full max-w-[1600px] mx-auto px-8 sm:px-14 md:px-20 lg:px-28 xl:px-36 2xl:px-44 flex flex-col justify-center min-h-[500px]"
+        className="relative z-20 w-full max-w-[1500px] mx-auto px-6 sm:px-10 md:px-16 lg:px-20 pt-16 sm:pt-20 lg:pt-24 pb-10 lg:pb-14 flex flex-col justify-center min-h-[580px]"
       >
-        <div className="max-w-[760px] space-y-7 md:space-y-9 text-left">
+        {/* UPPER DESKTOP COMPOSITION: Headline & Supporting Text (Left) + 2x2 Scientific Table (Right) */}
+        <div className="w-full flex flex-col lg:flex-row items-center lg:items-stretch justify-between gap-10 lg:gap-12 xl:gap-14">
           
-          {/* STAGED HEADLINE (Exactly two lines on desktop with overflow-hidden mask reveal & line 2 highlight sweep) */}
-          <div className="space-y-1 sm:space-y-2">
-            {/* Line 1 Mask */}
-            <div className="overflow-hidden">
-              <h2
-                style={{
-                  opacity: isRevealed ? 1 : 0,
-                  transform: isRevealed ? "translateY(0)" : "translateY(32px)",
-                  transition: isRevealed
-                    ? "opacity 650ms ease-out 150ms, transform 650ms cubic-bezier(0.16, 1, 0.3, 1) 150ms"
-                    : "none"
-                }}
-                className="text-[32px] sm:text-[42px] md:text-[50px] lg:text-[clamp(48px,4vw,66px)] font-medium tracking-tight text-white/95 leading-[1.04] lg:whitespace-nowrap"
-              >
-                We don&apos;t fight chemistry.
-              </h2>
+          {/* LEFT COLUMN: Large Extra-Bold Headline + Highlighted Supporting Sentence */}
+          <div className="w-full lg:w-[48%] xl:w-[46%] flex flex-col justify-center space-y-5 sm:space-y-6">
+            
+            {/* STAGGERED HEADLINE */}
+            <div className="space-y-1">
+              <div className="overflow-hidden py-0.5">
+                <h2
+                  style={{
+                    opacity: isRevealed ? 1 : 0,
+                    transform: isRevealed ? "translateY(0)" : "translateY(32px)",
+                    transition: isRevealed
+                      ? "opacity 650ms ease-out 150ms, transform 650ms cubic-bezier(0.16, 1, 0.3, 1) 150ms"
+                      : "none"
+                  }}
+                  className="text-[36px] sm:text-[48px] md:text-[58px] lg:text-[clamp(48px,4.1vw,74px)] font-extrabold tracking-[-0.04em] text-white leading-[0.98]"
+                >
+                  A microorganism
+                </h2>
+              </div>
+
+              <div className="overflow-hidden py-0.5">
+                <h2
+                  style={{
+                    opacity: isRevealed ? 1 : 0,
+                    transform: isRevealed ? "translateY(0)" : "translateY(34px)",
+                    transition: isRevealed
+                      ? "opacity 680ms ease-out 220ms, transform 680ms cubic-bezier(0.16, 1, 0.3, 1) 220ms"
+                      : "none"
+                  }}
+                  className="text-[36px] sm:text-[48px] md:text-[58px] lg:text-[clamp(48px,4.1vw,74px)] font-extrabold tracking-[-0.04em] text-white leading-[0.98]"
+                >
+                  is more
+                </h2>
+              </div>
+
+              <div className="overflow-hidden py-0.5">
+                <h2
+                  style={{
+                    opacity: isRevealed ? 1 : 0,
+                    transform: isRevealed ? "translateY(0)" : "translateY(36px)",
+                    transition: isRevealed
+                      ? "opacity 700ms ease-out 300ms, transform 700ms cubic-bezier(0.16, 1, 0.3, 1) 300ms"
+                      : "none"
+                  }}
+                  className="text-[36px] sm:text-[48px] md:text-[58px] lg:text-[clamp(48px,4.1vw,74px)] font-extrabold tracking-[-0.04em] text-white leading-[0.98]"
+                >
+                  than a cell.
+                </h2>
+              </div>
             </div>
 
-            {/* Line 2 Mask (Visually stronger emphasis with 800ms highlight sweep) */}
-            <div className="overflow-hidden">
-              <h2
-                style={{
-                  opacity: isRevealed ? 1 : 0,
-                  transform: isRevealed ? "translateY(0)" : "translateY(36px)",
-                  transition: isRevealed
-                    ? "opacity 700ms ease-out 300ms, transform 700ms cubic-bezier(0.16, 1, 0.3, 1) 300ms"
-                    : "none"
-                }}
-                className="text-[32px] sm:text-[42px] md:text-[50px] lg:text-[clamp(48px,4vw,66px)] font-bold tracking-tight text-white leading-[1.04] lg:whitespace-nowrap"
-              >
-                <span className="relative inline-block overflow-hidden">
-                  <span>We complete it.</span>
-                  {/* Subtle 800ms Light Highlight Sweep Across Line 2 */}
-                  <span
-                    style={{
-                      transform: isRevealed ? "translateX(120%)" : "translateX(-120%)",
-                      transition: isRevealed
-                        ? "transform 800ms cubic-bezier(0.4, 0, 0.2, 1) 900ms"
-                        : "none"
-                    }}
-                    className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.45)_50%,transparent_100%)] pointer-events-none"
-                  />
-                </span>
-              </h2>
-            </div>
+            {/* SUPPORTING SENTENCE WITH RESTRAINED BOTANICAL MINT ACCENTS */}
+            <p
+              style={{
+                opacity: isRevealed ? 1 : 0,
+                transform: isRevealed ? "translateY(0)" : "translateY(20px)",
+                transition: isRevealed
+                  ? "opacity 550ms ease-out 450ms, transform 550ms cubic-bezier(0.16, 1, 0.3, 1) 450ms"
+                  : "none"
+              }}
+              className="text-base sm:text-lg md:text-xl text-white/85 font-light leading-[1.55] max-w-[540px]"
+            >
+              It is a living system that{" "}
+              <span className="text-[#9DDC72] font-medium">makes</span>,{" "}
+              <span className="text-[#9DDC72] font-medium">transforms</span>,{" "}
+              <span className="text-[#9DDC72] font-medium">responds</span>, and{" "}
+              <span className="text-[#9DDC72] font-medium">adapts</span>.
+            </p>
+
           </div>
 
-          {/* BODY COPY REVEAL */}
-          <p
-            style={{
-              opacity: isRevealed ? 1 : 0,
-              transform: isRevealed ? "translateY(0)" : "translateY(20px)",
-              transition: isRevealed
-                ? "opacity 550ms ease-out 450ms, transform 550ms cubic-bezier(0.16, 1, 0.3, 1) 450ms"
-                : "none"
-            }}
-            className="text-base sm:text-lg md:text-xl text-emerald-50/85 font-light leading-[1.55] max-w-[660px] tracking-normal pt-1"
-          >
-            Biofactor works inside the systems modern agriculture, aquaculture, poultry, and animal production already run on — and adds the layer chemistry alone can&apos;t provide: living systems that interact, adapt, and regenerate.
-          </p>
-
-          {/* CALL TO ACTION BUTTON GROUP REVEAL */}
+          {/* RIGHT COLUMN: 2x2 SCIENTIFIC TABLE WITH SUBTLE TRANSPARENT BACKING */}
           <div
             style={{
               opacity: isRevealed ? 1 : 0,
-              transform: isRevealed ? "translateY(0)" : "translateY(16px)",
+              transform: isRevealed ? "translateY(0)" : "translateY(24px)",
               transition: isRevealed
-                ? "opacity 500ms ease-out 580ms, transform 500ms cubic-bezier(0.16, 1, 0.3, 1) 580ms"
+                ? "opacity 750ms ease-out 350ms, transform 750ms cubic-bezier(0.16, 1, 0.3, 1) 350ms"
                 : "none"
             }}
-            className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5"
+            className="w-full max-w-[620px] lg:w-[600px] xl:w-[620px] shrink-0 grid grid-cols-1 sm:grid-cols-2 border border-[rgba(170,220,185,0.34)] bg-[rgba(5,22,16,0.58)] rounded-none self-center"
           >
-            {/* Primary CTA Button (Magnetic micro-interaction + surface highlight sweep) */}
-            <a
-              ref={primaryBtnRef}
-              href="#science"
-              onMouseMove={(e) => handleBtnMouseMove(e, primaryMagTarget)}
-              onMouseLeave={() => handleBtnMouseLeave(primaryMagTarget)}
-              className="group relative inline-flex items-center justify-center gap-2.5 h-[50px] px-7 rounded-xl bg-[#059669] hover:bg-[#10b981] text-white font-semibold text-sm sm:text-base tracking-wide shadow-lg shadow-emerald-950/40 hover:-translate-y-0.5 transition-all duration-300 active:translate-y-0 overflow-hidden"
-            >
-              {/* Internal Surface Light Shimmer on Hover */}
-              <span className="absolute inset-0 bg-[linear-gradient(110deg,transparent_0%,rgba(255,255,255,0.25)_50%,transparent_100%)] -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
-              <span className="relative z-10">See Our Science</span>
-              <span className="relative z-10 inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </a>
+            {/* Cell 1: Makes */}
+            <div className="p-7 sm:p-[30px] flex flex-col items-start justify-start sm:h-[170px] border-b border-[rgba(170,220,185,0.34)] sm:border-r">
+              <div className="flex items-center text-[#A9D99A] mb-5 sm:mb-6">
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.75">
+                  <rect x="3" y="6" width="18" height="12" rx="6" />
+                  <path d="M12 6v12" strokeDasharray="2 2" />
+                </svg>
+              </div>
+              <h3 className="text-2xl sm:text-[26px] font-bold text-[#F4F7F2] tracking-tight leading-[1.1] mb-2.5 sm:mb-3">
+                Makes
+              </h3>
+              <div className="text-[11px] sm:text-xs font-mono font-semibold tracking-[0.12em] uppercase text-[#B7D8B0] whitespace-nowrap">
+                ENZYMES &middot; METABOLITES
+              </div>
+            </div>
 
-            {/* Secondary CTA Button (Magnetic micro-interaction + Glass surface enhancement) */}
-            <a
-              ref={secondaryBtnRef}
-              href="#where-we-work"
-              onMouseMove={(e) => handleBtnMouseMove(e, secondaryMagTarget)}
-              onMouseLeave={() => handleBtnMouseLeave(secondaryMagTarget)}
-              className="group relative inline-flex items-center justify-center gap-2.5 h-[50px] px-7 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/25 hover:border-white/45 text-white font-medium text-sm sm:text-base tracking-wide hover:-translate-y-0.5 transition-all duration-300 active:translate-y-0"
-            >
-              <span className="relative z-10">See Where We Work</span>
-              <span className="relative z-10 inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </a>
+            {/* Cell 2: Transforms */}
+            <div className="p-7 sm:p-[30px] flex flex-col items-start justify-start sm:h-[170px] border-b border-[rgba(170,220,185,0.34)]">
+              <div className="flex items-center text-[#A9D99A] mb-5 sm:mb-6">
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.75">
+                  <path d="M4 12a8 8 0 0114.93-4M20 12a8 8 0 01-14.93 4" strokeLinecap="round" />
+                  <polyline points="19 4 19 8 15 8" />
+                  <polyline points="5 20 5 16 9 16" />
+                </svg>
+              </div>
+              <h3 className="text-2xl sm:text-[26px] font-bold text-[#F4F7F2] tracking-tight leading-[1.1] mb-2.5 sm:mb-3">
+                Transforms
+              </h3>
+              <div className="text-[11px] sm:text-xs font-mono font-semibold tracking-[0.12em] uppercase text-[#B7D8B0] whitespace-nowrap">
+                NUTRIENTS &middot; MATTER
+              </div>
+            </div>
+
+            {/* Cell 3: Responds */}
+            <div className="p-7 sm:p-[30px] flex flex-col items-start justify-start sm:h-[170px] border-b sm:border-b-0 border-[rgba(170,220,185,0.34)] sm:border-r">
+              <div className="flex items-center text-[#A9D99A] mb-5 sm:mb-6">
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.75">
+                  <circle cx="12" cy="12" r="8" />
+                  <circle cx="12" cy="12" r="3" />
+                  <path d="M12 2v2M12 20v2M2 12h2M20 12h2" />
+                </svg>
+              </div>
+              <h3 className="text-2xl sm:text-[26px] font-bold text-[#F4F7F2] tracking-tight leading-[1.1] mb-2.5 sm:mb-3">
+                Responds
+              </h3>
+              <div className="text-[11px] sm:text-xs font-mono font-semibold tracking-[0.12em] uppercase text-[#B7D8B0] whitespace-nowrap">
+                SIGNALS &middot; ENVIRONMENT
+              </div>
+            </div>
+
+            {/* Cell 4: Adapts */}
+            <div className="p-7 sm:p-[30px] flex flex-col items-start justify-start sm:h-[170px]">
+              <div className="flex items-center text-[#A9D99A] mb-5 sm:mb-6">
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.75">
+                  <path d="M2 12c4-8 8 8 12 0s8 8 8 0" strokeLinecap="round" />
+                </svg>
+              </div>
+              <h3 className="text-2xl sm:text-[26px] font-bold text-[#F4F7F2] tracking-tight leading-[1.1] mb-2.5 sm:mb-3">
+                Adapts
+              </h3>
+              <div className="text-[11px] sm:text-xs font-mono font-semibold tracking-[0.12em] uppercase text-[#B7D8B0] whitespace-nowrap">
+                SOIL &middot; WATER &middot; HOST
+              </div>
+            </div>
           </div>
 
+        </div>
+
+        {/* LOWER DIVIDER & REFINED STATEMENT AREA */}
+        <div
+          style={{
+            opacity: isRevealed ? 1 : 0,
+            transform: isRevealed ? "translateY(0)" : "translateY(24px)",
+            transition: isRevealed
+              ? "opacity 600ms ease-out 500ms, transform 600ms cubic-bezier(0.16, 1, 0.3, 1) 500ms"
+              : "none"
+          }}
+          className="w-full my-8 sm:my-10 lg:my-12 pt-8 sm:pt-10 border-t border-[rgba(244,245,236,0.16)]"
+        >
+          {/* Final Statement with Aligned Pink x Marker */}
+          <div className="flex items-baseline gap-2.5 sm:gap-3.5 max-w-[1100px]">
+            <span className="text-[#FF6B8B] font-bold text-xl sm:text-2xl lg:text-[28px] leading-none select-none">
+              &times;
+            </span>
+            <p className="text-xl sm:text-2xl lg:text-[28px] font-normal text-white/95 leading-[1.3] tracking-[-0.015em]">
+              When they interact, their potential
+              <br className="hidden sm:inline" />
+              multiplies far beyond any single organism.
+            </p>
+          </div>
         </div>
       </div>
     </section>
