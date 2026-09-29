@@ -1,5 +1,6 @@
 import React from "react";
 import { Bricolage_Grotesque, Newsreader, JetBrains_Mono } from "next/font/google";
+import MicrobeField from "../components/MicrobeField";
 import RuminantsHero from "../components/ruminants/RuminantsHero";
 import RuminantsDataStrip from "../components/ruminants/RuminantsDataStrip";
 import RuminantsRumenFactory from "../components/ruminants/RuminantsRumenFactory";
@@ -32,28 +33,31 @@ const jetbrainsMono = JetBrains_Mono({
 export default function RuminantsPage() {
   return (
     <main
-      className={`${bricolage.variable} ${newsreader.variable} ${jetbrainsMono.variable} w-full bg-[#080d09] text-white selection:bg-[#b8e986] selection:text-black overflow-x-hidden`}
+      className={`${bricolage.variable} ${newsreader.variable} ${jetbrainsMono.variable} relative min-h-screen w-full bg-[#EAF3EA] text-[#173522] selection:bg-[#B8E986] selection:text-[#173522] overflow-x-hidden`}
     >
-      {/* FRAME 1: APPROVED HERO (LOCKED & UNTOUCHED) */}
-      <RuminantsHero />
+      {/* RUMINANTS PAGE CONTENT */}
+      <div className="relative z-10 w-full">
+        {/* FRAME 1: APPROVED HERO (LOCKED & UNTOUCHED) */}
+        <RuminantsHero />
 
-      {/* FRAME 2: DATA STRIP */}
-      <RuminantsDataStrip />
+        {/* FRAME 2: DATA STRIP */}
+        <RuminantsDataStrip />
 
-      {/* FRAME 3: RUMEN / MICROBIAL FACTORY */}
-      <RuminantsRumenFactory />
+        {/* FRAME 3: RUMEN / MICROBIAL FACTORY */}
+        <RuminantsRumenFactory />
 
-      {/* FRAME 4: LIFE STAGES */}
-      <RuminantsLifeStages />
+        {/* FRAME 4: LIFE STAGES */}
+        <RuminantsLifeStages />
 
-      {/* FRAME 5: METHANE */}
-      <RuminantsMethane />
+        {/* FRAME 5: METHANE */}
+        <RuminantsMethane />
 
-      {/* FRAME 6: LIFE-CYCLE SYSTEM MATRIX */}
-      <RuminantsMatrix />
+        {/* FRAME 6: LIFE-CYCLE SYSTEM MATRIX */}
+        <RuminantsMatrix />
 
-      {/* FRAME 7: CLOSING & REFERENCES */}
-      <RuminantsClosing />
+        {/* FRAME 7: CLOSING & REFERENCES */}
+        <RuminantsClosing />
+      </div>
     </main>
   );
 }

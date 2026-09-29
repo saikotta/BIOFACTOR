@@ -31,6 +31,9 @@ type Cell = {
   va: number;
   vx: number;
   vy: number;
+  waveAmp: number;
+  waveFreq: number;
+  phase: number;
   s: HTMLCanvasElement;
   w: number;
   h: number;
@@ -48,9 +51,23 @@ const HUES = [
   "rgb(112, 172, 140)", // Softened Bio Green
 ];
 
+interface MicrobeFieldProps {
+  densityMultiplier?: number;
+  motionMultiplier?: number;
+  opacityMultiplier?: number;
+  rotationMultiplier?: number;
+  position?: "fixed" | "absolute";
+}
+
 const M = 80; // wrap margin in px
 
-export default function MicrobeField() {
+export default function MicrobeField({
+  densityMultiplier = 1.0,
+  motionMultiplier = 1.0,
+  opacityMultiplier = 1.0,
+  rotationMultiplier = 1.0,
+  position = "fixed",
+}: MicrobeFieldProps = {}) {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -65,9 +82,20 @@ export default function MicrobeField() {
     let H = 0;
     let cells: Cell[] = [];
     let raf = 0;
-    let lastY = window.scrollY;
+    let lastTime = performance.now();
+    let lastY = typeof window !== "undefined" ? window.scrollY : 0;
+    let scrollVelocity = 0;
     let zoom = 1.0;
     let link = 0;
+
+    const handleScroll = () => {
+      if (reduce) return;
+      const currentY = window.scrollY;
+      const dy = currentY - lastY;
+      lastY = currentY;
+      // Accumulate scroll impulse into smooth velocity buffer
+      scrollVelocity += dy * 0.45;
+    };
 
     function sprite(kind: Kind, len: number, rad: number, hue: string) {
       const pad = rad * 3;
@@ -132,8 +160,11 @@ export default function MicrobeField() {
     };
 
     function build() {
-      // Reduced count formula: clamp(W * H / 48000, 14, 36)
-      const n = Math.round(Math.min(36, Math.max(14, (W * H) / 48000)));
+      // Configurable count formula: clamp min/max scaled by densityMultiplier
+      const baseRawN = (W * H) / 48000;
+      const minN = Math.round(14 * Math.min(densityMultiplier, 1.25));
+      const maxN = Math.round(36 * densityMultiplier);
+      const n = Math.round(Math.min(maxN, Math.max(minN, baseRawN * densityMultiplier)));
       cells = [];
 
       // Stratified jittered grid placement across viewport
@@ -161,14 +192,21 @@ export default function MicrobeField() {
         const x = (col + 0.15 + Math.random() * 0.70) * cellW;
         const y = (row + 0.15 + Math.random() * 0.70) * cellH;
 
+        // Varied organic 360-degree direction and time-based velocity
+        const dirAngle = Math.random() * Math.PI * 2;
+        const speed = (3.5 + Math.random() * 4.5) * motionMultiplier * (0.6 + z * 0.7);
+
         cells.push({
           x,
           y,
           z,
           a: Math.random() * Math.PI * 2,
-          va: (Math.random() - 0.5) * 0.004,
-          vx: (Math.random() - 0.5) * 0.18,
-          vy: (Math.random() - 0.5) * 0.18,
+          va: (Math.random() - 0.5) * 0.14 * rotationMultiplier, // Continuous rotation in rad/sec
+          vx: Math.cos(dirAngle) * speed,
+          vy: Math.sin(dirAngle) * speed,
+          waveAmp: (8 + Math.random() * 16) * motionMultiplier,
+          waveFreq: 0.4 + Math.random() * 0.4, // 8s to 15s oscillation cycles
+          phase: Math.random() * Math.PI * 2, // Randomized starting phase offset
           s: s.c,
           w: s.w,
           h: s.h,
@@ -211,9 +249,19 @@ export default function MicrobeField() {
       return bestState;
     }
 
-    function draw(scrollDelta: number) {
+    function draw(now: number) {
       if (!ctx) return;
+      const dt = Math.min((now - lastTime) / 1000, 0.05);
+      lastTime = now;
+
       ctx.clearRect(0, 0, W, H);
+
+      // Smooth exponential momentum decay for scroll-reactive velocity
+      if (!reduce) {
+        scrollVelocity *= 0.91;
+      } else {
+        scrollVelocity = 0;
+      }
 
       // 1. Determine target zoom and link state from nearest section
       const { zoomT, linkT } = getNearestSectionState();
@@ -236,14 +284,18 @@ export default function MicrobeField() {
       for (let i = 0; i < cells.length; i++) {
         const c = cells[i];
         if (!reduce) {
-          c.vx += (Math.random() - 0.5) * 0.02;
-          c.vy += (Math.random() - 0.5) * 0.02;
-          c.vx *= 0.985;
-          c.vy *= 0.985;
-          c.x += c.vx * (0.4 + c.z);
-          // REFERENCE SCROLL PARALLAX FORMULA
-          c.y += c.vy * (0.4 + c.z) - scrollDelta * (0.05 + c.z * 0.25);
-          c.a += c.va + c.vx * 0.002;
+          // LAYER 1: Continuous time-based linear drift + organic lateral S-curve wave
+          const waveX = Math.cos(now * 0.001 * c.waveFreq + c.phase) * c.waveAmp * 0.2;
+          const waveY = Math.sin(now * 0.001 * c.waveFreq + c.phase) * c.waveAmp * 0.2;
+
+          c.x += (c.vx + waveX) * dt;
+          c.y += (c.vy + waveY) * dt;
+          c.a += c.va * dt;
+
+          // LAYER 2: Temporary scroll-reactive depth-scaled parallax displacement
+          const parallaxFactor = 0.18 + c.z * 0.37; // Far (0.18) -> Med (0.365) -> Near (0.55)
+          c.y -= scrollVelocity * parallaxFactor * dt * 60 * 0.15;
+
           c.x = wrap(c.x, W);
           c.y = wrap(c.y, H);
         }
@@ -257,9 +309,9 @@ export default function MicrobeField() {
 
         pos.push({ px, py, cell: c, index: i });
 
-        // Multiply cell alpha by 0.55 for lighter, softer appearance
+        // Multiply cell alpha by 0.55 * opacityMultiplier
         const baseAlpha = Math.max(0.12, Math.min(0.9, 1 - Math.abs(c.z - 0.55) * 1.3));
-        ctx.globalAlpha = baseAlpha * 0.55;
+        ctx.globalAlpha = Math.min(0.85, baseAlpha * 0.55 * opacityMultiplier);
 
         ctx.save();
         ctx.translate(px, py);
@@ -307,8 +359,6 @@ export default function MicrobeField() {
           }
         }
 
-        const now = performance.now();
-
         // Draw connections and travelling signals
         for (const pair of acceptedPairs) {
           const { p1, p2, d } = pair;
@@ -339,11 +389,8 @@ export default function MicrobeField() {
       ctx.globalAlpha = 1;
     }
 
-    const frame = () => {
-      const y = window.scrollY;
-      const d = y - lastY;
-      lastY = y;
-      draw(d);
+    const frame = (time: number) => {
+      draw(time);
       raf = requestAnimationFrame(frame);
     };
 
@@ -358,29 +405,31 @@ export default function MicrobeField() {
       ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
       // Height-only changes (mobile URL bar) do not reshuffle the field
       if (widthChanged || !cells.length) build();
-      if (reduce) draw(0);
+      if (reduce) draw(performance.now());
     };
 
     resize();
     window.addEventListener("resize", resize);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     if (!reduce) raf = requestAnimationFrame(frame); // reduced motion: one static render
 
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [densityMultiplier, motionMultiplier, opacityMultiplier, rotationMultiplier]);
 
   return (
     <canvas
       ref={ref}
       aria-hidden="true"
       style={{
-        position: "fixed",
+        position: position,
         inset: 0,
         width: "100%",
         height: "100%",
-        zIndex: -1, // Task A: Positioned behind all Home content
+        zIndex: position === "absolute" ? 0 : -1,
         pointerEvents: "none",
       }}
     />

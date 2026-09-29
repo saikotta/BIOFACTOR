@@ -1,204 +1,236 @@
 import React from "react";
+import MicrobeField from "../MicrobeField";
 
 export default function RuminantsLifeStages() {
   return (
-    <section className="w-full bg-[#F7FAF6] text-[#173522] border-t border-[#167A4A]/15 py-16 md:py-24">
-      <div className="w-full max-w-[1440px] mx-auto px-5 md:px-8 lg:px-[clamp(48px,5vw,72px)]">
-        {/* Eyebrow */}
-        <div className="flex items-center gap-2.5 mb-4">
-          <span className="w-6 h-[1.5px] bg-[#167A4A]" />
-          <span className="font-mono text-xs font-semibold tracking-wider text-[#167A4A] uppercase">
+    <section className="relative w-full bg-[#EAF3EA] text-[#173522] pt-6 md:pt-7 lg:pt-8 pb-20 md:pb-28 lg:pb-36 overflow-hidden">
+      {/* Floating Microorganism Graphics Layer over #EAF3EA */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-90 overflow-hidden">
+        <MicrobeField
+          position="absolute"
+          densityMultiplier={2.8}
+          motionMultiplier={0.8}
+          opacityMultiplier={0.95}
+          rotationMultiplier={0.6}
+        />
+      </div>
+
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)]">
+        {/* Subtle Restrained Section Boundary Divider */}
+        <div className="w-full border-t border-[#167A4A]/14 mb-8 md:mb-10 lg:mb-12" aria-hidden="true" />
+
+        {/* Main Section Header */}
+        <div className="flex items-center gap-3 mb-4">
+          <span className="w-8 h-[1.5px] bg-[#2D6A4F]" />
+          <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">
             02 / TARGETED ANIMAL APPLICATIONS
           </span>
         </div>
 
-        {/* Heading */}
-        <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-[#173522] tracking-tight leading-[1.05] uppercase mb-12 md:mb-20 max-w-[900px]">
+        <h2 className="font-display font-extrabold text-[clamp(2.25rem,3.8vw,4rem)] text-[#173522] tracking-tight leading-[1.02] uppercase mb-12 md:mb-20 lg:mb-[80px] max-w-[1000px]">
           From the first week of life to peak lactation.
         </h2>
 
-        {/* 3 Life Stage Editorial Sections (Alternating Left/Right Rhythm) */}
-        <div className="flex flex-col gap-16 md:gap-24">
-          {/* ROW 1: CALVES (LEFT = Stage + Image, RIGHT = Content) */}
-          <div className="border-t-2 border-[#0284c7] pt-8 lg:pt-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-            {/* Left Column (38–40% width): Stage Identity & Image Placeholder */}
-            <div className="lg:col-span-5 flex flex-col gap-5">
+        {/* 3 Life Stage Editorial Chapters */}
+        <div className="space-y-28 md:space-y-40 lg:space-y-48">
+          {/* CHAPTER 1: CALVES (LEFT = Photo ~46%, RIGHT = Editorial Content) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            {/* Photo Composition Left */}
+            <div className="lg:col-span-5">
+              <div className="w-full aspect-[4/3] rounded-lg overflow-hidden bg-[#E8EFE6]">
+                <img
+                  src="/images/ruminants/calves-pre-weaning.png"
+                  alt="Calves pre-weaning stage"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-[1.02]"
+                />
+              </div>
+            </div>
+
+            {/* Editorial Content Right */}
+            <div className="lg:col-span-7 flex flex-col justify-center space-y-6">
               <div>
-                <span className="font-mono text-xs font-semibold tracking-wider text-[#0284c7] uppercase">
+                <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase block mb-2">
                   STAGE 01 — REARING
                 </span>
-                <h3 className="font-display font-black text-5xl sm:text-6xl text-[#0284c7] tracking-tight uppercase mt-2 mb-3">
+                <h3 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-[#173522] tracking-tight uppercase mb-3">
                   CALVES
                 </h3>
-                <p className="text-sm font-mono text-[#26382D]/70 leading-relaxed">
+                <p className="font-mono text-xs sm:text-sm text-[#26382D]/70 tracking-wide uppercase">
                   Early-life gut colonisation &amp; early rumen development.
                 </p>
               </div>
 
-              {/* CALVES IMAGE PLACEHOLDER */}
-              <div className="w-full aspect-[4/3] bg-[#0284c7]/8 border border-[#0284c7]/25 rounded-lg flex flex-col items-center justify-center p-6 text-center mt-2">
-                <span className="font-mono text-xs font-bold tracking-wider text-[#0284c7] uppercase mb-1">
-                  CALVES IMAGE PLACEHOLDER
-                </span>
-                <span className="font-serif italic text-xs text-[#26382D]/60">
-                  Young healthy dairy calf / early-life development
-                </span>
+              <div className="space-y-4 pt-2">
+                <h4 className="font-serif font-semibold text-2xl sm:text-3xl text-[#173522] leading-snug">
+                  A calf starts life as a single-stomached animal.
+                </h4>
+                <p className="text-base sm:text-lg text-[#26382D]/85 leading-relaxed max-w-2xl font-sans">
+                  The first few weeks of life determine how quickly the calf transitions from milk dependence to a fully functioning adult rumen. Early microbial seeding accelerates ruminal papillae development and establishes foundational gut immunity that persists into adulthood.
+                </p>
               </div>
-            </div>
 
-            {/* Right Column (60–62% width): Detailed Content */}
-            <div className="lg:col-span-7 flex flex-col gap-6">
-              <h4 className="font-display font-bold text-2xl sm:text-3xl text-[#173522]">
-                A calf starts life as a single-stomached animal.
-              </h4>
-              <p className="text-base sm:text-lg text-[#26382D]/85 leading-relaxed">
-                The first few weeks of life determine how quickly the calf transitions from milk dependence to a fully functioning adult rumen. Early microbial seeding accelerates ruminal papillae development and establishes foundational gut immunity that persists into adulthood.
-              </p>
-
-              {/* Evidence Metrics Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
-                <div className="bg-[#E0F2FE] border border-[#0284c7]/20 rounded-xl p-5">
-                  <span className="font-mono text-xs font-bold text-[#0369a1] block mb-1">EARLY WEANING</span>
-                  <p className="text-sm text-[#0c4a6e] leading-snug">
+              {/* Editorial Evidence Rows (No Colored Cards) */}
+              <div className="pt-6 border-t border-[#173522]/12 space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-6 items-baseline">
+                  <span className="font-mono text-xs font-bold tracking-widest text-[#2D6A4F] uppercase">
+                    EARLY WEANING
+                  </span>
+                  <p className="text-sm sm:text-base text-[#173522]/90 leading-relaxed font-sans">
                     Up to 14 days earlier transition to solid feed through accelerated ruminal papillae growth.
                   </p>
                 </div>
-                <div className="bg-[#E0F2FE] border border-[#0284c7]/20 rounded-xl p-5">
-                  <span className="font-mono text-xs font-bold text-[#0369a1] block mb-1">IMMUNE BOOSTER</span>
-                  <p className="text-sm text-[#0c4a6e] leading-snug">
+                <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-6 items-baseline pt-4 border-t border-[#173522]/08">
+                  <span className="font-mono text-xs font-bold tracking-widest text-[#2D6A4F] uppercase">
+                    IMMUNE BOOSTER
+                  </span>
+                  <p className="text-sm sm:text-base text-[#173522]/90 leading-relaxed font-sans">
                     Lower incidence of calf scours and early respiratory issues through competitive exclusion.
                   </p>
                 </div>
               </div>
 
-              {/* Key Programming Note Box */}
-              <div className="bg-[#FFFFFF] border-l-4 border-[#0284c7] p-5 rounded-r-xl shadow-xs">
-                <span className="font-mono text-xs font-bold text-[#0369a1] block mb-1">EARLY MICROBIOME PROGRAMMING</span>
-                <p className="text-sm text-[#26382D]/90 leading-relaxed font-serif italic">
+              {/* Key Programming Note - Refined Pull-Quote Style */}
+              <div className="pt-6 border-l-2 border-[#2D6A4F] pl-6 my-2">
+                <span className="font-mono text-[11px] font-bold tracking-widest text-[#2D6A4F] uppercase block mb-1">
+                  EARLY MICROBIOME PROGRAMMING
+                </span>
+                <p className="font-serif italic text-sm sm:text-base text-[#173522]/90 leading-relaxed">
                   Intervention in the first 4 weeks of life creates a permanent shift in ruminal microbial architecture that improves feed conversion efficiency across the animal&apos;s entire productive lifetime.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* ROW 2: TRANSITION (REVERSED: LEFT = Content, RIGHT = Stage + Image) */}
-          <div className="border-t-2 border-[#d97706] pt-8 lg:pt-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-            {/* Left Column (60–62% width): Detailed Content */}
-            <div className="lg:col-span-7 lg:order-1 flex flex-col gap-6">
-              <h4 className="font-display font-bold text-2xl sm:text-3xl text-[#173522]">
-                The critical weeks around calving.
-              </h4>
-              <p className="text-base sm:text-lg text-[#26382D]/85 leading-relaxed">
-                The transition period (3 weeks pre-calving to 3 weeks post-calving) is the highest metabolic risk window in a dairy cow&apos;s life. Rapid diet changes, immune suppression, and energy deficits create severe ruminal dysbiosis if not actively managed.
-              </p>
+          {/* CHAPTER 2: TRANSITION (LEFT = Editorial Content, RIGHT = Photo ~46%) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            {/* Editorial Content Left */}
+            <div className="lg:col-span-7 lg:order-1 flex flex-col justify-center space-y-6">
+              <div>
+                <span className="font-mono text-xs font-semibold tracking-widest text-[#B45309] uppercase block mb-2">
+                  STAGE 02 — PERIPARTURIENT
+                </span>
+                <h3 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-[#173522] tracking-tight uppercase mb-3">
+                  TRANSITION
+                </h3>
+                <p className="font-mono text-xs sm:text-sm text-[#26382D]/70 tracking-wide uppercase">
+                  Periparturient metabolic balance &amp; dry matter intake recovery.
+                </p>
+              </div>
 
-              {/* Evidence Metrics Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
-                <div className="bg-[#FEF3C7] border border-[#d97706]/20 rounded-xl p-5">
-                  <span className="font-mono text-xs font-bold text-[#b45309] block mb-1">METABOLIC STABILITY</span>
-                  <p className="text-sm text-[#78350f] leading-snug">
+              <div className="space-y-4 pt-2">
+                <h4 className="font-serif font-semibold text-2xl sm:text-3xl text-[#173522] leading-snug">
+                  The critical weeks around calving.
+                </h4>
+                <p className="text-base sm:text-lg text-[#26382D]/85 leading-relaxed max-w-2xl font-sans">
+                  The transition period (3 weeks pre-calving to 3 weeks post-calving) is the highest metabolic risk window in a dairy cow&apos;s life. Rapid diet changes, immune suppression, and energy deficits create severe ruminal dysbiosis if not actively managed.
+                </p>
+              </div>
+
+              {/* Editorial Evidence Rows */}
+              <div className="pt-6 border-t border-[#173522]/12 space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-6 items-baseline">
+                  <span className="font-mono text-xs font-bold tracking-widest text-[#B45309] uppercase">
+                    METABOLIC STABILITY
+                  </span>
+                  <p className="text-sm sm:text-base text-[#173522]/90 leading-relaxed font-sans">
                     Reduced incidence of subclinical ketosis and displaced abomasum by keeping ruminal pH stable.
                   </p>
                 </div>
-                <div className="bg-[#FEF3C7] border border-[#d97706]/20 rounded-xl p-5">
-                  <span className="font-mono text-xs font-bold text-[#b45309] block mb-1">DRY MATTER INTAKE</span>
-                  <p className="text-sm text-[#78350f] leading-snug">
+                <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-6 items-baseline pt-4 border-t border-[#173522]/08">
+                  <span className="font-mono text-xs font-bold tracking-widest text-[#B45309] uppercase">
+                    DRY MATTER INTAKE
+                  </span>
+                  <p className="text-sm sm:text-base text-[#173522]/90 leading-relaxed font-sans">
                     1.2–1.8 kg higher daily dry matter intake during early lactation post-calving recovery.
                   </p>
                 </div>
               </div>
 
-              {/* Key Programming Note Box */}
-              <div className="bg-[#FFFFFF] border-l-4 border-[#d97706] p-5 rounded-r-xl shadow-xs">
-                <span className="font-mono text-xs font-bold text-[#b45309] block mb-1">INFLAMMATION CONTROL</span>
-                <p className="text-sm text-[#26382D]/90 leading-relaxed font-serif italic">
+              {/* Key Programming Note - Refined Pull-Quote Style */}
+              <div className="pt-6 border-l-2 border-[#B45309] pl-6 my-2">
+                <span className="font-mono text-[11px] font-bold tracking-widest text-[#B45309] uppercase block mb-1">
+                  INFLAMMATION CONTROL
+                </span>
+                <p className="font-serif italic text-sm sm:text-base text-[#173522]/90 leading-relaxed">
                   Targeted biologicals reduce systemic inflammatory response after calving, redirecting energy from immune activation toward milk synthesis and rapid reproductive recovery.
                 </p>
               </div>
             </div>
 
-            {/* Right Column (38–40% width): Stage Identity & Image Placeholder */}
-            <div className="lg:col-span-5 lg:order-2 flex flex-col gap-5">
-              <div>
-                <span className="font-mono text-xs font-semibold tracking-wider text-[#d97706] uppercase">
-                  STAGE 02 — PERIPARTURIENT
-                </span>
-                <h3 className="font-display font-black text-5xl sm:text-6xl text-[#d97706] tracking-tight uppercase mt-2 mb-3">
-                  TRANSITION
-                </h3>
-                <p className="text-sm font-mono text-[#26382D]/70 leading-relaxed">
-                  Periparturient metabolic balance &amp; dry matter intake recovery.
-                </p>
-              </div>
-
-              {/* TRANSITION IMAGE PLACEHOLDER */}
-              <div className="w-full aspect-[4/3] bg-[#d97706]/8 border border-[#d97706]/25 rounded-lg flex flex-col items-center justify-center p-6 text-center mt-2">
-                <span className="font-mono text-xs font-bold tracking-wider text-[#d97706] uppercase mb-1">
-                  TRANSITION IMAGE PLACEHOLDER
-                </span>
-                <span className="font-serif italic text-xs text-[#26382D]/60">
-                  Dairy cow around transition &amp; calving period
-                </span>
+            {/* Photo Composition Right */}
+            <div className="lg:col-span-5 lg:order-2">
+              <div className="w-full aspect-[4/3] rounded-lg overflow-hidden bg-[#E8EFE6]">
+                <img
+                  src="/images/ruminants/transition-periparturient.png"
+                  alt="Transition periparturient stage"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-[1.02]"
+                />
               </div>
             </div>
           </div>
 
-          {/* ROW 3: LACTATION (LEFT = Stage + Image, RIGHT = Content) */}
-          <div className="border-t-2 border-[#167A4A] pt-8 lg:pt-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-            {/* Left Column (38–40% width): Stage Identity & Image Placeholder */}
-            <div className="lg:col-span-5 flex flex-col gap-5">
+          {/* CHAPTER 3: LACTATION (LEFT = Photo ~46%, RIGHT = Editorial Content) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            {/* Photo Composition Left */}
+            <div className="lg:col-span-5">
+              <div className="w-full aspect-[4/3] rounded-lg overflow-hidden bg-[#E8EFE6]">
+                <img
+                  src="/images/ruminants/lactation-production.png"
+                  alt="Lactation production stage"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-[1.02]"
+                />
+              </div>
+            </div>
+
+            {/* Editorial Content Right */}
+            <div className="lg:col-span-7 flex flex-col justify-center space-y-6">
               <div>
-                <span className="font-mono text-xs font-semibold tracking-wider text-[#167A4A] uppercase">
+                <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase block mb-2">
                   STAGE 03 — PRODUCTION
                 </span>
-                <h3 className="font-display font-black text-5xl sm:text-6xl text-[#167A4A] tracking-tight uppercase mt-2 mb-3">
+                <h3 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-[#173522] tracking-tight uppercase mb-3">
                   LACTATION
                 </h3>
-                <p className="text-sm font-mono text-[#26382D]/70 leading-relaxed">
+                <p className="font-mono text-xs sm:text-sm text-[#26382D]/70 tracking-wide uppercase">
                   Peak milk production &amp; sustained feed efficiency.
                 </p>
               </div>
 
-              {/* LACTATION IMAGE PLACEHOLDER */}
-              <div className="w-full aspect-[4/3] bg-[#167A4A]/8 border border-[#167A4A]/25 rounded-lg flex flex-col items-center justify-center p-6 text-center mt-2">
-                <span className="font-mono text-xs font-bold tracking-wider text-[#167A4A] uppercase mb-1">
-                  LACTATION IMAGE PLACEHOLDER
-                </span>
-                <span className="font-serif italic text-xs text-[#26382D]/60">
-                  Healthy lactating dairy cow / peak milk production
-                </span>
+              <div className="space-y-4 pt-2">
+                <h4 className="font-serif font-semibold text-2xl sm:text-3xl text-[#173522] leading-snug">
+                  A more efficient rumen turns more food into milk.
+                </h4>
+                <p className="text-base sm:text-lg text-[#26382D]/85 leading-relaxed max-w-2xl font-sans">
+                  During peak lactation, the cow&apos;s metabolic demand is extreme. Optimising the ratio of propionate to acetate in the rumen unlocks additional energy for milk fat and protein synthesis without increasing feed intake.
+                </p>
               </div>
-            </div>
 
-            {/* Right Column (60–62% width): Detailed Content */}
-            <div className="lg:col-span-7 flex flex-col gap-6">
-              <h4 className="font-display font-bold text-2xl sm:text-3xl text-[#173522]">
-                A more efficient rumen turns more food into milk.
-              </h4>
-              <p className="text-base sm:text-lg text-[#26382D]/85 leading-relaxed">
-                During peak lactation, the cow&apos;s metabolic demand is extreme. Optimising the ratio of propionate to acetate in the rumen unlocks additional energy for milk fat and protein synthesis without increasing feed intake.
-              </p>
-
-              {/* Evidence Metrics Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
-                <div className="bg-[#D1FAE5] border border-[#167A4A]/20 rounded-xl p-5">
-                  <span className="font-mono text-xs font-bold text-[#047857] block mb-1">MILK YIELD &amp; QUALITY</span>
-                  <p className="text-sm text-[#065f46] leading-snug">
+              {/* Editorial Evidence Rows */}
+              <div className="pt-6 border-t border-[#173522]/12 space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-6 items-baseline">
+                  <span className="font-mono text-xs font-bold tracking-widest text-[#2D6A4F] uppercase">
+                    MILK YIELD &amp; QUALITY
+                  </span>
+                  <p className="text-sm sm:text-base text-[#173522]/90 leading-relaxed font-sans">
                     +1.4–2.2 L/hd/day increase in energy-corrected milk yield with improved fat and protein ratio.
                   </p>
                 </div>
-                <div className="bg-[#D1FAE5] border border-[#167A4A]/20 rounded-xl p-5">
-                  <span className="font-mono text-xs font-bold text-[#047857] block mb-1">FEED CONVERSION RATIO</span>
-                  <p className="text-sm text-[#065f46] leading-snug">
+                <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-6 items-baseline pt-4 border-t border-[#173522]/08">
+                  <span className="font-mono text-xs font-bold tracking-widest text-[#2D6A4F] uppercase">
+                    FEED CONVERSION RATIO
+                  </span>
+                  <p className="text-sm sm:text-base text-[#173522]/90 leading-relaxed font-sans">
                     4.8–6.5% improvement in overall herd feed efficiency across total lactation length.
                   </p>
                 </div>
               </div>
 
-              {/* Key Programming Note Box */}
-              <div className="bg-[#FFFFFF] border-l-4 border-[#167A4A] p-5 rounded-r-xl shadow-xs">
-                <span className="font-mono text-xs font-bold text-[#047857] block mb-1">SUSTAINED PRODUCTION</span>
-                <p className="text-sm text-[#26382D]/90 leading-relaxed font-serif italic">
+              {/* Key Programming Note - Refined Pull-Quote Style */}
+              <div className="pt-6 border-l-2 border-[#2D6A4F] pl-6 my-2">
+                <span className="font-mono text-[11px] font-bold tracking-widest text-[#2D6A4F] uppercase block mb-1">
+                  SUSTAINED PRODUCTION
+                </span>
+                <p className="font-serif italic text-sm sm:text-base text-[#173522]/90 leading-relaxed">
                   Maintains peak milk yield for 3–5 weeks longer while reducing body condition loss during negative energy balance in early lactation.
                 </p>
               </div>
