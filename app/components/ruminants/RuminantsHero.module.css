@@ -1,0 +1,153 @@
+/* Scoped CSS Module for Ruminants Hero (Frame 1) */
+
+.heroSection {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  background-color: #080d09;
+}
+
+@media (min-width: 768px) {
+  .heroSection {
+    min-height: calc(100vh - 72px);
+  }
+}
+
+/* Background Image Container */
+.bgWrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bgImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Desktop object-position: 72% 38% keeps grazing cow prominent on right half with clean left text separation */
+  object-position: 72% 38%;
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  .bgImage {
+    /* Tablet position */
+    object-position: 68% 42%;
+  }
+}
+
+@media (max-width: 640px) {
+  .bgImage {
+    /* Mobile position */
+    object-position: 62% 45%;
+  }
+}
+
+/* Lightened Readability Overlay: Soft radial anchor aligned with left-shifted typography */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 14% 90%,
+    rgba(8, 14, 10, 0.44) 0%,
+    rgba(8, 14, 10, 0.22) 40%,
+    rgba(8, 14, 10, 0) 70%
+  ),
+  linear-gradient(
+    to top,
+    rgba(8, 14, 10, 0.36) 0%,
+    rgba(8, 14, 10, 0.10) 30%,
+    transparent 55%
+  );
+}
+
+/* Hero Content Container: Controlled left inset (clamp: 20px mobile -> 72px wide desktop, max-width 1440px) */
+.container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(20px, 5vw, 72px);
+  padding-right: clamp(20px, 5vw, 72px);
+  padding-bottom: 2.25rem;                      /* Bottom anchored position */
+  padding-top: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-bottom: 2.5rem;
+  }
+}
+
+/* Content block wrapper (constrained width for left visual territory) */
+.contentBlock {
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Technical Eyebrow Label */
+.eyebrowWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-bottom: 1.125rem;
+}
+
+.eyebrowLine {
+  width: 1.5rem;
+  height: 1.5px;
+  background-color: #b8e986;
+  opacity: 0.7;
+}
+
+.eyebrowText {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 0.8125rem; /* 13px */
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #b8e986;
+}
+
+/* Main Display Headline (3-Line Editorial Structure, 5.5rem max) */
+.headline {
+  font-family: var(--font-bricolage), sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #f8fafc;
+  letter-spacing: -0.035em;
+  line-height: 0.88;
+  margin-bottom: 1.35rem;
+  max-width: 650px;
+  font-size: clamp(2.35rem, 5.8vw, 5.5rem);
+}
+
+.accentFeeds {
+  color: #b8e986; /* Artifact botanical pale-green accent */
+}
+
+/* Quotation Copy (Constrained to 520px desktop width) */
+.quotation {
+  font-family: var(--font-newsreader), serif;
+  font-style: italic;
+  font-weight: 400;
+  color: rgba(241, 245, 249, 0.95);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  max-width: 520px;
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}

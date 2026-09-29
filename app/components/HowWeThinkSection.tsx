@@ -211,9 +211,9 @@ export default function HowWeThinkSection() {
             }}
           >
             <div>THE NEXT BIG</div>
-            <div className="flex flex-wrap items-baseline gap-x-4 sm:gap-x-6 gap-y-2 mt-1 sm:mt-2">
+            <div className="inline-flex items-baseline flex-wrap gap-x-3 sm:gap-x-5 gap-y-2 mt-1 sm:mt-2">
               <span>THING IS REALLY</span>
-              <span className="text-[#9DDC72] font-bold ml-1 sm:ml-2">
+              <span className="inline-flex items-center px-2.5 sm:px-3.5 py-1 text-[16px] sm:text-[20px] md:text-[24px] lg:text-[26px] font-semibold tracking-[0.18em] leading-none bg-[#A7E7C7] text-[#0B3325] rounded-[2px] shadow-md select-none whitespace-nowrap self-center translate-y-[-0.05em]">
                 SMALL.
               </span>
             </div>

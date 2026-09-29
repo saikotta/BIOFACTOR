@@ -157,7 +157,7 @@ export default function AboutHeroSection() {
 
         {/* Right / Center Area: Soft Materialize Entrance for Ecosystem PNG Artwork (300ms delay, translateY(20px) scale(0.985) blur(2px) -> translateY(0) scale(1) blur(0)) */}
         <div
-          className={`absolute right-0 bottom-0 pointer-events-none select-none z-10 w-[108vw] sm:w-[84vw] md:w-[75vw] lg:w-[75vw] max-w-[1350px] h-auto flex items-end justify-end overflow-hidden ${
+          className={`absolute right-0 bottom-0 pointer-events-none select-none z-10 w-[88vw] sm:w-[71vw] md:w-[66vw] lg:w-[64vw] xl:w-[62vw] max-w-[1140px] h-auto flex items-end justify-end overflow-hidden ${
             prefersReducedMotion
               ? "opacity-100"
               : hasTriggered
