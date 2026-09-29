@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { name: "HOME", href: "/" },
   { name: "ABOUT", href: "/about" },
   { name: "RUMINANTS", href: "/ruminants" },
+  { name: "POULTRY", href: "/poultry" },
   { name: "ONE HEALTH", href: "/one-health" },
   { name: "SCIENCE & TECHNOLOGY", href: "/science-technology" },
 ];
