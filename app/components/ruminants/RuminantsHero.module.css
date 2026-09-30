@@ -25,6 +25,7 @@
   height: 100%;
   z-index: 0;
   pointer-events: none;
+  animation: hero-image-load 1000ms cubic-bezier(.22,.61,.36,1) forwards;
 }
 
 .bgImage {
@@ -68,6 +69,72 @@
     rgba(8, 14, 10, 0.10) 30%,
     transparent 55%
   );
+  animation: hero-exposure 1200ms cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+.heroSection .motionLine > span,
+.heroSection .eyebrowText,
+.heroSection .quotation {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: opacity 380ms cubic-bezier(.22,.61,.36,1), transform 380ms cubic-bezier(.22,.61,.36,1);
+}
+
+.heroSection .eyebrowLine {
+  transform: scaleX(1);
+  transform-origin: left center;
+  transition: transform 700ms cubic-bezier(.22,.61,.36,1);
+}
+
+.heroSection .eyebrowText,
+.heroSection .motionLine > span,
+.heroSection .quotation {
+  animation: hero-text-in 380ms cubic-bezier(.22,.61,.36,1) both;
+}
+
+.heroSection .eyebrowText { animation-delay: 80ms; }
+.heroSection .motionLine:nth-of-type(1) > span { animation-delay: 140ms; }
+.heroSection .motionLine:nth-of-type(2) > span { animation-delay: 220ms; }
+.heroSection .motionLine:nth-of-type(3) > span { animation-delay: 300ms; }
+.heroSection .quotation { animation-delay: 400ms; }
+
+/* Keep hero copy available while client motion initializes or hot reloads. */
+.heroSection .eyebrowText,
+.heroSection .motionLine > span,
+.heroSection .quotation {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+@keyframes hero-text-in {
+  from { opacity: 0; transform: translate3d(0, 18px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+.heroSection:global(.rm-hero-ready) .eyebrowLine,
+.heroSection:global(.rm-hero-ready) .eyebrowText,
+.heroSection:global(.rm-hero-ready) .motionLine > span,
+.heroSection:global(.rm-hero-ready) .quotation {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.heroSection:global(.rm-hero-ready) .eyebrowLine { transform: scaleX(1); }
+.heroSection:global(.rm-hero-ready) .eyebrowText { transition-delay: 120ms; }
+.heroSection:global(.rm-hero-ready) .motionLine:nth-of-type(1) > span { transition-delay: 220ms; }
+.heroSection:global(.rm-hero-ready) .motionLine:nth-of-type(2) > span { transition-delay: 340ms; }
+.heroSection:global(.rm-hero-ready) .motionLine:nth-of-type(3) > span { transition-delay: 460ms; }
+.heroSection:global(.rm-hero-ready) .quotation { transition-delay: 620ms; }
+
+@keyframes hero-image-load {
+  from { transform: scale(1.04); }
+  to { transform: scale(1); }
+}
+
+@keyframes hero-exposure {
+  from { opacity: .75; }
+  to { opacity: 0; }
 }
 
 /* Hero Content Container: Controlled left inset (clamp: 20px mobile -> 72px wide desktop, max-width 1440px) */
@@ -135,6 +202,16 @@
   font-size: clamp(2.35rem, 5.8vw, 5.5rem);
 }
 
+.motionLine {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.motionLine > span {
+  display: inline-block;
+}
+
 .accentFeeds {
   color: #b8e986; /* Artifact botanical pale-green accent */
 }
@@ -150,4 +227,25 @@
   max-width: 520px;
   font-size: clamp(1.1rem, 1.8vw, 1.35rem);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bgWrapper,
+  .overlay {
+    animation: none;
+  }
+
+  .heroSection .motionLine > span,
+  .heroSection .eyebrowText,
+  .heroSection .quotation {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: none;
+  }
+
+  .heroSection .eyebrowLine {
+    transform: scaleX(1);
+    transition: none;
+  }
 }

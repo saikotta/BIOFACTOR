@@ -2,7 +2,7 @@ import React from "react";
 
 export default function RuminantsRumenFactory() {
   return (
-    <section className="relative w-full text-[#173522] pt-3 md:pt-4 lg:pt-5 pb-8 md:pb-9 lg:pb-10 overflow-hidden bg-[#EAF3EA]">
+    <section className="relative w-full text-[#173522] pt-3 md:pt-4 lg:pt-5 pb-8 md:pb-9 lg:pb-10 overflow-hidden bg-[#EAF3EA]" data-ruminants-section="rumen" data-motion>
       {/* Opaque Base Color Layer to Mask Global MicrobeField Canvas */}
       <div className="absolute inset-0 z-0 bg-[#EAF3EA]" aria-hidden="true" />
 
@@ -19,7 +19,7 @@ export default function RuminantsRumenFactory() {
       {/* Section Content */}
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)]">
         {/* Eyebrow Label */}
-        <div className="flex items-center gap-3 mb-4">
+        <div className="flex items-center gap-3 mb-4" data-motion-eyebrow>
           <span className="w-8 h-[1.5px] bg-[#2D6A4F]" aria-hidden="true" />
           <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">
             01 / A LIVING FERMENTER
@@ -28,7 +28,7 @@ export default function RuminantsRumenFactory() {
 
         {/* Headline & Supporting Copy Stack */}
         <div className="max-w-[1020px] mb-12 md:mb-16">
-          <h2 className="font-display font-extrabold text-[clamp(2.5rem,4vw,4.25rem)] text-[#173522] tracking-tight leading-[1.02] uppercase mb-6">
+          <h2 className="font-display font-extrabold text-[clamp(2.5rem,4vw,4.25rem)] text-[#173522] tracking-tight leading-[1.02] uppercase mb-6" data-motion-heading>
             The rumen is a microbial
             <br />
             factory with one customer.
@@ -39,7 +39,7 @@ export default function RuminantsRumenFactory() {
         </div>
 
         {/* Technical Biological Diagram Canvas (Unboxed, Breathable Layout) */}
-        <div className="w-full bg-[#FFFFFF]/70 rounded-2xl p-6 sm:p-10 border border-[#173522]/08 shadow-[0_4px_24px_rgba(23,53,34,0.03)] overflow-x-auto">
+        <div className="w-full bg-[#FFFFFF]/70 rounded-2xl p-6 sm:p-10 border border-[#173522]/08 shadow-[0_4px_24px_rgba(23,53,34,0.03)] overflow-x-auto" data-motion="diagram">
           <div className="min-w-[880px]">
             <svg
               viewBox="0 0 960 250"

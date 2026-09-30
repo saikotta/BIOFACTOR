@@ -3,7 +3,7 @@ import MicrobeField from "../MicrobeField";
 
 export default function RuminantsLifeStages() {
   return (
-    <section className="relative w-full bg-[#EAF3EA] text-[#173522] pt-6 md:pt-7 lg:pt-8 pb-20 md:pb-28 lg:pb-36 overflow-hidden">
+    <section className="relative w-full bg-[#EAF3EA] text-[#173522] pt-6 md:pt-7 lg:pt-8 pb-20 md:pb-28 lg:pb-36 overflow-hidden" data-ruminants-section="life" data-motion>
       {/* Floating Microorganism Graphics Layer over #EAF3EA */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-90 overflow-hidden">
         <MicrobeField
@@ -20,39 +20,28 @@ export default function RuminantsLifeStages() {
         <div className="w-full border-t border-[#167A4A]/14 mb-8 md:mb-10 lg:mb-12" aria-hidden="true" />
 
         {/* Main Section Header */}
-        <div className="flex items-center gap-3 mb-4">
+        <div className="flex items-center gap-3 mb-4" data-motion-eyebrow>
           <span className="w-8 h-[1.5px] bg-[#2D6A4F]" />
           <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">
             02 / TARGETED ANIMAL APPLICATIONS
           </span>
         </div>
 
-        <h2 className="font-display font-extrabold text-[clamp(2.25rem,3.8vw,4rem)] text-[#173522] tracking-tight leading-[1.02] uppercase mb-12 md:mb-20 lg:mb-[80px] max-w-[1000px]">
+        <h2 className="font-display font-extrabold text-[clamp(2.25rem,3.8vw,4rem)] text-[#173522] tracking-tight leading-[1.02] uppercase mb-12 md:mb-20 lg:mb-[80px] max-w-[1000px]" data-motion-heading>
           From the first week of life to peak lactation.
         </h2>
 
         {/* 3 Life Stage Editorial Chapters */}
-        <div className="space-y-28 md:space-y-40 lg:space-y-48">
-          {/* CHAPTER 1: CALVES (LEFT = Photo ~46%, RIGHT = Editorial Content) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-            {/* Photo Composition Left */}
-            <div className="lg:col-span-5">
-              <div className="w-full aspect-[4/3] rounded-lg overflow-hidden bg-[#E8EFE6]">
-                <img
-                  src="/images/ruminants/calves-pre-weaning.png"
-                  alt="Calves pre-weaning stage"
-                  className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-[1.02]"
-                />
-              </div>
-            </div>
-
-            {/* Editorial Content Right */}
-            <div className="lg:col-span-7 flex flex-col justify-center space-y-6">
+        <div className="space-y-10 md:space-y-12 lg:space-y-16">
+          {/* CHAPTER 1: CALVES (LEFT = Heading + Photo, RIGHT = Editorial Content) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start" data-stage data-side="left">
+            {/* Left Column: Heading + Photo */}
+            <div className="lg:col-span-5 flex flex-col space-y-6">
               <div>
                 <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase block mb-2">
                   STAGE 01 — REARING
                 </span>
-                <h3 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-[#173522] tracking-tight uppercase mb-3">
+                <h3 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-[#173522] tracking-tight uppercase mb-3" data-stage-heading>
                   CALVES
                 </h3>
                 <p className="font-mono text-xs sm:text-sm text-[#26382D]/70 tracking-wide uppercase">
@@ -60,6 +49,20 @@ export default function RuminantsLifeStages() {
                 </p>
               </div>
 
+              <div className="w-full aspect-[4/3] rounded-lg overflow-hidden bg-[#E8EFE6]" data-stage-image>
+                <img
+                  data-stage-image="calf"
+                  src="/images/ruminants/calves-pre-weaning.png"
+                  alt="Calves pre-weaning stage"
+                  loading="eager"
+                  decoding="async"
+                  className="w-full h-full object-cover object-center block will-change-transform"
+                />
+              </div>
+            </div>
+
+            {/* Right Column: Editorial Content */}
+            <div className="lg:col-span-7 flex flex-col justify-center space-y-6">
               <div className="space-y-4 pt-2">
                 <h4 className="font-serif font-semibold text-2xl sm:text-3xl text-[#173522] leading-snug">
                   A calf starts life as a single-stomached animal.
@@ -101,22 +104,10 @@ export default function RuminantsLifeStages() {
             </div>
           </div>
 
-          {/* CHAPTER 2: TRANSITION (LEFT = Editorial Content, RIGHT = Photo ~46%) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-            {/* Editorial Content Left */}
-            <div className="lg:col-span-7 lg:order-1 flex flex-col justify-center space-y-6">
-              <div>
-                <span className="font-mono text-xs font-semibold tracking-widest text-[#B45309] uppercase block mb-2">
-                  STAGE 02 — PERIPARTURIENT
-                </span>
-                <h3 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-[#173522] tracking-tight uppercase mb-3">
-                  TRANSITION
-                </h3>
-                <p className="font-mono text-xs sm:text-sm text-[#26382D]/70 tracking-wide uppercase">
-                  Periparturient metabolic balance &amp; dry matter intake recovery.
-                </p>
-              </div>
-
+          {/* CHAPTER 2: TRANSITION (LEFT = Editorial Content, RIGHT = Heading + Photo) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start" data-stage data-side="right">
+            {/* Left Column: Editorial Content */}
+            <div className="lg:col-span-7 flex flex-col justify-center space-y-6">
               <div className="space-y-4 pt-2">
                 <h4 className="font-serif font-semibold text-2xl sm:text-3xl text-[#173522] leading-snug">
                   The critical weeks around calving.
@@ -129,7 +120,7 @@ export default function RuminantsLifeStages() {
               {/* Editorial Evidence Rows */}
               <div className="pt-6 border-t border-[#173522]/12 space-y-5">
                 <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-6 items-baseline">
-                  <span className="font-mono text-xs font-bold tracking-widest text-[#B45309] uppercase">
+                  <span className="font-mono text-xs font-bold tracking-widest text-[#2D6A4F] uppercase">
                     METABOLIC STABILITY
                   </span>
                   <p className="text-sm sm:text-base text-[#173522]/90 leading-relaxed font-sans">
@@ -137,7 +128,7 @@ export default function RuminantsLifeStages() {
                   </p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-6 items-baseline pt-4 border-t border-[#173522]/08">
-                  <span className="font-mono text-xs font-bold tracking-widest text-[#B45309] uppercase">
+                  <span className="font-mono text-xs font-bold tracking-widest text-[#2D6A4F] uppercase">
                     DRY MATTER INTAKE
                   </span>
                   <p className="text-sm sm:text-base text-[#173522]/90 leading-relaxed font-sans">
@@ -147,8 +138,8 @@ export default function RuminantsLifeStages() {
               </div>
 
               {/* Key Programming Note - Refined Pull-Quote Style */}
-              <div className="pt-6 border-l-2 border-[#B45309] pl-6 my-2">
-                <span className="font-mono text-[11px] font-bold tracking-widest text-[#B45309] uppercase block mb-1">
+              <div className="pt-6 border-l-2 border-[#2D6A4F] pl-6 my-2">
+                <span className="font-mono text-[11px] font-bold tracking-widest text-[#2D6A4F] uppercase block mb-1">
                   INFLAMMATION CONTROL
                 </span>
                 <p className="font-serif italic text-sm sm:text-base text-[#173522]/90 leading-relaxed">
@@ -157,38 +148,42 @@ export default function RuminantsLifeStages() {
               </div>
             </div>
 
-            {/* Photo Composition Right */}
-            <div className="lg:col-span-5 lg:order-2">
-              <div className="w-full aspect-[4/3] rounded-lg overflow-hidden bg-[#E8EFE6]">
+            {/* Right Column: Heading + Photo */}
+            <div className="lg:col-span-5 flex flex-col space-y-6">
+              <div>
+                <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase block mb-2">
+                  STAGE 02 — PERIPARTURIENT
+                </span>
+                <h3 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-[#173522] tracking-tight uppercase mb-3" data-stage-heading>
+                  TRANSITION
+                </h3>
+                <p className="font-mono text-xs sm:text-sm text-[#26382D]/70 tracking-wide uppercase">
+                  Periparturient metabolic balance &amp; dry matter intake recovery.
+                </p>
+              </div>
+
+              <div className="w-full aspect-[4/3] rounded-lg overflow-hidden bg-[#E8EFE6]" data-stage-image>
                 <img
+                  data-stage-image="transition"
                   src="/images/ruminants/transition-periparturient.png"
                   alt="Transition periparturient stage"
-                  className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-[1.02]"
+                  loading="eager"
+                  decoding="async"
+                  className="w-full h-full object-cover object-center block will-change-transform"
                 />
               </div>
             </div>
           </div>
 
-          {/* CHAPTER 3: LACTATION (LEFT = Photo ~46%, RIGHT = Editorial Content) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-            {/* Photo Composition Left */}
-            <div className="lg:col-span-5">
-              <div className="w-full aspect-[4/3] rounded-lg overflow-hidden bg-[#E8EFE6]">
-                <img
-                  src="/images/ruminants/lactation-production.png"
-                  alt="Lactation production stage"
-                  className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-[1.02]"
-                />
-              </div>
-            </div>
-
-            {/* Editorial Content Right */}
-            <div className="lg:col-span-7 flex flex-col justify-center space-y-6">
+          {/* CHAPTER 3: LACTATION (LEFT = Heading + Photo, RIGHT = Editorial Content) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start" data-stage data-side="left">
+            {/* Left Column: Heading + Photo */}
+            <div className="lg:col-span-5 flex flex-col space-y-6">
               <div>
                 <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase block mb-2">
                   STAGE 03 — PRODUCTION
                 </span>
-                <h3 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-[#173522] tracking-tight uppercase mb-3">
+                <h3 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-[#173522] tracking-tight uppercase mb-3" data-stage-heading>
                   LACTATION
                 </h3>
                 <p className="font-mono text-xs sm:text-sm text-[#26382D]/70 tracking-wide uppercase">
@@ -196,6 +191,20 @@ export default function RuminantsLifeStages() {
                 </p>
               </div>
 
+              <div className="w-full aspect-[4/3] rounded-lg overflow-hidden bg-[#E8EFE6]" data-stage-image>
+                <img
+                  data-stage-image="lactation"
+                  src="/images/ruminants/lactation-production.png"
+                  alt="Lactation production stage"
+                  loading="eager"
+                  decoding="async"
+                  className="w-full h-full object-cover object-[center_30%] block will-change-transform"
+                />
+              </div>
+            </div>
+
+            {/* Right Column: Editorial Content */}
+            <div className="lg:col-span-7 flex flex-col justify-center space-y-6">
               <div className="space-y-4 pt-2">
                 <h4 className="font-serif font-semibold text-2xl sm:text-3xl text-[#173522] leading-snug">
                   A more efficient rumen turns more food into milk.

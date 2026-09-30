@@ -3,7 +3,7 @@ import styles from "./RuminantsHero.module.css";
 
 export default function RuminantsHero() {
   return (
-    <section className={styles.heroSection}>
+    <section className={styles.heroSection} data-ruminants-section="hero" data-motion>
       {/* Background Image Container */}
       <div className={styles.bgWrapper}>
         <img
@@ -27,11 +27,11 @@ export default function RuminantsHero() {
 
           {/* Main Display Headline (3-Line Editorial Structure) */}
           <h1 className={styles.headline}>
-            BIOLOGY THAT
+            <span className={styles.motionLine}><span data-hero-line-inner>BIOLOGY THAT</span></span>
             <br />
-            <span className={styles.accentFeeds}>FEEDS</span> THE
+            <span className={styles.motionLine}><span data-hero-line-inner data-hero-shimmer><span className={styles.accentFeeds}>FEEDS</span> THE</span></span>
             <br />
-            RUMEN.
+            <span className={styles.motionLine}><span data-hero-line-inner>RUMEN.</span></span>
           </h1>
 
           {/* Quotation Copy */}

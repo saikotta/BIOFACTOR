@@ -46,7 +46,7 @@ export default function RuminantsMatrix() {
   ];
 
   return (
-    <section className="relative w-full bg-[#EAF3EA] text-[#173522] py-16 md:py-24 lg:py-28 overflow-hidden">
+    <section className="relative w-full bg-[#EAF3EA] text-[#173522] py-16 md:py-24 lg:py-28 overflow-hidden" data-ruminants-section="matrix" data-motion>
       {/* Floating Microorganism Graphics Layer over #EAF3EA canvas inside Matrix */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.78] overflow-hidden">
         <MicrobeField
@@ -58,12 +58,12 @@ export default function RuminantsMatrix() {
         />
       </div>
 
-      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)]">
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)]" data-matrix-stage>
         {/* Subtle Restrained Section Boundary Divider */}
         <div className="w-full border-t border-[#167A4A]/14 mb-10 md:mb-14" aria-hidden="true" />
 
         {/* Eyebrow */}
-        <div className="flex items-center gap-3 mb-4">
+        <div className="flex items-center gap-3 mb-4" data-motion-eyebrow>
           <span className="w-8 h-[1.5px] bg-[#2D6A4F]" />
           <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">
             04 / SYSTEMATIC APPLICATION
@@ -71,7 +71,7 @@ export default function RuminantsMatrix() {
         </div>
 
         {/* Heading */}
-        <h2 className="font-display font-extrabold text-[clamp(2.25rem,3.8vw,4rem)] text-[#173522] tracking-tight leading-[1.02] uppercase mb-8 md:mb-12">
+        <h2 className="font-display font-extrabold text-[clamp(2.25rem,3.8vw,4rem)] text-[#173522] tracking-tight leading-[1.02] uppercase mb-8 md:mb-12" data-motion data-ruminants-headline>
           The right biology at every stage.
         </h2>
 
@@ -89,10 +89,11 @@ export default function RuminantsMatrix() {
 
               {/* 5 Stage Column Headers */}
               {STAGES.map((stg, i) => (
-                <div key={i} className="col-span-2 px-4 sm:px-5 lg:px-6 flex flex-col justify-end">
+                <div key={i} className="col-span-2 px-4 sm:px-5 lg:px-6 flex flex-col justify-end" data-matrix-column style={{ "--column-index": i } as React.CSSProperties}>
                   {/* Stage Color Accent Bar */}
                   <div
                     className="h-[3.5px] w-full rounded-full mb-3"
+                    data-matrix-bar
                     style={{ backgroundColor: stg.color }}
                   />
                   <span className="font-display font-extrabold text-sm sm:text-base text-[#173522] uppercase tracking-tight block">
@@ -115,7 +116,7 @@ export default function RuminantsMatrix() {
                 </span>
               </div>
               {STAGES.map((stg, i) => (
-                <div key={i} className="col-span-2 px-4 sm:px-5 lg:px-6 space-y-3">
+                <div key={i} className="col-span-2 px-4 sm:px-5 lg:px-6 space-y-3" data-matrix-column style={{ "--column-index": i } as React.CSSProperties}>
                   <div
                     className="w-[78%] h-[3px] rounded-full opacity-60"
                     style={{ backgroundColor: stg.color }}
@@ -137,7 +138,7 @@ export default function RuminantsMatrix() {
                 </span>
               </div>
               {STAGES.map((stg, i) => (
-                <div key={i} className="col-span-2 px-4 sm:px-5 lg:px-6 space-y-3">
+                <div key={i} className="col-span-2 px-4 sm:px-5 lg:px-6 space-y-3" data-matrix-column style={{ "--column-index": i } as React.CSSProperties}>
                   <div
                     className="w-[78%] h-[3px] rounded-full"
                     style={{ backgroundColor: stg.color }}
@@ -162,7 +163,7 @@ export default function RuminantsMatrix() {
                 </span>
               </div>
               {STAGES.map((stg, i) => (
-                <div key={i} className="col-span-2 px-4 sm:px-5 lg:px-6 space-y-3">
+                <div key={i} className="col-span-2 px-4 sm:px-5 lg:px-6 space-y-3" data-matrix-column style={{ "--column-index": i } as React.CSSProperties}>
                   <div
                     className="w-[78%] h-[3px] rounded-full opacity-60"
                     style={{ backgroundColor: stg.color }}

@@ -2,7 +2,7 @@ import React from "react";
 
 export default function RuminantsClosing() {
   return (
-    <section className="w-full bg-[#173F2B] text-white pt-9 md:pt-10 lg:pt-[42px] pb-9 md:pb-10 lg:pb-[44px] overflow-hidden">
+    <section className="w-full bg-[#173F2B] text-white pt-9 md:pt-10 lg:pt-[42px] pb-9 md:pb-10 lg:pb-[44px] overflow-hidden relative z-20" data-ruminants-section="closing" data-motion>
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)]">
         {/* TOP MICRO-LABELS */}
         <div className="flex items-center justify-between mb-7 md:mb-9">
@@ -19,7 +19,7 @@ export default function RuminantsClosing() {
           {/* LEFT / PRIMARY AREA: Quote with thin vertical accent */}
           <div className="lg:col-span-7 xl:col-span-8 flex max-w-[780px]">
             {/* Vertical Biological Green Accent */}
-            <div className="w-[2px] bg-[#B8E986]/60 mr-5 sm:mr-6 lg:mr-8 flex-shrink-0 self-stretch rounded-full" />
+            <div className="w-[2px] bg-[#B8E986]/60 mr-5 sm:mr-6 lg:mr-8 flex-shrink-0 self-stretch rounded-full" data-closing-rule />
 
             {/* Display Quote — Forced Exact 2 Lines on Desktop */}
             <h2 className="font-display font-extrabold text-[30px] sm:text-[38px] md:text-[44px] lg:text-[48px] xl:text-[50px] text-[#F8FAFC] tracking-tight leading-[1.02]">
@@ -55,29 +55,29 @@ export default function RuminantsClosing() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 lg:gap-x-16 gap-y-4 md:gap-y-0 text-xs sm:text-[13px] md:text-[13.5px] lg:text-[14px] text-white/60 font-mono leading-relaxed items-start">
             {/* LEFT COLUMN: 1–4 */}
             <ul className="flex flex-col gap-4 sm:gap-[18px] list-none p-0 m-0">
-              <li className="pl-4 border-l border-[#B8E986]/40">
+              <li className="pl-4 border-l border-[#B8E986]/40" data-reference>
                 1. Press Information Bureau, Government of India (2023). India ranks first in milk production in the world contributing 24% of global milk production (FAOSTAT, 2021–22). <span className="underline decoration-white/30">pib.gov.in</span>
               </li>
-              <li className="pl-4 border-l border-[#B8E986]/40">
+              <li className="pl-4 border-l border-[#B8E986]/40" data-reference>
                 2. FAO. Enteric methane: background. <span className="underline decoration-white/30">fao.org</span>
               </li>
-              <li className="pl-4 border-l border-[#B8E986]/40">
+              <li className="pl-4 border-l border-[#B8E986]/40" data-reference>
                 3. Plaizier J.C., Krause D.O., Gozho G.N., McBride B.W. (2008). Subacute ruminal acidosis in dairy cows: the physiological causes, incidence and consequences. <em>The Veterinary Journal</em> 176:21–31. <span className="font-semibold text-white/80">ScienceDirect</span>
               </li>
-              <li className="pl-4 border-l border-[#B8E986]/40">
+              <li className="pl-4 border-l border-[#B8E986]/40" data-reference>
                 4. Signorini M.L. et al. (2012). Impact of probiotic administration on the health and fecal microbiota of young calves: a meta-analysis of randomized controlled trials of lactic acid bacteria. <em>Research in Veterinary Science</em> 93:250–258. <span className="font-semibold text-white/80">ScienceDirect</span>
               </li>
             </ul>
 
             {/* RIGHT COLUMN: 5–7 */}
             <ul className="flex flex-col gap-4 sm:gap-[18px] list-none p-0 m-0">
-              <li className="pl-4 border-l border-[#B8E986]/40">
+              <li className="pl-4 border-l border-[#B8E986]/40" data-reference>
                 5. Desnoyers M. et al. (2009). Meta-analysis of the influence of <em>Saccharomyces cerevisiae</em> supplementation on ruminal parameters and milk production of ruminants. <em>Journal of Dairy Science</em> 92:1620–1632. <span className="font-semibold text-white/80">ScienceDirect</span>
               </li>
-              <li className="pl-4 border-l border-[#B8E986]/40">
+              <li className="pl-4 border-l border-[#B8E986]/40" data-reference>
                 6. Jeyanathan J., Martin C., Morgavi D.P. (2014). The use of direct-fed microbials for mitigation of ruminant methane emissions: a review. <em>Animal</em> 8:250–261. <span className="font-semibold text-white/80">Cambridge Core</span>
               </li>
-              <li className="pl-4 border-l border-[#B8E986]/40">
+              <li className="pl-4 border-l border-[#B8E986]/40" data-reference>
                 7. FAO forecast: world milk production in 2023 to reach 944 million tonnes, as reported by <em>The Cattle Site</em>. <span className="underline decoration-white/30">thecattlesite.com</span>
               </li>
             </ul>

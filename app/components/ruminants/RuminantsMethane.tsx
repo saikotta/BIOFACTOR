@@ -2,15 +2,17 @@ import React from "react";
 
 export default function RuminantsMethane() {
   return (
-    <section className="w-full relative bg-[#DDE9D8] text-[#173522] overflow-hidden">
+    <section className="w-full relative bg-[#DDE9D8] text-[#173522] overflow-hidden" data-ruminants-section="methane" data-motion>
       {/* 50 / 50 Split Architectural Section */}
       <div className="w-full flex flex-col lg:flex-row items-stretch">
         {/* LEFT HALF: Full-Height Architectural Photograph (Edge-to-Edge Left, Top-to-Bottom) */}
-        <div className="w-full lg:w-1/2 relative min-h-[320px] sm:min-h-[400px] lg:min-h-full flex-shrink-0">
+        <div className="w-full lg:w-1/2 relative min-h-[500px] sm:min-h-[600px] lg:min-h-[700px] flex-shrink-0 bg-[#c5d5c5]" data-methane-image>
           <img
             src="/images/ruminants/methane-feed-energy.png"
             alt="Dairy cow feeding in open pasture — Methane feed energy reduction"
-            className="w-full h-full object-cover object-center block"
+            loading="eager"
+            decoding="async"
+            className="w-full h-full object-cover object-center block will-change-transform"
           />
         </div>
 
@@ -21,8 +23,8 @@ export default function RuminantsMethane() {
             <div className="mb-7 sm:mb-8">
               {/* Eyebrow */}
               <div className="flex items-center gap-3 mb-3">
-                <span className="w-8 h-[1.5px] bg-[#B45309]" />
-                <span className="font-mono text-xs sm:text-[13px] font-semibold tracking-widest text-[#B45309] uppercase">
+                <span className="w-8 h-[1.5px] bg-[#2D6A4F]" />
+                <span className="font-mono text-xs sm:text-[13px] font-semibold tracking-widest text-[#2D6A4F] uppercase">
                   03 / ENTERIC EMISSIONS REDUCTION
                 </span>
               </div>
@@ -42,11 +44,11 @@ export default function RuminantsMethane() {
 
             {/* Compact 32% Evidence Block — Horizontal Layout */}
             <div className="mb-7 sm:mb-8 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
-              <div className="font-display font-extrabold text-5xl sm:text-6xl text-[#C06000] tracking-tight leading-none flex-shrink-0">
-                32%
+              <div className="font-display font-extrabold text-5xl sm:text-6xl text-[#2D6A4F] tracking-tight leading-none flex-shrink-0">
+                <span data-methane-value>32%</span>
               </div>
               <div className="space-y-1">
-                <span className="font-mono text-xs font-bold text-[#B45309] uppercase tracking-widest block">
+                <span className="font-mono text-xs font-bold text-[#2D6A4F] uppercase tracking-widest block">
                   MAX COMMERCIAL REDUCTION
                 </span>
                 <p className="text-sm sm:text-base text-[#26382D]/85 leading-relaxed font-sans">
@@ -66,7 +68,7 @@ export default function RuminantsMethane() {
                 </p>
               </div>
 
-              <div className="border-l-2 border-[#2D6A4F] pl-4 sm:pl-5 py-1 mt-3">
+              <div className="border-l-2 border-[#2D6A4F] pl-4 sm:pl-5 py-1 mt-3" data-motion-row>
                 <p className="font-serif italic text-sm sm:text-base text-[#173522]/90 leading-relaxed">
                   Biological solutions (direct-fed microbials, targeted enzyme blends, and precision bio-actives) work WITH the animal&apos;s natural rumen ecology, providing consistent emission reduction while simultaneously improving digestible energy yield.
                 </p>

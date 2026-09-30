@@ -87,6 +87,8 @@ export default function MicrobeField({
     let scrollVelocity = 0;
     let zoom = 1.0;
     let link = 0;
+    let isScrolling = false;
+    let scrollTimeout: NodeJS.Timeout | null = null;
 
     const handleScroll = () => {
       if (reduce) return;
@@ -95,6 +97,13 @@ export default function MicrobeField({
       lastY = currentY;
       // Accumulate scroll impulse into smooth velocity buffer
       scrollVelocity += dy * 0.45;
+
+      // Pause animation during scroll
+      isScrolling = true;
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        isScrolling = false;
+      }, 150);
     };
 
     function sprite(kind: Kind, len: number, rad: number, hue: string) {
@@ -161,9 +170,10 @@ export default function MicrobeField({
 
     function build() {
       // Configurable count formula: clamp min/max scaled by densityMultiplier
+      // Reduced to max 8 bacteria for performance
       const baseRawN = (W * H) / 48000;
-      const minN = Math.round(14 * Math.min(densityMultiplier, 1.25));
-      const maxN = Math.round(36 * densityMultiplier);
+      const minN = Math.round(4 * Math.min(densityMultiplier, 1.25));
+      const maxN = Math.round(8 * densityMultiplier);
       const n = Math.round(Math.min(maxN, Math.max(minN, baseRawN * densityMultiplier)));
       cells = [];
 
@@ -255,6 +265,12 @@ export default function MicrobeField({
       lastTime = now;
 
       ctx.clearRect(0, 0, W, H);
+
+      // Skip animation during scroll for performance
+      if (isScrolling) {
+        ctx.globalAlpha = 1;
+        return;
+      }
 
       // Smooth exponential momentum decay for scroll-reactive velocity
       if (!reduce) {
@@ -417,6 +433,7 @@ export default function MicrobeField({
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
       window.removeEventListener("scroll", handleScroll);
+      if (scrollTimeout) clearTimeout(scrollTimeout);
     };
   }, [densityMultiplier, motionMultiplier, opacityMultiplier, rotationMultiplier]);
 

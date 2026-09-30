@@ -10,6 +10,7 @@ import PoultryGutRestoration from "../components/poultry/PoultryGutRestoration";
 import PoultryMineralBioavailability from "../components/poultry/PoultryMineralBioavailability";
 import PoultryProductionCycle from "../components/poultry/PoultryProductionCycle";
 import PoultryClosing from "../components/poultry/PoultryClosing";
+import PoultryMotion from "../components/poultry/PoultryMotion";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -43,6 +44,7 @@ export default function PoultryPage() {
   return (
     <main
       className={`${bricolage.variable} ${spaceGrotesk.variable} ${newsreader.variable} ${jetbrainsMono.variable} w-full selection:bg-[#b8e986] selection:text-black overflow-x-hidden bg-[#EAF3EA]`}
+      data-poultry-page
     >
       {/* FRAME 1: APPROVED HERO - Dark background */}
       <PoultryHero />
@@ -73,6 +75,7 @@ export default function PoultryPage() {
 
       {/* FRAME 8: CLOSING & REFERENCES - New dark background */}
       <PoultryClosing />
+      <PoultryMotion />
     </main>
   );
 }

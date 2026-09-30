@@ -1,6 +1,5 @@
 import React from "react";
 import { Bricolage_Grotesque, Newsreader, JetBrains_Mono } from "next/font/google";
-import MicrobeField from "../components/MicrobeField";
 import RuminantsHero from "../components/ruminants/RuminantsHero";
 import RuminantsDataStrip from "../components/ruminants/RuminantsDataStrip";
 import RuminantsRumenFactory from "../components/ruminants/RuminantsRumenFactory";
@@ -8,6 +7,7 @@ import RuminantsLifeStages from "../components/ruminants/RuminantsLifeStages";
 import RuminantsMethane from "../components/ruminants/RuminantsMethane";
 import RuminantsMatrix from "../components/ruminants/RuminantsMatrix";
 import RuminantsClosing from "../components/ruminants/RuminantsClosing";
+import RuminantsAnimations from "../components/ruminants/RuminantsAnimations";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -58,6 +58,7 @@ export default function RuminantsPage() {
         {/* FRAME 7: CLOSING & REFERENCES */}
         <RuminantsClosing />
       </div>
+      <RuminantsAnimations />
     </main>
   );
 }

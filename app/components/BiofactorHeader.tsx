@@ -14,6 +14,8 @@ const NAV_ITEMS = [
 const PRODUCT_ITEMS = [
   { name: "Ruminants", href: "/ruminants" },
   { name: "Poultry", href: "/poultry" },
+  { name: "Bioremediation", href: "/bioremediation" },
+  { name: "Aquaculture", href: "/aquaculture" },
 ];
 
 export default function BiofactorHeader() {
@@ -22,8 +24,13 @@ export default function BiofactorHeader() {
   const pathname = usePathname();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Check if PRODUCT should be active (when on /ruminants or /poultry)
-  const isProductActive = pathname === "/ruminants" || pathname === "/poultry";
+  // Check if PRODUCTS should be active (when on /ruminants, /poultry, /bioremediation, /aquaculture, or /products)
+  const isProductActive =
+    pathname === "/ruminants" ||
+    pathname === "/poultry" ||
+    pathname === "/bioremediation" ||
+    pathname === "/aquaculture" ||
+    pathname.startsWith("/products");
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -52,7 +59,7 @@ export default function BiofactorHeader() {
         <nav className="hidden md:flex items-center gap-7 lg:gap-10">
           {NAV_ITEMS.map((item, index) => {
             const isActive = pathname === item.href;
-            // Insert PRODUCT dropdown after ABOUT (index 1)
+            // Insert PRODUCTS dropdown after ABOUT (index 1)
             if (index === 1) {
               return (
                 <React.Fragment key={item.name}>
@@ -70,21 +77,22 @@ export default function BiofactorHeader() {
                     )}
                   </Link>
 
-                  {/* PRODUCT Dropdown */}
+                  {/* PRODUCTS Dropdown */}
                   <div
                     className="relative"
                     ref={dropdownRef}
                     onMouseEnter={() => setProductDropdownOpen(true)}
+                    onMouseLeave={() => setProductDropdownOpen(false)}
                   >
                     <button
                       onClick={() => setProductDropdownOpen(!productDropdownOpen)}
                       className={`text-xs sm:text-sm font-semibold tracking-wider uppercase transition-colors whitespace-nowrap py-1 relative flex items-center gap-1 cursor-pointer ${
-                        isProductActive
+                        isProductActive || productDropdownOpen
                           ? "text-[#167A4A] font-bold"
                           : "text-[#26382D] hover:text-[#167A4A]"
                       }`}
                     >
-                      PRODUCT
+                      PRODUCTS
                       <svg
                         width="12"
                         height="12"
@@ -98,28 +106,33 @@ export default function BiofactorHeader() {
                       >
                         <polyline points="6 9 12 15 18 9" />
                       </svg>
+                      {(isProductActive || productDropdownOpen) && (
+                        <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#167A4A] rounded-full" />
+                      )}
                     </button>
 
                     {/* Dropdown Menu */}
                     {productDropdownOpen && (
-                      <div className="absolute top-full left-0 mt-2 bg-[#D9E8D2] border border-[#167A4A]/12 shadow-lg rounded-sm py-2 min-w-[160px] z-50">
-                        {PRODUCT_ITEMS.map((item) => {
-                          const isActive = pathname === item.href;
-                          return (
-                            <Link
-                              key={item.name}
-                              href={item.href}
-                              onClick={() => setProductDropdownOpen(false)}
-                              className={`block px-4 py-2 text-sm font-semibold tracking-wider uppercase transition-colors hover:bg-[#167A4A]/10 ${
-                                isActive
-                                  ? "bg-[#167A4A]/20 text-[#167A4A] font-bold"
-                                  : "text-[#26382D] hover:text-[#167A4A]"
-                              }`}
-                            >
-                              {item.name}
-                            </Link>
-                          );
-                        })}
+                      <div className="absolute top-full left-0 pt-2 min-w-[160px] z-50">
+                        <div className="bg-[#D9E8D2] border border-[#167A4A]/12 shadow-lg rounded-sm py-2">
+                          {PRODUCT_ITEMS.map((item) => {
+                            const isActive = pathname === item.href;
+                            return (
+                              <Link
+                                key={item.name}
+                                href={item.href}
+                                onClick={() => setProductDropdownOpen(false)}
+                                className={`block px-4 py-2 text-sm font-semibold tracking-wider uppercase transition-colors hover:bg-[#167A4A]/10 ${
+                                  isActive
+                                    ? "bg-[#167A4A]/20 text-[#167A4A] font-bold"
+                                    : "text-[#26382D] hover:text-[#167A4A]"
+                                }`}
+                              >
+                                {item.name}
+                              </Link>
+                            );
+                          })}
+                        </div>
                       </div>
                     )}
                   </div>
@@ -190,17 +203,17 @@ export default function BiofactorHeader() {
                     {item.name}
                   </Link>
 
-                  {/* Mobile PRODUCT Dropdown */}
+                  {/* Mobile PRODUCTS Dropdown */}
                   <div>
                     <button
                       onClick={() => setProductDropdownOpen(!productDropdownOpen)}
-                      className={`w-full text-left text-sm font-semibold tracking-wider uppercase py-2 flex items-center justify-between ${
-                        isProductActive
+                      className={`w-full text-left text-sm font-semibold tracking-wider uppercase py-2 flex items-center justify-between relative border-b border-[#167A4A]/12 ${
+                        isProductActive || productDropdownOpen
                           ? "text-[#167A4A] font-bold"
-                          : "text-[#26382D]"
+                          : "text-[#26382D] hover:text-[#167A4A]"
                       }`}
                     >
-                      PRODUCT
+                      PRODUCTS
                       <svg
                         width="12"
                         height="12"
@@ -214,6 +227,9 @@ export default function BiofactorHeader() {
                       >
                         <polyline points="6 9 12 15 18 9" />
                       </svg>
+                      {(isProductActive || productDropdownOpen) && (
+                        <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#167A4A] rounded-full" />
+                      )}
                     </button>
 
                     {productDropdownOpen && (

@@ -33,26 +33,35 @@ export default function PoultryBroilers() {
       <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 lg:px-12 h-full flex flex-col justify-center">
         {/* Two Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
-          {/* Left Side - BROILERS Heading */}
-          <div className="flex flex-col justify-start items-start space-y-4">
-            {/* Small Label */}
-            <div className="font-mono text-xs font-semibold tracking-[0.25em] text-[#D4A574] uppercase">
-              MEAT PRODUCTION
-            </div>
-
-            {/* Large Heading */}
-            <h2 className="font-space-grotesk font-extrabold text-[clamp(4rem,8vw,8rem)] text-[#D4A574] tracking-tight leading-[0.85] uppercase">
-              BROILERS
-            </h2>
-
-            {/* Priority */}
-            <div className="font-mono text-xs font-semibold tracking-[0.2em] text-[#2d2d2d] uppercase max-w-md">
-              Priority · precisely fast, even growth, low FCR and control of genetic materials
+          {/* Left Side - Broiler image */}
+          <div className="flex items-center justify-center">
+            <div className="w-[75%] aspect-[3/4] max-h-[600px] overflow-hidden rounded-sm" data-broiler-image>
+              <img
+                src="/images/poultry-broilers.png"
+                alt="Broilers in a commercial poultry production setting"
+                loading="eager"
+                className="w-full h-full object-cover block"
+              />
             </div>
           </div>
 
           {/* Right Side - Explanatory Content */}
           <div className="space-y-6 lg:space-y-8">
+            {/* Broilers heading and priority above the explanatory matter */}
+            <div className="flex flex-col justify-start items-start space-y-4">
+              <div className="font-mono text-xs font-semibold tracking-[0.25em] text-[#6BBF3A] uppercase">
+                MEAT PRODUCTION
+              </div>
+
+              <h2 className="font-space-grotesk font-extrabold text-[clamp(4rem,8vw,8rem)] text-[#6BBF3A] tracking-tight leading-[0.85] uppercase">
+                BROILERS
+              </h2>
+
+              <div className="font-mono text-xs font-semibold tracking-[0.2em] text-[#2d2d2d] uppercase max-w-md">
+                Priority · precisely fast, even growth, low FCR and control of genetic materials
+              </div>
+            </div>
+
             {/* Body Heading */}
             <h3 className="font-space-grotesk font-semibold text-xl lg:text-2xl text-[#1a1a1a] tracking-tight leading-tight mb-4">
               Fast growth depends on a gut that stays intact.
@@ -66,7 +75,7 @@ export default function PoultryBroilers() {
             {/* Two-column Box */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               {/* Left Box - Growth and FCR */}
-              <div className="border border-[#D4A574] p-5">
+              <div className="border border-[#6BBF3A] p-5">
                 <div className="font-space-grotesk font-bold text-base text-[#1a1a1a] mb-2">
                   Growth and FCR
                 </div>
@@ -76,7 +85,7 @@ export default function PoultryBroilers() {
               </div>
 
               {/* Right Box - Gut lesions */}
-              <div className="border border-[#D4A574] p-5">
+              <div className="border border-[#6BBF3A] p-5">
                 <div className="font-space-grotesk font-bold text-base text-[#1a1a1a] mb-2">
                   Gut lesions
                 </div>
@@ -88,7 +97,7 @@ export default function PoultryBroilers() {
 
             {/* Highlighted Statement with Vertical Accent Line */}
             <div className="flex gap-4 mb-6">
-              <div className="w-1 bg-[#D4A574] flex-shrink-0" />
+              <div className="w-1 bg-[#6BBF3A] flex-shrink-0" />
               <div>
                 <h4 className="font-space-grotesk font-bold text-base text-[#1a1a1a] mb-2">
                   As effective as antibiotics on growth.
