@@ -18,10 +18,10 @@ export default function BiofactorHero() {
           <span className="whitespace-nowrap block">
             <span className="text-[#4F8A4C]">BIG</span> THING
           </span>
-          <span className="inline-flex w-fit items-end flex-nowrap whitespace-nowrap gap-x-3.5 sm:gap-x-4 lg:gap-x-5">
+          <span className="inline-flex w-fit items-center flex-nowrap whitespace-nowrap gap-x-3.5 sm:gap-x-4 lg:gap-x-5">
             <span>IS REALLY</span>
-            <span className="inline-flex shrink-0 items-center px-2.5 sm:px-3.5 py-0.5 sm:py-1 text-xs sm:text-sm md:text-base lg:text-lg font-mono font-semibold tracking-[0.18em] uppercase text-[#A9E889] border border-[#A9E889]/80 bg-[#053022]/60 rounded-[3px] shadow-lg select-none whitespace-nowrap mb-[6px] sm:mb-[8px] md:mb-[10px] lg:mb-[12px]">
-              SMALL.
+            <span className="inline-flex shrink-0 items-center justify-center px-3.5 sm:px-4 md:px-5 lg:px-6 py-1 sm:py-1.5 md:py-1.5 lg:py-2 text-[13.5px] sm:text-[15.5px] md:text-[17.8px] lg:text-[20px] font-mono font-semibold tracking-[0.18em] uppercase text-[#A9E889] border border-[#A9E889]/80 bg-[#053022]/60 rounded-full shadow-lg select-none whitespace-nowrap">
+              SMALL...
             </span>
           </span>
         </h1>
