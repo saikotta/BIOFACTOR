@@ -1,0 +1,139 @@
+/* Scoped CSS Module for Bio-Remediation Hero */
+
+.heroSection {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  background-color: #080d09;
+}
+
+@media (min-width: 768px) {
+  .heroSection {
+    min-height: calc(100vh - 72px);
+  }
+}
+
+/* Background Image Container with Deep Shadow & Overlay */
+.bgWrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.8);
+}
+
+.bgImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  display: block;
+}
+
+/* Lightened Readability Overlay: Soft radial anchor aligned with left-shifted typography */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 14% 90%,
+    rgba(8, 14, 10, 0.65) 0%,
+    rgba(8, 14, 10, 0.35) 45%,
+    rgba(8, 14, 10, 0.1) 75%
+  ),
+  linear-gradient(
+    to top,
+    rgba(8, 14, 10, 0.75) 0%,
+    rgba(8, 14, 10, 0.25) 35%,
+    transparent 60%
+  );
+}
+
+/* Hero Content Container: Controlled left inset matching Ruminants page */
+.container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(20px, 5vw, 72px);
+  padding-right: clamp(20px, 5vw, 72px);
+  padding-bottom: 2.5rem;
+  padding-top: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-bottom: 3rem;
+  }
+}
+
+/* Content block wrapper */
+.contentBlock {
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Technical Eyebrow Label */
+.eyebrowWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-bottom: 1.125rem;
+}
+
+.eyebrowLine {
+  width: 1.5rem;
+  height: 1.5px;
+  background-color: #b8e986;
+  opacity: 0.85;
+}
+
+.eyebrowText {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 0.8125rem; /* 13px */
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #b8e986;
+}
+
+/* Main Display Headline */
+.headline {
+  font-family: var(--font-bricolage), sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #f8fafc;
+  letter-spacing: -0.035em;
+  line-height: 0.9;
+  margin-bottom: 1.35rem;
+  max-width: 700px;
+  font-size: clamp(2.35rem, 5.5vw, 5.25rem);
+}
+
+.accentGreen {
+  color: #b8e986; /* Botanical pale-green accent */
+}
+
+/* Subtitle Copy */
+.subtitle {
+  font-family: var(--font-newsreader), serif;
+  font-style: italic;
+  font-weight: 400;
+  color: rgba(241, 245, 249, 0.95);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  max-width: 580px;
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
