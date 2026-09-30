@@ -75,7 +75,6 @@ export default function BiofactorHeader() {
                     className="relative"
                     ref={dropdownRef}
                     onMouseEnter={() => setProductDropdownOpen(true)}
-                    onMouseLeave={() => setProductDropdownOpen(false)}
                   >
                     <button
                       onClick={() => setProductDropdownOpen(!productDropdownOpen)}
@@ -99,9 +98,6 @@ export default function BiofactorHeader() {
                       >
                         <polyline points="6 9 12 15 18 9" />
                       </svg>
-                      {isProductActive && (
-                        <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#167A4A] rounded-full" />
-                      )}
                     </button>
 
                     {/* Dropdown Menu */}
@@ -114,16 +110,13 @@ export default function BiofactorHeader() {
                               key={item.name}
                               href={item.href}
                               onClick={() => setProductDropdownOpen(false)}
-                              className={`block px-4 py-2 text-sm font-semibold tracking-wider uppercase transition-colors hover:bg-[#167A4A]/10 relative ${
+                              className={`block px-4 py-2 text-sm font-semibold tracking-wider uppercase transition-colors hover:bg-[#167A4A]/10 ${
                                 isActive
-                                  ? "text-[#167A4A] font-bold"
+                                  ? "bg-[#167A4A]/20 text-[#167A4A] font-bold"
                                   : "text-[#26382D] hover:text-[#167A4A]"
                               }`}
                             >
                               {item.name}
-                              {isActive && (
-                                <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#167A4A] rounded-full" />
-                              )}
                             </Link>
                           );
                         })}
@@ -201,7 +194,7 @@ export default function BiofactorHeader() {
                   <div>
                     <button
                       onClick={() => setProductDropdownOpen(!productDropdownOpen)}
-                      className={`w-full text-left text-sm font-semibold tracking-wider uppercase py-2 flex items-center justify-between relative ${
+                      className={`w-full text-left text-sm font-semibold tracking-wider uppercase py-2 flex items-center justify-between ${
                         isProductActive
                           ? "text-[#167A4A] font-bold"
                           : "text-[#26382D]"
@@ -221,9 +214,6 @@ export default function BiofactorHeader() {
                       >
                         <polyline points="6 9 12 15 18 9" />
                       </svg>
-                      {isProductActive && (
-                        <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#167A4A] rounded-full" />
-                      )}
                     </button>
 
                     {productDropdownOpen && (
@@ -238,16 +228,13 @@ export default function BiofactorHeader() {
                                 setMobileMenuOpen(false);
                                 setProductDropdownOpen(false);
                               }}
-                              className={`block py-2 text-sm font-semibold tracking-wider uppercase relative ${
+                              className={`block py-2 text-sm font-semibold tracking-wider uppercase ${
                                 isActive
-                                  ? "text-[#167A4A] font-bold"
+                                  ? "bg-[#167A4A]/20 text-[#167A4A] font-bold"
                                   : "text-[#26382D]"
                               }`}
                             >
                               {item.name}
-                              {isActive && (
-                                <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#167A4A] rounded-full" />
-                              )}
                             </Link>
                           );
                         })}
