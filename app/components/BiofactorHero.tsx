@@ -13,7 +13,7 @@ export default function BiofactorHero() {
         </div>
 
         {/* Headline */}
-        <h1 className="text-[1.875rem] sm:text-4xl md:text-5xl lg:text-[4.5rem] xl:text-[5rem] font-extrabold uppercase text-white leading-[0.98] tracking-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)] flex flex-col gap-1 sm:gap-2">
+        <h1 className="text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[clamp(4.5rem,6vw,7rem)] font-extrabold uppercase text-white leading-[0.98] tracking-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)] flex flex-col gap-1 sm:gap-2">
           <span className="whitespace-nowrap block">THE NEXT</span>
           <span className="whitespace-nowrap block">
             <span className="text-[#4F8A4C]">BIG</span> THING
