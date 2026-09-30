@@ -2,16 +2,17 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
-// The 8 official statistics
+// The official statistics
 const STATISTICS = [
-  { number: "9", label: "Patents Filed" },
+  { number: "11", label: "Patents Filed" },
   { number: "60+", label: "Elite / Deposited Strains" },
   { number: "100+", label: "Products Across Six Verticals" },
   { number: "2014", label: "Founded, Hyderabad" },
   { number: "600+", label: "Team Members" },
   { number: "3,000+", label: "Dealer Network" },
-  { number: "16", label: "Indian States" },
+  { number: "18", label: "Indian States" },
   { number: "2", label: "Countries Beyond Bharat" },
+  { number: "5 Lakhs+", label: "Happy Farmers" },
 ];
 
 export default function BiofactorNumbersSection() {
@@ -88,7 +89,7 @@ export default function BiofactorNumbersSection() {
 
     let animFrameId: number;
     const ROW_SPACING = 125; // 125px between row centers
-    const TOTAL_TRAVEL = 875; // 7 steps * 125px = 875px total track travel
+    const TOTAL_TRAVEL = (STATISTICS.length - 1) * ROW_SPACING; // dynamic total track travel
 
     const updateScrollAndPointer = () => {
       if (!sectionRef.current) return;
