@@ -34,8 +34,6 @@
   /* Center position for balanced image display */
   object-position: center center;
   display: block;
-  /* Glow effect */
-  filter: drop-shadow(0 0 30px rgba(184, 233, 134, 0.3));
 }
 
 /* Lightened Readability Overlay: Soft radial anchor aligned with left-shifted typography */

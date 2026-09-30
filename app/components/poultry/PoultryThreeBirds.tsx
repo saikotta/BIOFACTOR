@@ -96,7 +96,7 @@ export default function PoultryThreeBirds() {
             {/* Information Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Left Card */}
-              <div className="bg-white border border-[#c4d4c4] p-5">
+              <div className="border border-[#c4d4c4] p-5">
                 <div className="font-space-grotesk font-bold text-base text-[#0a2d1a] mb-2">
                   Less vertical transmission
                 </div>
@@ -106,7 +106,7 @@ export default function PoultryThreeBirds() {
               </div>
 
               {/* Right Card */}
-              <div className="bg-white border border-[#c4d4c4] p-5">
+              <div className="border border-[#c4d4c4] p-5">
                 <div className="font-space-grotesk font-bold text-base text-[#0a2d1a] mb-2">
                   Hatchery protection
                 </div>
@@ -117,7 +117,7 @@ export default function PoultryThreeBirds() {
             </div>
 
             {/* Chart Panel */}
-            <div className="bg-white border border-[#c4d4c4] p-4 lg:p-5">
+            <div className="border border-[#c4d4c4] p-4 lg:p-5">
               <div className="font-space-grotesk font-bold text-sm text-[#0a2d1a] mb-1">
                 Hatching eggs sprayed with probiotic bacteria
               </div>

@@ -2,18 +2,7 @@ import React from "react";
 
 export default function PoultryGutFrontline() {
   return (
-    <section className="w-full relative overflow-hidden py-8 lg:py-12 min-h-[85vh]">
-      {/* Background Image - Full Fit with Glow */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src="/images/poultry-chicks-hero.png"
-          alt="Newly hatched chicks with eggs and green grass"
-          className="w-full h-full object-cover"
-        />
-        {/* Glow Effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a2d1a]/20 via-transparent to-[#0a2d1a]/10" />
-      </div>
-
+    <section className="w-full relative overflow-hidden py-8 lg:py-12 min-h-[85vh] bg-[#EAF3EA]">
       <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 lg:px-12 h-full flex flex-col justify-center">
         {/* Editorial Content - Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-0">

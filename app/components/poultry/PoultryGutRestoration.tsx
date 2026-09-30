@@ -16,7 +16,7 @@ export default function PoultryGutRestoration() {
         {/* Two Information Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
           {/* Left Card */}
-          <div className="bg-white border border-[#c4d4c4] p-8 lg:p-12">
+          <div className="border border-[#c4d4c4] p-8 lg:p-12">
             <div className="font-mono text-xs font-semibold tracking-widest text-[#4a7c59] uppercase mb-6">
               How probiotics get there
             </div>
@@ -61,7 +61,7 @@ export default function PoultryGutRestoration() {
           </div>
 
           {/* Right Card */}
-          <div className="bg-white border border-[#c4d4c4] p-8 lg:p-12">
+          <div className="border border-[#c4d4c4] p-8 lg:p-12">
             <div className="font-mono text-xs font-semibold tracking-widest text-[#6B8F7A] uppercase mb-6">
               How they shape the community
             </div>
@@ -107,7 +107,7 @@ export default function PoultryGutRestoration() {
         </div>
 
         {/* Statistics Panel */}
-        <div className="bg-white border border-[#c4d4c4] p-8 lg:p-12">
+        <div className="border border-[#c4d4c4] p-8 lg:p-12">
           <div className="font-mono text-xs font-semibold tracking-widest text-[#4a7c59] uppercase mb-6">
             Prebiotic evidence: mannan-oligosaccharide in broilers
           </div>

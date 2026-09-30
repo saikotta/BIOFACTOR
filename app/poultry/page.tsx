@@ -5,6 +5,7 @@ import PoultryDataStrip from "../components/poultry/PoultryDataStrip";
 import PoultryGutFrontline from "../components/poultry/PoultryGutFrontline";
 import PoultryThreeBirds from "../components/poultry/PoultryThreeBirds";
 import PoultryLayers from "../components/poultry/PoultryLayers";
+import PoultryBroilers from "../components/poultry/PoultryBroilers";
 import PoultryGutRestoration from "../components/poultry/PoultryGutRestoration";
 import PoultryMineralBioavailability from "../components/poultry/PoultryMineralBioavailability";
 import PoultryProductionCycle from "../components/poultry/PoultryProductionCycle";
@@ -57,6 +58,9 @@ export default function PoultryPage() {
 
       {/* FRAME 4.5: LAYERS - New dark background */}
       <PoultryLayers />
+
+      {/* FRAME 4.6: BROILERS - New dark background */}
+      <PoultryBroilers />
 
       {/* FRAME 5: GUT RESTORATION AND DISEASE MANAGEMENT - New dark background */}
       <PoultryGutRestoration />
