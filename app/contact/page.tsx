@@ -44,7 +44,6 @@ export default function ContactPage() {
     
     // Simulate API call
     setTimeout(() => {
-      console.log('Form submitted:', formData);
       setFormStatus('success');
       setFormData({
         name: '',
@@ -57,87 +56,63 @@ export default function ContactPage() {
       
       // Reset status after 5 seconds
       setTimeout(() => setFormStatus(''), 5000);
-    }, 1500);
+    }, 1200);
   };
 
   const contactInfo = [
     {
-      icon: <Phone className="w-6 h-6 text-emerald-600" />,
+      icon: <Phone className="w-6 h-6 text-[#2D6A4F]" />,
       title: "Call Us",
       details: "7013074400",
       subtitle: "Visiting hours: 9:30 AM – 6:30 PM",
-      color: "from-blue-50 to-indigo-50",
-      border: "border-blue-100"
+      color: "from-[#EAF3EA] to-white",
+      border: "border-[#2D6A4F]/20"
     },
     {
-      icon: <Mail className="w-6 h-6 text-emerald-600" />,
+      icon: <Mail className="w-6 h-6 text-[#2D6A4F]" />,
       title: "Email Us",
       details: "info@biofactor.in",
       subtitle: "General Inquiries",
-      color: "from-emerald-50 to-green-50",
-      border: "border-emerald-100"
+      color: "from-[#EAF3EA] to-white",
+      border: "border-[#2D6A4F]/20"
     },
     {
-      icon: <MapPin className="w-6 h-6 text-emerald-600" />,
+      icon: <MapPin className="w-6 h-6 text-[#2D6A4F]" />,
       title: "Visit Us",
       details: "Head Office",
       subtitle: "4 & 5 Floors, Sai Medha Infra, Arca Satya Residency, Kousalya Colony, Bachupally, Hyderabad, Telangana 500090",
-      color: "from-amber-50 to-orange-50",
-      border: "border-orange-100"
+      color: "from-[#EAF3EA] to-white",
+      border: "border-[#2D6A4F]/20"
     }
   ];
 
   const expertiseAreas = [
-    {
-      icon: "🌱",
-      title: "Crop Protection",
-      desc: "Pesticides & Herbicides"
-    },
-    {
-      icon: "💧",
-      title: "Irrigation",
-      desc: "Smart Systems"
-    },
-    {
-      icon: "🌾",
-      title: "Seeds",
-      desc: "High Yield Varieties"
-    },
-    {
-      icon: "🧪",
-      title: "Fertilizers",
-      desc: "Organic & Chemical"
-    },
-    {
-      icon: "🏭",
-      title: "Processing",
-      desc: "Post-Harvest Tech"
-    },
-    {
-      icon: "📊",
-      title: "Consulting",
-      desc: "Farm Management"
-    }
+    { icon: "🌱", title: "Crop Protection", desc: "Pesticides & Herbicides" },
+    { icon: "💧", title: "Irrigation", desc: "Smart Systems" },
+    { icon: "🌾", title: "Seeds", desc: "High Yield Varieties" },
+    { icon: "🧪", title: "Fertilizers", desc: "Organic & Chemical" },
+    { icon: "🏭", title: "Processing", desc: "Post-Harvest Tech" },
+    { icon: "📊", title: "Consulting", desc: "Farm Management" }
   ];
 
   const features = [
     {
-      icon: <Shield className="w-8 h-8 text-emerald-600" />,
+      icon: <Shield className="w-8 h-8 text-[#2D6A4F]" />,
       title: "Trusted Solutions",
       description: "FCO Supported agricultural products"
     },
     {
-      icon: <Trophy className="w-8 h-8 text-emerald-600" />,
+      icon: <Trophy className="w-8 h-8 text-[#2D6A4F]" />,
       title: "Award Winning",
       description: "Recognized for innovation in agri-tech"
     },
     {
-      icon: <Users className="w-8 h-8 text-emerald-600" />,
+      icon: <Users className="w-8 h-8 text-[#2D6A4F]" />,
       title: "Expert Team",
       description: "100+ agricultural specialists"
     },
     {
-      icon: <Target className="w-8 h-8 text-emerald-600" />,
+      icon: <Target className="w-8 h-8 text-[#2D6A4F]" />,
       title: "Proven Results",
       description: "Increased yields for 10,000+ farmers"
     }
@@ -152,24 +127,16 @@ export default function ContactPage() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
+      transition: { staggerChildren: 0.1 }
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#EAF3EA] text-[#173522] flex flex-col justify-between selection:bg-[#2D6A4F] selection:text-[#EAF3EA]">
       <div>
         {/* Hero Section */}
-        <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden py-12">
-          <div className="absolute inset-0 bg-gradient-to-r from-emerald-900/20 to-teal-900/10 z-0"></div>
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute -top-24 -right-24 w-96 h-96 bg-emerald-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
-            <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-teal-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
-          </div>
-          
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden py-16 bg-white border-b border-[#2D6A4F]/10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <motion.div 
                 initial="hidden"
@@ -177,83 +144,82 @@ export default function ContactPage() {
                 variants={fadeInUp}
                 className="text-left"
               >
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                  Grow With <span className="text-emerald-700">Expert</span> Agricultural Support
+                <div className="inline-block mb-3">
+                  <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">Get In Touch</span>
+                </div>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#173522] mb-6 leading-tight font-display tracking-tight">
+                  Grow With <span className="text-[#2D6A4F]">Expert</span> Agricultural Support
                 </h1>
-                <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl">
+                <p className="text-base sm:text-lg text-[#173522]/90 mb-8 max-w-2xl font-sans leading-relaxed">
                   Get personalized solutions for your farming needs. Our team of agricultural experts is ready to help you increase yield and maximize profits.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link
                     href="/science-technology"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white font-semibold rounded-xl hover:bg-emerald-700 transition-all duration-300 hover:shadow-lg"
+                    className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#2D6A4F] text-white font-bold rounded-xl hover:bg-[#173522] transition-all duration-300 shadow-md hover:shadow-lg text-sm"
                   >
                     Explore Science & Tech
                     <FiArrowRight className="w-4 h-4" />
                   </Link>
                   <a
                     href="tel:7013074400"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-white text-emerald-600 font-semibold rounded-xl border border-emerald-200 hover:bg-emerald-50 transition-all duration-300"
+                    className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#EAF3EA] text-[#173522] font-bold rounded-xl border border-[#2D6A4F]/20 hover:bg-[#2D6A4F]/10 transition-all duration-300 text-sm"
                   >
-                    <Phone className="w-4 h-4" />
+                    <Phone className="w-4 h-4 text-[#2D6A4F]" />
                     Call Now
                   </a>
                 </div>
               </motion.div>
               
               <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8 }}
                 className="relative"
               >
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+                <div className="relative rounded-3xl overflow-hidden shadow-xl border border-[#2D6A4F]/20">
                   <img 
                     src={contactPhoto} 
                     alt="Agricultural Expert Consultation" 
-                    className="w-full h-64 lg:h-80 object-cover"
+                    className="w-full h-72 lg:h-96 object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/40 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#173522]/40 to-transparent"></div>
                 </div>
-                
-                {/* Decorative Elements */}
-                <div className="absolute -top-4 -right-4 w-24 h-24 bg-yellow-400 rounded-full mix-blend-multiply filter blur-xl opacity-20"></div>
-                <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-emerald-400 rounded-full mix-blend-multiply filter blur-xl opacity-20"></div>
               </motion.div>
             </div>
           </div>
         </section>
 
         {/* Contact Info Cards */}
-        <section className="py-8 px-4 max-w-7xl mx-auto">
+        <section className="py-10 px-4 max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-6">
             {contactInfo.map((info, idx) => (
-              <div key={idx} className={`p-6 rounded-2xl bg-gradient-to-br ${info.color} border ${info.border} shadow-sm flex items-start gap-4`}>
-                <div className="p-3 bg-white rounded-xl shadow-xs">{info.icon}</div>
+              <div key={idx} className={`p-6 rounded-2xl bg-white border ${info.border} shadow-xs flex items-start gap-4 hover:shadow-md transition-shadow`}>
+                <div className="p-3 bg-[#EAF3EA] rounded-xl flex-shrink-0">{info.icon}</div>
                 <div>
-                  <h3 className="font-bold text-gray-900 text-lg">{info.title}</h3>
-                  <p className="font-semibold text-emerald-800 text-base">{info.details}</p>
-                  <p className="text-xs text-gray-600 mt-1">{info.subtitle}</p>
+                  <h3 className="font-bold text-[#173522] text-lg">{info.title}</h3>
+                  <p className="font-bold text-[#2D6A4F] text-base">{info.details}</p>
+                  <p className="text-xs text-[#173522]/70 mt-1 font-sans">{info.subtitle}</p>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Main Content */}
+        {/* Main Content Form */}
         <section className="py-12 px-4">
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-3 gap-8">
               {/* Contact Form */}
-              <div className="lg:col-span-2 bg-white rounded-3xl shadow-xl p-6 md:p-8 border border-green-100">
+              <div className="lg:col-span-2 bg-white rounded-3xl shadow-md p-6 md:p-10 border border-[#2D6A4F]/15">
                 <div className="mb-8">
-                  <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 rounded-full text-sm font-semibold mb-4">
+                  <span className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#EAF3EA] text-[#2D6A4F] rounded-full text-xs font-mono font-bold uppercase tracking-wider mb-3">
                     <MessageSquare className="w-4 h-4" /> Send Message
                   </span>
-                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                  <h2 className="text-2xl md:text-3xl font-extrabold text-[#173522] mb-3">
                     Get in Touch With Our Experts
                   </h2>
-                  <p className="text-gray-600 mb-6">
+                  <p className="text-[#173522]/80 font-sans text-sm">
                     Fill out the form below and our agricultural specialists will get back to you within 24 hours.
                   </p>
                 </div>
@@ -261,7 +227,7 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <label className="block text-gray-700 font-medium" htmlFor="name">
+                      <label className="block text-[#173522] font-semibold text-sm" htmlFor="name">
                         Full Name *
                       </label>
                       <input
@@ -271,12 +237,12 @@ export default function ContactPage() {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-300 bg-white focus:bg-green-50 text-gray-900"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:border-[#2D6A4F] transition-all bg-white text-[#173522]"
                         placeholder="Enter your name"
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="block text-gray-700 font-medium" htmlFor="email">
+                      <label className="block text-[#173522] font-semibold text-sm" htmlFor="email">
                         Email Address *
                       </label>
                       <input
@@ -286,7 +252,7 @@ export default function ContactPage() {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-300 bg-white focus:bg-green-50 text-gray-900"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:border-[#2D6A4F] transition-all bg-white text-[#173522]"
                         placeholder="Enter your email"
                       />
                     </div>
@@ -294,7 +260,7 @@ export default function ContactPage() {
 
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <label className="block text-gray-700 font-medium" htmlFor="phone">
+                      <label className="block text-[#173522] font-semibold text-sm" htmlFor="phone">
                         Phone Number *
                       </label>
                       <input
@@ -304,13 +270,13 @@ export default function ContactPage() {
                         value={formData.phone}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-300 bg-white focus:bg-green-50 text-gray-900"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:border-[#2D6A4F] transition-all bg-white text-[#173522]"
                         placeholder="Enter phone number"
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="block text-gray-700 font-medium" htmlFor="area">
-                        Area (State & District) *
+                      <label className="block text-[#173522] font-semibold text-sm" htmlFor="area">
+                        Area (State &amp; District) *
                       </label>
                       <input
                         type="text"
@@ -319,14 +285,14 @@ export default function ContactPage() {
                         value={formData.area}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-300 bg-white focus:bg-green-50 text-gray-900"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:border-[#2D6A4F] transition-all bg-white text-[#173522]"
                         placeholder="e.g., Telangana, Hyderabad"
                       />
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <label className="block text-gray-700 font-medium" htmlFor="subject">
+                    <label className="block text-[#173522] font-semibold text-sm" htmlFor="subject">
                       Subject *
                     </label>
                     <select
@@ -335,7 +301,7 @@ export default function ContactPage() {
                       value={formData.subject}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-300 bg-white focus:bg-green-50 text-gray-900"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:border-[#2D6A4F] transition-all bg-white text-[#173522]"
                     >
                       <option value="">Select a topic</option>
                       <option value="General Inquiry">General Inquiry</option>
@@ -350,7 +316,7 @@ export default function ContactPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="block text-gray-700 font-medium" htmlFor="message">
+                    <label className="block text-[#173522] font-semibold text-sm" htmlFor="message">
                       Your Message *
                     </label>
                     <textarea
@@ -360,20 +326,20 @@ export default function ContactPage() {
                       onChange={handleChange}
                       required
                       rows={4}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-300 bg-white focus:bg-green-50 resize-none text-gray-900"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:border-[#2D6A4F] transition-all bg-white text-[#173522] resize-none"
                       placeholder="Tell us about your agricultural needs, farm size, crops grown, etc..."
                     />
                   </div>
 
-                  <div className="flex items-center gap-2 text-sm text-gray-600 mb-4">
-                    <MapPinIcon className="w-4 h-4 text-emerald-600" />
+                  <div className="flex items-center gap-2 text-xs text-[#173522]/70 font-sans mb-4">
+                    <MapPinIcon className="w-4 h-4 text-[#2D6A4F] flex-shrink-0" />
                     <span>We use your area information to connect you with our nearest distributor or support team.</span>
                   </div>
 
                   <button
                     type="submit"
                     disabled={formStatus === 'sending'}
-                    className={`w-full py-3.5 bg-gradient-to-r from-emerald-600 to-green-600 text-white font-semibold rounded-xl hover:from-emerald-700 hover:to-green-700 transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg ${
+                    className={`w-full py-4 bg-[#2D6A4F] hover:bg-[#173522] text-white font-bold rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg text-sm cursor-pointer ${
                       formStatus === 'sending' ? 'opacity-75 cursor-not-allowed' : ''
                     }`}
                   >
@@ -391,8 +357,8 @@ export default function ContactPage() {
                   </button>
 
                   {formStatus === 'success' && (
-                    <div className="p-4 bg-gradient-to-r from-emerald-50 to-green-50 border border-emerald-200 rounded-xl">
-                      <p className="text-emerald-700 font-medium flex items-center gap-2">
+                    <div className="p-4 bg-[#EAF3EA] border border-[#2D6A4F]/30 rounded-xl">
+                      <p className="text-[#2D6A4F] font-bold text-sm flex items-center gap-2">
                         <CheckCircle className="w-5 h-5 flex-shrink-0" />
                         Thank you! Your message has been sent successfully. Our regional team will contact you soon.
                       </p>
@@ -404,15 +370,15 @@ export default function ContactPage() {
               {/* Sidebar Information */}
               <div className="space-y-8 flex flex-col justify-center h-full">
                 {/* Our Areas of Expertise */}
-                <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl p-6 border border-emerald-100 shadow-sm">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">Our Areas of Expertise</h3>
+                <div className="bg-white rounded-2xl p-6 border border-[#2D6A4F]/15 shadow-xs">
+                  <h3 className="text-xl font-bold text-[#173522] mb-4">Our Areas of Expertise</h3>
                   <div className="grid grid-cols-2 gap-3">
                     {expertiseAreas.map((area, index) => (
-                      <div key={index} className="flex items-center gap-3 p-3 bg-white rounded-lg hover:shadow-md transition-shadow duration-300">
+                      <div key={index} className="flex items-center gap-3 p-3 bg-[#EAF3EA] rounded-xl hover:shadow-xs transition-shadow">
                         <span className="text-2xl">{area.icon}</span>
                         <div>
-                          <p className="font-medium text-gray-800 text-sm">{area.title}</p>
-                          <p className="text-xs text-gray-600">{area.desc}</p>
+                          <p className="font-bold text-[#173522] text-xs">{area.title}</p>
+                          <p className="text-[11px] text-[#173522]/70 font-sans">{area.desc}</p>
                         </div>
                       </div>
                     ))}
@@ -420,20 +386,20 @@ export default function ContactPage() {
                 </div>
 
                 {/* Business Hours */}
-                <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 border border-amber-100 shadow-sm">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">Visiting &amp; Business Hours</h3>
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center pb-2 border-b border-amber-200">
-                      <span className="text-gray-700">Visiting Hours</span>
-                      <span className="font-semibold text-gray-900">9:30 AM – 6:30 PM</span>
+                <div className="bg-white rounded-2xl p-6 border border-[#2D6A4F]/15 shadow-xs">
+                  <h3 className="text-xl font-bold text-[#173522] mb-4">Visiting &amp; Business Hours</h3>
+                  <div className="space-y-3 font-sans text-sm">
+                    <div className="flex justify-between items-center pb-2 border-b border-[#2D6A4F]/10">
+                      <span className="text-[#173522]/80">Visiting Hours</span>
+                      <span className="font-bold text-[#173522]">9:30 AM – 6:30 PM</span>
                     </div>
-                    <div className="flex justify-between items-center pb-2 border-b border-amber-200">
-                      <span className="text-gray-700">Monday - Saturday</span>
-                      <span className="font-semibold text-gray-900">9:30 AM – 6:30 PM</span>
+                    <div className="flex justify-between items-center pb-2 border-b border-[#2D6A4F]/10">
+                      <span className="text-[#173522]/80">Monday - Saturday</span>
+                      <span className="font-bold text-[#173522]">9:30 AM – 6:30 PM</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-700">Sunday</span>
-                      <span className="font-semibold text-gray-900 text-red-600">Closed</span>
+                      <span className="text-[#173522]/80">Sunday</span>
+                      <span className="font-bold text-red-600">Closed</span>
                     </div>
                   </div>
                 </div>
@@ -443,13 +409,16 @@ export default function ContactPage() {
         </section>
 
         {/* Features Section */}
-        <section className="py-16 px-4 bg-white">
+        <section className="py-16 px-4 bg-white border-t border-[#2D6A4F]/10">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <div className="inline-block mb-3">
+                <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">Why Choose Us</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#173522] mb-4 font-display">
                 Why Choose Our Agricultural Solutions
               </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
+              <p className="text-[#173522]/80 max-w-2xl mx-auto font-sans">
                 We combine decades of farming expertise with cutting-edge technology to deliver results that matter.
               </p>
             </div>
@@ -463,14 +432,14 @@ export default function ContactPage() {
                 <motion.div
                   key={index}
                   variants={fadeInUp}
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-emerald-100 hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center"
+                  whileHover={{ scale: 1.03 }}
+                  className="bg-[#EAF3EA] rounded-2xl p-6 border border-[#2D6A4F]/15 hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center"
                 >
-                  <div className="p-3 bg-white rounded-xl inline-flex justify-center items-center mb-4">
+                  <div className="p-3 bg-white rounded-xl inline-flex justify-center items-center mb-4 shadow-xs">
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.description}</p>
+                  <h3 className="text-lg font-bold text-[#173522] mb-2">{feature.title}</h3>
+                  <p className="text-[#173522]/80 text-sm font-sans">{feature.description}</p>
                 </motion.div>
               ))}
             </motion.div>
