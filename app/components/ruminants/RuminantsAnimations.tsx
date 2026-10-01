@@ -1,20 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export default function RuminantsAnimations() {
   const scrollProgressRef = useRef<HTMLDivElement>(null);
-  const [isClient, setIsClient] = useState(false);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const isScrollingRef = useRef(false);
 
   useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  useEffect(() => {
-    if (!isClient) return;
-
     // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -51,13 +44,18 @@ export default function RuminantsAnimations() {
       });
     }, observerOptions);
 
-    // Observe all elements with data-motion
-    const animatedElements = document.querySelectorAll("[data-motion]");
-    animatedElements.forEach((el) => observer.observe(el));
+    const contentTargets = document.querySelectorAll<HTMLElement>(
+      "[data-ruminants-section] h2, [data-ruminants-section] h3, [data-ruminants-section] h4, [data-ruminants-section] p",
+    );
+    contentTargets.forEach((element, index) => {
+      element.classList.add("ruminants-stagger");
+      element.style.setProperty("--ruminants-stagger-index", String(index % 5));
+    });
 
-    // Observe stage blocks
-    const stageBlocks = document.querySelectorAll("[data-ruminants-section]");
-    stageBlocks.forEach((el) => observer.observe(el));
+    const animatedElements = document.querySelectorAll<HTMLElement>(
+      "[data-motion], [data-ruminants-section], [data-stage-image]:not(img), [data-methane-image], [data-matrix-column], [data-ruminants-headline], .ruminants-stagger",
+    );
+    animatedElements.forEach((element) => observer.observe(element));
 
     // Handle scroll for progress and bacteria pause
     let ticking = false;
@@ -99,12 +97,16 @@ export default function RuminantsAnimations() {
     return () => {
       observer.disconnect();
       window.removeEventListener("scroll", handleScroll);
+      contentTargets.forEach((element) => {
+        element.classList.remove("ruminants-stagger", "animate-in");
+        element.style.removeProperty("--ruminants-stagger-index");
+      });
       if (scrollTimeoutRef.current) {
         clearTimeout(scrollTimeoutRef.current);
       }
       document.body.style.removeProperty("--motion-disabled");
     };
-  }, [isClient]);
+  }, []);
 
   return (
     <>

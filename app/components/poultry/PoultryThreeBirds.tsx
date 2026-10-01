@@ -53,11 +53,11 @@ export default function PoultryThreeBirds() {
           <div className="space-y-6 w-[85%] pl-8 lg:pl-16">
             {/* LEFT SECTION TEXT */}
             <div className="space-y-3">
-              <div className="font-mono text-xs font-semibold tracking-[0.2em] text-[#D4A574] uppercase">
+              <div className="font-mono text-xs font-semibold tracking-[0.2em] text-[#6DBE45] uppercase">
                 PARENT STOCK
               </div>
 
-              <div className="font-space-grotesk font-extrabold text-[clamp(2.5rem,6vw,6.5rem)] text-[#D4A574] tracking-tight leading-[0.9]">
+              <div className="font-space-grotesk font-extrabold text-[clamp(2.5rem,6vw,6.5rem)] text-[#6DBE45] tracking-tight leading-[0.9]">
                 BREEDERS
               </div>
 

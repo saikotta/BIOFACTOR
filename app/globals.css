@@ -91,6 +91,18 @@ body {
   transform: translate3d(0, 0, 0);
 }
 
+.ruminants-stagger {
+  opacity: 0;
+  transform: translate3d(0, 12px, 0);
+  transition: opacity 520ms cubic-bezier(.22,.61,.36,1), transform 680ms cubic-bezier(.22,.61,.36,1);
+  transition-delay: calc(var(--ruminants-stagger-index, 0) * 45ms);
+}
+
+.ruminants-stagger.animate-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
 /* Stage blocks with reserved height */
 [data-ruminants-section] {
   min-height: 400px;
@@ -102,20 +114,21 @@ body {
   }
 }
 
-/* Images - no parallax, no clip-path, simple fade */
+/* Image reveals use only opacity and transform to stay inexpensive to render. */
 [data-stage-image] img,
 [data-methane-image] img {
   opacity: 0;
-  transform: scale(1);
-  transition: opacity 0.5s ease-out;
+  transform: translate3d(0, 10px, 0) scale(.99);
+  transition: opacity 520ms cubic-bezier(.22,.61,.36,1), transform 680ms cubic-bezier(.22,.61,.36,1);
   display: block;
   aspect-ratio: 16/9;
-  will-change: opacity;
+  will-change: opacity, transform;
 }
 
 [data-stage-image].animate-in img,
 [data-methane-image].animate-in img {
   opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
 }
 
 /* Remove mask animations */
@@ -187,6 +200,7 @@ body {
   [data-methane-image] img,
   [data-matrix-column],
   [data-ruminants-headline],
+  .ruminants-stagger,
   .bacteria-capsule {
     opacity: 1 !important;
     transform: none !important;

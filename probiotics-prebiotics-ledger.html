@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Probiotics and Prebiotics Comparison</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-pale: #dcebd0;
+      --ink-deep: #12281a;
+      --moss: #3b6a45;
+      --leaf: #9cc47f;
+      --glow-accent: #e07b5a; /* Soft coral instead of amber */
+      --card-bg: rgba(248, 252, 243, 0.62);
+      --card-border: rgba(59, 106, 69, 0.3);
+      --spine-track: rgba(59, 106, 69, 0.15);
+      --text-muted: #4a5f4a;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    body {
+      font-family: 'Newsreader', Georgia, serif;
+      background: var(--bg-pale);
+      color: var(--ink-deep);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Soft radial highlights */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 20%, rgba(156, 196, 127, 0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 80%, rgba(156, 196, 127, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Background floating capsules */
+    .bg-capsule {
+      position: fixed;
+      border: 1px solid rgba(59, 106, 69, 0.1);
+      border-radius: 50px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    .bg-capsule:nth-child(1) {
+      width: 120px;
+      height: 40px;
+      top: 10%;
+      left: 5%;
+      animation: drift 25s ease-in-out infinite;
+    }
+
+    .bg-capsule:nth-child(2) {
+      width: 80px;
+      height: 30px;
+      top: 30%;
+      right: 10%;
+      animation: drift 30s ease-in-out infinite reverse;
+    }
+
+    .bg-capsule:nth-child(3) {
+      width: 100px;
+      height: 35px;
+      top: 60%;
+      left: 8%;
+      animation: drift 28s ease-in-out infinite 5s;
+    }
+
+    .bg-capsule:nth-child(4) {
+      width: 90px;
+      height: 32px;
+      top: 80%;
+      right: 15%;
+      animation: drift 32s ease-in-out infinite 8s reverse;
+    }
+
+    @keyframes drift {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(20px, -10px) rotate(2deg); }
+      50% { transform: translate(-10px, 15px) rotate(-1deg); }
+      75% { transform: translate(15px, 5px) rotate(1deg); }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .header-label {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: sentence case;
+      color: var(--moss);
+      margin-bottom: 24px;
+    }
+
+    .column-label {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--moss);
+      margin-bottom: 8px;
+    }
+
+    .column-heading {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .column-headings {
+      display: grid;
+      grid-template-columns: 1fr 64px 1fr;
+      gap: 0;
+      margin-bottom: 60px;
+      text-align: center;
+    }
+
+    .column-headings .left {
+      text-align: right;
+      padding-right: 20px;
+    }
+
+    .column-headings .right {
+      text-align: left;
+      padding-left: 20px;
+    }
+
+    .ledger {
+      position: relative;
+      padding-bottom: 40px;
+    }
+
+    /* Spine line */
+    .spine-container {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+
+    .spine-track {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--spine-track);
+      border-radius: 2px;
+    }
+
+    .spine-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0%;
+      background: linear-gradient(to bottom, var(--moss), var(--leaf), var(--glow-accent));
+      border-radius: 2px;
+      transition: height 0.05s linear;
+    }
+
+    .spine-tip {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 12px;
+      background: var(--glow-accent);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--glow-accent), 0 0 24px var(--glow-accent);
+      opacity: 0;
+      transition: opacity 0.3s ease, top 0.05s linear;
+    }
+
+    .spine-tip.visible {
+      opacity: 1;
+    }
+
+    /* Rows */
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 64px 1fr;
+      gap: 0;
+      margin-bottom: 60px;
+      position: relative;
+      align-items: center;
+      outline: none;
+      cursor: default;
+    }
+
+    .row:focus-visible {
+      outline: 2px solid var(--moss);
+      outline-offset: 4px;
+    }
+
+    .row:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Node on spine */
+    .node {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--moss);
+      border-radius: 50%;
+      background: var(--bg-pale);
+      z-index: 3;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .row.in .node {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .row:hover .node,
+    .row:focus .node {
+      border-color: var(--glow-accent);
+      box-shadow: 0 0 8px var(--glow-accent);
+    }
+
+    .row.pulse .node {
+      border-color: var(--glow-accent);
+      box-shadow: 0 0 12px var(--glow-accent), 0 0 24px var(--glow-accent);
+    }
+
+    /* Ripple effect */
+    .ripple {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 40px;
+      height: 40px;
+      border: 2px solid var(--moss);
+      border-radius: 50%;
+      opacity: 0;
+      z-index: 2;
+    }
+
+    .row.in .ripple {
+      animation: ripple 0.6s ease-out forwards;
+    }
+
+    @keyframes ripple {
+      0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.8; }
+      100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      padding: 24px 28px;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease, filter 0.4s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    .card-left {
+      border-radius: 56px 14px 14px 56px;
+      text-align: right;
+      justify-self: end;
+      max-width: 420px;
+      transform: translateX(90px) scale(0.92);
+      opacity: 0;
+      filter: blur(8px);
+    }
+
+    .card-right {
+      border-radius: 14px 56px 56px 14px;
+      text-align: left;
+      justify-self: start;
+      max-width: 420px;
+      transform: translateX(-90px) scale(0.92);
+      opacity: 0;
+      filter: blur(8px);
+    }
+
+    .row.in .card-left {
+      transform: translateX(0) scale(1);
+      opacity: 1;
+      filter: blur(0);
+    }
+
+    .row.in .card-right {
+      transform: translateX(0) scale(1);
+      opacity: 1;
+      filter: blur(0);
+    }
+
+    .row.done .card-left,
+    .row.done .card-right {
+      transition: transform 0.3s ease, opacity 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    .row:hover .card-left {
+      transform: translateX(-8px);
+      box-shadow: 0 8px 24px rgba(59, 106, 69, 0.15);
+      background: rgba(248, 252, 243, 0.82);
+    }
+
+    .row:hover .card-right {
+      transform: translateX(8px);
+      box-shadow: 0 8px 24px rgba(59, 106, 69, 0.15);
+      background: rgba(248, 252, 243, 0.82);
+    }
+
+    .row:focus .card-left {
+      transform: translateX(-8px);
+      box-shadow: 0 8px 24px rgba(59, 106, 69, 0.15);
+      background: rgba(248, 252, 243, 0.82);
+    }
+
+    .row:focus .card-right {
+      transform: translateX(8px);
+      box-shadow: 0 8px 24px rgba(59, 106, 69, 0.15);
+      background: rgba(248, 252, 243, 0.82);
+    }
+
+    .card-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink-deep);
+      margin-bottom: 8px;
+    }
+
+    .card-body {
+      font-size: 14.5px;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+
+    .card-body em {
+      font-style: italic;
+    }
+
+    sup {
+      font-size: 0.7em;
+      vertical-align: super;
+      color: var(--moss);
+    }
+
+    /* Connector line - only visible on hover */
+    .connector {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) scaleX(0);
+      width: calc(100% - 40px);
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--glow-accent), transparent);
+      z-index: 1;
+      transition: transform 0.4s ease;
+      pointer-events: none;
+    }
+
+    .row:hover .connector,
+    .row:focus .connector {
+      transform: translateX(-50%) scaleX(1);
+    }
+
+    /* Responsive */
+    @media (max-width: 760px) {
+      .column-headings {
+        display: none;
+      }
+
+      .row {
+        grid-template-columns: 32px 1fr;
+        gap: 16px;
+        margin-bottom: 40px;
+      }
+
+      .spine-container {
+        left: 16px;
+      }
+
+      .node {
+        left: 16px;
+      }
+
+      .ripple {
+        left: 16px;
+      }
+
+      .connector {
+        display: none;
+      }
+
+      .card-left,
+      .card-right {
+        border-radius: 14px;
+        text-align: left;
+        justify-self: start;
+        max-width: 100%;
+        transform: translateX(30px) scale(0.92);
+      }
+
+      .card-right {
+        transform: translateX(30px) scale(0.92);
+      }
+
+      .row.in .card-left,
+      .row.in .card-right {
+        transform: translateX(0) scale(1);
+      }
+
+      .row:hover .card-left,
+      .row:hover .card-right,
+      .row:focus .card-left,
+      .row:focus .card-right {
+        transform: translateX(0);
+      }
+
+      .container {
+        padding: 60px 24px;
+      }
+    }
+
+    /* Evidence Panel */
+    .evidence-panel {
+      background: #12281a;
+      border-radius: 36px;
+      padding: 44px 52px;
+      margin-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .evidence-glow {
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(156, 196, 127, 0.28) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .evidence-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .evidence-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #e9f3dd;
+      max-width: 24ch;
+      margin-bottom: 12px;
+    }
+
+    .evidence-subtitle {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 15px;
+      color: #a9c39a;
+      margin-bottom: 40px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .stat-item {
+      padding-top: 20px;
+      border-top: 1.5px solid rgba(233, 243, 221, 0.28);
+      transition: border-color 0.35s ease;
+      opacity: 0;
+      transform: translateY(24px);
+      filter: blur(6px);
+    }
+
+    .stat-item:hover {
+      border-color: #f0b04a;
+    }
+
+    .stat-item:hover .stat-number {
+      text-shadow: 0 0 20px rgba(240, 176, 74, 0.5);
+    }
+
+    .stat-item.animated {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+      transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .stat-number {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(44px, 6vw, 72px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: #f0b04a;
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 8px;
+      transition: text-shadow 0.35s ease;
+    }
+
+    .stat-label {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 14px;
+      color: #c5d9b7;
+      margin-bottom: 16px;
+    }
+
+    .stat-bar {
+      height: 8px;
+      background: rgba(233, 243, 221, 0.14);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .stat-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(to right, #9cc47f, #f0b04a);
+      border-radius: 4px;
+      transition: width 1.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .stat-item.animated .stat-bar-fill {
+      width: var(--bar-width);
+    }
+
+    @media (max-width: 760px) {
+      .evidence-panel {
+        padding: 32px 24px;
+        border-radius: 24px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .evidence-glow {
+        width: 200px;
+        height: 200px;
+        top: -80px;
+        right: -80px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .stat-item {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+
+      .stat-item.animated .stat-bar-fill {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background floating capsules -->
+  <div class="bg-capsule"></div>
+  <div class="bg-capsule"></div>
+  <div class="bg-capsule"></div>
+  <div class="bg-capsule"></div>
+
+  <div class="container">
+    <div class="header">
+      <div class="header-label">Gut restoration and disease management</div>
+      <h1 style="font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(38px, 5.6vw, 68px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.02; color: var(--ink-deep); max-width: 800px; margin: 0 auto;">
+        Probiotics bring the right bacteria. Prebiotics keep them there.
+      </h1>
+    </div>
+
+    <div class="column-headings">
+      <div class="left">
+        <div class="column-label">Probiotics: live beneficial bacteria</div>
+        <div class="column-heading">How they protect the gut</div>
+      </div>
+      <div class="center"></div>
+      <div class="right">
+        <div class="column-label">Prebiotics: food for good bacteria</div>
+        <div class="column-heading">How they shape the community</div>
+      </div>
+    </div>
+
+    <div class="ledger">
+      <div class="spine-container">
+        <div class="spine-track"></div>
+        <div class="spine-fill" id="spineFill"></div>
+        <div class="spine-tip" id="spineTip"></div>
+      </div>
+
+      <!-- Row 1 -->
+      <div class="row" tabindex="0" data-index="0">
+        <div class="card card-left">
+          <div class="card-title">Competitive exclusion</div>
+          <div class="card-body">Beneficial bacteria take the attachment sites and nutrients that <em>Salmonella</em>, <em>E. coli</em> and <em>Clostridium</em> need.<sup>4</sup></div>
+        </div>
+        <div class="node"></div>
+        <div class="ripple"></div>
+        <div class="connector"></div>
+        <div class="card card-right">
+          <div class="card-title">Selective feeding</div>
+          <div class="card-body">Fibres such as mannan- and fructo-oligosaccharides pass undigested to the lower gut, where beneficial bacteria ferment them.</div>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="row" tabindex="0" data-index="1">
+        <div class="card card-left">
+          <div class="card-title">Antimicrobial compounds</div>
+          <div class="card-body"><em>Bacillus</em> and lactic acid bacteria produce substances that inhibit pathogens directly.</div>
+        </div>
+        <div class="node"></div>
+        <div class="ripple"></div>
+        <div class="connector"></div>
+        <div class="card card-right">
+          <div class="card-title">Pathogen binding</div>
+          <div class="card-body">Mannan-oligosaccharides (MOS) bind to the fimbriae that some bacteria use to attach, so those bacteria pass out instead of colonising.</div>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="row" tabindex="0" data-index="2">
+        <div class="card card-left">
+          <div class="card-title">Stronger gut lining</div>
+          <div class="card-body">A healthy community supports taller villi and tighter junctions between gut cells, so fewer pathogens and toxins get through.</div>
+        </div>
+        <div class="node"></div>
+        <div class="ripple"></div>
+        <div class="connector"></div>
+        <div class="card card-right">
+          <div class="card-title">Short-chain fatty acids</div>
+          <div class="card-body">Fermentation produces acids that lower gut pH, feed gut cells and discourage pathogens.</div>
+        </div>
+      </div>
+
+      <!-- Row 4 -->
+      <div class="row" tabindex="0" data-index="3">
+        <div class="card card-left">
+          <div class="card-title">Hardy spores</div>
+          <div class="card-body"><em>Bacillus</em> spores tolerate heat and stomach acid far better than most bacteria, which helps them survive feed processing and reach the intestine.</div>
+        </div>
+        <div class="node"></div>
+        <div class="ripple"></div>
+        <div class="connector"></div>
+        <div class="card card-right">
+          <div class="card-title">Synbiotic effect</div>
+          <div class="card-body">Given together, probiotic and prebiotic reinforce each other.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Evidence Panel -->
+    <div class="evidence-panel" id="evidencePanel">
+      <div class="evidence-glow"></div>
+      <div class="evidence-content">
+        <h2 class="evidence-title">Prebiotic evidence: mannan-oligosaccharide in broilers</h2>
+        <p class="evidence-subtitle">Pooled pen trials, MOS compared with a diet without antibiotics.</p>
+        
+        <div class="stats-grid">
+          <div class="stat-item" data-target="-21" data-suffix="%" data-decimals="0" data-bar="63">
+            <div class="stat-number">−21%</div>
+            <div class="stat-label">mortality</div>
+            <div class="stat-bar">
+              <div class="stat-bar-fill"></div>
+            </div>
+          </div>
+          
+          <div class="stat-item" data-target="1.6" data-suffix="%" data-decimals="1" data-bar="48">
+            <div class="stat-number">+1.6%</div>
+            <div class="stat-label">body weight</div>
+            <div class="stat-bar">
+              <div class="stat-bar-fill"></div>
+            </div>
+          </div>
+          
+          <div class="stat-item" data-target="-2.0" data-suffix="%" data-decimals="1" data-bar="60">
+            <div class="stat-number">−2.0%</div>
+            <div class="stat-label">feed conversion ratio</div>
+            <div class="stat-bar">
+              <div class="stat-bar-fill"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const rows = document.querySelectorAll('.row');
+      const spineFill = document.getElementById('spineFill');
+      const spineTip = document.getElementById('spineTip');
+      const ledger = document.querySelector('.ledger');
+      let lastRowRevealed = -1;
+      let waveTimeout = null;
+
+      // Scroll-driven animation logic (IntersectionObserver-free)
+      function updateScroll() {
+        const viewportHeight = window.innerHeight;
+        const ledgerRect = ledger.getBoundingClientRect();
+        const ledgerTop = ledgerRect.top;
+        const ledgerHeight = ledgerRect.height;
+        const scrollY = window.scrollY;
+        
+        // Calculate fill height based on scroll position within the ledger
+        // The fill should extend from the top of the ledger down to the current scroll position
+        let fillHeight = 0;
+        
+        if (ledgerTop < viewportHeight * 0.7) {
+          // Calculate how far we've scrolled into the ledger
+          const scrollIntoLedger = (viewportHeight * 0.7) - ledgerTop;
+          fillHeight = Math.min(scrollIntoLedger, ledgerHeight);
+        }
+        
+        // Ensure minimum fill height for visibility
+        fillHeight = Math.max(fillHeight, 0);
+        
+        // Add some buffer to ensure it reaches through the last row
+        fillHeight = Math.min(fillHeight + 20, ledgerHeight);
+        
+        spineFill.style.height = fillHeight + 'px';
+        
+        // Move tip to the end of the fill
+        spineTip.style.top = fillHeight + 'px';
+        
+        // Show/hide tip
+        if (fillHeight > 10) {
+          spineTip.classList.add('visible');
+        } else {
+          spineTip.classList.remove('visible');
+        }
+
+        // Check which rows should be revealed
+        rows.forEach((row, index) => {
+          const rect = row.getBoundingClientRect();
+          const rowCenter = rect.top + rect.height / 2;
+          const triggerPoint = viewportHeight * 0.7; // Trigger when row is 70% down viewport
+
+          if (rowCenter < triggerPoint && !row.classList.contains('in')) {
+            // Add 'in' class with staggered delay
+            setTimeout(() => {
+              row.classList.add('in');
+              
+              // After entrance finishes, add 'done' class
+              setTimeout(() => {
+                row.classList.add('done');
+              }, 1500);
+
+              // Check if this is the last row
+              if (index === rows.length - 1 && lastRowRevealed !== index) {
+                lastRowRevealed = index;
+                // Ensure spine fill extends to the bottom
+                spineFill.style.height = '100%';
+                // Trigger synbiotic wave
+                setTimeout(() => triggerWave(), 300);
+              }
+            }, index * 150);
+          }
+        });
+      }
+
+      // Synbiotic wave animation
+      function triggerWave() {
+        // Remove any existing pulse classes
+        rows.forEach(row => row.classList.remove('pulse'));
+        
+        // Add pulse class to each row in sequence
+        rows.forEach((row, index) => {
+          setTimeout(() => {
+            row.classList.add('pulse');
+            setTimeout(() => {
+              row.classList.remove('pulse');
+            }, 1000);
+          }, index * 230);
+        });
+      }
+
+      // Remove connector when not hovering
+      rows.forEach(row => {
+        row.addEventListener('mouseleave', () => {
+          // Connector will hide automatically via CSS
+        });
+        row.addEventListener('focusout', () => {
+          // Connector will hide automatically via CSS
+        });
+      });
+
+      // Handle hover on last row to replay wave
+      const lastRow = rows[rows.length - 1];
+      lastRow.addEventListener('mouseenter', () => {
+        if (lastRow.classList.contains('in')) {
+          triggerWave();
+        }
+      });
+
+      // Initial run after page load
+      setTimeout(updateScroll, 100);
+
+      // Scroll listener (passive)
+      window.addEventListener('scroll', updateScroll, { passive: true });
+      
+      // Resize listener
+      window.addEventListener('resize', updateScroll, { passive: true });
+
+      // Evidence Panel Animation
+      const evidencePanel = document.getElementById('evidencePanel');
+      const statItems = document.querySelectorAll('.stat-item');
+      
+      if (evidencePanel && statItems.length > 0) {
+        // Set bar widths as CSS variables
+        statItems.forEach(item => {
+          const barWidth = item.getAttribute('data-bar');
+          item.style.setProperty('--bar-width', barWidth + '%');
+        });
+
+        // IntersectionObserver for evidence panel
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              // Trigger animation
+              statItems.forEach((item, index) => {
+                setTimeout(() => {
+                  item.classList.add('animated');
+                  
+                  // Count up animation
+                  const target = parseFloat(item.getAttribute('data-target'));
+                  const suffix = item.getAttribute('data-suffix');
+                  const decimals = parseInt(item.getAttribute('data-decimals'));
+                  const numberEl = item.querySelector('.stat-number');
+                  
+                  // Store original text for accessibility/fallback
+                  const originalText = numberEl.textContent;
+                  
+                  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    const duration = 1500;
+                    const startTime = performance.now();
+                    const startValue = 0;
+                    const isNegative = target < 0;
+                    const absTarget = Math.abs(target);
+                    
+                    function updateNumber(currentTime) {
+                      const elapsed = currentTime - startTime;
+                      const progress = Math.min(elapsed / duration, 1);
+                      const eased = 1 - Math.pow(1 - progress, 3); // cubic ease-out
+                      
+                      const currentValue = startValue + (absTarget * eased);
+                      const sign = isNegative ? '−' : '+';
+                      const formatted = currentValue.toFixed(decimals);
+                      numberEl.textContent = sign + formatted + suffix;
+                      
+                      if (progress < 1) {
+                        requestAnimationFrame(updateNumber);
+                      }
+                    }
+                    
+                    requestAnimationFrame(updateNumber);
+                  }
+                }, index * 150);
+              });
+              
+              // Disconnect observer after triggering
+              observer.disconnect();
+            }
+          });
+        }, {
+          threshold: 0.4,
+          triggerOnce: true
+        });
+        
+        observer.observe(evidencePanel);
+      }
+    })();
+  </script>
+</body>
+</html>

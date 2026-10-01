@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Mineral bioavailability | Biofactor Biologicals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #E6F4DC;
+      --ink: #1C1A14;
+      --soft: #4A3F1E;
+      --open: #FFF6DC;
+      --free: #0B6B52;
+      --slot: #FBD57C;
+      --fraunces: "Fraunces", Georgia, serif;
+      --instrument: "Instrument Sans", Arial, sans-serif;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        color-scheme: dark;
+        --bg: #E6F4DC;
+        --ink: #1C1A14;
+        --soft: #4A3F1E;
+        --free: #0B6B52;
+        --slot: #FBD57C;
+      }
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-width: 320px;
+      background: var(--bg);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      overflow-x: hidden;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--instrument);
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 1.55;
+    }
+
+    .section {
+      width: 100%;
+      background: var(--bg);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      align-items: stretch;
+      gap: clamp(24px, 4vw, 64px);
+      width: min(100%, 1320px);
+      margin: 0 auto;
+      padding: max(22px, env(safe-area-inset-top)) clamp(22px, 4vw, 56px) max(56px, env(safe-area-inset-bottom));
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .headline {
+      margin: 0 0 26px;
+      color: var(--ink);
+      font-family: var(--fraunces);
+      font-size: clamp(38px, 5.4vw, 70px);
+      font-weight: 900;
+      letter-spacing: -.025em;
+      line-height: .98;
+    }
+
+    .headline-window {
+      display: block;
+      overflow: hidden;
+      padding-block: .04em;
+    }
+
+    .headline-line {
+      display: block;
+      transform: translateY(0);
+    }
+
+    .js-motion .headline-line {
+      transform: translateY(105%);
+    }
+
+    .js-motion.is-loaded .headline-line {
+      animation: headline-rise 900ms cubic-bezier(.2, .8, .2, 1) both;
+      animation-delay: var(--headline-delay, 0ms);
+    }
+
+    .lead {
+      max-width: 62ch;
+      margin: 0 0 26px;
+      color: var(--soft);
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .explanation-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin-bottom: 30px;
+    }
+
+    .explanation-grid p {
+      margin: 0;
+      color: var(--soft);
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    mark {
+      padding: 0;
+      background: transparent;
+      color: var(--free);
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    sup {
+      position: relative;
+      top: -.15em;
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 0;
+    }
+
+    .meter {
+      margin-top: 30px;
+      padding-top: 18px;
+      border-top: 2.5px solid var(--ink);
+    }
+
+    .meter-title {
+      margin: 0 0 4px;
+      color: var(--ink);
+      font-family: var(--fraunces);
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .meter-subtitle {
+      margin: 0 0 22px;
+      color: var(--soft);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .lock-row + .lock-row {
+      margin-top: 24px;
+    }
+
+    .lock-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .lock-value {
+      color: var(--soft);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .mineral-bar {
+      display: flex;
+      width: 100%;
+      height: 22px;
+      overflow: hidden;
+      border: 1.5px solid var(--ink);
+      border-radius: 999px;
+      background: var(--open);
+    }
+
+    .phytate-segment {
+      display: block;
+      width: var(--phytate-share);
+      flex: 0 0 var(--phytate-share);
+      background: var(--ink);
+      transition: background-color 650ms cubic-bezier(.22, .61, .36, 1);
+    }
+
+    .other-segment {
+      display: block;
+      min-width: 0;
+      flex: 1 1 auto;
+      border-left: 2px solid var(--bg);
+      background: var(--open);
+    }
+
+    .legend-line {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 20px;
+      margin-top: 22px;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--soft);
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .legend-swatch {
+      display: inline-block;
+      width: 13px;
+      height: 13px;
+      flex: 0 0 auto;
+      border: 1.5px solid var(--ink);
+      border-radius: 3px;
+      background: var(--ink);
+    }
+
+    .legend-swatch.other {
+      background: var(--open);
+    }
+
+    .key-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 34px;
+      border-top: 2.5px solid var(--ink);
+      border-bottom: 1.5px solid var(--ink);
+    }
+
+    .key-item {
+      min-width: 0;
+      padding: 20px 18px 22px 0;
+    }
+
+    .key-item + .key-item {
+      padding-left: 18px;
+      border-left: 1.5px solid var(--ink);
+    }
+
+    .key-symbol {
+      display: block;
+      margin: 0 0 8px;
+      color: var(--ink);
+      font-family: var(--fraunces);
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing: -.03em;
+      line-height: 1;
+    }
+
+    .key-title {
+      margin: 0 0 6px;
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .key-copy {
+      margin: 0;
+      color: var(--soft);
+      font-size: 13.5px;
+      line-height: 1.45;
+    }
+
+    .source-line {
+      margin: 18px 0 0;
+      color: var(--soft);
+      font-size: 12.5px;
+      line-height: 1.45;
+    }
+
+    .visual-column {
+      position: relative;
+      min-width: 0;
+    }
+
+    .arch {
+      position: sticky;
+      top: 24px;
+      isolation: isolate;
+      width: 100%;
+      height: min(78vh, 720px);
+      overflow: visible;
+      border-radius: 8px;
+      background: var(--slot);
+    }
+
+    .js-motion.is-loaded .arch-image {
+      animation: image-arrive 1000ms cubic-bezier(.2, .8, .2, 1) 100ms both;
+    }
+
+    .arch > img,
+    .arch-image {
+      position: absolute;
+      z-index: 0;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      object-fit: cover;
+    }
+
+    .arch:has(img) .arch-placeholder {
+      display: none;
+    }
+
+    .arch-placeholder {
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 32px;
+      color: var(--soft);
+      font-size: 17px;
+      text-align: center;
+    }
+
+    .mineral-orbit {
+      position: absolute;
+      z-index: 3;
+      display: grid;
+      width: 54px;
+      height: 54px;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--bg);
+      font-family: var(--fraunces);
+      font-size: 18px;
+      font-weight: 900;
+      animation: mineral-float 4s ease-in-out var(--orbit-delay) infinite;
+    }
+
+    .mineral-orbit.black {
+      background: var(--ink);
+    }
+
+    .mineral-orbit.green {
+      background: var(--free);
+      color: var(--open);
+    }
+
+    .orbit-p { top: 22%; left: -27px; --orbit-delay: -1.1s; }
+    .orbit-ca { top: 38%; right: -27px; --orbit-delay: -2.5s; }
+    .orbit-zn { bottom: 22%; left: -27px; --orbit-delay: -3.2s; }
+    .orbit-fe { right: -27px; bottom: 12%; --orbit-delay: -.4s; }
+
+    @keyframes headline-rise {
+      from { transform: translateY(105%); }
+      to { transform: translateY(0); }
+    }
+
+    @keyframes image-arrive {
+      from { opacity: 0; transform: translate3d(0, 18px, 0) scale(.99); }
+      to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+    }
+
+    @keyframes mineral-float {
+      0%, 100% { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(-14px) rotate(8deg); }
+    }
+
+    @media (max-width: 899px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .visual-column {
+        order: 2;
+      }
+
+      .arch {
+        position: relative;
+        top: auto;
+        height: 420px;
+        min-height: 420px;
+      }
+
+      .mineral-orbit {
+        display: none;
+      }
+    }
+
+    @media (max-width: 619px) {
+      .layout {
+        gap: 34px;
+      }
+
+      .explanation-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+      }
+
+      .key-strip {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .key-item,
+      .key-item + .key-item {
+        padding: 16px 0;
+        border-left: 0;
+      }
+
+      .key-item + .key-item {
+        border-top: 1.5px solid var(--ink);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition: none !important;
+      }
+
+      .js-motion .headline-line,
+      .js-motion.is-loaded .headline-line {
+        transform: none;
+        animation: none;
+      }
+
+      .js-motion .arch-image,
+      .js-motion.is-loaded .arch-image {
+        opacity: 1;
+        transform: none;
+        animation: none;
+        will-change: auto;
+      }
+
+      .mineral-orbit {
+        animation: none;
+      }
+
+    }
+  </style>
+</head>
+<body>
+  <main class="section">
+    <div class="layout">
+      <section class="content" aria-labelledby="mineral-heading">
+        <h1 class="headline" id="mineral-heading">
+          <span class="headline-window"><span class="headline-line" style="--headline-delay: 0ms">Unlocking the minerals</span></span>
+          <span class="headline-window"><span class="headline-line" style="--headline-delay: 120ms">already in the feed.</span></span>
+        </h1>
+
+        <p class="lead">Most of the phosphorus in grain and oilseed meal is locked in phytate, a compound birds cannot break down well. Phytate also binds calcium, zinc and iron. Farmers pay for minerals twice: once in the grain and again as supplements to make up for what the bird cannot use.</p>
+
+        <div class="explanation-grid">
+          <p>Mineral-solubilising bacteria in the gut produce <mark>phytase enzymes that break phytate apart</mark>, and organic acids that keep calcium and other minerals soluble where they can be absorbed. The bird gets more from the same feed, and less phosphorus ends up in the litter and the soil.</p>
+          <p>This has been shown in principle: when broilers on a phosphorus-deficient diet were given <em>Lactobacillus</em> strains engineered to produce phytase, they grew as well as birds on a diet with adequate phosphorus.<sup>10</sup></p>
+        </div>
+
+        <section class="meter" aria-labelledby="meter-title">
+          <h2 class="meter-title" id="meter-title">Where feed phosphorus is locked up</h2>
+          <p class="meter-subtitle">Share of total phosphorus held as phytate versus other forms.</p>
+
+          <div class="lock-row" data-ingredient="corn" data-label="Corn" data-phytate="72">
+            <div class="lock-label"><span>Corn</span><span class="lock-value">72% phytate</span></div>
+            <div class="mineral-bar" role="img" aria-label="Corn: 72% bound in phytate, 28% other forms">
+              <span class="phytate-segment" style="--phytate-share: 72%"></span>
+              <span class="other-segment"></span>
+            </div>
+          </div>
+
+          <div class="lock-row" data-ingredient="soybean" data-label="Soybean meal" data-phytate="60">
+            <div class="lock-label"><span>Soybean meal</span><span class="lock-value">60% phytate</span></div>
+            <div class="mineral-bar" role="img" aria-label="Soybean meal: 60% bound in phytate, 40% other forms">
+              <span class="phytate-segment" style="--phytate-share: 60%"></span>
+              <span class="other-segment"></span>
+            </div>
+          </div>
+
+          <div class="legend-line">
+            <span class="legend-item"><span class="legend-swatch" aria-hidden="true"></span>Bound in phytate</span>
+            <span class="legend-item"><span class="legend-swatch other" aria-hidden="true"></span>Other forms</span>
+          </div>
+        </section>
+
+        <section class="key-strip" aria-label="Mineral outcomes">
+          <article class="key-item">
+            <span class="key-symbol">P</span>
+            <h3 class="key-title">Released from phytate</h3>
+            <p class="key-copy">Phytate holds 60–72% of the phosphorus in soybean meal and corn.<sup>3</sup></p>
+          </article>
+          <article class="key-item">
+            <span class="key-symbol">Ca</span>
+            <h3 class="key-title">Shell and bone</h3>
+            <p class="key-copy">Probiotics increased eggshell thickness and weight in laying hens.<sup>6</sup></p>
+          </article>
+          <article class="key-item">
+            <span class="key-symbol">Zn · Fe</span>
+            <h3 class="key-title">Freed from binding</h3>
+            <p class="key-copy">Breaking down phytate also releases the trace minerals it holds.</p>
+          </article>
+        </section>
+
+        <p class="source-line">Only 10–30% of the phosphorus in these ingredients is available to poultry. Source: Mississippi State University Extension.<sup>3</sup> The proportions shown are illustrative, not measured results.</p>
+      </section>
+
+      <aside class="visual-column" aria-label="Minerals released from feed">
+        <div class="arch">
+          <img class="arch-image" src="/images/poultry-mineral-bioavailability.jpg" alt="Poultry mineral bioavailability">
+          <span class="arch-placeholder">Your image goes here</span>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const hostFrame = window.frameElement;
+      const hostWindow = hostFrame ? window.parent : null;
+      const layout = document.querySelector(".layout");
+      const visualColumn = document.querySelector(".visual-column");
+      const arch = document.querySelector(".arch");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let hostFrameId = 0;
+      let archMotionFrame = 0;
+      let archCurrentOffset = 0;
+      let archTargetOffset = 0;
+      let previousArchFrame = 0;
+
+      function animateEmbeddedArch(timestamp) {
+        archMotionFrame = 0;
+        const elapsed = previousArchFrame ? timestamp - previousArchFrame : 16.67;
+        previousArchFrame = timestamp;
+        const progress = 1 - Math.exp(-elapsed / 72);
+        archCurrentOffset += (archTargetOffset - archCurrentOffset) * progress;
+
+        if (Math.abs(archTargetOffset - archCurrentOffset) < .25) {
+          archCurrentOffset = archTargetOffset;
+          previousArchFrame = 0;
+        }
+
+        arch.style.transform = `translate3d(0, ${archCurrentOffset}px, 0)`;
+        if (archCurrentOffset !== archTargetOffset && hostWindow) {
+          archMotionFrame = hostWindow.requestAnimationFrame(animateEmbeddedArch);
+        }
+      }
+
+      function setEmbeddedArchTarget(offset) {
+        archTargetOffset = offset;
+        if (reducedMotion.matches || !hostWindow) {
+          archCurrentOffset = offset;
+          arch.style.transform = `translate3d(0, ${offset}px, 0)`;
+          return;
+        }
+        if (!archMotionFrame) {
+          previousArchFrame = 0;
+          archMotionFrame = hostWindow.requestAnimationFrame(animateEmbeddedArch);
+        }
+      }
+
+      function updateEmbeddedArch() {
+        if (!hostFrame || !hostWindow || !layout || !visualColumn || !arch) return;
+        if (hostWindow.matchMedia("(max-width: 899px)").matches) {
+          archTargetOffset = 0;
+          archCurrentOffset = 0;
+          if (archMotionFrame) hostWindow.cancelAnimationFrame(archMotionFrame);
+          archMotionFrame = 0;
+          previousArchFrame = 0;
+          arch.style.transform = "none";
+          return;
+        }
+        const frameTop = hostFrame.getBoundingClientRect().top;
+        const visualRect = visualColumn.getBoundingClientRect();
+        const archHeight = arch.getBoundingClientRect().height;
+        const availableTravel = Math.max(0, visualRect.height - archHeight);
+        const naturalTop = frameTop + visualRect.top;
+        const offset = Math.max(0, Math.min(availableTravel, 24 - naturalTop));
+        setEmbeddedArchTarget(offset);
+      }
+
+      function scheduleHostUpdate() {
+        if (!hostWindow || hostFrameId) return;
+        hostFrameId = hostWindow.requestAnimationFrame(() => {
+          hostFrameId = 0;
+          updateEmbeddedArch();
+        });
+      }
+
+      if (hostFrame && hostWindow) {
+        hostWindow.addEventListener("scroll", scheduleHostUpdate, { passive: true });
+        hostWindow.addEventListener("resize", scheduleHostUpdate, { passive: true });
+        window.addEventListener("resize", scheduleHostUpdate, { passive: true });
+        scheduleHostUpdate();
+        document.fonts.ready.then(scheduleHostUpdate);
+      }
+
+      window.addEventListener("pagehide", () => {
+        if (hostFrameId && hostWindow) hostWindow.cancelAnimationFrame(hostFrameId);
+        if (archMotionFrame && hostWindow) hostWindow.cancelAnimationFrame(archMotionFrame);
+        hostWindow?.removeEventListener("scroll", scheduleHostUpdate);
+        hostWindow?.removeEventListener("resize", scheduleHostUpdate);
+        window.removeEventListener("resize", scheduleHostUpdate);
+      }, { once: true });
+
+      document.fonts.ready.then(() => {
+        root.classList.add("js-motion");
+        window.requestAnimationFrame(() => root.classList.add("is-loaded"));
+        if (hostFrame && hostWindow) scheduleHostUpdate();
+      });
+    })();
+  </script>
+</body>
+</html>

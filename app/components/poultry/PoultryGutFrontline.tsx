@@ -1,45 +1,69 @@
-import React from "react";
-import styles from "./PoultryGutFrontline.module.css";
+"use client";
+
+import { useEffect, useRef } from "react";
+
+function fitFrame(frame: HTMLIFrameElement | null) {
+  const document = frame?.contentDocument;
+  const content = document?.querySelector("main");
+  const bodyElement = document?.body;
+  const view = document?.defaultView;
+  if (!frame || !document || !content || !bodyElement || !view) return;
+
+  const body = view.getComputedStyle(bodyElement);
+  const bottomPadding = Number.parseFloat(body.paddingBottom) || 0;
+  const height = Math.ceil(content.getBoundingClientRect().bottom + bottomPadding);
+  if (height > 0) frame.style.height = `${height}px`;
+}
 
 export default function PoultryGutFrontline() {
+  const frameRef = useRef<HTMLIFrameElement>(null);
+
+  useEffect(() => {
+    const frame = frameRef.current;
+    let resizeTimer = 0;
+    let resizeFrame = 0;
+    const observer = new ResizeObserver(() => scheduleFit());
+    const scheduleFit = () => {
+      fitFrame(frame);
+      window.cancelAnimationFrame(resizeFrame);
+      resizeFrame = window.requestAnimationFrame(() => fitFrame(frame));
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => fitFrame(frame), 180);
+    };
+    const observeDocument = () => {
+      const document = frame?.contentDocument;
+      const documentElement = document?.documentElement;
+      if (!document || !documentElement) return;
+      observer.disconnect();
+      observer.observe(documentElement);
+      scheduleFit();
+      void document.fonts.ready.then(scheduleFit);
+    };
+
+    frame?.addEventListener("load", observeDocument);
+    observeDocument();
+    window.addEventListener("resize", scheduleFit, { passive: true });
+
+    return () => {
+      frame?.removeEventListener("load", observeDocument);
+      window.removeEventListener("resize", scheduleFit);
+      observer.disconnect();
+      window.cancelAnimationFrame(resizeFrame);
+      window.clearTimeout(resizeTimer);
+    };
+  }, []);
+
   return (
-    <section className={styles.section} data-poultry-static>
-      <div className={styles.container}>
-        <div className={styles.eyebrow}>
-          <span className={styles.eyebrowLine} aria-hidden="true" />
-          <span>THE GUT IS THE FRONT LINE</span>
-        </div>
-
-        <h2 className={styles.headline}>
-          <span className={styles.headlineLine}>Whoever colonises</span>
-          <span className={styles.headlineLine}>the gut first sets</span>
-          <span className={styles.headlineLine}>the course.</span>
-        </h2>
-
-        <div className={styles.grid}>
-          <div className={styles.copy}>
-            <p className={styles.body}>
-              A chick hatches with an almost empty gut. The first bacteria to settle there shape how the gut lining develops, how the immune system matures and which pathogens can find a place to attach.
-            </p>
-
-            <div className={styles.quote}>
-              <span className={styles.quoteLead}>The idea is 50 years old.</span>{" "}
-              In 1973, Nurmi and Rantala showed that day-old chicks given gut bacteria from healthy adult hens resisted <em>Salmonella</em> colonisation. This became known as competitive exclusion.<sup>4</sup>
-            </div>
-          </div>
-
-          <div className={styles.card}>
-            <div className={styles.legend}>
-              <span className={styles.legendGreen}>BENEFICIAL BACTERIA · ON THE VILLI</span>
-              <span className={styles.legendRose}>SALMONELLA · CLOSTRIDIUM · KEPT OUT</span>
-            </div>
-
-            <div className={styles.imageSlot} aria-label="Empty image slot for small intestine schematic" />
-
-            <div className={styles.cardFooter}>SMALL INTESTINE · SCHEMATIC</div>
-          </div>
-        </div>
-      </div>
+    <section className="w-full bg-[#E8F1E6]" data-poultry-static aria-label="First colonisers">
+      <iframe
+        ref={frameRef}
+        className="block w-full border-0"
+        src="/first-colonisers.html"
+        title="First colonisers: how bacteria compete to establish in a chick's gut"
+        loading="eager"
+        style={{ height: "1500px" }}
+        onLoad={(event) => fitFrame(event.currentTarget)}
+      />
     </section>
   );
 }

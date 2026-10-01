@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>The right biology at every stage of the bird's life</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --page: #d9ebd3;
+      --ink: #14301f;
+      --soft: rgba(20, 48, 31, .68);
+      --cream: #f4faec;
+      --stage-1: #f3faea;
+      --stage-2: #cde6c3;
+      --stage-3: #8fc49a;
+      --stage-4: #3f8a5f;
+      --stage-5: #1c4a31;
+      --ease-out: cubic-bezier(.16, 1, .3, 1);
+      --ease-inout: cubic-bezier(.65, 0, .35, 1);
+      --capsule-duration: 1.2s;
+      --header-duration: .7s;
+      --cell-duration: .6s;
+      --divider-duration: .8s;
+      --headline-duration: .9s;
+      --subtext-duration: .52s;
+      --row-duration: .56s;
+      --hover-duration: .6s;
+      --release-duration: .7s;
+      --dim-duration: .4s;
+      --underline-duration: .5s;
+      --ambient-duration: 20s;
+      --sweep-delay: 2.2s;
+      --sweep-duration: 1.4s;
+      --intro-duration: 3.6s;
+      --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+      --serif: "Newsreader", Georgia, serif;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-width: 320px;
+      background: var(--page);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      overflow-x: hidden;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      background: radial-gradient(ellipse 70% 58% at 0 0, rgba(243, 250, 234, .92), transparent 72%), var(--page);
+      color: var(--ink);
+    }
+
+    .section {
+      width: 100%;
+      background: transparent;
+    }
+
+    .frame {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      width: min(100%, 1320px);
+      margin: 0 auto;
+      padding: clamp(22px, 4vw, 56px);
+    }
+
+    .ambient {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .ambient-blob {
+      position: absolute;
+      width: 300px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      opacity: .55;
+      background: radial-gradient(circle, rgba(143, 196, 154, .25), rgba(205, 230, 195, .12) 42%, transparent 72%);
+      animation: ambient-drift var(--ambient-duration) var(--ease-inout) infinite alternate;
+    }
+
+    .ambient-blob:first-child {
+      top: -145px;
+      left: -135px;
+    }
+
+    .ambient-blob:nth-child(2) {
+      right: -150px;
+      bottom: -100px;
+      animation-delay: -10s;
+    }
+
+    .microbe-rod {
+      position: absolute;
+      width: var(--rod-width);
+      height: 11px;
+      border: 1px solid rgba(20, 48, 31, .13);
+      border-radius: 999px;
+      opacity: .14;
+      transform: translate3d(0, 0, 0) rotate(var(--rod-angle));
+      animation: rod-drift var(--rod-duration) var(--ease-inout) var(--rod-delay) infinite alternate;
+    }
+
+    .microbe-rod:nth-child(3) { top: 18%; left: 27%; }
+    .microbe-rod:nth-child(4) { top: 52%; left: 12%; }
+    .microbe-rod:nth-child(5) { top: 78%; left: 44%; }
+    .microbe-rod:nth-child(6) { top: 23%; right: 30%; }
+    .microbe-rod:nth-child(7) { top: 65%; right: 17%; }
+    .microbe-rod:nth-child(8) { top: 88%; right: 38%; }
+    .microbe-rod:nth-child(9) { top: 40%; right: 5%; }
+    .microbe-rod:nth-child(10) { top: 9%; right: 10%; }
+
+    .frame-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .headline {
+      max-width: 1100px;
+      margin: 0 0 14px;
+      color: var(--ink);
+      font-family: var(--display);
+      font-size: clamp(38px, 5.4vw, 70px);
+      font-weight: 800;
+      letter-spacing: -.025em;
+      line-height: .98;
+    }
+
+    .headline-line-mask {
+      display: block;
+      overflow: hidden;
+      margin-block: -.035em;
+      padding-block: .035em;
+    }
+
+    .headline-line {
+      display: block;
+      transform: translateY(0);
+    }
+
+    .frame.is-intro .headline-line {
+      transform: translateY(105%);
+      animation: headline-rise var(--headline-duration) var(--ease-out) both;
+      animation-delay: calc(var(--l, 0) * .1s);
+      will-change: transform, opacity;
+    }
+
+    .frame.is-intro .subtext {
+      opacity: 0;
+      transform: translateY(12px);
+      animation: subtext-rise var(--subtext-duration) var(--ease-out) .3s both;
+      will-change: transform, opacity;
+    }
+
+    .subtext {
+      max-width: 66ch;
+      margin: 0 0 30px;
+      color: var(--soft);
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .matrix-scroll {
+      width: 100%;
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+      padding: 10px 8px 28px;
+      scrollbar-color: rgba(20, 48, 31, .4) transparent;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .matrix {
+      --header-height: 168px;
+      --data-height: 132px;
+      display: grid;
+      grid-template-columns: 150px repeat(5, minmax(0, 1fr));
+      grid-template-rows: var(--header-height) repeat(3, var(--data-height));
+      column-gap: 14px;
+      width: 100%;
+      min-width: 1040px;
+    }
+
+    .row-label {
+      display: flex;
+      grid-column: 1;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      padding: 14px 12px 14px 0;
+    }
+
+    .matrix.is-animated .row-label {
+      opacity: 0;
+      transform: translateX(-10px);
+      animation: row-rise var(--row-duration) var(--ease-out) calc(1.5s + var(--r, 0) * .12s) both;
+      will-change: transform, opacity;
+    }
+
+    .row-label[data-row="0"] { grid-row: 2; }
+    .row-label[data-row="1"] { grid-row: 3; }
+    .row-label[data-row="2"] { grid-row: 4; }
+
+    .row-dot {
+      width: 7px;
+      height: 7px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--ink);
+    }
+
+    .row-label-copy { min-width: 0; }
+
+    .row-title {
+      display: block;
+      color: var(--ink);
+      font-family: var(--display);
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.28;
+    }
+
+    .row-subtitle {
+      display: block;
+      margin-top: 4px;
+      color: var(--soft);
+      font-family: var(--serif);
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .stage-column {
+      position: relative;
+      display: grid;
+      grid-column: var(--stage-column);
+      grid-row: 1 / 5;
+      grid-template-rows: var(--header-height) repeat(3, var(--data-height));
+      min-width: 0;
+      overflow: hidden;
+      border-radius: 90px;
+      background: var(--stage-color);
+      color: var(--stage-ink);
+      box-shadow: 0 12px 28px rgba(20, 48, 31, .1);
+      opacity: 1;
+      clip-path: inset(0 0 0 0 round 90px);
+      transform: translateY(0) scale(1);
+      transform-origin: bottom;
+      outline: none;
+      transition: transform var(--release-duration) var(--ease-out), opacity var(--release-duration) var(--ease-out);
+    }
+
+    .stage-column::before,
+    .stage-column::after {
+      position: absolute;
+      z-index: 3;
+      inset: 0;
+      border-radius: inherit;
+      content: "";
+      pointer-events: none;
+    }
+
+    .stage-column::before {
+      width: 48%;
+      background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .35), transparent);
+      opacity: 0;
+      transform: translateX(-120%);
+    }
+
+    .stage-column::after {
+      z-index: 0;
+      box-shadow: 0 22px 44px rgba(20, 48, 31, .2);
+      opacity: 0;
+      transition: opacity var(--release-duration) var(--ease-out);
+    }
+
+    .matrix.sweep-active .stage-column::before {
+      animation: light-sweep var(--sweep-duration) var(--ease-inout) var(--sweep-delay) both;
+      will-change: transform, opacity;
+    }
+
+    .stage-head,
+    .stage-cell {
+      position: relative;
+      z-index: 1;
+    }
+
+    .stage-column:focus-visible {
+      outline: 3px solid var(--ink);
+      outline-offset: 4px;
+    }
+
+    .matrix.is-animated .stage-column {
+      opacity: .6;
+      clip-path: inset(100% 0 0 0 round 90px);
+      animation: capsule-fill var(--capsule-duration) var(--ease-inout) calc(.4s + var(--c, 0) * .12s) both;
+      will-change: transform, opacity;
+    }
+
+    .stage-head {
+      display: flex;
+      grid-row: 1;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-width: 0;
+      padding: 22px 14px 18px;
+      text-align: center;
+    }
+
+    .stage-number,
+    .stage-name,
+    .stage-subtitle,
+    .cell-content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stage-number {
+      opacity: .76;
+      transition: opacity var(--dim-duration) var(--ease-out);
+    }
+
+    .stage-name {
+      position: relative;
+      display: block;
+    }
+
+    .stage-name::after {
+      display: block;
+      width: 40px;
+      height: 1px;
+      margin: 7px auto 0;
+      background: currentColor;
+      content: "";
+      opacity: .55;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform var(--underline-duration) var(--ease-out) 60ms;
+    }
+
+    .matrix.is-animated .stage-number,
+    .matrix.is-animated .stage-name,
+    .matrix.is-animated .stage-subtitle {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: text-rise var(--header-duration) var(--ease-out) calc(.9s + var(--c, 0) * .1s) both;
+      will-change: transform, opacity;
+    }
+
+    .matrix.is-animated .stage-cell .cell-content {
+      opacity: 0;
+      transform: translateY(10px);
+      animation-name: cell-rise;
+      animation-timing-function: var(--ease-out);
+      animation-fill-mode: both;
+      animation-duration: var(--cell-duration);
+      animation-delay: calc(1.2s + var(--c, 0) * .08s + var(--r, 0) * .12s);
+      will-change: transform, opacity;
+    }
+
+    .stage-number {
+      margin-bottom: 7px;
+      font-family: var(--display);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      line-height: 1;
+    }
+
+    .stage-name {
+      font-family: var(--display);
+      font-size: 19px;
+      font-weight: 800;
+      line-height: 1.18;
+    }
+
+    .stage-subtitle {
+      margin-top: 7px;
+      font-family: var(--serif);
+      font-size: 14px;
+      line-height: 1.25;
+    }
+
+    .stage-cell {
+      position: relative;
+      display: grid;
+      grid-row: var(--cell-row);
+      align-items: center;
+      justify-items: center;
+      min-width: 0;
+      padding: 14px;
+      text-align: center;
+      isolation: isolate;
+      outline: none;
+    }
+
+    .stage-cell:not([data-cell-row="2"])::before {
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      right: 14px;
+      left: 14px;
+      height: 1px;
+      background: var(--divider);
+      content: "";
+      transform: scaleX(1);
+      transform-origin: left center;
+    }
+
+    .matrix.is-animated .stage-cell:not([data-cell-row="2"])::before {
+      transform: scaleX(0);
+      animation: divider-draw var(--divider-duration) var(--ease-inout) calc(1.3s + var(--c, 0) * .08s + var(--r, 0) * .12s) both;
+      will-change: transform, opacity;
+    }
+
+    .cell-content {
+      display: block;
+      width: 100%;
+      font-family: var(--serif);
+      font-size: 16px;
+      line-height: 1.38;
+      transition: transform var(--release-duration) var(--ease-out);
+    }
+
+    .stage-cell.is-empty .cell-content {
+      color: var(--soft);
+      font-style: italic;
+    }
+
+    .stage-cell:hover .cell-content,
+    .stage-cell:focus-visible .cell-content {
+      transform: translateY(-2px);
+    }
+
+    .stage-column[data-tone="light"] {
+      --stage-ink: #14301f;
+      --divider: rgba(20, 48, 31, .22);
+    }
+
+    .stage-column[data-tone="dark"] {
+      --stage-ink: #f4faec;
+      --divider: rgba(244, 250, 236, .22);
+    }
+
+    .stage-column em { font-style: italic; }
+
+    .stage-column sup {
+      position: relative;
+      top: -.2em;
+      font-family: var(--display);
+      font-size: .7em;
+      font-weight: 800;
+      line-height: 0;
+    }
+
+    .stage-column:hover,
+    .stage-column:focus-within {
+      z-index: 2;
+      transform: translateY(-6px) scale(1.035);
+      transition-duration: var(--hover-duration);
+      transition-delay: 60ms;
+    }
+
+    .stage-column:hover::after,
+    .stage-column:focus-within::after {
+      opacity: 1;
+      transition-duration: var(--hover-duration);
+      transition-delay: 60ms;
+    }
+
+    .stage-column:hover .stage-number,
+    .stage-column:focus-within .stage-number {
+      opacity: 1;
+      transition-delay: 60ms;
+    }
+
+    .stage-column:hover .stage-name::after,
+    .stage-column:focus-within .stage-name::after {
+      transform: scaleX(1);
+    }
+
+    .matrix:has(.stage-column:hover) .stage-column:not(:hover),
+    .matrix:has(.stage-column:focus-within) .stage-column:not(:focus-within) {
+      opacity: .72;
+      transition-duration: var(--dim-duration);
+      transition-delay: 60ms;
+    }
+
+    @keyframes capsule-fill {
+      from { clip-path: inset(100% 0 0 0 round 90px); opacity: .6; }
+      to { clip-path: inset(0 0 0 0 round 90px); opacity: 1; }
+    }
+
+    @keyframes text-rise {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes cell-rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes headline-rise {
+      from { opacity: 1; transform: translateY(105%); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes subtext-rise {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes row-rise {
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes divider-draw {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    @keyframes light-sweep {
+      from { opacity: 0; transform: translateX(-120%); }
+      18% { opacity: 1; }
+      to { opacity: 0; transform: translateX(120%); }
+    }
+
+    @keyframes ambient-drift {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(40px, 40px, 0); }
+    }
+
+    @keyframes rod-drift {
+      from { transform: translate3d(0, 0, 0) rotate(var(--rod-angle)); }
+      to { transform: translate3d(24px, -32px, 0) rotate(var(--rod-angle)); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+
+      .matrix.is-animated .stage-column {
+        transform: none;
+        animation: none;
+        clip-path: inset(0 0 0 0 round 90px);
+      }
+
+      .matrix.is-animated .stage-number,
+      .matrix.is-animated .stage-name,
+      .matrix.is-animated .stage-subtitle,
+      .matrix.is-animated .cell-content,
+      .matrix.is-animated .row-label {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+
+      .matrix.is-animated .stage-cell:not([data-cell-row="2"])::before {
+        transform: none;
+        animation: none;
+      }
+
+      .stage-column:hover,
+      .stage-column:focus-within,
+      .stage-cell:hover .cell-content,
+      .stage-cell:focus-visible .cell-content {
+        transform: none;
+      }
+
+      .ambient-blob,
+      .microbe-rod {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="section">
+    <div class="frame">
+      <div class="ambient" aria-hidden="true">
+        <span class="ambient-blob"></span><span class="ambient-blob"></span>
+        <span class="microbe-rod" style="--rod-width: 54px; --rod-angle: 24deg; --rod-duration: 22s; --rod-delay: -3s"></span>
+        <span class="microbe-rod" style="--rod-width: 42px; --rod-angle: -18deg; --rod-duration: 28s; --rod-delay: -11s"></span>
+        <span class="microbe-rod" style="--rod-width: 62px; --rod-angle: 12deg; --rod-duration: 19s; --rod-delay: -7s"></span>
+        <span class="microbe-rod" style="--rod-width: 48px; --rod-angle: -32deg; --rod-duration: 26s; --rod-delay: -16s"></span>
+        <span class="microbe-rod" style="--rod-width: 58px; --rod-angle: 31deg; --rod-duration: 18s; --rod-delay: -5s"></span>
+        <span class="microbe-rod" style="--rod-width: 44px; --rod-angle: -8deg; --rod-duration: 30s; --rod-delay: -20s"></span>
+        <span class="microbe-rod" style="--rod-width: 52px; --rod-angle: 17deg; --rod-duration: 24s; --rod-delay: -13s"></span>
+        <span class="microbe-rod" style="--rod-width: 46px; --rod-angle: -26deg; --rod-duration: 21s; --rod-delay: -9s"></span>
+      </div>
+      <div class="frame-content">
+        <h1 class="headline">The right biology at every stage of the bird's life.</h1>
+        <p class="subtext">The gut faces different pressures at each stage. Biologicals work best matched to those pressures.</p>
+        <div class="matrix-scroll" tabindex="0" role="region" aria-label="Bird life-stage biology comparison">
+          <div class="matrix" id="life-stage-matrix">
+            <div class="row-label" data-row="0" style="--r: 0"><span class="row-dot"></span><span class="row-label-copy"><strong class="row-title">Gut restoration</strong><span class="row-subtitle">Pre- and probiotics</span></span></div>
+            <div class="row-label" data-row="1" style="--r: 1"><span class="row-dot"></span><span class="row-label-copy"><strong class="row-title">Disease management</strong><span class="row-subtitle">Exclusion, immunity</span></span></div>
+            <div class="row-label" data-row="2" style="--r: 2"><span class="row-dot"></span><span class="row-label-copy"><strong class="row-title">Mineral availability</strong><span class="row-subtitle">Solubilising bacteria</span></span></div>
+            <article class="stage-column" data-tone="light" tabindex="0" aria-label="01 Breeder flock, Parent stock" style="--stage-column: 2; --stage-color: var(--stage-1); --c: 0">
+              <header class="stage-head"><span class="stage-number">01</span><strong class="stage-name">Breeder flock</strong><span class="stage-subtitle">Parent stock</span></header>
+              <div class="stage-cell" data-cell-row="0" tabindex="0" style="--cell-row: 2; --r: 0"><span class="cell-content">Stable gut through the laying cycle</span></div>
+              <div class="stage-cell" data-cell-row="1" tabindex="0" style="--cell-row: 3; --r: 1"><span class="cell-content">Less <em>Salmonella</em> passed through the egg</span></div>
+              <div class="stage-cell" data-cell-row="2" tabindex="0" style="--cell-row: 4; --r: 2"><span class="cell-content">Shell quality for hatching eggs</span></div>
+            </article>
+            <article class="stage-column" data-tone="light" tabindex="0" aria-label="02 Hatchery, Egg to chick" style="--stage-column: 3; --stage-color: var(--stage-2); --c: 1">
+              <header class="stage-head"><span class="stage-number">02</span><strong class="stage-name">Hatchery</strong><span class="stage-subtitle">Egg to chick</span></header>
+              <div class="stage-cell" data-cell-row="0" tabindex="0" style="--cell-row: 2; --r: 0"><span class="cell-content">First beneficial microbes for the chick</span></div>
+              <div class="stage-cell" data-cell-row="1" tabindex="0" style="--cell-row: 3; --r: 1"><span class="cell-content">Protect the embryo on the shell <sup>5</sup></span></div>
+              <div class="stage-cell is-empty" data-cell-row="2" tabindex="0" style="--cell-row: 4; --r: 2"><span class="cell-content">Not a focus at this stage</span></div>
+            </article>
+            <article class="stage-column" data-tone="light" tabindex="0" aria-label="03 Brooding, Days 0–14" style="--stage-column: 4; --stage-color: var(--stage-3); --c: 2">
+              <header class="stage-head"><span class="stage-number">03</span><strong class="stage-name">Brooding</strong><span class="stage-subtitle">Days 0–14</span></header>
+              <div class="stage-cell" data-cell-row="0" tabindex="0" style="--cell-row: 2; --r: 0"><span class="cell-content">Seed the empty gut early</span></div>
+              <div class="stage-cell" data-cell-row="1" tabindex="0" style="--cell-row: 3; --r: 1"><span class="cell-content">Early exclusion of <em>Salmonella</em> <sup>4</sup></span></div>
+              <div class="stage-cell" data-cell-row="2" tabindex="0" style="--cell-row: 4; --r: 2"><span class="cell-content">Bone development</span></div>
+            </article>
+            <article class="stage-column" data-tone="dark" tabindex="0" aria-label="04 Grow-out, Broilers, pullets" style="--stage-column: 5; --stage-color: var(--stage-4); --c: 3">
+              <header class="stage-head"><span class="stage-number">04</span><strong class="stage-name">Grow-out</strong><span class="stage-subtitle">Broilers, pullets</span></header>
+              <div class="stage-cell" data-cell-row="0" tabindex="0" style="--cell-row: 2; --r: 0"><span class="cell-content">Recover after feed changes and stress</span></div>
+              <div class="stage-cell" data-cell-row="1" tabindex="0" style="--cell-row: 3; --r: 1"><span class="cell-content">Necrotic enteritis window <sup>8</sup></span></div>
+              <div class="stage-cell" data-cell-row="2" tabindex="0" style="--cell-row: 4; --r: 2"><span class="cell-content">Phytate P for fast growth <sup>10</sup></span></div>
+            </article>
+            <article class="stage-column" data-tone="dark" tabindex="0" aria-label="05 Production, Lay, market" style="--stage-column: 6; --stage-color: var(--stage-5); --c: 4">
+              <header class="stage-head"><span class="stage-number">05</span><strong class="stage-name">Production</strong><span class="stage-subtitle">Lay, market</span></header>
+              <div class="stage-cell" data-cell-row="0" tabindex="0" style="--cell-row: 2; --r: 0"><span class="cell-content">Hold stability over a long lay</span></div>
+              <div class="stage-cell" data-cell-row="1" tabindex="0" style="--cell-row: 3; --r: 1"><span class="cell-content">Keep <em>Salmonella</em> off eggs</span></div>
+              <div class="stage-cell" data-cell-row="2" tabindex="0" style="--cell-row: 4; --r: 2"><span class="cell-content">Calcium for every eggshell <sup>6</sup></span></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    (() => {
+      const frame = document.querySelector(".frame");
+      const matrix = document.getElementById("life-stage-matrix");
+      const headline = document.querySelector(".headline");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+      if (reducedMotion.matches) return;
+
+      document.fonts.ready.then(() => {
+        const headlineText = headline.textContent.trim();
+        const textNode = headline.firstChild;
+        const range = document.createRange();
+        const words = [...headlineText.matchAll(/\S+/g)];
+        const lines = [];
+        let lineTop = null;
+        let line = [];
+
+        words.forEach((word) => {
+          range.setStart(textNode, word.index);
+          range.setEnd(textNode, word.index + word[0].length);
+          const top = range.getBoundingClientRect().top;
+          if (lineTop !== null && Math.abs(top - lineTop) > 1) {
+            lines.push(line.join(" "));
+            line = [];
+          }
+          lineTop = top;
+          line.push(word[0]);
+        });
+        if (line.length) lines.push(line.join(" "));
+
+        headline.setAttribute("aria-label", headlineText);
+        headline.replaceChildren(...lines.map((lineText, index) => {
+          const mask = document.createElement("span");
+          const text = document.createElement("span");
+          mask.className = "headline-line-mask";
+          mask.setAttribute("aria-hidden", "true");
+          mask.style.setProperty("--l", String(index));
+          text.className = "headline-line";
+          text.textContent = lineText;
+          mask.appendChild(text);
+          return mask;
+        }));
+
+        window.requestAnimationFrame(() => {
+          frame.classList.add("is-intro");
+          matrix.classList.add("is-animated", "sweep-active");
+          const introDuration = parseFloat(getComputedStyle(frame).getPropertyValue("--intro-duration")) * 1000;
+          window.setTimeout(() => {
+            frame.classList.remove("is-intro");
+            matrix.classList.remove("is-animated", "sweep-active");
+          }, introDuration);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

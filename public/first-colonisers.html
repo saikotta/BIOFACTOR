@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>First colonisers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #E8F1E6;
+      --lumen: #D5E6D6;
+      --ink: #0B2B1F;
+      --mute: #4F6F5F;
+      --tissue: #F1B59C;
+      --good: #7CC65B;
+      --sal: #EB4A30;
+      --clo: #4280E4;
+      --accent: #C4533A;
+      --control-track: #D3E4D5;
+      --band-border: #B9D3BE;
+      --paragraph: #27453A;
+      --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+      --serif: "Newsreader", Georgia, serif;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-width: 320px;
+      background: var(--bg);
+    }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      padding: var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left);
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--serif);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1240px;
+      margin-inline: auto;
+      padding-inline: clamp(20px, 5vw, 64px);
+    }
+
+    h1 {
+      max-width: none;
+      margin: clamp(48px, 9vw, 110px) 0 clamp(32px, 5vw, 64px);
+      color: var(--ink);
+      font-family: var(--display);
+      font-size: clamp(2.4rem, 6.4vw, 5.8rem);
+      font-weight: 800;
+      letter-spacing: -.035em;
+      line-height: .96;
+      text-wrap: balance;
+    }
+
+    .gut-band {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-block: 1px solid var(--band-border);
+      background: radial-gradient(120% 90% at 30% 50%, #F0F7EE, #D3E5D5);
+    }
+
+    .gut-canvas {
+      display: block;
+      width: 100%;
+      height: clamp(300px, 44vw, 400px);
+    }
+
+    .stats {
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: clamp(20px, 5vw, 64px);
+      display: grid;
+      gap: 14px;
+      transform: translateY(-50%);
+      pointer-events: none;
+      text-shadow: 0 1px 12px var(--lumen);
+    }
+
+    .stat {
+      display: grid;
+      justify-items: start;
+      gap: 2px;
+    }
+
+    .stat-value {
+      color: var(--ink);
+      font-family: var(--display);
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-variant-numeric: tabular-nums;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .stat-label,
+    .clock-label {
+      color: var(--mute);
+      font-family: var(--serif);
+      font-size: .92rem;
+      font-weight: 400;
+      line-height: 1.2;
+    }
+
+    .clock {
+      position: absolute;
+      z-index: 1;
+      top: clamp(20px, 5vw, 64px);
+      right: clamp(20px, 5vw, 64px);
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      text-shadow: 0 1px 12px var(--lumen);
+      pointer-events: none;
+    }
+
+    .clock-value {
+      color: var(--ink);
+      font-family: var(--display);
+      font-size: 1.6rem;
+      font-variant-numeric: tabular-nums;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .control-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px 32px;
+      padding-top: 22px;
+    }
+
+    .segmented {
+      display: flex;
+      width: fit-content;
+      max-width: 100%;
+      flex: 0 1 auto;
+      gap: 2px;
+      padding: 4px;
+      border-radius: 999px;
+      background: var(--control-track);
+    }
+
+    .mode-button {
+      min-height: 44px;
+      padding: 11px 20px;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--mute);
+      cursor: pointer;
+      font-family: var(--display);
+      font-size: .95rem;
+      font-weight: 500;
+      line-height: 1.2;
+      text-align: center;
+      transition: background-color .25s ease, color .25s ease;
+    }
+
+    .mode-button[aria-pressed="true"] {
+      background: var(--ink);
+      color: var(--bg);
+    }
+
+    .mode-button:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px 22px;
+      margin: 0;
+      padding: 0;
+      color: var(--mute);
+      list-style: none;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--serif);
+      font-size: .98rem;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .swatch {
+      display: block;
+      width: 22px;
+      height: 9px;
+      flex: 0 0 auto;
+      border-radius: 999px;
+    }
+
+    .swatch-good { background: var(--good); }
+    .swatch-sal { background: var(--sal); }
+    .swatch-clo { background: var(--clo); }
+
+    .copy-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(28px, 6vw, 96px);
+      padding-top: clamp(44px, 7vw, 88px);
+      padding-bottom: clamp(64px, 9vw, 120px);
+    }
+
+    .copy-grid p {
+      max-width: 46ch;
+      margin: 0;
+      color: var(--paragraph);
+      font-family: var(--serif);
+      font-size: clamp(1.12rem, 1.6vw, 1.3rem);
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    .lead-in {
+      display: block;
+      margin-bottom: 14px;
+      color: var(--ink);
+      font-family: var(--display);
+      font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+      font-weight: 500;
+      letter-spacing: -.02em;
+      line-height: 1.12;
+    }
+
+    .year {
+      color: var(--accent);
+      font-family: var(--display);
+      font-weight: 800;
+    }
+
+    @media (max-width: 759px) {
+      h1 {
+        font-size: clamp(1.5rem, 6.8vw, 2.65rem);
+      }
+
+      .stats {
+        top: 18px;
+        right: 20px;
+        left: 20px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 20px;
+        transform: none;
+      }
+
+      .stat-value {
+        font-size: 1.5rem;
+      }
+
+      .stat-label {
+        max-width: 10ch;
+        font-size: .75rem;
+      }
+
+      .clock {
+        top: auto;
+        right: 20px;
+        bottom: 18px;
+      }
+
+      .control-bar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .segmented {
+        align-self: stretch;
+      }
+
+      .mode-button {
+        flex: 1 1 0;
+        padding-inline: 12px;
+      }
+
+      .legend {
+        justify-content: flex-start;
+        gap: 10px 16px;
+      }
+
+      .copy-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 390px) {
+      .stats {
+        gap: 14px;
+      }
+
+      .stat-label {
+        max-width: 9ch;
+        font-size: .72rem;
+      }
+
+      .mode-button {
+        padding-inline: 8px;
+        font-size: .87rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main aria-label="First colonisers">
+    <div class="container">
+      <h1>Whoever colonises the gut<br>first sets the course.</h1>
+    </div>
+
+    <section class="gut-band" aria-label="A chick's small intestine, where bacteria compete for attachment sites">
+      <canvas class="gut-canvas" role="img" aria-label="Bacteria drift through the gut and attach to the finger-like villi. Whichever group arrives first holds the attachment sites and blocks the other.">
+        Bacteria drift through the gut and attach to the finger-like villi. Whichever group arrives first holds the attachment sites and blocks the other.
+      </canvas>
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-value" data-stat="held">0 of 0</span>
+          <span class="stat-label" data-label="held">Sites held by beneficial bacteria</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" data-stat="turned">0</span>
+          <span class="stat-label" data-label="turned">Pathogens turned away</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" data-stat="secured">0 of 0</span>
+          <span class="stat-label">Villi fully secured</span>
+        </div>
+      </div>
+      <div class="clock" aria-label="Time after hatching">
+        <span class="clock-value" data-stat="clock">0</span>
+        <span class="clock-label">hours after hatching</span>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="control-bar">
+        <div class="segmented" role="group" aria-label="Who arrives first">
+          <button class="mode-button" type="button" data-mode="beneficial" aria-pressed="true">Beneficial bacteria arrive first</button>
+          <button class="mode-button" type="button" data-mode="pathogen" aria-pressed="false">Pathogens arrive first</button>
+        </div>
+        <ul class="legend" aria-label="Bacteria legend">
+          <li class="legend-item"><span class="swatch swatch-good" aria-hidden="true"></span>Beneficial bacteria</li>
+          <li class="legend-item"><span class="swatch swatch-sal" aria-hidden="true"></span>Salmonella</li>
+          <li class="legend-item"><span class="swatch swatch-clo" aria-hidden="true"></span>Clostridium</li>
+        </ul>
+      </div>
+
+      <div class="copy-grid">
+        <p><span class="lead-in">A chick hatches with an almost empty gut.</span>The first bacteria to settle there shape how the gut lining develops, how the immune system matures and which pathogens can find a place to attach.</p>
+        <p><span class="lead-in">The idea is 50 years old.</span>In <span class="year">1973</span>, Nurmi and Rantala showed that day-old chicks given gut bacteria from healthy adult hens resisted <em>Salmonella</em> colonisation. This became known as competitive exclusion.</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    (() => {
+      const canvas = document.querySelector(".gut-canvas");
+      const context = canvas.getContext("2d");
+      const band = document.querySelector(".gut-band");
+      const modeButtons = [...document.querySelectorAll(".mode-button")];
+      const heldValue = document.querySelector('[data-stat="held"]');
+      const turnedValue = document.querySelector('[data-stat="turned"]');
+      const securedValue = document.querySelector('[data-stat="secured"]');
+      const clockValue = document.querySelector('[data-stat="clock"]');
+      const heldLabel = document.querySelector('[data-label="held"]');
+      const turnedLabel = document.querySelector('[data-label="turned"]');
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const frameDuration = 1000 / 60;
+      const colors = { beneficial: "#7CC65B", salmonella: "#EB4A30", clostridium: "#4280E4" };
+      let width = 0;
+      let height = 0;
+      let pixelRatio = 1;
+      let mode = "beneficial";
+      let scene;
+      let animationFrame = 0;
+      let lastFrame = 0;
+      let resizeTimer = 0;
+      let fontReady = false;
+
+      function makeScene() {
+        const shortCanvas = height < 340;
+        const villusWidth = shortCanvas ? 28 : 34;
+        const villusHeight = shortCanvas ? 52 : 70;
+        const count = Math.max(4, Math.floor(width / 92));
+        const sites = [];
+        const villi = [];
+        let siteId = 0;
+
+        ["top", "bottom"].forEach((wall) => {
+          for (let index = 0; index < count; index += 1) {
+            const x = ((index + 1) * width) / (count + 1);
+            const baseY = wall === "top" ? 12 : height - 12;
+            const tipY = wall === "top" ? baseY + villusHeight : baseY - villusHeight;
+            const villus = { x, wall, baseY, tipY, width: villusWidth, height: villusHeight, sites: [] };
+            const flankY = tipY + (wall === "top" ? 1 : -1) * villusHeight * .55;
+            const definitions = [
+              { x: x - villusWidth * .34, y: flankY, angle: Math.PI / 2 },
+              { x: x + villusWidth * .34, y: flankY, angle: Math.PI / 2 },
+              { x, y: tipY, angle: 0 }
+            ];
+            definitions.forEach((site) => {
+              const attachment = { ...site, id: siteId, wall, villus, bacterium: null, owner: null };
+              siteId += 1;
+              sites.push(attachment);
+              villus.sites.push(attachment);
+            });
+            villi.push(villus);
+          }
+        });
+
+        const mucus = Array.from({ length: 70 }, () => ({
+          x: Math.random() * width,
+          y: 12 + Math.random() * (height - 24),
+          radius: 1 + Math.random() * 1.5,
+          speed: 8 + Math.random() * 12,
+          phase: Math.random() * Math.PI * 2
+        }));
+
+        return { time: 0, sites, villi, mucus, free: [], ripples: [], turnedAway: 0, nextId: 0, lastStats: -1 };
+      }
+
+      function setupCanvas() {
+        const bounds = canvas.getBoundingClientRect();
+        width = Math.max(1, bounds.width);
+        height = Math.max(1, bounds.height);
+        pixelRatio = Math.min(2, window.devicePixelRatio || 1);
+        canvas.width = Math.round(width * pixelRatio);
+        canvas.height = Math.round(height * pixelRatio);
+        context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+        scene = makeScene();
+        drawScene();
+      }
+
+      function updateModeLabels() {
+        const winningGroup = mode === "beneficial" ? "beneficial" : "pathogen";
+        heldLabel.textContent = winningGroup === "beneficial" ? "Sites held by beneficial bacteria" : "Sites held by pathogens";
+        turnedLabel.textContent = winningGroup === "beneficial" ? "Pathogens turned away" : "Beneficial bacteria turned away";
+      }
+
+      function updateStats() {
+        const winner = mode === "beneficial" ? "beneficial" : "pathogen";
+        const held = scene.sites.filter((site) => site.owner === winner).length;
+        const secured = scene.villi.filter((villus) => villus.sites.every((site) => site.owner === winner)).length;
+        heldValue.textContent = `${held} of ${scene.sites.length}`;
+        turnedValue.textContent = String(scene.turnedAway);
+        securedValue.textContent = `${secured} of ${scene.villi.length}`;
+        clockValue.textContent = String(Math.min(72, Math.floor(scene.time * 3)));
+      }
+
+      function spawnBacterium(group) {
+        let kind = "beneficial";
+        if (group === "pathogen") kind = Math.random() < .67 ? "salmonella" : "clostridium";
+        const usableHeight = Math.max(1, height - 2 * (12 + (height < 340 ? 52 : 70)));
+        const minY = 12 + (height < 340 ? 52 : 70);
+        const baseY = minY + Math.random() * usableHeight;
+        const speed = .9 + Math.random() * .9;
+        scene.free.push({
+          id: scene.nextId++,
+          group,
+          kind,
+          color: colors[kind],
+          x: -32 - Math.random() * 24,
+          y: baseY,
+          baseY,
+          speed,
+          angle: (Math.random() - .5) * .28,
+          phase: Math.random() * Math.PI * 2,
+          bounceV: 0,
+          bounceOffset: 0,
+          lastBouncedSite: null,
+          site: null
+        });
+      }
+
+      function maybeSpawn(group, rate, factor) {
+        const probability = 1 - Math.pow(1 - rate, factor);
+        if (Math.random() < probability) spawnBacterium(group);
+      }
+
+      function startAttach(bacterium, site) {
+        bacterium.site = site;
+        site.bacterium = bacterium;
+        site.owner = bacterium.group;
+      }
+
+      function bounce(bacterium, site) {
+        bacterium.bounceV = site.wall === "bottom" ? -1.6 : 1.6;
+        bacterium.speed *= .8;
+        bacterium.lastBouncedSite = site.id;
+        scene.ripples.push({ x: site.x, y: site.y, age: 0, radius: 8 });
+        if (bacterium.group !== (mode === "beneficial" ? "beneficial" : "pathogen")) scene.turnedAway += 1;
+      }
+
+      function stepSimulation(delta) {
+        const factor = delta / frameDuration;
+        const dt = delta / 1000;
+        scene.time += dt;
+        const winning = mode === "beneficial" ? "beneficial" : "pathogen";
+        const firstGroup = winning;
+        const secondGroup = winning === "beneficial" ? "pathogen" : "beneficial";
+        const firstRate = scene.time < 5 ? (firstGroup === "beneficial" ? .13 : .11) : .03;
+        const secondRate = scene.time < 5 ? (secondGroup === "beneficial" ? .13 : .11) : .03;
+        const pulse = 1 + .45 * Math.sin(scene.time * 1.1);
+
+        maybeSpawn(firstGroup, firstRate, factor);
+        if (scene.time >= 4.5) maybeSpawn(secondGroup, secondRate, factor);
+
+        scene.mucus.forEach((particle) => {
+          particle.x = (particle.x + particle.speed * dt) % width;
+          particle.y += Math.sin(scene.time * .8 + particle.phase) * .035 * factor;
+          if (particle.y < 12) particle.y = height - 13;
+          if (particle.y > height - 12) particle.y = 13;
+        });
+
+        scene.ripples.forEach((ripple) => {
+          ripple.age += dt;
+          ripple.radius = 8 + Math.min(1, ripple.age / .55) * 22;
+        });
+        scene.ripples = scene.ripples.filter((ripple) => ripple.age < .55);
+
+        scene.free.forEach((bacterium) => {
+          if (bacterium.site) {
+            const site = bacterium.site;
+            const settle = 1 - Math.pow(.88, factor);
+            bacterium.x += (site.x - bacterium.x) * settle;
+            bacterium.y += (site.y - bacterium.y) * settle;
+            const angleDelta = Math.atan2(Math.sin(site.angle - bacterium.angle), Math.cos(site.angle - bacterium.angle));
+            bacterium.angle += angleDelta * settle;
+            return;
+          }
+
+          bacterium.x += bacterium.speed * factor * pulse;
+          bacterium.y = bacterium.baseY + Math.sin(scene.time * .85 + bacterium.phase) * 9 + bacterium.bounceOffset;
+          bacterium.angle += Math.sin(scene.time * .42 + bacterium.phase) * .0008 * factor;
+          if (Math.abs(bacterium.bounceV) > .01) {
+            const kick = bacterium.bounceV * factor;
+            bacterium.bounceOffset += kick;
+            bacterium.y += kick;
+            bacterium.bounceV *= Math.pow(.93, factor);
+          }
+
+          let nearest = null;
+          let nearestDistance = 17;
+          for (const site of scene.sites) {
+            const dx = bacterium.x - site.x;
+            const dy = bacterium.y - site.y;
+            const distance = Math.hypot(dx, dy);
+            if (distance < nearestDistance) {
+              nearest = site;
+              nearestDistance = distance;
+            }
+          }
+
+          if (nearest) {
+            if (!nearest.bacterium) startAttach(bacterium, nearest);
+            else if (nearest.owner !== bacterium.group && bacterium.lastBouncedSite !== nearest.id) bounce(bacterium, nearest);
+          }
+        });
+        scene.free = scene.free.filter((bacterium) => bacterium.x < width + 40 || bacterium.site);
+
+        if (scene.time - scene.lastStats >= .15) {
+          updateStats();
+          scene.lastStats = scene.time;
+        }
+      }
+
+      function drawRoundedRect(x, y, rectangleWidth, rectangleHeight, radius) {
+        const r = Math.min(radius, rectangleWidth / 2, rectangleHeight / 2);
+        context.beginPath();
+        context.moveTo(x + r, y);
+        context.lineTo(x + rectangleWidth - r, y);
+        context.quadraticCurveTo(x + rectangleWidth, y, x + rectangleWidth, y + r);
+        context.lineTo(x + rectangleWidth, y + rectangleHeight - r);
+        context.quadraticCurveTo(x + rectangleWidth, y + rectangleHeight, x + rectangleWidth - r, y + rectangleHeight);
+        context.lineTo(x + r, y + rectangleHeight);
+        context.quadraticCurveTo(x, y + rectangleHeight, x, y + rectangleHeight - r);
+        context.lineTo(x, y + r);
+        context.quadraticCurveTo(x, y, x + r, y);
+        context.closePath();
+      }
+
+      function drawLightWave() {
+        const lumenTop = 12;
+        const lumenBottom = height - 12;
+        const sweepX = ((scene.time * 140) % (width + 400)) - 200;
+        const gradient = context.createLinearGradient(sweepX - 200, 0, sweepX + 200, 0);
+        gradient.addColorStop(0, "rgba(255,255,255,0)");
+        gradient.addColorStop(.5, "rgba(255,255,255,.45)");
+        gradient.addColorStop(1, "rgba(255,255,255,0)");
+        context.fillStyle = gradient;
+        context.fillRect(0, lumenTop, width, lumenBottom - lumenTop);
+      }
+
+      function drawMucus() {
+        scene.mucus.forEach((particle) => {
+          context.beginPath();
+          context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+          context.fillStyle = "rgba(11,43,31,.2)";
+          context.fill();
+        });
+      }
+
+      function drawVillus(villus) {
+        const half = villus.width / 2;
+        const topWall = villus.wall === "top";
+        const direction = topWall ? 1 : -1;
+        const x = villus.x;
+        const baseY = villus.baseY;
+        const tipY = villus.tipY;
+        const h = villus.height;
+        const gradient = context.createLinearGradient(x, baseY, x, tipY);
+        gradient.addColorStop(0, "#C9705A");
+        gradient.addColorStop(.35, "#E9A088");
+        gradient.addColorStop(1, "#F6C4AC");
+
+        context.beginPath();
+        context.moveTo(x - half, baseY);
+        context.bezierCurveTo(x - half, baseY + direction * h * .34, x - half * .86, tipY - direction * h * .1, x, tipY);
+        context.bezierCurveTo(x + half * .86, tipY - direction * h * .1, x + half, baseY + direction * h * .34, x + half, baseY);
+        context.closePath();
+        context.fillStyle = gradient;
+        context.fill();
+        context.strokeStyle = "rgba(120,40,30,.35)";
+        context.lineWidth = 1.5;
+        context.stroke();
+
+        context.beginPath();
+        context.ellipse(x - villus.width * .12, tipY + direction * h * .57, 2.3, h * .16, -.08, 0, Math.PI * 2);
+        context.fillStyle = "rgba(255,255,255,.22)";
+        context.fill();
+      }
+
+      function drawTissue() {
+        const wallFill = "#E9A088";
+        context.fillStyle = wallFill;
+        context.fillRect(0, 0, width, 12);
+        context.fillRect(0, height - 12, width, 12);
+        scene.villi.forEach(drawVillus);
+        context.strokeStyle = "rgba(120,40,30,.35)";
+        context.lineWidth = 1.5;
+        context.beginPath();
+        context.moveTo(0, 12);
+        context.lineTo(width, 12);
+        context.moveTo(0, height - 12);
+        context.lineTo(width, height - 12);
+        context.stroke();
+      }
+
+      function drawSecuredGlows() {
+        scene.villi.forEach((villus) => {
+          const owner = villus.sites[0].owner;
+          if (!owner || !villus.sites.every((site) => site.owner === owner)) return;
+          const centerY = villus.tipY + (villus.wall === "top" ? 1 : -1) * villus.height * .48;
+          const pulse = .94 + .06 * Math.sin(scene.time * 2.2 + villus.x * .02);
+          const radius = villus.height * .95 * pulse;
+          const glowColor = owner === "beneficial" ? "124,198,91" : "235,74,48";
+          const glow = context.createRadialGradient(villus.x, centerY, 0, villus.x, centerY, radius);
+          glow.addColorStop(0, `rgba(${glowColor},.45)`);
+          glow.addColorStop(1, `rgba(${glowColor},0)`);
+          context.fillStyle = glow;
+          context.beginPath();
+          context.arc(villus.x, centerY, radius, 0, Math.PI * 2);
+          context.fill();
+        });
+      }
+
+      function drawBacterium(bacterium) {
+        const wave = Math.sin(scene.time * 9 + bacterium.phase);
+        context.save();
+        context.translate(bacterium.x, bacterium.y);
+        context.rotate(bacterium.angle);
+
+        context.save();
+        context.globalAlpha = .76;
+        context.strokeStyle = bacterium.color;
+        context.lineWidth = 1;
+        for (let tick = -9; tick <= 9; tick += 6) {
+          context.beginPath();
+          context.moveTo(tick, -4.2);
+          context.lineTo(tick + .8, -7.2);
+          context.moveTo(tick, 4.2);
+          context.lineTo(tick + .8, 7.2);
+          context.stroke();
+        }
+        context.restore();
+
+        context.beginPath();
+        context.moveTo(-13, 0);
+        context.bezierCurveTo(-19, 2 + wave * 2, -23, -3 + wave * 3, -29, wave * 4);
+        context.strokeStyle = bacterium.color;
+        context.lineWidth = 1.35;
+        context.stroke();
+
+        drawRoundedRect(-13, -5, 26, 10, 5);
+        context.fillStyle = bacterium.color;
+        context.fill();
+        drawRoundedRect(-8, -2.8, 15, 2.1, 1.05);
+        context.fillStyle = "rgba(255,255,255,.28)";
+        context.fill();
+        context.restore();
+      }
+
+      function drawRipples() {
+        scene.ripples.forEach((ripple) => {
+          const opacity = Math.max(0, 1 - ripple.age / .55);
+          context.beginPath();
+          context.arc(ripple.x, ripple.y, ripple.radius, 0, Math.PI * 2);
+          context.strokeStyle = `rgba(11,43,31,${opacity * .6})`;
+          context.lineWidth = 1.25;
+          context.stroke();
+        });
+      }
+
+      function drawScene() {
+        if (!scene || !context) return;
+        context.clearRect(0, 0, width, height);
+        drawLightWave();
+        drawMucus();
+        drawTissue();
+        drawSecuredGlows();
+        scene.sites.forEach((site) => {
+          if (site.bacterium) drawBacterium(site.bacterium);
+        });
+        drawRipples();
+        scene.free.forEach((bacterium) => {
+          if (!bacterium.site) drawBacterium(bacterium);
+        });
+      }
+
+      function animationLoop(timestamp) {
+        if (!lastFrame) lastFrame = timestamp;
+        const delta = Math.min(40, Math.max(0, timestamp - lastFrame));
+        lastFrame = timestamp;
+        stepSimulation(delta || frameDuration);
+        drawScene();
+        animationFrame = window.requestAnimationFrame(animationLoop);
+      }
+
+      function beginTimeline() {
+        if (!fontReady || !scene) return;
+        if (animationFrame) window.cancelAnimationFrame(animationFrame);
+        animationFrame = 0;
+        lastFrame = 0;
+
+        if (reducedMotion.matches) {
+          for (let step = 0; step < 1400; step += 1) stepSimulation(frameDuration);
+          updateStats();
+          drawScene();
+          return;
+        }
+
+        animationFrame = window.requestAnimationFrame(animationLoop);
+      }
+
+      function resetScene() {
+        if (animationFrame) window.cancelAnimationFrame(animationFrame);
+        animationFrame = 0;
+        setupCanvas();
+        updateModeLabels();
+        updateStats();
+        beginTimeline();
+      }
+
+      modeButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          mode = button.dataset.mode;
+          modeButtons.forEach((option) => option.setAttribute("aria-pressed", String(option === button)));
+          resetScene();
+        });
+      });
+
+      window.addEventListener("resize", () => {
+        window.clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(resetScene, 150);
+      });
+
+      reducedMotion.addEventListener("change", resetScene);
+      setupCanvas();
+      updateModeLabels();
+      document.fonts.ready.then(() => {
+        fontReady = true;
+        beginTimeline();
+      });
+    })();
+  </script>
+</body>
+</html>

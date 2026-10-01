@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gut Restoration and Disease Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Literata:ital,wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Literata', Georgia, serif;
+      background-color: #E6F0E1;
+      color: #4B5F4F;
+      line-height: 1.65;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 72px 80px;
+    }
+
+    @media (max-width: 800px) {
+      .container {
+        padding: 44px 20px;
+      }
+    }
+
+    .label {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #2E6B4A;
+      letter-spacing: 0.02em;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(38px, 5.6vw, 68px);
+      font-weight: 800;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      color: #14281B;
+      max-width: 800px;
+      margin-bottom: 56px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 800px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background-color: #F5F9F2;
+      border: 1px solid #BCD1B5;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .card-probiotics {
+      border-top: 4px solid #2E6B4A;
+    }
+
+    .card-prebiotics {
+      border-top: 4px solid #1E7A72;
+    }
+
+    .card-header {
+      padding: 28px 28px 0 28px;
+    }
+
+    .card-tag {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #2E6B4A;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #14281B;
+      margin-bottom: 16px;
+    }
+
+    .card-divider {
+      height: 1px;
+      background-color: #BCD1B5;
+      margin: 0 28px;
+    }
+
+    .card-row {
+      padding: 20px 28px 28px 28px;
+      border-top: 1px solid #BCD1B5;
+    }
+
+    .row-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #14281B;
+      margin-bottom: 8px;
+    }
+
+    .row-description {
+      font-size: 14.5px;
+      color: #4B5F4F;
+    }
+
+    .italic {
+      font-style: italic;
+    }
+
+    .superscript {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: #1E7A72;
+      vertical-align: super;
+      line-height: 0;
+    }
+
+    .evidence-card {
+      background-color: #F5F9F2;
+      border: 1px solid #BCD1B5;
+      border-radius: 6px;
+      padding: 28px;
+    }
+
+    .evidence-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #14281B;
+      margin-bottom: 8px;
+    }
+
+    .evidence-subtitle {
+      font-size: 14.5px;
+      color: #4B5F4F;
+      margin-bottom: 24px;
+    }
+
+    .stat-strip {
+      background-color: #D8E7D2;
+      border: 1px solid #BCD1B5;
+      border-radius: 6px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      overflow: hidden;
+    }
+
+    @media (max-width: 600px) {
+      .stat-strip {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .stat-cell {
+      padding: 20px 24px;
+      border-right: 1px solid #BCD1B5;
+    }
+
+    .stat-cell:last-child {
+      border-right: none;
+    }
+
+    @media (max-width: 600px) {
+      .stat-cell {
+        border-right: none;
+        border-bottom: 1px solid #BCD1B5;
+      }
+
+      .stat-cell:last-child {
+        border-bottom: none;
+      }
+    }
+
+    .stat-number {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 40px;
+      font-weight: 600;
+      color: #2E6B4A;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 14.5px;
+      color: #4B5F4F;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <div class="label">Gut restoration and disease management</div>
+    <h1>Probiotics bring the right bacteria. Prebiotics keep them there.</h1>
+
+    <div class="cards-grid">
+      <article class="card card-probiotics">
+        <div class="card-header">
+          <div class="card-tag">Probiotics: live beneficial bacteria</div>
+          <h2 class="card-title">How they protect the gut</h2>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-row">
+          <div class="row-title">Competitive exclusion<span class="superscript">4</span></div>
+          <p class="row-description">Beneficial bacteria take the attachment sites and nutrients that <em class="italic">Salmonella</em>, <em class="italic">E. coli</em> and <em class="italic">Clostridium</em> need.</p>
+        </div>
+        <div class="card-row">
+          <div class="row-title">Antimicrobial compounds</div>
+          <p class="row-description"><em class="italic">Bacillus</em> and lactic acid bacteria produce substances that inhibit pathogens directly.</p>
+        </div>
+        <div class="card-row">
+          <div class="row-title">Stronger gut lining</div>
+          <p class="row-description">A healthy community supports taller villi and tighter junctions between gut cells, so fewer pathogens and toxins get through.</p>
+        </div>
+        <div class="card-row">
+          <div class="row-title">Hardy spores</div>
+          <p class="row-description"><em class="italic">Bacillus</em> spores tolerate heat and stomach acid far better than most bacteria, which helps them survive feed processing and reach the intestine.</p>
+        </div>
+      </article>
+
+      <article class="card card-prebiotics">
+        <div class="card-header">
+          <div class="card-tag">Prebiotics: food for good bacteria</div>
+          <h2 class="card-title">How they shape the community</h2>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-row">
+          <div class="row-title">Selective feeding</div>
+          <p class="row-description">Fibres such as mannan- and fructo-oligosaccharides pass undigested to the lower gut, where beneficial bacteria ferment them.</p>
+        </div>
+        <div class="card-row">
+          <div class="row-title">Pathogen binding</div>
+          <p class="row-description">Mannan-oligosaccharides (MOS) bind to the fimbriae that some bacteria use to attach, so those bacteria pass out instead of colonising.</p>
+        </div>
+        <div class="card-row">
+          <div class="row-title">Short-chain fatty acids</div>
+          <p class="row-description">Fermentation produces acids that lower gut pH, feed gut cells and discourage pathogens.</p>
+        </div>
+        <div class="card-row">
+          <div class="row-title">Synbiotic effect</div>
+          <p class="row-description">Given together, probiotic and prebiotic reinforce each other.</p>
+        </div>
+      </article>
+    </div>
+
+    <article class="evidence-card">
+      <h2 class="evidence-title">Prebiotic evidence: mannan-oligosaccharide in broilers</h2>
+      <p class="evidence-subtitle">Pooled pen trials, MOS compared with a diet without antibiotics.</p>
+      <div class="stat-strip">
+        <div class="stat-cell">
+          <div class="stat-number">−21%</div>
+          <div class="stat-label">mortality</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-number">+1.6%</div>
+          <div class="stat-label">body weight</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-number">−2.0%</div>
+          <div class="stat-label">feed conversion ratio</div>
+        </div>
+      </div>
+    </article>
+  </main>
+</body>
+</html>

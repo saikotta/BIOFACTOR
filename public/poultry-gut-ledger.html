@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>Probiotics and Prebiotics | Poultry Gut Ledger</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --page: #dcebd0;
+      --ink: #12281a;
+      --moss: #3b6a45;
+      --leaf: #9cc47f;
+      --glow: #4c8cca;
+      --body: #455c4b;
+      --card: rgba(248, 252, 243, .62);
+      --edge: rgba(59, 106, 69, .27);
+      --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+      --serif: "Newsreader", Georgia, serif;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    *,
+    *::before,
+    }
+      background:
+        radial-gradient(ellipse 68% 44% at 12% 5%, rgba(248, 252, 243, .66), transparent 76%),
+        radial-gradient(ellipse 54% 40% at 92% 68%, rgba(156, 196, 127, .18), transparent 78%),
+        var(--page);
+      color: var(--ink);
+    }
+
+    .page {
+      position: relative;
+      isolation: isolate;
+      overflow-x: clip;
+    }
+
+    .ambient {
+      position: fixed;
+      z-index: -1;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .capsule {
+      position: absolute;
+      display: block;
+      width: var(--capsule-width);
+      height: var(--capsule-height);
+      border: 1px solid rgba(59, 106, 69, .09);
+      border-radius: 999px;
+      transform: rotate(var(--capsule-angle));
+      animation: capsule-drift var(--capsule-duration) ease-in-out var(--capsule-delay) infinite alternate;
+    }
+
+    .capsule:nth-child(1) { top: 11%; left: 8%; }
+    .capsule:nth-child(2) { top: 26%; right: 7%; }
+    .capsule:nth-child(3) { top: 48%; left: 3%; }
+    .capsule:nth-child(4) { top: 68%; right: 11%; }
+    .capsule:nth-child(5) { top: 86%; left: 14%; }
+    .capsule:nth-child(6) { top: 39%; right: 26%; }
+
+    .page-header {
+      margin-bottom: 56px;
+    }
+
+    .page-label {
+      margin: 0 0 20px;
+      color: var(--moss);
+      font-family: var(--display);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .page-title {
+      max-width: 800px;
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--display);
+      font-size: clamp(38px, 5.6vw, 68px);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1.02;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 1120px);
+      margin: 0 auto;
+      padding: 72px 80px 96px;
+    }
+
+    .column-headings,
+    .row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 64px minmax(0, 1fr);
+      align-items: center;
+    }
+
+    .column-headings {
+      margin-bottom: 30px;
+    }
+
+    .column-heading {
+      min-width: 0;
+    }
+
+    .column-heading:first-child {
+      padding-left: 20px;
+      text-align: left;
+    }
+
+    .column-heading:last-child {
+      padding-left: 20px;
+      text-align: left;
+    }
+
+    .column-label {
+      margin: 0 0 8px;
+      color: var(--moss);
+      font-family: var(--display);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .column-title {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--display);
+      font-size: clamp(24px, 2.6vw, 34px);
+      font-weight: 700;
+      line-height: 1.08;
+    }
+
+    .column-spacer {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .ledger {
+      position: relative;
+      display: grid;
+      gap: 26px;
+    }
+
+    .row {
+      position: relative;
+      z-index: 1;
+      min-width: 0;
+      align-items: stretch;
+      outline: none;
+      scroll-margin-block: 18vh;
+    }
+
+    .row:focus-visible {
+      border-radius: 16px;
+      outline: 2px solid rgba(59, 106, 69, .7);
+      outline-offset: 5px;
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      min-width: 0;
+      padding: 22px 26px;
+      border: 1px solid var(--edge);
+      background: var(--card);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 0 rgba(18, 40, 26, 0);
+      opacity: 0;
+      filter: blur(8px);
+      transition:
+        background-color 240ms ease,
+        box-shadow 240ms ease,
+        transform 300ms cubic-bezier(.2, .75, .25, 1),
+        border-color 240ms ease;
+      will-change: transform, opacity, filter;
+    }
+
+    .card-left {
+      grid-column: 1;
+      border-radius: 56px 14px 14px 56px;
+      text-align: right;
+      transform: translateX(90px) scale(.92);
+    }
+
+    .card-left-align {
+      text-align: left;
+    }
+
+    .card-right {
+      grid-column: 3;
+      border-radius: 14px 56px 56px 14px;
+      transform: translateX(-90px) scale(.92);
+    }
+
+    .row.in .card-left {
+      animation: arrive-left 760ms cubic-bezier(.18, .88, .28, 1) both;
+    }
+
+    .row.in .card-right {
+      animation: arrive-right 800ms cubic-bezier(.18, .88, .28, 1) 190ms both;
+    }
+
+    .row.done .card {
+      opacity: 1;
+      filter: blur(0);
+      transition-delay: 0ms;
+      will-change: auto;
+    }
+
+    .row.done .card-left,
+    .row.done .card-right {
+      animation: none;
+      transform: translateX(0) scale(1);
+    }
+
+    .entry-title {
+      margin: 0 0 7px;
+      color: var(--ink);
+      font-family: var(--display);
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .entry-copy {
+      margin: 0;
+      color: var(--body);
+      font-family: var(--serif);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.48;
+    }
+
+    .entry-copy em {
+      color: var(--ink);
+      font-style: italic;
+    }
+
+    .entry-copy sup {
+      display: inline-block;
+      margin-left: 2px;
+      color: var(--moss);
+      font-family: var(--display);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 0;
+      vertical-align: super;
+    }
+
+    .node-cell {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-column: 2;
+      grid-row: 1;
+      min-height: 68px;
+      place-items: center;
+    }
+
+    .node-cell::after {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      content: "";
+      pointer-events: none;
+    }
+
+    .node-cell::after {
+      z-index: 1;
+      background: var(--moss);
+      opacity: .55;
+      transform: scaleX(1);
+      transform-origin: center;
+    }
+
+    .node {
+      position: relative;
+      display: block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid var(--moss);
+      border-radius: 50%;
+      background: var(--page);
+      opacity: 0;
+      transform: scale(.35);
+      z-index: 2;
+    }
+
+    .row.in .node {
+      animation: node-pop 620ms cubic-bezier(.18, 1.5, .38, 1) 80ms both;
+    }
+
+    .row:hover .card,
+    .row:focus-visible .card,
+    .row:focus-within .card {
+      border-color: rgba(59, 106, 69, .54);
+      background: rgba(248, 252, 243, .88);
+      box-shadow: 0 14px 32px rgba(18, 40, 26, .11);
+    }
+
+    .row:hover .card-left,
+    .row:focus-visible .card-left,
+    .row:focus-within .card-left {
+      transform: translateX(-8px) scale(1);
+    }
+
+    .row:hover .card-right,
+    .row:focus-visible .card-right,
+    .row:focus-within .card-right {
+      transform: translateX(8px) scale(1);
+    }
+
+    .row:hover .node,
+    .row:focus-visible .node,
+    .row:focus-within .node {
+      border-color: var(--glow);
+      background: var(--glow);
+      box-shadow: 0 0 0 5px rgba(76, 140, 202, .2), 0 0 18px rgba(76, 140, 202, .58);
+    }
+
+    .column-heading,
+    .card {
+      contain: layout paint;
+    }
+
+    .evidence-panel {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      margin-top: 56px;
+      padding: 44px 52px;
+      border-radius: 36px;
+      background: #12281a;
+      color: #e9f3dd;
+    }
+
+    .evidence-panel::before {
+      position: absolute;
+      z-index: -1;
+      top: -140px;
+      right: -110px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(156, 196, 127, .28) 0%, transparent 72%);
+      content: "";
+      pointer-events: none;
+    }
+
+    .evidence-title {
+      max-width: 24ch;
+      margin: 0 0 10px;
+      color: #e9f3dd;
+      font-family: var(--display);
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      line-height: 1.12;
+    }
+
+    .evidence-subtitle {
+      margin: 0 0 34px;
+      color: #a9c39a;
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .evidence-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .evidence-stat {
+      min-width: 0;
+      padding-top: 16px;
+      border-top: 1.5px solid rgba(233, 243, 221, .28);
+      transition: border-color 350ms ease, opacity 1600ms cubic-bezier(.2, .8, .2, 1), filter 1600ms cubic-bezier(.2, .8, .2, 1), transform 1600ms cubic-bezier(.2, .8, .2, 1);
+      transition-delay: var(--stat-delay, 0ms);
+    }
+
+    .evidence-panel.js-ready .evidence-stat {
+      opacity: 0;
+      filter: blur(6px);
+      transform: translateY(24px);
+    }
+
+    .evidence-panel.js-ready .evidence-stat.is-visible {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+
+    .evidence-number {
+      display: block;
+      margin: 0 0 5px;
+      color: #f0b04a;
+      font-family: var(--display);
+      font-size: clamp(44px, 6vw, 72px);
+      font-variant-numeric: tabular-nums;
+      font-weight: 500;
+      letter-spacing: -.035em;
+      line-height: 1;
+      transition: text-shadow 350ms ease;
+    }
+
+    .evidence-label {
+      margin: 0 0 18px;
+      color: #c5d9b7;
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.4;
+    }
+
+    .evidence-bar {
+      height: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(233, 243, 221, .14);
+    }
+
+    .evidence-bar-fill {
+      display: block;
+      width: var(--bar-width);
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #9cc47f, #f0b04a);
+      transition: width 1600ms cubic-bezier(.2, .8, .2, 1);
+      transition-delay: var(--stat-delay, 0ms);
+    }
+
+    .evidence-panel.js-ready .evidence-bar-fill {
+      width: 0;
+    }
+
+    .evidence-panel.js-ready .evidence-stat.is-visible .evidence-bar-fill {
+      width: var(--bar-width);
+    }
+
+    .evidence-stat:hover,
+    .evidence-stat:focus-within {
+      border-top-color: #f0b04a;
+    }
+
+    .evidence-stat:hover .evidence-number,
+    .evidence-stat:focus-within .evidence-number {
+      text-shadow: 0 0 24px rgba(240, 176, 74, .36);
+    }
+
+    @media (max-width: 759px) {
+      .evidence-panel {
+        margin-top: 40px;
+        padding: 32px 24px;
+        border-radius: 28px;
+      }
+
+      .evidence-subtitle {
+        margin-bottom: 28px;
+      }
+
+      .evidence-stats {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+    }
+
+    @keyframes arrive-left {
+      0% { opacity: 0; filter: blur(8px); transform: translateX(90px) scale(.92); }
+      72% { opacity: 1; filter: blur(0); transform: translateX(-3px) scale(1.008); }
+      100% { opacity: 1; filter: blur(0); transform: translateX(0) scale(1); }
+    }
+
+    @keyframes arrive-right {
+      0% { opacity: 0; filter: blur(8px); transform: translateX(-90px) scale(.92); }
+      72% { opacity: 1; filter: blur(0); transform: translateX(3px) scale(1.008); }
+      100% { opacity: 1; filter: blur(0); transform: translateX(0) scale(1); }
+    }
+
+    @keyframes node-pop {
+      0% { opacity: 0; transform: scale(.35); }
+      65% { opacity: 1; transform: scale(1.42); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes capsule-drift {
+      from { translate: 0 0; }
+      to { translate: 10px -14px; }
+    }
+
+    @media (max-width: 759px) {
+      .container {
+        padding: 44px 20px 64px;
+      }
+
+      .page-header {
+        margin-bottom: 40px;
+      }
+
+      .page-label {
+        margin-bottom: 16px;
+      }
+
+      .column-headings {
+        display: none;
+      }
+
+      .ledger {
+        gap: 22px;
+      }
+
+      .row {
+        grid-template-columns: 28px minmax(0, 1fr);
+        column-gap: 14px;
+        row-gap: 10px;
+      }
+
+      .node-cell {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+        align-self: stretch;
+        min-height: 0;
+      }
+
+      .node-cell::after {
+        display: block;
+        top: 7px;
+        bottom: 7px;
+        left: 50%;
+        width: 2px;
+        height: auto;
+        transform: translateX(-50%);
+      }
+
+      .node {
+        position: sticky;
+        top: calc(var(--host-height, 100vh) * .5);
+        align-self: center;
+      }
+
+      .card-left,
+      .card-right {
+        grid-column: 2;
+        text-align: left;
+      }
+
+      .card-left { grid-row: 1; }
+      .card-right { grid-row: 2; }
+
+      .card {
+        padding: 19px 21px;
+      }
+
+      .entry-title {
+        font-size: 16px;
+      }
+
+      .entry-copy {
+        font-size: 15.5px;
+      }
+
+      .row:hover .card-left,
+      .row:focus-visible .card-left,
+      .row:focus-within .card-left {
+        transform: translateX(-4px) scale(1);
+      }
+
+      .row:hover .card-right,
+      .row:focus-visible .card-right,
+      .row:focus-within .card-right {
+        transform: translateX(4px) scale(1);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0s !important;
+        animation-delay: 0s !important;
+        transition-duration: 0s !important;
+        scroll-behavior: auto !important;
+      }
+
+      .capsule {
+        display: none;
+      }
+
+      .card,
+      .row.in .card-left,
+      .row.in .card-right,
+      .node {
+        opacity: 1;
+        filter: none;
+        transform: none;
+      }
+
+      .evidence-panel.js-ready .evidence-stat,
+      .evidence-panel.js-ready .evidence-stat.is-visible {
+        opacity: 1;
+        filter: none;
+        transform: none;
+        transition: none;
+      }
+
+      .evidence-panel.js-ready .evidence-bar-fill,
+      .evidence-panel.js-ready .evidence-stat.is-visible .evidence-bar-fill {
+        width: var(--bar-width);
+        transition: none;
+      }
+
+      .evidence-stat,
+      .evidence-number {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="ambient" aria-hidden="true">
+      <i class="capsule" style="--capsule-width: 112px; --capsule-height: 26px; --capsule-angle: -24deg; --capsule-duration: 19s; --capsule-delay: -7s"></i>
+      <i class="capsule" style="--capsule-width: 84px; --capsule-height: 20px; --capsule-angle: 18deg; --capsule-duration: 24s; --capsule-delay: -13s"></i>
+      <i class="capsule" style="--capsule-width: 132px; --capsule-height: 31px; --capsule-angle: 42deg; --capsule-duration: 28s; --capsule-delay: -4s"></i>
+      <i class="capsule" style="--capsule-width: 96px; --capsule-height: 22px; --capsule-angle: -12deg; --capsule-duration: 22s; --capsule-delay: -15s"></i>
+      <i class="capsule" style="--capsule-width: 120px; --capsule-height: 28px; --capsule-angle: 30deg; --capsule-duration: 26s; --capsule-delay: -9s"></i>
+      <i class="capsule" style="--capsule-width: 76px; --capsule-height: 18px; --capsule-angle: -36deg; --capsule-duration: 21s; --capsule-delay: -11s"></i>
+    </div>
+
+    <main class="container">
+      <header class="page-header">
+        <p class="page-label">Gut restoration and disease management</p>
+        <h1 class="page-title">Probiotics bring the right bacteria. Prebiotics keep them there.</h1>
+      </header>
+
+      <header class="column-headings">
+        <div class="column-heading">
+          <p class="column-label">Probiotics: live beneficial bacteria</p>
+          <h2 class="column-title">How they protect <br>the gut</h2>
+        </div>
+        <span class="column-spacer" aria-hidden="true"></span>
+        <div class="column-heading">
+          <p class="column-label">Prebiotics: food for good bacteria</p>
+          <h2 class="column-title">How they shape the community</h2>
+        </div>
+      </header>
+
+      <section class="ledger" aria-label="Probiotics and prebiotics comparison">
+        <article class="row" tabindex="0" aria-label="Comparison row one">
+          <div class="card card-left card-left-align">
+            <h3 class="entry-title">Competitive exclusion:</h3>
+            <p class="entry-copy">Beneficial bacteria take the attachment sites and nutrients that <em>Salmonella</em>, <em>E. coli</em> and <em>Clostridium</em> need.<sup>4</sup></p>
+          </div>
+          <div class="node-cell" aria-hidden="true"><span class="node"></span></div>
+          <div class="card card-right">
+            <h3 class="entry-title">Selective feeding:</h3>
+            <p class="entry-copy">Fibres such as mannan- and fructo-oligosaccharides pass undigested to the lower gut, where beneficial bacteria ferment them.</p>
+          </div>
+        </article>
+
+        <article class="row" tabindex="0" aria-label="Comparison row two">
+          <div class="card card-left">
+            <h3 class="entry-title">Antimicrobial compounds:</h3>
+            <p class="entry-copy"><em>Bacillus</em> and lactic acid bacteria produce substances that inhibit pathogens directly.</p>
+          </div>
+          <div class="node-cell" aria-hidden="true"><span class="node"></span></div>
+          <div class="card card-right">
+            <h3 class="entry-title">Pathogen binding:</h3>
+            <p class="entry-copy">Mannan-oligosaccharides (MOS) bind to the fimbriae that some bacteria use to attach, so those bacteria pass out instead of colonising.</p>
+          </div>
+        </article>
+
+        <article class="row" tabindex="0" aria-label="Comparison row three">
+          <div class="card card-left">
+            <h3 class="entry-title">Stronger gut lining:</h3>
+            <p class="entry-copy">A healthy community supports taller villi and tighter junctions between gut cells, so fewer pathogens and toxins get through.</p>
+          </div>
+          <div class="node-cell" aria-hidden="true"><span class="node"></span></div>
+          <div class="card card-right">
+            <h3 class="entry-title">Short-chain fatty acids:</h3>
+            <p class="entry-copy">Fermentation produces acids that lower gut pH, feed gut cells and discourage pathogens.</p>
+          </div>
+        </article>
+
+        <article class="row" tabindex="0" aria-label="Comparison row four">
+          <div class="card card-left">
+            <h3 class="entry-title">Hardy spores:</h3>
+            <p class="entry-copy"><em>Bacillus</em> spores tolerate heat and stomach acid far better than most bacteria, which helps them survive feed processing and reach the intestine.</p>
+          </div>
+          <div class="node-cell" aria-hidden="true"><span class="node"></span></div>
+          <div class="card card-right">
+            <h3 class="entry-title">Synbiotic effect:</h3>
+            <p class="entry-copy">Given together, probiotic and prebiotic reinforce each other.</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="evidence-panel" aria-labelledby="evidence-panel-title">
+        <h2 class="evidence-title" id="evidence-panel-title">Prebiotic evidence: mannan-oligosaccharide in broilers</h2>
+        <p class="evidence-subtitle">Pooled pen trials, MOS compared with a diet without antibiotics.</p>
+        <div class="evidence-stats">
+          <article class="evidence-stat" style="--stat-delay: 0ms">
+            <p class="evidence-number" data-target="21" data-decimals="0" data-sign="−" data-suffix="%">−21%</p>
+            <p class="evidence-label">mortality</p>
+            <div class="evidence-bar" aria-hidden="true"><span class="evidence-bar-fill" style="--bar-width: 63%"></span></div>
+          </article>
+          <article class="evidence-stat" style="--stat-delay: 150ms">
+            <p class="evidence-number" data-target="1.6" data-decimals="1" data-sign="+" data-suffix="%">+1.6%</p>
+            <p class="evidence-label">body weight</p>
+            <div class="evidence-bar" aria-hidden="true"><span class="evidence-bar-fill" style="--bar-width: 48%"></span></div>
+          </article>
+          <article class="evidence-stat" style="--stat-delay: 300ms">
+            <p class="evidence-number" data-target="2" data-decimals="1" data-sign="−" data-suffix="%">−2.0%</p>
+            <p class="evidence-label">feed conversion ratio</p>
+            <div class="evidence-bar" aria-hidden="true"><span class="evidence-bar-fill" style="--bar-width: 60%"></span></div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (() => {
+      const rows = Array.from(document.querySelectorAll(".row"));
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const evidencePanel = document.querySelector(".evidence-panel");
+      const evidenceStats = Array.from(document.querySelectorAll(".evidence-stat"));
+      const hostFrame = window.frameElement;
+      const hostWindow = hostFrame ? window.parent : null;
+      const evidenceTimers = [];
+      const evidenceFrames = new Set();
+      let frame = 0;
+      let evidenceCheckFrame = 0;
+      let disposed = false;
+      let evidenceObserver = null;
+      let evidenceStarted = false;
+
+      function revealRow(row, index) {
+        if (row.classList.contains("in")) return;
+        row.classList.add("in");
+        window.setTimeout(() => row.classList.add("done"), 1500);
+      }
+
+      function formatEvidenceNumber(number, value) {
+        return `${number.dataset.sign || ""}${value.toFixed(Number(number.dataset.decimals || 0))}${number.dataset.suffix || ""}`;
+      }
+
+      function countEvidenceNumber(number) {
+        const target = Number(number.dataset.target || 0);
+        const started = performance.now();
+        const duration = 1500;
+        const tick = (now) => {
+          const progress = Math.min(1, (now - started) / duration);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          number.textContent = formatEvidenceNumber(number, target * eased);
+          if (progress < 1) {
+            const frameId = window.requestAnimationFrame(tick);
+            evidenceFrames.add(frameId);
+          } else {
+            number.textContent = formatEvidenceNumber(number, target);
+          }
+        };
+        const frameId = window.requestAnimationFrame(tick);
+        evidenceFrames.add(frameId);
+      }
+
+      function showEvidencePanel() {
+        if (evidenceStarted || !evidencePanel) return;
+        evidenceStarted = true;
+        evidenceStats.forEach((stat, index) => {
+          stat.classList.add("is-visible");
+          const number = stat.querySelector(".evidence-number");
+          const timer = window.setTimeout(() => {
+            if (number) countEvidenceNumber(number);
+          }, index * 150);
+          evidenceTimers.push(timer);
+        });
+        evidenceObserver?.disconnect();
+        hostWindow?.removeEventListener("scroll", scheduleEmbeddedEvidenceCheck);
+        hostWindow?.removeEventListener("resize", scheduleEmbeddedEvidenceCheck);
+      }
+
+      function checkEmbeddedEvidence() {
+        if (!hostFrame || !hostWindow || !evidencePanel || evidenceStarted) return;
+        const frameRect = hostFrame.getBoundingClientRect();
+        const panelRect = evidencePanel.getBoundingClientRect();
+        const panelTop = frameRect.top + panelRect.top;
+        const panelBottom = panelTop + panelRect.height;
+        const visibleHeight = Math.max(0, Math.min(hostWindow.innerHeight, panelBottom) - Math.max(0, panelTop));
+        if (panelRect.height > 0 && visibleHeight / panelRect.height >= 0.4) showEvidencePanel();
+      }
+
+      function scheduleEmbeddedEvidenceCheck() {
+        if (!hostWindow || evidenceStarted || evidenceCheckFrame) return;
+        evidenceCheckFrame = hostWindow.requestAnimationFrame(() => {
+          evidenceCheckFrame = 0;
+          checkEmbeddedEvidence();
+        });
+      }
+
+      function updateLedger() {
+        frame = 0;
+        if (disposed || !rows.length) return;
+
+        const viewportHeight = hostWindow ? hostWindow.innerHeight : window.innerHeight;
+        const scrollPosition = hostFrame
+          ? -hostFrame.getBoundingClientRect().top
+          : window.scrollY;
+        const triggerLine = viewportHeight * 0.72;
+        rows.forEach((row, index) => {
+          const nodeCell = row.querySelector(".node-cell");
+          if (!nodeCell) return;
+          const rect = nodeCell.getBoundingClientRect();
+          const center = window.scrollY + rect.top + rect.height / 2;
+          if (center <= scrollPosition + triggerLine) {
+            revealRow(row, index);
+          }
+        });
+      }
+
+      function scheduleUpdate() {
+        if (!frame) frame = window.requestAnimationFrame(updateLedger);
+      }
+
+      function applyReducedMotion() {
+        if (reducedMotion.matches) {
+          rows.forEach((row) => row.classList.add("in", "done"));
+          evidencePanel?.classList.remove("js-ready");
+          evidenceStats.forEach((stat) => {
+            const number = stat.querySelector(".evidence-number");
+            if (number) number.textContent = formatEvidenceNumber(number, Number(number.dataset.target || 0));
+          });
+          evidenceObserver?.disconnect();
+        } else {
+          scheduleUpdate();
+        }
+      }
+
+      function syncHostViewport() {
+        const viewportHeight = hostWindow ? hostWindow.innerHeight : window.innerHeight;
+        document.documentElement.style.setProperty("--host-height", `${viewportHeight}px`);
+        scheduleUpdate();
+        scheduleEmbeddedEvidenceCheck();
+      }
+
+      window.addEventListener("scroll", scheduleUpdate, { passive: true });
+      window.addEventListener("resize", scheduleUpdate, { passive: true });
+      hostWindow?.addEventListener("scroll", scheduleUpdate, { passive: true });
+      hostWindow?.addEventListener("resize", syncHostViewport, { passive: true });
+      reducedMotion.addEventListener("change", applyReducedMotion);
+      syncHostViewport();
+
+      if (evidencePanel && !reducedMotion.matches) {
+        evidencePanel.classList.add("js-ready");
+        if (hostFrame && hostWindow) {
+          hostWindow.addEventListener("scroll", scheduleEmbeddedEvidenceCheck, { passive: true });
+          hostWindow.addEventListener("resize", scheduleEmbeddedEvidenceCheck, { passive: true });
+          scheduleEmbeddedEvidenceCheck();
+        } else if ("IntersectionObserver" in window) {
+          evidenceObserver = new IntersectionObserver((entries) => {
+            if (entries.some((entry) => entry.isIntersecting)) showEvidencePanel();
+          }, { threshold: 0.4 });
+          evidenceObserver.observe(evidencePanel);
+        } else {
+          showEvidencePanel();
+        }
+      }
+
+      if (reducedMotion.matches) applyReducedMotion();
+      else {
+        window.requestAnimationFrame(updateLedger);
+        window.setTimeout(updateLedger, 90);
+      }
+
+      window.addEventListener("pagehide", () => {
+        disposed = true;
+        window.cancelAnimationFrame(frame);
+        evidenceTimers.forEach(window.clearTimeout);
+        evidenceFrames.forEach(window.cancelAnimationFrame);
+        if (evidenceCheckFrame) hostWindow?.cancelAnimationFrame(evidenceCheckFrame);
+        evidenceObserver?.disconnect();
+        window.removeEventListener("scroll", scheduleUpdate);
+        window.removeEventListener("resize", scheduleUpdate);
+        hostWindow?.removeEventListener("scroll", scheduleUpdate);
+        hostWindow?.removeEventListener("resize", syncHostViewport);
+        hostWindow?.removeEventListener("scroll", scheduleEmbeddedEvidenceCheck);
+        hostWindow?.removeEventListener("resize", scheduleEmbeddedEvidenceCheck);
+        reducedMotion.removeEventListener("change", applyReducedMotion);
+      }, { once: true });
+    })();
+  </script>
+</body>
+</html>
