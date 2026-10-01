@@ -10,11 +10,11 @@ interface OneHealthChapterSphereProps {
 }
 
 const TEXTURE_MAPS: Record<string, string> = {
-  soil: "/images/one-health/soil.png",
-  plant: "/images/one-health/plant.png",
-  animal: "/images/one-health/animal.png",
-  food: "/images/one-health/food.png",
-  people: "/images/one-health/people.png",
+  soil: "/images/one-health/soil.webp",
+  plant: "/images/one-health/plant.webp",
+  animal: "/images/one-health/animal.webp",
+  food: "/images/one-health/food.webp",
+  people: "/images/one-health/people.webp",
   planet: "/images/one-health/planet.png",
 };
 
@@ -134,34 +134,39 @@ export default function OneHealthChapterSphere({
     backRimLight.position.set(10, -6, -10);
     scene.add(backRimLight);
 
-    // 3. Preload Textures Once (Anisotropy capped at 4)
+    // 3. Preload Textures Once
     const textureLoader = new THREE.TextureLoader();
-    const maxAnisotropy = Math.min(renderer.capabilities.getMaxAnisotropy(), 4);
+    const maxAnisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
     const loadedTextures: Record<string, THREE.Texture> = {};
+    const failedTextures = new Set<string>();
 
     Object.entries(TEXTURE_MAPS).forEach(([key, url]) => {
-      const tex = textureLoader.load(url);
+      const tex = textureLoader.load(
+        url,
+        undefined,
+        undefined,
+        (err) => {
+          console.warn(`Failed to load texture at path: ${url}`, err);
+          failedTextures.add(key);
+          if (key === activeChapterRef.current || key === "planet") {
+            sphereMat.color.set("#2a6fb0");
+          }
+        }
+      );
       tex.colorSpace = THREE.SRGBColorSpace;
-      tex.anisotropy = maxAnisotropy;
-      tex.minFilter = THREE.LinearFilter;
+      tex.wrapS = THREE.RepeatWrapping;
+      tex.wrapT = THREE.ClampToEdgeWrapping;
+      tex.repeat.set(1, 1);
+      tex.offset.set(0, 0);
+      tex.generateMipmaps = true;
+      tex.minFilter = THREE.LinearMipmapLinearFilter;
       tex.magFilter = THREE.LinearFilter;
-
-      if (key === "planet") {
-        tex.repeat.set(0.8, 0.8);
-        tex.offset.set(0.1, 0.1);
-        tex.wrapS = THREE.MirroredRepeatWrapping;
-        tex.wrapT = THREE.MirroredRepeatWrapping;
-      } else {
-        tex.wrapS = THREE.MirroredRepeatWrapping;
-        tex.repeat.x = 2;
-        tex.offset.x = -0.5;
-        tex.wrapT = THREE.ClampToEdgeWrapping;
-      }
+      tex.anisotropy = maxAnisotropy;
       loadedTextures[key] = tex;
     });
 
-    // 4. Main 3D Sphere Geometry & Material (48x32 segments)
-    const sphereGeo = new THREE.SphereGeometry(1, 48, 32);
+    // 4. Main 3D Sphere Geometry & Material (SphereGeometry 1, 64, 48 inside tilted Group)
+    const sphereGeo = new THREE.SphereGeometry(1, 64, 48);
     const initialTex = loadedTextures[activeChapterRef.current] || loadedTextures.soil;
 
     const sphereMat = new THREE.MeshStandardMaterial({
@@ -174,8 +179,12 @@ export default function OneHealthChapterSphere({
       opacity: 1.0,
     });
 
+    const sphereGroup = new THREE.Group();
+    sphereGroup.rotation.x = -0.25;
+    scene.add(sphereGroup);
+
     const sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
-    scene.add(sphereMesh);
+    sphereGroup.add(sphereMesh);
 
     // 5. Tilted Orbit Ring (LineLoop) & Small Traveling Dot
     const ringSegments = 96;
@@ -295,6 +304,11 @@ export default function OneHealthChapterSphere({
           const newTex = loadedTextures[targetKey] || loadedTextures.soil;
           sphereMat.map = newTex;
           sphereMat.bumpMap = newTex;
+          if (failedTextures.has(targetKey)) {
+            sphereMat.color.set("#2a6fb0");
+          } else {
+            sphereMat.color.set("#ffffff");
+          }
           sphereMat.needsUpdate = true;
         } else if (transitionProgress <= 1.0) {
           const p = (transitionProgress - 0.55) / 0.45;
@@ -315,7 +329,7 @@ export default function OneHealthChapterSphere({
 
       const scrollBreathing = Math.sin(scrollYRef.current * 0.002) * 0.03;
       const finalScale = currentScale + scrollBreathing;
-      sphereMesh.scale.setScalar(finalScale);
+      sphereGroup.scale.setScalar(finalScale);
 
       shadowMesh.scale.set(finalScale * 1.05, finalScale * 0.8, 1);
 
@@ -334,7 +348,8 @@ export default function OneHealthChapterSphere({
         camera.position.y = -mouseCurrentRef.current.y * 0.2;
         camera.lookAt(0, 0, 0);
 
-        const autoSpin = elapsed * 0.35;
+        const spinPeriod = currentChapterKey === "planet" ? 90 : 50;
+        const autoSpin = (elapsed / spinPeriod) * Math.PI * 2;
         const scrollSpin = scrollYRef.current * 0.0015;
         sphereMesh.rotation.y = autoSpin + scrollSpin;
 

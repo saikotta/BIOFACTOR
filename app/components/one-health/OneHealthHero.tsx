@@ -21,31 +21,31 @@ const DEFAULT_DOMAINS: DomainSlotConfig[] = [
     id: "soil",
     name: "SOIL",
     baseAngleDeg: 270, // Top / Back
-    imgSrc: "/images/one-health/soil.png",
+    imgSrc: "/images/one-health/soil.webp",
   },
   {
     id: "plant",
     name: "PLANT",
     baseAngleDeg: 342, // Top-Right
-    imgSrc: "/images/one-health/plant.png",
+    imgSrc: "/images/one-health/plant.webp",
   },
   {
     id: "animal",
     name: "ANIMAL",
     baseAngleDeg: 54, // Bottom-Right
-    imgSrc: "/images/one-health/animal.png",
+    imgSrc: "/images/one-health/animal.webp",
   },
   {
     id: "food",
     name: "FOOD",
     baseAngleDeg: 126, // Bottom-Left
-    imgSrc: "/images/one-health/food.png",
+    imgSrc: "/images/one-health/food.webp",
   },
   {
     id: "people",
     name: "PEOPLE",
     baseAngleDeg: 198, // Top-Left
-    imgSrc: "/images/one-health/people.png",
+    imgSrc: "/images/one-health/people.webp",
   },
 ];
 
@@ -125,17 +125,17 @@ export default function OneHealthHero({
               "radial-gradient(ellipse at 50% 50%, rgba(207, 232, 207, 0.55) 0%, rgba(237, 233, 218, 0.35) 45%, transparent 75%)",
           }}
         />
-        {/* 3 Concentric Ripple Rings (1px, opacity 0.08) centered on planet */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full border border-[#147A46] opacity-[0.08]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[640px] h-[640px] rounded-full border border-[#147A46] opacity-[0.08]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[860px] h-[860px] rounded-full border border-[#147A46] opacity-[0.08]" />
+        {/* 3 Concentric Ripple Rings scaled to fit within 1.15x orbit half-width */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] rounded-full border border-[#147A46] opacity-[0.08]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[460px] h-[460px] rounded-full border border-[#147A46] opacity-[0.08]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-[#147A46] opacity-[0.08]" />
       </div>
 
-      {/* Main Content Layout Wrapper */}
-      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-8 pt-4 sm:pt-6 pb-20 flex-1 flex flex-col items-center justify-start text-center overflow-visible">
+      {/* Main Content Layout Wrapper (pt-5 = 20px top padding, pb-10 = 40px bottom padding) */}
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-8 pt-5 pb-10 flex-1 flex flex-col items-center justify-start text-center overflow-visible">
 
-        {/* TOP TEXT BLOCK: Centered Hierarchy */}
-        <div className="w-full max-w-4xl mx-auto text-center flex flex-col items-center">
+        {/* TOP TEXT BLOCK: Centered Hierarchy (relative z-20 to stay above orbit canvas) */}
+        <div className="w-full max-w-4xl mx-auto text-center flex flex-col items-center relative z-20">
 
           {/* Eyebrow: ONE HEALTH */}
           <div
@@ -151,8 +151,8 @@ export default function OneHealthHero({
             </span>
           </div>
 
-          {/* Primary Headline: Everything Is Connected with Mask & 70ms Word Stagger */}
-          <h1 className="mt-2 sm:mt-3 text-3xl sm:text-4xl lg:text-[clamp(2.4rem,3.8vw,4.2rem)] font-bold tracking-tight text-[#173522] leading-[1.05] flex flex-wrap justify-center gap-x-3">
+          {/* Primary Headline: Everything Is Connected (12px gap below pill) */}
+          <h1 className="mt-[12px] text-3xl sm:text-4xl lg:text-[clamp(2.4rem,3.8vw,4.2rem)] font-bold tracking-tight text-[#173522] leading-[1.05] flex flex-wrap justify-center gap-x-3">
             {headlineWords.map((word, idx) => (
               <span key={idx} className="overflow-hidden inline-block py-1">
                 <span
@@ -172,9 +172,9 @@ export default function OneHealthHero({
             ))}
           </h1>
 
-          {/* Supporting Copy */}
+          {/* Supporting Copy (10px gap below heading) */}
           <p
-            className={`mt-3 sm:mt-4 text-sm sm:text-base text-[#425A49] font-light italic leading-relaxed max-w-[720px] mx-auto transition-all duration-800 delay-300 ease-out transform ${
+            className={`mt-[10px] text-sm sm:text-base text-[#425A49] font-light italic leading-relaxed max-w-[720px] mx-auto transition-all duration-800 delay-300 ease-out transform ${
               hasEntered
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-4"
@@ -184,8 +184,8 @@ export default function OneHealthHero({
           </p>
         </div>
 
-        {/* CENTERED THREE.JS ORBIT ANIMATION (Tight gap ~24px, clamp height 640px to 860px) */}
-        <div className="w-full mx-auto flex items-center justify-center mt-6 h-[clamp(640px,82vh,860px)] relative overflow-visible">
+        {/* CENTERED THREE.JS ORBIT ANIMATION (Height clamp(720px, 92svh, 980px), pt-16 padding-top, mt-0 margin-top, relative z-10) */}
+        <div className="w-full mx-auto flex items-center justify-center mt-0 pt-16 h-[clamp(720px,92svh,980px)] relative z-10 overflow-visible">
           <div
             className={`relative w-full h-full flex items-center justify-center overflow-visible transition-all duration-1000 delay-300 ease-out transform ${
               hasEntered
@@ -202,8 +202,8 @@ export default function OneHealthHero({
           </div>
         </div>
 
-        {/* HINT LINE AT HERO BOTTOM: Scroll to follow the chain with bobbing arrow */}
-        <div className="mt-4 flex flex-col items-center gap-1.5 opacity-60">
+        {/* HINT LINE AT HERO BOTTOM: Scroll to follow the chain with mt-4 (16px) in normal flow */}
+        <div className="mt-4 flex flex-col items-center gap-1.5 opacity-60 relative z-30">
           <span className="text-xs font-mono tracking-widest uppercase text-[#173522]">
             Scroll to follow the chain
           </span>
@@ -223,9 +223,9 @@ export default function OneHealthHero({
 
       </div>
 
-      {/* Soft 120px Bottom Gradient Overlay fading into the first chapter's background */}
+      {/* Soft 40px Bottom Gradient Overlay fading into the first chapter's background */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-[120px] pointer-events-none z-20"
+        className="absolute bottom-0 left-0 right-0 h-[40px] pointer-events-none z-20"
         style={{
           background:
             "linear-gradient(to bottom, transparent 0%, #EDF4ED 100%)",

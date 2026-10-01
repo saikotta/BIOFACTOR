@@ -10,11 +10,11 @@ interface CycleNode {
 }
 
 const CYCLE_NODES: CycleNode[] = [
-  { id: "soil", name: "SOIL", imgSrc: "/images/one-health/soil.png" },
-  { id: "plant", name: "PLANT", imgSrc: "/images/one-health/plant.png" },
-  { id: "animal", name: "ANIMAL", imgSrc: "/images/one-health/animal.png" },
-  { id: "food", name: "FOOD", imgSrc: "/images/one-health/food.png" },
-  { id: "people", name: "PEOPLE", imgSrc: "/images/one-health/people.png" },
+  { id: "soil", name: "SOIL", imgSrc: "/images/one-health/soil.webp" },
+  { id: "plant", name: "PLANT", imgSrc: "/images/one-health/plant.webp" },
+  { id: "animal", name: "ANIMAL", imgSrc: "/images/one-health/animal.webp" },
+  { id: "food", name: "FOOD", imgSrc: "/images/one-health/food.webp" },
+  { id: "people", name: "PEOPLE", imgSrc: "/images/one-health/people.webp" },
   { id: "planet", name: "PLANET", imgSrc: "/images/one-health/planet.png" },
 ];
 
