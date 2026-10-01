@@ -1,72 +1,64 @@
 import React from "react";
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Newsreader, JetBrains_Mono } from "next/font/google";
-import BioremediationHero from "../components/bioremediation/BioremediationHero";
-import OxygenConditionsDiagram from "../components/bioremediation/OxygenConditionsDiagram";
-import DifferentWastesSection from "../components/bioremediation/DifferentWastesSection";
-import TreatmentChainTable from "../components/bioremediation/TreatmentChainTable";
-import BioremediationClosing from "../components/bioremediation/BioremediationClosing";
-import PulseLineDivider from "../components/bioremediation/PulseLineDivider";
+import BioremidationHero from "../components/bioremediation/BioremidationHero";
+import BioremidationDataStrip from "../components/bioremediation/BioremidationDataStrip";
+import BioremidationOxygenConnect from "../components/bioremediation/BioremidationOxygenConnect";
+import BioremidationApplications from "../components/bioremediation/BioremidationApplications";
+import BioremidationMatrix from "../components/bioremediation/BioremidationMatrix";
+import BioremidationClosing from "../components/bioremediation/BioremidationClosing";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["700", "800"],
+  weight: "800",
   variable: "--font-bricolage",
   display: "swap",
 });
 
 const newsreader = Newsreader({
   subsets: ["latin"],
-  style: ["italic", "normal"],
+  style: "italic",
   variable: "--font-newsreader",
   display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: "500",
   variable: "--font-jetbrains",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Biology That Cleans Water (Bioremediation) — Biofactor Biologicals",
+  title: "Bio-Remediation — Biofactor Biologicals",
   description:
-    "Every sewage plant, septic tank and effluent pond already depends on microbes. Targeted biological solutions for industrial, municipal sewage, and septic wastewater.",
+    "Targeted microbial consortia that degrade complex organic contaminants, eliminate toxic sludge, and restore natural water quality without synthetic chemicals.",
 };
 
 export default function BioremediationPage() {
   return (
     <main
-      className={`${bricolage.variable} ${newsreader.variable} ${jetbrainsMono.variable} relative min-h-screen w-full bg-[#EAF6EC] text-[#111111] selection:bg-[#0284C7] selection:text-white overflow-x-hidden`}
+      className={`${bricolage.variable} ${newsreader.variable} ${jetbrainsMono.variable} relative min-h-screen w-full bg-[#EAF3EA] text-[#173522] selection:bg-[#B8E986] selection:text-[#173522] overflow-x-hidden`}
     >
-      <div className="relative z-10 w-full animate-fadeIn">
-        {/* FRAME 1: HERO */}
-        <BioremediationHero />
+      {/* BIO-REMEDIATION PAGE CONTENT */}
+      <div className="relative z-10 w-full">
+        {/* FRAME 1: HERO SECTION - MATCHED TO RUMINANTS HERO */}
+        <BioremidationHero />
 
-        {/* PULSE LINE DIVIDER */}
-        <PulseLineDivider centerText="THREE OXYGEN CONDITIONS" />
+        {/* FRAME 2: BIO-REMEDIATION STATS DATA STRIP & PULL-QUOTE */}
+        <BioremidationDataStrip />
 
-        {/* FRAME 2: THREE OXYGEN CONDITIONS DIAGRAM */}
-        <OxygenConditionsDiagram />
+        {/* FRAME 3: HOW BIOLOGICAL TREATMENT WORKS (3-OXYGEN CONDITIONS FLOW) */}
+        <BioremidationOxygenConnect />
 
-        {/* PULSE LINE DIVIDER */}
-        <PulseLineDivider centerText="THREE WASTE STREAMS" />
+        {/* FRAME 4: TARGET APPLICATIONS (INDUSTRIAL, SEWAGE, SEPTIC) */}
+        <BioremidationApplications />
 
-        {/* FRAME 3: DIFFERENT WASTES NEED DIFFERENT MICROBES */}
-        <DifferentWastesSection />
+        {/* FRAME 5: SYSTEMIC APPLICATION MATRIX (LIGHT #EAF3EA BG + MICROBEFIELD) */}
+        <BioremidationMatrix />
 
-        {/* PULSE LINE DIVIDER */}
-        <PulseLineDivider centerText="TREATMENT CHAIN" />
-
-        {/* FRAME 4: WHERE BIOLOGY DOES THE WORK (5-STAGE TABLE) */}
-        <TreatmentChainTable />
-
-        {/* PULSE LINE DIVIDER */}
-        <PulseLineDivider centerText="BIOLOGICAL PRINCIPLE" />
-
-        {/* FRAME 5: CLOSING QUOTE, WORDMARK, REFERENCES & DISCLAIMER */}
-        <BioremediationClosing />
+        {/* FRAME 6: CLOSING & REFERENCES */}
+        <BioremidationClosing />
       </div>
     </main>
   );
