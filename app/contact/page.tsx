@@ -206,38 +206,38 @@ export default function ContactPage() {
           </motion.div>
         </section>
 
-        {/* Main Content: Form + Sidebar — same top AND bottom alignment */}
+        {/* Main Content: Form + Sidebar */}
         <section className="py-8 px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-3 gap-8 items-stretch">
+            <div className="grid lg:grid-cols-3 gap-8 items-start">
 
-              {/* Contact Form — zoom-in on scroll, h-full so it matches sidebar height */}
+              {/* Contact Form — zoom-in on scroll */}
               <motion.div
-                className="lg:col-span-2 bg-white rounded-3xl shadow-md p-5 border border-[#2D6A4F]/15 h-full flex flex-col"
+                className="lg:col-span-2 bg-white rounded-3xl shadow-md p-4 border border-[#2D6A4F]/15"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.15 }}
                 variants={zoomIn}
               >
-                <div className="mb-4">
+                <div className="mb-3">
                   <span className="inline-flex items-center gap-2 px-3 py-1 bg-[#EAF3EA] text-[#2D6A4F] rounded-full text-xs font-mono font-bold uppercase tracking-wider mb-2">
                     <MessageSquare className="w-3.5 h-3.5" /> Send Message
                   </span>
-                  <h2 className="text-lg md:text-xl font-extrabold text-[#173522] mb-1">
+                  <h2 className="text-base font-extrabold text-[#173522] mb-0.5">
                     Get in Touch With Our Experts
                   </h2>
-                  <p className="text-[#173522]/80 font-sans text-xs">
-                    Fill out the form below and our agricultural specialists will get back to you within 24 hours.
+                  <p className="text-[#173522]/70 font-sans text-xs">
+                    Fill out the form below and our specialists will get back to you within 24 hours.
                   </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-3 flex-1 flex flex-col">
+                <form onSubmit={handleSubmit} className="space-y-2.5">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-1">
                       <label className="block text-[#173522] font-semibold text-sm" htmlFor="name">Full Name *</label>
                       <input
                         type="text" id="name" name="name" value={formData.name} onChange={handleChange} required
-                        className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:border-[#2D6A4F] transition-all bg-white text-[#173522] text-sm"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:border-[#2D6A4F] transition-all bg-white text-[#173522] text-sm"
                         placeholder="Enter your name"
                       />
                     </div>
@@ -245,7 +245,7 @@ export default function ContactPage() {
                       <label className="block text-[#173522] font-semibold text-sm" htmlFor="email">Email Address *</label>
                       <input
                         type="email" id="email" name="email" value={formData.email} onChange={handleChange} required
-                        className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:border-[#2D6A4F] transition-all bg-white text-[#173522] text-sm"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:border-[#2D6A4F] transition-all bg-white text-[#173522] text-sm"
                         placeholder="Enter your email"
                       />
                     </div>
@@ -256,7 +256,7 @@ export default function ContactPage() {
                       <label className="block text-[#173522] font-semibold text-sm" htmlFor="phone">Phone Number *</label>
                       <input
                         type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} required
-                        className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:border-[#2D6A4F] transition-all bg-white text-[#173522] text-sm"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:border-[#2D6A4F] transition-all bg-white text-[#173522] text-sm"
                         placeholder="Enter phone number"
                       />
                     </div>
@@ -264,7 +264,7 @@ export default function ContactPage() {
                       <label className="block text-[#173522] font-semibold text-sm" htmlFor="area">Area (State &amp; District) *</label>
                       <input
                         type="text" id="area" name="area" value={formData.area} onChange={handleChange} required
-                        className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:border-[#2D6A4F] transition-all bg-white text-[#173522] text-sm"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:border-[#2D6A4F] transition-all bg-white text-[#173522] text-sm"
                         placeholder="e.g., Telangana, Hyderabad"
                       />
                     </div>
@@ -274,7 +274,7 @@ export default function ContactPage() {
                     <label className="block text-[#173522] font-semibold text-sm" htmlFor="subject">Subject *</label>
                     <select
                       id="subject" name="subject" value={formData.subject} onChange={handleChange} required
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:border-[#2D6A4F] transition-all bg-white text-[#173522] text-sm"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:border-[#2D6A4F] transition-all bg-white text-[#173522] text-sm"
                     >
                       <option value="">Select a topic</option>
                       <option value="General Inquiry">General Inquiry</option>
@@ -292,7 +292,7 @@ export default function ContactPage() {
                     <label className="block text-[#173522] font-semibold text-sm" htmlFor="message">Your Message *</label>
                     <textarea
                       id="message" name="message" value={formData.message} onChange={handleChange} required rows={3}
-                      className="w-full flex-1 px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:border-[#2D6A4F] transition-all bg-white text-[#173522] resize-none text-sm"
+                      className="w-full flex-1 px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:border-[#2D6A4F] transition-all bg-white text-[#173522] resize-none text-sm"
                       placeholder="Tell us about your agricultural needs, farm size, crops grown, etc..."
                     />
                   </div>
@@ -333,7 +333,7 @@ export default function ContactPage() {
 
               {/* Sidebar — aligned at top with items-start, zoom-in cards */}
               <motion.div
-                className="flex flex-col justify-between h-full gap-5"
+                className="flex flex-col gap-4"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.15 }}
