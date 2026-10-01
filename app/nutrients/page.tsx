@@ -1,5 +1,6 @@
 import React from "react";
 import BiofactorHeader from "../components/BiofactorHeader";
+import ProductFooter from "../components/ProductFooter";
 import NutrientsHero from "../components/nutrients/NutrientsHero";
 import NutrientsComparativeCard from "../components/nutrients/NutrientsComparativeCard";
 import NutrientsPrimaryApplications from "../components/nutrients/NutrientsPrimaryApplications";
@@ -36,6 +37,7 @@ export default function NutrientsPage() {
 
       {/* Closing Editorial Statement & 21 Scientific References */}
       <NutrientsClosing />
+      <ProductFooter />
     </main>
   );
 }

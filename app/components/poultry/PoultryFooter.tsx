@@ -14,7 +14,7 @@ export default function PoultryFooter() {
               <img
                 src="/images/biofactor-official-logo.png"
                 alt="BIOFACTOR BIOLOGICALS"
-                className="h-[44px] w-auto object-contain brightness-0 invert"
+                className="h-[64px] w-auto object-contain brightness-0 invert"
               />
             </Link>
             <p className="font-serif text-sm leading-relaxed text-white/60 max-w-[280px]">

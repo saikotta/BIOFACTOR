@@ -1,76 +1,92 @@
 import React from "react";
+import Image from "next/image";
 
 export default function ConsortiaBlock() {
   return (
     <section className="relative w-full bg-[#EAF6EC] px-6 py-20 md:px-12 lg:px-20 xl:px-32">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
-        {/* Giant word CONSORTIA */}
-        <div className="lg:col-span-4 flex items-start">
-          <h2 className="font-inter-tight font-extrabold text-[clamp(48px,8vw,72px)] leading-[0.9] text-[#B8893A]">
+        {/* Left column */}
+        <div className="order-1 flex flex-col lg:order-2 lg:col-start-8 lg:col-span-5">
+          <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[#1F8A57]">
+            WHAT BIOLOGY DOES
+          </p>
+          <h2 className="mb-4 font-inter-tight text-[72px] font-extrabold leading-[0.9] text-[#1F8A57]">
             CONSORTIA
           </h2>
+          <p className="font-newsreader text-[18px] leading-[1.6] text-[#2B2B2B]">
+            Anaerobic and facultative probiotics working together
+          </p>
+          <div className="relative mt-8 aspect-square w-full overflow-hidden rounded-sm">
+            <Image
+              src="/images/aquaculture-consortia.jpg"
+              alt="Underwater view of pond-bottom sediment"
+              fill
+              sizes="(max-width: 1024px) 100vw, 40vw"
+              className="object-cover"
+            />
+          </div>
         </div>
 
         {/* Right column content */}
-        <div className="lg:col-span-8">
+        <div className="order-2 lg:order-1 lg:col-start-1 lg:col-span-7">
           {/* H3 */}
-          <h3 className="font-inter-tight font-bold text-[clamp(20px,3vw,28px)] text-[#111111] mb-8">
+          <h3 className="font-inter-tight font-bold text-[36px] text-[#111111] mb-6">
             Anaerobic probiotics manage the load at its source.
           </h3>
 
-          {/* 2x2 Card Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-            {/* Card 1 */}
-            <div className="bg-white border border-[#D5E9D8] p-6 rounded-sm border-t-[3px] border-t-[#6BBF3A] hover:translate-y-[-3px] transition-transform duration-300">
-              <h4 className="font-inter-tight font-bold text-[16px] text-[#111111] mb-3">
-                Organic breakdown
+          <p className="font-newsreader text-[18px] leading-[1.6] text-[#2B2B2B] mb-8">
+            Surface-water probiotics cannot reach the sediment, where the problem starts. Anaerobic and facultative bacteria can, and they work as a consortium.
+          </p>
+
+          {/* Bullet points */}
+          <div className="space-y-6 mb-8">
+            <div className="border-l-4 border-[#1F8A57] pl-4">
+              <h4 className="font-inter-tight font-bold text-[18px] text-[#111111] mb-2">
+                Digest the organic load
               </h4>
-              <p className="font-newsreader text-[15px] leading-[1.55] text-[#2B2B2B]">
-                Specialised anaerobes accelerate decomposition of accumulated organic matter in sediment.
+              <p className="font-newsreader text-[16px] leading-[1.5] text-[#2B2B2B]">
+                Hydrolytic bacteria break down sludge, leaving less fuel for H₂S producers.
               </p>
             </div>
 
-            {/* Card 2 */}
-            <div className="bg-white border border-[#D5E9D8] p-6 rounded-sm border-t-[3px] border-t-[#6BBF3A] hover:translate-y-[-3px] transition-transform duration-300">
-              <h4 className="font-inter-tight font-bold text-[16px] text-[#111111] mb-3">
-                Competes with pathogens
+            <div className="border-l-4 border-[#1F8A57] pl-4">
+              <h4 className="font-inter-tight font-bold text-[18px] text-[#111111] mb-2">
+                Remove nitrogen as gas
               </h4>
-              <p className="font-newsreader text-[15px] leading-[1.55] text-[#2B2B2B]">
-                Beneficial microbes outcompete harmful bacteria for resources in the sediment environment.
+              <p className="font-newsreader text-[16px] leading-[1.5] text-[#2B2B2B]">
+                Denitrifying bacteria convert nitrate and nitrite to harmless N₂, which leaves the pond for good.
               </p>
             </div>
 
-            {/* Card 3 */}
-            <div className="bg-white border border-[#D5E9D8] p-6 rounded-sm border-t-[3px] border-t-[#6BBF3A] hover:translate-y-[-3px] transition-transform duration-300">
-              <h4 className="font-inter-tight font-bold text-[16px] text-[#111111] mb-3">
-                Reduced gas formation
+            <div className="border-l-4 border-[#1F8A57] pl-4">
+              <h4 className="font-inter-tight font-bold text-[18px] text-[#111111] mb-2">
+                Neutralise sulphide
               </h4>
-              <p className="font-newsreader text-[15px] leading-[1.55] text-[#2B2B2B]">
-                Diverts organic breakdown pathways away from methane and hydrogen sulphide production.
+              <p className="font-newsreader text-[16px] leading-[1.5] text-[#2B2B2B]">
+                Sulphide-oxidising and photosynthetic bacteria convert H₂S before it reaches the water.
               </p>
             </div>
 
-            {/* Card 4 */}
-            <div className="bg-white border border-[#D5E9D8] p-6 rounded-sm border-t-[3px] border-t-[#6BBF3A] hover:translate-y-[-3px] transition-transform duration-300">
-              <h4 className="font-inter-tight font-bold text-[16px] text-[#111111] mb-3">
-                Sludge reduction
+            <div className="border-l-4 border-[#1F8A57] pl-4">
+              <h4 className="font-inter-tight font-bold text-[18px] text-[#111111] mb-2">
+                Protect the interface
               </h4>
-              <p className="font-newsreader text-[15px] leading-[1.55] text-[#2B2B2B]">
-                Faster organic breakdown reduces sediment accumulation over production cycles.
+              <p className="font-newsreader text-[16px] leading-[1.5] text-[#2B2B2B]">
+                A lighter organic load uses less oxygen, helping keep the thin top layer of sediment oxidised.
               </p>
             </div>
           </div>
 
-          {/* Callout box */}
-          <div className="bg-white border-2 border-[#B8893A] p-6 rounded-sm">
-            <div className="font-newsreader text-[clamp(28px,4vw,36px)] font-bold text-[#6BBF3A] mb-2">
-              93% less hydrogen sulphide
-            </div>
-            <p className="font-newsreader text-[15px] leading-[1.55] text-[#2B2B2B] italic">
-              In pond trials with anaerobic probiotic application.
-            </p>
-          </div>
         </div>
+      </div>
+
+      <div className="mx-auto mt-12 w-full max-w-6xl border-2 border-[#1F8A57] bg-transparent p-8 text-center">
+        <div className="mb-2 font-newsreader text-[clamp(28px,4vw,36px)] font-bold text-[#1F8A57]">
+          93% less hydrogen sulphide.
+        </div>
+        <p className="mx-auto max-w-4xl font-newsreader text-[15px] italic leading-[1.55] text-[#2B2B2B]">
+          When shrimp-pond sediment bacteria were given nitrate to use instead of oxygen, they switched to oxidising sulphide. Shrimp stayed unaffected by sulphide in the sediment as long as the soil–water interface remained oxygenated.
+        </p>
       </div>
     </section>
   );

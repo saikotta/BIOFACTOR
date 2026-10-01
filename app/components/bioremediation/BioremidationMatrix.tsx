@@ -1,5 +1,6 @@
 import React from "react";
 import MicrobeField from "../MicrobeField";
+import styles from "./BioremidationMatrix.module.css";
 
 export default function BioremidationMatrix() {
   return (
@@ -32,11 +33,11 @@ export default function BioremidationMatrix() {
         </h2>
 
         {/* Matrix Table Container - Light #EAF3EA Aesthetic */}
-        <div className="w-full overflow-x-auto pb-6">
-          <div className="min-w-[1050px] w-full">
+        <div className={styles.matrixScroll} role="region" tabIndex={0} aria-label="Treatment chain comparison">
+          <div className={styles.matrix}>
 
             {/* MATRIX HEADER: 5 STAGES ALONG TREATMENT CHAIN */}
-            <div className="grid grid-cols-[180px_repeat(5,1fr)] gap-6 pb-6 border-b border-[#173522]/20 items-end">
+            <div className={styles.matrixHeader}>
               {/* Row Header Label */}
               <div className="font-mono text-xs font-bold tracking-widest text-[#2D6A4F] uppercase pb-1">
 
@@ -95,7 +96,7 @@ export default function BioremidationMatrix() {
 
 
             {/* ROW 1: INDUSTRIAL EFFLUENT (AMBER/GOLD ACCENTS) */}
-            <div className="grid grid-cols-[180px_repeat(5,1fr)] gap-6 py-7 border-b border-[#173522]/12 items-start">
+            <div className={styles.matrixRow} data-row="0">
               {/* Row Label */}
               <div>
                 <h3 className="font-display font-bold text-lg text-[#173522]">
@@ -115,7 +116,7 @@ export default function BioremidationMatrix() {
               </div>
 
               {/* Col 2 */}
-              <div>
+              <div data-empty="true">
                 <div className="h-[1.5px] bg-[#D69E2E]/25 rounded-full my-3 w-full" />
                 <p className="text-xs sm:text-sm text-[#26382D]/40 font-mono">
                   —
@@ -149,7 +150,7 @@ export default function BioremidationMatrix() {
 
 
             {/* ROW 2: SEWAGE STP (CYAN/BLUE ACCENTS) */}
-            <div className="grid grid-cols-[180px_repeat(5,1fr)] gap-6 py-7 border-b border-[#173522]/12 items-start">
+            <div className={styles.matrixRow} data-row="1">
               {/* Row Label */}
               <div>
                 <h3 className="font-display font-bold text-lg text-[#173522]">
@@ -161,7 +162,7 @@ export default function BioremidationMatrix() {
               </div>
 
               {/* Col 1 */}
-              <div>
+              <div data-empty="true">
                 <div className="h-[1.5px] bg-[#3182CE]/25 rounded-full my-3 w-full" />
                 <p className="text-xs sm:text-sm text-[#26382D]/40 font-mono">
                   —
@@ -203,7 +204,7 @@ export default function BioremidationMatrix() {
 
 
             {/* ROW 3: SEPTIC ON-SITE (PURPLE/VIOLET ACCENTS) */}
-            <div className="grid grid-cols-[180px_repeat(5,1fr)] gap-6 py-7 items-start">
+            <div className={styles.matrixRow} data-row="2">
               {/* Row Label */}
               <div>
                 <h3 className="font-display font-bold text-lg text-[#173522]">

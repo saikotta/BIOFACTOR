@@ -1,0 +1,123 @@
+/* Scoped CSS Module for Aquaculture Hero */
+
+.heroSection {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  background-color: #03110d;
+}
+
+/* Background Image Container */
+.bgWrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bgImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+/* Dark overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(3, 17, 13, 0.35) 0%,
+      rgba(3, 17, 13, 0.10) 40%,
+      rgba(3, 17, 13, 0.55) 75%,
+      rgba(3, 17, 13, 0.82) 100%
+    );
+}
+
+/* Hero Content Container */
+.container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(20px, 5vw, 72px);
+  padding-right: clamp(20px, 5vw, 72px);
+  padding-bottom: 3rem;
+  padding-top: 2rem;
+}
+
+/* Content block */
+.contentBlock {
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Eyebrow */
+.eyebrowWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-bottom: 1.125rem;
+}
+
+.eyebrowLine {
+  width: 1.5rem;
+  height: 1.5px;
+  background-color: #6BBF3A;
+  opacity: 0.85;
+}
+
+.eyebrowText {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6BBF3A;
+}
+
+/* Headline */
+.headline {
+  font-family: var(--font-inter-tight), sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #f8fafc;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+  margin-bottom: 1.35rem;
+  max-width: 650px;
+  font-size: clamp(2.35rem, 5.8vw, 5.5rem);
+}
+
+/* Sky blue accent on "BALANCES" */
+.accentBalances {
+  color: #6BBF3A;
+}
+
+/* Subline */
+.quotation {
+  font-family: var(--font-newsreader), serif;
+  font-style: italic;
+  font-weight: 400;
+  color: rgba(241, 245, 249, 0.88);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  max-width: 520px;
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
+}

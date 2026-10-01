@@ -1,15 +1,16 @@
 import React from "react";
 import { Inter_Tight, Newsreader, JetBrains_Mono } from "next/font/google";
 import AquacultureHero from "../components/aquaculture/AquacultureHero";
-import OrganicLoadSection from "../components/aquaculture/OrganicLoadSection";
+import AquacultureDataStrip from "../components/aquaculture/AquacultureDataStrip";
 import BottomBlock from "../components/aquaculture/BottomBlock";
 import ConsortiaBlock from "../components/aquaculture/ConsortiaBlock";
 import WaterBlock from "../components/aquaculture/WaterBlock";
 import GutHealthSection from "../components/aquaculture/GutHealthSection";
 import MineralsSection from "../components/aquaculture/MineralsSection";
-import CultureCycleSection from "../components/aquaculture/CultureCycleSection";
+import CultureCycleTable from "../components/aquaculture/CultureCycleTable";
 import AquacultureClosing from "../components/aquaculture/AquacultureClosing";
 import AquacultureAnimations from "../components/aquaculture/AquacultureAnimations";
+import AquacultureFooter from "../components/aquaculture/AquacultureFooter";
 
 const interTight = Inter_Tight({
   subsets: ["latin"],
@@ -39,14 +40,15 @@ export default function AquaculturePage() {
     >
       <AquacultureAnimations />
       <AquacultureHero />
-      <OrganicLoadSection />
+      <AquacultureDataStrip />
       <BottomBlock />
       <ConsortiaBlock />
       <WaterBlock />
       <GutHealthSection />
       <MineralsSection />
-      <CultureCycleSection />
+      <CultureCycleTable />
       <AquacultureClosing />
+      <AquacultureFooter />
     </main>
   );
 }

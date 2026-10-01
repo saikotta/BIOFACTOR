@@ -20,236 +20,32 @@ body {
   overflow-x: hidden;
 }
 
-[data-poultry-page] [data-poultry-reveal] {
-  opacity: 0;
-  transform: translate3d(0, 24px, 0);
-  transition: opacity 620ms cubic-bezier(.22,.61,.36,1), transform 620ms cubic-bezier(.22,.61,.36,1);
-  transition-delay: calc(var(--poultry-index, 0) * 90ms);
-}
+/* Poultry page animations removed */
 
-[data-poultry-page] [data-poultry-reveal].poultry-motion-in {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
+/* (old .ruminants-scroll-progress removed — replaced by .rm-scroll-progress-bar) */
 
-[data-poultry-page] [data-layer-image] img {
-  transform: scale(.97);
-  transition: transform 900ms cubic-bezier(.22,.61,.36,1);
-}
-
-[data-poultry-page] [data-layer-image].poultry-motion-in img {
-  transform: scale(1);
-}
-
-[data-poultry-page] [data-layer-image]:hover img {
-  transform: scale(1.015);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  [data-poultry-page] [data-poultry-reveal],
-  [data-poultry-page] [data-layer-image] img {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}
-
-.ruminants-scroll-progress {
-  position: fixed;
-  inset: env(safe-area-inset-top) 0 auto;
-  z-index: 100;
-  height: 3px;
-  background: linear-gradient(90deg, #8bc53f, #d4a574);
-  transform: scaleX(0);
-  transform-origin: left center;
-  pointer-events: none;
-}
-
-@property --r {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 0%;
-}
-
-@property --w {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 0%;
-}
-
-/* Ruminants Page - Simplified Performance-Optimized Animations */
-
-/* Scroll reveal - simplified fade + rise */
-[data-motion] {
-  opacity: 0;
-  transform: translate3d(0, 16px, 0);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-}
-
-[data-motion].animate-in {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-.ruminants-stagger {
-  opacity: 0;
-  transform: translate3d(0, 12px, 0);
-  transition: opacity 520ms cubic-bezier(.22,.61,.36,1), transform 680ms cubic-bezier(.22,.61,.36,1);
-  transition-delay: calc(var(--ruminants-stagger-index, 0) * 45ms);
-}
-
-.ruminants-stagger.animate-in {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-/* Stage blocks with reserved height */
+/* ── Section layout reserves (ruminants) ───────────────────────────────── */
 [data-ruminants-section] {
   min-height: 400px;
 }
-
 @media (min-width: 1024px) {
-  [data-ruminants-section] {
-    min-height: 500px;
+  [data-ruminants-section] { min-height: 500px; }
+}
+[data-ruminants-section="footer"],
+[data-ruminants-section="stats"] {
+  min-height: 0 !important;
+}
+@media (min-width: 1024px) {
+  [data-ruminants-section="footer"],
+  [data-ruminants-section="stats"] {
+    min-height: 0 !important;
   }
 }
 
-/* Image reveals use only opacity and transform to stay inexpensive to render. */
-[data-stage-image] img,
-[data-methane-image] img {
-  opacity: 0;
-  transform: translate3d(0, 10px, 0) scale(.99);
-  transition: opacity 520ms cubic-bezier(.22,.61,.36,1), transform 680ms cubic-bezier(.22,.61,.36,1);
-  display: block;
-  aspect-ratio: 16/9;
-  will-change: opacity, transform;
-}
+/* Ruminants animations removed — all other rm- rules stripped */
 
-[data-stage-image].animate-in img,
-[data-methane-image].animate-in img {
-  opacity: 1;
-  transform: translate3d(0, 0, 0) scale(1);
-}
-
-/* Remove mask animations */
-[data-stage-image],
-[data-methane-image] {
-  -webkit-mask-image: none !important;
-  mask-image: none !important;
-  clip-path: none !important;
-}
-
-/* Navbar - solid background, no blur */
-.ruminants-header-scrolled {
-  background: rgba(230, 244, 220, 0.96) !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
-  transition: background-color 0.4s ease, border-color 0.4s ease;
-}
-
-/* Bacteria capsules - reduced to 8, pause on scroll */
-.bacteria-capsule {
-  animation: bacteria-drift 8s ease-in-out infinite alternate;
-  will-change: transform, opacity;
-}
-
-.bacteria-capsule.paused {
-  animation-play-state: paused;
-}
-
-@keyframes bacteria-drift {
-  from {
-    transform: translate3d(-8px, -10px, 0);
-  }
-  to {
-    transform: translate3d(8px, 10px, 0);
-  }
-}
-
-/* Stage matrix - all columns fade together */
-[data-matrix-column] {
-  opacity: 0;
-  transform: translate3d(0, 16px, 0);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-  transition-delay: calc(var(--column-index, 0) * 40ms);
-}
-
-[data-matrix-column].animate-in {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-/* Matrix container - reserve height */
-[data-ruminants-section="matrix"] {
-  min-height: 600px;
-}
-
-/* Headline - opacity only, no color animation */
-[data-ruminants-headline] {
-  opacity: 0;
-  transition: opacity 0.4s ease-out;
-}
-
-[data-ruminants-headline].animate-in {
-  opacity: 1;
-}
-
-/* Reduced motion - show everything immediately */
-@media (prefers-reduced-motion: reduce) {
-  [data-motion],
-  [data-stage-image] img,
-  [data-methane-image] img,
-  [data-matrix-column],
-  [data-ruminants-headline],
-  .ruminants-stagger,
-  .bacteria-capsule {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-    animation: none !important;
-    animation-play-state: paused !important;
-  }
-}
-
-/* Remove all layout-shifting properties */
-* {
-  transition-property: opacity, transform !important;
-}
-
-/* Exception: hover effects */
-[data-matrix-column]:hover {
-  background-color: rgb(234 245 227 / 90%) !important;
-}
-
-.ruminants-grain {
-  position: fixed;
-  inset: 0;
-  z-index: 90;
-  pointer-events: none;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.75'/%3E%3C/svg%3E");
-}
-
-body:has([data-ruminants-section]) a,
-body:has([data-ruminants-section]) button {
-  position: relative;
-}
-
-body:has([data-ruminants-section]) a::after {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 1px;
-  background: currentColor;
-  content: "";
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.35s ease;
-}
-
-body:has([data-ruminants-section]) a:hover::after {
-  transform: scaleX(1);
-}
+/* ── Scroll progress bar ────────────────────────────────────────────────── */
+/* Ruminants motion CSS removed */
 
 /* Oversized brand text responsive styling - Minimal & refined */
 .brand-oversized-text {
@@ -1634,146 +1430,10 @@ body:has([data-ruminants-section]) a:hover::after {
 
 
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   POULTRY SCROLL-MOTION SYSTEM OVERRIDES
-   These rules coexist with the old [data-poultry-reveal] system.
-   The JS scrub sets inline styles on the same elements; we need to ensure
-   CSS transitions don't fight the per-frame inline style updates.
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* Poultry scroll-motion overrides removed */
 
-/*
- * The old reveal system uses a CSS transition on opacity + transform.
- * For elements now owned by the JS scrub engine (data-pm-* targets) we
- * suppress that transition so the per-frame update is applied immediately.
- * The old .poultry-motion-in state is never added by the new engine, so
- * those rules become inert — no conflict, no double-animation.
- */
-[data-pm-strip-panel],
-[data-pm-species-frame],
-[data-pm-species-text],
-[data-pm-mini-card],
-[data-pm-bar],
-[data-pm-hero-bg],
-[data-pm-hero-text],
-[data-pm-hero-eyebrow],
-[data-pm-hero-headline],
-[data-pm-hero-subline] {
-  /* Override the global "* { transition-property: opacity, transform !important }" */
-  transition: none !important;
-}
-
-/*
- * The old [data-poultry-reveal] rule hides elements at opacity:0 + translateY(24px).
- * PoultryLayers has data-poultry-reveal on its section and two inner divs.
- * The new JS engine handles those inner divs via data-pm-species-frame/text,
- * so we reset the old reveal initial state on them so they aren't invisible
- * before the JS engine first runs.
- * We keep the section-level [data-poultry-reveal] hidden-state as-is since
- * the old PoultryMotion IntersectionObserver is still present and will
- * add .poultry-motion-in to section wrappers normally.
- */
-[data-pm-species-frame][data-poultry-reveal],
-[data-pm-species-text][data-poultry-reveal] {
-  opacity: 1 !important;
-  transform: none !important;
-  transition: none !important;
-}
-
-/*
- * Prevent the old DataStrip editorial paragraph's own inline JS transition
- * (the component uses inline style opacity/translateX transition) from
- * layering on top of the new scrub. We don't own that element with a
- * data-pm attribute so we leave it alone — it uses its own IntersectionObserver
- * and inline transition, which is fine since the new system doesn't touch it.
- */
-
-/*
- * Ensure the hero bg wrapper (position:absolute) doesn't clip the parallax
- * translation. The JS moves it by up to 0.4 * vh which could go outside
- * the section bounds — allow overflow on the section while keeping the
- * page body overflow-x:hidden.
- */
-[data-pm-section="hero"] {
-  overflow: visible;
-}
-[data-pm-section="hero"] [data-pm-hero-bg] {
-  overflow: hidden;
-  will-change: transform;
-}
-
-/* Give the hero rays + spores absolute positioning anchor */
-[data-pm-hero-rays],
-[data-pm-hero-spores] {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
-  overflow: hidden;
-}
-
-/* Footer: ensure relative positioning for the spotlight child */
-[data-pm-section="footer"] {
-  position: relative;
-  overflow: hidden;
-}
-
-/* body overflow-x guard — belt and braces */
+/* body overflow-x guard */
 body {
   overflow-x: hidden;
 }
 
-/*
- * prefers-reduced-motion:
- * Force every JS-animated element to its final visible state.
- * The JS engine also checks this flag and calls return early,
- * but CSS ensures zero flash even if JS is slow to load.
- */
-@media (prefers-reduced-motion: reduce) {
-  /* Cancel all CSS ambient loops injected by the motion system */
-  [data-pm-hero-img],
-  [data-pm-hero-rays],
-  [data-pm-hero-spores] > * {
-    animation: none !important;
-  }
-
-  /* Reveal all JS-animated elements immediately */
-  [data-pm-strip-panel],
-  [data-pm-species-frame],
-  [data-pm-species-text],
-  [data-pm-mini-card] {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-    border-radius: 0 !important;
-  }
-
-  /* Bars: use the data attribute value written by JS, or default to full */
-  [data-pm-bar] {
-    width: calc(var(--pm-bar-target, 1) * 100%) !important;
-    transition: none !important;
-  }
-
-  /* Heading words split by JS: make them visible before JS runs */
-  [data-pm-heading="rise"] span,
-  [data-pm-heading="flip"] span {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-
-  /* Hero text block */
-  [data-pm-hero-eyebrow],
-  [data-pm-hero-headline],
-  [data-pm-hero-subline],
-  [data-pm-hero-text] {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-
-  /* Footer spotlight */
-  [data-pm-section="footer"] > div:first-child {
-    transform: translateX(-50%) scale(1) !important;
-    opacity: 1 !important;
-  }
-}

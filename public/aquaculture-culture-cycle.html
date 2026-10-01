@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>Aquaculture Culture Cycle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --page: #e8f5e9;
+      --ink: #0f2f1e;
+      --soft: rgba(64, 96, 77, .82);
+      --cream: #f1faee;
+      --stage-1: #f1faee;
+      --stage-2: #c6e0c4;
+      --stage-3: #5fbf86;
+      --stage-4: #1f8a57;
+      --stage-5: #0d4f31;
+      --ease-out: cubic-bezier(.16, 1, .3, 1);
+      --ease-inout: cubic-bezier(.65, 0, .35, 1);
+      --capsule-duration: 1.2s;
+      --header-duration: .7s;
+      --cell-duration: .6s;
+      --divider-duration: .8s;
+      --headline-duration: .9s;
+      --subtext-duration: .52s;
+      --row-duration: .56s;
+      --hover-duration: .6s;
+      --release-duration: .7s;
+      --dim-duration: .4s;
+      --underline-duration: .5s;
+      --ambient-duration: 20s;
+      --sweep-delay: 2.2s;
+      --sweep-duration: 1.4s;
+      --intro-duration: 3.6s;
+      --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+      --serif: "Newsreader", Georgia, serif;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-width: 320px;
+      background: var(--page);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      overflow-x: hidden;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      background: radial-gradient(ellipse 70% 58% at 0 0, rgba(232, 245, 233, .92), transparent 72%), var(--page);
+      color: var(--ink);
+    }
+
+    .section {
+      width: 100%;
+      background: transparent;
+    }
+
+    .frame {
+      position: relative;
+      isolation: isolate;
+      overflow: visible;
+      width: min(100%, 1320px);
+      margin: 0 auto;
+      padding: clamp(22px, 4vw, 56px);
+      padding-bottom: clamp(32px, 5vw, 70px);
+    }
+
+    .ambient {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .ambient-blob {
+      position: absolute;
+      width: 300px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      opacity: .55;
+      background: radial-gradient(circle, rgba(95, 191, 134, .25), rgba(198, 224, 196, .12) 42%, transparent 72%);
+      animation: ambient-drift var(--ambient-duration) var(--ease-inout) infinite alternate;
+    }
+
+    .ambient-blob:first-child {
+      top: -145px;
+      left: -135px;
+    }
+
+    .ambient-blob:nth-child(2) {
+      right: -150px;
+      bottom: -100px;
+      animation-delay: -10s;
+    }
+
+    .microbe-rod {
+      position: absolute;
+      width: var(--rod-width);
+      height: 11px;
+      border: 1px solid rgba(13, 79, 49, .13);
+      border-radius: 999px;
+      opacity: .14;
+      transform: translate3d(0, 0, 0) rotate(var(--rod-angle));
+      animation: rod-drift var(--rod-duration) var(--ease-inout) var(--rod-delay) infinite alternate;
+    }
+
+    .microbe-rod:nth-child(3) { top: 18%; left: 27%; }
+    .microbe-rod:nth-child(4) { top: 52%; left: 12%; }
+    .microbe-rod:nth-child(5) { top: 78%; left: 44%; }
+    .microbe-rod:nth-child(6) { top: 23%; right: 30%; }
+    .microbe-rod:nth-child(7) { top: 65%; right: 17%; }
+    .microbe-rod:nth-child(8) { top: 88%; right: 38%; }
+    .microbe-rod:nth-child(9) { top: 40%; right: 5%; }
+    .microbe-rod:nth-child(10) { top: 9%; right: 10%; }
+
+    .frame-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      opacity: 0;
+      animation: eyebrow-fade var(--subtext-duration) var(--ease-out) 0s both;
+    }
+
+    .eyebrow-line {
+      width: 32px;
+      height: 1px;
+      background: #000;
+      transform: scaleX(0);
+      transform-origin: left center;
+      animation: line-draw var(--underline-duration) var(--ease-out) 0.2s both;
+    }
+
+    .eyebrow-text {
+      font-family: var(--display);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #000;
+    }
+
+    .headline {
+      max-width: 1100px;
+      margin: 0 0 14px;
+      color: #000;
+      font-family: var(--display);
+      font-size: clamp(38px, 5.4vw, 70px);
+      font-weight: 800;
+      letter-spacing: -.025em;
+      line-height: .98;
+    }
+
+    .headline-line-mask {
+      display: block;
+      overflow: hidden;
+      margin-block: -.035em;
+      padding-block: .035em;
+    }
+
+    .headline-line {
+      display: block;
+      transform: translateY(0);
+    }
+
+    .frame.is-intro .headline-line {
+      transform: translateY(105%);
+      animation: headline-rise var(--headline-duration) var(--ease-out) both;
+      animation-delay: calc(var(--l, 0) * .1s);
+      will-change: transform, opacity;
+    }
+
+    .subtext {
+      max-width: 66ch;
+      margin: 0 0 30px;
+      color: var(--soft);
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .matrix-scroll {
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: visible;
+      overscroll-behavior-inline: contain;
+      padding: 40px 8px 28px;
+      margin-top: -10px;
+      scrollbar-color: rgba(13, 79, 49, .4) transparent;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .matrix {
+      --header-height: 168px;
+      --data-height: 132px;
+      display: grid;
+      grid-template-columns: 150px repeat(5, minmax(0, 1fr));
+      grid-template-rows: var(--header-height) repeat(4, var(--data-height));
+      column-gap: 12px;
+      width: 100%;
+      min-width: 980px;
+    }
+
+    .row-label {
+      display: flex;
+      grid-column: 1;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      padding: 14px 12px 14px 0;
+    }
+
+    .matrix.is-animated .row-label {
+      opacity: 0;
+      transform: translateX(-10px);
+      animation: row-rise var(--row-duration) var(--ease-out) calc(1.5s + var(--r, 0) * .12s) both;
+      will-change: transform, opacity;
+    }
+
+    .row-label[data-row="0"] { grid-row: 2; }
+    .row-label[data-row="1"] { grid-row: 3; }
+    .row-label[data-row="2"] { grid-row: 4; }
+    .row-label[data-row="3"] { grid-row: 5; }
+
+    .row-dot {
+      width: 7px;
+      height: 7px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--ink);
+    }
+
+    .row-label-copy { min-width: 0; }
+
+    .row-title {
+      display: block;
+      color: var(--ink);
+      font-family: var(--display);
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.28;
+    }
+
+    .row-subtitle {
+      display: block;
+      margin-top: 4px;
+      color: var(--soft);
+      font-family: var(--serif);
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .stage-column {
+      position: relative;
+      display: grid;
+      grid-column: var(--stage-column);
+      grid-row: 1 / 6;
+      grid-template-rows: var(--header-height) repeat(4, var(--data-height));
+      min-width: 0;
+      overflow: visible;
+      border-radius: 90px;
+      background: var(--stage-color);
+      color: var(--stage-ink);
+      box-shadow: 0 12px 28px rgba(13, 79, 49, .18), 0 2px 6px rgba(13, 79, 49, .12);
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      transform-origin: bottom;
+      outline: none;
+      transition: transform var(--release-duration) var(--ease-out), opacity var(--release-duration) var(--ease-out), box-shadow var(--release-duration) var(--ease-out);
+    }
+
+    .stage-column-inner {
+      position: absolute;
+      inset: 0;
+      border-radius: 90px;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .stage-column::before,
+    .stage-column::after {
+      position: absolute;
+      z-index: 3;
+      inset: 0;
+      border-radius: inherit;
+      content: "";
+      pointer-events: none;
+    }
+
+    .stage-column::before {
+      width: 48%;
+      background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .35), transparent);
+      opacity: 0;
+      transform: translateX(-120%);
+      overflow: hidden;
+    }
+
+    .stage-column::after {
+      z-index: 0;
+      box-shadow: 0 22px 44px rgba(13, 79, 49, .2);
+      opacity: 0;
+      transition: opacity var(--release-duration) var(--ease-out);
+    }
+
+    .stage-column-border {
+      position: absolute;
+      inset: 0;
+      border-radius: 90px;
+      border: 2px solid rgba(13, 79, 49, .42);
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .stage-column[data-tone="dark"] .stage-column-border {
+      border-color: rgba(244, 250, 236, .50);
+    }
+
+    .matrix.sweep-active .stage-column::before {
+      animation: light-sweep var(--sweep-duration) var(--ease-inout) var(--sweep-delay) both;
+      will-change: transform, opacity;
+    }
+
+    .stage-head,
+    .stage-cell {
+      position: relative;
+      z-index: 1;
+    }
+
+    .stage-column:focus-visible {
+      outline: 3px solid var(--ink);
+      outline-offset: 4px;
+    }
+
+    .matrix.is-animated .stage-column {
+      opacity: .6;
+      transform: translateY(100%) scale(1);
+      animation: capsule-fill var(--capsule-duration) var(--ease-inout) calc(.4s + var(--c, 0) * .12s) both;
+      will-change: transform, opacity;
+    }
+
+    .stage-head {
+      display: flex;
+      grid-row: 1;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-width: 0;
+      padding: 22px 14px 18px;
+      text-align: center;
+    }
+
+    .stage-number,
+    .stage-name,
+    .stage-subtitle,
+    .cell-content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stage-number {
+      opacity: .92;
+      transition: opacity var(--dim-duration) var(--ease-out);
+    }
+
+    .stage-name {
+      position: relative;
+      display: block;
+    }
+
+    .stage-name::after {
+      display: block;
+      width: 40px;
+      height: 1px;
+      margin: 7px auto 0;
+      background: currentColor;
+      content: "";
+      opacity: .55;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform var(--underline-duration) var(--ease-out) 60ms;
+    }
+
+    .matrix.is-animated .stage-number,
+    .matrix.is-animated .stage-name,
+    .matrix.is-animated .stage-subtitle {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: text-rise var(--header-duration) var(--ease-out) calc(.9s + var(--c, 0) * .1s) both;
+      will-change: transform, opacity;
+    }
+
+    .matrix.is-animated .stage-cell .cell-content {
+      opacity: 0;
+      transform: translateY(10px);
+      animation-name: cell-rise;
+      animation-timing-function: var(--ease-out);
+      animation-fill-mode: both;
+      animation-duration: var(--cell-duration);
+      animation-delay: calc(1.2s + var(--c, 0) * .08s + var(--r, 0) * .12s);
+      will-change: transform, opacity;
+    }
+
+    .stage-number {
+      margin-bottom: 7px;
+      font-family: var(--display);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      line-height: 1;
+    }
+
+    .stage-name {
+      font-family: var(--display);
+      font-size: 19px;
+      font-weight: 800;
+      line-height: 1.18;
+    }
+
+    .stage-subtitle {
+      margin-top: 7px;
+      font-family: var(--serif);
+      font-size: 14px;
+      line-height: 1.25;
+    }
+
+    .stage-cell {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      grid-row: var(--cell-row);
+      justify-content: center;
+      min-width: 0;
+      padding: 14px;
+      text-align: center;
+      isolation: isolate;
+      outline: none;
+    }
+
+    /* ── Row indicator bars ── */
+    .cell-bar {
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 7px;
+      margin-bottom: 7px;
+      flex-shrink: 0;
+    }
+
+    .cell-bar-track {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      height: 2px;
+      border-radius: 999px;
+      background: var(--bar-track, rgba(13,79,49,.22));
+      width: 100%;
+    }
+
+    .cell-bar-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      border-radius: 999px;
+      background: var(--bar-color);
+      width: var(--bar-fill, 60%);
+      transition: width .4s cubic-bezier(.16,1,.3,1);
+    }
+
+    .cell-bar-dot {
+      position: absolute;
+      top: 50%;
+      left: var(--bar-fill, 60%);
+      transform: translate(-50%, -50%);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--bar-color);
+      box-shadow: 0 0 0 1px var(--stage-color, #fff), 0 0 0 2px var(--bar-color);
+      transition: left .4s cubic-bezier(.16,1,.3,1);
+    }
+
+    /* Row 0 — Pond bottom — deep teal on light, bright mint on dark */
+    .stage-cell[data-cell-row="0"] {
+      --bar-color: #1a6640;
+      --bar-track: rgba(26,102,64,.32);
+    }
+    /* Row 1 — Water column — dark forest on light, warm cream on dark */
+    .stage-cell[data-cell-row="1"] {
+      --bar-color: #0d3d22;
+      --bar-track: rgba(13,61,34,.32);
+    }
+    /* Row 2 — Gut — teal-green on light, pale mint on dark */
+    .stage-cell[data-cell-row="2"] {
+      --bar-color: #157a45;
+      --bar-track: rgba(21,122,69,.30);
+    }
+    /* Row 3 — Minerals — medium forest on light, pale sage on dark */
+    .stage-cell[data-cell-row="3"] {
+      --bar-color: #2a5c3a;
+      --bar-track: rgba(42,92,58,.32);
+    }
+
+    /* Dark columns — flip to light colors */
+    .stage-column[data-tone="dark"] .stage-cell[data-cell-row="0"] {
+      --bar-color: #a8e6bf;
+      --bar-track: rgba(168,230,191,.40);
+    }
+    .stage-column[data-tone="dark"] .stage-cell[data-cell-row="1"] {
+      --bar-color: #f0f7e6;
+      --bar-track: rgba(240,247,230,.38);
+    }
+    .stage-column[data-tone="dark"] .stage-cell[data-cell-row="2"] {
+      --bar-color: #6ed4a0;
+      --bar-track: rgba(110,212,160,.38);
+    }
+    .stage-column[data-tone="dark"] .stage-cell[data-cell-row="3"] {
+      --bar-color: #c8f0d8;
+      --bar-track: rgba(200,240,216,.38);
+    }
+
+    /* Animate bar fill on intro */
+    .matrix.is-animated .cell-bar-fill,
+    .matrix.is-animated .cell-bar-dot {
+      opacity: 0;
+      animation: bar-appear .5s var(--ease-out) calc(1.4s + var(--c, 0) * .08s + var(--r, 0) * .12s) both;
+    }
+
+    @keyframes bar-appear {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .stage-cell:not([data-cell-row="0"])::before {
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      right: 14px;
+      left: 14px;
+      height: 1px;
+      background: var(--divider);
+      content: "";
+      transform: scaleX(1);
+      transform-origin: left center;
+    }
+
+    .matrix.is-animated .stage-cell:not([data-cell-row="0"])::before {
+      transform: scaleX(0);
+      animation: divider-draw var(--divider-duration) var(--ease-inout) calc(1.3s + var(--c, 0) * .08s + var(--r, 0) * .12s) both;
+      will-change: transform, opacity;
+    }
+
+    .cell-content {
+      display: block;
+      width: 100%;
+      font-family: var(--serif);
+      font-size: 16px;
+      line-height: 1.38;
+      transition: transform var(--release-duration) var(--ease-out);
+    }
+
+    .stage-cell.is-empty .cell-content {
+      color: var(--soft);
+      font-style: italic;
+    }
+
+    .stage-cell:hover .cell-content,
+    .stage-cell:focus-visible .cell-content {
+      transform: translateY(-2px);
+    }
+
+    .stage-column[data-tone="light"] {
+      --stage-ink: #0f2f1e;
+      --divider: rgba(13, 79, 49, .40);
+    }
+
+    .stage-column[data-tone="dark"] {
+      --stage-ink: #f1faee;
+      --divider: rgba(241, 250, 238, .52);
+    }
+
+    .stage-column[data-tone="dark"] .stage-number,
+    .stage-column[data-tone="dark"] .stage-name,
+    .stage-column[data-tone="dark"] .stage-subtitle,
+    .stage-column[data-tone="dark"] .cell-content {
+      color: #f1faee;
+    }
+
+    .stage-column[data-tone="dark"] .stage-number {
+      opacity: 1;
+    }
+
+    .stage-column[data-tone="dark"] .stage-subtitle {
+      opacity: 1;
+    }
+
+    .stage-column em { font-style: italic; }
+
+    .stage-column sup {
+      position: relative;
+      top: -.2em;
+      font-family: var(--display);
+      font-size: .7em;
+      font-weight: 800;
+      line-height: 0;
+    }
+
+    .stage-column:hover,
+    .stage-column:focus-within {
+      z-index: 2;
+      transform: translateY(-6px) scale(1.035);
+      box-shadow: 0 22px 44px rgba(13, 79, 49, .22), 0 4px 10px rgba(13, 79, 49, .14);
+      transition-duration: var(--hover-duration);
+      transition-delay: 60ms;
+    }
+
+    .stage-column:hover::after,
+    .stage-column:focus-within::after {
+      opacity: 0;
+      transition-duration: var(--hover-duration);
+      transition-delay: 60ms;
+    }
+
+    .stage-column:hover .stage-number,
+    .stage-column:focus-within .stage-number {
+      opacity: 1;
+      transition-delay: 60ms;
+    }
+
+    .stage-column:hover .stage-name::after,
+    .stage-column:focus-within .stage-name::after {
+      transform: scaleX(1);
+    }
+
+    .matrix:has(.stage-column:hover) .stage-column:not(:hover),
+    .matrix:has(.stage-column:focus-within) .stage-column:not(:focus-within) {
+      opacity: .72;
+      transition-duration: var(--dim-duration);
+      transition-delay: 60ms;
+    }
+
+    @keyframes capsule-fill {
+      from { transform: translateY(100%) scale(1); opacity: .6; }
+      to   { transform: translateY(0) scale(1);   opacity: 1; }
+    }
+
+    @keyframes text-rise {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes cell-rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes headline-rise {
+      from { opacity: 1; transform: translateY(105%); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes eyebrow-fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes line-draw {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    @keyframes row-rise {
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes divider-draw {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    @keyframes light-sweep {
+      from { opacity: 0; transform: translateX(-120%); }
+      18% { opacity: 1; }
+      to { opacity: 0; transform: translateX(120%); }
+    }
+
+    @keyframes ambient-drift {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(40px, 40px, 0); }
+    }
+
+    @keyframes rod-drift {
+      from { transform: translate3d(0, 0, 0) rotate(var(--rod-angle)); }
+      to { transform: translate3d(24px, -32px, 0) rotate(var(--rod-angle)); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+
+      .matrix.is-animated .stage-column {
+        transform: none;
+        animation: none;
+      }
+
+      .matrix.is-animated .stage-number,
+      .matrix.is-animated .stage-name,
+      .matrix.is-animated .stage-subtitle,
+      .matrix.is-animated .cell-content,
+      .matrix.is-animated .row-label {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+
+      .matrix.is-animated .stage-cell:not([data-cell-row="0"])::before {
+        transform: none;
+        animation: none;
+      }
+
+      .stage-column:hover,
+      .stage-column:focus-within,
+      .stage-cell:hover .cell-content,
+      .stage-cell:focus-visible .cell-content {
+        transform: none;
+      }
+
+      .ambient-blob,
+      .microbe-rod {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="section">
+    <div class="frame">
+      <div class="ambient" aria-hidden="true">
+        <span class="ambient-blob"></span><span class="ambient-blob"></span>
+        <span class="microbe-rod" style="--rod-width: 54px; --rod-angle: 24deg; --rod-duration: 22s; --rod-delay: -3s"></span>
+        <span class="microbe-rod" style="--rod-width: 42px; --rod-angle: -18deg; --rod-duration: 28s; --rod-delay: -11s"></span>
+        <span class="microbe-rod" style="--rod-width: 62px; --rod-angle: 12deg; --rod-duration: 19s; --rod-delay: -7s"></span>
+        <span class="microbe-rod" style="--rod-width: 48px; --rod-angle: -32deg; --rod-duration: 26s; --rod-delay: -16s"></span>
+        <span class="microbe-rod" style="--rod-width: 58px; --rod-angle: 31deg; --rod-duration: 18s; --rod-delay: -5s"></span>
+        <span class="microbe-rod" style="--rod-width: 44px; --rod-angle: -8deg; --rod-duration: 30s; --rod-delay: -20s"></span>
+        <span class="microbe-rod" style="--rod-width: 52px; --rod-angle: 17deg; --rod-duration: 24s; --rod-delay: -13s"></span>
+        <span class="microbe-rod" style="--rod-width: 46px; --rod-angle: -26deg; --rod-duration: 21s; --rod-delay: -9s"></span>
+      </div>
+      <div class="frame-content">
+        <div class="eyebrow">
+          <span class="eyebrow-line"></span>
+          <span class="eyebrow-text">Across the culture cycle</span>
+        </div>
+        <h1 class="headline">The right biology at each stage.</h1>
+        <div class="matrix-scroll" tabindex="0" role="region" aria-label="Aquaculture culture cycle biology comparison">
+          <div class="matrix" id="culture-cycle-matrix"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const data = {
+      rows: [
+        { title: "Pond bottom", subtitle: "ANAEROBIC CONSORTIA" },
+        { title: "Water column", subtitle: "AEROBIC · FACULTATIVE" },
+        { title: "Gut", subtitle: "PRE- AND PROBIOTICS" },
+        { title: "Minerals", subtitle: "SOLUBILISING BACTERIA" }
+      ],
+      stages: [
+        {
+          number: "01",
+          name: "POND PREP",
+          subtitle: "BEFORE STOCKING",
+          color: "var(--stage-1)",
+          tone: "light",
+          cells: [
+            { text: "Digest old sludge; condition the soil",     bar: 55 },
+            { text: "Build a stable bloom",                       bar: 48 },
+            { text: null,                                          bar: 15 },
+            { text: "Correct Ca, Mg, K balance",                  bar: 60 }
+          ]
+        },
+        {
+          number: "02",
+          name: "STOCKING",
+          subtitle: "DAYS 0–30",
+          color: "var(--stage-2)",
+          tone: "light",
+          cells: [
+            { text: "Establish the bottom community",             bar: 62 },
+            { text: "Establish nitrifiers",                       bar: 58 },
+            { text: "Seed a healthy gut in post-larvae",          bar: 50 },
+            { text: "Support early moults",                       bar: 55 }
+          ]
+        },
+        {
+          number: "03",
+          name: "EARLY GROW-OUT",
+          subtitle: "DAYS 30–60",
+          color: "var(--stage-3)",
+          tone: "light",
+          cells: [
+            { text: "Organic load building",                      bar: 72 },
+            { text: "Night-time oxygen dips begin",               bar: 65 },
+            { text: "Hold <em>Vibrio</em> down as feeding rises", bar: 78 },
+            { text: "Release sediment-bound P",                   bar: 68 }
+          ]
+        },
+        {
+          number: "04",
+          name: "PEAK BIOMASS",
+          subtitle: "DAYS 60–HARVEST",
+          color: "var(--stage-4)",
+          tone: "dark",
+          cells: [
+            { text: "Highest sludge, NH₃ and H₂S risk",          bar: 92 },
+            { text: "Highest ammonia and nitrite load",            bar: 88 },
+            { text: "Highest disease pressure",                    bar: 85 },
+            { text: "Frequent moults",                             bar: 80 }
+          ]
+        },
+        {
+          number: "05",
+          name: "HARVEST",
+          subtitle: "AND AFTER",
+          color: "var(--stage-5)",
+          tone: "dark",
+          cells: [
+            { text: "Clear sludge before next crop",              bar: 70 },
+            { text: null,                                          bar: 18 },
+            { text: null,                                          bar: 18 },
+            { text: null,                                          bar: 18 }
+          ]
+        }
+      ]
+    };
+
+    const matrix = document.getElementById("culture-cycle-matrix");
+
+    // Render row labels
+    data.rows.forEach((row, index) => {
+      const label = document.createElement("div");
+      label.className = "row-label";
+      label.setAttribute("data-row", index);
+      label.style.setProperty("--r", index);
+      label.innerHTML = `
+        <span class="row-dot"></span>
+        <span class="row-label-copy">
+          <strong class="row-title">${row.title}</strong>
+          <span class="row-subtitle">${row.subtitle}</span>
+        </span>
+      `;
+      matrix.appendChild(label);
+    });
+
+    // Render stage columns
+    data.stages.forEach((stage, colIndex) => {
+      const column = document.createElement("article");
+      column.className = "stage-column";
+      column.setAttribute("data-tone", stage.tone);
+      column.setAttribute("tabindex", "0");
+      column.setAttribute("aria-label", `${stage.number} ${stage.name}, ${stage.subtitle}`);
+      column.style.setProperty("--stage-column", colIndex + 2);
+      column.style.setProperty("--stage-color", stage.color);
+      column.style.setProperty("--c", colIndex);
+
+      column.innerHTML = `
+        <div class="stage-column-border" aria-hidden="true"></div>
+        <header class="stage-head">
+          <span class="stage-number">${stage.number}</span>
+          <strong class="stage-name">${stage.name}</strong>
+          <span class="stage-subtitle">${stage.subtitle}</span>
+        </header>
+      `;
+
+      // Render cells
+      stage.cells.forEach((cell, rowIndex) => {
+        const isEmpty = cell.text === null;
+        const barFill = cell.bar ?? 20;
+        const cellDiv = document.createElement("div");
+        cellDiv.className = "stage-cell" + (isEmpty ? " is-empty" : "");
+        cellDiv.setAttribute("data-cell-row", rowIndex);
+        cellDiv.setAttribute("tabindex", "0");
+        cellDiv.style.setProperty("--cell-row", rowIndex + 2);
+        cellDiv.style.setProperty("--r", rowIndex);
+
+        const content = isEmpty ? "Not a focus at this stage" : cell.text;
+        cellDiv.innerHTML = `
+          <span class="cell-bar" aria-hidden="true">
+            <span class="cell-bar-track"></span>
+            <span class="cell-bar-fill" style="--bar-fill:${barFill}%"></span>
+            <span class="cell-bar-dot" style="--bar-fill:${barFill}%"></span>
+          </span>
+          <span class="cell-content">${content}</span>`;
+        column.appendChild(cellDiv);
+      });
+
+      matrix.appendChild(column);
+    });
+
+    // Intro animation
+    (() => {
+      const frame = document.querySelector(".frame");
+      const headline = document.querySelector(".headline");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+      if (reducedMotion.matches) return;
+
+      document.fonts.ready.then(() => {
+        const headlineText = headline.textContent.trim();
+        const textNode = headline.firstChild;
+        const range = document.createRange();
+        const words = [...headlineText.matchAll(/\S+/g)];
+        const lines = [];
+        let lineTop = null;
+        let line = [];
+
+        words.forEach((word) => {
+          range.setStart(textNode, word.index);
+          range.setEnd(textNode, word.index + word[0].length);
+          const top = range.getBoundingClientRect().top;
+          if (lineTop !== null && Math.abs(top - lineTop) > 1) {
+            lines.push(line.join(" "));
+            line = [];
+          }
+          lineTop = top;
+          line.push(word[0]);
+        });
+        if (line.length) lines.push(line.join(" "));
+
+        headline.setAttribute("aria-label", headlineText);
+        headline.replaceChildren(...lines.map((lineText, index) => {
+          const mask = document.createElement("span");
+          const text = document.createElement("span");
+          mask.className = "headline-line-mask";
+          mask.setAttribute("aria-hidden", "true");
+          mask.style.setProperty("--l", String(index));
+          text.className = "headline-line";
+          text.textContent = lineText;
+          mask.appendChild(text);
+          return mask;
+        }));
+
+        window.requestAnimationFrame(() => {
+          frame.classList.add("is-intro");
+          matrix.classList.add("is-animated", "sweep-active");
+          const introDuration = parseFloat(getComputedStyle(frame).getPropertyValue("--intro-duration")) * 1000;
+          window.setTimeout(() => {
+            frame.classList.remove("is-intro");
+            matrix.classList.remove("is-animated", "sweep-active");
+          }, introDuration);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Newsreader, JetBrains_Mono } from "next/font/google";
+import ProductFooter from "../components/ProductFooter";
 import BioremidationHero from "../components/bioremediation/BioremidationHero";
 import BioremidationDataStrip from "../components/bioremediation/BioremidationDataStrip";
 import BioremidationOxygenConnect from "../components/bioremediation/BioremidationOxygenConnect";
@@ -60,6 +61,7 @@ export default function BioremediationPage() {
         {/* FRAME 6: CLOSING & REFERENCES */}
         <BioremidationClosing />
       </div>
+      <ProductFooter />
     </main>
   );
 }
