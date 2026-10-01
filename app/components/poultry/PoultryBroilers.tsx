@@ -2,7 +2,7 @@ import React from "react";
 
 export default function PoultryBroilers() {
   return (
-    <section className="w-full relative overflow-hidden py-8 lg:py-12 min-h-[85vh] bg-[#DDE9D5]">
+    <section className="w-full relative overflow-hidden py-8 lg:py-12 min-h-[85vh] bg-[#DDE9D5]" data-pm-section="broilers">
       {/* Subtle capsule decorations */}
       <div className="absolute inset-0 opacity-[0.08] pointer-events-none">
         <svg width="100%" height="100%" viewBox="0 0 1600 846" fill="none">
@@ -35,7 +35,7 @@ export default function PoultryBroilers() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
           {/* Left Side - Broiler image */}
           <div className="flex items-center justify-center">
-            <div className="w-[75%] aspect-[3/4] max-h-[600px] overflow-hidden rounded-sm" data-broiler-image>
+            <div className="w-[75%] aspect-[3/4] max-h-[600px] overflow-hidden rounded-sm" data-broiler-image data-pm-species-frame="2">
               <img
                 src="/images/poultry-broilers.png"
                 alt="Broilers in a commercial poultry production setting"
@@ -46,14 +46,14 @@ export default function PoultryBroilers() {
           </div>
 
           {/* Right Side - Explanatory Content */}
-          <div className="space-y-6 lg:space-y-8">
+          <div className="space-y-6 lg:space-y-8" data-pm-species-text="2">
             {/* Broilers heading and priority above the explanatory matter */}
             <div className="flex flex-col justify-start items-start space-y-4">
-              <div className="font-mono text-xs font-semibold tracking-[0.25em] text-[#6BBF3A] uppercase">
+              <div className="font-mono text-xs font-semibold tracking-[0.25em] text-[#2D5A42] uppercase">
                 MEAT PRODUCTION
               </div>
 
-              <h2 className="font-space-grotesk font-extrabold text-[clamp(4rem,8vw,8rem)] text-[#6BBF3A] tracking-tight leading-[0.85] uppercase">
+              <h2 className="font-space-grotesk font-extrabold text-[clamp(4rem,8vw,8rem)] text-[#2D5A42] tracking-tight leading-[0.85] uppercase">
                 BROILERS
               </h2>
 
@@ -75,7 +75,7 @@ export default function PoultryBroilers() {
             {/* Two-column Box */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               {/* Left Box - Growth and FCR */}
-              <div className="border border-[#6BBF3A] p-5">
+              <div className="border border-[#2D5A42] p-5" data-pm-mini-card="0">
                 <div className="font-space-grotesk font-bold text-base text-[#1a1a1a] mb-2">
                   Growth and FCR
                 </div>
@@ -85,7 +85,7 @@ export default function PoultryBroilers() {
               </div>
 
               {/* Right Box - Gut lesions */}
-              <div className="border border-[#6BBF3A] p-5">
+              <div className="border border-[#2D5A42] p-5" data-pm-mini-card="1">
                 <div className="font-space-grotesk font-bold text-base text-[#1a1a1a] mb-2">
                   Gut lesions
                 </div>
@@ -97,7 +97,7 @@ export default function PoultryBroilers() {
 
             {/* Highlighted Statement with Vertical Accent Line */}
             <div className="flex gap-4 mb-6">
-              <div className="w-1 bg-[#6BBF3A] flex-shrink-0" />
+              <div className="w-1 bg-[#2D5A42] flex-shrink-0" />
               <div>
                 <h4 className="font-space-grotesk font-bold text-base text-[#1a1a1a] mb-2">
                   As effective as antibiotics on growth.

@@ -2,7 +2,7 @@ import React from "react";
 
 export default function PoultryThreeBirds() {
   return (
-    <section className="w-full bg-[#EAF3EA] py-8 lg:py-12 text-[#0a2d1a] relative overflow-hidden">
+    <section className="w-full bg-[#EAF3EA] py-8 lg:py-12 text-[#0a2d1a] relative overflow-hidden" data-pm-section="threebirds">
       {/* Subtle bacterial background decorations */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <svg width="100%" height="100%" viewBox="0 0 1600 846" fill="none">
@@ -35,14 +35,14 @@ export default function PoultryThreeBirds() {
         {/* MAIN HEADLINE - Aligned with Hero Header */}
         <div className="mb-6 lg:mb-8 max-w-5xl pl-8 lg:pl-12">
           {/* Small Label with Horizontal Line */}
-          <div className="flex items-center gap-3 mb-4">
-            <span className="w-8 h-[1.5px] bg-[#2D6A4F]" />
-            <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">
+          <div className="flex items-center gap-3 mb-[14px]">
+            <span className="w-8 h-[1.5px] bg-[#0B6B52]" />
+            <span className="font-mono text-xs font-semibold tracking-[0.14em] text-[#0B6B52] uppercase">
               04 / BREEDERS, LAYERS AND BROILERS
             </span>
           </div>
           {/* Main Headline */}
-          <h2 className="font-space-grotesk font-extrabold text-[clamp(2.25rem,3.8vw,4rem)] text-[#0a2d1a] tracking-tight leading-[1.02] uppercase">
+          <h2 className="font-extrabold text-[clamp(2.4rem,6.4vw,5.8rem)] text-[#0a2d1a] leading-[.96]" style={{ fontFamily: "var(--font-bricolage), 'Helvetica Neue', Arial, sans-serif", letterSpacing: "-.035em" }} data-pm-heading="rise">
             Breeders, layers and broilers need different things from the gut.
           </h2>
         </div>
@@ -50,14 +50,14 @@ export default function PoultryThreeBirds() {
         {/* Two Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-1">
           {/* LEFT SECTION - Breeder Text and Image */}
-          <div className="space-y-6 w-[85%] pl-8 lg:pl-16">
+          <div className="space-y-6 w-[85%] pl-8 lg:pl-16" data-pm-species-frame="0">
             {/* LEFT SECTION TEXT */}
             <div className="space-y-3">
-              <div className="font-mono text-xs font-semibold tracking-[0.2em] text-[#6DBE45] uppercase">
+              <div className="font-mono text-xs font-semibold tracking-[0.2em] text-[#2D5A42] uppercase">
                 PARENT STOCK
               </div>
 
-              <div className="font-space-grotesk font-extrabold text-[clamp(2.5rem,6vw,6.5rem)] text-[#6DBE45] tracking-tight leading-[0.9]">
+              <div className="font-space-grotesk font-extrabold text-[clamp(2.5rem,6vw,6.5rem)] text-[#2D5A42] tracking-tight leading-[0.9]">
                 BREEDERS
               </div>
 
@@ -82,7 +82,7 @@ export default function PoultryThreeBirds() {
           </div>
 
           {/* RIGHT MAIN CONTENT - Aligned with BREEDERS heading */}
-          <div className="space-y-4 lg:space-y-6 pt-8 lg:pt-12 pl-0">
+          <div className="space-y-4 lg:space-y-6 pt-8 lg:pt-12 pl-0" data-pm-species-text="0">
             {/* Heading */}
             <h3 className="font-space-grotesk font-semibold text-[clamp(1.5rem,2.5vw,2.5rem)] text-[#0a2d1a] tracking-tight leading-tight">
               A healthy breeder passes on a healthy start.
@@ -96,7 +96,7 @@ export default function PoultryThreeBirds() {
             {/* Information Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Left Card */}
-              <div className="border border-[#c4d4c4] p-5">
+              <div className="border border-[#c4d4c4] p-5" data-pm-mini-card="0">
                 <div className="font-space-grotesk font-bold text-base text-[#0a2d1a] mb-2">
                   Less vertical transmission
                 </div>
@@ -106,7 +106,7 @@ export default function PoultryThreeBirds() {
               </div>
 
               {/* Right Card */}
-              <div className="border border-[#c4d4c4] p-5">
+              <div className="border border-[#c4d4c4] p-5" data-pm-mini-card="1">
                 <div className="font-space-grotesk font-bold text-base text-[#0a2d1a] mb-2">
                   Hatchery protection
                 </div>
@@ -134,7 +134,7 @@ export default function PoultryThreeBirds() {
                     <span className="font-space-grotesk font-bold text-xs text-[#f0799c]">60–70%</span>
                   </div>
                   <div className="w-full h-3 bg-[#e8e8e8] rounded overflow-hidden">
-                    <div className="h-full bg-[#f0799c] rounded" style={{ width: '65%' }}></div>
+                    <div className="h-full bg-[#f0799c] rounded" style={{ width: '65%' }} data-pm-bar="0.65"></div>
                   </div>
                 </div>
 
@@ -145,7 +145,7 @@ export default function PoultryThreeBirds() {
                     <span className="font-space-grotesk font-bold text-xs text-[#d47a7a]">60–70%</span>
                   </div>
                   <div className="w-full h-3 bg-[#e8e8e8] rounded overflow-hidden">
-                    <div className="h-full bg-[#d47a7a] rounded" style={{ width: '65%' }}></div>
+                    <div className="h-full bg-[#d47a7a] rounded" style={{ width: '65%' }} data-pm-bar="0.65"></div>
                   </div>
                 </div>
 
@@ -156,7 +156,7 @@ export default function PoultryThreeBirds() {
                     <span className="font-space-grotesk font-bold text-xs text-[#8fdcc0]">&lt;20%</span>
                   </div>
                   <div className="w-full h-3 bg-[#e8e8e8] rounded overflow-hidden">
-                    <div className="h-full bg-[#8fdcc0] rounded" style={{ width: '18%' }}></div>
+                    <div className="h-full bg-[#8fdcc0] rounded" style={{ width: '18%' }} data-pm-bar="0.18"></div>
                   </div>
                 </div>
               </div>

@@ -7,7 +7,7 @@
   <title>First colonisers</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
   <style>
     :root {
       color-scheme: light;
@@ -15,15 +15,16 @@
       --lumen: #D5E6D6;
       --ink: #0B2B1F;
       --mute: #4F6F5F;
-      --tissue: #F1B59C;
-      --good: #7CC65B;
-      --sal: #EB4A30;
-      --clo: #4280E4;
+      --tissue: #F9C9B0;
+      --good: #35A86B;
+      --sal: #D95F4D;
+      --clo: #557BC4;
       --accent: #C4533A;
       --control-track: #D3E4D5;
       --band-border: #B9D3BE;
       --paragraph: #27453A;
       --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+      --label-font: "Poppins", "Helvetica Neue", Arial, sans-serif;
       --serif: "Newsreader", Georgia, serif;
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-right: env(safe-area-inset-right, 0px);
@@ -65,7 +66,7 @@
 
     h1 {
       max-width: none;
-      margin: clamp(48px, 9vw, 110px) 0 clamp(32px, 5vw, 64px);
+      margin: 0 0 clamp(32px, 5vw, 64px);
       color: var(--ink);
       font-family: var(--display);
       font-size: clamp(2.4rem, 6.4vw, 5.8rem);
@@ -75,30 +76,65 @@
       text-wrap: balance;
     }
 
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: clamp(48px, 9vw, 110px) 0 0;
+      color: var(--free);
+      font-family: var(--label-font);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      line-height: 1.3;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 32px;
+      height: 1.5px;
+      flex: 0 0 auto;
+      background: currentColor;
+      content: "";
+    }
+
+    .gut-layout {
+      display: grid;
+      grid-template-columns: minmax(120px, .55fr) minmax(0, 2fr) minmax(90px, .45fr);
+      grid-template-areas: "stats diagram clock";
+      align-items: center;
+      gap: 0;
+      column-gap: 12px;
+      width: min(100%, 1440px);
+      margin: 0 auto;
+      padding-inline: clamp(20px, 5vw, 64px);
+    }
+
     .gut-band {
+      grid-area: diagram;
       position: relative;
       width: 100%;
+      height: clamp(300px, 32vw, 380px);
       overflow: hidden;
-      border-block: 1px solid var(--band-border);
+      border: 0;
+      border-radius: 12px;
       background: radial-gradient(120% 90% at 30% 50%, #F0F7EE, #D3E5D5);
     }
 
     .gut-canvas {
       display: block;
       width: 100%;
-      height: clamp(300px, 44vw, 400px);
+      height: 100%;
     }
 
     .stats {
-      position: absolute;
-      z-index: 1;
-      top: 50%;
-      left: clamp(20px, 5vw, 64px);
+      grid-area: stats;
       display: grid;
       gap: 14px;
-      transform: translateY(-50%);
+      min-width: 0;
       pointer-events: none;
-      text-shadow: 0 1px 12px var(--lumen);
+      text-shadow: 0 1px 6px var(--lumen);
+      padding-right: 8px;
     }
 
     .stat {
@@ -110,7 +146,7 @@
     .stat-value {
       color: var(--ink);
       font-family: var(--display);
-      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-size: clamp(1.75rem, 3.6vw, 3rem);
       font-variant-numeric: tabular-nums;
       font-weight: 800;
       letter-spacing: -.03em;
@@ -128,14 +164,13 @@
     }
 
     .clock {
-      position: absolute;
-      z-index: 1;
-      top: clamp(20px, 5vw, 64px);
-      right: clamp(20px, 5vw, 64px);
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-      text-shadow: 0 1px 12px var(--lumen);
+      grid-area: clock;
+      display: grid;
+      justify-self: start;
+      align-self: start;
+      gap: 6px;
+      min-width: 0;
+      text-shadow: 0 1px 6px var(--lumen);
       pointer-events: none;
     }
 
@@ -263,19 +298,33 @@
     }
 
     @media (max-width: 759px) {
+      .eyebrow {
+        margin-top: 48px;
+      }
+
       h1 {
         font-size: clamp(1.5rem, 6.8vw, 2.65rem);
       }
 
+      .gut-layout {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+          "stats"
+          "diagram"
+          "clock";
+        gap: 16px;
+        padding-inline: 20px;
+      }
+
       .stats {
-        top: 18px;
-        right: 20px;
-        left: 20px;
         display: flex;
         align-items: flex-start;
-        justify-content: flex-start;
-        gap: 20px;
-        transform: none;
+        gap: 14px;
+      }
+
+      .stat {
+        flex: 1 1 0;
+        min-width: 0;
       }
 
       .stat-value {
@@ -288,9 +337,11 @@
       }
 
       .clock {
-        top: auto;
-        right: 20px;
-        bottom: 18px;
+        display: flex;
+        align-items: baseline;
+        justify-self: end;
+        gap: 8px;
+        text-align: right;
       }
 
       .control-bar {
@@ -337,13 +388,12 @@
 <body>
   <main aria-label="First colonisers">
     <div class="container">
+      <p class="eyebrow">The gut is the front line</p>
       <h1>Whoever colonises the gut<br>first sets the course.</h1>
     </div>
 
-    <section class="gut-band" aria-label="A chick's small intestine, where bacteria compete for attachment sites">
-      <canvas class="gut-canvas" role="img" aria-label="Bacteria drift through the gut and attach to the finger-like villi. Whichever group arrives first holds the attachment sites and blocks the other.">
-        Bacteria drift through the gut and attach to the finger-like villi. Whichever group arrives first holds the attachment sites and blocks the other.
-      </canvas>
+    <section aria-label="A chick's small intestine, where bacteria compete for attachment sites">
+      <div class="gut-layout">
       <div class="stats">
         <div class="stat">
           <span class="stat-value" data-stat="held">0 of 0</span>
@@ -358,9 +408,15 @@
           <span class="stat-label">Villi fully secured</span>
         </div>
       </div>
+      <div class="gut-band">
+        <canvas class="gut-canvas" role="img" aria-label="Bacteria drift through the gut and attach to the finger-like villi. Whichever group arrives first holds the attachment sites and blocks the other.">
+          Bacteria drift through the gut and attach to the finger-like villi. Whichever group arrives first holds the attachment sites and blocks the other.
+        </canvas>
+      </div>
       <div class="clock" aria-label="Time after hatching">
         <span class="clock-value" data-stat="clock">0</span>
         <span class="clock-label">hours after hatching</span>
+      </div>
       </div>
     </section>
 
@@ -398,7 +454,7 @@
       const turnedLabel = document.querySelector('[data-label="turned"]');
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
       const frameDuration = 1000 / 60;
-      const colors = { beneficial: "#7CC65B", salmonella: "#EB4A30", clostridium: "#4280E4" };
+      const colors = { beneficial: "#35A86B", salmonella: "#D95F4D", clostridium: "#557BC4" };
       let width = 0;
       let height = 0;
       let pixelRatio = 1;
@@ -617,7 +673,7 @@
         const sweepX = ((scene.time * 140) % (width + 400)) - 200;
         const gradient = context.createLinearGradient(sweepX - 200, 0, sweepX + 200, 0);
         gradient.addColorStop(0, "rgba(255,255,255,0)");
-        gradient.addColorStop(.5, "rgba(255,255,255,.45)");
+        gradient.addColorStop(.5, "rgba(255,255,255,.24)");
         gradient.addColorStop(1, "rgba(255,255,255,0)");
         context.fillStyle = gradient;
         context.fillRect(0, lumenTop, width, lumenBottom - lumenTop);
@@ -641,9 +697,9 @@
         const tipY = villus.tipY;
         const h = villus.height;
         const gradient = context.createLinearGradient(x, baseY, x, tipY);
-        gradient.addColorStop(0, "#C9705A");
-        gradient.addColorStop(.35, "#E9A088");
-        gradient.addColorStop(1, "#F6C4AC");
+        gradient.addColorStop(0, "#D9826C");
+        gradient.addColorStop(.35, "#F2B09A");
+        gradient.addColorStop(1, "#FDD4BE");
 
         context.beginPath();
         context.moveTo(x - half, baseY);
@@ -652,23 +708,23 @@
         context.closePath();
         context.fillStyle = gradient;
         context.fill();
-        context.strokeStyle = "rgba(120,40,30,.35)";
+        context.strokeStyle = "rgba(151,82,60,.62)";
         context.lineWidth = 1.5;
         context.stroke();
 
         context.beginPath();
         context.ellipse(x - villus.width * .12, tipY + direction * h * .57, 2.3, h * .16, -.08, 0, Math.PI * 2);
-        context.fillStyle = "rgba(255,255,255,.22)";
+        context.fillStyle = "rgba(255,255,255,.15)";
         context.fill();
       }
 
       function drawTissue() {
-        const wallFill = "#E9A088";
+        const wallFill = "#F2B09A";
         context.fillStyle = wallFill;
         context.fillRect(0, 0, width, 12);
         context.fillRect(0, height - 12, width, 12);
         scene.villi.forEach(drawVillus);
-        context.strokeStyle = "rgba(120,40,30,.35)";
+        context.strokeStyle = "rgba(180,90,65,.55)";
         context.lineWidth = 1.5;
         context.beginPath();
         context.moveTo(0, 12);
@@ -687,7 +743,7 @@
           const radius = villus.height * .95 * pulse;
           const glowColor = owner === "beneficial" ? "124,198,91" : "235,74,48";
           const glow = context.createRadialGradient(villus.x, centerY, 0, villus.x, centerY, radius);
-          glow.addColorStop(0, `rgba(${glowColor},.45)`);
+          glow.addColorStop(0, `rgba(${glowColor},.22)`);
           glow.addColorStop(1, `rgba(${glowColor},0)`);
           context.fillStyle = glow;
           context.beginPath();

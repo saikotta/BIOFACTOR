@@ -197,10 +197,6 @@
       transform: translateX(90px) scale(.92);
     }
 
-    .card-left-align {
-      text-align: left;
-    }
-
     .card-right {
       grid-column: 3;
       border-radius: 14px 56px 56px 14px;
@@ -412,7 +408,7 @@
     .evidence-number {
       display: block;
       margin: 0 0 5px;
-      color: #f0b04a;
+      color: #8FD860;
       font-family: var(--display);
       font-size: clamp(44px, 6vw, 72px);
       font-variant-numeric: tabular-nums;
@@ -442,7 +438,7 @@
       width: var(--bar-width);
       height: 100%;
       border-radius: inherit;
-      background: linear-gradient(90deg, #9cc47f, #f0b04a);
+      background: linear-gradient(90deg, #9cc47f, #8FD860);
       transition: width 1600ms cubic-bezier(.2, .8, .2, 1);
       transition-delay: var(--stat-delay, 0ms);
     }
@@ -457,12 +453,12 @@
 
     .evidence-stat:hover,
     .evidence-stat:focus-within {
-      border-top-color: #f0b04a;
+      border-top-color: #8FD860;
     }
 
     .evidence-stat:hover .evidence-number,
     .evidence-stat:focus-within .evidence-number {
-      text-shadow: 0 0 24px rgba(240, 176, 74, .36);
+      text-shadow: 0 0 24px rgba(143, 216, 96, .36);
     }
 
     @media (max-width: 759px) {
@@ -664,7 +660,7 @@
 
       <section class="ledger" aria-label="Probiotics and prebiotics comparison">
         <article class="row" tabindex="0" aria-label="Comparison row one">
-          <div class="card card-left card-left-align">
+          <div class="card card-left">
             <h3 class="entry-title">Competitive exclusion:</h3>
             <p class="entry-copy">Beneficial bacteria take the attachment sites and nutrients that <em>Salmonella</em>, <em>E. coli</em> and <em>Clostridium</em> need.<sup>4</sup></p>
           </div>

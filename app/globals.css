@@ -1633,3 +1633,147 @@ body:has([data-ruminants-section]) a:hover::after {
 }
 
 
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   POULTRY SCROLL-MOTION SYSTEM OVERRIDES
+   These rules coexist with the old [data-poultry-reveal] system.
+   The JS scrub sets inline styles on the same elements; we need to ensure
+   CSS transitions don't fight the per-frame inline style updates.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/*
+ * The old reveal system uses a CSS transition on opacity + transform.
+ * For elements now owned by the JS scrub engine (data-pm-* targets) we
+ * suppress that transition so the per-frame update is applied immediately.
+ * The old .poultry-motion-in state is never added by the new engine, so
+ * those rules become inert — no conflict, no double-animation.
+ */
+[data-pm-strip-panel],
+[data-pm-species-frame],
+[data-pm-species-text],
+[data-pm-mini-card],
+[data-pm-bar],
+[data-pm-hero-bg],
+[data-pm-hero-text],
+[data-pm-hero-eyebrow],
+[data-pm-hero-headline],
+[data-pm-hero-subline] {
+  /* Override the global "* { transition-property: opacity, transform !important }" */
+  transition: none !important;
+}
+
+/*
+ * The old [data-poultry-reveal] rule hides elements at opacity:0 + translateY(24px).
+ * PoultryLayers has data-poultry-reveal on its section and two inner divs.
+ * The new JS engine handles those inner divs via data-pm-species-frame/text,
+ * so we reset the old reveal initial state on them so they aren't invisible
+ * before the JS engine first runs.
+ * We keep the section-level [data-poultry-reveal] hidden-state as-is since
+ * the old PoultryMotion IntersectionObserver is still present and will
+ * add .poultry-motion-in to section wrappers normally.
+ */
+[data-pm-species-frame][data-poultry-reveal],
+[data-pm-species-text][data-poultry-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/*
+ * Prevent the old DataStrip editorial paragraph's own inline JS transition
+ * (the component uses inline style opacity/translateX transition) from
+ * layering on top of the new scrub. We don't own that element with a
+ * data-pm attribute so we leave it alone — it uses its own IntersectionObserver
+ * and inline transition, which is fine since the new system doesn't touch it.
+ */
+
+/*
+ * Ensure the hero bg wrapper (position:absolute) doesn't clip the parallax
+ * translation. The JS moves it by up to 0.4 * vh which could go outside
+ * the section bounds — allow overflow on the section while keeping the
+ * page body overflow-x:hidden.
+ */
+[data-pm-section="hero"] {
+  overflow: visible;
+}
+[data-pm-section="hero"] [data-pm-hero-bg] {
+  overflow: hidden;
+  will-change: transform;
+}
+
+/* Give the hero rays + spores absolute positioning anchor */
+[data-pm-hero-rays],
+[data-pm-hero-spores] {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+/* Footer: ensure relative positioning for the spotlight child */
+[data-pm-section="footer"] {
+  position: relative;
+  overflow: hidden;
+}
+
+/* body overflow-x guard — belt and braces */
+body {
+  overflow-x: hidden;
+}
+
+/*
+ * prefers-reduced-motion:
+ * Force every JS-animated element to its final visible state.
+ * The JS engine also checks this flag and calls return early,
+ * but CSS ensures zero flash even if JS is slow to load.
+ */
+@media (prefers-reduced-motion: reduce) {
+  /* Cancel all CSS ambient loops injected by the motion system */
+  [data-pm-hero-img],
+  [data-pm-hero-rays],
+  [data-pm-hero-spores] > * {
+    animation: none !important;
+  }
+
+  /* Reveal all JS-animated elements immediately */
+  [data-pm-strip-panel],
+  [data-pm-species-frame],
+  [data-pm-species-text],
+  [data-pm-mini-card] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    border-radius: 0 !important;
+  }
+
+  /* Bars: use the data attribute value written by JS, or default to full */
+  [data-pm-bar] {
+    width: calc(var(--pm-bar-target, 1) * 100%) !important;
+    transition: none !important;
+  }
+
+  /* Heading words split by JS: make them visible before JS runs */
+  [data-pm-heading="rise"] span,
+  [data-pm-heading="flip"] span {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* Hero text block */
+  [data-pm-hero-eyebrow],
+  [data-pm-hero-headline],
+  [data-pm-hero-subline],
+  [data-pm-hero-text] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* Footer spotlight */
+  [data-pm-section="footer"] > div:first-child {
+    transform: translateX(-50%) scale(1) !important;
+    opacity: 1 !important;
+  }
+}

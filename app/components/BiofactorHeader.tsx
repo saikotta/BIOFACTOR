@@ -44,7 +44,7 @@ export default function BiofactorHeader() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 w-full bg-[#D9E8D2] border-b border-[#167A4A]/12">
+    <header className="fixed top-0 left-0 right-0 z-50 w-full bg-[#d9ead3] border-t-2 border-[#93c47d] border-b border-[#167A4A]/12">
       <div className="w-full max-w-[1700px] mx-auto h-[64px] md:h-[72px] px-6 sm:px-10 md:px-14 lg:px-20 flex items-center justify-between">
         {/* Left Side: Official Biofactor Logo */}
         <Link href="/" className="flex items-center group">
@@ -114,7 +114,7 @@ export default function BiofactorHeader() {
                     {/* Dropdown Menu */}
                     {productDropdownOpen && (
                       <div className="absolute top-full left-0 pt-2 min-w-[160px] z-50">
-                        <div className="bg-[#D9E8D2] border border-[#167A4A]/12 shadow-lg rounded-sm py-2">
+                        <div className="bg-[#d9ead3] border border-[#167A4A]/12 shadow-lg rounded-sm py-2">
                           {PRODUCT_ITEMS.map((item) => {
                             const isActive = pathname === item.href;
                             return (
@@ -184,7 +184,7 @@ export default function BiofactorHeader() {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-[#D9E8D2] border-b border-[#167A4A]/12 shadow-lg px-8 py-5 flex flex-col gap-3.5 z-50">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-[#d9ead3] border-b border-[#167A4A]/12 shadow-lg px-8 py-5 flex flex-col gap-3.5 z-50">
           {NAV_ITEMS.map((item, index) => {
             const isActive = pathname === item.href;
             // Insert PRODUCT dropdown after ABOUT (index 1)

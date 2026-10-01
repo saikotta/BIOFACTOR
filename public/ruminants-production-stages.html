@@ -4,22 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="light">
-  <title>The right biology at every stage of the bird's life</title>
+  <title>The right biology at every stage of the cow's life</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
   <style>
     :root {
       color-scheme: light;
-      --page: #d9ebd3;
-      --ink: #14301f;
-      --soft: rgba(20, 48, 31, .82);
+      --page: #EAF3EA;
+      --ink: #173522;
+      --soft: rgba(23, 53, 34, .82);
       --cream: #f4faec;
-      --stage-1: #f3faea;
-      --stage-2: #cde6c3;
-      --stage-3: #8fc49a;
-      --stage-4: #3f8a5f;
-      --stage-5: #1c4a31;
+      --stage-1: #C8E6C9;
+      --stage-2: #A5D6A7;
+      --stage-3: #81C784;
+      --stage-4: #66BB6A;
+      --stage-5: #4CAF50;
       --ease-out: cubic-bezier(.16, 1, .3, 1);
       --ease-inout: cubic-bezier(.65, 0, .35, 1);
       --capsule-duration: 1.2s;
@@ -114,7 +114,7 @@
       position: absolute;
       width: var(--rod-width);
       height: 11px;
-      border: 1px solid rgba(20, 48, 31, .13);
+      border: 1px solid rgba(23, 53, 34, .13);
       border-radius: 999px;
       opacity: .14;
       transform: translate3d(0, 0, 0) rotate(var(--rod-angle));
@@ -188,7 +188,7 @@
       overscroll-behavior-inline: contain;
       padding: 28px 8px 28px;
       margin-top: -10px;
-      scrollbar-color: rgba(20, 48, 31, .4) transparent;
+      scrollbar-color: rgba(23, 53, 34, .4) transparent;
       -webkit-overflow-scrolling: touch;
     }
 
@@ -262,7 +262,7 @@
       border-radius: 90px;
       background: var(--stage-color);
       color: var(--stage-ink);
-      box-shadow: 0 12px 28px rgba(20, 48, 31, .18), 0 2px 6px rgba(20, 48, 31, .12);
+      box-shadow: 0 12px 28px rgba(23, 53, 34, .18), 0 2px 6px rgba(23, 53, 34, .12);
       opacity: 1;
       transform: translateY(0) scale(1);
       transform-origin: bottom;
@@ -270,7 +270,6 @@
       transition: transform var(--release-duration) var(--ease-out), opacity var(--release-duration) var(--ease-out), box-shadow var(--release-duration) var(--ease-out);
     }
 
-    /* Inner mask to keep content clipped while allowing hover to overflow upward */
     .stage-column-inner {
       position: absolute;
       inset: 0;
@@ -300,17 +299,16 @@
 
     .stage-column::after {
       z-index: 0;
-      box-shadow: 0 22px 44px rgba(20, 48, 31, .2);
+      box-shadow: 0 22px 44px rgba(23, 53, 34, .2);
       opacity: 0;
       transition: opacity var(--release-duration) var(--ease-out);
     }
 
-    /* Border ring overlay — visible on all columns */
     .stage-column-border {
       position: absolute;
       inset: 0;
       border-radius: 90px;
-      border: 2px solid rgba(20, 48, 31, .42);
+      border: 2px solid rgba(23, 53, 34, .42);
       pointer-events: none;
       z-index: 4;
     }
@@ -441,7 +439,6 @@
       outline: none;
     }
 
-    /* ── Row indicator bars ── */
     .cell-bar {
       display: block;
       position: relative;
@@ -458,7 +455,7 @@
       transform: translateY(-50%);
       height: 2px;
       border-radius: 999px;
-      background: var(--bar-track, rgba(20,48,31,.22));
+      background: var(--bar-track, rgba(23,53,34,.22));
       width: 100%;
     }
 
@@ -486,23 +483,19 @@
       transition: left .4s cubic-bezier(.16,1,.3,1);
     }
 
-    /* Row 0 — Gut restoration — deep teal on light, bright mint on dark */
     .stage-cell[data-cell-row="0"] {
       --bar-color: #1a6640;
       --bar-track: rgba(26,102,64,.32);
     }
-    /* Row 1 — Disease management — dark forest on light, warm cream on dark */
     .stage-cell[data-cell-row="1"] {
       --bar-color: #0d3d22;
       --bar-track: rgba(13,61,34,.32);
     }
-    /* Row 2 — Mineral availability — medium forest on light, pale sage on dark */
     .stage-cell[data-cell-row="2"] {
       --bar-color: #2a5c3a;
       --bar-track: rgba(42,92,58,.32);
     }
 
-    /* Dark columns (stage-4 #3f8a5f, stage-5 #1c4a31) — flip to light colors */
     .stage-column[data-tone="dark"] .stage-cell[data-cell-row="0"] {
       --bar-color: #a8e6bf;
       --bar-track: rgba(168,230,191,.40);
@@ -516,7 +509,6 @@
       --bar-track: rgba(110,212,160,.38);
     }
 
-    /* Animate bar fill on intro */
     .matrix.is-animated .cell-bar-fill,
     .matrix.is-animated .cell-bar-dot {
       opacity: 0;
@@ -567,8 +559,8 @@
     }
 
     .stage-column[data-tone="light"] {
-      --stage-ink: #14301f;
-      --divider: rgba(20, 48, 31, .40);
+      --stage-ink: #173522;
+      --divider: rgba(23, 53, 34, .40);
     }
 
     .stage-column[data-tone="dark"] {
@@ -576,7 +568,6 @@
       --divider: rgba(244, 250, 236, .52);
     }
 
-    /* Ensure text in dark columns is fully legible */
     .stage-column[data-tone="dark"] .stage-number,
     .stage-column[data-tone="dark"] .stage-name,
     .stage-column[data-tone="dark"] .stage-subtitle,
@@ -607,7 +598,7 @@
     .stage-column:focus-within {
       z-index: 2;
       transform: translateY(-6px) scale(1.035);
-      box-shadow: 0 22px 44px rgba(20, 48, 31, .22), 0 4px 10px rgba(20, 48, 31, .14);
+      box-shadow: 0 22px 44px rgba(23, 53, 34, .22), 0 4px 10px rgba(23, 53, 34, .14);
       transition-duration: var(--hover-duration);
       transition-delay: 60ms;
     }
@@ -747,91 +738,91 @@
         <span class="microbe-rod" style="--rod-width: 46px; --rod-angle: -26deg; --rod-duration: 21s; --rod-delay: -9s"></span>
       </div>
       <div class="frame-content">
-        <h1 class="headline">The right biology at every stage of the bird's life.</h1>
-        <p class="subtext">The gut faces different pressures at each stage. Biologicals work best matched to those pressures.</p>
-        <div class="matrix-scroll" tabindex="0" role="region" aria-label="Bird life-stage biology comparison">
+        <h1 class="headline">The right biology at every stage.</h1>
+        <p class="subtext">The rumen faces different pressures at each stage. Biologicals work best matched to those pressures.</p>
+        <div class="matrix-scroll" tabindex="0" role="region" aria-label="Cow life-stage biology comparison">
           <div class="matrix" id="life-stage-matrix">
-            <div class="row-label" data-row="0" style="--r: 0"><span class="row-dot"></span><span class="row-label-copy"><strong class="row-title">Gut restoration</strong><span class="row-subtitle">Pre- and probiotics</span></span></div>
-            <div class="row-label" data-row="1" style="--r: 1"><span class="row-dot"></span><span class="row-label-copy"><strong class="row-title">Disease management</strong><span class="row-subtitle">Exclusion, immunity</span></span></div>
-            <div class="row-label" data-row="2" style="--r: 2"><span class="row-dot"></span><span class="row-label-copy"><strong class="row-title">Mineral availability</strong><span class="row-subtitle">Solubilising bacteria</span></span></div>
-            <article class="stage-column" data-tone="light" tabindex="0" aria-label="01 Breeder flock, Parent stock" style="--stage-column: 2; --stage-color: var(--stage-1); --c: 0">
+            <div class="row-label" data-row="0" style="--r: 0"><span class="row-dot"></span><span class="row-label-copy"><strong class="row-title">Rumen development</strong><span class="row-subtitle">Papillae & microbial ecosystem</span></span></div>
+            <div class="row-label" data-row="1" style="--r: 1"><span class="row-dot"></span><span class="row-label-copy"><strong class="row-title">Health & immunity</strong><span class="row-subtitle">Disease resistance & stress</span></span></div>
+            <div class="row-label" data-row="2" style="--r: 2"><span class="row-dot"></span><span class="row-label-copy"><strong class="row-title">Nutrient absorption</strong><span class="row-subtitle">Energy capture & minerals</span></span></div>
+            <article class="stage-column" data-tone="light" tabindex="0" aria-label="01 Pre-weaning, 0–8 wks" style="--stage-column: 2; --stage-color: var(--stage-1); --c: 0">
               <div class="stage-column-border" aria-hidden="true"></div>
-              <header class="stage-head"><span class="stage-number">01</span><strong class="stage-name">Breeder flock</strong><span class="stage-subtitle">Parent stock</span></header>
-              <div class="stage-cell" data-cell-row="0" tabindex="0" style="--cell-row: 2; --r: 0">
-                <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:62%"></span><span class="cell-bar-dot" style="--bar-fill:62%"></span></span>
-                <span class="cell-content">Stable gut through the laying cycle</span>
-              </div>
-              <div class="stage-cell" data-cell-row="1" tabindex="0" style="--cell-row: 3; --r: 1">
-                <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:78%"></span><span class="cell-bar-dot" style="--bar-fill:78%"></span></span>
-                <span class="cell-content">Less <em>Salmonella</em> passed through the egg</span>
-              </div>
-              <div class="stage-cell" data-cell-row="2" tabindex="0" style="--cell-row: 4; --r: 2">
-                <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:55%"></span><span class="cell-bar-dot" style="--bar-fill:55%"></span></span>
-                <span class="cell-content">Shell quality for hatching eggs</span>
-              </div>
-            </article>
-            <article class="stage-column" data-tone="light" tabindex="0" aria-label="02 Hatchery, Egg to chick" style="--stage-column: 3; --stage-color: var(--stage-2); --c: 1">
-              <div class="stage-column-border" aria-hidden="true"></div>
-              <header class="stage-head"><span class="stage-number">02</span><strong class="stage-name">Hatchery</strong><span class="stage-subtitle">Egg to chick</span></header>
+              <header class="stage-head"><span class="stage-number">01</span><strong class="stage-name">Pre-weaning</strong><span class="stage-subtitle">0–8 wks</span></header>
               <div class="stage-cell" data-cell-row="0" tabindex="0" style="--cell-row: 2; --r: 0">
                 <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:45%"></span><span class="cell-bar-dot" style="--bar-fill:45%"></span></span>
-                <span class="cell-content">First beneficial microbes for the chick</span>
+                <span class="cell-content">Papillae development from milk</span>
+              </div>
+              <div class="stage-cell" data-cell-row="1" tabindex="0" style="--cell-row: 3; --r: 1">
+                <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:55%"></span><span class="cell-bar-dot" style="--bar-fill:55%"></span></span>
+                <span class="cell-content">Immune priming & gut barrier</span>
+              </div>
+              <div class="stage-cell" data-cell-row="2" tabindex="0" style="--cell-row: 4; --r: 2">
+                <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:40%"></span><span class="cell-bar-dot" style="--bar-fill:40%"></span></span>
+                <span class="cell-content">Milk as primary nutrient source</span>
+              </div>
+            </article>
+            <article class="stage-column" data-tone="light" tabindex="0" aria-label="02 Weaned heifer, 2–12 mos" style="--stage-column: 3; --stage-color: var(--stage-2); --c: 1">
+              <div class="stage-column-border" aria-hidden="true"></div>
+              <header class="stage-head"><span class="stage-number">02</span><strong class="stage-name">Weaned heifer</strong><span class="stage-subtitle">2–12 mos</span></header>
+              <div class="stage-cell" data-cell-row="0" tabindex="0" style="--cell-row: 2; --r: 0">
+                <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:65%"></span><span class="cell-bar-dot" style="--bar-fill:65%"></span></span>
+                <span class="cell-content">Fiber digestion capacity builds</span>
               </div>
               <div class="stage-cell" data-cell-row="1" tabindex="0" style="--cell-row: 3; --r: 1">
                 <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:60%"></span><span class="cell-bar-dot" style="--bar-fill:60%"></span></span>
-                <span class="cell-content">Protect the embryo on the shell <sup>5</sup></span>
-              </div>
-              <div class="stage-cell is-empty" data-cell-row="2" tabindex="0" style="--cell-row: 4; --r: 2">
-                <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:20%"></span><span class="cell-bar-dot" style="--bar-fill:20%"></span></span>
-                <span class="cell-content">Not a focus at this stage</span>
-              </div>
-            </article>
-            <article class="stage-column" data-tone="light" tabindex="0" aria-label="03 Brooding, Days 0–14" style="--stage-column: 4; --stage-color: var(--stage-3); --c: 2">
-              <div class="stage-column-border" aria-hidden="true"></div>
-              <header class="stage-head"><span class="stage-number">03</span><strong class="stage-name">Brooding</strong><span class="stage-subtitle">Days 0–14</span></header>
-              <div class="stage-cell" data-cell-row="0" tabindex="0" style="--cell-row: 2; --r: 0">
-                <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:70%"></span><span class="cell-bar-dot" style="--bar-fill:70%"></span></span>
-                <span class="cell-content">Seed the empty gut early</span>
-              </div>
-              <div class="stage-cell" data-cell-row="1" tabindex="0" style="--cell-row: 3; --r: 1">
-                <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:85%"></span><span class="cell-bar-dot" style="--bar-fill:85%"></span></span>
-                <span class="cell-content">Early exclusion of <em>Salmonella</em> <sup>4</sup></span>
+                <span class="cell-content">Transition to solid feed stress</span>
               </div>
               <div class="stage-cell" data-cell-row="2" tabindex="0" style="--cell-row: 4; --r: 2">
-                <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:48%"></span><span class="cell-bar-dot" style="--bar-fill:48%"></span></span>
-                <span class="cell-content">Bone development</span>
+                <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:70%"></span><span class="cell-bar-dot" style="--bar-fill:70%"></span></span>
+                <span class="cell-content">Structural growth requires minerals</span>
               </div>
             </article>
-            <article class="stage-column" data-tone="dark" tabindex="0" aria-label="04 Grow-out, Broilers, pullets" style="--stage-column: 5; --stage-color: var(--stage-4); --c: 3">
+            <article class="stage-column" data-tone="light" tabindex="0" aria-label="03 Dry & transition, -3 to +3 wks" style="--stage-column: 4; --stage-color: var(--stage-3); --c: 2">
               <div class="stage-column-border" aria-hidden="true"></div>
-              <header class="stage-head"><span class="stage-number">04</span><strong class="stage-name">Grow-out</strong><span class="stage-subtitle">Broilers, pullets</span></header>
+              <header class="stage-head"><span class="stage-number">03</span><strong class="stage-name">Dry & transition</strong><span class="stage-subtitle">-3 to +3 wks</span></header>
               <div class="stage-cell" data-cell-row="0" tabindex="0" style="--cell-row: 2; --r: 0">
-                <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:80%"></span><span class="cell-bar-dot" style="--bar-fill:80%"></span></span>
-                <span class="cell-content">Recover after feed changes and stress</span>
+                <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:75%"></span><span class="cell-bar-dot" style="--bar-fill:75%"></span></span>
+                <span class="cell-content">Rumen adaptation for lactation</span>
               </div>
               <div class="stage-cell" data-cell-row="1" tabindex="0" style="--cell-row: 3; --r: 1">
+                <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:80%"></span><span class="cell-bar-dot" style="--bar-fill:80%"></span></span>
+                <span class="cell-content">Metabolic support & immunity</span>
+              </div>
+              <div class="stage-cell" data-cell-row="2" tabindex="0" style="--cell-row: 4; --r: 2">
+                <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:68%"></span><span class="cell-bar-dot" style="--bar-fill:68%"></span></span>
+                <span class="cell-content">Mineral mobilisation & storage</span>
+              </div>
+            </article>
+            <article class="stage-column" data-tone="dark" tabindex="0" aria-label="04 Peak lactation, Wks 4–20" style="--stage-column: 5; --stage-color: var(--stage-4); --c: 3">
+              <div class="stage-column-border" aria-hidden="true"></div>
+              <header class="stage-head"><span class="stage-number">04</span><strong class="stage-name">Peak lactation</strong><span class="stage-subtitle">Wks 4–20</span></header>
+              <div class="stage-cell" data-cell-row="0" tabindex="0" style="--cell-row: 2; --r: 0">
+                <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:90%"></span><span class="cell-bar-dot" style="--bar-fill:90%"></span></span>
+                <span class="cell-content">Maximum VFA yield & efficiency</span>
+              </div>
+              <div class="stage-cell" data-cell-row="1" tabindex="0" style="--cell-row: 3; --r: 1">
+                <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:70%"></span><span class="cell-bar-dot" style="--bar-fill:70%"></span></span>
+                <span class="cell-content">High metabolic stress management</span>
+              </div>
+              <div class="stage-cell" data-cell-row="2" tabindex="0" style="--cell-row: 4; --r: 2">
+                <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:85%"></span><span class="cell-bar-dot" style="--bar-fill:85%"></span></span>
+                <span class="cell-content">Energy capture & methane reduction</span>
+              </div>
+            </article>
+            <article class="stage-column" data-tone="dark" tabindex="0" aria-label="05 Late lactation, Wks 20+" style="--stage-column: 6; --stage-color: var(--stage-5); --c: 4">
+              <div class="stage-column-border" aria-hidden="true"></div>
+              <header class="stage-head"><span class="stage-number">05</span><strong class="stage-name">Late lactation</strong><span class="stage-subtitle">Wks 20+</span></header>
+              <div class="stage-cell" data-cell-row="0" tabindex="0" style="--cell-row: 2; --r: 0">
                 <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:72%"></span><span class="cell-bar-dot" style="--bar-fill:72%"></span></span>
-                <span class="cell-content">Necrotic enteritis window <sup>8</sup></span>
+                <span class="cell-content">Persistent yield maintenance</span>
+              </div>
+              <div class="stage-cell" data-cell-row="1" tabindex="0" style="--cell-row: 3; --r: 1">
+                <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:65%"></span><span class="cell-bar-dot" style="--bar-fill:65%"></span></span>
+                <span class="cell-content">Body condition recovery</span>
               </div>
               <div class="stage-cell" data-cell-row="2" tabindex="0" style="--cell-row: 4; --r: 2">
                 <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:75%"></span><span class="cell-bar-dot" style="--bar-fill:75%"></span></span>
-                <span class="cell-content">Phytate P for fast growth <sup>10</sup></span>
-              </div>
-            </article>
-            <article class="stage-column" data-tone="dark" tabindex="0" aria-label="05 Production, Lay, market" style="--stage-column: 6; --stage-color: var(--stage-5); --c: 4">
-              <div class="stage-column-border" aria-hidden="true"></div>
-              <header class="stage-head"><span class="stage-number">05</span><strong class="stage-name">Production</strong><span class="stage-subtitle">Lay, market</span></header>
-              <div class="stage-cell" data-cell-row="0" tabindex="0" style="--cell-row: 2; --r: 0">
-                <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:68%"></span><span class="cell-bar-dot" style="--bar-fill:68%"></span></span>
-                <span class="cell-content">Hold stability over a long lay</span>
-              </div>
-              <div class="stage-cell" data-cell-row="1" tabindex="0" style="--cell-row: 3; --r: 1">
-                <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:55%"></span><span class="cell-bar-dot" style="--bar-fill:55%"></span></span>
-                <span class="cell-content">Keep <em>Salmonella</em> off eggs</span>
-              </div>
-              <div class="stage-cell" data-cell-row="2" tabindex="0" style="--cell-row: 4; --r: 2">
-                <span class="cell-bar" aria-hidden="true"><span class="cell-bar-track"></span><span class="cell-bar-fill" style="--bar-fill:90%"></span><span class="cell-bar-dot" style="--bar-fill:90%"></span></span>
-                <span class="cell-content">Calcium for every eggshell <sup>6</sup></span>
+                <span class="cell-content">Efficiency & nutrient partitioning</span>
               </div>
             </article>
           </div>

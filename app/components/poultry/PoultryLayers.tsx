@@ -2,7 +2,7 @@ import React from "react";
 
 export default function PoultryLayers() {
   return (
-    <section className="w-full relative overflow-hidden py-8 lg:py-12 min-h-[85vh] bg-[#DCE8D5]" data-poultry-reveal>
+    <section className="w-full relative overflow-hidden py-8 lg:py-12 min-h-[85vh] bg-[#DCE8D5]" data-pm-section="layers">
       {/* Subtle capsule decorations */}
       <div className="absolute inset-0 opacity-[0.08] pointer-events-none">
         <svg width="100%" height="100%" viewBox="0 0 1600 846" fill="none">
@@ -34,14 +34,14 @@ export default function PoultryLayers() {
         {/* Two Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Left Side - Content */}
-          <div className="space-y-6 lg:space-y-8 w-[95%] pl-8 lg:pl-16" data-poultry-reveal>
+          <div className="space-y-6 lg:space-y-8 w-[95%] pl-8 lg:pl-16" data-pm-species-text="1">
             {/* Small Label */}
-            <div className="font-mono text-xs font-semibold tracking-[0.25em] text-[#6BBF3A] uppercase mb-2">
+            <div className="font-mono text-xs font-semibold tracking-[0.25em] text-[#2D5A42] uppercase mb-2">
               COMMERCIAL EGG PRODUCTION
             </div>
 
             {/* Large Heading */}
-            <h2 className="font-space-grotesk font-extrabold text-[clamp(4rem,8vw,8rem)] text-[#6BBF3A] tracking-tight leading-[0.85] uppercase mb-4">
+            <h2 className="font-space-grotesk font-extrabold text-[clamp(4rem,8vw,8rem)] text-[#2D5A42] tracking-tight leading-[0.85] uppercase mb-4">
               LAYERS
             </h2>
 
@@ -101,7 +101,7 @@ export default function PoultryLayers() {
           </div>
 
           {/* Right Side - Image */}
-          <div className="flex flex-col items-center" data-poultry-reveal>
+          <div className="flex flex-col items-center" data-pm-species-frame="1">
             {/* Spacer to align image top with "A long laying cycle needs a stable gut." */}
             <div className="h-[60px] lg:h-[90px]" />
             {/* Image */}

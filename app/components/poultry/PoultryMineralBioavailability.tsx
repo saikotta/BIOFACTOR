@@ -37,7 +37,7 @@ export default function PoultryMineralBioavailability() {
   }, []);
 
   return (
-    <section className="w-full bg-[#E6F4DC]" data-poultry-static aria-label="Mineral bioavailability">
+    <section className="w-full bg-[#d9ebd3]" data-poultry-static aria-label="Mineral bioavailability">
       <iframe
         ref={frameRef}
         className="block w-full border-0"

@@ -6,16 +6,6 @@ export default function RuminantsRumenFactory() {
       {/* Opaque Base Color Layer to Mask Global MicrobeField Canvas */}
       <div className="absolute inset-0 z-0 bg-[#EAF3EA]" aria-hidden="true" />
 
-      {/* Background Microbes Image */}
-      <div
-        className="absolute inset-0 z-0 bg-cover bg-no-repeat bg-[position:80%_center]"
-        style={{ backgroundImage: "url('/images/ruminants-rumen-microbes-bg.png')" }}
-        aria-hidden="true"
-      />
-
-      {/* Pale Warm Botanical Overlay (85% Opacity) */}
-      <div className="absolute inset-0 z-0 bg-[#EAF3EA]/85" aria-hidden="true" />
-
       {/* Section Content */}
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)]">
         {/* Eyebrow Label */}
@@ -38,8 +28,39 @@ export default function RuminantsRumenFactory() {
           </p>
         </div>
 
-        {/* Technical Biological Diagram Canvas (Unboxed, Breathable Layout) */}
-        <div className="w-full bg-[#FFFFFF]/70 rounded-2xl p-6 sm:p-10 border border-[#173522]/08 shadow-[0_4px_24px_rgba(23,53,34,0.03)] overflow-x-auto" data-motion="diagram">
+        {/* Technical Biological Diagram Canvas (Glossy Glass Card) */}
+        <div
+          className="relative w-full rounded-2xl p-6 sm:p-10 overflow-x-auto"
+          style={{
+            background: "linear-gradient(160deg, rgba(255,255,255,0.82) 0%, rgba(234,243,234,0.60) 100%)",
+            backdropFilter: "blur(18px) saturate(1.4)",
+            WebkitBackdropFilter: "blur(18px) saturate(1.4)",
+            border: "1px solid rgba(255,255,255,0.72)",
+            boxShadow:
+              "0 2px 0px rgba(255,255,255,0.90) inset," +   /* top specular edge */
+              "0 -1px 0px rgba(23,53,34,0.06) inset," +      /* bottom inner shadow */
+              "0 8px 32px rgba(23,53,34,0.08)," +            /* ambient drop shadow */
+              "0 1px 4px rgba(23,53,34,0.06)",               /* tight contact shadow */
+          }}
+          data-motion="diagram"
+        >
+          {/* Glossy radial highlight — top-left specular lobe */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 rounded-2xl overflow-hidden"
+          >
+            <div
+              className="absolute"
+              style={{
+                top: "-30%",
+                left: "-10%",
+                width: "70%",
+                height: "60%",
+                background:
+                  "radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.0) 70%)",
+              }}
+            />
+          </div>
           <div className="min-w-[880px]">
             <svg
               viewBox="0 0 960 250"
@@ -136,7 +157,7 @@ export default function RuminantsRumenFactory() {
               </g>
             </svg>
           </div>
-        </div>
+        </div>{/* end glossy card */}
       </div>
     </section>
   );

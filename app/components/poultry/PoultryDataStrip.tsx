@@ -46,7 +46,7 @@ export default function PoultryDataStrip() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full">
+    <section ref={sectionRef} className="w-full" data-pm-section="datastrip">
       {/* Full-Bleed Dark Brown Table */}
       <div
         ref={tableRef}
@@ -74,7 +74,7 @@ export default function PoultryDataStrip() {
         <div className="w-full max-w-[1440px] mx-auto px-5 md:px-8 lg:px-[clamp(48px,5vw,72px)] relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 items-stretch">
             {/* Cell 1: ~US$6 bn */}
-            <div className="md:pr-8 lg:pr-10 md:border-r pb-6 md:pb-0 border-b md:border-b-0 flex flex-col justify-between h-full" style={{ borderColor: 'rgba(109, 190, 69, 0.25)', borderRightWidth: '1px' }}>
+            <div className="md:pr-8 lg:pr-10 md:border-r pb-6 md:pb-0 border-b md:border-b-0 flex flex-col justify-between h-full" style={{ borderColor: 'rgba(109, 190, 69, 0.25)', borderRightWidth: '1px' }} data-pm-strip-panel="0">
               <div>
                 <div className="font-display font-normal text-[clamp(2.9rem,3.5vw,3.8rem)] tracking-tight leading-none mb-5" style={{ color: '#6DBE45' }}>
                   ~US$6 bn
@@ -92,7 +92,7 @@ export default function PoultryDataStrip() {
             </div>
 
             {/* Cell 2: 2006 */}
-            <div className="md:px-8 lg:px-10 md:border-r pb-6 md:pb-0 border-b md:border-b-0 flex flex-col justify-between h-full" style={{ borderColor: 'rgba(109, 190, 69, 0.25)', borderRightWidth: '1px' }}>
+            <div className="md:px-8 lg:px-10 md:border-r pb-6 md:pb-0 border-b md:border-b-0 flex flex-col justify-between h-full" style={{ borderColor: 'rgba(109, 190, 69, 0.25)', borderRightWidth: '1px' }} data-pm-strip-panel="1">
               <div>
                 <div className="font-display font-normal text-[clamp(2.9rem,3.5vw,3.8rem)] tracking-tight leading-none mb-5" style={{ color: '#6DBE45' }}>
                   2006
@@ -110,7 +110,7 @@ export default function PoultryDataStrip() {
             </div>
 
             {/* Cell 3: 10–30% */}
-            <div className="md:pl-8 lg:pl-10 flex flex-col justify-between h-full">
+            <div className="md:pl-8 lg:pl-10 flex flex-col justify-between h-full" data-pm-strip-panel="2">
               <div>
                 <div className="font-display font-normal text-[clamp(2.9rem,3.5vw,3.8rem)] tracking-tight leading-none mb-5" style={{ color: '#6DBE45' }}>
                   10–30%
@@ -152,7 +152,7 @@ export default function PoultryDataStrip() {
       </div>
 
       {/* Transition Band from Frame 2 to Frame 3 */}
-      <div className="w-full h-[4px] sm:h-[6px] lg:h-[8px] bg-[#1B3B2B]" aria-hidden="true" />
+      <div className="w-full h-[4px] sm:h-[6px] lg:h-[8px] bg-[#E8F3EA]" aria-hidden="true" />
     </section>
   );
 }

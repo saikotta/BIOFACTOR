@@ -8,6 +8,7 @@ import RuminantsMethane from "../components/ruminants/RuminantsMethane";
 import RuminantsMatrix from "../components/ruminants/RuminantsMatrix";
 import RuminantsClosing from "../components/ruminants/RuminantsClosing";
 import RuminantsAnimations from "../components/ruminants/RuminantsAnimations";
+import RuminantsFooter from "../components/ruminants/RuminantsFooter";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -33,7 +34,7 @@ const jetbrainsMono = JetBrains_Mono({
 export default function RuminantsPage() {
   return (
     <main
-      className={`${bricolage.variable} ${newsreader.variable} ${jetbrainsMono.variable} relative min-h-screen w-full bg-[#EAF3EA] text-[#173522] selection:bg-[#B8E986] selection:text-[#173522] overflow-x-hidden`}
+      className={`${bricolage.variable} ${newsreader.variable} ${jetbrainsMono.variable} relative w-full bg-[#EAF3EA] text-[#173522] selection:bg-[#B8E986] selection:text-[#173522] overflow-x-hidden`}
     >
       {/* RUMINANTS PAGE CONTENT */}
       <div className="relative z-10 w-full">
@@ -57,6 +58,9 @@ export default function RuminantsPage() {
 
         {/* FRAME 7: CLOSING & REFERENCES */}
         <RuminantsClosing />
+
+        {/* FOOTER */}
+        <RuminantsFooter />
       </div>
       <RuminantsAnimations />
     </main>

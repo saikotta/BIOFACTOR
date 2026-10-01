@@ -2,7 +2,7 @@ import React from "react";
 
 export default function PoultryClosing() {
   return (
-    <section className="relative z-20 w-full overflow-hidden bg-[#173F2B] pt-9 pb-9 text-white md:pt-10 md:pb-10 lg:pt-[42px] lg:pb-[44px]">
+    <section className="relative z-20 w-full overflow-hidden bg-[#173F2B] pt-9 pb-9 text-white md:pt-10 md:pb-10 lg:pt-[42px] lg:pb-[44px]" data-pm-section="closing">
       <div className="mx-auto w-full max-w-[1440px] px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)]">
         <div className="mb-7 flex items-center justify-between md:mb-9">
           <span className="font-mono text-[11px] font-semibold tracking-[0.2em] text-white/50 uppercase">
@@ -16,7 +16,7 @@ export default function PoultryClosing() {
         <div className="mb-9 grid grid-cols-1 items-center gap-8 md:mb-11 lg:mb-[44px] lg:grid-cols-12 lg:gap-14">
           <div className="flex max-w-[780px] lg:col-span-7 xl:col-span-8">
             <div className="mr-5 w-[2px] flex-shrink-0 self-stretch rounded-full bg-[#B8E986]/60 sm:mr-6 lg:mr-8" aria-hidden="true" />
-            <h2 className="font-display text-[30px] leading-[1.02] font-extrabold tracking-tight text-[#F8FAFC] sm:text-[38px] md:text-[44px] lg:text-[48px] xl:text-[50px]">
+            <h2 className="font-display text-[30px] leading-[1.02] font-extrabold tracking-tight text-[#F8FAFC] sm:text-[38px] md:text-[44px] lg:text-[48px] xl:text-[50px]" data-pm-heading="flip">
               Feed the microbes well, and{" "}
               <br className="hidden sm:block" />
               <span className="inline font-serif font-normal text-[#B8E986] italic">
