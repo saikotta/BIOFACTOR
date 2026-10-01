@@ -284,34 +284,41 @@ export default function ResourcesPage() {
     <div className={`min-h-screen bg-[#EAF3EA] text-[#173522] flex flex-col justify-between selection:bg-[#2D6A4F] selection:text-[#EAF3EA] transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
       <div>
         {/* Full-Screen Hero Section (100vh view height when page opens) */}
-        <section className="relative min-h-[calc(100vh-72px)] flex flex-col justify-center items-center overflow-hidden bg-emerald-950 px-4 py-20">
+        <section className="relative min-h-[calc(100vh-72px)] flex flex-col justify-between items-center overflow-hidden bg-emerald-950 px-4 pt-12 pb-8">
           <div className="absolute inset-0 z-0">
-             <img src={biofactor_resource} alt="Biofactor Scientific Resources" className="w-full h-full object-cover brightness-95 opacity-85" />
-             {/* Gentle transparent gradient overlay */}
-             <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-emerald-950/40 to-emerald-950/80"></div>
+             <img src={biofactor_resource} alt="Biofactor Scientific Resources" className="w-full h-full object-cover brightness-100 opacity-90" />
+             {/* Subtle gradient overlay to keep background laptop crisp and clear */}
+             <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/70"></div>
           </div>
           
-          <div className="relative z-10 text-center max-w-4xl mx-auto flex flex-col items-center">
-            <div className="inline-block px-5 py-2 rounded-full border border-emerald-400/40 bg-emerald-500/20 backdrop-blur-md mb-8">
+          {/* Top Content: Badge, Heading, and Subtitle tight together above the laptop */}
+          <div className="relative z-10 text-center max-w-4xl mx-auto flex flex-col items-center pt-4">
+            <div className="inline-block px-4 py-1.5 rounded-full border border-emerald-400/40 bg-emerald-500/20 backdrop-blur-md mb-3">
               <span className="text-emerald-200 font-mono text-xs font-semibold uppercase tracking-widest flex items-center gap-2">
                 <GiDna2 className="text-sm" /> Biofactor Intelligence Hub
               </span>
             </div>
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-8 tracking-tight font-display leading-tight">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white mb-3 tracking-tight font-display leading-tight drop-shadow-md">
               Scientific <span className="text-emerald-300">Resource Hub</span>
             </h1>
 
-            <p className="text-emerald-50 text-base md:text-xl lg:text-2xl font-sans max-w-3xl mx-auto leading-relaxed mb-10">
+            <p className="text-emerald-50 text-sm md:text-base lg:text-lg font-sans max-w-2xl mx-auto leading-relaxed mb-2 drop-shadow-sm">
               Explore our curated library of whitepapers, webinars, and technical guides designed to improve agricultural efficiency and biological soil health.
             </p>
+          </div>
 
-            <div className="w-full max-w-2xl mx-auto relative mb-12">
-              <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-emerald-200 text-2xl" />
+          {/* Middle Spacer so the background laptop screen & text "RESOURCES & KNOWLEDGE CENTER" is completely clear */}
+          <div className="relative z-10 my-auto py-8"></div>
+
+          {/* Bottom Content: Search Bar positioned below the laptop area, followed by the Explore Catalog arrow */}
+          <div className="relative z-10 text-center w-full max-w-2xl mx-auto flex flex-col items-center pb-2">
+            <div className="w-full relative mb-6">
+              <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-emerald-200 text-xl" />
               <input 
                 type="text" 
                 placeholder="Search whitepapers, webinars, research papers..." 
-                className="w-full pl-14 pr-12 py-4 rounded-2xl bg-white/20 backdrop-blur-md border border-white/35 text-white text-base md:text-lg placeholder-emerald-100/70 focus:bg-white/30 transition-all outline-none shadow-xl"
+                className="w-full pl-14 pr-12 py-3.5 rounded-2xl bg-white/20 backdrop-blur-md border border-white/40 text-white text-sm md:text-base placeholder-emerald-100/70 focus:bg-white/30 transition-all outline-none shadow-2xl"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -320,15 +327,15 @@ export default function ResourcesPage() {
                   onClick={() => setSearchQuery('')}
                   className="absolute right-5 top-1/2 -translate-y-1/2 text-emerald-100 hover:text-white cursor-pointer"
                 >
-                  <FiX size={22} />
+                  <FiX size={20} />
                 </button>
               )}
             </div>
 
-            {/* Scroll Indicator */}
-            <a href="#resource-catalog" className="inline-flex flex-col items-center gap-2 text-emerald-200 hover:text-white transition-colors cursor-pointer animate-bounce mt-4">
-              <span className="font-mono text-xs uppercase tracking-widest">Explore Catalog</span>
-              <FaChevronDown />
+            {/* Scroll Indicator at the very bottom */}
+            <a href="#resource-catalog" className="inline-flex flex-col items-center gap-1 text-emerald-200 hover:text-white transition-colors cursor-pointer animate-bounce">
+              <span className="font-mono text-[11px] uppercase tracking-widest font-bold">Explore Catalog</span>
+              <FaChevronDown className="text-xs" />
             </a>
           </div>
         </section>
