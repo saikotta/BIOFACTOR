@@ -6,6 +6,7 @@ import NutrientsPrimaryApplications from "../components/nutrients/NutrientsPrima
 import NutrientsSecondaryMicronutrients from "../components/nutrients/NutrientsSecondaryMicronutrients";
 import NutrientsMatrix from "../components/nutrients/NutrientsMatrix";
 import NutrientsClosing from "../components/nutrients/NutrientsClosing";
+import BiofactorFooter from "../components/BiofactorFooter";
 
 export const metadata = {
   title: "Nutrients | Biofactor Biologicals",
@@ -36,6 +37,9 @@ export default function NutrientsPage() {
 
       {/* Closing Editorial Statement & 21 Scientific References */}
       <NutrientsClosing />
+
+      {/* Global Footer */}
+      <BiofactorFooter />
     </main>
   );
 }
