@@ -14,6 +14,7 @@ const NAV_ITEMS = [
 const PRODUCT_ITEMS = [
   { name: "Ruminants", href: "/ruminants" },
   { name: "Poultry", href: "/poultry" },
+  { name: "Nutrients", href: "/nutrients" },
   { name: "Bioremediation", href: "/bioremediation" },
   { name: "Aquaculture", href: "/aquaculture" },
 ];
@@ -24,12 +25,13 @@ export default function BiofactorHeader() {
   const pathname = usePathname();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Check if PRODUCTS should be active (when on /ruminants, /poultry, /bioremediation, /aquaculture, or /products)
+  // Check if PRODUCTS should be active (when on /ruminants, /poultry, /bioremediation, /aquaculture, /nutrients, or /products)
   const isProductActive =
     pathname === "/ruminants" ||
     pathname === "/poultry" ||
     pathname === "/bioremediation" ||
     pathname === "/aquaculture" ||
+    pathname === "/nutrients" ||
     pathname.startsWith("/products");
 
   // Close dropdown when clicking outside
