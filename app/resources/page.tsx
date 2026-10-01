@@ -7,8 +7,7 @@ import {
   FiBookOpen, FiBarChart2, FiTrendingUp
 } from 'react-icons/fi';
 import { 
-  FaFish, FaEgg, FaMicroscope, FaCertificate, 
-  FaGlobeAmericas, FaUniversity, FaIndustry
+  FaMicroscope, FaChevronDown
 } from 'react-icons/fa';
 import { GiCow, GiWheat, GiWaterDrop, GiChicken, GiDna2 } from 'react-icons/gi';
 import { MdScience } from 'react-icons/md';
@@ -55,7 +54,7 @@ export default function ResourcesPage() {
       category: "Agriculture", 
       type: "Webinar", 
       size: "15:20", 
-      image: "https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&q=80&w=1000", 
+      image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&q=80&w=1000", 
       videoUrl: "https://www.youtube.com/embed/QfSJ04d9p20",
       description: "Explore the latest advancements in regenerative farming practices that restore soil health.",
       author: "Dr. Sarah Chen",
@@ -94,7 +93,7 @@ export default function ResourcesPage() {
       category: "Agriculture", 
       type: "Whitepaper", 
       size: "5.8 MB", 
-      image: "https://images.unsplash.com/photo-1586771107445-d3ca888129fc?auto=format&fit=crop&q=80&w=1000", 
+      image: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&q=80&w=1000", 
       videoUrl: null,
       description: "Detailed analysis of microbial inoculants and their benefits.",
       author: "Dr. Maria Rodriguez",
@@ -120,7 +119,7 @@ export default function ResourcesPage() {
       category: "Agriculture", 
       type: "Technical Guide", 
       size: "1.8 MB", 
-      image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&q=80&w=1000", 
+      image: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&q=80&w=1000", 
       videoUrl: null,
       description: "Interactive guide to selecting optimal cover crops.",
       author: "Agronomy Division",
@@ -159,7 +158,7 @@ export default function ResourcesPage() {
       category: "Large Animals", 
       type: "Whitepaper", 
       size: "6.2 MB", 
-      image: "https://images.unsplash.com/photo-1527151977613-a0b9e10c6c6a?auto=format&fit=crop&q=80&w=1000", 
+      image: "https://images.unsplash.com/photo-1570042707221-5a415ff68051?auto=format&fit=crop&q=80&w=1000", 
       videoUrl: null,
       description: "Advanced feeding strategies for dairy cattle.",
       author: "Nutrition Research Center",
@@ -185,7 +184,7 @@ export default function ResourcesPage() {
       category: "Aquaculture", 
       type: "Research Paper", 
       size: "5.1 MB", 
-      image: "https://images.unsplash.com/photo-1511211756783-653133887d26?auto=format&fit=crop&q=80&w=1000", 
+      image: "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&q=80&w=1000", 
       videoUrl: null,
       description: "Peer-reviewed research on recirculating aquaculture systems.",
       author: "Aquatic Sciences Journal",
@@ -198,7 +197,7 @@ export default function ResourcesPage() {
       category: "Aquaculture", 
       type: "Research Paper", 
       size: "2.8 MB", 
-      image: "https://images.unsplash.com/photo-1534324403061-08197771746f?auto=format&fit=crop&q=80&w=1000", 
+      image: "https://images.unsplash.com/photo-1535591273668-578e31182c4f?auto=format&fit=crop&q=80&w=1000", 
       videoUrl: null,
       description: "Alternative protein sources for aquaculture feeds.",
       author: "Marine Nutrition Lab",
@@ -284,68 +283,76 @@ export default function ResourcesPage() {
   return (
     <div className={`min-h-screen bg-[#EAF3EA] text-[#173522] flex flex-col justify-between selection:bg-[#2D6A4F] selection:text-[#EAF3EA] transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
       <div>
-        {/* Header Hero Section with Crisp Background Image */}
-        <section className="relative h-[55vh] min-h-[400px] flex flex-col justify-center items-center overflow-hidden bg-emerald-950">
+        {/* Full-Screen Hero Section (100vh view height when page opens) */}
+        <section className="relative min-h-[calc(100vh-72px)] flex flex-col justify-center items-center overflow-hidden bg-emerald-950 px-4 py-20">
           <div className="absolute inset-0 z-0">
-             <img src={biofactor_resource} alt="Background" className="w-full h-full object-cover brightness-95 opacity-85" />
-             {/* Subtle shadow overlay so background image is clear and crisp */}
-             <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/80 via-emerald-950/30 to-black/20"></div>
+             <img src={biofactor_resource} alt="Biofactor Scientific Resources" className="w-full h-full object-cover brightness-95 opacity-85" />
+             {/* Gentle transparent gradient overlay */}
+             <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-emerald-950/40 to-emerald-950/80"></div>
           </div>
           
-          <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-            <div className="inline-block px-4 py-1.5 rounded-full border border-emerald-400/30 bg-emerald-500/20 backdrop-blur-md mb-6">
+          <div className="relative z-10 text-center max-w-4xl mx-auto flex flex-col items-center">
+            <div className="inline-block px-5 py-2 rounded-full border border-emerald-400/40 bg-emerald-500/20 backdrop-blur-md mb-8">
               <span className="text-emerald-200 font-mono text-xs font-semibold uppercase tracking-widest flex items-center gap-2">
-                <GiDna2 /> Biofactor Intelligence
+                <GiDna2 className="text-sm" /> Biofactor Intelligence Hub
               </span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight font-display">
+
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-8 tracking-tight font-display leading-tight">
               Scientific <span className="text-emerald-300">Resource Hub</span>
             </h1>
-            <p className="text-emerald-50 text-base md:text-xl font-sans max-w-2xl mx-auto leading-relaxed">
-              Explore our curated library of whitepapers, webinars, and technical guides designed to improve agricultural efficiency.
+
+            <p className="text-emerald-50 text-base md:text-xl lg:text-2xl font-sans max-w-3xl mx-auto leading-relaxed mb-10">
+              Explore our curated library of whitepapers, webinars, and technical guides designed to improve agricultural efficiency and biological soil health.
             </p>
 
-            <div className="mt-8 relative max-w-xl mx-auto">
-              <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-200 text-xl" />
+            <div className="w-full max-w-2xl mx-auto relative mb-12">
+              <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-emerald-200 text-2xl" />
               <input 
                 type="text" 
-                placeholder="Search resources..." 
-                className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-emerald-100/70 focus:bg-white/30 transition-all outline-none"
+                placeholder="Search whitepapers, webinars, research papers..." 
+                className="w-full pl-14 pr-12 py-4 rounded-2xl bg-white/20 backdrop-blur-md border border-white/35 text-white text-base md:text-lg placeholder-emerald-100/70 focus:bg-white/30 transition-all outline-none shadow-xl"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
               {searchQuery && (
                 <button 
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-100 hover:text-white"
+                  className="absolute right-5 top-1/2 -translate-y-1/2 text-emerald-100 hover:text-white cursor-pointer"
                 >
-                  <FiX size={20} />
+                  <FiX size={22} />
                 </button>
               )}
             </div>
+
+            {/* Scroll Indicator */}
+            <a href="#resource-catalog" className="inline-flex flex-col items-center gap-2 text-emerald-200 hover:text-white transition-colors cursor-pointer animate-bounce mt-4">
+              <span className="font-mono text-xs uppercase tracking-widest">Explore Catalog</span>
+              <FaChevronDown />
+            </a>
           </div>
         </section>
 
-        {/* Category Filters */}
-        <section className="sticky top-[64px] md:top-[72px] z-40 bg-[#EAF3EA]/95 backdrop-blur-xl border-b border-[#2D6A4F]/15 shadow-xs">
-          <div className="max-w-7xl mx-auto px-4 py-4">
+        {/* Category Filters (Sticky Navigation Bar) */}
+        <section id="resource-catalog" className="sticky top-[64px] md:top-[72px] z-40 bg-[#EAF3EA]/95 backdrop-blur-xl border-b border-[#2D6A4F]/15 shadow-sm py-4">
+          <div className="max-w-7xl mx-auto px-4">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <div className="flex flex-wrap justify-center gap-2">
                 {categories.map((cat) => (
                   <button
                     key={cat.id}
                     onClick={() => setActiveTab(cat.id)}
-                    className={`group flex items-center gap-2 px-4 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 ${
+                    className={`group flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer ${
                       activeTab === cat.id 
                       ? 'bg-[#2D6A4F] text-white shadow-md transform scale-105' 
-                      : 'bg-white text-[#173522] hover:bg-[#2D6A4F]/10 hover:text-[#2D6A4F]'
+                      : 'bg-white text-[#173522] hover:bg-[#2D6A4F]/10 hover:text-[#2D6A4F] border border-[#2D6A4F]/15'
                     }`}
                   >
                     {cat.icon} 
                     <span>{cat.name}</span>
                     <span className={`px-2 py-0.5 rounded-full text-xs font-mono ${
                       activeTab === cat.id 
-                      ? 'bg-white/30' 
+                      ? 'bg-white/30 text-white' 
                       : 'bg-[#EAF3EA] text-[#173522]'
                     }`}>
                       {cat.count}
@@ -361,8 +368,8 @@ export default function ResourcesPage() {
           </div>
         </section>
 
-        {/* Main Resource Sections */}
-        <main className="max-w-7xl mx-auto px-4 py-12">
+        {/* Main Resource Sections (Expanded Vertical Height & Spacing) */}
+        <main className="max-w-7xl mx-auto px-4 py-16 space-y-16">
           {resourceTypes.map((type) => {
             const resources = groupedResources[type.id] || [];
             if (resources.length === 0) return null;
@@ -370,49 +377,48 @@ export default function ResourcesPage() {
             const isExpanded = expandedSections[type.id] !== undefined ? expandedSections[type.id] : true;
             
             return (
-              <div key={type.id} className="mb-12">
+              <div key={type.id} className="space-y-8">
                 <div 
-                  className="flex items-center justify-between p-6 bg-white rounded-2xl border border-[#2D6A4F]/15 shadow-xs mb-6 cursor-pointer hover:shadow-md transition-shadow group"
+                  className="flex items-center justify-between p-6 md:p-8 bg-white rounded-3xl border border-[#2D6A4F]/15 shadow-sm cursor-pointer hover:shadow-md transition-all group"
                   onClick={() => toggleSection(type.id)}
                 >
                   <div className="flex items-center gap-4">
-                    <div className="p-3 rounded-xl bg-[#EAF3EA] text-[#2D6A4F]">
+                    <div className="p-4 rounded-2xl bg-[#EAF3EA] text-[#2D6A4F] text-xl">
                       {type.icon}
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-[#173522]">{type.name}</h3>
-                      <p className="text-[#173522]/70 text-sm font-sans">{resources.length} resources available</p>
+                      <h3 className="text-2xl md:text-3xl font-extrabold text-[#173522] font-display">{type.name}</h3>
+                      <p className="text-[#173522]/70 text-sm font-sans mt-0.5">{resources.length} high-impact resources available</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
                     <div className={`transform transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
-                      <svg className="w-5 h-5 text-[#2D6A4F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
+                      <FaChevronDown className="text-[#2D6A4F] text-lg" />
                     </div>
                   </div>
                 </div>
 
                 {isExpanded && (
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {resources.map((item) => (
                       <div 
                         key={item.id} 
-                        className="group bg-white rounded-2xl border border-[#2D6A4F]/15 hover:border-[#2D6A4F]/40 shadow-xs hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full"
+                        className="group bg-white rounded-3xl border border-[#2D6A4F]/15 hover:border-[#2D6A4F]/40 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full"
                       >
-                        <div className="relative h-48 overflow-hidden bg-emerald-900">
+                        {/* High-Definition Image Container */}
+                        <div className="relative h-60 overflow-hidden bg-emerald-950">
                           <img 
                             src={item.image} 
                             alt={item.title} 
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                           
                           <div className="absolute top-4 left-4 flex gap-2">
-                            <span className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-lg text-xs font-bold text-[#2D6A4F]">
+                            <span className="px-3.5 py-1.5 bg-white/95 backdrop-blur-md rounded-xl text-xs font-bold text-[#2D6A4F] shadow-sm">
                               {item.category}
                             </span>
-                            <span className="px-3 py-1 bg-[#2D6A4F] text-white rounded-lg text-xs font-mono font-bold uppercase tracking-wider">
+                            <span className="px-3.5 py-1.5 bg-[#2D6A4F] text-white rounded-xl text-xs font-mono font-bold uppercase tracking-wider shadow-sm">
                               {item.type}
                             </span>
                           </div>
@@ -422,26 +428,26 @@ export default function ResourcesPage() {
                               onClick={() => setSelectedVideo(item.videoUrl)}
                               className="absolute inset-0 flex items-center justify-center group/play cursor-pointer"
                             >
-                              <div className="w-14 h-14 bg-[#2D6A4F] rounded-full flex items-center justify-center text-white shadow-2xl transform group-hover/play:scale-110 transition-transform duration-300">
+                              <div className="w-16 h-16 bg-[#2D6A4F] hover:bg-[#173522] rounded-full flex items-center justify-center text-white shadow-2xl transform group-hover/play:scale-110 transition-all duration-300">
                                 <FiPlay className="ml-1 text-2xl" />
                               </div>
                             </button>
                           )}
                         </div>
 
-                        <div className="p-6 flex flex-col flex-grow">
-                          <h3 className="text-lg font-bold text-[#173522] mb-3 line-clamp-2 group-hover:text-[#2D6A4F] transition-colors">
+                        <div className="p-7 flex flex-col flex-grow">
+                          <h3 className="text-xl font-extrabold text-[#173522] mb-3 line-clamp-2 group-hover:text-[#2D6A4F] transition-colors leading-snug">
                             {item.title}
                           </h3>
                           
-                          <p className="text-[#173522]/80 text-sm mb-4 line-clamp-2 flex-grow font-sans">
+                          <p className="text-[#173522]/85 text-sm mb-6 line-clamp-3 flex-grow font-sans leading-relaxed">
                             {item.description}
                           </p>
 
-                          <div className="space-y-3 mb-4">
-                            <div className="flex items-center gap-2 text-sm text-[#173522]/70">
+                          <div className="space-y-3 mb-6 pt-4 border-t border-[#2D6A4F]/10">
+                            <div className="flex items-center gap-2 text-sm text-[#173522]/80">
                               <FiBookOpen className="text-[#2D6A4F]" />
-                              <span className="font-medium">{item.author}</span>
+                              <span className="font-semibold">{item.author}</span>
                             </div>
                             <div className="flex items-center justify-between text-xs font-mono text-[#173522]/60">
                               <span>{new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
@@ -465,11 +471,11 @@ export default function ResourcesPage() {
                             
                             <div className="flex items-center gap-2">
                               <button className="p-2 text-[#173522]/50 hover:text-[#2D6A4F] transition-colors cursor-pointer">
-                                <FiShare2 size={16} />
+                                <FiShare2 size={18} />
                               </button>
                               {item.type !== 'Webinar' && (
                                 <button className="p-2 text-[#173522]/50 hover:text-[#2D6A4F] transition-colors cursor-pointer">
-                                  <FiDownload size={16} />
+                                  <FiDownload size={18} />
                                 </button>
                               )}
                             </div>
@@ -484,7 +490,7 @@ export default function ResourcesPage() {
           })}
 
           {filteredResources.length === 0 && (
-            <div className="text-center py-20 bg-white rounded-3xl border border-[#2D6A4F]/15">
+            <div className="text-center py-24 bg-white rounded-3xl border border-[#2D6A4F]/15">
               <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-[#EAF3EA] mb-6">
                 <FaMicroscope className="text-4xl text-[#2D6A4F]" />
               </div>
