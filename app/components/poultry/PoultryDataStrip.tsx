@@ -131,8 +131,8 @@ export default function PoultryDataStrip() {
       </div>
 
       {/* 3. Bottom Editorial Paragraph */}
-      <div className="w-full py-8 lg:py-11 bg-[#EAF3EA]">
-        <div className="w-full max-w-[1440px] mx-auto px-5 md:px-8 lg:px-[clamp(48px,5vw,72px)] pb-8 lg:pb-11">
+      <div className="w-full py-8 lg:py-11 bg-[#E8F3EA]">
+        <div className="w-full max-w-[1440px] mx-auto px-5 md:px-8 lg:px-[clamp(48px,5vw,72px)]">
           <div className="max-w-[850px]">
             <div
               className="text-[clamp(1.25rem,1.55vw,1.5rem)] leading-[1.52]"
