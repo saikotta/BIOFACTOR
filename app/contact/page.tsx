@@ -207,13 +207,13 @@ export default function ContactPage() {
         </section>
 
         {/* Main Content: Form + Sidebar */}
-        <section className="py-8 px-4">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-3 gap-8 items-start">
+        <section className="py-8 px-4 sm:px-8 lg:px-16">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-3 gap-6 items-stretch">
 
-              {/* Contact Form — zoom-in on scroll */}
+              {/* Contact Form */}
               <motion.div
-                className="lg:col-span-2 bg-white rounded-3xl shadow-md p-4 border border-[#2D6A4F]/15"
+                className="lg:col-span-2 bg-white rounded-3xl shadow-md p-5 border border-[#2D6A4F]/15 h-full flex flex-col"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.15 }}
@@ -231,7 +231,7 @@ export default function ContactPage() {
                   </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-2.5">
+                <form onSubmit={handleSubmit} className="space-y-2.5 flex-1 flex flex-col">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-1">
                       <label className="block text-[#173522] font-semibold text-sm" htmlFor="name">Full Name *</label>
@@ -292,7 +292,7 @@ export default function ContactPage() {
                     <label className="block text-[#173522] font-semibold text-sm" htmlFor="message">Your Message *</label>
                     <textarea
                       id="message" name="message" value={formData.message} onChange={handleChange} required rows={3}
-                      className="w-full flex-1 px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:border-[#2D6A4F] transition-all bg-white text-[#173522] resize-none text-sm"
+                      className="flex-1 w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:border-[#2D6A4F] transition-all bg-white text-[#173522] resize-none text-sm"
                       placeholder="Tell us about your agricultural needs, farm size, crops grown, etc..."
                     />
                   </div>
@@ -333,7 +333,7 @@ export default function ContactPage() {
 
               {/* Sidebar — aligned at top with items-start, zoom-in cards */}
               <motion.div
-                className="flex flex-col gap-4"
+                className="flex flex-col gap-4 h-full"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.15 }}
@@ -364,11 +364,11 @@ export default function ContactPage() {
                   </div>
                 </motion.div>
 
-                {/* Business Hours card */}
+                {/* Business Hours card — flex-1 so it grows to match form bottom */}
                 <motion.div
                   variants={zoomIn}
                   whileHover={{ scale: 1.02, boxShadow: "0 8px 28px rgba(45,106,79,0.12)" }}
-                  className="bg-white rounded-2xl p-5 border border-[#2D6A4F]/15 shadow-sm"
+                  className="bg-white rounded-2xl p-5 border border-[#2D6A4F]/15 shadow-sm flex-1 flex flex-col justify-center"
                 >
                   <h3 className="text-lg font-bold text-[#173522] mb-3">Visiting &amp; Business Hours</h3>
                   <div className="space-y-2.5 font-sans text-sm">
