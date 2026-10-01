@@ -126,7 +126,7 @@ export default function BioremidationMatrix() {
               <div>
                 <div className="h-1 bg-[#D69E2E] rounded-full mb-3 w-full" />
                 <p className="text-xs sm:text-sm text-[#173522]/85 font-serif leading-relaxed">
-                  Dye cleavage, Cr(VI) reduction<sup className="text-[9px]">4 5</sup>
+                  Dye cleavage, Cr(VI) reduction
                 </p>
               </div>
 
@@ -149,7 +149,7 @@ export default function BioremidationMatrix() {
 
 
             {/* ROW 2: SEWAGE STP (CYAN/BLUE ACCENTS) */}
-            <div className="grid grid-cols-[180px_repeat(5,1fr)] gap-6 py-7 border-b border-[#173522]/12 items-start">
+            <div className="grid grid-cols-[180px_repeat(5,1fr)] gap-6 py-7 items-start">
               {/* Row Label */}
               <div>
                 <h3 className="font-display font-bold text-lg text-[#173522]">
@@ -180,7 +180,7 @@ export default function BioremidationMatrix() {
               <div>
                 <div className="h-1 bg-[#3182CE] rounded-full mb-3 w-full" />
                 <p className="text-xs sm:text-sm text-[#173522]/85 font-serif leading-relaxed">
-                  Start-up, shock recovery, N removal<sup className="text-[9px]">6</sup>
+                  Start-up, shock recovery, N removal
                 </p>
               </div>
 
@@ -197,60 +197,6 @@ export default function BioremidationMatrix() {
                 <div className="h-1 bg-[#3182CE] rounded-full mb-3 w-full" />
                 <p className="text-xs sm:text-sm text-[#173522]/85 font-serif leading-relaxed">
                   Treated water for reuse
-                </p>
-              </div>
-            </div>
-
-
-            {/* ROW 3: SEPTIC ON-SITE (PURPLE/VIOLET ACCENTS) */}
-            <div className="grid grid-cols-[180px_repeat(5,1fr)] gap-6 py-7 items-start">
-              {/* Row Label */}
-              <div>
-                <h3 className="font-display font-bold text-lg text-[#173522]">
-                  Septic
-                </h3>
-                <span className="font-mono text-[11px] text-[#26382D]/60 uppercase tracking-wider block">
-                  ON-SITE
-                </span>
-              </div>
-
-              {/* Col 1 */}
-              <div>
-                <div className="h-1 bg-[#805AD5] rounded-full mb-3 w-full" />
-                <p className="text-xs sm:text-sm text-[#173522]/85 font-serif leading-relaxed">
-                  Correct tank design and use
-                </p>
-              </div>
-
-              {/* Col 2 */}
-              <div>
-                <div className="h-1 bg-[#805AD5] rounded-full mb-3 w-full" />
-                <p className="text-xs sm:text-sm text-[#173522]/85 font-serif leading-relaxed">
-                  Regular emptying
-                </p>
-              </div>
-
-              {/* Col 3 */}
-              <div>
-                <div className="h-1 bg-[#805AD5] rounded-full mb-3 w-full" />
-                <p className="text-xs sm:text-sm text-[#173522]/85 font-serif leading-relaxed">
-                  Septage treatment at FSTP
-                </p>
-              </div>
-
-              {/* Col 4 */}
-              <div>
-                <div className="h-1 bg-[#805AD5] rounded-full mb-3 w-full" />
-                <p className="text-xs sm:text-sm text-[#173522]/85 font-serif leading-relaxed">
-                  Stabilised, safer sludge
-                </p>
-              </div>
-
-              {/* Col 5 */}
-              <div>
-                <div className="h-1 bg-[#805AD5] rounded-full mb-3 w-full" />
-                <p className="text-xs sm:text-sm text-[#173522]/85 font-serif leading-relaxed">
-                  Less dumping into water bodies
                 </p>
               </div>
             </div>

@@ -15,6 +15,7 @@ const PRODUCT_ITEMS = [
   { name: "Ruminants", href: "/ruminants" },
   { name: "Poultry", href: "/poultry" },
   { name: "Bio-Remediation", href: "/bioremidation" },
+  { name: "Nutrients", href: "/nutrients" },
 ];
 
 export default function BiofactorHeader() {
@@ -23,9 +24,12 @@ export default function BiofactorHeader() {
   const pathname = usePathname();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Check if PRODUCT should be active (when on /ruminants, /poultry, or /bioremidation)
+  // Check if PRODUCT should be active (when on /ruminants, /poultry, /bioremidation, or /nutrients)
   const isProductActive =
-    pathname === "/ruminants" || pathname === "/poultry" || pathname === "/bioremidation";
+    pathname === "/ruminants" ||
+    pathname === "/poultry" ||
+    pathname === "/bioremidation" ||
+    pathname === "/nutrients";
 
   // Close dropdown when clicking outside
   useEffect(() => {
