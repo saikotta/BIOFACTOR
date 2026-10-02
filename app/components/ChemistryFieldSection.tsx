@@ -469,11 +469,8 @@ export default function ChemistryFieldSection() {
           }}
           className="w-full my-8 sm:my-10 lg:my-12 pt-8 sm:pt-10 border-t border-[rgba(244,245,236,0.16)]"
         >
-          {/* Final Statement with Aligned Pink x Marker */}
-          <div className="flex items-baseline gap-2.5 sm:gap-3.5 max-w-[1100px]">
-            <span className="text-[#FF6B8B] font-bold text-xl sm:text-2xl lg:text-[28px] leading-none select-none">
-              &times;
-            </span>
+          {/* Final Statement */}
+          <div className="max-w-[1100px]">
             <p className="text-xl sm:text-2xl lg:text-[28px] font-normal text-white/95 leading-[1.3] tracking-[-0.015em]">
               When they interact, their potential
               <br className="hidden sm:inline" />

@@ -6,15 +6,14 @@ const STATISTICS = [
   // ROW 1
   { number: "11", label: "PATENTS FILED" },
   { number: "60+", label: "ELITE / DEPOSITED STRAINS" },
-  { number: "100+", label: "PRODUCTS" },
+  { number: "100+", label: "PRODUCTS ACROSS SIX VERTICALS" },
   { number: "600+", label: "TEAM MEMBERS" },
   { number: "3,000+", label: "DEALER NETWORK" },
   // ROW 2
-  { number: "20", label: "MARKETS REACHED" },
+  { number: "2", label: "COUNTRIES BEYOND BHARAT" },
   { number: "18", label: "INDIAN STATES" },
   { number: "2014", label: "FOUNDED, HYDERABAD" },
   { number: "5 Lakhs+", label: "HAPPY FARMERS" },
-  { number: "6", label: "PRODUCT VERTICALS" },
 ];
 
 export default function BiofactorNumbersSection() {
@@ -118,11 +117,11 @@ export default function BiofactorNumbersSection() {
         >
           <div className="grid grid-cols-2 md:grid-cols-5 w-full">
             {STATISTICS.map((stat, idx) => {
-              // Exact editorial border math:
-              // Mobile (2 cols): right border on odd items (idx % 2 === 0), bottom border on rows 1..4 (idx < 8)
-              // Desktop/Tablet (5 cols): right border on items 0..3 & 5..8 ((idx + 1) % 5 !== 0), bottom border on row 1 (idx < 5)
-              const isMobileRight = (idx + 1) % 2 !== 0;
-              const isDesktopRight = (idx + 1) % 5 !== 0;
+              // Exact editorial border math for 9 items:
+              // Mobile (2 cols): right border on odd items except last (idx % 2 === 0 && idx < 8), bottom border on rows 1..4 (idx < 8)
+              // Desktop/Tablet (5 cols): right border on items 0..3 & 5..7 ((idx + 1) % 5 !== 0 && idx !== 8), bottom border on row 1 (idx < 5)
+              const isMobileRight = (idx + 1) % 2 !== 0 && idx < 8;
+              const isDesktopRight = (idx + 1) % 5 !== 0 && idx !== 8;
 
               const isMobileBottom = idx < 8;
               const isDesktopBottom = idx < 5;
