@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 function fitGutFrame(frame: HTMLIFrameElement | null) {
-  const stage = frame?.contentDocument?.querySelector(".stage");
+  const stage = frame?.contentDocument?.querySelector<HTMLElement>(".stage");
   if (!frame || !stage) return;
 
   const frameWidth = frame.contentWindow?.innerWidth ?? 0;
@@ -43,7 +43,7 @@ export default function GutHealthSection() {
     const resizeObserver = new ResizeObserver(scheduleFit);
     const stageObserver = new ResizeObserver(scheduleFit);
     const observeStage = () => {
-      const stage = frame.contentDocument?.querySelector(".stage");
+      const stage = frame.contentDocument?.querySelector<HTMLElement>(".stage");
       if (stage) stageObserver.observe(stage);
       scheduleFit();
     };

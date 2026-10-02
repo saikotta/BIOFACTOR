@@ -9,6 +9,9 @@ const NAV_ITEMS = [
   { name: "ABOUT", href: "/about" },
   { name: "ONE HEALTH", href: "/one-health" },
   { name: "SCIENCE & TECHNOLOGY", href: "/science-technology" },
+  { name: "RESOURCES", href: "/resources" },
+  { name: "CAREERS", href: "/careers" },
+  { name: "CONTACT", href: "/contact" },
 ];
 
 const PRODUCT_ITEMS = [
