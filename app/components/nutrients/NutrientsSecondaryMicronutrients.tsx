@@ -154,12 +154,12 @@ export default function NutrientsSecondaryMicronutrients() {
               </div>
 
               {/* RIGHT: Related Micronutrients Image */}
-              <div className="lg:col-span-6 relative w-full h-[360px] sm:h-[420px] rounded-2xl overflow-hidden shadow-xl border border-[#2D6A4F]/20">
+              <div className="lg:col-span-6 relative w-full h-[400px] sm:h-[480px] lg:h-[520px] rounded-2xl overflow-hidden shadow-xl border border-[#2D6A4F]/20">
                 <Image
                   src="/images/nutriants/secondary-micronutriants.jpg"
                   alt="Secondary and Micronutrients Biological Mobilisation"
                   fill
-                  className="object-cover object-center"
+                  className="object-cover object-top"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   priority
                 />
