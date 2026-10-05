@@ -50,9 +50,9 @@ export default function BiofactorHeader() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 w-full bg-[#d9ead3] border-t-2 border-[#93c47d] border-b border-[#167A4A]/12">
-      <div className="w-full max-w-[1700px] mx-auto h-[64px] md:h-[72px] px-6 sm:px-10 md:px-14 lg:px-20 flex items-center justify-between">
+      <div className="w-full max-w-[1700px] mx-auto h-[64px] md:h-[72px] px-4 sm:px-6 md:px-8 lg:px-10 flex items-center justify-between">
         {/* Left Side: Official Biofactor Logo */}
-        <Link href="/" className="flex items-center group">
+        <Link href="/" className="flex items-center group flex-shrink-0">
           <img
             src="/images/biofactor-official-logo.png"
             alt="BIOFACTOR BIOLOGICALS"
@@ -61,7 +61,7 @@ export default function BiofactorHeader() {
         </Link>
 
         {/* Right Side Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-7 lg:gap-10">
+        <nav className="hidden md:flex items-center gap-3 md:gap-4 lg:gap-6 xl:gap-7 ml-auto">
           {NAV_ITEMS.map((item, index) => {
             const isActive = pathname === item.href;
             // Insert PRODUCTS dropdown after ABOUT (index 1)

@@ -15,7 +15,27 @@ import {
   FiMapPin
 } from 'react-icons/fi';
 import { FaLeaf, FaHandsHelping, FaChartLine } from 'react-icons/fa';
+import { motion, type Variants } from 'framer-motion';
 import BiofactorFooter from '../components/BiofactorFooter';
+
+// Animation Variants
+const fadeInUp: Variants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.2, 0.7, 0.2, 1] } }
+};
+
+const zoomIn: Variants = {
+  hidden: { opacity: 0, scale: 0.88 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.55, ease: "easeOut" } }
+};
+
+const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 }
+  }
+};
 
 const biofactor_career = '/images/biofactor_career.png';
 

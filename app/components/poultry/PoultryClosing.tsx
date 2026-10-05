@@ -27,10 +27,10 @@ export default function PoultryClosing() {
 
           <div className="flex flex-col justify-center gap-3.5 lg:col-span-5 xl:col-span-4">
             <div>
-              <div className="mb-1.5 font-display text-lg font-extrabold tracking-[0.15em] text-white uppercase sm:text-[21px] lg:text-[22px]">
+              <div className="mb-1.5 font-display text-lg font-extrabold tracking-[0.15em] text-white uppercase sm:text-[21px] lg:text-[22px] br-rv">
                 BIOFACTOR <span className="text-[#B8E986]">BIOLOGICALS</span>
               </div>
-              <p className="max-w-sm font-serif text-sm leading-relaxed text-white/70 italic sm:text-[16px] lg:text-[17px]">
+              <p className="max-w-sm font-serif text-sm leading-relaxed text-white/70 italic sm:text-[16px] lg:text-[17px] br-rv">
                 Turning microbial functions into measurable biological impact.
               </p>
             </div>

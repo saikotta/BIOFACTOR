@@ -20,10 +20,10 @@ export default function NutrientsClosing() {
           {/* LEFT AREA: Statement with vertical biological green accent */}
           <div className="lg:col-span-7 flex max-w-[820px]">
             {/* Vertical Biological Green Accent Bar */}
-            <div className="w-[2px] bg-[#B8E986]/60 mr-5 sm:mr-6 lg:mr-8 flex-shrink-0 self-stretch rounded-full" />
+            <div className="w-[2px] bg-[#B8E986]/60 mr-5 sm:mr-6 lg:mr-8 flex-shrink-0 self-stretch rounded-full br-callout br-rv" />
 
             {/* Display Quote Text */}
-            <h2 className="font-display font-extrabold text-[26px] sm:text-[34px] md:text-[38px] lg:text-[42px] text-[#F8FAFC] tracking-tight leading-[1.08]">
+            <h2 className="font-display font-extrabold text-[26px] sm:text-[34px] md:text-[38px] lg:text-[42px] text-[#F8FAFC] tracking-tight leading-[1.08] br-rv br-d1">
               Because the future of plant nutrition is not only about what we put into the soil. <br className="hidden sm:block" />
               It is also about what{" "}
               <span className="font-serif italic text-[#B8E986] font-normal">
@@ -33,12 +33,12 @@ export default function NutrientsClosing() {
           </div>
 
           {/* RIGHT AREA: Featured Future of Plant Image Card */}
-          <div className="lg:col-span-5 relative w-full h-[240px] sm:h-[280px] rounded-2xl overflow-hidden shadow-2xl border border-white/20">
+          <div className="group lg:col-span-5 relative w-full h-[240px] sm:h-[280px] rounded-2xl overflow-hidden shadow-2xl border border-white/20 br-rv br-d2 cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_25px_50px_-12px_rgba(184,233,134,0.15)] active:scale-[0.98]">
             <Image
               src="/images/nutriants/future-of-plant.jpg"
               alt="The Future of Plant Nutrition"
               fill
-              className="object-cover object-center"
+              className="object-cover object-center transition-transform duration-[800ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-105"
               sizes="(max-width: 1024px) 100vw, 40vw"
               priority
             />

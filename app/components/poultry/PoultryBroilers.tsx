@@ -35,12 +35,12 @@ export default function PoultryBroilers() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
           {/* Left Side - Broiler image */}
           <div className="flex items-center justify-center">
-            <div className="w-[75%] aspect-[3/4] max-h-[600px] overflow-hidden rounded-sm" data-broiler-image data-pm-species-frame="2">
+            <div className="group cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_25px_50px_-12px_rgba(45,90,66,0.25)] active:scale-[0.98] w-[75%] aspect-[3/4] max-h-[600px] overflow-hidden rounded-sm" data-broiler-image data-pm-species-frame="2">
               <img
                 src="/images/poultry-broilers.png"
                 alt="Broilers in a commercial poultry production setting"
                 loading="eager"
-                className="w-full h-full object-cover block"
+                className="w-full h-full object-cover block transition-transform duration-[800ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-105"
               />
             </div>
           </div>
@@ -63,17 +63,17 @@ export default function PoultryBroilers() {
             </div>
 
             {/* Body Heading */}
-            <h3 className="font-space-grotesk font-semibold text-xl lg:text-2xl text-[#1a1a1a] tracking-tight leading-tight mb-4">
+            <h3 className="font-space-grotesk font-semibold text-xl lg:text-2xl text-[#1a1a1a] tracking-tight leading-tight mb-4 br-rv">
               Fast growth depends on a gut that stays intact.
             </h3>
 
             {/* Body Paragraph */}
-            <p className="text-base lg:text-lg text-[#2d2d2d] leading-relaxed mb-6" style={{ fontFamily: 'Georgia, Times New Roman, Times, serif' }}>
+            <p className="text-base lg:text-lg text-[#2d2d2d] leading-relaxed mb-6 br-rv br-d1" style={{ fontFamily: 'Georgia, Times New Roman, Times, serif' }}>
               Gut damage in broilers, caused by <span className="italic">Clostridium perfringens</span>, can hinder growth. <span className="italic">Bacillus</span> probiotics offer a biological solution.
             </p>
 
             {/* Two-column Box */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 br-rv br-d2">
               {/* Left Box - Growth and FCR */}
               <div className="border border-[#2D5A42] p-5" data-pm-mini-card="0">
                 <div className="font-space-grotesk font-bold text-base text-[#1a1a1a] mb-2">
@@ -96,7 +96,7 @@ export default function PoultryBroilers() {
             </div>
 
             {/* Highlighted Statement with Vertical Accent Line */}
-            <div className="flex gap-4 mb-6">
+            <div className="flex gap-4 mb-6 br-rv br-d2">
               <div className="w-1 bg-[#2D5A42] flex-shrink-0" />
               <div>
                 <h4 className="font-space-grotesk font-bold text-base text-[#1a1a1a] mb-2">

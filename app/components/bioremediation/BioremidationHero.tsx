@@ -100,24 +100,6 @@ export default function BioremidationHero() {
             }
           });
         }
-        // Rail
-        const s = document.querySelectorAll("section[id^='s']");
-        let active = "";
-        s.forEach((sec) => {
-          const r = sec.getBoundingClientRect();
-          if (r.top <= window.innerHeight / 2 && r.bottom > window.innerHeight / 2) active = sec.id;
-        });
-        if (active) {
-          document.querySelectorAll(".br-rail-dot").forEach(d => {
-            d.classList.remove("bg-[#2D6A4F]", "opacity-100", "scale-150");
-            d.classList.add("bg-transparent", "opacity-50");
-          });
-          const activeDot = document.querySelector(`.br-rail-dot[href="#${active}"]`);
-          if (activeDot) {
-            activeDot.classList.remove("bg-transparent", "opacity-50");
-            activeDot.classList.add("bg-[#2D6A4F]", "opacity-100", "scale-150");
-          }
-        }
       });
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -132,18 +114,6 @@ export default function BioremidationHero() {
         id="br-progress-bar"
         className="fixed top-0 left-0 right-0 h-[3px] bg-[#2D6A4F] origin-left scale-x-0 z-[60]"
       />
-
-      {/* Side Rail Navigation */}
-      <div className="fixed right-4 sm:right-6 top-1/2 -translate-y-1/2 z-[60] flex flex-col gap-3 sm:gap-4 group">
-        {[1, 2, 3, 4].map((i) => (
-          <a
-            key={i}
-            href={`#s${i}`}
-            className="br-rail-dot w-2 h-2 rounded-full border border-[#2D6A4F] bg-transparent opacity-50 hover:bg-[#2D6A4F] hover:opacity-100 transition-all duration-300"
-            aria-label={`Go to section ${i}`}
-          />
-        ))}
-      </div>
 
       <section className={styles.heroSection} id="s1">
         {/* Background Image Container */}
