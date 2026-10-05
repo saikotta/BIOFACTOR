@@ -2,20 +2,20 @@ import React from "react";
 
 export default function BioremidationApplications() {
   return (
-    <section id="applications" className="relative w-full bg-[#EAF3EA] text-[#173522] pt-8 md:pt-12 lg:pt-16 pb-8 md:pb-12 lg:pb-14 overflow-hidden">
+    <section id="s3" className="relative w-full bg-[#EAF3EA] text-[#173522] pt-8 md:pt-12 lg:pt-16 pb-8 md:pb-12 lg:pb-14 overflow-hidden">
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)]">
         {/* Section Boundary Divider */}
         <div className="w-full border-t border-[#167A4A]/14 mb-8 md:mb-10 lg:mb-12" aria-hidden="true" />
 
         {/* Section Header */}
-        <div className="flex items-center gap-3 mb-4">
+        <div className="flex items-center gap-3 mb-4 br-rv">
           <span className="w-8 h-[1.5px] bg-[#2D6A4F]" />
           <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">
             DIFFERENT WASTES NEED DIFFERENT MICROBES
           </span>
         </div>
 
-        <h2 className="font-display font-extrabold text-[clamp(2.25rem,3.8vw,4rem)] text-[#173522] tracking-tight leading-[1.02] uppercase mb-12 md:mb-20 lg:mb-[80px] max-w-[1000px]">
+        <h2 className="font-display font-extrabold text-[clamp(2.25rem,3.8vw,4rem)] text-[#173522] tracking-tight leading-[1.02] uppercase mb-12 md:mb-20 lg:mb-[80px] max-w-[1000px] br-rv br-d1">
           DIFFERENT WASTES NEED<br />
           DIFFERENT MICROBES.
         </h2>
@@ -43,14 +43,14 @@ export default function BioremidationApplications() {
                 <img
                   src="/images/bioremidation/industrial.jpg"
                   alt="Industrial Bio-Remediation"
-                  className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-[1.02]"
+                  className="w-full h-full object-cover object-center block"
                 />
               </div>
             </div>
 
             {/* Editorial Content Right */}
             <div className="lg:col-span-7 flex flex-col justify-center space-y-6">
-              <div className="space-y-4">
+              <div className="space-y-4 br-rv">
                 <h5 className="font-serif font-semibold text-2xl sm:text-3xl text-[#173522] leading-snug">
                   Specialist microbes for specialist pollutants.
                 </h5>
@@ -60,7 +60,7 @@ export default function BioremidationApplications() {
               </div>
 
               {/* Editorial Evidence Rows */}
-              <div className="pt-6 border-t border-[#173522]/12 space-y-5">
+              <div className="pt-6 border-t border-[#173522]/12 space-y-5 br-rv br-d1">
                 <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-6 items-baseline">
                   <span className="font-mono text-xs font-bold tracking-widest text-[#2D6A4F] uppercase">
                     DYE DECOLOURISATION
@@ -80,7 +80,7 @@ export default function BioremidationApplications() {
               </div>
 
               {/* Key Programming Note - Pull-Quote Style */}
-              <div className="pt-6 border-l-2 border-[#2D6A4F] pl-6 my-2">
+              <div className="pt-6 pl-6 my-2 br-callout br-rv br-d2">
                 <span className="font-mono text-[11px] font-bold tracking-widest text-[#2D6A4F] uppercase block mb-1">
                   50% OF 100 MG/L Cr(VI) REDUCED IN 24 HOURS
                 </span>
@@ -96,7 +96,7 @@ export default function BioremidationApplications() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             {/* Editorial Content Left */}
             <div className="lg:col-span-7 lg:order-1 order-2 flex flex-col justify-center space-y-6">
-              <div className="space-y-4">
+              <div className="space-y-4 br-rv">
                 <h5 className="font-serif font-semibold text-2xl sm:text-3xl text-[#173522] leading-snug">
                   Where biology helps most is downstream of the tank.
                 </h5>
@@ -106,7 +106,7 @@ export default function BioremidationApplications() {
               </div>
 
               {/* Editorial Evidence Rows */}
-              <div className="pt-6 border-t border-[#173522]/12 space-y-5">
+              <div className="pt-6 border-t border-[#173522]/12 space-y-5 br-rv br-d1">
                 <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-6 items-baseline">
                   <span className="font-mono text-xs font-bold tracking-widest text-[#2D6A4F] uppercase">
                     SEPTAGE TREATMENT
@@ -126,7 +126,7 @@ export default function BioremidationApplications() {
               </div>
 
               {/* Key Programming Note - Pull-Quote Style */}
-              <div className="pt-6 border-l-2 border-[#2D6A4F] pl-6 my-2">
+              <div className="pt-6 pl-6 my-2 br-callout br-rv br-d2">
                 <span className="font-mono text-[11px] font-bold tracking-widest text-[#2D6A4F] uppercase block mb-1">
                   EVIDENCE-BASED SOLUTIONS
                 </span>
@@ -154,7 +154,7 @@ export default function BioremidationApplications() {
                 <img
                   src="/images/bioremidation/septic.jpg"
                   alt="Septic Bio-Remediation"
-                  className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-[1.02]"
+                  className="w-full h-full object-cover object-center block"
                 />
               </div>
             </div>

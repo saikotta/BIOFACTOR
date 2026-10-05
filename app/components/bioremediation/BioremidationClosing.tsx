@@ -15,11 +15,11 @@ export default function BioremidationClosing() {
         </div>
 
         {/* PRIMARY CLOSING AREA — ASYMMETRIC EDITORIAL COMPOSITION (RUMINANTS & POULTRY PARITY) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center mb-9 md:mb-11 lg:mb-[44px]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center mb-9 md:mb-11 lg:mb-[44px] br-rv">
           {/* LEFT AREA: Statement with vertical biological green accent */}
-          <div className="lg:col-span-7 xl:col-span-8 flex max-w-[820px]">
+          <div className="lg:col-span-7 xl:col-span-8 flex max-w-[820px] br-callout">
             {/* Vertical Biological Green Accent Bar */}
-            <div className="w-[2px] bg-[#B8E986]/60 mr-5 sm:mr-6 lg:mr-8 flex-shrink-0 self-stretch rounded-full" />
+            <div className="w-[2px] bg-[#B8E986]/60 mr-5 sm:mr-6 lg:mr-8 flex-shrink-0 self-stretch rounded-full opacity-0" />
 
             {/* Display Quote Text */}
             <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] md:text-[42px] lg:text-[46px] xl:text-[48px] text-[#F8FAFC] tracking-tight leading-[1.05]">
