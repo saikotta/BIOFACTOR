@@ -359,23 +359,6 @@ export default function ChemistryFieldSection() {
               </div>
             </div>
 
-            {/* SUPPORTING SENTENCE WITH RESTRAINED BOTANICAL MINT ACCENTS */}
-            <p
-              style={{
-                opacity: isRevealed ? 1 : 0,
-                transform: isRevealed ? "translateY(0)" : "translateY(20px)",
-                transition: isRevealed
-                  ? "opacity 550ms ease-out 450ms, transform 550ms cubic-bezier(0.16, 1, 0.3, 1) 450ms"
-                  : "none"
-              }}
-              className="text-base sm:text-lg md:text-xl text-white/85 font-light leading-[1.55] max-w-[540px]"
-            >
-              It is a living system that{" "}
-              <span className="text-[#9DDC72] font-medium">makes</span>,{" "}
-              <span className="text-[#9DDC72] font-medium">transforms</span>,{" "}
-              <span className="text-[#9DDC72] font-medium">responds</span>, and{" "}
-              <span className="text-[#9DDC72] font-medium">adapts</span>.
-            </p>
 
           </div>
 
@@ -458,26 +441,7 @@ export default function ChemistryFieldSection() {
 
         </div>
 
-        {/* LOWER DIVIDER & REFINED STATEMENT AREA */}
-        <div
-          style={{
-            opacity: isRevealed ? 1 : 0,
-            transform: isRevealed ? "translateY(0)" : "translateY(24px)",
-            transition: isRevealed
-              ? "opacity 600ms ease-out 500ms, transform 600ms cubic-bezier(0.16, 1, 0.3, 1) 500ms"
-              : "none"
-          }}
-          className="w-full my-8 sm:my-10 lg:my-12 pt-8 sm:pt-10 border-t border-[rgba(244,245,236,0.16)]"
-        >
-          {/* Final Statement */}
-          <div className="max-w-[1100px]">
-            <p className="text-xl sm:text-2xl lg:text-[28px] font-normal text-white/95 leading-[1.3] tracking-[-0.015em]">
-              When they interact, their potential
-              <br className="hidden sm:inline" />
-              multiplies far beyond any single organism.
-            </p>
-          </div>
-        </div>
+
       </div>
     </section>
   );

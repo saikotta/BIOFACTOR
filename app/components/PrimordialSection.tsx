@@ -17,18 +17,12 @@ export default function PrimordialSection() {
           </div>
 
           {/* Main Heading with Subtle Cyan Underline Accent */}
-          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-[48px] font-bold text-[#14231a] tracking-tight leading-[1.15] mb-3 sm:mb-5">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-[48px] font-bold text-[#14231a] tracking-tight leading-[1.15]">
             Biotechnology begins{" "}
             <span className="relative inline-block border-b-2 border-cyan-400/90 pb-0.5">
               here.
             </span>
           </h2>
-
-          {/* Supporting Paragraph */}
-          <p className="text-sm sm:text-base md:text-lg text-[#2C3E35]/90 font-normal leading-relaxed max-w-xl">
-            Biotechnology begins here: not just by observing life, but by
-            understanding it and working with it.
-          </p>
         </div>
 
         {/* Lower Part: Three Cards with Smooth Green Hover & Focus Interaction */}

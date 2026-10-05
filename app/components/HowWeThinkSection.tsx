@@ -155,10 +155,10 @@ export default function HowWeThinkSection() {
                       'ui-monospace, "SFMono-Regular", "Cascadia Code", "Roboto Mono", monospace',
                   }}
                 >
-                  SYSTEM
+                  SYSTEMS
                 </div>
                 <div className="text-2xl sm:text-[26px] lg:text-[28px] font-normal text-[#F4F5EC] tracking-[-0.025em] leading-[1.1]">
-                  Living systems.
+                  Chemical, Biological &amp; Organic
                 </div>
               </div>
 
@@ -198,57 +198,25 @@ export default function HowWeThinkSection() {
         </div>
 
         {/* ================================================== */}
-        {/* 4. LARGE CLOSING STATEMENT */}
-        {/* ================================================== */}
-        <div className="w-full mt-14 sm:mt-16 lg:mt-18 mb-14 sm:mb-16 text-left relative">
-          <h2
-            className="relative z-10 uppercase text-[#F4F5EC] text-[clamp(44px,6.2vw,108px)] tracking-[-0.045em] leading-[0.92] font-bold"
-            style={{
-              fontFamily: "var(--font-poppins), Poppins, sans-serif",
-              fontWeight: 700,
-              letterSpacing: "-0.045em",
-              lineHeight: 0.92,
-            }}
-          >
-            <div>THE NEXT BIG</div>
-            <div className="inline-flex items-center flex-wrap gap-x-3 sm:gap-x-5 gap-y-2 mt-1 sm:mt-2">
-              <span>THING IS REALLY</span>
-              <span className="inline-flex shrink-0 items-center justify-center px-4.5 sm:px-6 md:px-7 lg:px-8 py-1.5 sm:py-2 md:py-2.5 lg:py-3 text-[17.8px] sm:text-[22px] md:text-[26.5px] lg:text-[29px] font-semibold tracking-[0.18em] leading-none bg-[#A7E7C7] text-[#0B3325] rounded-full shadow-md select-none whitespace-nowrap self-center">
-                SMALL...
-              </span>
-            </div>
-          </h2>
-        </div>
-
-        {/* ================================================== */}
         {/* 5. BRAND / CTA ROW */}
         {/* ================================================== */}
-        <div className="w-full flex flex-col md:flex-row items-center justify-between gap-6 pt-6 mb-4 border-t border-[rgba(244,245,236,0.18)] mt-14 sm:mt-16">
-          {/* Middle / Left: Official Logo / Branding */}
-          <div className="flex items-center gap-3">
+        <div className="w-full flex flex-col md:flex-row items-center justify-between gap-6 pt-6 mb-4 border-t border-[rgba(244,245,236,0.18)] mt-10 sm:mt-12">
+          {/* Middle / Left: Official Logo */}
+          <div className="flex items-center">
             <img
               src="/images/biofactor-official-logo.png"
               alt="Biofactor Biologicals"
-              className="h-9 sm:h-11 w-auto object-contain brightness-200"
+              className="h-9 sm:h-11 w-auto object-contain brightness-0 invert opacity-90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.25)]"
             />
-            <span className="text-sm sm:text-base font-medium tracking-[0.12em] uppercase text-[#F4F5EC]/88">
-              BIOFACTOR BIOLOGICALS
-            </span>
           </div>
 
-          {/* Right: CTA Buttons */}
+          {/* Right: CTA Button */}
           <div className="flex items-center gap-3 flex-wrap">
             <a
               href="/science-technology"
               className="bg-[#A9E889] hover:bg-[#97d876] text-[#06271A] font-semibold text-xs sm:text-sm px-6 sm:px-7 h-[46px] sm:h-[50px] flex items-center justify-center rounded-lg transition-colors text-center shadow-sm"
             >
               EXPLORE OUR SCIENCE
-            </a>
-            <a
-              href="#contact"
-              className="bg-[rgba(5,48,34,0.30)] border border-[rgba(244,245,236,0.55)] hover:bg-[rgba(5,48,34,0.50)] hover:border-[#F4F5EC] text-[#F4F5EC] font-semibold text-xs sm:text-sm px-6 sm:px-7 h-[46px] sm:h-[50px] flex items-center justify-center rounded-lg transition-colors text-center"
-            >
-              WORK WITH US
             </a>
           </div>
         </div>

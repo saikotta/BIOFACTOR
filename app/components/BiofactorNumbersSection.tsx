@@ -4,14 +4,14 @@ import React, { useEffect, useRef, useState } from "react";
 
 const STATISTICS = [
   // ROW 1
-  { number: "11", label: "PATENTS FILED" },
-  { number: "60+", label: "ELITE / DEPOSITED STRAINS" },
+  { number: "11", label: "PATENTS GRANTED" },
+  { number: "60+", label: "PROPRIETARY AND DEPOSITED STRAINS" },
   { number: "100+", label: "PRODUCTS ACROSS SIX VERTICALS" },
-  { number: "600+", label: "TEAM MEMBERS" },
-  { number: "3,000+", label: "DEALER NETWORK" },
+  { number: "550+", label: "TEAM MEMBERS" },
+  { number: "2000+", label: "DEALERS’ NETWORK" },
   // ROW 2
   { number: "2", label: "COUNTRIES BEYOND BHARAT" },
-  { number: "18", label: "INDIAN STATES" },
+  { number: "20+", label: "INDIAN STATES" },
   { number: "2014", label: "FOUNDED, HYDERABAD" },
   { number: "5 Lakhs+", label: "HAPPY FARMERS" },
 ];
@@ -171,10 +171,10 @@ export default function BiofactorNumbersSection() {
           }}
         >
           <span className="font-mono text-xs font-semibold tracking-wider text-[#059669] uppercase shrink-0">
-            2 COUNTRIES BEYOND BHARAT —
+            2 COUNTRIES BEYOND BHARAT –
           </span>
           <p className="text-xs sm:text-sm font-medium text-[#2a4d3e]/90 leading-relaxed">
-            Reach extends into Malawi and Kenya — Biofactor&apos;s first international product licences.
+            Reach extended into Malawi and Kenya
           </p>
         </div>
 
