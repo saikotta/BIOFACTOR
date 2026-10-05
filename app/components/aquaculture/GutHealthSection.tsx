@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 function fitGutFrame(frame: HTMLIFrameElement | null) {
-  const stage = frame?.contentDocument?.querySelector<HTMLElement>(".stage");
+  const stage = frame?.contentDocument?.querySelector<HTMLElement>(".stage") || frame?.contentDocument?.querySelector<HTMLElement>("#stage");
   if (!frame || !stage) return;
 
   const frameWidth = frame.contentWindow?.innerWidth ?? 0;
@@ -12,7 +12,8 @@ function fitGutFrame(frame: HTMLIFrameElement | null) {
     stage.style.left = "0px";
     stage.style.top = "0px";
     stage.style.transform = "none";
-    if (frame.style.height !== "760px") frame.style.height = "760px";
+    const height = Math.max(800, Math.ceil(stage.scrollHeight));
+    if (frame.style.height !== `${height}px`) frame.style.height = `${height}px`;
     return;
   }
 

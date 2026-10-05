@@ -80,13 +80,41 @@ export default function ConsortiaBlock() {
         </div>
       </div>
 
-      <div className="mx-auto mt-12 w-full max-w-6xl border-2 border-[#1F8A57] bg-transparent p-8 text-center">
-        <div className="mb-2 font-newsreader text-[clamp(28px,4vw,36px)] font-bold text-[#1F8A57]">
-          93% less hydrogen sulphide.
+      {/* ── STAT CALLOUT ── */}
+      <div className="mx-auto mt-12 w-full max-w-6xl bg-[#0f2f1e] px-8 py-10 sm:px-12 sm:py-12">
+        <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-10">
+
+          {/* Big number */}
+          <div className="flex-shrink-0 border-r-0 pr-0 sm:border-r sm:border-[#1F8A57]/30 sm:pr-10">
+            <span
+              className="font-inter-tight font-extrabold leading-none text-[#86EFAC]"
+              style={{ fontSize: "clamp(4rem,8vw,6rem)", letterSpacing: "-0.035em" }}
+            >
+              93%
+            </span>
+            <p className="mt-1 font-jetbrains text-[10px] font-medium uppercase tracking-[0.18em] text-[#86EFAC]/60">
+              reduction in H₂S
+            </p>
+          </div>
+
+          {/* Divider line — horizontal on mobile, hidden on desktop (border-r above handles it) */}
+          <div className="h-px w-full bg-[#1F8A57]/30 sm:hidden" aria-hidden="true" />
+
+          {/* Explanation */}
+          <div>
+            <p className="font-newsreader text-[16.5px] leading-[1.65] text-[#D9F5D0]">
+              When shrimp-pond sediment bacteria were given nitrate to use instead
+              of oxygen, they switched to oxidising sulphide. Shrimp stayed
+              unaffected by sulphide in the sediment as long as the soil–water
+              interface remained oxygenated.
+            </p>
+            <p className="mt-3 font-jetbrains text-[10px] uppercase tracking-[0.14em] text-[#86EFAC]/50">
+              Xu &amp; Pan 2013, <em className="not-italic normal-case text-[#86EFAC]/40">Aquaculture</em>
+              <sup className="text-[#86EFAC]/70"> 7</sup>
+            </p>
+          </div>
+
         </div>
-        <p className="mx-auto max-w-4xl font-newsreader text-[15px] italic leading-[1.55] text-[#2B2B2B]">
-          When shrimp-pond sediment bacteria were given nitrate to use instead of oxygen, they switched to oxidising sulphide. Shrimp stayed unaffected by sulphide in the sediment as long as the soil–water interface remained oxygenated.
-        </p>
       </div>
     </section>
   );

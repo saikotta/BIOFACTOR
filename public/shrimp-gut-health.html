@@ -1,723 +1,610 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="color-scheme:light;">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#d8ecd4">
-  <title>Shrimp Gut Health | Biofactor</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      color-scheme: light;
-      --page: #d8ecd4;
-      --glow: #e8f5e4;
-      --panel: #f1faee;
-      --line: #a3c9a2;
-      --ink: #0f2f1e;
-      --muted: #40604d;
-      --deep: #0d4f31;
-      --mid: #1f8a57;
-      --light: #5fbf86;
-      --lime: #8aa31c;
-      --track: #c6e0c4;
-      --sans: "Instrument Sans", sans-serif;
-      --display: "Bricolage Grotesque", sans-serif;
-      --serif: "Newsreader", Georgia, serif;
-    }
-
-    * { box-sizing: border-box; }
-
-    html, body { margin: 0; min-height: 100%; }
-
-    body {
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-      display: grid;
-      place-items: center;
-      color: var(--ink);
-      background: radial-gradient(circle at 100% 0%, var(--glow) 0%, var(--page) 58%);
-      font-family: var(--sans);
-    }
-
-    .stage {
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 1280px;
-      height: 760px;
-      padding: 40px 52px;
-      display: grid;
-      grid-template-columns: 600px minmax(0, 1fr);
-      grid-template-rows: auto 190px minmax(0, 1fr);
-      grid-template-areas:
-        "header cards"
-        "diagram cards"
-        "chart chart";
-      gap: 18px 40px;
-      overflow: hidden;
-      background: rgba(241, 250, 238, .34);
-      transform-origin: top left;
-      isolation: isolate;
-    }
-
-    .stage.is-embedded {
-      left: 0;
-      top: 0;
-      width: 100vw;
-      transform: none;
-      grid-template-areas:
-        "header cards"
-        "diagram cards"
-        "chart cards";
-    }
-
-    .stage.is-embedded .cards-panel {
-      grid-row: 1 / 4;
-    }
-
-    .stage.is-embedded .benefit-card {
-      justify-content: flex-start;
-      padding: 22px 18px;
-    }
-
-    .stage.is-embedded .chart-panel {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 7px;
-      align-content: center;
-      padding: 11px 14px;
-    }
-
-    .stage.is-embedded .chart-copy h2 {
-      margin-bottom: 4px;
-      font-size: 18px;
-    }
-
-    .stage.is-embedded .chart-copy p {
-      margin-bottom: 4px;
-      font-size: 11px;
-      line-height: 1.18;
-    }
-
-    .stage.is-embedded .chart-copy .source-note {
-      margin: 0;
-      font-size: 9px;
-      line-height: 1.15;
-    }
-
-    .stage.is-embedded .bar-list { gap: 4px; }
-
-    .stage.is-embedded .bar-row {
-      grid-template-columns: 102px minmax(0, 1fr) 106px;
-      gap: 8px;
-      min-height: 23px;
-    }
-
-    .stage.is-embedded .bar-label { font-size: 12px; }
-    .stage.is-embedded .bar-track { height: 9px; }
-    .stage.is-embedded .bar-count { font-size: 10px; }
-
-    .drifting-dots {
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    .drift-dot {
-      position: absolute;
-      left: var(--x);
-      top: var(--y);
-      width: var(--size);
-      height: var(--size);
-      border-radius: 50%;
-      background: var(--dot-color);
-      opacity: .3;
-      animation: drift var(--duration) ease-in-out var(--delay) infinite alternate;
-    }
-
-    .header, .diagram-panel, .cards-panel, .chart-panel {
-      position: relative;
-      z-index: 1;
-      min-width: 0;
-    }
-
-    .header { grid-area: header; }
-
-    .eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 9px;
-      color: var(--mid);
-      font: 600 11px/1.2 var(--sans);
-      letter-spacing: .16em;
-      text-transform: uppercase;
-    }
-
-    .eyebrow-line {
-      display: inline-block;
-      width: 28px;
-      height: 1px;
-      flex: 0 0 28px;
-      background: var(--mid);
-      transform-origin: left center;
-      animation: line-grow .55s cubic-bezier(.2,.75,.25,1) both;
-    }
-
-    h1 {
-      margin: 0 0 8px;
-      color: var(--ink);
-      font: 800 42px/.98 var(--display);
-      letter-spacing: 0;
-    }
-
-    .headline-mask {
-      display: block;
-      overflow: hidden;
-    }
-
-    .headline-mask > span {
-      display: block;
-      transform: translateY(110%);
-      animation: headline-up .72s cubic-bezier(.2,.75,.25,1) both;
-    }
-
-    .headline-mask:last-child > span { animation-delay: .22s; }
-    .headline-mask:first-child > span { animation-delay: .1s; }
-
-    .header-copy {
-      margin: 0;
-      max-width: 590px;
-      color: var(--muted);
-      font: 400 15.5px/1.38 var(--serif);
-      animation: rise-in .68s ease .55s both;
-    }
-
-    sup {
-      color: var(--mid);
-      font: 600 .68em/0 var(--sans);
-      vertical-align: super;
-    }
-
-    .diagram-panel, .cards-panel, .chart-panel {
-      border: 1px solid var(--line);
-      background: var(--panel);
-      transition: border-color .25s ease, box-shadow .25s ease;
-    }
-
-    .diagram-panel:hover, .cards-panel:hover, .chart-panel:hover {
-      border-color: var(--mid);
-      box-shadow: 0 8px 22px rgba(13, 79, 49, .09);
-    }
-
-    .diagram-panel {
-      grid-area: diagram;
-      height: 190px;
-      padding: 10px 14px 27px;
-      overflow: hidden;
-      animation: rise-in .7s ease .8s both;
-    }
-
-    .diagram-content {
-      display: grid;
-      grid-template-columns: 170px minmax(0, 1fr);
-      gap: 10px;
-      align-items: center;
-      height: 100%;
-    }
-
-    .legend {
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-      min-width: 0;
-    }
-
-    .legend-item {
-      display: grid;
-      grid-template-columns: 8px minmax(0, 1fr);
-      gap: 8px;
-      align-items: start;
-      color: var(--muted);
-      font: 500 11.5px/1.27 var(--sans);
-    }
-
-    .legend-dot {
-      width: 7px;
-      height: 7px;
-      margin-top: 3px;
-      border-radius: 50%;
-      background: var(--dot-color);
-      animation: legend-pulse 2.2s ease-in-out infinite;
-    }
-
-    .legend-item:nth-child(2) .legend-dot { animation-delay: .35s; }
-    .legend-item:nth-child(3) .legend-dot { animation-delay: .7s; }
-
-    .gut-svg-wrap { width: 100%; height: 145px; min-width: 0; }
-    .gut-svg { display: block; width: 100%; height: 100%; overflow: visible; }
-
-    .gut-wall {
-      fill: rgba(31, 138, 87, .06);
-      stroke: var(--mid);
-      stroke-width: 13;
-      stroke-dasharray: 840;
-      stroke-dashoffset: 840;
-      animation: gut-draw 2s cubic-bezier(.5,0,.2,1) .82s forwards;
-    }
-
-    .gut-lumen {
-      fill: none;
-      stroke: var(--deep);
-      stroke-width: 1.5;
-      stroke-dasharray: 6 6;
-      animation: dash-march 12s linear infinite;
-    }
-
-    .probiotic {
-      fill: var(--light);
-      stroke: var(--deep);
-      stroke-width: 1;
-      transform-box: fill-box;
-      transform-origin: center;
-      animation: bacteria-pulse 2.8s ease-in-out var(--delay) infinite;
-    }
-
-    .vibrio {
-      fill: none;
-      stroke: var(--deep);
-      stroke-width: 4;
-      stroke-linecap: round;
-      animation: vibrio-drift 7s ease-in-out var(--delay) infinite;
-    }
-
-    .prebiotic {
-      fill: var(--lime);
-      animation: particle-float 5s ease-in-out var(--delay) infinite;
-    }
-
-    .diagram-caption {
-      position: absolute;
-      left: 14px;
-      bottom: 8px;
-      color: var(--muted);
-      font: 600 9px/1 var(--sans);
-      letter-spacing: .14em;
-    }
-
-    .cards-panel {
-      grid-area: cards;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      grid-template-rows: repeat(2, minmax(0, 1fr));
-      min-height: 0;
-      overflow: hidden;
-      animation: rise-in .7s ease 1s both;
-    }
-
-    .benefit-card {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-width: 0;
-      padding: 13px 15px;
-      background: transparent;
-      transition: background-color .25s ease;
-    }
-
-    .benefit-card::after {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--mid);
-      content: "";
-      transform: scaleX(0);
-      transform-origin: left center;
-      transition: transform .35s cubic-bezier(.2,.75,.25,1);
-    }
-
-    .benefit-card:hover { background: #fff; }
-    .benefit-card:hover::after { transform: scaleX(1); }
-    .benefit-card:nth-child(odd) { border-right: 1px solid var(--line); }
-    .benefit-card:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
-
-    .card-tag {
-      margin: 0 0 5px;
-      color: var(--mid);
-      font: 700 9px/1.2 var(--sans);
-      letter-spacing: .15em;
-    }
-
-    .benefit-card h2 {
-      margin: 0 0 6px;
-      color: var(--ink);
-      font: 800 21px/1.04 var(--display);
-      letter-spacing: 0;
-    }
-
-    .benefit-card p:last-child {
-      margin: 0;
-      color: var(--muted);
-      font: 400 15px/1.3 var(--serif);
-    }
-
-    .chart-panel {
-      grid-area: chart;
-      display: grid;
-      grid-template-columns: 330px minmax(0, 1fr);
-      gap: 28px;
-      align-items: center;
-      min-width: 0;
-      padding: 17px 20px;
-      animation: rise-in .7s ease 1.2s both;
-    }
-
-    .chart-copy h2 {
-      margin: 0 0 6px;
-      color: var(--ink);
-      font: 800 21px/1.08 var(--display);
-    }
-
-    .chart-copy p {
-      margin: 0 0 6px;
-      color: var(--muted);
-      font: 400 13px/1.3 var(--serif);
-    }
-
-    .chart-copy .source-note {
-      margin: 0;
-      font-size: 11px;
-      line-height: 1.25;
-    }
-
-    .bar-list { display: flex; flex-direction: column; gap: 9px; min-width: 0; }
-
-    .bar-row {
-      display: grid;
-      grid-template-columns: 130px minmax(0, 1fr) 132px;
-      gap: 13px;
-      align-items: center;
-      min-height: 38px;
-    }
-
-    .bar-label {
-      color: var(--ink);
-      font: 700 14px/1.2 var(--sans);
-    }
-
-    .bar-track {
-      height: 12px;
-      overflow: hidden;
-      background: var(--track);
-    }
-
-    .bar-fill {
-      width: var(--bar-width);
-      height: 100%;
-      background: linear-gradient(90deg, var(--light), var(--mid), var(--deep));
-      transform: scaleX(0);
-      transform-origin: left center;
-      transition: transform 1.5s cubic-bezier(.2,.75,.25,1);
-    }
-
-    .bar-fill.is-filled { transform: scaleX(1); }
-
-    .bar-count {
-      color: var(--deep);
-      text-align: right;
-      white-space: nowrap;
-      font: 600 12px/1.2 var(--sans);
-    }
-
-    @keyframes line-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-    @keyframes headline-up { to { transform: translateY(0); } }
-    @keyframes rise-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes gut-draw { to { stroke-dashoffset: 0; } }
-    @keyframes dash-march { to { stroke-dashoffset: -96; } }
-    @keyframes bacteria-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.14); } }
-    @keyframes vibrio-drift { 0%, 12% { opacity: 0; transform: translateX(0); } 22%, 62% { opacity: .95; } 100% { opacity: 0; transform: translateX(28px); } }
-    @keyframes particle-float { 0%, 100% { opacity: .25; transform: translate(10px, 12px); } 50% { opacity: 1; transform: translate(-8px, -12px); } }
-    @keyframes legend-pulse { 0%, 100% { transform: scale(.8); opacity: .55; } 50% { transform: scale(1.3); opacity: 1; } }
-    @keyframes drift { from { transform: translate(0, 0); } to { transform: translate(var(--dx), var(--dy)); } }
-
-    @media (max-width: 859px) {
-      body {
-        display: block;
-        width: 100%;
-        height: auto;
-        min-height: 100vh;
-        overflow-x: hidden;
-        overflow-y: auto;
-      }
-
-      .stage {
-        position: relative;
-        left: auto !important;
-        top: auto !important;
-        width: 100%;
-        height: auto;
-        min-height: 100vh;
-        padding: 28px 18px;
-        grid-template-columns: minmax(0, 1fr);
-        grid-template-rows: auto;
-        grid-template-areas:
-          "header"
-          "diagram"
-          "cards"
-          "chart";
-        gap: 18px;
-        overflow: hidden;
-        transform: none !important;
-      }
-
-      .stage.is-embedded {
-        left: auto;
-        top: auto;
-        width: 100%;
-        grid-template-areas:
-          "header"
-          "diagram"
-          "cards"
-          "chart";
-        transform: none;
-      }
-
-      .stage.is-embedded .cards-panel { grid-row: auto; }
-      .stage.is-embedded .chart-panel { grid-template-columns: minmax(0, 1fr); gap: 18px; padding: 20px; }
-      .stage.is-embedded .chart-copy h2 { font-size: 23px; }
-      .stage.is-embedded .chart-copy p { font-size: 13px; line-height: 1.3; }
-      .stage.is-embedded .chart-copy .source-note { font-size: 11px; line-height: 1.25; }
-      .stage.is-embedded .bar-row { grid-template-columns: minmax(76px, .8fr) minmax(36px, 1.3fr) minmax(80px, .9fr); gap: 8px; min-height: 38px; }
-      .stage.is-embedded .bar-label { font-size: 13px; }
-      .stage.is-embedded .bar-track { height: 12px; }
-      .stage.is-embedded .bar-count { font-size: 11px; }
-
-      h1 { font-size: clamp(19px, 7vw, 34px); }
-      .headline-mask > span { white-space: nowrap; }
-      .header-copy { max-width: none; font-size: 15.5px; line-height: 1.45; }
-      .diagram-panel { height: auto; min-height: 320px; padding: 14px 14px 28px; }
-      .diagram-content { grid-template-columns: minmax(0, 1fr); gap: 12px; }
-      .legend { display: grid; grid-template-columns: 1fr; gap: 8px; }
-      .gut-svg-wrap { height: 165px; }
-      .cards-panel { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto; }
-      .benefit-card { min-height: 150px; padding: 20px; }
-      .benefit-card:nth-child(odd) { border-right: 0; }
-      .benefit-card:nth-child(-n+3) { border-bottom: 1px solid var(--line); }
-      .benefit-card h2 { font-size: 23px; }
-      .chart-panel { grid-template-columns: minmax(0, 1fr); gap: 18px; padding: 20px; }
-      .chart-copy h2 { font-size: 23px; }
-      .bar-row { grid-template-columns: minmax(76px, .8fr) minmax(36px, 1.3fr) minmax(80px, .9fr); gap: 8px; }
-      .bar-label { font-size: 13px; }
-      .bar-count { font-size: 11px; }
-    }
-
-    @media (max-width: 420px) {
-      .stage { padding: 24px 14px; }
-      .bar-row { grid-template-columns: minmax(68px, .8fr) minmax(28px, 1fr) minmax(74px, .9fr); gap: 6px; }
-      .bar-label { font-size: 12px; }
-      .bar-count { font-size: 10px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
-      }
-
-      .headline-mask > span, .bar-fill { opacity: 1 !important; transform: none !important; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Inside the Shrimp – Gut Health Infographic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&display=swap" rel="stylesheet">
+<style>
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #EAF6EC;
+  --glow:    #e8f5e4;
+  --panel:   rgba(255, 255, 255, 0.75);
+  --phov:    rgba(255, 255, 255, 0.95);
+  --ink:     #0b2416;
+  --muted:   #21432f;
+  --green:   #1f8a57;
+  --gdark:   #0d4f31;
+  --glt:     #5fbf86;
+  --lime:    #8aa31c;
+  --red:     #c0392b;
+  --line:    rgba(163, 201, 162, 0.55);
+  --line-h:  #6aaa7a;
+  --track:   #c6e0c4;
+  --ease:    cubic-bezier(.2, .7, .2, 1);
+}
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  font-family: "Instrument Sans", sans-serif;
+  color: var(--ink);
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse 65% 60% at 100% 0%, var(--glow) 0%, transparent 68%),
+    var(--bg);
+}
+
+sup { color: var(--green); font-weight: 600; font-size: .75em; vertical-align: super; }
+
+/* ── DRIFTING BACKGROUND DOTS ── */
+.dots-bg {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+  overflow: hidden;
+}
+.dot { position: absolute; border-radius: 50%; opacity: .30; }
+@keyframes du { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-24px) } }
+@keyframes dd { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY( 24px) } }
+@keyframes dl { 0%,100%{ transform: translateX(0) } 50%{ transform: translateX( 22px) } }
+@keyframes dr { 0%,100%{ transform: translateX(0) } 50%{ transform: translateX(-22px) } }
+
+/* ── SCALED STAGE WRAPPER ── */
+#wrap {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+  width: 1280px; height: 800px;
+  transform-origin: center center;
+}
+
+.stage, #stage {
+  width: 1280px; height: 800px;
+  padding: 38px 56px;
+  display: grid;
+  grid-template-columns: 570px 1fr;
+  grid-template-rows: auto auto auto 1fr;
+  column-gap: 40px;
+  row-gap: 16px;
+}
+
+/* ── PANEL STYLES ── */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  transition: border-color .25s, box-shadow .25s, background .25s;
+}
+.panel:hover {
+  border-color: var(--line-h);
+  box-shadow: 0 6px 24px rgba(13, 79, 49, 0.10);
+}
+
+/* ── ANIMATION UTILITIES ── */
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes growX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes slideUp { from { transform: translateY(110%); } to { transform: none; } }
+@keyframes pulseDot { 0%,100%{ transform: scale(1); opacity:.9 } 50%{ transform: scale(1.45); opacity:1 } }
+
+.rise {
+  opacity: 0;
+  animation: rise .55s var(--ease) forwards;
+  animation-delay: var(--t, 0s);
+}
+
+/* ══════════════════════════════════════════
+   ROW 1: HEADER (Col 1)
+══════════════════════════════════════════ */
+.sec-head {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eyebrow {
+  display: flex; align-items: center; gap: 10px;
+  font: 700 11px/1 "Instrument Sans", sans-serif;
+  letter-spacing: .24em; text-transform: uppercase;
+  color: var(--green);
+}
+.eyebrow-bar {
+  display: inline-block; width: 26px; height: 2px;
+  background: var(--green); transform-origin: left;
+  animation: growX .65s .05s var(--ease) both;
+}
+
+h1 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 44px;
+  line-height: 1.05;
+  letter-spacing: -.025em;
+  color: var(--ink);
+}
+
+/* ══════════════════════════════════════════
+   ROW 2: MATTER (Col 1, below Header)
+══════════════════════════════════════════ */
+.sec-matter {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.lede {
+  font-family: "Newsreader", serif;
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 52ch;
+}
+
+/* ══════════════════════════════════════════
+   DIAGRAM (Col 2, Spans Rows 1 & 2 beside Header & Matter)
+══════════════════════════════════════════ */
+.sec-diagram {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 10px;
+  position: relative;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.diag-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 440px;
+}
+
+.diag-eyebrow {
+  font: 700 10.5px/1 "Instrument Sans", sans-serif;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--green);
+}
+
+.diag-caption {
+  font-size: 9.5px; font-weight: 600; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted); opacity: .75;
+}
+
+.dsvg {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 0;
+}
+.dsvg svg {
+  width: 100%;
+  max-width: 330px;
+  max-height: 130px;
+}
+
+/* Legend directly inside Diagram */
+.diag-legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.leg-row {
+  display: flex; align-items: center; gap: 7px;
+  font: 600 11.5px/1.2 "Instrument Sans", sans-serif;
+  color: var(--ink);
+}
+
+.leg-dot {
+  width: 8.5px; height: 8.5px; border-radius: 50%; flex-shrink: 0;
+  background: var(--c);
+  animation: pulseDot 2.4s ease-in-out infinite;
+  animation-delay: var(--pd, 0s);
+}
+
+/* SVG Animations */
+@keyframes drawgut { from { stroke-dashoffset: 900 } to { stroke-dashoffset: 0 } }
+@keyframes marchdash { from { stroke-dashoffset: 0 } to { stroke-dashoffset: -40 } }
+@keyframes cappulse { 0%,100%{ transform: scale(1) } 50%{ transform: scale(1.15) } }
+@keyframes vibdrift { 0%{ transform: translateX(0); opacity: .9 } 70%{ transform: translateX(28px); opacity: .25 } 100%{ transform: translateX(0); opacity: .9 } }
+@keyframes sigring { 0%{ r: 5; opacity: .85 } 100%{ r: 22; opacity: 0 } }
+@keyframes prebfloat { 0%{ transform: translateY(0); opacity: .88 } 55%{ transform: translateY(-12px); opacity: .35 } 100%{ transform: translateY(0); opacity: .88 } }
+
+.gut-wall { stroke-dasharray: 900; stroke-dashoffset: 900; animation: drawgut 2s ease forwards; }
+.lumen { animation: marchdash 2.5s linear infinite; }
+.cap { animation: cappulse 2.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.cap:nth-child(2){ animation-delay: .20s }
+.cap:nth-child(3){ animation-delay: .40s }
+.cap:nth-child(4){ animation-delay: .60s }
+.cap:nth-child(5){ animation-delay: .80s }
+.vib1 { animation: vibdrift 7s ease-in-out infinite; }
+.vib2 { animation: vibdrift 7s ease-in-out 1.6s infinite; }
+.sring { animation: sigring 2.6s ease-out infinite; }
+.pd { animation: prebfloat 5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.pd:nth-child(2){ animation-delay: .9s }
+.pd:nth-child(3){ animation-delay: 1.8s }
+.pd:nth-child(4){ animation-delay: 2.7s }
+
+/* ══════════════════════════════════════════
+   ROW 3: HORIZONTAL BOXES (Full width, 4 Columns)
+══════════════════════════════════════════ */
+.sec-boxes {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.box {
+  padding: 18px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.box::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 0; height: 3px;
+  background: linear-gradient(90deg, var(--green), var(--glt));
+  transition: width .4s ease;
+}
+.box:hover {
+  background: var(--phov);
+  border-color: var(--line-h);
+  box-shadow: 0 4px 18px rgba(13, 79, 49, 0.12);
+}
+.box:hover::before { width: 100%; }
+
+.btag {
+  display: inline-flex; align-items: center;
+  padding: 2.5px 9px;
+  font: 700 9.5px/1 "Instrument Sans", sans-serif;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--green); background: rgba(31, 138, 87, 0.12);
+  border: 1px solid rgba(31, 138, 87, 0.24); border-radius: 3px;
+  width: fit-content;
+}
+.btag.both {
+  color: #6b7a00; background: rgba(138, 163, 28, 0.14);
+  border-color: rgba(138, 163, 28, 0.30);
+}
+
+.btit {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 17.5px;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.bbod {
+  font-family: "Newsreader", serif;
+  font-size: 14px;
+  line-height: 1.52;
+  color: var(--muted);
+}
+
+/* ══════════════════════════════════════════
+   ROW 4: CHART (Full width, bottom)
+══════════════════════════════════════════ */
+.sec-chart {
+  grid-column: 1 / -1;
+  grid-row: 4;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  padding: 18px 30px;
+}
+
+.cleft {
+  width: 400px; flex-shrink: 0;
+  display: flex; flex-direction: column; gap: 4px;
+}
+
+.ctit {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.csub {
+  font-family: "Newsreader", serif;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.csrc {
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 11px;
+  color: var(--muted); opacity: .8;
+  margin-top: 2px;
+}
+
+.cright {
+  flex: 1;
+  display: flex; flex-direction: column;
+  justify-content: center; gap: 12px;
+}
+
+.bbar {
+  display: flex; align-items: center; gap: 12px;
+}
+
+.blbl {
+  width: 124px; flex-shrink: 0;
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: var(--ink); text-align: right;
+}
+.blbl span { display: block; font-weight: 400; font-size: 9.5px; color: var(--muted); }
+
+.btrk {
+  flex: 1; height: 14px;
+  background: var(--track); border-radius: 99px;
+  overflow: hidden;
+}
+
+.bfil {
+  height: 100%; border-radius: 99px;
+  background: linear-gradient(90deg, var(--glt), var(--green));
+  width: 0%;
+  transition: width 1.4s var(--ease);
+}
+
+.bcnt {
+  width: 100px; flex-shrink: 0;
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: var(--green); text-align: left;
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE (≤ 860px)
+══════════════════════════════════════════ */
+@media(max-width:860px){
+  html, body { overflow: auto; height: auto; }
+  body { align-items: flex-start; }
+  #wrap { width: 100%; height: auto; transform: none !important; }
+  .stage, #stage {
+    width: 100%; height: auto;
+    padding: 24px 18px 40px;
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  h1 { font-size: 32px; }
+  .sec-diagram { height: auto; padding: 18px 0; }
+  .sec-boxes { grid-template-columns: 1fr; }
+  .sec-chart { flex-direction: column; gap: 16px; padding: 20px; }
+  .cleft { width: 100%; }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .eyebrow-bar { transform: scaleX(1); }
+  .rise { opacity: 1; transform: none; }
+  .gut-wall { stroke-dashoffset: 0; }
+  .bfil { width: var(--w) !important; }
+}
+</style>
 </head>
 <body>
-  <main class="stage" id="stage" aria-label="Shrimp gut health infographic">
-    <div class="drifting-dots" aria-hidden="true">
-      <i class="drift-dot" style="--x:7%;--y:8%;--size:5px;--duration:9s;--delay:-2s;--dx:14px;--dy:10px;--dot-color:#0d4f31"></i>
-      <i class="drift-dot" style="--x:23%;--y:37%;--size:7px;--duration:12s;--delay:-5s;--dx:-12px;--dy:15px;--dot-color:#1f8a57"></i>
-      <i class="drift-dot" style="--x:48%;--y:12%;--size:4px;--duration:8s;--delay:-3s;--dx:10px;--dy:-12px;--dot-color:#8aa31c"></i>
-      <i class="drift-dot" style="--x:69%;--y:68%;--size:6px;--duration:14s;--delay:-8s;--dx:-16px;--dy:9px;--dot-color:#5fbf86"></i>
-      <i class="drift-dot" style="--x:89%;--y:26%;--size:5px;--duration:11s;--delay:-4s;--dx:11px;--dy:14px;--dot-color:#0d4f31"></i>
-      <i class="drift-dot" style="--x:34%;--y:84%;--size:4px;--duration:13s;--delay:-6s;--dx:12px;--dy:-10px;--dot-color:#8aa31c"></i>
-      <i class="drift-dot" style="--x:95%;--y:86%;--size:8px;--duration:10s;--delay:-1s;--dx:-13px;--dy:-14px;--dot-color:#1f8a57"></i>
+
+<!-- 7 Drifting background dots -->
+<div class="dots-bg" aria-hidden="true">
+  <div class="dot" style="width:6px;height:6px;background:#5fbf86;top:11%;left:7%;animation:du 11s ease-in-out infinite;"></div>
+  <div class="dot" style="width:5px;height:5px;background:#1f8a57;top:34%;left:19%;animation:dd 13s ease-in-out 1.1s infinite;"></div>
+  <div class="dot" style="width:8px;height:8px;background:#8aa31c;top:61%;left:4%;animation:dl 9s ease-in-out 2.2s infinite;"></div>
+  <div class="dot" style="width:4px;height:4px;background:#0d4f31;top:78%;left:31%;animation:dr 14s ease-in-out 3s infinite;"></div>
+  <div class="dot" style="width:7px;height:7px;background:#5fbf86;top:19%;left:84%;animation:dd 10s ease-in-out .6s infinite;"></div>
+  <div class="dot" style="width:5px;height:5px;background:#8aa31c;top:71%;left:91%;animation:du 8s ease-in-out 1.6s infinite;"></div>
+  <div class="dot" style="width:6px;height:6px;background:#1f8a57;top:49%;left:73%;animation:dl 12s ease-in-out 2.8s infinite;"></div>
+</div>
+
+<!-- Scaled wrapper + stage -->
+<div id="wrap">
+<div class="stage" id="stage">
+
+  <!-- ── ROW 1: HEADER (Col 1) ── -->
+  <header class="sec-head rise" style="--t:0s">
+    <p class="eyebrow">
+      <span class="eyebrow-bar"></span>
+      Inside the shrimp
+    </p>
+    <h1>A healthy gut is the first line of disease defence.</h1>
+  </header>
+
+  <!-- ── ROW 2: MATTER (Col 1, below Header) ── -->
+  <div class="sec-matter rise" style="--t:.05s">
+    <p class="lede">
+      Disease costs tropical shrimp farming up to 40% of production a year.<sup>2</sup>
+      Many bacterial diseases, including <em>Vibrio</em> infections such as AHPND, start by colonising the gut.
+      Probiotics add beneficial bacteria. Prebiotics feed them. Together they restore a gut community that resists pathogens and turns more feed into growth.
+    </p>
+  </div>
+
+  <!-- ── DIAGRAM (Col 2, Spans Rows 1 & 2 beside Header & Matter) ── -->
+  <figure class="sec-diagram rise" style="--t:.05s" aria-label="Animated shrimp midgut cross-section">
+    <div class="diag-top">
+      <span class="diag-eyebrow">Shrimp midgut · cross-section</span>
+      <span class="diag-caption">Midgut schematic · not to scale</span>
     </div>
 
-    <header class="header">
-      <div class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span><span>INSIDE THE SHRIMP</span></div>
-      <h1>
-        <span class="headline-mask"><span>A healthy gut is the first</span></span>
-        <span class="headline-mask"><span>line of disease defence.</span></span>
-      </h1>
-      <p class="header-copy">
-        Disease costs tropical shrimp farming up to 40% of production a year.<sup>[2]</sup> Many bacterial diseases, including <em>Vibrio</em> infections such as AHPND (early mortality syndrome), start by colonising the gut. Probiotics add beneficial bacteria. Prebiotics feed them. Together they restore a gut community that resists pathogens and turns more feed into growth.
-      </p>
-    </header>
+    <div class="dsvg">
+      <svg viewBox="0 0 320 150" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Schematic of shrimp midgut showing probiotics, Vibrio and prebiotics" role="img">
+        <!-- gut wall outer -->
+        <ellipse class="gut-wall" cx="160" cy="75" rx="148" ry="56" stroke="#1f8a57" stroke-width="2.5" fill="#f1faee"/>
 
-    <section class="diagram-panel" aria-label="Shrimp midgut diagram">
-      <div class="diagram-content">
-        <div class="legend" aria-label="Diagram legend">
-          <div class="legend-item"><span class="legend-dot" style="--dot-color:var(--mid)"></span><span>Probiotics line the gut wall</span></div>
-          <div class="legend-item"><span class="legend-dot" style="--dot-color:var(--deep)"></span><span>Vibrio blocked, signals silenced</span></div>
-          <div class="legend-item"><span class="legend-dot" style="--dot-color:var(--lime)"></span><span>Prebiotics feed the good bacteria</span></div>
-        </div>
+        <!-- lumen inner dashed -->
+        <ellipse class="lumen" cx="160" cy="75" rx="108" ry="36" stroke="#5fbf86" stroke-width="1.5" fill="none" stroke-dasharray="7 5"/>
 
-        <div class="gut-svg-wrap">
-          <svg class="gut-svg" viewBox="0 0 430 150" role="img" aria-labelledby="gut-title gut-description">
-            <title id="gut-title">Schematic shrimp midgut</title>
-            <desc id="gut-description">Probiotic capsules line the gut wall, Vibrio signals are blocked, and lime prebiotic particles move toward beneficial bacteria.</desc>
-            <ellipse class="gut-wall" cx="215" cy="75" rx="192" ry="48"></ellipse>
-            <ellipse class="gut-lumen" cx="215" cy="75" rx="154" ry="27"></ellipse>
+        <!-- 5 probiotic capsules top wall -->
+        <g class="cap"><rect x="44"  y="22" width="20" height="11" rx="5.5" fill="#5fbf86" opacity=".93"/></g>
+        <g class="cap"><rect x="85"  y="15" width="20" height="11" rx="5.5" fill="#5fbf86" opacity=".93"/></g>
+        <g class="cap"><rect x="150" y="12" width="20" height="11" rx="5.5" fill="#5fbf86" opacity=".93"/></g>
+        <g class="cap"><rect x="215" y="15" width="20" height="11" rx="5.5" fill="#5fbf86" opacity=".93"/></g>
+        <g class="cap"><rect x="256" y="22" width="20" height="11" rx="5.5" fill="#5fbf86" opacity=".93"/></g>
+        <!-- 5 probiotic capsules bottom wall -->
+        <g class="cap"><rect x="44"  y="117" width="20" height="11" rx="5.5" fill="#5fbf86" opacity=".93"/></g>
+        <g class="cap"><rect x="85"  y="124" width="20" height="11" rx="5.5" fill="#5fbf86" opacity=".93"/></g>
+        <g class="cap"><rect x="150" y="127" width="20" height="11" rx="5.5" fill="#5fbf86" opacity=".93"/></g>
+        <g class="cap"><rect x="215" y="124" width="20" height="11" rx="5.5" fill="#5fbf86" opacity=".93"/></g>
+        <g class="cap"><rect x="256" y="117" width="20" height="11" rx="5.5" fill="#5fbf86" opacity=".93"/></g>
 
-            <rect class="probiotic" style="--delay:0s" x="54" y="34" width="26" height="9" rx="4.5"></rect>
-            <rect class="probiotic" style="--delay:.16s" x="121" y="27" width="26" height="9" rx="4.5"></rect>
-            <rect class="probiotic" style="--delay:.32s" x="188" y="25" width="26" height="9" rx="4.5"></rect>
-            <rect class="probiotic" style="--delay:.48s" x="255" y="27" width="26" height="9" rx="4.5"></rect>
-            <rect class="probiotic" style="--delay:.64s" x="322" y="34" width="26" height="9" rx="4.5"></rect>
-            <rect class="probiotic" style="--delay:.08s" x="54" y="107" width="26" height="9" rx="4.5"></rect>
-            <rect class="probiotic" style="--delay:.24s" x="121" y="114" width="26" height="9" rx="4.5"></rect>
-            <rect class="probiotic" style="--delay:.4s" x="188" y="116" width="26" height="9" rx="4.5"></rect>
-            <rect class="probiotic" style="--delay:.56s" x="255" y="114" width="26" height="9" rx="4.5"></rect>
-            <rect class="probiotic" style="--delay:.72s" x="322" y="107" width="26" height="9" rx="4.5"></rect>
+        <!-- Vibrio wavy lines -->
+        <g class="vib1">
+          <path d="M98 68 q9-9 18 0 q9 9 18 0 q9-9 18 0" stroke="#0d4f31" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        </g>
+        <g class="vib2">
+          <path d="M162 86 q8-8 16 0 q8 8 16 0 q8-8 16 0" stroke="#0d4f31" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        </g>
 
-            <g class="vibrio" style="--delay:0s">
-              <path d="M92 72 C102 58,112 88,123 71 S145 58,155 76 S177 89,188 70"></path>
-            </g>
-            <g class="vibrio" style="--delay:1.1s">
-              <path d="M234 81 C245 65,256 94,267 78 S289 64,300 81 S322 91,333 75"></path>
-            </g>
-            <circle class="prebiotic" style="--delay:0s" cx="362" cy="57" r="4"></circle>
-            <circle class="prebiotic" style="--delay:1.1s" cx="378" cy="76" r="3.5"></circle>
-            <circle class="prebiotic" style="--delay:2.2s" cx="357" cy="94" r="4.5"></circle>
-            <circle class="prebiotic" style="--delay:3.3s" cx="390" cy="62" r="3"></circle>
-          </svg>
-        </div>
+        <!-- expanding signal ring -->
+        <circle class="sring" cx="116" cy="68" r="5" stroke="#1f8a57" stroke-width="1.5" fill="none"/>
+
+        <!-- 4 prebiotic lime dots -->
+        <g class="pd"><circle cx="131" cy="57" r="5.5" fill="#8aa31c" opacity=".88"/></g>
+        <g class="pd"><circle cx="187" cy="95" r="4.5" fill="#8aa31c" opacity=".88"/></g>
+        <g class="pd"><circle cx="203" cy="54" r="5"   fill="#8aa31c" opacity=".88"/></g>
+        <g class="pd"><circle cx="146" cy="99" r="4"   fill="#8aa31c" opacity=".88"/></g>
+      </svg>
+    </div>
+
+    <!-- Legend directly inside Diagram -->
+    <div class="diag-legend">
+      <div class="leg-row"><span class="leg-dot" style="--c:#1f8a57;--pd:0s"></span>Probiotics line the gut wall</div>
+      <div class="leg-row"><span class="leg-dot" style="--c:#c0392b;--pd:.4s"></span><em>Vibrio</em> blocked, signals silenced</div>
+      <div class="leg-row"><span class="leg-dot" style="--c:#8aa31c;--pd:.8s"></span>Prebiotics feed the good bacteria</div>
+    </div>
+  </figure>
+
+  <!-- ── ROW 3: HORIZONTAL BOXES (Full width, replacing table) ── -->
+  <div class="sec-boxes">
+    <div class="panel box rise" style="--t:.10s">
+      <span class="btag">Probiotic</span>
+      <h3 class="btit">Competitive exclusion</h3>
+      <p class="bbod">Beneficial bacteria occupy attachment sites and nutrients on the gut wall, leaving less room for <em>Vibrio</em>.</p>
+    </div>
+
+    <div class="panel box rise" style="--t:.15s">
+      <span class="btag">Probiotic</span>
+      <h3 class="btit">Quorum quenching</h3>
+      <p class="bbod">Some <em>Bacillus</em> produce AHL-lactonase, which breaks down the signals <em>Vibrio</em> use to coordinate attack, reducing biofilm and mortality.<sup>6</sup></p>
+    </div>
+
+    <div class="panel box rise" style="--t:.20s">
+      <span class="btag">Prebiotic</span>
+      <h3 class="btit">Feeding the good bacteria</h3>
+      <p class="bbod">Oligosaccharides and β-glucans feed beneficial bacteria. Together with probiotics they form a synbiotic.<sup>9</sup></p>
+    </div>
+
+    <div class="panel box rise" style="--t:.25s">
+      <span class="btag both">Both</span>
+      <h3 class="btit">Immune priming &amp; digestion</h3>
+      <p class="bbod">A balanced gut community supports immune response and digestive enzymes, so more feed converts to growth.</p>
+    </div>
+  </div>
+
+  <!-- ── ROW 4: CHART (Full width, at bottom) ── -->
+  <section class="panel sec-chart rise" id="chart" style="--t:.30s" aria-label="Pooled shrimp probiotic trial results">
+    <div class="cleft">
+      <h3 class="ctit">What pooled shrimp studies show</h3>
+      <p class="csub">Meta-analysis of probiotic trials. Every pooled effect was in the beneficial direction.</p>
+      <p class="csrc">Toledo et al. 2019, <em>Aquaculture</em>.<sup>5</sup></p>
+    </div>
+    <div class="cright">
+      <div class="bbar">
+        <div class="blbl">Survival<span>improvement ↑</span></div>
+        <div class="btrk"><div class="bfil" id="bf0" style="--w:100%"></div></div>
+        <div class="bcnt" id="bc0">0 exp.</div>
       </div>
-      <p class="diagram-caption">SHRIMP MIDGUT · SCHEMATIC</p>
-    </section>
-
-    <section class="cards-panel" aria-label="How probiotics and prebiotics support gut health">
-      <article class="benefit-card">
-        <p class="card-tag">PROBIOTIC</p>
-        <h2>Competitive exclusion</h2>
-        <p>Beneficial bacteria occupy attachment sites and nutrients on the gut wall, leaving less room for <em>Vibrio</em>.</p>
-      </article>
-      <article class="benefit-card">
-        <p class="card-tag">PROBIOTIC</p>
-        <h2>Quorum quenching</h2>
-        <p>Some <em>Bacillus</em> make an enzyme (AHL-lactonase) that breaks down the signal molecules <em>Vibrio</em> use to coordinate attack. In trials this reduced <em>Vibrio</em> biofilm, gut colonisation and shrimp mortality.<sup>[6]</sup></p>
-      </article>
-      <article class="benefit-card">
-        <p class="card-tag">PREBIOTIC</p>
-        <h2>Feeding the good bacteria</h2>
-        <p>Non-digestible fibres such as oligosaccharides and β-glucans pass to the gut, where they feed beneficial bacteria. Probiotic and prebiotic together are called a synbiotic.<sup>[9]</sup></p>
-      </article>
-      <article class="benefit-card">
-        <p class="card-tag">BOTH</p>
-        <h2>Immune priming and digestion</h2>
-        <p>A balanced gut community supports the shrimp's immune response and digestive enzymes, so more feed becomes growth.</p>
-      </article>
-    </section>
-
-    <section class="chart-panel" aria-label="Pooled shrimp probiotic study results">
-      <div class="chart-copy">
-        <h2>What pooled shrimp studies show</h2>
-        <p>Meta-analysis of probiotic trials in shrimp. Every pooled effect was in the beneficial direction.</p>
-        <p class="source-note">Toledo et al. 2019, <em>Aquaculture</em>.<sup>[5]</sup> The authors note that published studies lean towards positive results, so field responses will vary.</p>
+      <div class="bbar">
+        <div class="blbl">Growth rate<span>improvement ↑</span></div>
+        <div class="btrk"><div class="bfil" id="bf1" style="--w:60%"></div></div>
+        <div class="bcnt" id="bc2">0 exp.</div>
       </div>
-      <div class="bar-list" aria-label="Pooled trial outcomes">
-        <div class="bar-row">
-          <strong class="bar-label">Survival ↑</strong>
-          <div class="bar-track" role="img" aria-label="Survival, 100 percent of experiments beneficial"><div class="bar-fill" style="--bar-width:100%"></div></div>
-          <span class="bar-count"><span class="counter" data-target="100">100</span> experiments</span>
-        </div>
-        <div class="bar-row">
-          <strong class="bar-label">Growth rate ↑</strong>
-          <div class="bar-track" role="img" aria-label="Growth rate, 60 percent of experiments beneficial"><div class="bar-fill" style="--bar-width:60%"></div></div>
-          <span class="bar-count"><span class="counter" data-target="60">60</span> experiments</span>
-        </div>
-        <div class="bar-row">
-          <strong class="bar-label">FCR ↓ (better)</strong>
-          <div class="bar-track" role="img" aria-label="Feed conversion ratio improved, 49 percent of experiments beneficial"><div class="bar-fill" style="--bar-width:49%"></div></div>
-          <span class="bar-count"><span class="counter" data-target="49">49</span> experiments</span>
-        </div>
+      <div class="bbar">
+        <div class="blbl">FCR<span>improvement ↓</span></div>
+        <div class="btrk"><div class="bfil" id="bf2" style="--w:49%"></div></div>
+        <div class="bcnt" id="bc2">0 exp.</div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <script>
-    (() => {
-      const stage = document.getElementById("stage");
-      const embedded = new URLSearchParams(window.location.search).get("embed") === "1";
-      if (embedded) stage.classList.add("is-embedded");
-      const fitStage = () => {
-        if (window.innerWidth < 860) {
-          stage.style.width = "";
-          stage.style.left = "";
-          stage.style.top = "";
-          stage.style.transform = "";
-          return;
-        }
+</div><!-- /stage -->
+</div><!-- /wrap -->
 
-        if (embedded) {
-          stage.style.width = "";
-          stage.style.left = "";
-          stage.style.top = "";
-          stage.style.transform = "";
-          return;
-        }
+<script>
+(function(){
+  /* ── SCALE ── */
+  var wrap = document.getElementById('wrap');
+  function scale(){
+    if(window.innerWidth <= 860){ wrap.style.transform=''; return; }
+    var s = Math.min(window.innerWidth/1280, window.innerHeight/800);
+    wrap.style.transform = 'scale('+s+')';
+  }
+  scale();
+  window.addEventListener('resize', scale);
 
-        stage.style.width = "";
-        const scale = Math.min(window.innerWidth / 1280, window.innerHeight / 760);
-        stage.style.left = `${(window.innerWidth - 1280 * scale) / 2}px`;
-        stage.style.top = `${(window.innerHeight - 760 * scale) / 2}px`;
-        stage.style.transform = `scale(${scale})`;
-      };
+  /* ── ANIMATE BARS & COUNTERS ── */
+  var bars = [
+    { fill: 'bf0', cnt: 'bc0', maxW: 100, maxN: 100 },
+    { fill: 'bf1', cnt: 'bc1', maxW: 60,  maxN: 60  },
+    { fill: 'bf2', cnt: 'bc2', maxW: 49,  maxN: 49  }
+  ];
+  function ease(t){ return 1-Math.pow(1-t,3); }
 
-      window.addEventListener("resize", fitStage, { passive: true });
-      fitStage();
-
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const counters = [...document.querySelectorAll(".counter")];
-      const fills = [...document.querySelectorAll(".bar-fill")];
-
-      if (reducedMotion) {
-        fills.forEach((fill) => fill.classList.add("is-filled"));
-        counters.forEach((counter) => {
-          counter.textContent = counter.dataset.target;
-        });
-        return;
+  function runBars(){
+    var dur = 1400, stag = 180;
+    bars.forEach(function(b, i){
+      var fill = document.getElementById(b.fill);
+      var cnt  = document.getElementById(b.cnt);
+      if (!fill || !cnt) return;
+      var t0 = performance.now() + i * stag;
+      function step(now){
+        var p = Math.min(Math.max(0, now - t0) / dur, 1);
+        var e = ease(p);
+        fill.style.width = (e * b.maxW) + '%';
+        cnt.textContent  = Math.round(e * b.maxN) + ' exp.';
+        if (p < 1) requestAnimationFrame(step);
       }
+      requestAnimationFrame(step);
+    });
+  }
 
-      counters.forEach((counter) => { counter.textContent = "0"; });
-
-      const countUp = (element, target) => {
-        const start = performance.now();
-        const duration = 1500;
-        const tick = (now) => {
-          const progress = Math.min((now - start) / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          element.textContent = String(Math.round(target * eased));
-          if (progress < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-      };
-
-      window.setTimeout(() => {
-        fills.forEach((fill, index) => {
-          window.setTimeout(() => fill.classList.add("is-filled"), index * 200);
-        });
-        counters.forEach((counter, index) => {
-          window.setTimeout(() => countUp(counter, Number(counter.dataset.target)), index * 200);
-        });
-      }, 1700);
-    })();
-  </script>
+  setTimeout(runBars, 400);
+})();
+</script>
 </body>
 </html>

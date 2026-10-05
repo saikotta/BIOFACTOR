@@ -285,8 +285,8 @@ export default function BottomBlock() {
               style={{
                 fontFamily: "'Bricolage Grotesque', sans-serif",
                 fontWeight: 800,
-                fontSize: "clamp(44px,7.2vw,92px)",
-                lineHeight: 0.98,
+                fontSize: "clamp(36px,5.2vw,68px)",
+                lineHeight: 0.96,
                 letterSpacing: "-0.035em",
                 color: "#10301f",
                 margin: 0,
@@ -323,37 +323,38 @@ export default function BottomBlock() {
           {/* ── THE FRAME ── */}
           <div
             ref={frameRef}
-            className="pb-frame"
+            className="pb-frame shadow-xl"
             style={{
-              border: "1px solid #9cc7a6",
-              borderRadius: "4px",
-              padding: "44px",
-              background: "rgba(255,255,255,0.18)",
+              border: "1px solid rgba(156, 199, 166, 0.45)",
+              borderRadius: "12px",
+              padding: "28px",
+              background: "rgba(255, 255, 255, 0.65)",
+              backdropFilter: "blur(12px)",
               width: "100%",
               overflowX: "auto",
             }}
           >
             <svg
-              viewBox="0 0 1092 438"
+              viewBox="0 0 1092 465"
               xmlns="http://www.w3.org/2000/svg"
-              style={{ width: "100%", minWidth: "480px", display: "block" }}
+              style={{ width: "100%", minWidth: "520px", display: "block" }}
               aria-label="Animated cross-section of pond bottom showing organic matter settling, anaerobic sediment, and toxic gas rising"
               role="img"
             >
               <defs>
                 {/* water gradient */}
                 <linearGradient id="pbWater" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#e2f3ef" />
-                  <stop offset="100%" stopColor="#bfe2dd" />
+                  <stop offset="0%" stopColor="#e8f6f3" />
+                  <stop offset="100%" stopColor="#c2e6e0" />
                 </linearGradient>
                 {/* sediment gradient */}
                 <linearGradient id="pbSed" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#3a2a1d" />
-                  <stop offset="100%" stopColor="#271b13" />
+                  <stop offset="0%" stopColor="#342318" />
+                  <stop offset="100%" stopColor="#1f140d" />
                 </linearGradient>
                 {/* clip for sediment zone */}
                 <clipPath id="pbSedClip">
-                  <rect x="0" y="228" width="1092" height="210" />
+                  <rect x="0" y="230" width="1092" height="235" />
                 </clipPath>
                 {/* arrowhead marker */}
                 <marker
@@ -369,45 +370,44 @@ export default function BottomBlock() {
               </defs>
 
               {/* ── WATER COLUMN ── */}
-              <rect x="0" y="0" width="1092" height="228" fill="url(#pbWater)" />
+              <rect x="0" y="0" width="1092" height="230" fill="url(#pbWater)" rx="6" />
 
               {/* ── SEDIMENT ── */}
-              <rect x="0" y="228" width="1092" height="210" fill="url(#pbSed)" />
+              <rect x="0" y="230" width="1092" height="235" fill="url(#pbSed)" rx="6" />
 
               {/* ── SLUDGE CRUST (animates up/down) ── */}
               <g className="pb-sludge-crust" style={{ animation: "sludge-breathe 3.8s ease-in-out infinite" }}>
-                <rect x="0" y="222" width="1092" height="12" fill="#4a3520" opacity="0.7" />
+                <rect x="0" y="224" width="1092" height="12" fill="#4a3520" opacity="0.75" />
               </g>
 
               {/* ── SAND INTERFACE LINE (drawn in on scroll) ── */}
               <line
                 className="pb-interface-line"
-                x1="0" y1="228" x2="1092" y2="228"
+                x1="0" y1="230" x2="1092" y2="230"
                 stroke="#c58f4a"
                 strokeWidth="2.5"
               />
 
               {/* dotted line just below interface */}
               <line
-                x1="0" y1="240" x2="1092" y2="240"
+                x1="0" y1="242" x2="1092" y2="242"
                 stroke="#c58f4a"
                 strokeWidth="1"
                 strokeDasharray="4 6"
-                opacity="0.45"
+                opacity="0.5"
               />
 
               {/* ── ZONE LABELS ── */}
               {/* Water column label */}
               <text
                 className="pb-label-fade"
-                x="546" y="32"
+                x="546" y="38"
                 textAnchor="middle"
                 fontFamily="'JetBrains Mono', monospace"
-                fontSize="11.5"
-                fontWeight="500"
+                fontSize="12"
+                fontWeight="600"
                 fill="#10301f"
-                letterSpacing="2"
-                textDecoration="none"
+                letterSpacing="2.2"
                 style={{ textTransform: "uppercase" }}
               >
                 WATER COLUMN · SHRIMP
@@ -416,11 +416,11 @@ export default function BottomBlock() {
               {/* Interface label */}
               <text
                 className="pb-label-fade"
-                x="546" y="218"
+                x="546" y="220"
                 textAnchor="middle"
                 fontFamily="'JetBrains Mono', monospace"
                 fontSize="11"
-                fontWeight="400"
+                fontWeight="500"
                 fill="#7a5a2f"
                 letterSpacing="1.8"
               >
@@ -430,13 +430,13 @@ export default function BottomBlock() {
               {/* Sediment label */}
               <text
                 className="pb-label-fade"
-                x="546" y="420"
+                x="546" y="448"
                 textAnchor="middle"
                 fontFamily="'JetBrains Mono', monospace"
                 fontSize="11.5"
                 fontWeight="500"
                 fill="#d9a566"
-                letterSpacing="2"
+                letterSpacing="2.2"
               >
                 ANAEROBIC SEDIMENT · NO OXYGEN
               </text>
@@ -461,26 +461,32 @@ export default function BottomBlock() {
                 className="pb-label-fade"
                 x="42" y="52"
                 fontFamily="'Newsreader', serif"
-                fontSize="13"
-                fill="#4b6b57"
+                fontSize="14"
+                fill="#3c5c48"
+                fontWeight="500"
               >
                 Feed, faeces, dead plankton
               </text>
               <text
                 className="pb-label-fade"
-                x="42" y="68"
+                x="42" y="70"
                 fontFamily="'Newsreader', serif"
-                fontSize="13"
-                fill="#4b6b57"
+                fontSize="14"
+                fill="#3c5c48"
+                fontWeight="500"
               >
                 settle daily
               </text>
 
               {/* ── GAS ARROWS ── */}
-              {gasArrows.map((a, i) => {
+              {[
+                { x: 440, label: "NH₃ · ammonia",          id: "nh3" },
+                { x: 620, label: "NO₂⁻ · nitrite",         id: "no2" },
+                { x: 800, label: "H₂S · hydrogen sulphide", id: "h2s" },
+              ].map((a, i) => {
                 const isH2S = i === 2;
-                const arrowTopY = isH2S ? 42 : 68;
-                const arrowBotY = 268;
+                const arrowTopY = isH2S ? 44 : 70;
+                const arrowBotY = 270;
                 return (
                   <g key={a.id}>
                     {/* arrow shaft group – scales up from bottom */}
@@ -496,7 +502,7 @@ export default function BottomBlock() {
                         x1={a.x} y1={arrowTopY + 18}
                         x2={a.x} y2={arrowBotY}
                         stroke="#d6456a"
-                        strokeWidth="2"
+                        strokeWidth="2.2"
                         strokeDasharray="6 5"
                         style={{
                           animation: "dash-flow .9s linear infinite",
@@ -537,7 +543,7 @@ export default function BottomBlock() {
                       textAnchor="middle"
                       fontFamily="'JetBrains Mono', monospace"
                       fontSize="11.5"
-                      fontWeight="500"
+                      fontWeight="600"
                       fill="#d6456a"
                       letterSpacing="1.2"
                     >
@@ -550,32 +556,31 @@ export default function BottomBlock() {
               {/* ── SEDIMENT TEXT LABELS (slide up on scroll) ── */}
               <text
                 className="pb-sed-label"
-                x="350" y="310"
+                x="330" y="315"
                 textAnchor="middle"
                 fontFamily="'Newsreader', serif"
-                fontSize="14"
-                fill="rgba(255,255,255,0.82)"
-                fontStyle="normal"
+                fontSize="14.5"
+                fill="rgba(255,255,255,0.88)"
               >
                 Organic N → ammonia
               </text>
               <text
                 className="pb-sed-label"
-                x="546" y="355"
+                x="530" y="360"
                 textAnchor="middle"
                 fontFamily="'Newsreader', serif"
-                fontSize="14"
-                fill="rgba(255,255,255,0.82)"
+                fontSize="14.5"
+                fill="rgba(255,255,255,0.88)"
               >
                 Incomplete nitrification
               </text>
               <text
                 className="pb-sed-label"
-                x="760" y="310"
+                x="750" y="315"
                 textAnchor="middle"
                 fontFamily="'Newsreader', serif"
-                fontSize="14"
-                fill="rgba(255,255,255,0.82)"
+                fontSize="14.5"
+                fill="rgba(255,255,255,0.88)"
               >
                 Sulphate-reducing bacteria
               </text>
@@ -583,29 +588,29 @@ export default function BottomBlock() {
               {/* ── MICROBES BOTTOM-LEFT (mint outline) ── */}
               <g className="pb-microbe" style={{ animation: "microbe-drift 5s ease-in-out infinite" }}>
                 {/* pills */}
-                <rect x="30" y="338" width="28" height="14" rx="7" fill="none" stroke="#a8ecc7" strokeWidth="1.5" />
-                <rect x="66" y="344" width="22" height="12" rx="6" fill="none" stroke="#a8ecc7" strokeWidth="1.5" />
+                <rect x="30" y="338" width="28" height="14" rx="7" fill="none" stroke="#7ee0a8" strokeWidth="1.5" />
+                <rect x="66" y="344" width="22" height="12" rx="6" fill="none" stroke="#7ee0a8" strokeWidth="1.5" />
                 {/* circles */}
-                <circle cx="104" cy="350" r="7" fill="none" stroke="#a8ecc7" strokeWidth="1.5" />
-                <circle cx="46" cy="362" r="5" fill="none" stroke="#a8ecc7" strokeWidth="1.5" />
-                <rect x="55" y="368" width="26" height="11" rx="5.5" fill="none" stroke="#a8ecc7" strokeWidth="1.5" />
+                <circle cx="104" cy="350" r="7" fill="none" stroke="#7ee0a8" strokeWidth="1.5" />
+                <circle cx="46" cy="362" r="5" fill="none" stroke="#7ee0a8" strokeWidth="1.5" />
+                <rect x="55" y="368" width="26" height="11" rx="5.5" fill="none" stroke="#7ee0a8" strokeWidth="1.5" />
 
                 <text
-                  x="30" y="390"
+                  x="30" y="396"
                   fontFamily="'JetBrains Mono', monospace"
-                  fontSize="9.5"
-                  fontWeight="500"
-                  fill="#a8ecc7"
+                  fontSize="10"
+                  fontWeight="600"
+                  fill="#7ee0a8"
                   letterSpacing="1.2"
                 >
                   ANAEROBIC CONSORTIA
                 </text>
                 <text
-                  x="30" y="403"
+                  x="30" y="412"
                   fontFamily="'Newsreader', serif"
-                  fontSize="10.5"
+                  fontSize="12"
                   fill="#a8ecc7"
-                  opacity="0.75"
+                  opacity="0.85"
                 >
                   digest the organic load
                 </text>
@@ -613,28 +618,28 @@ export default function BottomBlock() {
 
               {/* ── MICROBES BOTTOM-RIGHT (mint outline) ── */}
               <g className="pb-microbe" style={{ animation: "microbe-drift 6.5s ease-in-out .8s infinite" }}>
-                <rect x="880" y="338" width="28" height="14" rx="7" fill="none" stroke="#a8ecc7" strokeWidth="1.5" />
-                <circle cx="918" cy="345" r="7" fill="none" stroke="#a8ecc7" strokeWidth="1.5" />
-                <rect x="930" y="342" width="22" height="12" rx="6" fill="none" stroke="#a8ecc7" strokeWidth="1.5" />
-                <circle cx="966" cy="350" r="5" fill="none" stroke="#a8ecc7" strokeWidth="1.5" />
-                <rect x="898" y="358" width="26" height="11" rx="5.5" fill="none" stroke="#a8ecc7" strokeWidth="1.5" />
+                <rect x="860" y="338" width="28" height="14" rx="7" fill="none" stroke="#7ee0a8" strokeWidth="1.5" />
+                <circle cx="898" cy="345" r="7" fill="none" stroke="#7ee0a8" strokeWidth="1.5" />
+                <rect x="910" y="342" width="22" height="12" rx="6" fill="none" stroke="#7ee0a8" strokeWidth="1.5" />
+                <circle cx="946" cy="350" r="5" fill="none" stroke="#7ee0a8" strokeWidth="1.5" />
+                <rect x="878" y="358" width="26" height="11" rx="5.5" fill="none" stroke="#7ee0a8" strokeWidth="1.5" />
 
                 <text
-                  x="870" y="390"
+                  x="850" y="396"
                   fontFamily="'JetBrains Mono', monospace"
-                  fontSize="9.5"
-                  fontWeight="500"
-                  fill="#a8ecc7"
+                  fontSize="10"
+                  fontWeight="600"
+                  fill="#7ee0a8"
                   letterSpacing="1.2"
                 >
                   DENITRIFIERS · SULPHIDE OXIDISERS
                 </text>
                 <text
-                  x="880" y="403"
+                  x="860" y="412"
                   fontFamily="'Newsreader', serif"
-                  fontSize="10.5"
+                  fontSize="12"
                   fill="#a8ecc7"
-                  opacity="0.75"
+                  opacity="0.85"
                 >
                   N → N₂ gas · H₂S → sulphur
                 </text>
@@ -648,56 +653,101 @@ export default function BottomBlock() {
       </div>
     </section>
 
-    <section className="w-full bg-[#EAF6EC] px-6 py-16 text-[#10301f] md:px-12 lg:px-20 xl:px-32">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-stretch gap-8 md:grid-cols-12">
-        <div
-          role="img"
-          aria-label="Pond bottom image"
-          className="min-h-[280px] rounded-sm bg-[#dcecdf] bg-cover bg-center md:col-span-4"
-          style={{ backgroundImage: "url('/images/aquaculture-pond-bottom.jpg')" }}
-        />
+    <section className="w-full bg-[#EAF6EC] px-6 pb-10 pt-24 text-[#10301f] md:px-12 md:pb-14 md:pt-28 lg:px-20 lg:pb-16 lg:pt-28 xl:px-32">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-8 md:grid-cols-12 lg:gap-12">
+        <div className="order-2 mx-auto w-[88%] md:order-1 md:col-span-4 md:col-start-1 md:row-start-1 md:w-full md:self-center">
+          <div
+            role="img"
+            aria-label="Pond bottom image"
+            className="mx-auto aspect-[3/4] w-full max-w-[320px] rounded-sm bg-[#dcecdf] bg-cover bg-center"
+            style={{ backgroundImage: "url('/images/aquaculture-pond-bottom.jpg')" }}
+          />
+        </div>
 
-        <div className="md:col-span-8">
-          <p className="font-mono text-[11px] tracking-[0.22em] text-[#5A7A5E]">
+        <div className="order-1 md:order-2 md:col-span-8 md:col-start-5 md:row-start-1">
+          <p
+            style={{ fontFamily: "var(--font-jetbrains), monospace" }}
+            className="text-[10px] font-medium uppercase leading-none tracking-[0.24em] text-[#5A7A5E]"
+          >
             HOW TOXINS FORM
           </p>
-          <h2 className="mt-2 font-inter-tight text-[clamp(64px,8vw,96px)] font-extrabold leading-[0.88] text-[#1F8A57]">
+          <h2
+            style={{
+              fontFamily: "var(--font-inter-tight), sans-serif",
+              fontSize: "clamp(48px, 8vw, 88px)",
+              lineHeight: 0.82,
+            }}
+            className="mt-3 font-extrabold tracking-normal text-[#1F8A57]"
+          >
             BOTTOM
           </h2>
-          <ul className="mt-5 flex flex-col gap-2 font-mono text-[12px] leading-[1.5] tracking-[0.08em] text-[#4b6b57]">
-            <li className="flex items-start gap-2">
-              <span className="mt-[5px] h-[7px] w-4 shrink-0 rounded-full bg-[#B8893A]" />
+          <div className="mt-3 flex flex-col gap-[6px]">
+            <div
+              className="flex items-center gap-2"
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: "11px",
+                letterSpacing: "0.04em",
+                color: "#4b6b57",
+                whiteSpace: "nowrap",
+              }}
+            >
+              <span
+                style={{
+                  display: "inline-block",
+                  width: "16px",
+                  height: "2px",
+                  background: "#B8893A",
+                  flexShrink: 0,
+                }}
+              />
               No oxygen below a few mm
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="mt-[5px] h-[7px] w-4 shrink-0 rounded-full bg-[#B8893A]" />
+            </div>
+            <div
+              className="flex items-center gap-2"
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: "11px",
+                letterSpacing: "0.04em",
+                color: "#4b6b57",
+                whiteSpace: "nowrap",
+              }}
+            >
+              <span
+                style={{
+                  display: "inline-block",
+                  width: "16px",
+                  height: "2px",
+                  background: "#B8893A",
+                  flexShrink: 0,
+                }}
+              />
               Organic load builds up every day
-            </li>
-          </ul>
-
-          <h2 className="mb-5 mt-10 font-inter-tight text-[clamp(24px,3vw,36px)] font-bold leading-tight text-[#10301f]">
+            </div>
+          </div>
+          <h2 className="mb-5 mt-4 font-inter-tight text-[clamp(24px,2.5vw,34px)] font-bold leading-tight text-[#10301f]">
             Three toxic metabolites, one source.
           </h2>
-          <div className="grid grid-cols-1 border border-[#B8D5BF] bg-white/40 sm:grid-cols-2">
-            <article className="border-b border-[#B8D5BF] p-5 sm:border-r">
+          <div className="grid grid-cols-1 gap-px border border-[#B8D5BF] bg-[#B8D5BF] sm:grid-cols-2">
+            <article className="bg-[#EAF6EC] p-4 md:p-5">
               <h3 className="font-inter-tight text-[16px] font-bold text-[#10301f]">Ammonia (NH₃)</h3>
               <p className="mt-1 font-newsreader text-[15px] leading-[1.5] text-[#4b6b57]">
                 Released as proteins in feed and faeces break down in the sediment.
               </p>
             </article>
-            <article className="border-b border-[#B8D5BF] p-5">
+            <article className="bg-[#EAF6EC] p-4 md:p-5">
               <h3 className="font-inter-tight text-[16px] font-bold text-[#10301f]">Nitrite (NO₂⁻)</h3>
               <p className="mt-1 font-newsreader text-[15px] leading-[1.5] text-[#4b6b57]">
                 Accumulates when low oxygen at the bottom stops nitrification halfway.
               </p>
             </article>
-            <article className="border-b border-[#B8D5BF] p-5 sm:border-b-0 sm:border-r">
+            <article className="bg-[#EAF6EC] p-4 md:p-5">
               <h3 className="font-inter-tight text-[16px] font-bold text-[#10301f]">Hydrogen sulphide (H₂S)</h3>
               <p className="mt-1 font-newsreader text-[15px] leading-[1.5] text-[#4b6b57]">
                 Produced by sulphate-reducing bacteria such as <em>Desulfovibrio</em> in oxygen-free sediment.
               </p>
             </article>
-            <article className="p-5">
+            <article className="bg-[#EAF6EC] p-4 md:p-5">
               <h3 className="font-inter-tight text-[16px] font-bold text-[#10301f]">Released upward</h3>
               <p className="mt-1 font-newsreader text-[15px] leading-[1.5] text-[#4b6b57]">
                 All three diffuse into the water column, where they stress shrimp, suppress feeding and weaken immunity.

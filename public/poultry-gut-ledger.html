@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script src="/poultry-static-frame.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light">
   <title>Probiotics and Prebiotics | Poultry Gut Ledger</title>
@@ -29,7 +30,17 @@
 
     *,
     *::before,
+    *::after {
+      box-sizing: border-box;
     }
+
+    html,
+    body {
+      min-height: 100%;
+      margin: 0;
+    }
+
+    body {
       background:
         radial-gradient(ellipse 68% 44% at 12% 5%, rgba(248, 252, 243, .66), transparent 76%),
         radial-gradient(ellipse 54% 40% at 92% 68%, rgba(156, 196, 127, .18), transparent 78%),

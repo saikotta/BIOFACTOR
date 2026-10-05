@@ -70,6 +70,7 @@ export default function BiofactorFooter() {
                 <Link
                   key={item.label}
                   href={item.href}
+                  data-footer-link
                   className="font-sans text-sm text-white/65 hover:text-white transition-colors"
                 >
                   {item.label}
@@ -92,6 +93,7 @@ export default function BiofactorFooter() {
                 <Link
                   key={item.label}
                   href={item.href}
+                  data-footer-link
                   className="font-sans text-sm text-white/65 hover:text-white transition-colors"
                 >
                   {item.label}
@@ -113,6 +115,7 @@ export default function BiofactorFooter() {
                 <Link
                   key={item.label}
                   href={item.href}
+                  data-footer-link
                   className="font-sans text-sm text-white/65 hover:text-white transition-colors"
                 >
                   {item.label}

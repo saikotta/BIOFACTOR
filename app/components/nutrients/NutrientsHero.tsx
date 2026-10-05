@@ -1,9 +1,10 @@
 import React from "react";
 import Image from "next/image";
+import styles from "./NutrientsHero.module.css";
 
 export default function NutrientsHero() {
   return (
-    <section className="relative w-full h-[85vh] min-h-[600px] max-h-[900px] flex items-end justify-start overflow-hidden bg-[#0A1A10]">
+    <section className="relative w-full min-h-[calc(100vh-64px)] md:min-h-[calc(100vh-72px)] flex items-end justify-start overflow-hidden bg-[#0A1A10]">
       {/* Hero Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -32,7 +33,7 @@ export default function NutrientsHero() {
           </div>
 
           {/* Main Title */}
-          <h1 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white uppercase tracking-tight leading-[1.08]">
+          <h1 className={`${styles.headline} font-extrabold text-white uppercase tracking-tight leading-[1.08]`}>
             BIOLOGY THAT MOVES NUTRIENTS
           </h1>
 

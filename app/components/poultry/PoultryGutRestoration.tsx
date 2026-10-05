@@ -15,24 +15,40 @@ export default function PoultryGutRestoration() {
   const frameRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
+    const frame = frameRef.current;
+    if (!frame) return;
+
     let resizeTimer = 0;
     let resizeFrame = 0;
+    let contentObserver: ResizeObserver | null = null;
     const scheduleFit = () => {
-      fitFrame(frameRef.current);
+      fitFrame(frame);
       window.cancelAnimationFrame(resizeFrame);
-      resizeFrame = window.requestAnimationFrame(() => fitFrame(frameRef.current));
+      resizeFrame = window.requestAnimationFrame(() => fitFrame(frame));
       window.clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(() => fitFrame(frameRef.current), 180);
+      resizeTimer = window.setTimeout(() => fitFrame(frame), 180);
+    };
+    const observeContent = () => {
+      const content = frame.contentDocument?.querySelector<HTMLElement>(".page");
+      if (!content) return;
+      contentObserver?.disconnect();
+      contentObserver = new ResizeObserver(scheduleFit);
+      contentObserver.observe(content);
+      scheduleFit();
+      void frame.contentDocument?.fonts.ready.then(scheduleFit);
     };
 
     scheduleFit();
+    frame.addEventListener("load", observeContent);
+    observeContent();
     window.addEventListener("resize", scheduleFit, { passive: true });
-    void frameRef.current?.contentDocument?.fonts.ready.then(scheduleFit);
 
     return () => {
+      frame.removeEventListener("load", observeContent);
       window.removeEventListener("resize", scheduleFit);
       window.cancelAnimationFrame(resizeFrame);
       window.clearTimeout(resizeTimer);
+      contentObserver?.disconnect();
     };
   }, []);
 
@@ -41,7 +57,7 @@ export default function PoultryGutRestoration() {
       <iframe
         ref={frameRef}
         className="block w-full border-0"
-        src="/poultry-gut-ledger.html"
+        src="/poultry-gut-ledger.html?poultryStatic=1"
         title="Probiotics and prebiotics comparison ledger"
         loading="eager"
         style={{ height: "1800px" }}

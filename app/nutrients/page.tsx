@@ -1,5 +1,5 @@
 import React from "react";
-import BiofactorHeader from "../components/BiofactorHeader";
+import { Inter_Tight } from "next/font/google";
 import ProductFooter from "../components/ProductFooter";
 import NutrientsHero from "../components/nutrients/NutrientsHero";
 import NutrientsComparativeCard from "../components/nutrients/NutrientsComparativeCard";
@@ -7,6 +7,13 @@ import NutrientsPrimaryApplications from "../components/nutrients/NutrientsPrima
 import NutrientsSecondaryMicronutrients from "../components/nutrients/NutrientsSecondaryMicronutrients";
 import NutrientsMatrix from "../components/nutrients/NutrientsMatrix";
 import NutrientsClosing from "../components/nutrients/NutrientsClosing";
+
+const interTight = Inter_Tight({
+  subsets: ["latin"],
+  weight: ["700", "800"],
+  variable: "--font-inter-tight",
+  display: "swap",
+});
 
 export const metadata = {
   title: "Nutrients | Biofactor Biologicals",
@@ -16,10 +23,7 @@ export const metadata = {
 
 export default function NutrientsPage() {
   return (
-    <main className="min-h-screen w-full bg-[#EAF3EA] text-[#173522] flex flex-col font-sans selection:bg-[#2D6A4F] selection:text-[#EAF3EA]">
-      {/* Fixed Navigation Bar */}
-      <BiofactorHeader />
-
+    <main className={`${interTight.variable} min-h-screen w-full bg-[#EAF3EA] text-[#173522] flex flex-col font-sans selection:bg-[#2D6A4F] selection:text-[#EAF3EA]`}>
       {/* Hero Section */}
       <NutrientsHero />
 

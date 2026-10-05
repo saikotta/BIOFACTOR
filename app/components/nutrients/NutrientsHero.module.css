@@ -1,0 +1,10 @@
+.headline {
+  font-family: var(--font-inter-tight), sans-serif;
+  font-size: clamp(2.35rem, 6.12vw, 5.5rem);
+}
+
+@media (min-width: 1024px) {
+  .headline {
+    font-size: 88px;
+  }
+}

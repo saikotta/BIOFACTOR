@@ -40,7 +40,7 @@ export default function CultureCycleTable() {
         src="/aquaculture-culture-cycle.html?v=2"
         title="Aquaculture biology across culture cycle"
         loading="eager"
-        style={{ height: "1600px" }}
+        style={{ height: "1180px" }}
         onLoad={(event) => fitFrame(event.currentTarget)}
       />
     </section>

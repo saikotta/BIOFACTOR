@@ -1,0 +1,62 @@
+ .page {
+  color: #10260f;
+  background: linear-gradient(
+    180deg,
+    #f5faee 0%,
+    #e8f3db 30%,
+    #d6eac4 65%,
+    #c4deaa 100%
+  );
+}
+
+.page :global(*),
+.page :global(*::before),
+.page :global(*::after) {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+.page :global([data-aos]),
+.page :global(.reveal),
+.page :global(.fade-in),
+.page :global(.animate),
+.page :global([data-poultry-reveal]),
+.page :global([data-pm-heading]) {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+.page :global([data-pm-section="threebirds"]),
+.page :global([data-pm-section="layers"]),
+.page :global([data-pm-section="broilers"]),
+.page :global(section[data-poultry-static]) {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  color: #10260f;
+}
+
+.page :global([data-pm-section="datastrip"] > div:nth-child(2)),
+.page :global([data-pm-section="datastrip"] > div:nth-child(3)) {
+  background: transparent !important;
+}
+
+.page :global([data-pm-section="datastrip"] [style*="opacity: 0"]) {
+  color: #10260f !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.page :global([data-pm-section="datastrip"] > div:nth-child(2) p),
+.page :global([data-pm-section="threebirds"] :is(h1, h2, h3, h4, p, li)),
+.page :global([data-pm-section="layers"] :is(h1, h2, h3, h4, p, li)),
+.page :global([data-pm-section="broilers"] :is(h1, h2, h3, h4, p, li)) {
+  color: #10260f !important;
+}
+
+.page :global([data-pm-section="datastrip"] > div:first-child > div.absolute) {
+  display: none !important;
+}

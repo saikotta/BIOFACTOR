@@ -8,7 +8,6 @@ import WaterBlock from "../components/aquaculture/WaterBlock";
 import GutHealthSection from "../components/aquaculture/GutHealthSection";
 import MineralsSection from "../components/aquaculture/MineralsSection";
 import CultureCycleTable from "../components/aquaculture/CultureCycleTable";
-import AquacultureClosing from "../components/aquaculture/AquacultureClosing";
 import AquacultureAnimations from "../components/aquaculture/AquacultureAnimations";
 import AquacultureFooter from "../components/aquaculture/AquacultureFooter";
 
@@ -47,7 +46,6 @@ export default function AquaculturePage() {
       <GutHealthSection />
       <MineralsSection />
       <CultureCycleTable />
-      <AquacultureClosing />
       <AquacultureFooter />
     </main>
   );

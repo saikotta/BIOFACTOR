@@ -12,6 +12,8 @@ import {
 import { GiCow, GiWheat, GiWaterDrop, GiChicken, GiDna2 } from 'react-icons/gi';
 import { MdScience } from 'react-icons/md';
 import BiofactorFooter from '../components/BiofactorFooter';
+import ResourcesAnimations from '../components/ResourcesAnimations';
+import './resources-animations.css';
 
 const biofactor_resource = '/images/biofactor_resources.png';
 
@@ -98,72 +100,72 @@ export default function ResourcesPage() {
       description: "Detailed analysis of microbial inoculants and their benefits.",
       author: "Dr. Maria Rodriguez",
       date: "2024-02-15",
-      downloads: 1890
+      downloads: 2180
     },
     { 
       id: 5, 
-      title: "Microbial Inoculants Guide 2025", 
+      title: "Crop Microbiome Management", 
       category: "Agriculture", 
-      type: "Technical Guide", 
-      size: "2.1 MB", 
-      image: "https://images.unsplash.com/photo-1592210454359-9043f067919b?auto=format&fit=crop&q=80&w=1000", 
+      type: "Research Paper", 
+      size: "3.1 MB", 
+      image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&q=80&w=1000", 
       videoUrl: null,
-      description: "Step-by-step implementation guide for microbial products.",
-      author: "Biofactor R&D Team",
-      date: "2024-03-01",
-      downloads: 2567
+      description: "Peer-reviewed study on rhizosphere microbiome interactions.",
+      author: "Journal of Agricultural Science",
+      date: "2024-01-20",
+      downloads: 4567
     },
     { 
       id: 6, 
-      title: "Cover Crop Selection Matrix", 
+      title: "Cover Cropping Best Practices", 
       category: "Agriculture", 
       type: "Technical Guide", 
-      size: "1.8 MB", 
-      image: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&q=80&w=1000", 
+      size: "2.4 MB", 
+      image: "https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&q=80&w=1000", 
       videoUrl: null,
-      description: "Interactive guide to selecting optimal cover crops.",
-      author: "Agronomy Division",
-      date: "2024-02-10",
-      downloads: 1789
+      description: "Step-by-step implementation guide for cover cropping systems.",
+      author: "Sustainable Ag Extension",
+      date: "2024-02-01",
+      downloads: 1876
     },
     { 
       id: 7, 
-      title: "Understanding Ruminant Digestion", 
+      title: "Bovine Gut Microbiome Insights", 
       category: "Large Animals", 
-      type: "Webinar", 
-      size: "12:45", 
-      image: "https://images.unsplash.com/photo-1547496502-affa22d38842?auto=format&fit=crop&q=80&w=1000", 
-      videoUrl: "https://www.youtube.com/embed/sc4hC3y4fNw",
-      description: "Deep dive into rumen microbiology and fermentation.",
-      author: "Dr. Robert Thompson",
-      date: "2024-03-10",
-      downloads: 1567
-    },
-    { 
-      id: 8, 
-      title: "Methane Reduction Strategies", 
-      category: "Large Animals", 
-      type: "Whitepaper", 
-      size: "8.4 MB", 
-      image: "https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&q=80&w=1000", 
+      type: "Research Paper", 
+      size: "4.8 MB", 
+      image: "https://images.unsplash.com/photo-1545468000-6e3a8f8d7b9c?auto=format&fit=crop&q=80&w=1000", 
       videoUrl: null,
-      description: "Innovative approaches to reduce livestock methane emissions.",
-      author: "Climate & Livestock Institute",
-      date: "2024-01-20",
+      description: "Comprehensive analysis of cattle digestive microflora.",
+      author: "Veterinary Science Review",
+      date: "2024-01-08",
       downloads: 2345
     },
     { 
-      id: 9, 
-      title: "Dairy Nutrition Optimization", 
+      id: 8, 
+      title: "Ruminant Nutrition Optimization", 
       category: "Large Animals", 
-      type: "Whitepaper", 
-      size: "6.2 MB", 
-      image: "https://images.unsplash.com/photo-1570042707221-5a415ff68051?auto=format&fit=crop&q=80&w=1000", 
+      type: "Webinar", 
+      size: "35:15", 
+      image: "https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?auto=format&fit=crop&q=80&w=1000", 
+      videoUrl: "https://www.youtube.com/embed/3X8a2g7x8c8",
+      description: "Modern approaches to maximizing feed efficiency in large ruminants.",
+      author: "Dr. Michael Torres",
+      date: "2024-02-22",
+      downloads: 1654
+    },
+    { 
+      id: 9, 
+      title: "Antibiotic Resistance in Livestock", 
+      category: "Large Animals", 
+      type: "Case Study", 
+      size: "2.2 MB", 
+      image: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&q=80&w=1000", 
       videoUrl: null,
-      description: "Advanced feeding strategies for dairy cattle.",
-      author: "Nutrition Research Center",
-      date: "2024-02-05",
-      downloads: 1890
+      description: "Field study on AMR mitigation through probiotic intervention.",
+      author: "One Health Initiative",
+      date: "2024-03-01",
+      downloads: 3102
     },
     { 
       id: 10, 
@@ -282,16 +284,25 @@ export default function ResourcesPage() {
 
   return (
     <div className={`min-h-screen bg-[#EAF3EA] text-[#173522] flex flex-col justify-between selection:bg-[#2D6A4F] selection:text-[#EAF3EA] transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+
+      {/* Animation engine — renders scroll bar + wires all observers */}
+      <ResourcesAnimations />
+
       <div>
-        {/* Full-Screen Hero Section — top content above laptop, search+arrow pinned to bottom */}
+        {/* ── HERO ─────────────────────────────────────────────── */}
         <section className="relative min-h-[calc(100vh-72px)] flex flex-col overflow-hidden bg-emerald-950 px-4">
-          <div className="absolute inset-0 z-0">
-             <img src={biofactor_resource} alt="Biofactor Scientific Resources" className="w-full h-full object-cover brightness-95 opacity-85" />
-             {/* Gentle transparent gradient overlay */}
-             <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-emerald-950/40 to-emerald-950/80"></div>
+
+          {/* Background image — data-hero-bg for zoom-out */}
+          <div className="absolute inset-0 z-0" data-hero-bg>
+            <img
+              src={biofactor_resource}
+              alt="Biofactor Scientific Resources"
+              className="w-full h-full object-cover brightness-95 opacity-85"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-emerald-950/40 to-emerald-950/80" />
           </div>
 
-          {/* TOP BLOCK: Badge + Heading + Description — pushed to upper portion of hero */}
+          {/* TOP BLOCK */}
           <div className="relative z-10 text-center max-w-4xl mx-auto flex flex-col items-center pt-6 md:pt-10">
             <div className="inline-block px-5 py-2 rounded-full border border-emerald-400/40 bg-emerald-500/20 backdrop-blur-md mb-5">
               <span className="text-emerald-200 font-mono text-xs font-semibold uppercase tracking-widest flex items-center gap-2">
@@ -299,20 +310,26 @@ export default function ResourcesPage() {
               </span>
             </div>
 
+            {/* Title — plain, no animation */}
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-3 tracking-tight font-display leading-tight">
-              Scientific <span className="text-emerald-300">Resource Hub</span>
+              Scientific <span style={{ color: "#7CC242" }}>Resource Hub</span>
             </h1>
 
-            {/* Description close to heading, original text restored */}
-            <p className="text-emerald-100 text-sm md:text-base font-sans max-w-2xl mx-auto leading-relaxed">
+            {/* Subtitle */}
+            <p
+              data-hero-sub
+              className="text-emerald-100 text-sm md:text-base font-sans max-w-2xl mx-auto leading-relaxed"
+            >
               Explore our curated library of whitepapers, webinars, and technical guides designed to improve agricultural efficiency and biological soil health.
             </p>
           </div>
 
-          {/* BOTTOM BLOCK: Search bar + Explore Catalog arrow — pushed further down below laptop */}
+          {/* BOTTOM BLOCK */}
           <div className="relative z-10 flex flex-col items-center w-full mt-auto pb-14 md:pb-20">
-            <div className="w-full max-w-2xl mx-auto relative">
-              <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-emerald-200 text-2xl" />
+
+            {/* Search bar wrapper — data-hero-search */}
+            <div data-hero-search className="w-full max-w-2xl mx-auto relative">
+              <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-emerald-200 text-2xl pointer-events-none" />
               <input
                 type="text"
                 placeholder="Search whitepapers, webinars, research papers..."
@@ -330,15 +347,21 @@ export default function ResourcesPage() {
               )}
             </div>
 
-            {/* Explore Catalog arrow — directly below search bar, no gap */}
-            <a href="#resource-catalog" className="inline-flex flex-col items-center gap-1 text-emerald-200 hover:text-white transition-colors cursor-pointer animate-bounce mt-3">
+            {/* Explore catalog cue — data-hero-cue, chevron gets rh-chevron class */}
+            <a
+              href="#resource-catalog"
+              data-hero-cue
+              className="inline-flex flex-col items-center gap-1 text-emerald-200 hover:text-white transition-colors cursor-pointer mt-3"
+            >
               <span className="font-mono text-xs uppercase tracking-widest">Explore Catalog</span>
-              <FaChevronDown />
+              <span className="rh-chevron">
+                <FaChevronDown />
+              </span>
             </a>
           </div>
         </section>
 
-        {/* Category Filters (Sticky Navigation Bar) */}
+        {/* ── FILTER CHIPS ─────────────────────────────────────── */}
         <section id="resource-catalog" className="sticky top-[64px] md:top-[72px] z-40 bg-[#EAF3EA]/95 backdrop-blur-xl border-b border-[#2D6A4F]/15 shadow-sm py-4">
           <div className="max-w-7xl mx-auto px-4">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
@@ -346,8 +369,9 @@ export default function ResourcesPage() {
                 {categories.map((cat) => (
                   <button
                     key={cat.id}
+                    data-chip
                     onClick={() => setActiveTab(cat.id)}
-                    className={`group flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer ${
+                    className={`group flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold cursor-pointer ${
                       activeTab === cat.id 
                       ? 'bg-[#2D6A4F] text-white shadow-md transform scale-105' 
                       : 'bg-white text-[#173522] hover:bg-[#2D6A4F]/10 hover:text-[#2D6A4F] border border-[#2D6A4F]/15'
@@ -373,22 +397,30 @@ export default function ResourcesPage() {
           </div>
         </section>
 
-        {/* Main Resource Sections (Expanded Vertical Height & Spacing) */}
+        {/* ── MAIN RESOURCE SECTIONS ───────────────────────────── */}
         <main className="max-w-7xl mx-auto px-4 py-16 space-y-16">
           {resourceTypes.map((type) => {
             const resources = groupedResources[type.id] || [];
             if (resources.length === 0) return null;
             
-            const isExpanded = expandedSections[type.id] !== undefined ? expandedSections[type.id] : true;
+            const isExpanded = expandedSections[type.id] !== undefined
+              ? expandedSections[type.id]
+              : true;
             
             return (
               <div key={type.id} className="space-y-8">
+
+                {/* Section header — data-section-head, icon gets data-section-icon */}
                 <div 
-                  className="flex items-center justify-between p-6 md:p-8 bg-white rounded-3xl border border-[#2D6A4F]/15 shadow-sm cursor-pointer hover:shadow-md transition-all group"
+                  data-section-head
+                  className="flex items-center justify-between p-6 md:p-8 bg-white rounded-3xl border border-[#2D6A4F]/15 shadow-sm cursor-pointer hover:shadow-md transition-shadow group"
                   onClick={() => toggleSection(type.id)}
                 >
                   <div className="flex items-center gap-4">
-                    <div className="p-4 rounded-2xl bg-[#EAF3EA] text-[#2D6A4F] text-xl">
+                    <div
+                      data-section-icon
+                      className="p-4 rounded-2xl bg-[#EAF3EA] text-[#2D6A4F] text-xl"
+                    >
                       {type.icon}
                     </div>
                     <div>
@@ -405,89 +437,128 @@ export default function ResourcesPage() {
 
                 {isExpanded && (
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {resources.map((item) => (
-                      <div 
-                        key={item.id} 
-                        className="group bg-white rounded-3xl border border-[#2D6A4F]/15 hover:border-[#2D6A4F]/40 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full"
-                      >
-                        {/* High-Definition Image Container */}
-                        <div className="relative h-60 overflow-hidden bg-emerald-950">
-                          <img 
-                            src={item.image} 
-                            alt={item.title} 
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                          
-                          <div className="absolute top-4 left-4 flex gap-2">
-                            <span className="px-3.5 py-1.5 bg-white/95 backdrop-blur-md rounded-xl text-xs font-bold text-[#2D6A4F] shadow-sm">
-                              {item.category}
-                            </span>
-                            <span className="px-3.5 py-1.5 bg-[#2D6A4F] text-white rounded-xl text-xs font-mono font-bold uppercase tracking-wider shadow-sm">
-                              {item.type}
-                            </span>
-                          </div>
+                    {resources.map((item, cardIndex) => {
+                      /* stagger index resets per section: 0,1,2,0,1,2,… */
+                      const staggerIndex = cardIndex % 3;
 
-                          {item.type === 'Webinar' && (
-                            <button 
-                              onClick={() => setSelectedVideo(item.videoUrl)}
-                              className="absolute inset-0 flex items-center justify-center group/play cursor-pointer"
-                            >
-                              <div className="w-16 h-16 bg-[#2D6A4F] hover:bg-[#173522] rounded-full flex items-center justify-center text-white shadow-2xl transform group-hover/play:scale-110 transition-all duration-300">
-                                <FiPlay className="ml-1 text-2xl" />
-                              </div>
-                            </button>
-                          )}
-                        </div>
-
-                        <div className="p-7 flex flex-col flex-grow">
-                          <h3 className="text-xl font-extrabold text-[#173522] mb-3 line-clamp-2 group-hover:text-[#2D6A4F] transition-colors leading-snug">
-                            {item.title}
-                          </h3>
-                          
-                          <p className="text-[#173522]/85 text-sm mb-6 line-clamp-3 flex-grow font-sans leading-relaxed">
-                            {item.description}
-                          </p>
-
-                          <div className="space-y-3 mb-6 pt-4 border-t border-[#2D6A4F]/10">
-                            <div className="flex items-center gap-2 text-sm text-[#173522]/80">
-                              <FiBookOpen className="text-[#2D6A4F]" />
-                              <span className="font-semibold">{item.author}</span>
+                      return (
+                        <div 
+                          key={item.id}
+                          data-card
+                          data-stagger-index={staggerIndex}
+                          className="group bg-white rounded-3xl border border-[#2D6A4F]/15 hover:border-[#2D6A4F]/40 shadow-sm overflow-hidden flex flex-col h-full"
+                        >
+                          {/* Image container */}
+                          <div data-card-img className="relative h-60 overflow-hidden bg-emerald-950">
+                            <img 
+                              src={item.image} 
+                              alt={item.title} 
+                              className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                            
+                            {/* Tags */}
+                            <div className="absolute top-4 left-4 flex gap-2">
+                              <span
+                                data-tag
+                                className="px-3.5 py-1.5 bg-white/95 backdrop-blur-md rounded-xl text-xs font-bold text-[#2D6A4F] shadow-sm"
+                              >
+                                {item.category}
+                              </span>
+                              <span
+                                data-tag
+                                className="px-3.5 py-1.5 bg-[#2D6A4F] text-white rounded-xl text-xs font-mono font-bold uppercase tracking-wider shadow-sm"
+                              >
+                                {item.type}
+                              </span>
                             </div>
-                            <div className="flex items-center justify-between text-xs font-mono text-[#173522]/60">
-                              <span>{new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
-                              <span>{item.downloads.toLocaleString()} downloads</span>
-                            </div>
-                          </div>
 
-                          <div className="flex items-center justify-between pt-4 border-t border-[#2D6A4F]/10 mt-auto">
-                            {item.type === 'Webinar' ? (
+                            {/* Play button (Webinar only) */}
+                            {item.type === 'Webinar' && (
                               <button 
                                 onClick={() => setSelectedVideo(item.videoUrl)}
-                                className="flex items-center gap-2 text-[#2D6A4F] hover:text-[#173522] font-bold text-sm transition-colors cursor-pointer"
+                                className="absolute inset-0 flex items-center justify-center cursor-pointer"
                               >
-                                Watch Now <FiArrowRight />
-                              </button>
-                            ) : (
-                              <button className="flex items-center gap-2 text-[#173522] hover:text-[#2D6A4F] font-bold text-sm transition-colors cursor-pointer">
-                                Read More <FiArrowRight />
+                                <div
+                                  data-play
+                                  className="w-16 h-16 bg-[#2D6A4F] hover:bg-[#173522] rounded-full flex items-center justify-center text-white shadow-2xl transition-colors duration-300"
+                                >
+                                  <FiPlay className="ml-1 text-2xl" />
+                                </div>
                               </button>
                             )}
+                          </div>
+
+                          {/* Text body */}
+                          <div data-body className="p-7 flex flex-col flex-grow">
+                            {/* child 1 — title */}
+                            <h3 className="text-xl font-extrabold text-[#173522] mb-3 line-clamp-2 group-hover:text-[#2D6A4F] transition-colors leading-snug">
+                              {item.title}
+                            </h3>
                             
-                            <div className="flex items-center gap-2">
-                              <button className="p-2 text-[#173522]/50 hover:text-[#2D6A4F] transition-colors cursor-pointer">
-                                <FiShare2 size={18} />
-                              </button>
-                              {item.type !== 'Webinar' && (
-                                <button className="p-2 text-[#173522]/50 hover:text-[#2D6A4F] transition-colors cursor-pointer">
-                                  <FiDownload size={18} />
+                            {/* child 2 — description */}
+                            <p className="text-[#173522]/85 text-sm mb-6 line-clamp-3 flex-grow font-sans leading-relaxed">
+                              {item.description}
+                            </p>
+
+                            {/* child 3 — author + downloads meta */}
+                            <div className="space-y-3 mb-6 pt-4 border-t border-[#2D6A4F]/10">
+                              <div className="flex items-center gap-2 text-sm text-[#173522]/80">
+                                <FiBookOpen className="text-[#2D6A4F]" />
+                                <span className="font-semibold">{item.author}</span>
+                              </div>
+                              <div className="flex items-center justify-between text-xs font-mono text-[#173522]/60">
+                                <span>{new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                                {/* data-count holds the live counter element */}
+                                <span
+                                  data-count
+                                  data-count-target={item.downloads}
+                                >
+                                  {item.downloads.toLocaleString()} downloads
+                                </span>
+                              </div>
+                            </div>
+
+                            {/* child 4 — CTA row */}
+                            <div className="flex items-center justify-between pt-4 border-t border-[#2D6A4F]/10 mt-auto">
+                              {item.type === 'Webinar' ? (
+                                <button 
+                                  data-cta
+                                  onClick={() => setSelectedVideo(item.videoUrl)}
+                                  className="flex items-center gap-2 text-[#2D6A4F] hover:text-[#173522] font-bold text-sm cursor-pointer"
+                                >
+                                  Watch Now <span className="rh-arrow"><FiArrowRight /></span>
+                                </button>
+                              ) : (
+                                <button
+                                  data-cta
+                                  className="flex items-center gap-2 text-[#173522] hover:text-[#2D6A4F] font-bold text-sm cursor-pointer"
+                                >
+                                  Read More <span className="rh-arrow"><FiArrowRight /></span>
                                 </button>
                               )}
+                              
+                              <div className="flex items-center gap-2">
+                                <button
+                                  data-icon-btn
+                                  className="p-2 text-[#173522]/50 hover:text-[#2D6A4F] cursor-pointer"
+                                >
+                                  <FiShare2 size={18} />
+                                </button>
+                                {item.type !== 'Webinar' && (
+                                  <button
+                                    data-icon-btn
+                                    className="p-2 text-[#173522]/50 hover:text-[#2D6A4F] cursor-pointer"
+                                  >
+                                    <FiDownload size={18} />
+                                  </button>
+                                )}
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 )}
               </div>
@@ -541,6 +612,7 @@ export default function ResourcesPage() {
         )}
       </div>
 
+      {/* Footer — links get data-footer-link for hover animation */}
       <BiofactorFooter />
     </div>
   );

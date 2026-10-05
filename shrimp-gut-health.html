@@ -1,391 +1,427 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="color-scheme:light;">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Shrimp Gut Health — Infographic</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,800&family=Newsreader:ital,wght@0,400;1,400&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Inside the Shrimp – Gut Health Infographic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&display=swap" rel="stylesheet">
 <style>
-/* ─── BASE RESET ───────────────────────────────────── */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ─── PALETTE ──────────────────────────────────────── */
-:root{
-  --bg:#d8ecd4;
-  --glow:#e8f5e4;
-  --panel:#f1faee;
-  --border:#a3c9a2;
-  --border-h:#6aaa7a;
-  --txt:#0f2f1e;
-  --muted:#40604d;
-  --deep:#0d4f31;
-  --mid:#1f8a57;
-  --light:#5fbf86;
-  --lime:#8aa31c;
-  --track:#c6e0c4;
+:root {
+  --bg:      #EAF6EC;
+  --glow:    #e8f5e4;
+  --panel:   rgba(255, 255, 255, 0.75);
+  --phov:    rgba(255, 255, 255, 0.95);
+  --ink:     #0b2416;
+  --muted:   #21432f;
+  --green:   #1f8a57;
+  --gdark:   #0d4f31;
+  --glt:     #5fbf86;
+  --lime:    #8aa31c;
+  --red:     #c0392b;
+  --line:    rgba(163, 201, 162, 0.55);
+  --line-h:  #6aaa7a;
+  --track:   #c6e0c4;
+  --ease:    cubic-bezier(.2, .7, .2, 1);
 }
 
-/* ─── HTML / BODY ──────────────────────────────────── */
-html,body{
-  width:100%;height:100%;
-  overflow:hidden;
-  background:var(--bg);
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  font-family: "Instrument Sans", sans-serif;
+  color: var(--ink);
 }
-body{
-  display:flex;
-  align-items:center;
-  justify-content:center;
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background:
-    radial-gradient(ellipse 65% 60% at 100% 0%,var(--glow) 0%,transparent 68%),
+    radial-gradient(ellipse 65% 60% at 100% 0%, var(--glow) 0%, transparent 68%),
     var(--bg);
 }
 
-/* ─── DRIFTING DOTS ────────────────────────────────── */
-.dots-bg{
-  position:fixed;inset:0;
-  pointer-events:none;z-index:0;
-  overflow:hidden;
-}
-.dot{position:absolute;border-radius:50%;opacity:.30;}
-@keyframes du{0%,100%{transform:translateY(0)}50%{transform:translateY(-24px)}}
-@keyframes dd{0%,100%{transform:translateY(0)}50%{transform:translateY( 24px)}}
-@keyframes dl{0%,100%{transform:translateX(0)}50%{transform:translateX( 22px)}}
-@keyframes dr{0%,100%{transform:translateX(0)}50%{transform:translateX(-22px)}}
+sup { color: var(--green); font-weight: 600; font-size: .75em; vertical-align: super; }
 
-/* ─── OUTER WRAPPER keeps stage centred after scale ── */
-#wrap{
-  position:relative;z-index:1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:1280px;height:800px;
-  transform-origin:center center;
+/* ── DRIFTING BACKGROUND DOTS ── */
+.dots-bg {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+  overflow: hidden;
 }
+.dot { position: absolute; border-radius: 50%; opacity: .30; }
+@keyframes du { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-24px) } }
+@keyframes dd { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY( 24px) } }
+@keyframes dl { 0%,100%{ transform: translateX(0) } 50%{ transform: translateX( 22px) } }
+@keyframes dr { 0%,100%{ transform: translateX(0) } 50%{ transform: translateX(-22px) } }
 
-/* ─── STAGE ────────────────────────────────────────── */
-#stage{
-  width:1280px;height:800px;
-  padding:36px 52px;
-  display:grid;
-  grid-template-columns:600px 1fr;
-  grid-template-rows:auto 182px auto 1fr;
-  column-gap:40px;
-  row-gap:16px;
+/* ── SCALED STAGE WRAPPER ── */
+#wrap {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+  width: 1280px; height: 800px;
+  transform-origin: center center;
 }
 
-/* ─── PANEL BASE ───────────────────────────────────── */
-.panel{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:10px;
-  transition:border-color .25s,box-shadow .25s;
-}
-.panel:hover{
-  border-color:var(--border-h);
-  box-shadow:0 4px 20px rgba(13,79,49,.11);
+.stage, #stage {
+  width: 1280px; height: 800px;
+  padding: 38px 56px;
+  display: grid;
+  grid-template-columns: 570px 1fr;
+  grid-template-rows: auto auto auto 1fr;
+  column-gap: 40px;
+  row-gap: 16px;
 }
 
-/* ════════════════════════════════════════════════════
-   ROW 1 — HEADER
-════════════════════════════════════════════════════ */
-.hdr{
-  grid-column:1/-1;
-  grid-row:1;
-  display:flex;flex-direction:column;gap:5px;
+/* ── PANEL STYLES ── */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  transition: border-color .25s, box-shadow .25s, background .25s;
 }
-.lbl-row{
-  display:flex;align-items:center;gap:10px;
-}
-.lbl-line{
-  height:2px;width:28px;
-  background:var(--mid);
-  transform-origin:left;
-  transform:scaleX(0);
-}
-.lbl-txt{
-  font-family:'Instrument Sans',sans-serif;
-  font-size:11px;font-weight:600;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:var(--mid);
-}
-.hl-mask{overflow:hidden;}
-.hl{
-  font-family:'Bricolage Grotesque',sans-serif;
-  font-weight:800;font-size:44px;
-  line-height:1.08;color:var(--txt);
-  white-space:nowrap;
-  transform:translateY(102%);
-  will-change:transform;
+.panel:hover {
+  border-color: var(--line-h);
+  box-shadow: 0 6px 24px rgba(13, 79, 49, 0.10);
 }
 
-/* ════════════════════════════════════════════════════
-   ROW 2 LEFT — PARAGRAPH
-════════════════════════════════════════════════════ */
-.para{
-  grid-column:1;grid-row:2;
-  display:flex;align-items:center;
-  opacity:0;transform:translateY(18px);
-  will-change:opacity,transform;
-}
-.para p{
-  font-family:'Newsreader',serif;
-  font-size:16.5px;line-height:1.6;
-  color:var(--muted);
-}
-.para sup{
-  font-family:'Instrument Sans',sans-serif;
-  font-size:10px;color:var(--mid);
-  font-weight:600;vertical-align:super;
+/* ── ANIMATION UTILITIES ── */
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes growX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes slideUp { from { transform: translateY(110%); } to { transform: none; } }
+@keyframes pulseDot { 0%,100%{ transform: scale(1); opacity:.9 } 50%{ transform: scale(1.45); opacity:1 } }
+
+.rise {
+  opacity: 0;
+  animation: rise .55s var(--ease) forwards;
+  animation-delay: var(--t, 0s);
 }
 
-/* ════════════════════════════════════════════════════
-   ROW 2 RIGHT — DIAGRAM
-════════════════════════════════════════════════════ */
-.diag{
-  grid-column:2;grid-row:2;
-  display:flex;flex-direction:row;
-  gap:14px;
-  padding:14px 16px 22px;
-  position:relative;
-  overflow:hidden;
-  opacity:0;transform:translateY(18px);
-  will-change:opacity,transform;
+/* ══════════════════════════════════════════
+   ROW 1: HEADER (Col 1)
+══════════════════════════════════════════ */
+.sec-head {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-/* legend */
-.dleg{
-  width:154px;flex-shrink:0;
-  display:flex;flex-direction:column;
-  justify-content:center;gap:11px;
+.eyebrow {
+  display: flex; align-items: center; gap: 10px;
+  font: 700 11px/1 "Instrument Sans", sans-serif;
+  letter-spacing: .24em; text-transform: uppercase;
+  color: var(--green);
 }
-.li{
-  display:flex;align-items:flex-start;
-  gap:8px;
-  font-family:'Instrument Sans',sans-serif;
-  font-size:11.5px;line-height:1.35;
-  color:var(--muted);
-}
-.ldot{
-  width:9px;height:9px;border-radius:50%;
-  flex-shrink:0;margin-top:2px;
-}
-.ldot.g{background:var(--light);}
-.ldot.d{background:var(--deep);}
-.ldot.l{background:var(--lime);}
-
-@keyframes pdot{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.5);opacity:1}}
-.ldot{animation:pdot 2.4s ease-in-out infinite;}
-.ldot.d{animation-delay:.7s;}
-.ldot.l{animation-delay:1.4s;}
-
-/* SVG area */
-.dsvg{
-  flex:1;display:flex;
-  align-items:center;justify-content:center;
-}
-.dsvg svg{width:100%;max-height:142px;}
-.dcap{
-  position:absolute;bottom:7px;left:16px;
-  font-family:'Instrument Sans',sans-serif;
-  font-size:10px;letter-spacing:.12em;
-  color:var(--muted);opacity:.65;
-  text-transform:uppercase;
+.eyebrow-bar {
+  display: inline-block; width: 26px; height: 2px;
+  background: var(--green); transform-origin: left;
+  animation: growX .65s .05s var(--ease) both;
 }
 
-/* SVG gut animations */
-@keyframes drawgut{from{stroke-dashoffset:900}to{stroke-dashoffset:0}}
-@keyframes marchdash{from{stroke-dashoffset:0}to{stroke-dashoffset:-40}}
-@keyframes cappulse{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
-@keyframes vibdrift{0%{transform:translateX(0);opacity:.9}70%{transform:translateX(30px);opacity:.25}100%{transform:translateX(0);opacity:.9}}
-@keyframes sigring{0%{r:5;opacity:.85}100%{r:22;opacity:0}}
-@keyframes prebfloat{0%{transform:translateY(0);opacity:.88}55%{transform:translateY(-13px);opacity:.35}100%{transform:translateY(0);opacity:.88}}
-
-.gut-wall{stroke-dasharray:900;stroke-dashoffset:900;animation:drawgut 2s ease forwards;}
-.lumen{animation:marchdash 2.5s linear infinite;}
-.cap{animation:cappulse 2.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center;}
-.cap:nth-child(2){animation-delay:.20s}
-.cap:nth-child(3){animation-delay:.40s}
-.cap:nth-child(4){animation-delay:.60s}
-.cap:nth-child(5){animation-delay:.80s}
-.cap:nth-child(6){animation-delay:1.00s}
-.cap:nth-child(7){animation-delay:1.20s}
-.cap:nth-child(8){animation-delay:1.40s}
-.cap:nth-child(9){animation-delay:1.60s}
-.cap:nth-child(10){animation-delay:1.80s}
-.vib1{animation:vibdrift 7s ease-in-out infinite;}
-.vib2{animation:vibdrift 7s ease-in-out 1.6s infinite;}
-.sring{animation:sigring 2.6s ease-out infinite;}
-.pd{animation:prebfloat 5s ease-in-out infinite;transform-box:fill-box;transform-origin:center;}
-.pd:nth-child(2){animation-delay:.9s}
-.pd:nth-child(3){animation-delay:1.8s}
-.pd:nth-child(4){animation-delay:2.7s}
-
-/* ════════════════════════════════════════════════════
-   ROW 3 — FOUR BOXES
-════════════════════════════════════════════════════ */
-.brow{
-  grid-column:1/-1;grid-row:3;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
-}
-.box{
-  padding:16px 16px 14px;
-  display:flex;flex-direction:column;gap:7px;
-  position:relative;overflow:hidden;
-  opacity:0;transform:translateY(18px);
-  will-change:opacity,transform;
-}
-.box::before{
-  content:'';
-  position:absolute;top:0;left:0;
-  width:0;height:3px;
-  background:linear-gradient(90deg,var(--mid),var(--light));
-  transition:width .4s ease;
-}
-.box:hover{background:#fff !important;border-color:var(--border-h);box-shadow:0 4px 20px rgba(13,79,49,.11);}
-.box:hover::before{width:100%;}
-.btag{
-  font-family:'Instrument Sans',sans-serif;
-  font-size:10px;font-weight:600;
-  letter-spacing:.14em;text-transform:uppercase;
-  color:var(--mid);
-}
-.btit{
-  font-family:'Bricolage Grotesque',sans-serif;
-  font-weight:800;font-size:18px;line-height:1.2;
-  color:var(--txt);
-}
-.bbod{
-  font-family:'Newsreader',serif;
-  font-size:13.5px;line-height:1.55;
-  color:var(--muted);
-}
-.bbod sup{
-  font-family:'Instrument Sans',sans-serif;
-  font-size:10px;color:var(--mid);font-weight:600;
+h1 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 44px;
+  line-height: 1.05;
+  letter-spacing: -.025em;
+  color: var(--ink);
 }
 
-/* ════════════════════════════════════════════════════
-   ROW 4 — CHART
-════════════════════════════════════════════════════ */
-.chart{
-  grid-column:1/-1;grid-row:4;
-  display:flex;flex-direction:row;
-  gap:48px;align-items:center;
-  padding:18px 36px;
-  opacity:0;transform:translateY(18px);
-  will-change:opacity,transform;
-}
-.cleft{
-  width:340px;flex-shrink:0;
-  display:flex;flex-direction:column;gap:8px;
-}
-.ctit{
-  font-family:'Bricolage Grotesque',sans-serif;
-  font-weight:800;font-size:20px;line-height:1.2;
-  color:var(--txt);
-}
-.csub{
-  font-family:'Newsreader',serif;
-  font-size:14px;line-height:1.5;
-  color:var(--muted);
-}
-.csrc{
-  font-family:'Instrument Sans',sans-serif;
-  font-size:11px;line-height:1.45;
-  color:var(--muted);opacity:.75;
-}
-.csrc sup{font-size:9px;color:var(--mid);}
-.cright{
-  flex:1;display:flex;flex-direction:column;
-  justify-content:center;gap:16px;
-}
-.bbar{
-  display:flex;align-items:center;gap:12px;
-}
-.blbl{
-  width:126px;flex-shrink:0;
-  font-family:'Instrument Sans',sans-serif;
-  font-size:13px;font-weight:600;
-  color:var(--txt);text-align:right;
-}
-.btrk{
-  flex:1;height:16px;
-  background:var(--track);border-radius:8px;
-  overflow:hidden;
-}
-.bfil{
-  height:100%;border-radius:8px;
-  background:linear-gradient(90deg,var(--light),var(--mid));
-  width:0%;
-}
-.bcnt{
-  width:126px;flex-shrink:0;
-  font-family:'Instrument Sans',sans-serif;
-  font-size:13px;font-weight:600;
-  color:var(--mid);text-align:left;
+/* ══════════════════════════════════════════
+   ROW 2: MATTER (Col 1, below Header)
+══════════════════════════════════════════ */
+.sec-matter {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
-/* ════════════════════════════════════════════════════
-   LOAD SEQUENCE KEYFRAMES
-════════════════════════════════════════════════════ */
-@keyframes growline{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@keyframes slidehl{from{transform:translateY(102%)}to{transform:translateY(0)}}
-@keyframes fadeup{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.lede {
+  font-family: "Newsreader", serif;
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 52ch;
+}
 
-/* classes injected by JS */
-.anim-line{animation:growline .5s ease forwards;}
-.anim-hl  {animation:slidehl .55s .10s ease forwards;}
-.anim-para{animation:fadeup .55s .55s ease both;}
-.anim-diag{animation:fadeup .55s .75s ease both;}
-.anim-b0  {animation:fadeup .45s .95s ease both;}
-.anim-b1  {animation:fadeup .45s 1.05s ease both;}
-.anim-b2  {animation:fadeup .45s 1.15s ease both;}
-.anim-b3  {animation:fadeup .45s 1.25s ease both;}
-.anim-ch  {animation:fadeup .55s 1.40s ease both;}
+/* ══════════════════════════════════════════
+   DIAGRAM (Col 2, Spans Rows 1 & 2 beside Header & Matter)
+══════════════════════════════════════════ */
+.sec-diagram {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 10px;
+  position: relative;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
 
-/* ════════════════════════════════════════════════════
-   RESPONSIVE ≤ 860px
-════════════════════════════════════════════════════ */
+.diag-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 440px;
+}
+
+.diag-eyebrow {
+  font: 700 10.5px/1 "Instrument Sans", sans-serif;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--green);
+}
+
+.diag-caption {
+  font-size: 9.5px; font-weight: 600; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted); opacity: .75;
+}
+
+.dsvg {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 0;
+}
+.dsvg svg {
+  width: 100%;
+  max-width: 330px;
+  max-height: 130px;
+}
+
+/* Legend directly inside Diagram */
+.diag-legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.leg-row {
+  display: flex; align-items: center; gap: 7px;
+  font: 600 11.5px/1.2 "Instrument Sans", sans-serif;
+  color: var(--ink);
+}
+
+.leg-dot {
+  width: 8.5px; height: 8.5px; border-radius: 50%; flex-shrink: 0;
+  background: var(--c);
+  animation: pulseDot 2.4s ease-in-out infinite;
+  animation-delay: var(--pd, 0s);
+}
+
+/* SVG Animations */
+@keyframes drawgut { from { stroke-dashoffset: 900 } to { stroke-dashoffset: 0 } }
+@keyframes marchdash { from { stroke-dashoffset: 0 } to { stroke-dashoffset: -40 } }
+@keyframes cappulse { 0%,100%{ transform: scale(1) } 50%{ transform: scale(1.15) } }
+@keyframes vibdrift { 0%{ transform: translateX(0); opacity: .9 } 70%{ transform: translateX(28px); opacity: .25 } 100%{ transform: translateX(0); opacity: .9 } }
+@keyframes sigring { 0%{ r: 5; opacity: .85 } 100%{ r: 22; opacity: 0 } }
+@keyframes prebfloat { 0%{ transform: translateY(0); opacity: .88 } 55%{ transform: translateY(-12px); opacity: .35 } 100%{ transform: translateY(0); opacity: .88 } }
+
+.gut-wall { stroke-dasharray: 900; stroke-dashoffset: 900; animation: drawgut 2s ease forwards; }
+.lumen { animation: marchdash 2.5s linear infinite; }
+.cap { animation: cappulse 2.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.cap:nth-child(2){ animation-delay: .20s }
+.cap:nth-child(3){ animation-delay: .40s }
+.cap:nth-child(4){ animation-delay: .60s }
+.cap:nth-child(5){ animation-delay: .80s }
+.vib1 { animation: vibdrift 7s ease-in-out infinite; }
+.vib2 { animation: vibdrift 7s ease-in-out 1.6s infinite; }
+.sring { animation: sigring 2.6s ease-out infinite; }
+.pd { animation: prebfloat 5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.pd:nth-child(2){ animation-delay: .9s }
+.pd:nth-child(3){ animation-delay: 1.8s }
+.pd:nth-child(4){ animation-delay: 2.7s }
+
+/* ══════════════════════════════════════════
+   ROW 3: HORIZONTAL BOXES (Full width, 4 Columns)
+══════════════════════════════════════════ */
+.sec-boxes {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.box {
+  padding: 18px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.box::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 0; height: 3px;
+  background: linear-gradient(90deg, var(--green), var(--glt));
+  transition: width .4s ease;
+}
+.box:hover {
+  background: var(--phov);
+  border-color: var(--line-h);
+  box-shadow: 0 4px 18px rgba(13, 79, 49, 0.12);
+}
+.box:hover::before { width: 100%; }
+
+.btag {
+  display: inline-flex; align-items: center;
+  padding: 2.5px 9px;
+  font: 700 9.5px/1 "Instrument Sans", sans-serif;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--green); background: rgba(31, 138, 87, 0.12);
+  border: 1px solid rgba(31, 138, 87, 0.24); border-radius: 3px;
+  width: fit-content;
+}
+.btag.both {
+  color: #6b7a00; background: rgba(138, 163, 28, 0.14);
+  border-color: rgba(138, 163, 28, 0.30);
+}
+
+.btit {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 17.5px;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.bbod {
+  font-family: "Newsreader", serif;
+  font-size: 14px;
+  line-height: 1.52;
+  color: var(--muted);
+}
+
+/* ══════════════════════════════════════════
+   ROW 4: CHART (Full width, bottom)
+══════════════════════════════════════════ */
+.sec-chart {
+  grid-column: 1 / -1;
+  grid-row: 4;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  padding: 18px 30px;
+}
+
+.cleft {
+  width: 400px; flex-shrink: 0;
+  display: flex; flex-direction: column; gap: 4px;
+}
+
+.ctit {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.csub {
+  font-family: "Newsreader", serif;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.csrc {
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 11px;
+  color: var(--muted); opacity: .8;
+  margin-top: 2px;
+}
+
+.cright {
+  flex: 1;
+  display: flex; flex-direction: column;
+  justify-content: center; gap: 12px;
+}
+
+.bbar {
+  display: flex; align-items: center; gap: 12px;
+}
+
+.blbl {
+  width: 124px; flex-shrink: 0;
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: var(--ink); text-align: right;
+}
+.blbl span { display: block; font-weight: 400; font-size: 9.5px; color: var(--muted); }
+
+.btrk {
+  flex: 1; height: 14px;
+  background: var(--track); border-radius: 99px;
+  overflow: hidden;
+}
+
+.bfil {
+  height: 100%; border-radius: 99px;
+  background: linear-gradient(90deg, var(--glt), var(--green));
+  width: 0%;
+  transition: width 1.4s var(--ease);
+}
+
+.bcnt {
+  width: 100px; flex-shrink: 0;
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: var(--green); text-align: left;
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE (≤ 860px)
+══════════════════════════════════════════ */
 @media(max-width:860px){
-  html,body{overflow:auto;height:auto;}
-  body{align-items:flex-start;}
-  #wrap{
-    width:100%;height:auto;
-    transform:none !important;
+  html, body { overflow: auto; height: auto; }
+  body { align-items: flex-start; }
+  #wrap { width: 100%; height: auto; transform: none !important; }
+  .stage, #stage {
+    width: 100%; height: auto;
+    padding: 24px 18px 40px;
+    display: flex; flex-direction: column; gap: 18px;
   }
-  #stage{
-    width:100%;height:auto;
-    padding:24px 20px 40px;
-    display:flex;flex-direction:column;gap:20px;
-  }
-  .hl{white-space:normal;font-size:30px;}
-  .diag{flex-direction:column;height:auto;}
-  .dleg{width:100%;}
-  .brow{grid-template-columns:1fr;}
-  .chart{flex-direction:column;gap:20px;}
-  .cleft{width:100%;}
+  h1 { font-size: 32px; }
+  .sec-diagram { height: auto; padding: 18px 0; }
+  .sec-boxes { grid-template-columns: 1fr; }
+  .sec-chart { flex-direction: column; gap: 16px; padding: 20px; }
+  .cleft { width: 100%; }
 }
 
-/* ════════════════════════════════════════════════════
-   REDUCED MOTION
-════════════════════════════════════════════════════ */
 @media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none !important;transition:none !important;}
-  .lbl-line{transform:scaleX(1) !important;}
-  .hl{transform:translateY(0) !important;}
-  .para,.diag,.box,.chart{opacity:1 !important;transform:none !important;}
-  .gut-wall{stroke-dashoffset:0 !important;}
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .eyebrow-bar { transform: scaleX(1); }
+  .rise { opacity: 1; transform: none; }
+  .gut-wall { stroke-dashoffset: 0; }
+  .bfil { width: var(--w) !important; }
 }
 </style>
 </head>
 <body>
 
-<!-- 7 drifting background dots -->
+<!-- 7 Drifting background dots -->
 <div class="dots-bg" aria-hidden="true">
   <div class="dot" style="width:6px;height:6px;background:#5fbf86;top:11%;left:7%;animation:du 11s ease-in-out infinite;"></div>
   <div class="dot" style="width:5px;height:5px;background:#1f8a57;top:34%;left:19%;animation:dd 13s ease-in-out 1.1s infinite;"></div>
@@ -398,48 +434,40 @@ body{
 
 <!-- Scaled wrapper + stage -->
 <div id="wrap">
-<div id="stage">
+<div class="stage" id="stage">
 
-  <!-- ── ROW 1: HEADER ─────────────────────────── -->
-  <header class="hdr">
-    <div class="lbl-row">
-      <div class="lbl-line" id="lblLine"></div>
-      <span class="lbl-txt">Inside the Shrimp</span>
-    </div>
-    <div class="hl-mask">
-      <h1 class="hl" id="hl">A healthy gut is the first line of disease defence.</h1>
-    </div>
+  <!-- ── ROW 1: HEADER (Col 1) ── -->
+  <header class="sec-head rise" style="--t:0s">
+    <p class="eyebrow">
+      <span class="eyebrow-bar"></span>
+      Inside the shrimp
+    </p>
+    <h1>A healthy gut is the first line of disease defence.</h1>
   </header>
 
-  <!-- ── ROW 2 LEFT: PARAGRAPH ─────────────────── -->
-  <div class="para" id="para">
-    <p>Disease costs tropical shrimp farming up to 40% of production a year.<sup>2</sup>
-    Many bacterial diseases, including <em>Vibrio</em> infections such as AHPND (early
-    mortality syndrome), start by colonising the gut. Probiotics add beneficial bacteria.
-    Prebiotics feed them. Together they restore a gut community that resists pathogens
-    and turns more feed into growth.</p>
+  <!-- ── ROW 2: MATTER (Col 1, below Header) ── -->
+  <div class="sec-matter rise" style="--t:.05s">
+    <p class="lede">
+      Disease costs tropical shrimp farming up to 40% of production a year.<sup>2</sup>
+      Many bacterial diseases, including <em>Vibrio</em> infections such as AHPND, start by colonising the gut.
+      Probiotics add beneficial bacteria. Prebiotics feed them. Together they restore a gut community that resists pathogens and turns more feed into growth.
+    </p>
   </div>
 
-  <!-- ── ROW 2 RIGHT: DIAGRAM ──────────────────── -->
-  <div class="panel diag" id="diag">
-    <!-- legend -->
-    <div class="dleg">
-      <div class="li"><div class="ldot g"></div>Probiotics line the gut wall</div>
-      <div class="li"><div class="ldot d"></div><em>Vibrio</em> blocked, signals silenced</div>
-      <div class="li"><div class="ldot l"></div>Prebiotics feed the good bacteria</div>
+  <!-- ── DIAGRAM (Col 2, Spans Rows 1 & 2 beside Header & Matter) ── -->
+  <figure class="sec-diagram rise" style="--t:.05s" aria-label="Animated shrimp midgut cross-section">
+    <div class="diag-top">
+      <span class="diag-eyebrow">Shrimp midgut · cross-section</span>
+      <span class="diag-caption">Midgut schematic · not to scale</span>
     </div>
-    <!-- SVG midgut -->
-    <div class="dsvg">
-      <svg viewBox="0 0 320 150" fill="none" xmlns="http://www.w3.org/2000/svg"
-           aria-label="Schematic of shrimp midgut showing probiotics, Vibrio and prebiotics" role="img">
 
+    <div class="dsvg">
+      <svg viewBox="0 0 320 150" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Schematic of shrimp midgut showing probiotics, Vibrio and prebiotics" role="img">
         <!-- gut wall outer -->
-        <ellipse class="gut-wall" cx="160" cy="75" rx="148" ry="56"
-          stroke="#1f8a57" stroke-width="2.5" fill="#f1faee"/>
+        <ellipse class="gut-wall" cx="160" cy="75" rx="148" ry="56" stroke="#1f8a57" stroke-width="2.5" fill="#f1faee"/>
 
         <!-- lumen inner dashed -->
-        <ellipse class="lumen" cx="160" cy="75" rx="108" ry="36"
-          stroke="#5fbf86" stroke-width="1.5" fill="none" stroke-dasharray="7 5"/>
+        <ellipse class="lumen" cx="160" cy="75" rx="108" ry="36" stroke="#5fbf86" stroke-width="1.5" fill="none" stroke-dasharray="7 5"/>
 
         <!-- 5 probiotic capsules top wall -->
         <g class="cap"><rect x="44"  y="22" width="20" height="11" rx="5.5" fill="#5fbf86" opacity=".93"/></g>
@@ -456,17 +484,14 @@ body{
 
         <!-- Vibrio wavy lines -->
         <g class="vib1">
-          <path d="M98 68 q9-9 18 0 q9 9 18 0 q9-9 18 0"
-            stroke="#0d4f31" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          <path d="M98 68 q9-9 18 0 q9 9 18 0 q9-9 18 0" stroke="#0d4f31" stroke-width="2.2" stroke-linecap="round" fill="none"/>
         </g>
         <g class="vib2">
-          <path d="M162 86 q8-8 16 0 q8 8 16 0 q8-8 16 0"
-            stroke="#0d4f31" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          <path d="M162 86 q8-8 16 0 q8 8 16 0 q8-8 16 0" stroke="#0d4f31" stroke-width="2.2" stroke-linecap="round" fill="none"/>
         </g>
 
         <!-- expanding signal ring -->
-        <circle class="sring" cx="116" cy="68" r="5"
-          stroke="#1f8a57" stroke-width="1.5" fill="none"/>
+        <circle class="sring" cx="116" cy="68" r="5" stroke="#1f8a57" stroke-width="1.5" fill="none"/>
 
         <!-- 4 prebiotic lime dots -->
         <g class="pd"><circle cx="131" cy="57" r="5.5" fill="#8aa31c" opacity=".88"/></g>
@@ -475,80 +500,74 @@ body{
         <g class="pd"><circle cx="146" cy="99" r="4"   fill="#8aa31c" opacity=".88"/></g>
       </svg>
     </div>
-    <div class="dcap">Shrimp Midgut · Schematic</div>
+
+    <!-- Legend directly inside Diagram -->
+    <div class="diag-legend">
+      <div class="leg-row"><span class="leg-dot" style="--c:#1f8a57;--pd:0s"></span>Probiotics line the gut wall</div>
+      <div class="leg-row"><span class="leg-dot" style="--c:#c0392b;--pd:.4s"></span><em>Vibrio</em> blocked, signals silenced</div>
+      <div class="leg-row"><span class="leg-dot" style="--c:#8aa31c;--pd:.8s"></span>Prebiotics feed the good bacteria</div>
+    </div>
+  </figure>
+
+  <!-- ── ROW 3: HORIZONTAL BOXES (Full width, replacing table) ── -->
+  <div class="sec-boxes">
+    <div class="panel box rise" style="--t:.10s">
+      <span class="btag">Probiotic</span>
+      <h3 class="btit">Competitive exclusion</h3>
+      <p class="bbod">Beneficial bacteria occupy attachment sites and nutrients on the gut wall, leaving less room for <em>Vibrio</em>.</p>
+    </div>
+
+    <div class="panel box rise" style="--t:.15s">
+      <span class="btag">Probiotic</span>
+      <h3 class="btit">Quorum quenching</h3>
+      <p class="bbod">Some <em>Bacillus</em> produce AHL-lactonase, which breaks down the signals <em>Vibrio</em> use to coordinate attack, reducing biofilm and mortality.<sup>6</sup></p>
+    </div>
+
+    <div class="panel box rise" style="--t:.20s">
+      <span class="btag">Prebiotic</span>
+      <h3 class="btit">Feeding the good bacteria</h3>
+      <p class="bbod">Oligosaccharides and β-glucans feed beneficial bacteria. Together with probiotics they form a synbiotic.<sup>9</sup></p>
+    </div>
+
+    <div class="panel box rise" style="--t:.25s">
+      <span class="btag both">Both</span>
+      <h3 class="btit">Immune priming &amp; digestion</h3>
+      <p class="bbod">A balanced gut community supports immune response and digestive enzymes, so more feed converts to growth.</p>
+    </div>
   </div>
 
-  <!-- ── ROW 3: FOUR BOXES ──────────────────────── -->
-  <div class="brow">
-
-    <div class="panel box" id="b0">
-      <div class="btag">Probiotic</div>
-      <div class="btit">Competitive exclusion</div>
-      <div class="bbod">Beneficial bacteria occupy attachment sites and nutrients
-        on the gut wall, leaving less room for <em>Vibrio</em>.</div>
-    </div>
-
-    <div class="panel box" id="b1">
-      <div class="btag">Probiotic</div>
-      <div class="btit">Quorum quenching</div>
-      <div class="bbod">Some <em>Bacillus</em> make an enzyme (AHL-lactonase) that
-        breaks down the signal molecules <em>Vibrio</em> use to coordinate attack.
-        In trials this reduced <em>Vibrio</em> biofilm, gut colonisation and shrimp
-        mortality.<sup>6</sup></div>
-    </div>
-
-    <div class="panel box" id="b2">
-      <div class="btag">Prebiotic</div>
-      <div class="btit">Feeding the good bacteria</div>
-      <div class="bbod">Non-digestible fibres such as oligosaccharides and
-        β-glucans pass to the gut, where they feed beneficial bacteria.
-        Probiotic and prebiotic together are called a synbiotic.<sup>9</sup></div>
-    </div>
-
-    <div class="panel box" id="b3">
-      <div class="btag">Both</div>
-      <div class="btit">Immune priming and digestion</div>
-      <div class="bbod">A balanced gut community supports the shrimp's immune
-        response and digestive enzymes, so more feed becomes growth.</div>
-    </div>
-
-  </div>
-
-  <!-- ── ROW 4: CHART ───────────────────────────── -->
-  <div class="panel chart" id="chart">
+  <!-- ── ROW 4: CHART (Full width, at bottom) ── -->
+  <section class="panel sec-chart rise" id="chart" style="--t:.30s" aria-label="Pooled shrimp probiotic trial results">
     <div class="cleft">
-      <div class="ctit">What pooled shrimp studies show</div>
-      <div class="csub">Meta-analysis of probiotic trials in shrimp. Every pooled
-        effect was in the beneficial direction.</div>
-      <div class="csrc">Toledo et al. 2019, <em>Aquaculture</em>.<sup>5</sup>
-        The authors note that published studies lean towards positive results,
-        so field responses will vary.</div>
+      <h3 class="ctit">What pooled shrimp studies show</h3>
+      <p class="csub">Meta-analysis of probiotic trials. Every pooled effect was in the beneficial direction.</p>
+      <p class="csrc">Toledo et al. 2019, <em>Aquaculture</em>.<sup>5</sup></p>
     </div>
     <div class="cright">
       <div class="bbar">
-        <div class="blbl">Survival ↑</div>
-        <div class="btrk"><div class="bfil" id="bf0"></div></div>
-        <div class="bcnt" id="bc0">0 experiments</div>
+        <div class="blbl">Survival<span>improvement ↑</span></div>
+        <div class="btrk"><div class="bfil" id="bf0" style="--w:100%"></div></div>
+        <div class="bcnt" id="bc0">0 exp.</div>
       </div>
       <div class="bbar">
-        <div class="blbl">Growth rate ↑</div>
-        <div class="btrk"><div class="bfil" id="bf1"></div></div>
-        <div class="bcnt" id="bc1">0 experiments</div>
+        <div class="blbl">Growth rate<span>improvement ↑</span></div>
+        <div class="btrk"><div class="bfil" id="bf1" style="--w:60%"></div></div>
+        <div class="bcnt" id="bc1">0 exp.</div>
       </div>
       <div class="bbar">
-        <div class="blbl">FCR ↓ (better)</div>
-        <div class="btrk"><div class="bfil" id="bf2"></div></div>
-        <div class="bcnt" id="bc2">0 experiments</div>
+        <div class="blbl">FCR<span>improvement ↓</span></div>
+        <div class="btrk"><div class="bfil" id="bf2" style="--w:49%"></div></div>
+        <div class="bcnt" id="bc2">0 exp.</div>
       </div>
     </div>
-  </div>
+  </section>
 
 </div><!-- /stage -->
 </div><!-- /wrap -->
 
 <script>
 (function(){
-  /* ── SCALE ──────────────────────────────────── */
+  /* ── SCALE ── */
   var wrap = document.getElementById('wrap');
   function scale(){
     if(window.innerWidth <= 860){ wrap.style.transform=''; return; }
@@ -558,69 +577,33 @@ body{
   scale();
   window.addEventListener('resize', scale);
 
-  /* ── REDUCED MOTION CHECK ───────────────────── */
-  var noMotion = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-
-  /* helper: show element instantly */
-  function show(id){
-    var el = document.getElementById(id);
-    if(!el) return;
-    el.style.opacity='1';
-    el.style.transform='none';
-  }
-
-  if(noMotion){
-    // Show everything at final state immediately
-    document.getElementById('lblLine').style.transform='scaleX(1)';
-    ['hl','para','diag','b0','b1','b2','b3','chart'].forEach(show);
-    // bars at full width
-    var bdata=[[0,100,100],[1,60,60],[2,49,49]];
-    bdata.forEach(function(d){
-      var f=document.getElementById('bf'+d[0]);
-      var c=document.getElementById('bc'+d[0]);
-      if(f) f.style.width=d[1]+'%';
-      if(c) c.textContent=d[2]+' experiments';
-    });
-    return;
-  }
-
-  /* ── LOAD ANIMATIONS ────────────────────────── */
-  document.getElementById('lblLine').classList.add('anim-line');
-  document.getElementById('hl').classList.add('anim-hl');
-  document.getElementById('para').classList.add('anim-para');
-  document.getElementById('diag').classList.add('anim-diag');
-  document.getElementById('b0').classList.add('anim-b0');
-  document.getElementById('b1').classList.add('anim-b1');
-  document.getElementById('b2').classList.add('anim-b2');
-  document.getElementById('b3').classList.add('anim-b3');
-  document.getElementById('chart').classList.add('anim-ch');
-
-  /* ── BAR COUNT-UP ───────────────────────────── */
-  var bars=[
-    {fill:'bf0',cnt:'bc0',maxW:100,maxN:100},
-    {fill:'bf1',cnt:'bc1',maxW:60, maxN:60},
-    {fill:'bf2',cnt:'bc2',maxW:49, maxN:49}
+  /* ── ANIMATE BARS & COUNTERS ── */
+  var bars = [
+    { fill: 'bf0', cnt: 'bc0', maxW: 100, maxN: 100 },
+    { fill: 'bf1', cnt: 'bc1', maxW: 60,  maxN: 60  },
+    { fill: 'bf2', cnt: 'bc2', maxW: 49,  maxN: 49  }
   ];
   function ease(t){ return 1-Math.pow(1-t,3); }
 
   function runBars(){
-    var dur=1500, stag=220;
-    bars.forEach(function(b,i){
-      var fill=document.getElementById(b.fill);
-      var cnt =document.getElementById(b.cnt);
-      var t0  = performance.now() + i*stag;
+    var dur = 1400, stag = 180;
+    bars.forEach(function(b, i){
+      var fill = document.getElementById(b.fill);
+      var cnt  = document.getElementById(b.cnt);
+      if (!fill || !cnt) return;
+      var t0 = performance.now() + i * stag;
       function step(now){
-        var p = Math.min(Math.max(0,now-t0)/dur, 1);
+        var p = Math.min(Math.max(0, now - t0) / dur, 1);
         var e = ease(p);
-        fill.style.width = (e*b.maxW)+'%';
-        cnt.textContent  = Math.round(e*b.maxN)+' experiments';
-        if(p<1) requestAnimationFrame(step);
+        fill.style.width = (e * b.maxW) + '%';
+        cnt.textContent  = Math.round(e * b.maxN) + ' exp.';
+        if (p < 1) requestAnimationFrame(step);
       }
       requestAnimationFrame(step);
     });
   }
-  setTimeout(runBars, 1900);
 
+  setTimeout(runBars, 400);
 })();
 </script>
 </body>

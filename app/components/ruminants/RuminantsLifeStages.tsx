@@ -162,15 +162,17 @@ export default function RuminantsLifeStages() {
                 </p>
               </div>
 
-              <div className="w-full aspect-[4/3] rounded-lg overflow-hidden bg-[#E8EFE6]" data-stage-image>
-                <img
-                  data-stage-image="transition"
-                  src="/images/ruminants/transition-periparturient.png"
-                  alt="Transition periparturient stage"
-                  loading="eager"
-                  decoding="async"
-                  className="w-full h-full object-cover object-center block will-change-transform"
-                />
+              <div className="w-full max-w-[440px] rounded-lg overflow-hidden bg-[#E8EFE6] mx-auto lg:ml-auto py-3 sm:py-4" data-stage-image>
+                <div className="aspect-[4/3] w-full">
+                  <img
+                    data-stage-image="transition"
+                    src="/images/ruminants/transition-periparturient.png"
+                    alt="Transition periparturient stage"
+                    loading="eager"
+                    decoding="async"
+                    className="w-full h-full object-cover object-center block will-change-transform"
+                  />
+                </div>
               </div>
             </div>
           </div>

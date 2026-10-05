@@ -1,5 +1,5 @@
 import React from "react";
-import { Bricolage_Grotesque, Newsreader, JetBrains_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Inter_Tight, Newsreader, JetBrains_Mono } from "next/font/google";
 import RuminantsHero from "../components/ruminants/RuminantsHero";
 import RuminantsDataStrip from "../components/ruminants/RuminantsDataStrip";
 import RuminantsRumenFactory from "../components/ruminants/RuminantsRumenFactory";
@@ -14,6 +14,13 @@ const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
   weight: "800",
   variable: "--font-bricolage",
+  display: "swap",
+});
+
+const interTight = Inter_Tight({
+  subsets: ["latin"],
+  weight: ["700", "800"],
+  variable: "--font-inter-tight",
   display: "swap",
 });
 
@@ -34,7 +41,7 @@ const jetbrainsMono = JetBrains_Mono({
 export default function RuminantsPage() {
   return (
     <main
-      className={`${bricolage.variable} ${newsreader.variable} ${jetbrainsMono.variable} relative w-full bg-[#EAF3EA] text-[#173522] selection:bg-[#B8E986] selection:text-[#173522] overflow-x-hidden`}
+      className={`${interTight.variable} ${bricolage.variable} ${newsreader.variable} ${jetbrainsMono.variable} relative w-full bg-[#EAF3EA] text-[#173522] selection:bg-[#B8E986] selection:text-[#173522] overflow-x-hidden`}
     >
       {/* RUMINANTS PAGE CONTENT */}
       <div className="relative z-10 w-full">
