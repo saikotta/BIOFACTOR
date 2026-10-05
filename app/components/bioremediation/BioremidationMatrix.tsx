@@ -94,10 +94,10 @@ export default function BioremidationMatrix() {
           Where biology does the work.
         </h2>
 
-        {/* Matrix Scroll Container */}
-        <div className="w-full overflow-x-auto pb-8 pt-4">
-          <div className="min-w-[1040px] w-full group/matrix">
-            <div className="grid grid-cols-[160px_repeat(5,minmax(0,1fr))] gap-4 items-stretch">
+        {/* Matrix Scroll Container (Scrollbar hidden) */}
+        <div className="w-full overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pb-8 pt-4">
+          <div className="min-w-[960px] lg:min-w-0 w-full group/matrix">
+            <div className="grid grid-cols-[130px_repeat(5,minmax(0,1fr))] lg:grid-cols-[140px_repeat(5,minmax(0,1fr))] gap-3 sm:gap-4 items-stretch">
               
               {/* Left Column: Row Labels */}
               <div className="flex flex-col justify-between py-24 space-y-16">
@@ -132,17 +132,17 @@ export default function BioremidationMatrix() {
               {STAGES.map((stage, colIdx) => (
                 <div
                   key={colIdx}
-                  className={`relative flex flex-col justify-between rounded-[70px] p-5 sm:p-6 border border-[#173522]/25 shadow-[0_12px_28px_rgba(23,53,34,0.12)] transition-all duration-300 ease-out hover:scale-[1.045] hover:-translate-y-2.5 hover:shadow-[0_24px_48px_rgba(23,53,34,0.25)] hover:z-20 cursor-pointer group/capsule group-hover/matrix:opacity-60 group-hover/matrix:hover:opacity-100 ${
+                  className={`relative flex flex-col justify-between rounded-[55px] sm:rounded-[70px] p-4 sm:p-5 lg:p-6 border border-[#173522]/25 shadow-[0_12px_28px_rgba(23,53,34,0.12)] transition-all duration-300 ease-out hover:scale-[1.045] hover:-translate-y-2.5 hover:shadow-[0_24px_48px_rgba(23,53,34,0.25)] hover:z-20 cursor-pointer group/capsule group-hover/matrix:opacity-60 group-hover/matrix:hover:opacity-100 ${
                     stage.darkText ? "text-[#F4FAEC]" : "text-[#173522]"
                   }`}
                   style={{ backgroundColor: stage.bg }}
                 >
                   {/* Capsule Header */}
-                  <div className="text-center pt-3 pb-4 border-b border-current/20">
+                  <div className="text-center pt-2 pb-4 border-b border-current/20">
                     <span className="font-display font-extrabold text-xs tracking-wider block mb-1 opacity-90">
                       {stage.number}
                     </span>
-                    <strong className="font-display font-extrabold text-base sm:text-lg uppercase leading-tight block relative">
+                    <strong className="font-display font-extrabold text-sm sm:text-base lg:text-lg uppercase leading-tight block relative">
                       {stage.name}
                       <span className="block w-8 h-[1px] bg-current mx-auto mt-1.5 opacity-50 scale-x-0 group-hover/capsule:scale-x-100 transition-transform duration-300" />
                     </strong>
@@ -161,7 +161,7 @@ export default function BioremidationMatrix() {
                             style={{ width: stage.cells[0].fill, backgroundColor: stage.cells[0].barColor }}
                           />
                         </div>
-                        <p className="font-serif text-sm sm:text-base leading-snug">
+                        <p className="font-serif text-xs sm:text-sm lg:text-base leading-snug">
                           {stage.cells[0].text}
                           {stage.cells[0].sup && (
                             <sup className="text-[9px] font-mono ml-0.5">{stage.cells[0].sup}</sup>
@@ -183,7 +183,7 @@ export default function BioremidationMatrix() {
                             style={{ width: stage.cells[1].fill, backgroundColor: stage.cells[1].barColor }}
                           />
                         </div>
-                        <p className="font-serif text-sm sm:text-base leading-snug">
+                        <p className="font-serif text-xs sm:text-sm lg:text-base leading-snug">
                           {stage.cells[1].text}
                         </p>
                       </>
