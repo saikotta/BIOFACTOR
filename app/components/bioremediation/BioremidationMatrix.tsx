@@ -84,26 +84,26 @@ function getToneColor(rowIndex: number, isDark: boolean) {
 
 export default function BioremidationMatrix() {
   return (
-    <section className="relative w-full bg-[#EAF3EA] text-[#173522] pt-4 md:pt-6 lg:pt-8 pb-16 md:pb-24 lg:pb-32 overflow-hidden">
+    <section className="relative w-full bg-[#EAF3EA] text-[#173522] pt-4 md:pt-6 lg:pt-8 pb-16 md:pb-24 lg:pb-32 overflow-hidden" id="s4">
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)]">
         {/* Subtle Boundary Divider */}
         <div className="w-full border-t border-[#167A4A]/14 mb-8 md:mb-10" aria-hidden="true" />
 
         {/* Eyebrow & Main Title */}
-        <div className="flex items-center gap-3 mb-4">
+        <div className="flex items-center gap-3 mb-4 br-rv">
           <span className="w-8 h-[1.5px] bg-[#2D6A4F]" />
           <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">
             ALONG THE TREATMENT CHAIN
           </span>
         </div>
 
-        <h2 className="font-display font-extrabold text-[clamp(2.25rem,4vw,4.25rem)] text-[#173522] tracking-tight leading-[1.02] uppercase mb-10 md:mb-14 max-w-[1100px]">
+        <h2 className="font-display font-extrabold text-[clamp(2.25rem,4vw,4.25rem)] text-[#173522] tracking-tight leading-[1.02] uppercase mb-10 md:mb-14 max-w-[1100px] br-rv br-d1">
           Where biology does the work.
         </h2>
 
         {/* Matrix Scroll Container (Scrollbar hidden) */}
         <div className="w-full overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pb-8 pt-4">
-          <div className="min-w-[960px] lg:min-w-0 w-full group/matrix">
+          <div className="min-w-[960px] lg:min-w-0 w-full group/matrix br-mx-wrap" id="br-matrix">
             <div className="grid grid-cols-[130px_repeat(5,minmax(0,1fr))] lg:grid-cols-[140px_repeat(5,minmax(0,1fr))] gap-3 sm:gap-4.5 items-stretch">
 
               {/* Left Column: Row Labels */}
@@ -139,7 +139,8 @@ export default function BioremidationMatrix() {
               {STAGES.map((stage, colIdx) => (
                 <div
                   key={colIdx}
-                  className={`relative grid grid-rows-[150px_repeat(2,135px)] rounded-[90px] border shadow-[0_12px_28px_rgba(23,53,34,0.18)] transition-all duration-300 ease-out hover:scale-[1.035] hover:-translate-y-2 hover:shadow-[0_22px_44px_rgba(23,53,34,0.22)] hover:z-20 cursor-pointer group/capsule group-hover/matrix:opacity-70 group-hover/matrix:hover:opacity-100 ${
+                  data-c={colIdx + 1}
+                  className={`relative grid grid-rows-[150px_repeat(2,135px)] rounded-[90px] border shadow-[0_12px_28px_rgba(23,53,34,0.18)] transition-all duration-300 ease-out hover:scale-[1.035] hover:-translate-y-2 hover:shadow-[0_22px_44px_rgba(23,53,34,0.22)] hover:z-20 cursor-pointer group/capsule group-hover/matrix:opacity-70 group-hover/matrix:hover:opacity-100 br-mx-col ${
                     stage.darkText
                       ? "text-[#F4FAEC] border-[#F4FAEC]/40"
                       : "text-[#173522] border-[#173522]/30"

@@ -2,14 +2,14 @@ import React from "react";
 
 export default function BioremidationOxygenConnect() {
   return (
-    <section className="relative w-full text-[#173522] pt-6 md:pt-8 lg:pt-10 pb-16 md:pb-24 overflow-hidden bg-[#EAF3EA]">
+    <section className="relative w-full text-[#173522] pt-6 md:pt-8 lg:pt-10 pb-16 md:pb-24 overflow-hidden bg-[#EAF3EA]" id="s2">
       {/* Pale Warm Botanical Base */}
       <div className="absolute inset-0 z-0 bg-[#EAF3EA]" aria-hidden="true" />
 
       {/* Content Container */}
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)]">
         {/* Eyebrow Label — Matched to Ruminants SS1 */}
-        <div className="flex items-center gap-3 mb-4">
+        <div className="flex items-center gap-3 mb-4 br-rv">
           <span className="w-8 h-[1.5px] bg-[#2D6A4F]" aria-hidden="true" />
           <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">
             HOW BIOLOGICAL TREATMENT WORKS
@@ -17,7 +17,7 @@ export default function BioremidationOxygenConnect() {
         </div>
 
         {/* Big Headline & Subtitle — Matched to SS1/SS2 */}
-        <div className="max-w-[1100px] mb-10 md:mb-14">
+        <div className="max-w-[1100px] mb-10 md:mb-14 br-rv br-d1">
           <h2 className="font-display font-extrabold text-[clamp(2.25rem,4vw,4.25rem)] text-[#173522] tracking-tight leading-[1.04] mb-5 uppercase">
             Three oxygen conditions, three kinds of microbial work.
           </h2>
@@ -27,7 +27,7 @@ export default function BioremidationOxygenConnect() {
         </div>
 
         {/* Process Flow Card Container — Matched to White/Light Ruminants Container (SS2 Image 2) */}
-        <div className="w-full bg-[#FFFFFF]/80 backdrop-blur-sm rounded-2xl p-6 sm:p-10 md:p-12 border border-[#173522]/10 shadow-[0_4px_24px_rgba(23,53,34,0.04)] overflow-x-auto text-[#173522]">
+        <div className="w-full bg-[#FFFFFF]/80 backdrop-blur-sm rounded-2xl p-6 sm:p-10 md:p-12 border border-[#173522]/10 shadow-[0_4px_24px_rgba(23,53,34,0.04)] overflow-x-auto text-[#173522] br-rv br-d2">
           <div className="min-w-[980px] py-4 px-2">
             {/* Top Row: Flow Diagram */}
             <div className="grid grid-cols-[170px_1fr_170px] gap-4 items-center">
