@@ -7,7 +7,7 @@ export default function Evidence() {
   const sectionRef = useRef<HTMLElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
   const [isIn, setIsIn] = useState(false);
-  const [counts, setCounts] = useState<string[]>(["9", "2", "60+"]);
+  const [counts, setCounts] = useState<string[]>(["11", "2", "350+"]);
 
   // 1. Reveal observer for title & stats fade-in
   useEffect(() => {

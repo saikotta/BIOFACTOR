@@ -31,7 +31,7 @@ export function Visual01() {
         className="st-tg"
         style={{ "--i": 5, position: "static", alignSelf: "flex-start" } as React.CSSProperties}
       >
-        60+ deposited and elite strains
+        350+ MICROBIAL STRAIN BANK
       </span>
 
       <style jsx>{`
@@ -269,97 +269,199 @@ export function Visual02() {
 }
 
 export function Visual03() {
-  const points = [
-    [90, 90],
-    [310, 90],
-    [90, 300],
-    [310, 300],
-  ];
-
-  const centralBubbles = [
-    [200, 200, 34, "#1F7A4D", 0.35],
-    [172, 224, 22, "#6B4226", 0.4],
-    [230, 176, 24, "#1F7A4D", 0.3],
-    [228, 228, 18, "#6B4226", 0.4],
-    [172, 174, 16, "#1F7A4D", 0.4],
-  ] as const;
-
   return (
     <svg viewBox="0 0 400 400" className="st-v-svg" aria-hidden="true">
-      {points.map((p, i) => {
-        const d = `M200 195L${p[0]} ${p[1] < 200 ? p[1] + 26 : p[1] - 26}`;
-        return (
-          <React.Fragment key={i}>
-            <path className="ln" pathLength={1} d={d} />
-            <circle r="4" fill="#8B5E34">
-              <animateMotion
-                dur="3s"
-                begin={`${i * 0.6}s`}
-                repeatCount="indefinite"
-                path={d}
-              />
-            </circle>
-          </React.Fragment>
-        );
-      })}
-
-      {centralBubbles.map((c, i) => (
-        <circle
-          key={i}
-          cx={c[0]}
-          cy={c[1]}
-          r={c[2]}
-          fill={c[3]}
-          opacity={c[4]}
-          stroke={c[3]}
-          className="bb"
-        />
-      ))}
-
-      {/* Minerals */}
-      <polygon
-        points="90,66 111,78 111,102 90,114 69,102 69,78"
-        fill="#C9A77C"
-        stroke="#6B4226"
-        strokeWidth="2"
-      />
-
-      {/* Nutrients */}
-      <circle cx="298" cy="92" r="7" fill="#1F7A4D" />
-      <circle cx="320" cy="82" r="5" fill="#8B5E34" />
-      <circle cx="318" cy="104" r="6" fill="#3F7D4B" />
-
-      {/* Plants */}
-      <path d="M72 312Q74 282 106 284Q104 314 72 312Z" fill="#1F7A4D" />
-      <path d="M72 312L106 284" stroke="#EDF4ED" strokeWidth="1.5" />
-
-      {/* Animals */}
-      <ellipse cx="310" cy="306" rx="16" ry="13" fill="#6B4226" />
-      <circle cx="292" cy="288" r="5" fill="#6B4226" />
-      <circle cx="306" cy="282" r="5" fill="#6B4226" />
-      <circle cx="322" cy="282" r="5" fill="#6B4226" />
-      <circle cx="334" cy="290" r="5" fill="#6B4226" />
-
-      <text x="90" y="140" textAnchor="middle" fill="#143324">
-        minerals
+      {/* --- INTEGRATED SCIENTIFIC DIAGRAM ANNOTATIONS --- */}
+      {/* 01: Left Microbial Community Annotation */}
+      <text x="60" y="110" textAnchor="middle" fill="#143324" style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.6px" }}>
+        <tspan x="60" dy="0" fill="#1F7A4D" style={{ fontSize: "12px", fontWeight: 800 }}>01</tspan>
+        <tspan x="60" dy="14">MICROBIAL COMMUNITY</tspan>
       </text>
-      <text x="310" y="140" textAnchor="middle" fill="#143324">
-        nutrients
+
+      {/* 02: Center Metabolites + Synergy Annotation */}
+      <text x="205" y="110" textAnchor="middle" fill="#143324" style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.6px" }}>
+        <tspan x="205" dy="0" fill="#1F7A4D" style={{ fontSize: "12px", fontWeight: 800 }}>02</tspan>
+        <tspan x="205" dy="14">METABOLITES + SYNERGY</tspan>
       </text>
-      <text x="90" y="346" textAnchor="middle" fill="#143324">
-        plants
+
+      {/* 03: Right Biological Performance Annotation */}
+      <text x="340" y="110" textAnchor="middle" fill="#143324" style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.6px" }}>
+        <tspan x="340" dy="0" fill="#1F7A4D" style={{ fontSize: "12px", fontWeight: 800 }}>03</tspan>
+        <tspan x="340" dy="14">BIOLOGICAL</tspan>
+        <tspan x="340" dy="12">PERFORMANCE</tspan>
       </text>
-      <text x="310" y="346" textAnchor="middle" fill="#143324">
-        animals
-      </text>
-      <text x="200" y="268" textAnchor="middle" fill="#143324">
-        one another
-      </text>
+
+      {/* --- 1. LEFT SIDE / SOURCE: MICROBIAL COMMUNITY (6 abstract microbes) --- */}
+      <g className="microbial-community">
+        {/* Bacillus / Rod */}
+        <rect x="35" y="165" width="22" height="10" rx="5" fill="#1F7A4D" opacity="0.9">
+          <animateTransform
+            attributeName="transform"
+            type="translate"
+            values="0,0; 2,-3; 0,0"
+            dur="4s"
+            repeatCount="indefinite"
+          />
+        </rect>
+        <circle cx="42" cy="170" r="2" fill="#9BD0AE" />
+
+        {/* Cocci Cluster */}
+        <g>
+          <animateTransform
+            attributeName="transform"
+            type="translate"
+            values="0,0; -2,3; 0,0"
+            dur="5s"
+            repeatCount="indefinite"
+          />
+          <circle cx="72" cy="160" r="5" fill="#3F7D4B" />
+          <circle cx="80" cy="162" r="4" fill="#1F7A4D" />
+          <circle cx="75" cy="168" r="4.5" fill="#6B4226" opacity="0.85" />
+          <circle cx="83" cy="169" r="3.5" fill="#8B5E34" />
+        </g>
+
+        {/* Curved Microbe */}
+        <path
+          d="M 38 205 C 48 195, 58 215, 68 205"
+          stroke="#1F7A4D"
+          strokeWidth="4"
+          strokeLinecap="round"
+          fill="none"
+          opacity="0.85"
+        >
+          <animateTransform
+            attributeName="transform"
+            type="translate"
+            values="0,0; 3,2; 0,0"
+            dur="4.5s"
+            repeatCount="indefinite"
+          />
+        </path>
+
+        {/* Small Oval Organisms */}
+        <ellipse cx="78" cy="200" rx="7" ry="4.5" fill="#6B4226" opacity="0.8">
+          <animateTransform
+            attributeName="transform"
+            type="translate"
+            values="0,0; -3,-2; 0,0"
+            dur="3.8s"
+            repeatCount="indefinite"
+          />
+        </ellipse>
+        <ellipse cx="45" cy="235" rx="6" ry="4" fill="#1F7A4D" opacity="0.8">
+          <animateTransform
+            attributeName="transform"
+            type="translate"
+            values="0,0; 2,-2; 0,0"
+            dur="4.2s"
+            repeatCount="indefinite"
+          />
+        </ellipse>
+
+        {/* Subtle Filament-like Organism */}
+        <path
+          d="M 62 230 Q 72 220 82 240 T 92 230"
+          stroke="#8B5E34"
+          strokeWidth="2"
+          fill="none"
+          opacity="0.75"
+          strokeDasharray="2 1"
+        >
+          <animateTransform
+            attributeName="transform"
+            type="translate"
+            values="0,0; -1,3; 0,0"
+            dur="5.2s"
+            repeatCount="indefinite"
+          />
+        </path>
+      </g>
+
+      {/* --- 2. METABOLITE RELEASE PARTICLES --- */}
+      <g>
+        <animateMotion path="M 80 165 C 110 160, 140 180, 175 200" dur="3.5s" repeatCount="indefinite" begin="0s" />
+        <circle r="3" fill="#1F7A4D" />
+      </g>
+      <g>
+        <animateMotion path="M 80 165 C 110 160, 140 180, 175 200" dur="3.5s" repeatCount="indefinite" begin="1.75s" />
+        <circle cx="-3" cy="0" r="2.5" fill="#3F7D4B" />
+        <circle cx="3" cy="0" r="2.5" fill="#8B5E34" />
+      </g>
+      <g>
+        <animateMotion path="M 75 205 L 175 210" dur="3s" repeatCount="indefinite" begin="0.6s" />
+        <circle r="3.5" fill="#8B5E34" />
+      </g>
+      <g>
+        <animateMotion path="M 75 205 L 175 210" dur="3s" repeatCount="indefinite" begin="2.1s" />
+        <line x1="-4" y1="0" x2="4" y2="0" stroke="#1F7A4D" strokeWidth="1.5" />
+        <circle cx="-4" cy="0" r="2" fill="#1F7A4D" />
+        <circle cx="4" cy="0" r="2" fill="#1F7A4D" />
+      </g>
+      <g>
+        <animateMotion path="M 80 235 C 110 240, 140 230, 175 220" dur="3.8s" repeatCount="indefinite" begin="1.2s" />
+        <circle r="3" fill="#1F7A4D" />
+      </g>
+
+      {/* --- 3. CENTER SYNERGY ZONE --- */}
+      <circle cx="205" cy="210" r="32" fill="#EDF4ED" opacity="0.6" stroke="#1F7A4D" strokeWidth="1.5" strokeDasharray="4 3" className="synergy-ring" />
+      <circle cx="205" cy="210" r="22" fill="#1F7A4D" opacity="0.08" />
+
+      {/* Interconnected synergy network nodes */}
+      <g className="synergy-network">
+        <line x1="192" y1="200" x2="218" y2="205" stroke="#1F7A4D" strokeWidth="1.2" opacity="0.7" />
+        <line x1="218" y1="205" x2="205" y2="225" stroke="#6B4226" strokeWidth="1.2" opacity="0.7" />
+        <line x1="205" y1="225" x2="192" y2="200" stroke="#1F7A4D" strokeWidth="1.2" opacity="0.7" />
+        <line x1="192" y1="200" x2="208" y2="193" stroke="#3F7D4B" strokeWidth="1.2" opacity="0.7" />
+
+        <circle cx="192" cy="200" r="4" fill="#1F7A4D" className="syn-node" />
+        <circle cx="218" cy="205" r="4.5" fill="#6B4226" className="syn-node" />
+        <circle cx="205" cy="225" r="3.5" fill="#3F7D4B" className="syn-node" />
+        <circle cx="208" cy="193" r="3" fill="#8B5E34" className="syn-node" />
+      </g>
+
+      {/* --- 4. OUTPUT / BIOLOGICAL PERFORMANCE --- */}
+      <path className="ln" pathLength={1} d="M 237 210 L 322 210" />
+      <circle r="4" fill="#1F7A4D">
+        <animateMotion path="M 237 210 L 322 210" dur="2.2s" repeatCount="indefinite" />
+      </circle>
+      <circle r="7" fill="none" stroke="#9BD0AE" strokeWidth="1.5">
+        <animateMotion path="M 237 210 L 322 210" dur="2.2s" repeatCount="indefinite" />
+      </circle>
+
+      {/* Biological Performance Output node */}
+      <g transform="translate(340, 210)">
+        <circle r="18" fill="#EDF4ED" stroke="#1F7A4D" strokeWidth="1.5" />
+        <circle r="12" fill="none" stroke="#1F7A4D" strokeWidth="1" strokeDasharray="3 2" className="perf-pulse" />
+        <circle r="6" fill="#1F7A4D" />
+      </g>
 
       <style jsx>{`
+        .synergy-ring {
+          animation: synPulse 3s ease-in-out infinite;
+          transform-origin: 205px 210px;
+        }
+        .syn-node {
+          animation: nodePulse 2s ease-in-out infinite alternate;
+        }
+        .perf-pulse {
+          animation: perfRotate 6s linear infinite;
+          transform-origin: 340px 210px;
+        }
+        @keyframes synPulse {
+          0%, 100% { transform: scale(1); opacity: 0.6; }
+          50% { transform: scale(1.08); opacity: 0.9; }
+        }
+        @keyframes nodePulse {
+          0% { opacity: 0.7; }
+          100% { opacity: 1; filter: drop-shadow(0 0 2px #1F7A4D); }
+        }
+        @keyframes perfRotate {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
         @media (max-width: 640px) {
           text {
-            font-size: 12.5px !important;
+            font-size: 8.5px !important;
           }
         }
       `}</style>
@@ -636,143 +738,201 @@ export function Visual05() {
     </div>
   );
 }
-
 export function Visual06() {
   return (
     <svg viewBox="0 0 400 400" className="st-v-svg" aria-hidden="true">
-      <path
-        className="ln"
-        pathLength={1}
-        d="M60 246L340 246"
-        style={{ strokeDasharray: "5 7", strokeDashoffset: 0 }}
-      />
-
-      {[0, 1, 2].map((i) => (
-        <path
-          key={i}
-          className="hw"
-          style={{ "--i": i } as React.CSSProperties}
-          d={`M150 ${168 + i * 12}q10-12 20 0t20 0 20 0 20 0 20 0`}
-        />
-      ))}
-
-      {/* Storage box */}
-      <rect
-        x="52"
-        y="226"
-        width="36"
-        height="30"
-        rx="3"
-        fill="#C9A77C"
-        stroke="#6B4226"
-        strokeWidth="2"
-      />
-      <path d="M52 238H88" stroke="#6B4226" />
-
-      {/* Transport Truck */}
-      <rect
-        x="178"
-        y="226"
-        width="30"
-        height="20"
-        rx="2"
-        fill="#C9A77C"
-        stroke="#6B4226"
-        strokeWidth="2"
-      />
-      <rect
-        x="208"
-        y="232"
-        width="14"
-        height="14"
-        rx="2"
-        fill="#C9A77C"
-        stroke="#6B4226"
-        strokeWidth="2"
-      />
-      <circle cx="190" cy="250" r="5" fill="#143324" />
-      <circle cx="214" cy="250" r="5" fill="#143324" />
-
-      {/* Field Application Sprout */}
-      <path
-        d="M300 258Q330 236 360 258"
+      {/* Orbital Connecting Pathway */}
+      <ellipse
+        cx="200"
+        cy="190"
+        rx="140"
+        ry="115"
         fill="none"
-        stroke="#6B4226"
-        strokeWidth="2"
-      />
-      <path
-        d="M318 258V240M332 258V234M346 258V242"
-        stroke="#1F7A4D"
-        strokeWidth="3"
-        strokeLinecap="round"
+        stroke="#C9A77C"
+        strokeWidth="1.2"
+        strokeDasharray="4 6"
+        opacity="0.4"
       />
 
-      {/* Moving Bead */}
-      <g>
+      {/* Active orbital tracer node */}
+      <circle r="4" fill="#1F7A4D">
         <animateMotion
-          dur="7s"
+          path="M 70 75 A 140 115 0 0 1 330 75 A 140 115 0 0 1 330 305 A 140 115 0 0 1 70 305 A 140 115 0 0 1 70 75"
+          dur="12s"
           repeatCount="indefinite"
-          path="M70 196L330 196"
         />
-        <circle r="22" fill="none" stroke="#1F7A4D" strokeDasharray="3 5" />
-        <circle r="14" fill="#9BD0AE" stroke="#1F7A4D" strokeWidth="3" />
-        <circle r="6" fill="#6B4226" />
+      </circle>
+
+      {/* ===================================================
+          TOP-LEFT: PHASE 1 — 45°C HEAT
+          =================================================== */}
+      <g transform="translate(70, 75)">
+        {/* Heat wave lines entering from top-left toward central chamber */}
+        {[0, 1, 2].map((i) => (
+          <path
+            key={i}
+            className="heat-wave-line"
+            style={{ "--i": i } as React.CSSProperties}
+            d={`M ${-25 + i * 10} ${-15 + i * 5} Q ${-15 + i * 10} ${-25 + i * 5} ${0 + i * 10} ${-15 + i * 5} T ${25 + i * 10} ${-5 + i * 5}`}
+          />
+        ))}
+        {/* Environmental phase node */}
+        <circle r="14" fill="#EDF4ED" stroke="#6B4226" strokeWidth="1.5">
+          <animate
+            attributeName="stroke"
+            values="#6B4226; #1F7A4D; #6B4226; #6B4226; #6B4226"
+            keyTimes="0; 0.25; 0.5; 0.75; 1"
+            dur="12s"
+            repeatCount="indefinite"
+          />
+        </circle>
+        <text x="0" y="4" textAnchor="middle" fill="#6B4226" style={{ fontSize: "10px", fontWeight: 700 }}>
+          45°
+        </text>
+      </g>
+      <text x="70" y="42" textAnchor="middle" fill="#6B4226" style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.5px" }}>
+        45°C HEAT
+      </text>
+
+      {/* ===================================================
+          TOP-RIGHT: PHASE 2 — STORAGE
+          =================================================== */}
+      <g transform="translate(330, 75)">
+        <rect x="-14" y="-12" width="28" height="24" rx="3" fill="#C9A77C" stroke="#6B4226" strokeWidth="1.5" opacity="0.75" />
+        <line x1="-14" y1="0" x2="14" y2="0" stroke="#6B4226" strokeWidth="1.2" opacity="0.75" />
+        <circle r="18" fill="none" stroke="#1F7A4D" strokeWidth="1.5" strokeDasharray="3 3" opacity="0">
+          <animate attributeName="opacity" values="0; 0.85; 0; 0; 0" keyTimes="0; 0.25; 0.5; 0.75; 1" dur="12s" repeatCount="indefinite" />
+        </circle>
+      </g>
+      <text x="330" y="42" textAnchor="middle" fill="#143324" style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.5px" }}>
+        STORAGE
+      </text>
+
+      {/* ===================================================
+          BOTTOM-LEFT: PHASE 3 — TRANSPORT
+          =================================================== */}
+      <g transform="translate(70, 305)">
+        <g opacity="0.75">
+          <rect x="-14" y="-9" width="20" height="15" rx="2" fill="#C9A77C" stroke="#6B4226" strokeWidth="1.5" />
+          <rect x="6" y="-3" width="9" height="9" rx="1.5" fill="#C9A77C" stroke="#6B4226" strokeWidth="1.5" />
+          <circle cx="-6" cy="9" r="3" fill="#143324" />
+          <circle cx="8" cy="9" r="3" fill="#143324" />
+        </g>
+        {/* Subtle vibration ring around transport zone */}
+        <circle r="20" fill="none" stroke="#8B5E34" strokeWidth="1.2" strokeDasharray="2 3" opacity="0">
+          <animate attributeName="opacity" values="0; 0; 0.85; 0; 0" keyTimes="0; 0.5; 0.65; 0.75; 1" dur="12s" repeatCount="indefinite" />
+        </circle>
+      </g>
+      <text x="70" y="338" textAnchor="middle" fill="#143324" style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.5px" }}>
+        TRANSPORT
+      </text>
+
+      {/* ===================================================
+          BOTTOM-RIGHT: PHASE 4 — FIELD APPLICATION
+          =================================================== */}
+      <g transform="translate(330, 305)">
+        <path d="M -16 10 Q 0 -5 16 10" fill="none" stroke="#6B4226" strokeWidth="1.5" opacity="0.75" />
+        <path d="M -8 10 V -2 M 0 10 V -8 M 8 10 V -1" stroke="#1F7A4D" strokeWidth="2" strokeLinecap="round" opacity="0.75" />
+        {/* Field Activation Pulse */}
+        <circle r="22" fill="none" stroke="#1F7A4D" strokeWidth="1.8" opacity="0">
+          <animate attributeName="opacity" values="0; 0; 0; 0.95; 0" keyTimes="0; 0.5; 0.75; 0.88; 1" dur="12s" repeatCount="indefinite" />
+          <animate attributeName="r" values="12; 12; 12; 26; 12" keyTimes="0; 0.5; 0.75; 0.88; 1" dur="12s" repeatCount="indefinite" />
+        </circle>
+      </g>
+      <text x="330" y="338" textAnchor="middle" fill="#143324" style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.5px" }}>
+        FIELD APPLICATION
+      </text>
+
+      {/* ===================================================
+          CENTRAL HERO — BIOENCAPSULATION SURVIVAL CHAMBER
+          =================================================== */}
+      <g transform="translate(200, 190)">
+        {/* Layer 3: Outer Asymmetric Translucent Biological Aura */}
+        <path
+          d="M -78 0 C -78 -52, -45 -74, 0 -74 C 45 -74, 78 -52, 78 0 C 78 52, 45 74, 0 74 C -45 74, -78 52, -78 0 Z"
+          fill="none"
+          stroke="#1F7A4D"
+          strokeWidth="1.2"
+          strokeDasharray="4 4"
+          opacity="0.6"
+        >
+          <animate attributeName="opacity" values="0.6; 0.6; 0.6; 0; 0.6" keyTimes="0; 0.5; 0.75; 0.92; 1" dur="12s" repeatCount="indefinite" />
+          <animateTransform attributeName="transform" type="scale" values="1; 1.02; 1; 1.35; 1" keyTimes="0; 0.5; 0.75; 0.92; 1" dur="12s" repeatCount="indefinite" />
+        </path>
+
+        {/* Layer 2: Middle Translucent Bioencapsulation Shell */}
+        <path
+          d="M -62 0 C -62 -42, -36 -60, 0 -60 C 36 -60, 62 -42, 62 0 C 62 42, 36 60, 0 60 C -36 60, -62 42, -62 0 Z"
+          fill="rgba(201, 167, 124, 0.18)"
+          stroke="#8B5E34"
+          strokeWidth="1.5"
+          strokeDasharray="6 3"
+        >
+          <animate attributeName="stroke" values="#8B5E34; #6B4226; #8B5E34; #8B5E34; #8B5E34" keyTimes="0; 0.12; 0.25; 0.75; 1" dur="12s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.85; 0.85; 0.85; 0; 0.85" keyTimes="0; 0.5; 0.75; 0.92; 1" dur="12s" repeatCount="indefinite" />
+          <animateTransform attributeName="transform" type="scale" values="1; 1.03; 1; 1.25; 1" keyTimes="0; 0.12; 0.75; 0.92; 1" dur="12s" repeatCount="indefinite" />
+        </path>
+
+        {/* Layer 1: Inner Bioencapsulation Layer */}
+        <path
+          d="M -46 0 C -46 -30, -28 -44, 0 -44 C 28 -44, 46 -30, 46 0 C 46 30, 28 44, 0 44 C -28 44, -46 30, -46 0 Z"
+          fill="rgba(31, 122, 77, 0.22)"
+          stroke="#1F7A4D"
+          strokeWidth="1.8"
+        >
+          <animate attributeName="opacity" values="0.9; 0.9; 0.9; 0; 0.9" keyTimes="0; 0.5; 0.75; 0.92; 1" dur="12s" repeatCount="indefinite" />
+          <animateTransform attributeName="transform" type="scale" values="1; 1; 1; 1.18; 1" keyTimes="0; 0.5; 0.75; 0.92; 1" dur="12s" repeatCount="indefinite" />
+        </path>
+
+        {/* CORE LIVING MICROBE: Large central green biological organism */}
+        <g className="core-microbe">
+          <ellipse cx="0" cy="0" rx="30" ry="20" fill="#1F7A4D" stroke="#143324" strokeWidth="1.5" />
+          <ellipse cx="-8" cy="-5" rx="14" ry="8" fill="#3F7D4B" />
+          <ellipse cx="-12" cy="-7" rx="6" ry="3" fill="#9BD0AE" opacity="0.9" />
+          <circle cx="10" cy="4" r="4" fill="#3F7D4B" />
+          <circle cx="12" cy="3" r="2" fill="#9BD0AE" />
+          <circle cx="2" cy="7" r="3" fill="#143324" opacity="0.4" />
+          
+          <animateTransform attributeName="transform" type="scale" values="1; 1.04; 1; 1.04; 1" dur="6s" repeatCount="indefinite" />
+        </g>
+
+        {/* Biological Activation Signal released at Phase 4 (Field Application) */}
+        <path d="M 25 10 Q 75 60 120 105" fill="none" stroke="#1F7A4D" strokeWidth="2" strokeDasharray="3 3" opacity="0">
+          <animate attributeName="opacity" values="0; 0; 0; 0.95; 0" keyTimes="0; 0.5; 0.75; 0.88; 1" dur="12s" repeatCount="indefinite" />
+        </path>
+        <circle r="0" fill="none" stroke="#9BD0AE" strokeWidth="2">
+          <animate attributeName="r" values="0; 0; 0; 50; 0" keyTimes="0; 0.5; 0.75; 0.92; 1" dur="12s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0; 0; 0; 1; 0" keyTimes="0; 0.5; 0.75; 0.92; 1" dur="12s" repeatCount="indefinite" />
+        </circle>
       </g>
 
-      {/* Text Labels */}
-      <text
-        x="200"
-        y="118"
-        textAnchor="middle"
-        style={{ fontSize: "18px", fontWeight: 700, fill: "#6B4226" }}
-      >
-        45°C heat
-      </text>
-      <text x="70" y="292" textAnchor="middle" fill="#143324">
-        storage
-      </text>
-      <text x="200" y="292" textAnchor="middle" fill="#143324">
-        transport
-      </text>
-      <text x="330" y="292" textAnchor="middle" fill="#143324">
-        field application
-      </text>
-
+      {/* Scoped CSS styles */}
       <style jsx>{`
-        :global(.hw) {
+        .heat-wave-line {
           fill: none;
           stroke: #6b4226;
-          stroke-width: 2;
+          stroke-width: 1.8;
           stroke-linecap: round;
           opacity: 0;
-          animation: hw 3.4s ease-in infinite;
-          animation-delay: calc(var(--i) * -0.7s);
+          animation: heatAnim 3s ease-in-out infinite;
+          animation-delay: calc(var(--i) * -0.6s);
         }
-
-        @keyframes hw {
+        @keyframes heatAnim {
           0% {
             opacity: 0;
-            transform: translateY(40px);
+            transform: translate(-10px, -10px);
           }
-          30% {
+          35% {
             opacity: 0.8;
           }
           100% {
             opacity: 0;
-            transform: translateY(-10px);
+            transform: translate(15px, 15px);
           }
         }
-
         @media (max-width: 640px) {
-          text:not([style*="font-size: 18px"]):not([style*="font-size:18px"]) {
-            font-size: 12.5px !important;
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          :global(.hw) {
-            animation: none !important;
-            opacity: 0.8;
+          text {
+            font-size: 9.5px !important;
           }
         }
       `}</style>

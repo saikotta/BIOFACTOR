@@ -6,7 +6,6 @@ import Evidence from "../components/science-technology/Evidence";
 import DepthMeter from "../components/science-technology/DepthMeter";
 import {
   Visual01,
-  Visual02,
   Visual03,
   Visual04,
   Visual05,
@@ -23,7 +22,6 @@ export const metadata: Metadata = {
 export default function ScienceTechnologyPage() {
   const visuals = [
     <Visual01 key="v01" />,
-    <Visual02 key="v02" />,
     <Visual03 key="v03" />,
     <Visual04 key="v04" />,
     <Visual05 key="v05" />,

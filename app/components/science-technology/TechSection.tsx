@@ -434,6 +434,7 @@ export default function TechSection({
           max-width: 46ch;
           opacity: 0.84;
           color: #143324;
+          white-space: pre-line;
         }
 
         .fade {

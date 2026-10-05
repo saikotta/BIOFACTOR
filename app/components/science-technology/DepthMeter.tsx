@@ -5,11 +5,10 @@ import { subscribeSharedScroll } from "./TechSection";
 
 const ITEMS = [
   { id: "biotech", num: "01", ariaLabel: "Microbial Biotechnology" },
-  { id: "metabolite", num: "02", ariaLabel: "Metabolite Science" },
-  { id: "metabiome", num: "03", ariaLabel: "Metabiome" },
-  { id: "mnm", num: "04", ariaLabel: "Microbe & Mineral™" },
-  { id: "mineral", num: "05", ariaLabel: "Mineral Technology" },
-  { id: "delivery", num: "06", ariaLabel: "Delivery Technologies" },
+  { id: "metabyaum", num: "02", ariaLabel: "METABYAUM" },
+  { id: "mnm", num: "03", ariaLabel: "E=m² (Microbes + Mineral)" },
+  { id: "mineral", num: "04", ariaLabel: "Mineral Technology" },
+  { id: "delivery", num: "05", ariaLabel: "Delivery Technologies" },
 ];
 
 export default function DepthMeter() {
