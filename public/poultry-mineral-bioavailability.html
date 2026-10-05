@@ -466,7 +466,16 @@
       .mineral-orbit {
         animation: none;
       }
+    }
 
+    .lead, .explanation-grid p, .meter, .key-strip, .source-line {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .is-loaded .lead, .is-loaded .explanation-grid p, .is-loaded .meter, .is-loaded .key-strip, .is-loaded .source-line {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
@@ -632,11 +641,32 @@
         window.removeEventListener("resize", scheduleHostUpdate);
       }, { once: true });
 
-      document.fonts.ready.then(() => {
-        root.classList.add("js-motion");
-        window.requestAnimationFrame(() => root.classList.add("is-loaded"));
-        if (hostFrame && hostWindow) scheduleHostUpdate();
-      });
+      const triggerMotion = () => {
+        if (root.classList.contains("is-loaded")) return;
+        if (hostFrame && hostWindow) {
+          const r = hostFrame.getBoundingClientRect();
+          if (r.top < hostWindow.innerHeight * 0.85 && r.bottom > 0) {
+            root.classList.add("js-motion", "is-loaded");
+            if (hostFrame && hostWindow) scheduleHostUpdate();
+          }
+        } else {
+          root.classList.add("js-motion", "is-loaded");
+        }
+      };
+
+      if (hostFrame && hostWindow) {
+        hostWindow.addEventListener("scroll", triggerMotion, { passive: true });
+        triggerMotion();
+      } else {
+        const obs = new IntersectionObserver((entries) => {
+          if (entries.some((e) => e.isIntersecting)) {
+            root.classList.add("js-motion", "is-loaded");
+            obs.disconnect();
+          }
+        }, { threshold: 0.1 });
+        obs.observe(document.body);
+      }
+      document.fonts.ready.then(triggerMotion);
     })();
   </script>
 </body>

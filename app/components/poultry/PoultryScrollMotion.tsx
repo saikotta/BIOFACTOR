@@ -205,49 +205,7 @@ export default function PoultryScrollMotion() {
         createSpores(heroSporeEl, reduced);
       }
 
-      /* Hero entrance animations (CSS, one-shot, on load) */
-      if (!reduced) {
-        if (heroEyebrow) {
-          heroEyebrow.style.cssText += `
-            opacity:0;
-            transform:translateX(-40px);
-            letter-spacing:.6em;
-            transition:opacity 1s ease .2s, transform 1s ease .2s, letter-spacing 1s ease .2s;
-          `;
-          requestAnimationFrame(() => {
-            heroEyebrow.style.opacity = "1";
-            heroEyebrow.style.transform = "translateX(0)";
-            heroEyebrow.style.letterSpacing = "normal";
-          });
-        }
-        if (heroHeadline) {
-          heroHeadline.style.cssText += `
-            opacity:0;
-            transform:translateY(28px);
-            transition:opacity 1s cubic-bezier(.2,.8,.2,1) 0s, transform 1s cubic-bezier(.2,.8,.2,1) 0s;
-          `;
-          requestAnimationFrame(() => {
-            heroHeadline.style.opacity = "1";
-            heroHeadline.style.transform = "translateY(0)";
-          });
-        }
-        if (heroSubline) {
-          heroSubline.style.cssText += `
-            opacity:0;
-            transform:translateY(28px);
-            transition:opacity 1s cubic-bezier(.2,.8,.2,1) .35s, transform 1s cubic-bezier(.2,.8,.2,1) .35s;
-          `;
-          requestAnimationFrame(() => {
-            heroSubline.style.opacity = "1";
-            heroSubline.style.transform = "translateY(0)";
-          });
-        }
-      } else {
-        /* reduced: just show final states */
-        [heroEyebrow, heroHeadline, heroSubline].forEach(el => {
-          if (el) { el.style.opacity = "1"; el.style.transform = "none"; }
-        });
-      }
+      /* Hero entrance animations handled by CSS br-ln now */
 
       /* ═══════════════════════════════════════════════════════════
          DATA STRIP  setup  (panel fold-down)
@@ -263,41 +221,7 @@ export default function PoultryScrollMotion() {
         p.style.willChange = "transform";
       });
 
-      /* Cursor spotlight on the dark table */
-      const darkTable = stripSection?.querySelector<HTMLElement>(".bg-\\[\\#1B3B2B\\]") ??
-                        stripSection?.querySelector<HTMLElement>("[style*='1B3B2B']") ??
-                        stripSection?.firstElementChild as HTMLElement | null;
-      let cursorX = 0.5;
-      const onTableMove = (e: MouseEvent) => {
-        if (!darkTable) return;
-        const r = darkTable.getBoundingClientRect();
-        cursorX = (e.clientX - r.left) / r.width;
-        darkTable.style.setProperty("--pm-cursor-x", `${cursorX * 100}%`);
-      };
-      darkTable?.addEventListener("mousemove", onTableMove, { passive: true });
-
-      /* inject cursor-light pseudo styles */
-      if (!document.getElementById("pm-cursor-light")) {
-        const cs = document.createElement("style");
-        cs.id = "pm-cursor-light";
-        cs.textContent = `
-          [data-pm-section="datastrip"] .pm-cursor-spotlight {
-            position:absolute;top:0;bottom:0;width:420px;
-            transform:translateX(calc(var(--pm-cursor-x, 50%) - 210px));
-            background:radial-gradient(420px circle at center, rgba(140,198,63,.22), transparent);
-            pointer-events:none;
-            transition:transform .08s ease-out;
-          }
-        `;
-        document.head.appendChild(cs);
-      }
-      if (darkTable && !darkTable.querySelector(".pm-cursor-spotlight")) {
-        const spotlight = document.createElement("div");
-        spotlight.className = "pm-cursor-spotlight";
-        darkTable.style.position = "relative";
-        darkTable.style.overflow = "hidden";
-        darkTable.appendChild(spotlight);
-      }
+      /* Cursor spotlight removed for solid dark table background */
 
       /* ═══════════════════════════════════════════════════════════
          HEADINGS  –  split and prepare
@@ -346,12 +270,55 @@ export default function PoultryScrollMotion() {
       miniCards.forEach(c => { c.style.willChange = "transform"; });
 
       /* ═══════════════════════════════════════════════════════════
-         PROGRESS BARS
+         PROGRESS BARS & COUNT-UPS (BIO-REMEDIATION STANDARD)
       ═══════════════════════════════════════════════════════════ */
       const bars = Array.from(page.querySelectorAll<HTMLElement>("[data-pm-bar]"));
       bars.forEach(b => {
         b._pmBarTarget = parseFloat(b.dataset.pmBar ?? "1");
         b.style.width = "0%";
+      });
+
+      // data-cu Count-up initialization
+      page.querySelectorAll("[data-cu]").forEach((el) => {
+        if (el.hasAttribute("data-obs")) return;
+        el.setAttribute("data-obs", "1");
+        const text = el.textContent || "";
+        new IntersectionObserver((entries, observer) => {
+          if (!entries[0].isIntersecting) return;
+          observer.disconnect();
+          const t0 = performance.now();
+          const animate = (now: number) => {
+            const p = reduced ? 1 : Math.min(1, (now - t0) / 1500);
+            const k = 1 - Math.pow(1 - p, 3);
+            el.textContent = text.replace(/\d+(?:\.\d+)?/g, (n) => 
+              n.includes('.') ? (Number(n) * k).toFixed(1) : Math.round(Number(n) * k).toString()
+            );
+            if (p < 1) requestAnimationFrame(animate);
+          };
+          requestAnimationFrame(animate);
+        }, { threshold: 0.6 }).observe(el);
+      });
+
+      // br-rv Scroll Reveal generic integration
+      const rvObserver = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("br-in");
+            rvObserver.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.18 });
+
+      page.querySelectorAll(".br-rv, .br-callout, .br-ln, .br-quote").forEach((el) => {
+        if (!el.classList.contains("br-in") && !el.hasAttribute("data-obs")) {
+          el.setAttribute("data-obs", "1");
+          const topOffset = el.getBoundingClientRect().top;
+          if (topOffset < window.innerHeight - (reduced ? 0 : 50)) {
+            setTimeout(() => el.classList.add("br-in"), 150);
+          } else {
+            rvObserver.observe(el);
+          }
+        }
       });
 
       /* ═══════════════════════════════════════════════════════════
@@ -498,9 +465,7 @@ export default function PoultryScrollMotion() {
           heroTxtC = smooth(heroTxtC, same ? heroTxtC : (inHeroZone ? sy / vh : heroTxtC));
 
           if (inHeroZone || !same) {
-            const bgFrac  = Math.min(sy * 0.4, vh);
-            const bgScale = 1.05 + sy / 2200;
-            heroBg.style.transform = `translateY(${bgFrac}px) scale(${bgScale})`;
+            heroBg.style.transform = `none`;
 
             const txtY     = sy * 0.28;
             const txtScale = 1 + sy / 3500;
@@ -717,8 +682,8 @@ export default function PoultryScrollMotion() {
       ═══════════════════════════════════════════════════════════ */
       cleanupFn = () => {
         cancelAnimationFrame(rafId);
-        darkTable?.removeEventListener("mousemove", onTableMove);
-      };    };
+      };
+    };
 
     /* Run init on next paint to ensure DOM from server components is ready */
     const raf0 = requestAnimationFrame(() => {

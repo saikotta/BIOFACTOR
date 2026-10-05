@@ -39,11 +39,11 @@ export default function BioremidationApplications() {
                 </p>
               </div>
 
-              <div className="w-full aspect-[4/3] rounded-lg overflow-hidden bg-[#E8EFE6]">
+              <div className="group w-full aspect-[4/3] rounded-lg overflow-hidden bg-[#E8EFE6] transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_25px_50px_-12px_rgba(22,122,74,0.25)] cursor-pointer active:scale-[0.98]">
                 <img
                   src="/images/bioremidation/industrial.jpg"
                   alt="Industrial Bio-Remediation"
-                  className="w-full h-full object-cover object-center block"
+                  className="w-full h-full object-cover object-center block transition-transform duration-[800ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-105"
                 />
               </div>
             </div>
@@ -150,11 +150,11 @@ export default function BioremidationApplications() {
                 </p>
               </div>
 
-              <div className="w-full aspect-[4/3] rounded-lg overflow-hidden bg-[#E8EFE6]">
+              <div className="group w-full aspect-[4/3] rounded-lg overflow-hidden bg-[#E8EFE6] transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_25px_50px_-12px_rgba(22,122,74,0.25)] cursor-pointer active:scale-[0.98]">
                 <img
                   src="/images/bioremidation/septic.jpg"
                   alt="Septic Bio-Remediation"
-                  className="w-full h-full object-cover object-center block"
+                  className="w-full h-full object-cover object-center block transition-transform duration-[800ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-105"
                 />
               </div>
             </div>

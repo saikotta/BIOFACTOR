@@ -73,15 +73,6 @@
       margin-bottom: 56px;
     }
 
-    .page-label {
-      margin: 0 0 20px;
-      color: var(--moss);
-      font-family: var(--display);
-      font-size: 14px;
-      font-weight: 600;
-      line-height: 1.3;
-    }
-
     .page-title {
       max-width: 800px;
       margin: 0;
@@ -91,6 +82,26 @@
       font-weight: 800;
       letter-spacing: -.03em;
       line-height: 1.02;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+      transition-delay: 0.15s;
+    }
+
+    .page-label {
+      margin: 0 0 20px;
+      color: var(--moss);
+      font-family: var(--display);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.3;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .page-title.in, .page-label.in {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .container {
@@ -747,6 +758,44 @@
       let disposed = false;
       let evidenceObserver = null;
       let evidenceStarted = false;
+
+      // Reveal text animations matching Bio-Remediation
+      const texts = document.querySelectorAll(".page-title, .page-label");
+      let textRevealed = false;
+      const triggerTextReveal = () => {
+        if (textRevealed) return;
+        if (hostFrame && hostWindow) {
+          const r = hostFrame.getBoundingClientRect();
+          if (r.top < hostWindow.innerHeight * 0.85 && r.bottom > 0) {
+            textRevealed = true;
+            texts.forEach((t, i) => {
+              t.style.transitionDelay = `${i * 0.15}s`;
+              t.classList.add("in");
+            });
+          }
+        } else {
+          textRevealed = true;
+          texts.forEach((t, i) => {
+            t.style.transitionDelay = `${i * 0.15}s`;
+            t.classList.add("in");
+          });
+        }
+      };
+
+      if (hostFrame && hostWindow) {
+        hostWindow.addEventListener("scroll", triggerTextReveal, { passive: true });
+        triggerTextReveal();
+      } else {
+        const revObs = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              revObs.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        texts.forEach(t => revObs.observe(t));
+      }
 
       function revealRow(row, index) {
         if (row.classList.contains("in")) return;

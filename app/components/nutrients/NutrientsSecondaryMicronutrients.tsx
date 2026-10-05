@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import MicrobeField from "../MicrobeField";
 
 export default function NutrientsSecondaryMicronutrients() {
   const [activeCard, setActiveCard] = useState<number | null>(null);
@@ -101,22 +100,12 @@ export default function NutrientsSecondaryMicronutrients() {
     <section id="secondary-nutrients" className="relative w-full bg-[#EAF3EA] text-[#173522] py-16 md:py-24 overflow-hidden">
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)] space-y-16">
         
-        {/* TOP & MIDDLE SECTION (With Floating Microbes Background) */}
+        {/* TOP & MIDDLE SECTION */}
         <div className="relative space-y-16 pb-4">
-          {/* Microbe Field scoped ONLY to Top/Middle area */}
-          <div className="absolute inset-0 z-0 pointer-events-none opacity-80 overflow-hidden">
-            <MicrobeField
-              position="absolute"
-              densityMultiplier={2.0}
-              motionMultiplier={0.5}
-              opacityMultiplier={0.8}
-              rotationMultiplier={0.4}
-            />
-          </div>
 
           <div className="relative z-10 space-y-16">
             {/* Section Heading */}
-            <div className="space-y-3">
+            <div className="space-y-3 br-rv">
               <div className="flex items-center gap-3">
                 <span className="w-8 h-[1.5px] bg-[#2D6A4F]" />
                 <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">
@@ -129,7 +118,7 @@ export default function NutrientsSecondaryMicronutrients() {
             </div>
 
             {/* TOP ROW: 2-Column Layout (Left: Text Narrative, Right: Micronutrients Image) */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center br-rv br-d1">
               {/* LEFT: Text Narrative & 3 Mechanism Bullets */}
               <div className="lg:col-span-6 flex flex-col space-y-6">
                 <div className="space-y-4 text-base sm:text-lg text-[#173522]/90 leading-relaxed font-sans">
@@ -154,12 +143,12 @@ export default function NutrientsSecondaryMicronutrients() {
               </div>
 
               {/* RIGHT: Related Micronutrients Image */}
-              <div className="lg:col-span-6 relative w-full h-[400px] sm:h-[480px] lg:h-[520px] rounded-2xl overflow-hidden shadow-xl border border-[#2D6A4F]/20">
+              <div className="group lg:col-span-6 relative w-full h-[400px] sm:h-[480px] lg:h-[520px] rounded-2xl overflow-hidden shadow-xl border border-[#2D6A4F]/20 cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_25px_50px_-12px_rgba(22,122,74,0.25)] active:scale-[0.98]">
                 <Image
                   src="/images/nutriants/secondary-micronutriants.jpg"
                   alt="Secondary and Micronutrients Biological Mobilisation"
                   fill
-                  className="object-cover object-top"
+                  className="object-cover object-top transition-transform duration-[800ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-105"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   priority
                 />
@@ -168,7 +157,7 @@ export default function NutrientsSecondaryMicronutrients() {
             </div>
 
             {/* MIDDLE ROW: Full-Width Horizontal FAO Soil Deficiency Bar Chart (Clean directly on page background) */}
-            <div className="w-full space-y-6 pt-4 border-t border-[#173522]/15">
+            <div className="w-full space-y-6 pt-4 border-t border-[#173522]/15 br-rv br-d1">
               <div className="space-y-1">
                 <h3 className="font-display font-extrabold text-xl sm:text-2xl text-[#173522] uppercase tracking-tight">
                   HOW MUCH OF THE WORLD'S FARMLAND IS SHORT
@@ -184,7 +173,7 @@ export default function NutrientsSecondaryMicronutrients() {
                   <div key={idx} className="p-4 rounded-xl bg-white/80 border border-[#2D6A4F]/15 space-y-2">
                     <div className="flex justify-between items-center text-xs font-bold font-mono text-[#173522]">
                       <span className="text-sm font-semibold">{item.symbol} <span className="text-xs font-normal text-[#173522]/60 font-sans">({item.name})</span></span>
-                      <span className="text-sm font-bold text-[#2D6A4F]">{item.percent}%</span>
+                      <span className="text-sm font-bold text-[#2D6A4F]"><span data-cu>{item.percent}</span>%</span>
                     </div>
                     <div className="w-full h-3 bg-[#EAF3EA] rounded-full overflow-hidden border border-[#2D6A4F]/10">
                       <div
@@ -247,7 +236,7 @@ export default function NutrientsSecondaryMicronutrients() {
           </div>
 
           {/* Bottom Editorial Quote Line */}
-          <div className="border-l-4 border-[#2D6A4F] pl-6 py-2 mt-8">
+          <div className="border-l-4 border-transparent pl-6 py-2 mt-8 br-callout br-rv br-d1">
             <p className="font-serif italic text-xl sm:text-2xl text-[#173522] leading-relaxed">
               "Nutrient density starts in the soil. When biology makes zinc and iron available to the root, more of it can reach the grain."
             </p>

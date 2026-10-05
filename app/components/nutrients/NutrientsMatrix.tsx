@@ -91,7 +91,7 @@ export default function NutrientsMatrix() {
             SECTION 1: TRANSFORMATION TABLE (FIX. SOLUBILISE. MOBILISE.)
             With Classic Green Background (#173522) - NO FALLING MICROBES
             ========================================== */}
-        <div className="relative p-8 sm:p-12 md:p-14 rounded-3xl bg-[#173522] text-[#EAF3EA] shadow-2xl border border-[#2D6A4F]/40 space-y-10 overflow-hidden">
+        <div className="relative p-8 sm:p-12 md:p-14 rounded-3xl bg-[#173522] text-[#EAF3EA] shadow-2xl border border-[#2D6A4F]/40 space-y-10 overflow-hidden br-rv">
           <div className="relative z-10 space-y-8">
             {/* Header & Eyebrow */}
             <div className="space-y-2">
@@ -165,7 +165,7 @@ export default function NutrientsMatrix() {
             SECTION 2: ROOT EXUDATES & CROP CYCLE
             With 3-Line Heading & Larger Image Size
             ========================================== */}
-        <div className="space-y-8">
+        <div className="space-y-8 br-rv">
           {/* Top Heading & Narrative with Larger Image Side-by-Side */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Narrative with 3-Line Heading */}
@@ -187,16 +187,16 @@ export default function NutrientsMatrix() {
             </div>
 
             {/* Right: Larger Featured `one-biology.jpg` Image */}
-            <div className="lg:col-span-6 relative w-full h-[340px] sm:h-[380px] lg:h-[420px] rounded-2xl overflow-hidden shadow-2xl border border-[#2D6A4F]/20">
+            <div className="group lg:col-span-6 relative w-full h-[340px] sm:h-[380px] lg:h-[420px] rounded-2xl overflow-hidden shadow-2xl border border-[#2D6A4F]/20 cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_45px_70px_-15px_rgba(23,53,34,0.3)] active:scale-[0.98]">
               <Image
                 src="/images/nutriants/one-biology.jpg"
                 alt="One Biology, Three Roles across the crop cycle"
                 fill
-                className="object-cover object-center"
+                className="object-cover object-center transition-transform duration-[800ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-105"
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#173522]/30 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#173522]/30 via-transparent to-transparent pointer-events-none transition-opacity duration-300 group-hover:opacity-100 opacity-80" />
             </div>
           </div>
 
@@ -283,7 +283,7 @@ export default function NutrientsMatrix() {
           </div>
 
           <div className="w-full overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pb-8 pt-4">
-            <div className="min-w-[960px] lg:min-w-0 w-full group/matrix">
+            <div className="min-w-[960px] lg:min-w-0 w-full group/matrix br-mx-wrap">
               <div className="grid grid-cols-[130px_repeat(5,minmax(0,1fr))] lg:grid-cols-[140px_repeat(5,minmax(0,1fr))] gap-3 sm:gap-4.5 items-stretch">
                 
                 {/* Left Column: Row Labels */}
@@ -332,7 +332,7 @@ export default function NutrientsMatrix() {
                 {NUTRIENT_STAGES.map((stage, colIdx) => (
                   <div
                     key={colIdx}
-                    className={`relative grid grid-rows-[150px_repeat(3,135px)] rounded-[90px] border shadow-[0_12px_28px_rgba(23,53,34,0.18)] transition-all duration-300 ease-out hover:scale-[1.035] hover:-translate-y-2 hover:shadow-[0_22px_44px_rgba(23,53,34,0.22)] hover:z-20 cursor-pointer group/capsule group-hover/matrix:opacity-70 group-hover/matrix:hover:opacity-100 ${
+                    className={`br-mx-col relative grid grid-rows-[150px_repeat(3,135px)] rounded-[90px] border shadow-[0_12px_28px_rgba(23,53,34,0.18)] transition-all duration-300 ease-out hover:scale-[1.035] hover:-translate-y-2 hover:shadow-[0_22px_44px_rgba(23,53,34,0.22)] hover:z-20 cursor-pointer group/capsule group-hover/matrix:opacity-70 group-hover/matrix:hover:opacity-100 ${
                       stage.darkText 
                         ? "text-[#F4FAEC] border-[#F4FAEC]/40" 
                         : "text-[#173522] border-[#173522]/30"
@@ -397,7 +397,7 @@ export default function NutrientsMatrix() {
             SECTION 4: META-ANALYSIS GLOBAL VALIDATION CARDS
             With Clean Uniform Borders (No thick left border line)
             ========================================== */}
-        <div className="space-y-8">
+        <div className="space-y-8 br-rv">
           <div>
             <h3 className="font-display font-extrabold text-3xl sm:text-4xl text-[#173522] uppercase">
               Validated across hundreds of studies.
@@ -410,7 +410,7 @@ export default function NutrientsMatrix() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-lg space-y-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-[#2D6A4F]/40 cursor-pointer">
               <span className="font-mono text-xs font-bold text-[#2D6A4F] uppercase">NUTRIENT ENABLER</span>
-              <div className="font-display font-extrabold text-4xl text-[#173522]">+20%</div>
+              <div className="font-display font-extrabold text-4xl text-[#173522]">+{<span data-cu>20</span>}%</div>
               <p className="text-xs sm:text-sm text-[#173522]/85 font-sans">
                 average yield gain from biofertilisers in dry climates, and +14.9% in tropical climates.
               </p>
@@ -419,7 +419,7 @@ export default function NutrientsMatrix() {
 
             <div className="p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-lg space-y-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-[#2D6A4F]/40 cursor-pointer">
               <span className="font-mono text-xs font-bold text-[#C25975] uppercase">DISEASE MANAGER</span>
-              <div className="font-display font-extrabold text-4xl text-[#173522]">60%</div>
+              <div className="font-display font-extrabold text-4xl text-[#173522]"><span data-cu>60</span>%</div>
               <p className="text-xs sm:text-sm text-[#173522]/85 font-sans">
                 average reduction in disease with Bacillus biocontrol agents compared with untreated controls.
               </p>
@@ -428,7 +428,7 @@ export default function NutrientsMatrix() {
 
             <div className="p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-lg space-y-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-[#2D6A4F]/40 cursor-pointer">
               <span className="font-mono text-xs font-bold text-[#D97706] uppercase">QUALITY &amp; SHELF LIFE</span>
-              <div className="font-display font-extrabold text-4xl text-[#173522]">50–70%</div>
+              <div className="font-display font-extrabold text-4xl text-[#173522]">50–<span data-cu>70</span>%</div>
               <p className="text-xs sm:text-sm text-[#173522]/85 font-sans">
                 less soft rot and black mold in tomato treated with Bacillus subtilis. 40–60% less rot in leafy greens.
               </p>
@@ -454,19 +454,19 @@ export default function NutrientsMatrix() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             <div className="p-4 rounded-xl bg-[#EAF3EA] border border-[#2D6A4F]/20">
               <div className="font-mono text-xs font-bold text-[#2D6A4F] uppercase mb-1">DRY</div>
-              <div className="font-display font-extrabold text-3xl text-[#173522]">+20.0%</div>
+              <div className="font-display font-extrabold text-3xl text-[#173522]">+<span data-cu>20.0</span>%</div>
             </div>
             <div className="p-4 rounded-xl bg-[#EAF3EA] border border-[#2D6A4F]/20">
               <div className="font-mono text-xs font-bold text-[#2D6A4F] uppercase mb-1">TROPICAL</div>
-              <div className="font-display font-extrabold text-3xl text-[#173522]">+14.9%</div>
+              <div className="font-display font-extrabold text-3xl text-[#173522]">+<span data-cu>14.9</span>%</div>
             </div>
             <div className="p-4 rounded-xl bg-[#EAF3EA] border border-[#2D6A4F]/20">
               <div className="font-mono text-xs font-bold text-[#2D6A4F] uppercase mb-1">OCEANIC</div>
-              <div className="font-display font-extrabold text-3xl text-[#173522]">+10.0%</div>
+              <div className="font-display font-extrabold text-3xl text-[#173522]">+<span data-cu>10.0</span>%</div>
             </div>
             <div className="p-4 rounded-xl bg-[#EAF3EA] border border-[#2D6A4F]/20">
               <div className="font-mono text-xs font-bold text-[#2D6A4F] uppercase mb-1">CONTINENTAL</div>
-              <div className="font-display font-extrabold text-3xl text-[#173522]">+8.5%</div>
+              <div className="font-display font-extrabold text-3xl text-[#173522]">+<span data-cu>8.5</span>%</div>
             </div>
           </div>
 

@@ -51,17 +51,17 @@ export default function PoultryLayers() {
             </div>
 
             {/* Body Heading */}
-            <h3 className="font-space-grotesk font-semibold text-xl lg:text-2xl text-[#1a1a1a] tracking-tight leading-tight mb-4">
+            <h3 className="font-space-grotesk font-semibold text-xl lg:text-2xl text-[#1a1a1a] tracking-tight leading-tight mb-4 br-rv">
               A long laying cycle needs a stable gut.
             </h3>
 
             {/* Body Paragraph */}
-            <p className="text-base lg:text-lg text-[#2d2d2d] leading-relaxed mb-6" style={{ fontFamily: 'Georgia, Times New Roman, Times, serif' }}>
+            <p className="text-base lg:text-lg text-[#2d2d2d] leading-relaxed mb-6 br-rv br-d1" style={{ fontFamily: 'Georgia, Times New Roman, Times, serif' }}>
               A laying hen produces for a year or more, and every egg draws heavily on calcium and phosphorus. A balanced gut community supports feed efficiency and mineral uptake across the whole cycle, and helps keep Salmonella out of the flock and off the eggs.
             </p>
 
             {/* Feature Boxes */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 br-rv br-d2">
               {/* Left Feature Box */}
               <div className="border border-[#c4d4c4] p-5">
                 <div className="font-space-grotesk font-bold text-base text-[#1a1a1a] mb-2">
@@ -84,7 +84,7 @@ export default function PoultryLayers() {
             </div>
 
             {/* Highlighted Statement with Vertical Accent Line */}
-            <div className="flex gap-4 mb-6">
+            <div className="flex gap-4 mb-6 br-rv br-d2">
               <div className="w-1 bg-[#6BBF3A] flex-shrink-0" />
               <div>
                 <p className="text-base lg:text-lg text-[#1a1a1a] leading-relaxed font-medium" style={{ fontFamily: 'Georgia, Times New Roman, Times, serif' }}>
@@ -105,12 +105,12 @@ export default function PoultryLayers() {
             {/* Spacer to align image top with "A long laying cycle needs a stable gut." */}
             <div className="h-[60px] lg:h-[90px]" />
             {/* Image */}
-            <div className="w-[75%] h-[520px] lg:h-[580px]" data-layer-image>
+            <div className="group cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_25px_50px_-12px_rgba(45,90,66,0.25)] active:scale-[0.98] w-[75%] h-[520px] lg:h-[580px] rounded-sm overflow-hidden" data-layer-image>
               <img
                 src="/images/poultry-hero-right.png"
                 alt="Layers - sustained lay, strong shells and gut"
                 loading="eager"
-                className="w-full h-full object-cover rounded-sm"
+                className="w-full h-full object-cover transition-transform duration-[800ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-105"
               />
             </div>
           </div>

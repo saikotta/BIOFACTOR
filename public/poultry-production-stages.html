@@ -884,15 +884,43 @@
           return mask;
         }));
 
-        window.requestAnimationFrame(() => {
-          frame.classList.add("is-intro");
-          matrix.classList.add("is-animated", "sweep-active");
-          const introDuration = parseFloat(getComputedStyle(frame).getPropertyValue("--intro-duration")) * 1000;
-          window.setTimeout(() => {
-            frame.classList.remove("is-intro");
-            matrix.classList.remove("is-animated", "sweep-active");
-          }, introDuration);
-        });
+        const hostFrame = window.frameElement;
+        const hostWindow = hostFrame ? window.parent : null;
+        let animated = false;
+
+        const startStageAnimation = () => {
+          if (animated) return;
+          if (hostFrame && hostWindow) {
+            const r = hostFrame.getBoundingClientRect();
+            if (r.top < hostWindow.innerHeight * 0.85 && r.bottom > 0) {
+              animated = true;
+              frame.classList.add("is-intro");
+              matrix.classList.add("is-animated", "sweep-active");
+              const introDuration = parseFloat(getComputedStyle(frame).getPropertyValue("--intro-duration")) * 1000;
+              window.setTimeout(() => {
+                frame.classList.remove("is-intro");
+                matrix.classList.remove("is-animated", "sweep-active");
+              }, introDuration);
+            }
+          } else {
+            animated = true;
+            frame.classList.add("is-intro");
+            matrix.classList.add("is-animated", "sweep-active");
+          }
+        };
+
+        if (hostFrame && hostWindow) {
+          hostWindow.addEventListener("scroll", startStageAnimation, { passive: true });
+          startStageAnimation();
+        } else {
+          const obs = new IntersectionObserver((entries) => {
+            if (entries.some((e) => e.isIntersecting)) {
+              startStageAnimation();
+              obs.disconnect();
+            }
+          }, { threshold: 0.1 });
+          obs.observe(document.body);
+        }
       });
     })();
   </script>
