@@ -67,7 +67,7 @@ export default function GutHealthSection() {
   }, []);
 
   return (
-    <section className="w-full overflow-hidden bg-[#d8ecd4]" data-aquaculture-static aria-label="Shrimp gut health infographic">
+    <section className="w-full overflow-hidden" data-aquaculture-static aria-label="Shrimp gut health infographic" style={{ background: "linear-gradient(180deg, #E5F0D4 0%, #DDE9C8 50%, #D1E4B9 100%)" }}>
       <iframe
         ref={frameRef}
         className="block w-full border-0"

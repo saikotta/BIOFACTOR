@@ -28,7 +28,7 @@ const ZONES = [
 
 export default function WaterBlock() {
   return (
-    <section className="relative w-full bg-[#EAF6EC] px-6 pb-16 pt-28 md:px-12 md:pb-16 md:pt-32 lg:px-20 lg:pb-20 lg:pt-36 xl:px-32" aria-label="Water column section">
+    <section className="relative w-full px-6 pb-16 pt-28 md:px-12 md:pb-16 md:pt-32 lg:px-20 lg:pb-20 lg:pt-36 xl:px-32" aria-label="Water column section" style={{ background: "linear-gradient(180deg, #E5F0D4 0%, #DDE9C8 50%, #D1E4B9 100%)" }}>
       <div className="mx-auto max-w-7xl">
 
         {/* ── GRID: LEFT (HEADER + IMAGE) | RIGHT (PARALLEL MATTER CARDS) ── */}
@@ -53,7 +53,7 @@ export default function WaterBlock() {
             </div>
 
             {/* Image below the header */}
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-[#B8D5BF] shadow-md">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-[#CFE3BB]" style={{ boxShadow: "none" }}>
               <Image
                 src="/images/aquaculture-water-column.jpg"
                 alt="Fish swimming in a pond water column"
@@ -103,7 +103,8 @@ export default function WaterBlock() {
               {ZONES.map((z) => (
                 <div
                   key={z.label}
-                  className="group relative flex flex-col justify-center rounded-lg border border-[#B8D5BF] bg-white/70 p-5 sm:p-6 backdrop-blur-sm transition-all duration-300 hover:border-[#1F8A57]/50 hover:bg-white/95 hover:shadow-md"
+                  className="group relative flex flex-col justify-center rounded-lg border border-[#CFE3BB] bg-[#FFFFFF] p-5 sm:p-6"
+                  style={{ borderTop: "3px solid #4CAF3F" }}
                 >
                   {/* Visual Depth Tag */}
                   <div className="mb-2.5 flex items-center gap-2.5">

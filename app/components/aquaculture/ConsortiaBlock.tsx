@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function ConsortiaBlock() {
   return (
-    <section className="relative w-full bg-[#EAF6EC] px-6 py-20 md:px-12 lg:px-20 xl:px-32">
+    <section className="relative w-full px-6 py-20 md:px-12 lg:px-20 xl:px-32" style={{ background: "linear-gradient(180deg, #D9EBC4 0%, #EDF7DF 50%, #E5F0D4 100%)" }}>
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
         {/* Left column */}
         <div className="order-1 flex flex-col lg:order-2 lg:col-start-8 lg:col-span-5">
@@ -81,13 +81,13 @@ export default function ConsortiaBlock() {
       </div>
 
       {/* ── STAT CALLOUT ── */}
-      <div className="mx-auto mt-12 w-full max-w-6xl bg-[#0f2f1e] px-8 py-10 sm:px-12 sm:py-12">
+      <div className="mx-auto mt-12 w-full max-w-6xl bg-[#0F2A1A] px-8 py-10 sm:px-12 sm:py-12">
         <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-10">
 
           {/* Big number */}
           <div className="flex-shrink-0 border-r-0 pr-0 sm:border-r sm:border-[#1F8A57]/30 sm:pr-10">
             <span
-              className="font-inter-tight font-extrabold leading-none text-[#86EFAC]"
+              className="font-inter-tight font-extrabold leading-none text-[#6FCB5A]"
               style={{ fontSize: "clamp(4rem,8vw,6rem)", letterSpacing: "-0.035em" }}
             >
               93%
@@ -102,13 +102,13 @@ export default function ConsortiaBlock() {
 
           {/* Explanation */}
           <div>
-            <p className="font-newsreader text-[16.5px] leading-[1.65] text-[#D9F5D0]">
+            <p className="font-newsreader text-[16.5px] leading-[1.65] text-[#FFFFFF]">
               When shrimp-pond sediment bacteria were given nitrate to use instead
               of oxygen, they switched to oxidising sulphide. Shrimp stayed
               unaffected by sulphide in the sediment as long as the soil–water
               interface remained oxygenated.
             </p>
-            <p className="mt-3 font-jetbrains text-[10px] uppercase tracking-[0.14em] text-[#86EFAC]/50">
+            <p className="mt-3 font-jetbrains text-[10px] uppercase tracking-[0.14em] text-white/60">
               Xu &amp; Pan 2013, <em className="not-italic normal-case text-[#86EFAC]/40">Aquaculture</em>
               <sup className="text-[#86EFAC]/70"> 7</sup>
             </p>

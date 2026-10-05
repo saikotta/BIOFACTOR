@@ -8,7 +8,6 @@ import WaterBlock from "../components/aquaculture/WaterBlock";
 import GutHealthSection from "../components/aquaculture/GutHealthSection";
 import MineralsSection from "../components/aquaculture/MineralsSection";
 import CultureCycleTable from "../components/aquaculture/CultureCycleTable";
-import AquacultureAnimations from "../components/aquaculture/AquacultureAnimations";
 import AquacultureFooter from "../components/aquaculture/AquacultureFooter";
 
 const interTight = Inter_Tight({
@@ -35,9 +34,8 @@ const jetbrainsMono = JetBrains_Mono({
 export default function AquaculturePage() {
   return (
     <main
-      className={`${interTight.variable} ${newsreader.variable} ${jetbrainsMono.variable} w-full selection:bg-[#6BBF3A] selection:text-black overflow-x-hidden bg-[#EAF6EC]`}
+      className={`${interTight.variable} ${newsreader.variable} ${jetbrainsMono.variable} w-full selection:bg-[#6BBF3A] selection:text-black overflow-x-hidden bg-[#EDF7DF]`}
     >
-      <AquacultureAnimations />
       <AquacultureHero />
       <AquacultureDataStrip />
       <BottomBlock />

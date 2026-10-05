@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function AquacultureFooter() {
   return (
     <footer className="w-full" data-pm-section="footer">
-      <div className="w-full bg-[#173F2B] px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)] pt-9 pb-9 text-white md:pt-10 md:pb-10 lg:pt-[42px] lg:pb-[44px]">
+      <div className="w-full bg-[#0F2A1A] px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)] pt-9 pb-9 text-[#BFD9B4] md:pt-10 md:pb-10 lg:pt-[42px] lg:pb-[44px]">
         <div className="w-full max-w-[1440px] mx-auto">
           <div className="flex items-center justify-between mb-7 md:mb-9">
             <span className="font-mono text-[11px] font-semibold tracking-[0.2em] uppercase text-white/50">
@@ -36,7 +36,7 @@ export default function AquacultureFooter() {
         </div>
       </div>
 
-      <div className="w-full bg-[#0B2318] text-white">
+      <div className="w-full bg-[#0F2A1A] text-[#BFD9B4]">
         <div className="w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)] pt-14 pb-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr] gap-10 lg:gap-8">
 

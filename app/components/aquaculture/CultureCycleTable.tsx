@@ -33,7 +33,7 @@ export default function CultureCycleTable() {
   }, []);
 
   return (
-    <section className="w-full bg-[#e8f5e9]" data-aquaculture-static aria-label="Aquaculture biology across culture cycle">
+    <section className="w-full" data-aquaculture-static aria-label="Aquaculture biology across culture cycle" style={{ background: "linear-gradient(180deg, #D1E4B9 0%, #C4DEA9 100%)" }}>
       <iframe
         ref={frameRef}
         className="block w-full border-0"

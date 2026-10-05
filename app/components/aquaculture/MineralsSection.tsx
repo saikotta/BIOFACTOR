@@ -25,7 +25,7 @@ export default function MineralsSection() {
     return () => observer.disconnect();
   }, []);
   return (
-    <section className="relative w-full bg-[#EAF6EC] px-6 py-20 md:px-12 lg:px-20 xl:px-32">
+    <section className="relative w-full px-6 py-20 md:px-12 lg:px-20 xl:px-32" style={{ background: "linear-gradient(180deg, #E5F0D4 0%, #DDE9C8 50%, #D1E4B9 100%)" }}>
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-stretch gap-6 sm:grid-cols-12 lg:gap-10">
         <div className="sm:col-span-6">
           <h2 className="mb-8 font-inter-tight text-[clamp(36px,5vw,56px)] font-extrabold leading-[1.05] text-[#111111]">
@@ -96,7 +96,7 @@ export default function MineralsSection() {
         </div>
       </div>
 
-      <div className="mx-auto mt-10 w-full max-w-[100%] rounded-[16px] border border-[#B8D5BF] bg-[#F7FBF8] p-3 sm:p-4 lg:p-5" ref={chartRef}>
+      <div className="mx-auto mt-10 w-full max-w-[100%] rounded-[16px] border border-[#CFE3BB] bg-[#FFFFFF] p-3 sm:p-4 lg:p-5" ref={chartRef} style={{ borderTop: "3px solid #4CAF3F" }}>
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="mb-1.5 font-jetbrains text-[10px] font-medium uppercase tracking-[0.18em] text-[#5A7A5E]">
@@ -144,7 +144,6 @@ export default function MineralsSection() {
                     className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-[#9FCF7B] via-[#5FBF86] to-[#1F8A57]"
                     style={{
                       width: fired ? `${item.value}%` : "0%",
-                      transition: fired ? "width 1.2s cubic-bezier(.2,.7,.2,1)" : "none",
                       background: item.tone === "amber" ? "linear-gradient(90deg, #D7A55D 0%, #C48D3A 100%)" : "linear-gradient(90deg, #7BCB9A 0%, #5FBF86 45%, #1F8A57 100%)",
                     }}
                   />
@@ -154,10 +153,7 @@ export default function MineralsSection() {
               <div className="flex justify-end">
                 <span
                   className={`inline-flex min-w-[52px] items-center justify-center rounded-full border px-2 py-0.5 font-inter-tight text-[13px] font-bold ${item.chip}`}
-                  style={{
-                    opacity: fired ? 1 : 0,
-                    transition: fired ? "opacity .45s ease" : "none",
-                  }}
+                  style={{ opacity: 1 }}
                 >
                   {item.value}%
                 </span>
