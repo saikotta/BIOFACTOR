@@ -2,17 +2,17 @@ import React from "react";
 
 export default function RuminantsMethane() {
   return (
-    <section className="w-full relative bg-[#DDE9D8] text-[#173522] overflow-hidden" data-ruminants-section="methane" data-motion>
+    <section id="s3" data-n="Methane" className="w-full relative bg-[#DDE9D8] text-[#173522] overflow-hidden" data-ruminants-section="methane" data-motion>
       {/* 50 / 50 Split Architectural Section */}
-      <div className="w-full flex flex-col lg:flex-row items-stretch">
+      <div className="w-full flex flex-col lg:flex-row items-stretch split">
         {/* LEFT HALF: Full-Height Architectural Photograph (Edge-to-Edge Left, Top-to-Bottom) */}
-        <div className="w-full lg:w-1/2 relative min-h-[500px] sm:min-h-[600px] lg:min-h-[700px] flex-shrink-0 bg-[#c5d5c5]" data-methane-image>
+        <div className="w-full lg:w-1/2 relative min-h-[500px] sm:min-h-[600px] lg:min-h-[700px] flex-shrink-0 bg-[#c5d5c5] overflow-hidden !rounded-none">
           <img
             src="/images/ruminants/methane-feed-energy.png"
             alt="Dairy cow feeding in open pasture — Methane feed energy reduction"
             loading="eager"
             decoding="async"
-            className="w-full h-full object-cover object-center block will-change-transform"
+            className="absolute inset-0 w-full h-full object-cover object-center block !rounded-none"
           />
         </div>
 
@@ -20,7 +20,7 @@ export default function RuminantsMethane() {
         <div className="w-full lg:w-1/2 bg-[#DDE9D8] text-[#173522] flex flex-col justify-center py-10 sm:py-12 lg:py-14 px-6 sm:px-10 lg:px-14 xl:px-16">
           <div className="max-w-[680px] w-full mx-auto lg:mx-0">
             {/* Header Block */}
-            <div className="mb-7 sm:mb-8">
+            <div className="mb-7 sm:mb-8 rv">
               {/* Eyebrow */}
               <div className="flex items-center gap-3 mb-3">
                 <span className="w-8 h-[1.5px] bg-[#2D6A4F]" />
@@ -43,9 +43,9 @@ export default function RuminantsMethane() {
             </div>
 
             {/* Compact 32% Evidence Block — Horizontal Layout */}
-            <div className="mb-7 sm:mb-8 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
+            <div className="mb-7 sm:mb-8 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 rv d1">
               <div className="font-display font-extrabold text-5xl sm:text-6xl text-[#2D6A4F] tracking-tight leading-none flex-shrink-0">
-                <span data-methane-value>32%</span>
+                <span data-cu="32%" data-methane-value>32%</span>
               </div>
               <div className="space-y-1">
                 <span className="font-mono text-xs font-bold text-[#2D6A4F] uppercase tracking-widest block">
@@ -58,7 +58,7 @@ export default function RuminantsMethane() {
             </div>
 
             {/* Biologicals Chapter */}
-            <div className="space-y-4">
+            <div className="space-y-4 rv d2">
               <div>
                 <span className="font-mono text-xs sm:text-[13px] font-bold text-[#2D6A4F] uppercase tracking-widest block mb-2">
                   WHERE BIOLOGICALS STAND TODAY
@@ -68,7 +68,7 @@ export default function RuminantsMethane() {
                 </p>
               </div>
 
-              <div className="border-l-2 border-[#2D6A4F] pl-4 sm:pl-5 py-1 mt-3" data-motion-row>
+              <div className="border-l-2 border-[#2D6A4F] pl-4 sm:pl-5 py-1 mt-3 call" data-motion-row>
                 <p className="font-serif italic text-sm sm:text-base text-[#173522]/90 leading-relaxed">
                   Biological solutions (direct-fed microbials, targeted enzyme blends, and precision bio-actives) work WITH the animal&apos;s natural rumen ecology, providing consistent emission reduction while simultaneously improving digestible energy yield.
                 </p>

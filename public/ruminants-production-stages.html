@@ -196,11 +196,55 @@
       --header-height: 168px;
       --data-height: 132px;
       display: grid;
-      grid-template-columns: 150px repeat(5, minmax(0, 1fr));
+      grid-template-columns: 140px repeat(5, minmax(0, 1fr));
       grid-template-rows: var(--header-height) repeat(3, var(--data-height));
-      column-gap: 14px;
+      column-gap: 12px;
       width: 100%;
-      min-width: 1040px;
+      min-width: 0;
+    }
+
+    @media (min-width: 1024px) {
+      .matrix-scroll {
+        overflow-x: visible !important;
+        padding-inline: 0 !important;
+      }
+      .matrix {
+        min-width: 0 !important;
+        width: 100% !important;
+        grid-template-columns: 130px repeat(5, minmax(0, 1fr)) !important;
+        column-gap: 10px !important;
+      }
+      .stage-head {
+        padding: 20px 6px 16px !important;
+      }
+      .stage-cell {
+        padding: 10px 6px !important;
+      }
+      .row-label {
+        padding-right: 6px !important;
+      }
+      .row-title {
+        font-size: 13.5px !important;
+      }
+      .row-subtitle {
+        font-size: 12px !important;
+      }
+      .stage-name {
+        font-size: 17px !important;
+      }
+      .cell-content {
+        font-size: 14.5px !important;
+      }
+    }
+
+    @media (max-width: 1023px) {
+      .matrix-scroll {
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+      }
+      .matrix {
+        min-width: 960px !important;
+      }
     }
 
     .row-label {

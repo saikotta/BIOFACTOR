@@ -25,15 +25,41 @@ export default function RuminantsMatrix() {
     window.addEventListener("resize", scheduleFit, { passive: true });
     void frameRef.current?.contentDocument?.fonts.ready.then(scheduleFit);
 
+    // Trigger matrix entrance animation when #s4 enters viewport
+    const sec = document.getElementById("s4");
+    const triggerMatrixAnimation = () => {
+      const doc = frameRef.current?.contentDocument;
+      if (!doc) return;
+      const frame = doc.querySelector(".frame");
+      const matrix = doc.getElementById("life-stage-matrix");
+      if (frame && matrix) {
+        frame.classList.add("is-intro");
+        matrix.classList.add("is-animated", "sweep-active");
+      }
+    };
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          triggerMatrixAnimation();
+          io.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sec) io.observe(sec);
+
     return () => {
       window.removeEventListener("resize", scheduleFit);
       window.cancelAnimationFrame(resizeFrame);
       window.clearTimeout(resizeTimer);
+      io.disconnect();
     };
   }, []);
 
   return (
-    <section className="w-full bg-[#EAF3EA]" data-ruminants-static aria-label="Ruminant biology at every life stage">
+    <section id="s4" data-n="Every stage" className="w-full bg-[#EAF3EA] mxw" data-ruminants-static aria-label="Ruminant biology at every life stage">
       <iframe
         ref={frameRef}
         className="block w-full border-0"
@@ -41,7 +67,22 @@ export default function RuminantsMatrix() {
         title="Ruminant biology across life stages"
         loading="eager"
         style={{ height: "1600px" }}
-        onLoad={(event) => fitFrame(event.currentTarget)}
+        onLoad={(event) => {
+          fitFrame(event.currentTarget);
+          const sec = document.getElementById("s4");
+          if (sec) {
+            const rect = sec.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+              const doc = event.currentTarget.contentDocument;
+              const frame = doc?.querySelector(".frame");
+              const matrix = doc?.getElementById("life-stage-matrix");
+              if (frame && matrix) {
+                frame.classList.add("is-intro");
+                matrix.classList.add("is-animated", "sweep-active");
+              }
+            }
+          }
+        }}
       />
     </section>
   );

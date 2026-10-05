@@ -2,7 +2,7 @@ import React from "react";
 
 export default function RuminantsRumenFactory() {
   return (
-    <section className="relative w-full text-[#173522] pt-3 md:pt-4 lg:pt-5 pb-8 md:pb-9 lg:pb-10 overflow-hidden bg-[#EAF3EA]" data-ruminants-section="rumen" data-motion>
+    <section id="s1" className="relative w-full text-[#173522] pt-3 md:pt-4 lg:pt-5 pb-8 md:pb-9 lg:pb-10 overflow-hidden bg-[#EAF3EA]" data-ruminants-section="rumen" data-n="A living fermenter" data-motion>
       {/* Opaque Base Color Layer to Mask Global MicrobeField Canvas */}
       <div className="absolute inset-0 z-0 bg-[#EAF3EA]" aria-hidden="true" />
 
@@ -17,7 +17,7 @@ export default function RuminantsRumenFactory() {
         </div>
 
         {/* Headline & Supporting Copy Stack */}
-        <div className="max-w-[1020px] mb-12 md:mb-16">
+        <div className="rv max-w-[1020px] mb-12 md:mb-16">
           <h2 className="font-display font-extrabold text-[clamp(2.5rem,4vw,4.25rem)] text-[#173522] tracking-tight leading-[1.02] uppercase mb-6" data-motion-heading>
             The rumen is a microbial
             <br />
@@ -30,7 +30,7 @@ export default function RuminantsRumenFactory() {
 
         {/* Technical Biological Diagram Canvas (Glossy Glass Card) */}
         <div
-          className="relative w-full rounded-2xl p-6 sm:p-10 overflow-x-auto"
+          className="dia rv relative w-full rounded-2xl p-6 sm:p-10 overflow-x-auto"
           style={{
             background: "linear-gradient(160deg, rgba(255,255,255,0.82) 0%, rgba(234,243,234,0.60) 100%)",
             backdropFilter: "blur(18px) saturate(1.4)",
@@ -74,7 +74,7 @@ export default function RuminantsRumenFactory() {
                 </clipPath>
               </defs>
 
-              {/* LEFT INPUT WITH SOLID L-SHAPED PATHWAY */}
+              {/* LEFT INPUT WITH FLOW PATHWAY */}
               <g transform="translate(20, 35)">
                 <text x="0" y="0" fill="#167A4A" fontSize="12" fontFamily="monospace" fontWeight="700" letterSpacing="1">
                   FEED IN
@@ -83,29 +83,42 @@ export default function RuminantsRumenFactory() {
                   fibre · starch · protein
                 </text>
 
-                {/* Solid L-shaped pathway: vertical down → horizontal right → arrow into Petri dish */}
-                <path d="M 40 28 L 40 90 L 332 90" stroke="#167A4A" strokeWidth="1.25" fill="none" />
-                <polygon points="332,86 340,90 332,94" fill="#167A4A" />
+                {/* Animated Flow pathway into Petri dish */}
+                <path className="flow" d="M 40 28 L 40 90 L 332 90" stroke="#167A4A" strokeWidth="1.6" fill="none" />
+                <polygon points="332,86 340,90 332,94" fill="#167A4A" className="ah" />
               </g>
 
-              {/* CENTER CIRCULAR PETRI DISH (RUMEN BIOLOGICAL VISUAL) */}
+              {/* CENTER CIRCULAR PETRI DISH WITH RUMEN PULSE & MICROBIAL BOBBING */}
               <g transform="translate(260, 10)">
                 {/* Top Label */}
                 <text x="200" y="18" textAnchor="middle" fill="#167A4A" fontSize="11" fontFamily="monospace" fontWeight="700" letterSpacing="1">
                   RUMEN · NO OXYGEN · ~39 °C
                 </text>
 
-                {/* 1:1 Circular Petri Dish Image (180px Diameter) */}
-                <image
-                  href="/images/ruminants-petri-dish.png"
-                  x="110"
-                  y="25"
-                  width="180"
-                  height="180"
-                  preserveAspectRatio="xMidYMid slice"
-                  clipPath="url(#petriDishCircleClip)"
-                  opacity="0.95"
-                />
+                {/* Inner Pulse Group — Stationary center at local (200px, 115px) */}
+                <g className="rumenPulse">
+                  {/* 1:1 Circular Petri Dish Image (180px Diameter) */}
+                  <image
+                    href="/images/ruminants-petri-dish.png"
+                    x="110"
+                    y="25"
+                    width="180"
+                    height="180"
+                    preserveAspectRatio="xMidYMid slice"
+                    clipPath="url(#petriDishCircleClip)"
+                    opacity="0.95"
+                  />
+
+                  {/* Bobbing Microbes Overlay */}
+                  <g className="mic">
+                    <circle cx="165" cy="90" r="7" />
+                    <circle cx="220" cy="75" r="6" />
+                    <circle cx="240" cy="130" r="8" />
+                    <circle cx="180" cy="150" r="7" />
+                    <circle cx="210" cy="110" r="5" />
+                    <circle cx="152" cy="125" r="5" />
+                  </g>
+                </g>
 
                 {/* Bottom Label */}
                 <text x="200" y="222" textAnchor="middle" fill="#26382D" fontSize="11" fontFamily="monospace" opacity="0.8">
@@ -116,8 +129,8 @@ export default function RuminantsRumenFactory() {
               {/* RIGHT OUTPUT PATHWAYS */}
               {/* Output 1: Methane */}
               <g transform="translate(640, 25)">
-                <path d="M -80 75 Q 5 35, 65 20" fill="none" stroke="#C88A35" strokeWidth="1.25" strokeDasharray="3 3" />
-                <polygon points="62,15 72,17 67,25" fill="#C88A35" />
+                <path className="flow am" d="M -80 75 Q 5 35, 65 20" fill="none" stroke="#C88A35" strokeWidth="1.6" />
+                <polygon points="62,15 72,17 67,25" fill="#C88A35" className="ah" />
                 <text x="80" y="22" fill="#C88A35" fontSize="12" fontFamily="monospace" fontWeight="700" letterSpacing="0.5">
                   METHANE · ENERGY LOST
                 </text>
@@ -125,8 +138,8 @@ export default function RuminantsRumenFactory() {
 
               {/* Output 2: Volatile Fatty Acids */}
               <g transform="translate(640, 80)">
-                <path d="M -80 35 Q 5 20, 65 15" fill="none" stroke="#167A4A" strokeWidth="1.25" />
-                <polygon points="65,10 73,15 65,20" fill="#167A4A" />
+                <path className="flow gn" d="M -80 35 Q 5 20, 65 15" fill="none" stroke="#167A4A" strokeWidth="1.6" />
+                <polygon points="65,10 73,15 65,20" fill="#167A4A" className="ah" />
                 <text x="80" y="14" fill="#167A4A" fontSize="12" fontFamily="monospace" fontWeight="700" letterSpacing="0.5">
                   VOLATILE FATTY ACIDS
                 </text>
@@ -137,8 +150,8 @@ export default function RuminantsRumenFactory() {
 
               {/* Output 3: Microbial Protein */}
               <g transform="translate(640, 140)">
-                <path d="M -80 -10 Q 5 5, 65 15" fill="none" stroke="#047857" strokeWidth="1.25" />
-                <polygon points="65,10 73,15 65,20" fill="#047857" />
+                <path className="flow gn" d="M -80 -10 Q 5 5, 65 15" fill="none" stroke="#047857" strokeWidth="1.6" />
+                <polygon points="65,10 73,15 65,20" fill="#047857" className="ah" />
                 <text x="80" y="14" fill="#047857" fontSize="12" fontFamily="monospace" fontWeight="700" letterSpacing="0.5">
                   MICROBIAL PROTEIN
                 </text>
@@ -149,8 +162,8 @@ export default function RuminantsRumenFactory() {
 
               {/* Output 4: Lactic Acid */}
               <g transform="translate(640, 195)">
-                <path d="M -80 -45 Q 5 0, 65 15" fill="none" stroke="#C96F82" strokeWidth="1.25" strokeDasharray="3 3" />
-                <polygon points="62,10 72,12 67,20" fill="#C96F82" />
+                <path className="flow pk" d="M -80 -45 Q 5 0, 65 15" fill="none" stroke="#C96F82" strokeWidth="1.6" />
+                <polygon points="62,10 72,12 67,20" fill="#C96F82" className="ah" />
                 <text x="80" y="18" fill="#C96F82" fontSize="12" fontFamily="monospace" fontWeight="700" letterSpacing="0.5">
                   LACTIC ACID · IF STARCH OVERLOADS
                 </text>
