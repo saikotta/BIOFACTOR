@@ -4,7 +4,6 @@ import Image from "next/image";
 interface MatrixCell {
   text: string;
   fill: string;
-  barColor: string;
   empty?: boolean;
   sup?: string;
 }
@@ -24,9 +23,9 @@ const NUTRIENT_STAGES: StageColumn[] = [
     bg: "#C8E6C9",
     darkText: false,
     cells: [
-      { text: "Root colonisation; early P for root growth", fill: "70%", barColor: "#2D6A4F" },
-      { text: "Root-zone protection against damping-off", fill: "65%", barColor: "#C25975" },
-      { text: "—", fill: "0%", barColor: "#D97706", empty: true },
+      { text: "Root colonisation; early P for root growth", fill: "70%" },
+      { text: "Root-zone protection against damping-off", fill: "65%" },
+      { text: "—", fill: "0%", empty: true },
     ],
   },
   {
@@ -35,9 +34,9 @@ const NUTRIENT_STAGES: StageColumn[] = [
     bg: "#A5D6A7",
     darkText: false,
     cells: [
-      { text: "Peak N demand met by fixation & mobilisation", fill: "90%", barColor: "#2D6A4F" },
-      { text: "Induced systemic resistance primes plant", fill: "80%", barColor: "#C25975", sup: "8" },
-      { text: "Balanced nutrition builds sound tissue", fill: "70%", barColor: "#D97706" },
+      { text: "Peak N demand met by fixation & mobilisation", fill: "90%" },
+      { text: "Induced systemic resistance primes plant", fill: "80%", sup: "8" },
+      { text: "Balanced nutrition builds sound tissue", fill: "70%" },
     ],
   },
   {
@@ -46,9 +45,9 @@ const NUTRIENT_STAGES: StageColumn[] = [
     bg: "#81C784",
     darkText: false,
     cells: [
-      { text: "P and K support flowering & energy transfer", fill: "85%", barColor: "#2D6A4F" },
-      { text: "Lipopeptides act against foliar pathogens", fill: "85%", barColor: "#C25975", sup: "9" },
-      { text: "Better set and uniformity", fill: "75%", barColor: "#D97706" },
+      { text: "P and K support flowering & energy transfer", fill: "85%" },
+      { text: "Lipopeptides act against foliar pathogens", fill: "85%", sup: "9" },
+      { text: "Better set and uniformity", fill: "75%" },
     ],
   },
   {
@@ -57,9 +56,9 @@ const NUTRIENT_STAGES: StageColumn[] = [
     bg: "#66BB6A",
     darkText: false,
     cells: [
-      { text: "K for filling; Zn & Fe loading into grain", fill: "85%", barColor: "#2D6A4F", sup: "15" },
-      { text: "Primed defences hold through fill", fill: "75%", barColor: "#C25975" },
-      { text: "Protein, sugars, soluble solids", fill: "85%", barColor: "#D97706", sup: "11" },
+      { text: "K for filling; Zn & Fe loading into grain", fill: "85%", sup: "15" },
+      { text: "Primed defences hold through fill", fill: "75%" },
+      { text: "Protein, sugars, soluble solids", fill: "85%", sup: "11" },
     ],
   },
   {
@@ -68,9 +67,9 @@ const NUTRIENT_STAGES: StageColumn[] = [
     bg: "#4CAF50",
     darkText: true,
     cells: [
-      { text: "—", fill: "0%", barColor: "#2D6A4F", empty: true },
-      { text: "Biocontrol of storage rots", fill: "80%", barColor: "#F472B6", sup: "10" },
-      { text: "Less decay in storage and at retail", fill: "90%", barColor: "#FBBF24", sup: "10" },
+      { text: "—", fill: "0%", empty: true },
+      { text: "Biocontrol of storage rots", fill: "80%", sup: "10" },
+      { text: "Less decay in storage and at retail", fill: "90%", sup: "10" },
     ],
   },
 ];
@@ -259,8 +258,8 @@ export default function NutrientsMatrix() {
         </div>
 
         {/* ==========================================
-            SECTION 3: 5-STAGE CROP CYCLE MATRIX TABLE (SLENDER CAPSULE FORMAT)
-            Strict Visual & Structural Parity with Ruminants
+            SECTION 3: 5-STAGE CROP CYCLE MATRIX TABLE (CAPSULE FORMAT)
+            Exact Grid Row Alignment & Tip Dot Matching Ruminants
             ========================================== */}
         <div className="space-y-6 pt-4">
           <div className="space-y-2">
@@ -277,130 +276,128 @@ export default function NutrientsMatrix() {
 
           <div className="w-full overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pb-8 pt-4">
             <div className="min-w-[960px] lg:min-w-0 w-full group/matrix">
-              <div className="grid grid-cols-[130px_repeat(5,minmax(0,1fr))] lg:grid-cols-[140px_repeat(5,minmax(0,1fr))] gap-3 sm:gap-4.5 items-stretch">
+              <div className="grid grid-cols-[130px_repeat(5,minmax(0,1fr))] lg:grid-cols-[150px_repeat(5,minmax(0,1fr))] grid-rows-[150px_repeat(3,135px)] gap-3 sm:gap-4.5 items-stretch">
                 
-                {/* Left Column: Row Labels */}
-                <div className="flex flex-col justify-between pt-36 pb-16 space-y-16">
-                  {/* Row 1 Label: Nutrient Enabler */}
-                  <div className="flex items-center gap-2.5">
-                    <span className="w-2 h-2 rounded-full bg-[#2D6A4F] flex-shrink-0" />
-                    <div>
-                      <h3 className="font-display font-bold text-xs sm:text-sm lg:text-base text-[#2D6A4F] leading-tight uppercase">
-                        Nutrient Enabler
-                      </h3>
-                    </div>
-                  </div>
-
-                  {/* Row 2 Label: Disease Manager */}
-                  <div className="flex items-center gap-2.5">
-                    <span className="w-2 h-2 rounded-full bg-[#C25975] flex-shrink-0" />
-                    <div>
-                      <h3 className="font-display font-bold text-xs sm:text-sm lg:text-base text-[#C25975] leading-tight uppercase">
-                        Disease Manager
-                      </h3>
-                    </div>
-                  </div>
-
-                  {/* Row 3 Label: Quality & Shelf Life */}
-                  <div className="flex items-center gap-2.5">
-                    <span className="w-2 h-2 rounded-full bg-[#D97706] flex-shrink-0" />
-                    <div>
-                      <h3 className="font-display font-bold text-xs sm:text-sm lg:text-base text-[#D97706] leading-tight uppercase">
-                        Quality &amp; Shelf Life
-                      </h3>
-                    </div>
+                {/* Row 0 Label: Nutrient Enabler */}
+                <div className="col-start-1 row-start-2 flex items-center gap-2.5 py-4">
+                  <span className="w-2 h-2 rounded-full bg-[#173522] flex-shrink-0" />
+                  <div>
+                    <h3 className="font-display font-bold text-xs sm:text-sm lg:text-base text-[#173522] leading-tight uppercase">
+                      Nutrient Enabler
+                    </h3>
                   </div>
                 </div>
 
-                {/* 5 Stage Capsule Columns (Slender Ruminants Parity) */}
-                {NUTRIENT_STAGES.map((stage, colIdx) => (
-                  <div
-                    key={colIdx}
-                    className={`relative flex flex-col justify-between rounded-[90px] px-3.5 sm:px-4 lg:px-5 py-8 sm:py-10 border shadow-[0_12px_28px_rgba(23,53,34,0.18)] transition-all duration-300 ease-out hover:scale-[1.035] hover:-translate-y-2 hover:shadow-[0_22px_44px_rgba(23,53,34,0.22)] hover:z-20 cursor-pointer group/capsule group-hover/matrix:opacity-70 group-hover/matrix:hover:opacity-100 min-h-[520px] sm:min-h-[560px] ${
-                      stage.darkText 
-                        ? "text-[#F4FAEC] border-[#F4FAEC]/40" 
-                        : "text-[#173522] border-[#173522]/30"
-                    }`}
-                    style={{ backgroundColor: stage.bg }}
-                  >
-                    {/* Capsule Header */}
-                    <div className="text-center pt-2 pb-6 border-b border-current/25">
-                      <span className="font-display font-bold text-xs tracking-wider block mb-1 opacity-90">
-                        {stage.number}
-                      </span>
-                      <strong className="font-display font-extrabold text-xs sm:text-sm lg:text-[15px] uppercase leading-tight block relative">
-                        {stage.name}
-                        <span className="block w-8 h-[1px] bg-current mx-auto mt-2 opacity-55 scale-x-0 group-hover/capsule:scale-x-100 transition-transform duration-300" />
-                      </strong>
-                    </div>
-
-                    {/* Cell 1: Nutrient Enabler */}
-                    <div className="py-5 flex flex-col justify-center text-center border-b border-current/20 flex-1">
-                      {!stage.cells[0].empty ? (
-                        <>
-                          <div className="relative w-full h-1.5 bg-current/20 rounded-full mb-2.5 overflow-hidden">
-                            <div
-                              className="absolute top-0 left-0 h-full rounded-full transition-all duration-500"
-                              style={{ width: stage.cells[0].fill, backgroundColor: stage.cells[0].barColor }}
-                            />
-                          </div>
-                          <p className="font-serif text-xs sm:text-sm leading-snug">
-                            {stage.cells[0].text}
-                            {stage.cells[0].sup && (
-                              <sup className="text-[9px] font-mono ml-0.5">{stage.cells[0].sup}</sup>
-                            )}
-                          </p>
-                        </>
-                      ) : (
-                        <p className="font-mono text-sm opacity-40">—</p>
-                      )}
-                    </div>
-
-                    {/* Cell 2: Disease Manager */}
-                    <div className="py-5 flex flex-col justify-center text-center border-b border-current/20 flex-1">
-                      {!stage.cells[1].empty ? (
-                        <>
-                          <div className="relative w-full h-1.5 bg-current/20 rounded-full mb-2.5 overflow-hidden">
-                            <div
-                              className="absolute top-0 left-0 h-full rounded-full transition-all duration-500"
-                              style={{ width: stage.cells[1].fill, backgroundColor: stage.cells[1].barColor }}
-                            />
-                          </div>
-                          <p className="font-serif text-xs sm:text-sm leading-snug">
-                            {stage.cells[1].text}
-                            {stage.cells[1].sup && (
-                              <sup className="text-[9px] font-mono ml-0.5">{stage.cells[1].sup}</sup>
-                            )}
-                          </p>
-                        </>
-                      ) : (
-                        <p className="font-mono text-sm opacity-40">—</p>
-                      )}
-                    </div>
-
-                    {/* Cell 3: Quality & Shelf Life */}
-                    <div className="py-5 flex flex-col justify-center text-center pb-3 flex-1">
-                      {!stage.cells[2].empty ? (
-                        <>
-                          <div className="relative w-full h-1.5 bg-current/20 rounded-full mb-2.5 overflow-hidden">
-                            <div
-                              className="absolute top-0 left-0 h-full rounded-full transition-all duration-500"
-                              style={{ width: stage.cells[2].fill, backgroundColor: stage.cells[2].barColor }}
-                            />
-                          </div>
-                          <p className="font-serif text-xs sm:text-sm leading-snug">
-                            {stage.cells[2].text}
-                            {stage.cells[2].sup && (
-                              <sup className="text-[9px] font-mono ml-0.5">{stage.cells[2].sup}</sup>
-                            )}
-                          </p>
-                        </>
-                      ) : (
-                        <p className="font-mono text-sm opacity-40">—</p>
-                      )}
-                    </div>
+                {/* Row 1 Label: Disease Manager */}
+                <div className="col-start-1 row-start-3 flex items-center gap-2.5 py-4">
+                  <span className="w-2 h-2 rounded-full bg-[#173522] flex-shrink-0" />
+                  <div>
+                    <h3 className="font-display font-bold text-xs sm:text-sm lg:text-base text-[#173522] leading-tight uppercase">
+                      Disease Manager
+                    </h3>
                   </div>
-                ))}
+                </div>
+
+                {/* Row 2 Label: Quality & Shelf Life */}
+                <div className="col-start-1 row-start-4 flex items-center gap-2.5 py-4">
+                  <span className="w-2 h-2 rounded-full bg-[#173522] flex-shrink-0" />
+                  <div>
+                    <h3 className="font-display font-bold text-xs sm:text-sm lg:text-base text-[#173522] leading-tight uppercase">
+                      Quality &amp; Shelf Life
+                    </h3>
+                  </div>
+                </div>
+
+                {/* 5 Stage Capsule Columns */}
+                {NUTRIENT_STAGES.map((stage, colIdx) => {
+                  const colClass = `col-start-${colIdx + 2}`;
+                  const barStyles = stage.darkText
+                    ? [
+                        { fillBg: "#A8E6BF", trackBg: "rgba(168,230,191,0.40)" },
+                        { fillBg: "#F0F7E6", trackBg: "rgba(240,247,230,0.38)" },
+                        { fillBg: "#6ED4A0", trackBg: "rgba(110,212,160,0.38)" },
+                      ]
+                    : [
+                        { fillBg: "#1A6640", trackBg: "rgba(26,102,64,0.32)" },
+                        { fillBg: "#0D3D22", trackBg: "rgba(13,61,34,0.32)" },
+                        { fillBg: "#2A5C3A", trackBg: "rgba(42,92,58,0.32)" },
+                      ];
+
+                  return (
+                    <div
+                      key={colIdx}
+                      className={`row-start-1 row-span-4 grid grid-rows-[150px_repeat(3,135px)] rounded-[90px] px-3.5 sm:px-4 lg:px-5 border shadow-[0_12px_28px_rgba(23,53,34,0.18)] transition-all duration-300 ease-out hover:scale-[1.035] hover:-translate-y-2 hover:shadow-[0_22px_44px_rgba(23,53,34,0.22)] hover:z-20 cursor-pointer group/capsule group-hover/matrix:opacity-70 group-hover/matrix:hover:opacity-100 ${colClass} ${
+                        stage.darkText 
+                          ? "text-[#F4FAEC] border-[#F4FAEC]/40" 
+                          : "text-[#173522] border-[#173522]/30"
+                      }`}
+                      style={{ backgroundColor: stage.bg }}
+                    >
+                      {/* Capsule Header (Row 1 of capsule grid) */}
+                      <div className="row-start-1 flex flex-col justify-center text-center py-4 border-b border-current/25">
+                        <span className="font-display font-bold text-xs tracking-wider block mb-1 opacity-90">
+                          {stage.number}
+                        </span>
+                        <strong className="font-display font-extrabold text-xs sm:text-sm lg:text-[15px] uppercase leading-tight block relative">
+                          {stage.name}
+                          <span className="block w-8 h-[1px] bg-current mx-auto mt-2 opacity-55 scale-x-0 group-hover/capsule:scale-x-100 transition-transform duration-300" />
+                        </strong>
+                      </div>
+
+                      {/* Cells (Rows 2, 3 & 4 of capsule grid) */}
+                      {stage.cells.map((cell, rowIdx) => {
+                        const style = barStyles[rowIdx];
+                        const isNotFirst = rowIdx > 0;
+                        return (
+                          <div
+                            key={rowIdx}
+                            className={`flex flex-col justify-center text-center px-2 py-3 relative ${
+                              isNotFirst ? "border-t border-current/20" : ""
+                            }`}
+                            style={{ gridRow: rowIdx + 2 }}
+                          >
+                            {!cell.empty ? (
+                              <>
+                                {/* Cell Bar Track & Filled Bar with Tip Dot */}
+                                <div className="relative w-full h-[7px] mb-2 flex-shrink-0">
+                                  {/* Track */}
+                                  <div
+                                    className="absolute top-1/2 left-0 -translate-y-1/2 h-[2px] w-full rounded-full"
+                                    style={{ backgroundColor: style.trackBg }}
+                                  />
+                                  {/* Filled bar */}
+                                  <div
+                                    className="absolute top-0 left-0 h-full rounded-full transition-all duration-500"
+                                    style={{ width: cell.fill, backgroundColor: style.fillBg }}
+                                  />
+                                  {/* Glowing tip dot */}
+                                  <div
+                                    className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full transition-all duration-500"
+                                    style={{
+                                      left: cell.fill,
+                                      backgroundColor: style.fillBg,
+                                      boxShadow: `0 0 0 1px ${stage.bg}, 0 0 0 2px ${style.fillBg}`,
+                                    }}
+                                  />
+                                </div>
+
+                                {/* Cell Text */}
+                                <p className="font-serif text-xs sm:text-sm leading-snug">
+                                  {cell.text}
+                                  {cell.sup && (
+                                    <sup className="text-[9px] font-mono ml-0.5">{cell.sup}</sup>
+                                  )}
+                                </p>
+                              </>
+                            ) : (
+                              <p className="font-mono text-sm opacity-40">—</p>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
 
               </div>
             </div>
