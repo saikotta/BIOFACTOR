@@ -259,9 +259,8 @@ export default function NutrientsMatrix() {
         </div>
 
         {/* ==========================================
-            SECTION 3: 5-STAGE CROP CYCLE MATRIX TABLE (CAPSULE FORMAT)
-            Matching Ruminants & Bio-Remediation Capsule Matrix Layout
-            Clean Light Green Background (No Scrollbar)
+            SECTION 3: 5-STAGE CROP CYCLE MATRIX TABLE (SLENDER CAPSULE FORMAT)
+            Strict Visual & Structural Parity with Ruminants
             ========================================== */}
         <div className="space-y-6 pt-4">
           <div className="space-y-2">
@@ -278,13 +277,13 @@ export default function NutrientsMatrix() {
 
           <div className="w-full overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pb-8 pt-4">
             <div className="min-w-[960px] lg:min-w-0 w-full group/matrix">
-              <div className="grid grid-cols-[140px_repeat(5,minmax(0,1fr))] lg:grid-cols-[160px_repeat(5,minmax(0,1fr))] gap-3 sm:gap-4 items-stretch">
+              <div className="grid grid-cols-[130px_repeat(5,minmax(0,1fr))] lg:grid-cols-[140px_repeat(5,minmax(0,1fr))] gap-3 sm:gap-4.5 items-stretch">
                 
                 {/* Left Column: Row Labels */}
-                <div className="flex flex-col justify-between py-24 space-y-12">
+                <div className="flex flex-col justify-between pt-36 pb-16 space-y-16">
                   {/* Row 1 Label: Nutrient Enabler */}
                   <div className="flex items-center gap-2.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#2D6A4F] flex-shrink-0" />
+                    <span className="w-2 h-2 rounded-full bg-[#2D6A4F] flex-shrink-0" />
                     <div>
                       <h3 className="font-display font-bold text-xs sm:text-sm lg:text-base text-[#2D6A4F] leading-tight uppercase">
                         Nutrient Enabler
@@ -294,7 +293,7 @@ export default function NutrientsMatrix() {
 
                   {/* Row 2 Label: Disease Manager */}
                   <div className="flex items-center gap-2.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#C25975] flex-shrink-0" />
+                    <span className="w-2 h-2 rounded-full bg-[#C25975] flex-shrink-0" />
                     <div>
                       <h3 className="font-display font-bold text-xs sm:text-sm lg:text-base text-[#C25975] leading-tight uppercase">
                         Disease Manager
@@ -304,7 +303,7 @@ export default function NutrientsMatrix() {
 
                   {/* Row 3 Label: Quality & Shelf Life */}
                   <div className="flex items-center gap-2.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#D97706] flex-shrink-0" />
+                    <span className="w-2 h-2 rounded-full bg-[#D97706] flex-shrink-0" />
                     <div>
                       <h3 className="font-display font-bold text-xs sm:text-sm lg:text-base text-[#D97706] leading-tight uppercase">
                         Quality &amp; Shelf Life
@@ -313,28 +312,30 @@ export default function NutrientsMatrix() {
                   </div>
                 </div>
 
-                {/* 5 Stage Capsule Columns */}
+                {/* 5 Stage Capsule Columns (Slender Ruminants Parity) */}
                 {NUTRIENT_STAGES.map((stage, colIdx) => (
                   <div
                     key={colIdx}
-                    className={`relative flex flex-col justify-between rounded-[55px] sm:rounded-[70px] p-4 sm:p-5 lg:p-6 border border-[#173522]/25 shadow-[0_12px_28px_rgba(23,53,34,0.12)] transition-all duration-300 ease-out hover:scale-[1.045] hover:-translate-y-2.5 hover:shadow-[0_24px_48px_rgba(23,53,34,0.25)] hover:z-20 cursor-pointer group/capsule group-hover/matrix:opacity-60 group-hover/matrix:hover:opacity-100 ${
-                      stage.darkText ? "text-[#F4FAEC]" : "text-[#173522]"
+                    className={`relative flex flex-col justify-between rounded-[90px] px-3.5 sm:px-4 lg:px-5 py-8 sm:py-10 border shadow-[0_12px_28px_rgba(23,53,34,0.18)] transition-all duration-300 ease-out hover:scale-[1.035] hover:-translate-y-2 hover:shadow-[0_22px_44px_rgba(23,53,34,0.22)] hover:z-20 cursor-pointer group/capsule group-hover/matrix:opacity-70 group-hover/matrix:hover:opacity-100 min-h-[520px] sm:min-h-[560px] ${
+                      stage.darkText 
+                        ? "text-[#F4FAEC] border-[#F4FAEC]/40" 
+                        : "text-[#173522] border-[#173522]/30"
                     }`}
                     style={{ backgroundColor: stage.bg }}
                   >
                     {/* Capsule Header */}
-                    <div className="text-center pt-2 pb-4 border-b border-current/20">
-                      <span className="font-display font-extrabold text-xs tracking-wider block mb-1 opacity-90">
+                    <div className="text-center pt-2 pb-6 border-b border-current/25">
+                      <span className="font-display font-bold text-xs tracking-wider block mb-1 opacity-90">
                         {stage.number}
                       </span>
-                      <strong className="font-display font-extrabold text-xs sm:text-sm lg:text-base uppercase leading-tight block relative">
+                      <strong className="font-display font-extrabold text-xs sm:text-sm lg:text-[15px] uppercase leading-tight block relative">
                         {stage.name}
-                        <span className="block w-8 h-[1px] bg-current mx-auto mt-1.5 opacity-50 scale-x-0 group-hover/capsule:scale-x-100 transition-transform duration-300" />
+                        <span className="block w-8 h-[1px] bg-current mx-auto mt-2 opacity-55 scale-x-0 group-hover/capsule:scale-x-100 transition-transform duration-300" />
                       </strong>
                     </div>
 
                     {/* Cell 1: Nutrient Enabler */}
-                    <div className="py-5 flex flex-col justify-center text-center border-b border-current/15 min-h-[100px]">
+                    <div className="py-5 flex flex-col justify-center text-center border-b border-current/20 flex-1">
                       {!stage.cells[0].empty ? (
                         <>
                           <div className="relative w-full h-1.5 bg-current/20 rounded-full mb-2.5 overflow-hidden">
@@ -356,7 +357,7 @@ export default function NutrientsMatrix() {
                     </div>
 
                     {/* Cell 2: Disease Manager */}
-                    <div className="py-5 flex flex-col justify-center text-center border-b border-current/15 min-h-[100px]">
+                    <div className="py-5 flex flex-col justify-center text-center border-b border-current/20 flex-1">
                       {!stage.cells[1].empty ? (
                         <>
                           <div className="relative w-full h-1.5 bg-current/20 rounded-full mb-2.5 overflow-hidden">
@@ -378,7 +379,7 @@ export default function NutrientsMatrix() {
                     </div>
 
                     {/* Cell 3: Quality & Shelf Life */}
-                    <div className="py-5 flex flex-col justify-center text-center pb-3 min-h-[100px]">
+                    <div className="py-5 flex flex-col justify-center text-center pb-3 flex-1">
                       {!stage.cells[2].empty ? (
                         <>
                           <div className="relative w-full h-1.5 bg-current/20 rounded-full mb-2.5 overflow-hidden">
