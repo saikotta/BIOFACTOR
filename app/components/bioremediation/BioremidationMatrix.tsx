@@ -1,25 +1,88 @@
 import React from "react";
-import MicrobeField from "../MicrobeField";
+
+interface MatrixCell {
+  text: string;
+  fill: string;
+  barColor: string;
+  empty?: boolean;
+  sup?: string;
+}
+
+interface StageColumn {
+  number: string;
+  name: string;
+  subtitle: string;
+  bg: string;
+  darkText: boolean;
+  cells: MatrixCell[];
+}
+
+const STAGES: StageColumn[] = [
+  {
+    number: "01",
+    name: "SOURCE",
+    subtitle: "GENERATION",
+    bg: "#C8E6C9",
+    darkText: false,
+    cells: [
+      { text: "Segregate difficult streams", fill: "70%", barColor: "#D69E2E" },
+      { text: "Correct tank design and use", fill: "65%", barColor: "#805AD5" },
+    ],
+  },
+  {
+    number: "02",
+    name: "COLLECTION",
+    subtitle: "TANK · DRAIN · SUMP",
+    bg: "#A5D6A7",
+    darkText: false,
+    cells: [
+      { text: "—", fill: "0%", barColor: "#D69E2E", empty: true },
+      { text: "Regular emptying", fill: "50%", barColor: "#805AD5" },
+    ],
+  },
+  {
+    number: "03",
+    name: "BIOLOGICAL TREATMENT",
+    subtitle: "CORE PROCESS",
+    bg: "#81C784",
+    darkText: false,
+    cells: [
+      { text: "Dye cleavage, Cr(VI) reduction", fill: "90%", barColor: "#D69E2E", sup: "4 5" },
+      { text: "Septage treatment at FSTP", fill: "80%", barColor: "#805AD5" },
+    ],
+  },
+  {
+    number: "04",
+    name: "POLISHING",
+    subtitle: "FINAL QUALITY",
+    bg: "#66BB6A",
+    darkText: false,
+    cells: [
+      { text: "Aerobic clean-up of by-products", fill: "85%", barColor: "#D69E2E" },
+      { text: "Stabilised, safer sludge", fill: "75%", barColor: "#805AD5" },
+    ],
+  },
+  {
+    number: "05",
+    name: "RECEIVING WATER",
+    subtitle: "LAKE · RIVER · REUSE",
+    bg: "#4CAF50",
+    darkText: true,
+    cells: [
+      { text: "Lower toxic load discharged", fill: "95%", barColor: "#B8E986" },
+      { text: "Less dumping into water bodies", fill: "85%", barColor: "#E9D8FD" },
+    ],
+  },
+];
 
 export default function BioremidationMatrix() {
   return (
     <section className="relative w-full bg-[#EAF3EA] text-[#173522] pt-4 md:pt-6 lg:pt-8 pb-16 md:pb-24 lg:pb-32 overflow-hidden">
-      {/* Floating MicrobeField Layer - Light Background Canvas */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-80 overflow-hidden">
-        <MicrobeField
-          position="absolute"
-          densityMultiplier={2.5}
-          motionMultiplier={0.7}
-          opacityMultiplier={0.9}
-          rotationMultiplier={0.5}
-        />
-      </div>
-
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)]">
         {/* Subtle Boundary Divider */}
         <div className="w-full border-t border-[#167A4A]/14 mb-8 md:mb-10" aria-hidden="true" />
 
-        {/* Eyebrow & Main Title - Matched to Screenshot 1 & 2 */}
+        {/* Eyebrow & Main Title */}
         <div className="flex items-center gap-3 mb-4">
           <span className="w-8 h-[1.5px] bg-[#2D6A4F]" />
           <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">
@@ -27,181 +90,111 @@ export default function BioremidationMatrix() {
           </span>
         </div>
 
-        <h2 className="font-display font-extrabold text-[clamp(2.25rem,4vw,4.25rem)] text-[#173522] tracking-tight leading-[1.02] uppercase mb-12 md:mb-16 max-w-[1100px]">
+        <h2 className="font-display font-extrabold text-[clamp(2.25rem,4vw,4.25rem)] text-[#173522] tracking-tight leading-[1.02] uppercase mb-10 md:mb-14 max-w-[1100px]">
           Where biology does the work.
         </h2>
 
-        {/* Matrix Table Container - Light #EAF3EA Aesthetic */}
-        <div className="w-full overflow-x-auto pb-6">
-          <div className="min-w-[1050px] w-full">
+        {/* Matrix Scroll Container */}
+        <div className="w-full overflow-x-auto pb-8 pt-4">
+          <div className="min-w-[1040px] w-full group/matrix">
+            <div className="grid grid-cols-[160px_repeat(5,minmax(0,1fr))] gap-4 items-stretch">
+              
+              {/* Left Column: Row Labels */}
+              <div className="flex flex-col justify-between py-24 space-y-16">
+                {/* Row 1 Label: Industrial */}
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#D69E2E] flex-shrink-0" />
+                  <div>
+                    <h3 className="font-display font-bold text-base text-[#173522] leading-tight">
+                      Industrial
+                    </h3>
+                    <span className="font-mono text-[11px] text-[#26382D]/60 uppercase tracking-wider block">
+                      EFFLUENT
+                    </span>
+                  </div>
+                </div>
 
-            {/* MATRIX HEADER: 5 STAGES ALONG TREATMENT CHAIN */}
-            <div className="grid grid-cols-[180px_repeat(5,1fr)] gap-6 pb-6 border-b border-[#173522]/20 items-end">
-              {/* Row Header Label */}
-              <div className="font-mono text-xs font-bold tracking-widest text-[#2D6A4F] uppercase pb-1">
-
+                {/* Row 2 Label: Septic */}
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#805AD5] flex-shrink-0" />
+                  <div>
+                    <h3 className="font-display font-bold text-base text-[#173522] leading-tight">
+                      Septic
+                    </h3>
+                    <span className="font-mono text-[11px] text-[#26382D]/60 uppercase tracking-wider block">
+                      ON-SITE
+                    </span>
+                  </div>
+                </div>
               </div>
 
-              {/* Col 1 */}
-              <div>
-                <span className="font-mono text-xs font-bold tracking-wider text-[#173522] uppercase block">
-                  01 SOURCE
-                </span>
-                <span className="font-mono text-[11px] text-[#26382D]/60 uppercase tracking-widest block mt-0.5">
-                  GENERATION
-                </span>
-              </div>
+              {/* 5 Stage Capsule Columns */}
+              {STAGES.map((stage, colIdx) => (
+                <div
+                  key={colIdx}
+                  className={`relative flex flex-col justify-between rounded-[70px] p-5 sm:p-6 border border-[#173522]/25 shadow-[0_12px_28px_rgba(23,53,34,0.12)] transition-all duration-300 ease-out hover:scale-[1.045] hover:-translate-y-2.5 hover:shadow-[0_24px_48px_rgba(23,53,34,0.25)] hover:z-20 cursor-pointer group/capsule group-hover/matrix:opacity-60 group-hover/matrix:hover:opacity-100 ${
+                    stage.darkText ? "text-[#F4FAEC]" : "text-[#173522]"
+                  }`}
+                  style={{ backgroundColor: stage.bg }}
+                >
+                  {/* Capsule Header */}
+                  <div className="text-center pt-3 pb-4 border-b border-current/20">
+                    <span className="font-display font-extrabold text-xs tracking-wider block mb-1 opacity-90">
+                      {stage.number}
+                    </span>
+                    <strong className="font-display font-extrabold text-base sm:text-lg uppercase leading-tight block relative">
+                      {stage.name}
+                      <span className="block w-8 h-[1px] bg-current mx-auto mt-1.5 opacity-50 scale-x-0 group-hover/capsule:scale-x-100 transition-transform duration-300" />
+                    </strong>
+                    <span className="font-serif italic text-xs block mt-1.5 opacity-80">
+                      {stage.subtitle}
+                    </span>
+                  </div>
 
-              {/* Col 2 */}
-              <div>
-                <span className="font-mono text-xs font-bold tracking-wider text-[#173522] uppercase block">
-                  02 COLLECTION
-                </span>
-                <span className="font-mono text-[11px] text-[#26382D]/60 uppercase tracking-widest block mt-0.5">
-                  TANK · DRAIN · SUMP
-                </span>
-              </div>
+                  {/* Cell 1: Industrial */}
+                  <div className="py-6 flex flex-col justify-center text-center border-b border-current/15 min-h-[120px]">
+                    {!stage.cells[0].empty ? (
+                      <>
+                        <div className="relative w-full h-1.5 bg-current/20 rounded-full mb-3 overflow-hidden">
+                          <div
+                            className="absolute top-0 left-0 h-full rounded-full transition-all duration-500"
+                            style={{ width: stage.cells[0].fill, backgroundColor: stage.cells[0].barColor }}
+                          />
+                        </div>
+                        <p className="font-serif text-sm sm:text-base leading-snug">
+                          {stage.cells[0].text}
+                          {stage.cells[0].sup && (
+                            <sup className="text-[9px] font-mono ml-0.5">{stage.cells[0].sup}</sup>
+                          )}
+                        </p>
+                      </>
+                    ) : (
+                      <p className="font-mono text-sm opacity-40">—</p>
+                    )}
+                  </div>
 
-              {/* Col 3 */}
-              <div>
-                <span className="font-mono text-xs font-bold tracking-wider text-[#173522] uppercase block">
-                  03 BIOLOGICAL TREATMENT
-                </span>
-                <span className="font-mono text-[11px] text-[#2D6A4F] font-semibold uppercase tracking-widest block mt-0.5">
-                  CORE PROCESS
-                </span>
-              </div>
+                  {/* Cell 2: Septic */}
+                  <div className="py-6 flex flex-col justify-center text-center pb-4 min-h-[120px]">
+                    {!stage.cells[1].empty ? (
+                      <>
+                        <div className="relative w-full h-1.5 bg-current/20 rounded-full mb-3 overflow-hidden">
+                          <div
+                            className="absolute top-0 left-0 h-full rounded-full transition-all duration-500"
+                            style={{ width: stage.cells[1].fill, backgroundColor: stage.cells[1].barColor }}
+                          />
+                        </div>
+                        <p className="font-serif text-sm sm:text-base leading-snug">
+                          {stage.cells[1].text}
+                        </p>
+                      </>
+                    ) : (
+                      <p className="font-mono text-sm opacity-40">—</p>
+                    )}
+                  </div>
+                </div>
+              ))}
 
-              {/* Col 4 */}
-              <div>
-                <span className="font-mono text-xs font-bold tracking-wider text-[#173522] uppercase block">
-                  04 POLISHING
-                </span>
-                <span className="font-mono text-[11px] text-[#26382D]/60 uppercase tracking-widest block mt-0.5">
-                  FINAL QUALITY
-                </span>
-              </div>
-
-              {/* Col 5 */}
-              <div>
-                <span className="font-mono text-xs font-bold tracking-wider text-[#173522] uppercase block">
-                  05 RECEIVING WATER
-                </span>
-                <span className="font-mono text-[11px] text-[#26382D]/60 uppercase tracking-widest block mt-0.5">
-                  LAKE · RIVER · REUSE
-                </span>
-              </div>
             </div>
-
-
-            {/* ROW 1: INDUSTRIAL EFFLUENT (AMBER/GOLD ACCENTS) */}
-            <div className="grid grid-cols-[180px_repeat(5,1fr)] gap-6 py-7 border-b border-[#173522]/12 items-start">
-              {/* Row Label */}
-              <div>
-                <h3 className="font-display font-bold text-lg text-[#173522]">
-                  Industrial
-                </h3>
-                <span className="font-mono text-[11px] text-[#26382D]/60 uppercase tracking-wider block">
-                  EFFLUENT
-                </span>
-              </div>
-
-              {/* Col 1 */}
-              <div>
-                <div className="h-1 bg-[#D69E2E] rounded-full mb-3 w-full" />
-                <p className="text-xs sm:text-sm text-[#173522]/85 font-serif leading-relaxed">
-                  Segregate difficult streams
-                </p>
-              </div>
-
-              {/* Col 2 */}
-              <div>
-                <div className="h-[1.5px] bg-[#D69E2E]/25 rounded-full my-3 w-full" />
-                <p className="text-xs sm:text-sm text-[#26382D]/40 font-mono">
-                  —
-                </p>
-              </div>
-
-              {/* Col 3 */}
-              <div>
-                <div className="h-1 bg-[#D69E2E] rounded-full mb-3 w-full" />
-                <p className="text-xs sm:text-sm text-[#173522]/85 font-serif leading-relaxed">
-                  Dye cleavage, Cr(VI) reduction<sup className="text-[9px]">4 5</sup>
-                </p>
-              </div>
-
-              {/* Col 4 */}
-              <div>
-                <div className="h-1 bg-[#D69E2E] rounded-full mb-3 w-full" />
-                <p className="text-xs sm:text-sm text-[#173522]/85 font-serif leading-relaxed">
-                  Aerobic clean-up of by-products
-                </p>
-              </div>
-
-              {/* Col 5 */}
-              <div>
-                <div className="h-1 bg-[#D69E2E] rounded-full mb-3 w-full" />
-                <p className="text-xs sm:text-sm text-[#173522]/85 font-serif leading-relaxed">
-                  Lower toxic load discharged
-                </p>
-              </div>
-            </div>
-
-
-
-            {/* ROW 3: SEPTIC ON-SITE (PURPLE/VIOLET ACCENTS) */}
-            <div className="grid grid-cols-[180px_repeat(5,1fr)] gap-6 py-7 items-start">
-              {/* Row Label */}
-              <div>
-                <h3 className="font-display font-bold text-lg text-[#173522]">
-                  Septic
-                </h3>
-                <span className="font-mono text-[11px] text-[#26382D]/60 uppercase tracking-wider block">
-                  ON-SITE
-                </span>
-              </div>
-
-              {/* Col 1 */}
-              <div>
-                <div className="h-1 bg-[#805AD5] rounded-full mb-3 w-full" />
-                <p className="text-xs sm:text-sm text-[#173522]/85 font-serif leading-relaxed">
-                  Correct tank design and use
-                </p>
-              </div>
-
-              {/* Col 2 */}
-              <div>
-                <div className="h-1 bg-[#805AD5] rounded-full mb-3 w-full" />
-                <p className="text-xs sm:text-sm text-[#173522]/85 font-serif leading-relaxed">
-                  Regular emptying
-                </p>
-              </div>
-
-              {/* Col 3 */}
-              <div>
-                <div className="h-1 bg-[#805AD5] rounded-full mb-3 w-full" />
-                <p className="text-xs sm:text-sm text-[#173522]/85 font-serif leading-relaxed">
-                  Septage treatment at FSTP
-                </p>
-              </div>
-
-              {/* Col 4 */}
-              <div>
-                <div className="h-1 bg-[#805AD5] rounded-full mb-3 w-full" />
-                <p className="text-xs sm:text-sm text-[#173522]/85 font-serif leading-relaxed">
-                  Stabilised, safer sludge
-                </p>
-              </div>
-
-              {/* Col 5 */}
-              <div>
-                <div className="h-1 bg-[#805AD5] rounded-full mb-3 w-full" />
-                <p className="text-xs sm:text-sm text-[#173522]/85 font-serif leading-relaxed">
-                  Less dumping into water bodies
-                </p>
-              </div>
-            </div>
-
           </div>
         </div>
       </div>

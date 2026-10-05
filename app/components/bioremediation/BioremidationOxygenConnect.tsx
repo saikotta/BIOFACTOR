@@ -3,18 +3,8 @@ import React from "react";
 export default function BioremidationOxygenConnect() {
   return (
     <section className="relative w-full text-[#173522] pt-6 md:pt-8 lg:pt-10 pb-16 md:pb-24 overflow-hidden bg-[#EAF3EA]">
-      {/* Opaque Base Color Layer */}
+      {/* Pale Warm Botanical Base */}
       <div className="absolute inset-0 z-0 bg-[#EAF3EA]" aria-hidden="true" />
-
-      {/* Background Microbes Image Overlay (Parity with Ruminants Rumen Factory) */}
-      <div
-        className="absolute inset-0 z-0 bg-cover bg-no-repeat bg-[position:80%_center] opacity-40 mix-blend-multiply"
-        style={{ backgroundImage: "url('/images/ruminants-rumen-microbes-bg.png')" }}
-        aria-hidden="true"
-      />
-
-      {/* Pale Warm Botanical Overlay (85% Opacity) */}
-      <div className="absolute inset-0 z-0 bg-[#EAF3EA]/85" aria-hidden="true" />
 
       {/* Content Container */}
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)]">

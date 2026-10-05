@@ -1,20 +1,8 @@
 import React from "react";
-import MicrobeField from "../MicrobeField";
 
 export default function BioremidationApplications() {
   return (
     <section id="applications" className="relative w-full bg-[#EAF3EA] text-[#173522] pt-8 md:pt-12 lg:pt-16 pb-8 md:pb-12 lg:pb-14 overflow-hidden">
-      {/* Floating Microorganism Canvas Background Layer */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-90 overflow-hidden">
-        <MicrobeField
-          position="absolute"
-          densityMultiplier={2.8}
-          motionMultiplier={0.8}
-          opacityMultiplier={0.95}
-          rotationMultiplier={0.6}
-        />
-      </div>
-
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)]">
         {/* Section Boundary Divider */}
         <div className="w-full border-t border-[#167A4A]/14 mb-8 md:mb-10 lg:mb-12" aria-hidden="true" />
@@ -32,7 +20,7 @@ export default function BioremidationApplications() {
           DIFFERENT MICROBES.
         </h2>
 
-        {/* 3 Application Chapters */}
+        {/* 2 Application Chapters */}
         <div className="space-y-28 md:space-y-40 lg:space-y-48">
 
           {/* CHAPTER 1: INDUSTRIAL (LEFT = Title + Priority + Image, RIGHT = Editorial Content) */}
@@ -104,34 +92,10 @@ export default function BioremidationApplications() {
           </div>
 
 
-
-          {/* CHAPTER 3: SEPTIC (LEFT = Vertically Centered Title + Priority + Image, RIGHT = Editorial Content) */}
+          {/* CHAPTER 2: SEPTIC (LEFT = Editorial Content, RIGHT = Vertically Centered Title + Priority + Image) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-            {/* Left Column: Vertically Centered Title + Priority + Image */}
-            <div className="lg:col-span-5 flex flex-col justify-center space-y-4">
-              <div>
-                <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase block mb-2">
-                  ON-SITE SANITATION
-                </span>
-                <h1 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-[#173522] tracking-tight uppercase mb-2">
-                  SEPTIC
-                </h1>
-                <p className="font-mono text-xs sm:text-sm text-[#26382D]/70 tracking-wide uppercase">
-                  Priority · safe septage handling, odour, groundwater protection
-                </p>
-              </div>
-
-              <div className="w-full aspect-[4/3] rounded-lg overflow-hidden bg-[#E8EFE6]">
-                <img
-                  src="/images/bioremidation/septic.jpg"
-                  alt="Septic Bio-Remediation"
-                  className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-[1.02]"
-                />
-              </div>
-            </div>
-
-            {/* Editorial Content Right */}
-            <div className="lg:col-span-7 flex flex-col justify-center space-y-6">
+            {/* Editorial Content Left */}
+            <div className="lg:col-span-7 lg:order-1 order-2 flex flex-col justify-center space-y-6">
               <div className="space-y-4">
                 <h5 className="font-serif font-semibold text-2xl sm:text-3xl text-[#173522] leading-snug">
                   Where biology helps most is downstream of the tank.
@@ -169,6 +133,29 @@ export default function BioremidationApplications() {
                 <p className="font-serif italic text-sm sm:text-base text-[#173522]/90 leading-relaxed">
                   <strong className="font-bold font-sans not-italic">Not every claim holds up.</strong> A double-blind trial in 48 working septic tanks found no significant long-term reduction in solids from commercial biological additives across all maintenance levels.<sup className="text-[10px]">8</sup> We design septic solutions around evidence, not around dosing a tank that is already working.
                 </p>
+              </div>
+            </div>
+
+            {/* Right Column: Vertically Centered Title + Priority + Image */}
+            <div className="lg:col-span-5 lg:order-2 order-1 flex flex-col justify-center space-y-4">
+              <div>
+                <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase block mb-2">
+                  ON-SITE SANITATION
+                </span>
+                <h1 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-[#173522] tracking-tight uppercase mb-2">
+                  SEPTIC
+                </h1>
+                <p className="font-mono text-xs sm:text-sm text-[#26382D]/70 tracking-wide uppercase">
+                  Priority · safe septage handling, odour, groundwater protection
+                </p>
+              </div>
+
+              <div className="w-full aspect-[4/3] rounded-lg overflow-hidden bg-[#E8EFE6]">
+                <img
+                  src="/images/bioremidation/septic.jpg"
+                  alt="Septic Bio-Remediation"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-[1.02]"
+                />
               </div>
             </div>
           </div>
