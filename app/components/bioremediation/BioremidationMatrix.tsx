@@ -149,60 +149,6 @@ export default function BioremidationMatrix() {
             </div>
 
 
-            {/* ROW 2: SEWAGE STP (CYAN/BLUE ACCENTS) */}
-            <div className={styles.matrixRow} data-row="1">
-              {/* Row Label */}
-              <div>
-                <h3 className="font-display font-bold text-lg text-[#173522]">
-                  Sewage
-                </h3>
-                <span className="font-mono text-[11px] text-[#26382D]/60 uppercase tracking-wider block">
-                  STP
-                </span>
-              </div>
-
-              {/* Col 1 */}
-              <div data-empty="true">
-                <div className="h-[1.5px] bg-[#3182CE]/25 rounded-full my-3 w-full" />
-                <p className="text-xs sm:text-sm text-[#26382D]/40 font-mono">
-                  —
-                </p>
-              </div>
-
-              {/* Col 2 */}
-              <div>
-                <div className="h-1 bg-[#3182CE] rounded-full mb-3 w-full" />
-                <p className="text-xs sm:text-sm text-[#173522]/85 font-serif leading-relaxed">
-                  Odour control in sumps
-                </p>
-              </div>
-
-              {/* Col 3 */}
-              <div>
-                <div className="h-1 bg-[#3182CE] rounded-full mb-3 w-full" />
-                <p className="text-xs sm:text-sm text-[#173522]/85 font-serif leading-relaxed">
-                  Start-up, shock recovery, N removal<sup className="text-[9px]">6</sup>
-                </p>
-              </div>
-
-              {/* Col 4 */}
-              <div>
-                <div className="h-1 bg-[#3182CE] rounded-full mb-3 w-full" />
-                <p className="text-xs sm:text-sm text-[#173522]/85 font-serif leading-relaxed">
-                  Settling and clarity
-                </p>
-              </div>
-
-              {/* Col 5 */}
-              <div>
-                <div className="h-1 bg-[#3182CE] rounded-full mb-3 w-full" />
-                <p className="text-xs sm:text-sm text-[#173522]/85 font-serif leading-relaxed">
-                  Treated water for reuse
-                </p>
-              </div>
-            </div>
-
-
             {/* ROW 3: SEPTIC ON-SITE (PURPLE/VIOLET ACCENTS) */}
             <div className={styles.matrixRow} data-row="2">
               {/* Row Label */}
