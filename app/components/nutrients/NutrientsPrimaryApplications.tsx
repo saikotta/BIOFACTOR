@@ -59,7 +59,7 @@ export default function NutrientsPrimaryApplications() {
                 The atmosphere contains approximately 78% nitrogen. Yet plants cannot use atmospheric N₂ directly. Nitrogen-fixing microorganisms convert that inert atmospheric nitrogen into biologically useful forms.
               </p>
               <p>
-                Under suitable symbiotic conditions, legumes can fix more than 250 kg N per hectare in a growing season.³ In other systems, biological nitrogen fixation is lower and depends on the microorganism, crop, soil and environment.
+                Under suitable symbiotic conditions, legumes can fix more than 250 kg N per hectare in a growing season. In other systems, biological nitrogen fixation is lower and depends on the microorganism, crop, soil and environment.
               </p>
             </div>
 
@@ -70,7 +70,7 @@ export default function NutrientsPrimaryApplications() {
                   GLOBAL FIXATION
                 </span>
                 <span className="sm:col-span-2 text-sm sm:text-base text-[#173522]/90 font-sans">
-                  <strong>50–70 Tg N</strong> fixed biologically in agricultural systems every year, worldwide.²
+                  <strong>50–70 Tg N</strong> fixed biologically in agricultural systems every year, worldwide.
                 </span>
               </div>
 
@@ -79,7 +79,7 @@ export default function NutrientsPrimaryApplications() {
                   FIXATION CAPACITY
                 </span>
                 <span className="sm:col-span-2 text-sm sm:text-base text-[#173522]/90 font-sans">
-                  <strong>Up to 311 kg N/ha</strong> reported for faba bean; up to 389 kg N/ha for red clover.³
+                  <strong>Up to 311 kg N/ha</strong> reported for faba bean; up to 389 kg N/ha for red clover.
                 </span>
               </div>
             </div>
@@ -107,7 +107,7 @@ export default function NutrientsPrimaryApplications() {
                 Phosphorus is abundant in many soils. Most of it, however, remains locked in insoluble mineral or chemically bound forms that plants cannot readily access.
               </p>
               <p>
-                Phosphate-solubilising microorganisms release organic acids, chelating compounds and other metabolites that help convert these forms into more plant-available phosphorus.⁴
+                Phosphate-solubilising microorganisms release organic acids, chelating compounds and other metabolites that help convert these forms into more plant-available phosphorus.
               </p>
             </div>
 
@@ -118,7 +118,7 @@ export default function NutrientsPrimaryApplications() {
                   ORGANIC ACIDS
                 </span>
                 <span className="sm:col-span-2 text-sm sm:text-base text-[#173522]/90 font-sans">
-                  <strong>Gluconic, citric &amp; oxalic acids</strong> release bound phosphate from calcium and iron complexes.⁴
+                  <strong>Gluconic, citric &amp; oxalic acids</strong> release bound phosphate from calcium and iron complexes.
                 </span>
               </div>
 
@@ -127,7 +127,7 @@ export default function NutrientsPrimaryApplications() {
                   P-USE EFFICIENCY
                 </span>
                 <span className="sm:col-span-2 text-sm sm:text-base text-[#173522]/90 font-sans">
-                  <strong>+7.5 kg yield / kg P</strong> average gain with biofertilisers across field trials worldwide.¹
+                  <strong>+7.5 kg yield / kg P</strong> average gain with biofertilisers across field trials worldwide.
                 </span>
               </div>
             </div>
@@ -179,7 +179,7 @@ export default function NutrientsPrimaryApplications() {
                   10–25%
                 </div>
                 <div className="text-xs text-[#173522]/80 font-sans leading-snug">
-                  The rest is rapidly fixed in the soil.⁴
+                  The rest is rapidly fixed in the soil.
                 </div>
               </div>
             </div>
@@ -226,7 +226,7 @@ export default function NutrientsPrimaryApplications() {
                   <span data-cu>90</span>–98%
                 </div>
                 <div className="text-xs text-[#173522]/80 font-sans leading-snug">
-                  of the total K in most soils is not readily available to plants.⁵
+                  of the total K in most soils is not readily available to plants.
                 </div>
               </div>
             </div>
@@ -239,7 +239,7 @@ export default function NutrientsPrimaryApplications() {
                 Soils can contain enormous quantities of potassium. Only a small fraction is immediately available to plants.
               </p>
               <p>
-                Potassium-solubilising microorganisms release potassium from mineral sources through organic-acid production and biological weathering.⁵
+                Potassium-solubilising microorganisms release potassium from mineral sources through organic-acid production and biological weathering.
               </p>
             </div>
 
@@ -250,7 +250,7 @@ export default function NutrientsPrimaryApplications() {
                   DIRECT RECOVERY
                 </span>
                 <span className="sm:col-span-2 text-sm sm:text-base text-[#173522]/90 font-sans">
-                  <strong>Only 2–10%</strong> of soil K is in water-soluble &amp; exchangeable forms roots can take up directly.⁵
+                  <strong>Only 2–10%</strong> of soil K is in water-soluble &amp; exchangeable forms roots can take up directly.
                 </span>
               </div>
 
@@ -259,7 +259,7 @@ export default function NutrientsPrimaryApplications() {
                   WEATHERING MECHANISM
                 </span>
                 <span className="sm:col-span-2 text-sm sm:text-base text-[#173522]/90 font-sans">
-                  <strong>Acidolysis &amp; chelation</strong> break silicate lattices to release soluble potassium ions.⁵
+                  <strong>Acidolysis &amp; chelation</strong> break silicate lattices to release soluble potassium ions.
                 </span>
               </div>
             </div>

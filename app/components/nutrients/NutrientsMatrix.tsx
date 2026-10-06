@@ -265,7 +265,7 @@ export default function NutrientsMatrix() {
                 Why nutrients arrive when the crop asks
               </h4>
               <p className="text-base text-[#173522]/90 font-sans leading-relaxed">
-                Plants invest <strong>up to 20–40% of the carbon they fix</strong> in root exudates.⁶ That is sugars, organic acids and signal molecules released into the soil. Exudation changes with the plant's nutrient status. Under phosphorus deficiency, for example, roots release more organic acids such as malate.⁶ Microbes living on this carbon are most active where and when roots are growing hardest, so <strong>release tracks the crop's demand</strong> instead of arriving in a single dose.
+                Plants invest <strong>up to 20–40% of the carbon they fix</strong> in root exudates. That is sugars, organic acids and signal molecules released into the soil. Exudation changes with the plant's nutrient status. Under phosphorus deficiency, for example, roots release more organic acids such as malate. Microbes living on this carbon are most active where and when roots are growing hardest, so <strong>release tracks the crop's demand</strong> instead of arriving in a single dose.
               </p>
             </div>
           </div>
@@ -420,7 +420,7 @@ export default function NutrientsMatrix() {
               <p className="text-xs sm:text-sm text-[#173522]/85 font-sans">
                 average yield gain from biofertilisers in dry climates, and +14.9% in tropical climates.
               </p>
-              <div className="pt-2 text-[11px] font-mono text-[#2D6A4F] font-semibold">171 publications · Global meta-analysis¹</div>
+              <div className="pt-2 text-[11px] font-mono text-[#2D6A4F] font-semibold">171 publications · Global meta-analysis</div>
             </div>
 
             <div className="p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-lg space-y-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-[#2D6A4F]/40 cursor-pointer">
@@ -429,7 +429,7 @@ export default function NutrientsMatrix() {
               <p className="text-xs sm:text-sm text-[#173522]/85 font-sans">
                 average reduction in disease with Bacillus biocontrol agents compared with untreated controls.
               </p>
-              <div className="pt-2 text-[11px] font-mono text-[#C25975] font-semibold">399 studies · Meta-analysis⁷</div>
+              <div className="pt-2 text-[11px] font-mono text-[#C25975] font-semibold">399 studies · Meta-analysis</div>
             </div>
 
             <div className="p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-lg space-y-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-[#2D6A4F]/40 cursor-pointer">
@@ -438,7 +438,7 @@ export default function NutrientsMatrix() {
               <p className="text-xs sm:text-sm text-[#173522]/85 font-sans">
                 less soft rot and black mold in tomato treated with Bacillus subtilis. 40–60% less rot in leafy greens.
               </p>
-              <div className="pt-2 text-[11px] font-mono text-[#D97706] font-semibold">Post-harvest biocontrol review¹⁰</div>
+              <div className="pt-2 text-[11px] font-mono text-[#D97706] font-semibold">Post-harvest biocontrol review</div>
             </div>
           </div>
         </div>
@@ -477,7 +477,7 @@ export default function NutrientsMatrix() {
           </div>
 
           <p className="text-xs font-mono text-[#173522]/70 pt-2 border-t border-[#173522]/10">
-            Scale 0–25%. Nitrogen-use efficiency also improved by +5.8 kg yield per kg N applied. Source: Schütz et al. 2018.¹
+            Scale 0–25%. Nitrogen-use efficiency also improved by +5.8 kg yield per kg N applied. Source: Schütz et al. 2018.
           </p>
         </div>
 
