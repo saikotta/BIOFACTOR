@@ -99,8 +99,15 @@ sup { color: var(--green); font-weight: 600; font-size: .75em; vertical-align: s
 
 .rise {
   opacity: 0;
-  animation: rise .55s var(--ease) forwards;
-  animation-delay: var(--t, 0s);
+  transform: translateY(16px);
+  transition: opacity .55s var(--ease), transform .55s var(--ease);
+  transition-delay: var(--t, 0s);
+}
+
+.stage.is-animated .rise,
+body.is-animated .rise {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ══════════════════════════════════════════
@@ -552,7 +559,7 @@ h1 {
       <div class="bbar">
         <div class="blbl">Growth rate<span>improvement ↑</span></div>
         <div class="btrk"><div class="bfil" id="bf1" style="--w:60%"></div></div>
-        <div class="bcnt" id="bc2">0 exp.</div>
+        <div class="bcnt" id="bc1">0 exp.</div>
       </div>
       <div class="bbar">
         <div class="blbl">FCR<span>improvement ↓</span></div>
@@ -585,7 +592,12 @@ h1 {
   ];
   function ease(t){ return 1-Math.pow(1-t,3); }
 
+  var ran = false;
   function runBars(){
+    var stage = document.getElementById('stage') || document.querySelector('.stage') || document.body;
+    if (stage) stage.classList.add('is-animated');
+    if (ran) return;
+    ran = true;
     var dur = 1400, stag = 180;
     bars.forEach(function(b, i){
       var fill = document.getElementById(b.fill);
@@ -603,7 +615,19 @@ h1 {
     });
   }
 
-  setTimeout(runBars, 400);
+  function resetBars(){
+    /* reveal once: no-op */
+  }
+
+  window.runBars = runBars;
+  window.resetBars = resetBars;
+
+  // Fallback: Ensure bars run and elements are revealed after 1.2s if trigger hasn't fired
+  setTimeout(function(){
+    var stage = document.getElementById('stage') || document.querySelector('.stage') || document.body;
+    if (stage) stage.classList.add('is-animated');
+    if (!ran) runBars();
+  }, 1200);
 })();
 </script>
 </body>

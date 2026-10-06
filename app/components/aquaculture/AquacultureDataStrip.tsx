@@ -28,13 +28,15 @@ export default function AquacultureDataStrip() {
   return (
     <section
       className="w-full bg-[#1B4332]"
+      data-n="Key Stats"
+      data-motion
       style={{ borderTop: "1px solid rgba(107,191,58,0.25)" }}
     >
       <div className="w-full max-w-[1440px] mx-auto grid grid-cols-1 sm:grid-cols-3">
         {stats.map((s, i) => (
           <div
             key={i}
-            className="flex flex-col px-[clamp(1.5rem,3vw,2.5rem)] py-12"
+            className={`led rv ${i === 1 ? "d1" : i === 2 ? "d2" : ""} flex flex-col px-[clamp(1.5rem,3vw,2.5rem)] py-12`}
             style={{
               borderRight:
                 i < stats.length - 1
@@ -45,6 +47,7 @@ export default function AquacultureDataStrip() {
             {/* Big number */}
             <span
               className="font-inter-tight font-extrabold leading-none mb-5"
+              data-cu={s.value}
               style={{
                 fontSize: "clamp(2.4rem,4.5vw,3.4rem)",
                 color: s.valueColor,

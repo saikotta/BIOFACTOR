@@ -67,7 +67,15 @@ export default function GutHealthSection() {
   }, []);
 
   return (
-    <section className="w-full overflow-hidden" data-aquaculture-static aria-label="Shrimp gut health infographic" style={{ background: "linear-gradient(180deg, #E5F0D4 0%, #DDE9C8 50%, #D1E4B9 100%)" }}>
+    <section
+      id="gut-health-sec"
+      data-n="Shrimp Gut Health"
+      data-motion
+      className="w-full overflow-hidden"
+      data-aquaculture-static
+      aria-label="Shrimp gut health infographic"
+      style={{ background: "linear-gradient(180deg, #E5F0D4 0%, #DDE9C8 50%, #D1E4B9 100%)" }}
+    >
       <iframe
         ref={frameRef}
         className="block w-full border-0"
@@ -75,7 +83,21 @@ export default function GutHealthSection() {
         title="A healthy gut is the first line of disease defence"
         loading="eager"
         style={{ height: "760px" }}
-        onLoad={(event) => fitGutFrame(event.currentTarget)}
+        onLoad={(event) => {
+          fitGutFrame(event.currentTarget);
+          const sec = document.getElementById("gut-health-sec");
+          if (sec) {
+            const rect = sec.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+              const doc = event.currentTarget.contentDocument;
+              const stage = doc?.querySelector(".stage") || doc?.body;
+              if (stage) stage.classList.add("is-animated");
+              if (doc && typeof (doc.defaultView as any)?.runBars === "function") {
+                (doc.defaultView as any).runBars();
+              }
+            }
+          }
+        }}
       />
     </section>
   );

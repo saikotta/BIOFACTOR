@@ -3,10 +3,10 @@ import Image from "next/image";
 
 export default function ConsortiaBlock() {
   return (
-    <section className="relative w-full px-6 py-20 md:px-12 lg:px-20 xl:px-32" style={{ background: "linear-gradient(180deg, #D9EBC4 0%, #EDF7DF 50%, #E5F0D4 100%)" }}>
+    <section className="relative w-full px-6 py-20 md:px-12 lg:px-20 xl:px-32" data-n="Consortia" data-motion style={{ background: "linear-gradient(180deg, #D9EBC4 0%, #EDF7DF 50%, #E5F0D4 100%)" }}>
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
         {/* Left column */}
-        <div className="order-1 flex flex-col lg:order-2 lg:col-start-8 lg:col-span-5">
+        <div className="order-1 flex flex-col lg:order-2 lg:col-start-8 lg:col-span-5 rv">
           <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[#1F8A57]">
             WHAT BIOLOGY DOES
           </p>
@@ -16,7 +16,7 @@ export default function ConsortiaBlock() {
           <p className="font-newsreader text-[18px] leading-[1.6] text-[#2B2B2B]">
             Anaerobic and facultative probiotics working together
           </p>
-          <div className="relative mt-8 aspect-square w-full overflow-hidden rounded-sm">
+          <div className="ph relative mt-8 aspect-square w-full overflow-hidden rounded-sm">
             <Image
               src="/images/aquaculture-consortia.jpg"
               alt="Underwater view of pond-bottom sediment"
@@ -28,7 +28,7 @@ export default function ConsortiaBlock() {
         </div>
 
         {/* Right column content */}
-        <div className="order-2 lg:order-1 lg:col-start-1 lg:col-span-7">
+        <div className="order-2 lg:order-1 lg:col-start-1 lg:col-span-7 rv d1">
           {/* H3 */}
           <h3 className="font-inter-tight font-bold text-[36px] text-[#111111] mb-6">
             Anaerobic probiotics manage the load at its source.
@@ -40,7 +40,7 @@ export default function ConsortiaBlock() {
 
           {/* Bullet points */}
           <div className="space-y-6 mb-8">
-            <div className="border-l-4 border-[#1F8A57] pl-4">
+            <div className="rv d1 border-l-4 border-[#1F8A57] pl-4">
               <h4 className="font-inter-tight font-bold text-[18px] text-[#111111] mb-2">
                 Digest the organic load
               </h4>
@@ -49,7 +49,7 @@ export default function ConsortiaBlock() {
               </p>
             </div>
 
-            <div className="border-l-4 border-[#1F8A57] pl-4">
+            <div className="rv d2 border-l-4 border-[#1F8A57] pl-4">
               <h4 className="font-inter-tight font-bold text-[18px] text-[#111111] mb-2">
                 Remove nitrogen as gas
               </h4>
@@ -58,7 +58,7 @@ export default function ConsortiaBlock() {
               </p>
             </div>
 
-            <div className="border-l-4 border-[#1F8A57] pl-4">
+            <div className="rv d3 border-l-4 border-[#1F8A57] pl-4">
               <h4 className="font-inter-tight font-bold text-[18px] text-[#111111] mb-2">
                 Neutralise sulphide
               </h4>
@@ -67,7 +67,7 @@ export default function ConsortiaBlock() {
               </p>
             </div>
 
-            <div className="border-l-4 border-[#1F8A57] pl-4">
+            <div className="rv d4 border-l-4 border-[#1F8A57] pl-4">
               <h4 className="font-inter-tight font-bold text-[18px] text-[#111111] mb-2">
                 Protect the interface
               </h4>
@@ -81,13 +81,14 @@ export default function ConsortiaBlock() {
       </div>
 
       {/* ── STAT CALLOUT ── */}
-      <div className="mx-auto mt-12 w-full max-w-6xl bg-[#0F2A1A] px-8 py-10 sm:px-12 sm:py-12">
+      <div className="rv d2 mx-auto mt-12 w-full max-w-6xl bg-[#0F2A1A] px-8 py-10 sm:px-12 sm:py-12">
         <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-10">
 
           {/* Big number */}
           <div className="flex-shrink-0 border-r-0 pr-0 sm:border-r sm:border-[#1F8A57]/30 sm:pr-10">
             <span
               className="font-inter-tight font-extrabold leading-none text-[#6FCB5A]"
+              data-cu="93%"
               style={{ fontSize: "clamp(4rem,8vw,6rem)", letterSpacing: "-0.035em" }}
             >
               93%

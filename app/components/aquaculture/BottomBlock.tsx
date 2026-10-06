@@ -7,10 +7,12 @@ export default function BottomBlock() {
     <>
       <section
         className="relative w-full overflow-hidden px-6 py-20 md:px-12 lg:px-20 xl:px-32"
+        data-n="Pond Bottom"
+        data-motion
         style={{ background: "linear-gradient(180deg, #E5F0D4 0%, #DDE9C8 50%, #D1E4B9 100%)" }}
       >
         <div className="relative z-10 mx-auto flex max-w-6xl flex-col gap-8">
-          <div className="flex w-full flex-col items-start gap-4">
+          <div className="flex w-full flex-col items-start gap-4 rv">
             <div className="flex items-center gap-3">
               <div className="h-[1.5px] w-7 bg-[#4b6b57]" />
               <span
@@ -59,6 +61,7 @@ export default function BottomBlock() {
           </div>
 
           <div
+            className="ph rv d2"
             style={{
               border: "1px solid #CFE3BB",
               borderTop: "3px solid #4CAF3F",
@@ -100,9 +103,9 @@ export default function BottomBlock() {
               <text x="42" y="52" fontFamily="'Newsreader', serif" fontSize="14" fill="#3C5C48" fontWeight="500">Feed, faeces, dead plankton</text>
               <text x="42" y="70" fontFamily="'Newsreader', serif" fontSize="14" fill="#3C5C48" fontWeight="500">settle daily</text>
 
-              <line x1="440" y1="90" x2="440" y2="270" stroke="#D6456A" strokeWidth="2.2" strokeDasharray="6 5" />
-              <line x1="620" y1="120" x2="620" y2="270" stroke="#D6456A" strokeWidth="2.2" strokeDasharray="6 5" />
-              <line x1="800" y1="60" x2="800" y2="270" stroke="#D6456A" strokeWidth="2.2" strokeDasharray="6 5" />
+              <line x1="440" y1="90" x2="440" y2="270" stroke="#D6456A" strokeWidth="2.2" strokeDasharray="6 5" className="flow" />
+              <line x1="620" y1="120" x2="620" y2="270" stroke="#D6456A" strokeWidth="2.2" strokeDasharray="6 5" className="flow" />
+              <line x1="800" y1="60" x2="800" y2="270" stroke="#D6456A" strokeWidth="2.2" strokeDasharray="6 5" className="flow" />
 
               <polygon points="433,90 447,90 440,82" fill="#D6456A" />
               <polygon points="613,120 627,120 620,112" fill="#D6456A" />
@@ -142,10 +145,12 @@ export default function BottomBlock() {
 
       <section
         className="w-full px-6 pb-10 pt-24 text-[#10301f] md:px-12 md:pb-14 md:pt-28 lg:px-20 lg:pb-16 lg:pt-28 xl:px-32"
+        data-n="How Toxins Form"
+        data-motion
         style={{ background: "linear-gradient(180deg, #D1E4B9 0%, #C4DEA9 50%, #D9EBC4 100%)" }}
       >
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-8 md:grid-cols-12 lg:gap-12">
-          <div className="order-2 mx-auto w-[88%] md:order-1 md:col-span-4 md:col-start-1 md:row-start-1 md:w-full md:self-center">
+          <div className="ph order-2 mx-auto w-[88%] md:order-1 md:col-span-4 md:col-start-1 md:row-start-1 md:w-full md:self-center">
             <div
               role="img"
               aria-label="Pond bottom image"
@@ -154,7 +159,7 @@ export default function BottomBlock() {
             />
           </div>
 
-          <div className="order-1 md:order-2 md:col-span-8 md:col-start-5 md:row-start-1">
+          <div className="order-1 md:order-2 md:col-span-8 md:col-start-5 md:row-start-1 rv">
             <p
               style={{ fontFamily: "var(--font-jetbrains), monospace" }}
               className="text-[10px] font-medium uppercase leading-none tracking-[0.24em] text-[#5A7A5E]"
@@ -171,7 +176,7 @@ export default function BottomBlock() {
             >
               BOTTOM
             </h2>
-            <div className="mt-3 flex flex-col gap-[6px]">
+            <div className="mt-3 flex flex-col gap-[6px] rv d1">
               <div className="flex items-center gap-2" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", letterSpacing: "0.04em", color: "#4b6b57", whiteSpace: "nowrap" }}>
                 <span style={{ display: "inline-block", width: "16px", height: "2px", background: "#B8893A", flexShrink: 0 }} />
                 No oxygen below a few mm
@@ -181,23 +186,23 @@ export default function BottomBlock() {
                 Organic load builds up every day
               </div>
             </div>
-            <h2 className="mb-5 mt-4 font-inter-tight text-[clamp(24px,2.5vw,34px)] font-bold leading-tight text-[#10301f]">
+            <h2 className="mb-5 mt-4 font-inter-tight text-[clamp(24px,2.5vw,34px)] font-bold leading-tight text-[#10301f] rv d1">
               Three toxic metabolites, one source.
             </h2>
             <div className="grid grid-cols-1 gap-px border border-[#CFE3BB] bg-[#CFE3BB] sm:grid-cols-2">
-              <article className="bg-[#FFFFFF] p-4 md:p-5" style={{ borderTop: "3px solid #4CAF3F" }}>
+              <article className="rv d1 bg-[#FFFFFF] p-4 md:p-5" style={{ borderTop: "3px solid #4CAF3F" }}>
                 <h3 className="font-inter-tight text-[16px] font-bold text-[#10301f]">Ammonia (NH₃)</h3>
                 <p className="mt-1 font-newsreader text-[15px] leading-[1.5] text-[#4b6b57]">Released as proteins in feed and faeces break down in the sediment.</p>
               </article>
-              <article className="bg-[#FFFFFF] p-4 md:p-5" style={{ borderTop: "3px solid #4CAF3F" }}>
+              <article className="rv d2 bg-[#FFFFFF] p-4 md:p-5" style={{ borderTop: "3px solid #4CAF3F" }}>
                 <h3 className="font-inter-tight text-[16px] font-bold text-[#10301f]">Nitrite (NO₂⁻)</h3>
                 <p className="mt-1 font-newsreader text-[15px] leading-[1.5] text-[#4b6b57]">Accumulates when low oxygen at the bottom stops nitrification halfway.</p>
               </article>
-              <article className="bg-[#FFFFFF] p-4 md:p-5" style={{ borderTop: "3px solid #4CAF3F" }}>
+              <article className="rv d3 bg-[#FFFFFF] p-4 md:p-5" style={{ borderTop: "3px solid #4CAF3F" }}>
                 <h3 className="font-inter-tight text-[16px] font-bold text-[#10301f]">Hydrogen sulphide (H₂S)</h3>
                 <p className="mt-1 font-newsreader text-[15px] leading-[1.5] text-[#4b6b57]">Produced by sulphate-reducing bacteria such as <em>Desulfovibrio</em> in oxygen-free sediment.</p>
               </article>
-              <article className="bg-[#FFFFFF] p-4 md:p-5" style={{ borderTop: "3px solid #4CAF3F" }}>
+              <article className="rv d4 bg-[#FFFFFF] p-4 md:p-5" style={{ borderTop: "3px solid #4CAF3F" }}>
                 <h3 className="font-inter-tight text-[16px] font-bold text-[#10301f]">Released upward</h3>
                 <p className="mt-1 font-newsreader text-[15px] leading-[1.5] text-[#4b6b57]">All three diffuse into the water column, where they stress shrimp, suppress feeding and weaken immunity.</p>
               </article>

@@ -10,6 +10,8 @@ import MineralsSection from "../components/aquaculture/MineralsSection";
 import CultureCycleTable from "../components/aquaculture/CultureCycleTable";
 import AquacultureFooter from "../components/aquaculture/AquacultureFooter";
 
+import AquacultureAnimations from "../components/aquaculture/AquacultureAnimations";
+
 const interTight = Inter_Tight({
   subsets: ["latin"],
   weight: ["700", "800"],
@@ -45,6 +47,7 @@ export default function AquaculturePage() {
       <MineralsSection />
       <CultureCycleTable />
       <AquacultureFooter />
+      <AquacultureAnimations />
     </main>
   );
 }

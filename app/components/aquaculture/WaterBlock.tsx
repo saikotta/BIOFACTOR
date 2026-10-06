@@ -28,7 +28,7 @@ const ZONES = [
 
 export default function WaterBlock() {
   return (
-    <section className="relative w-full px-6 pb-16 pt-28 md:px-12 md:pb-16 md:pt-32 lg:px-20 lg:pb-20 lg:pt-36 xl:px-32" aria-label="Water column section" style={{ background: "linear-gradient(180deg, #E5F0D4 0%, #DDE9C8 50%, #D1E4B9 100%)" }}>
+    <section className="relative w-full px-6 pb-16 pt-28 md:px-12 md:pb-16 md:pt-32 lg:px-20 lg:pb-20 lg:pt-36 xl:px-32" data-n="Water Column" data-motion aria-label="Water column section" style={{ background: "linear-gradient(180deg, #E5F0D4 0%, #DDE9C8 50%, #D1E4B9 100%)" }}>
       <div className="mx-auto max-w-7xl">
 
         {/* ── GRID: LEFT (HEADER + IMAGE) | RIGHT (PARALLEL MATTER CARDS) ── */}
@@ -37,7 +37,7 @@ export default function WaterBlock() {
           {/* LEFT COLUMN: Header on top of the image, then image below */}
           <div className="flex flex-col lg:col-span-5">
             {/* Header section on the top left */}
-            <div className="mb-5">
+            <div className="mb-5 rv">
               <div className="mb-2 flex items-center gap-2">
                 <span className="h-[2px] w-6 bg-[#1F8A57]" />
                 <p className="font-jetbrains text-[11px] font-bold uppercase tracking-[0.22em] text-[#1F8A57]">
@@ -53,7 +53,7 @@ export default function WaterBlock() {
             </div>
 
             {/* Image below the header */}
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-[#CFE3BB]" style={{ boxShadow: "none" }}>
+            <div className="ph rv d2 relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-[#CFE3BB]" style={{ boxShadow: "none" }}>
               <Image
                 src="/images/aquaculture-water-column.jpg"
                 alt="Fish swimming in a pond water column"
@@ -67,8 +67,8 @@ export default function WaterBlock() {
                 className="absolute inset-0 flex flex-col justify-between py-5 pl-4"
                 style={{ pointerEvents: "none" }}
               >
-                {ZONES.map((z) => (
-                  <div key={z.label} className="flex items-center gap-2">
+                {ZONES.map((z, idx) => (
+                  <div key={z.label} className={`rv ${idx === 1 ? "d2" : "d1"} flex items-center gap-2`}>
                     <span
                       className="h-[1.5px] w-5 flex-shrink-0"
                       style={{ background: z.color, opacity: 0.9 }}
@@ -92,7 +92,7 @@ export default function WaterBlock() {
           {/* RIGHT COLUMN: Table Header + Reduced Size Zone Cards */}
           <div className="flex flex-col gap-4 lg:col-span-7 lg:pt-24">
             {/* Header of the table/cards on top right */}
-            <div className="pb-1 border-b border-[#B8D5BF]/70">
+            <div className="pb-1 border-b border-[#B8D5BF]/70 rv d1">
               <h3 className="font-inter-tight text-[26px] font-extrabold leading-snug text-[#10301f] sm:text-[30px]">
                 Keeping the water column stable.
               </h3>
@@ -100,10 +100,10 @@ export default function WaterBlock() {
 
             {/* Reduced size cards */}
             <div className="flex flex-col gap-4">
-              {ZONES.map((z) => (
+              {ZONES.map((z, idx) => (
                 <div
                   key={z.label}
-                  className="group relative flex flex-col justify-center rounded-lg border border-[#CFE3BB] bg-[#FFFFFF] p-5 sm:p-6"
+                  className={`rv ${idx === 1 ? "d2" : "d1"} group relative flex flex-col justify-center rounded-lg border border-[#CFE3BB] bg-[#FFFFFF] p-5 sm:p-6`}
                   style={{ borderTop: "3px solid #4CAF3F" }}
                 >
                   {/* Visual Depth Tag */}

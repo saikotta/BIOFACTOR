@@ -1,195 +1,448 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 
 export default function AquacultureAnimations() {
-  const [isClient, setIsClient] = useState(false);
-
   useEffect(() => {
-    setIsClient(true);
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // ------------------------------------------------------------------
+    // 1. One-Time Reveal Observer (.rv, .led, .call, .ph)
+    // Reveal once -> remain visible forever for remainder of session
+    // ------------------------------------------------------------------
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          const target = entry.target as HTMLElement;
+          if (entry.isIntersecting) {
+            target.classList.add("in", "visible");
+            observer.unobserve(target);
+          }
+        });
+      },
+      {
+        threshold: [0, 0.1],
+        rootMargin: "50px 0px 50px 0px",
+      }
+    );
+
+    document.querySelectorAll(".rv, .led, .call, .ph").forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 100 && rect.bottom > -100) {
+        el.classList.add("in", "visible");
+      } else {
+        revealObserver.observe(el);
+      }
+    });
+
+    // ------------------------------------------------------------------
+    // 2. Iframe Observer: Gut Health Section (#gut-health-sec)
+    // ------------------------------------------------------------------
+    const gutSec = document.getElementById("gut-health-sec");
+    let gutObserver: IntersectionObserver | null = null;
+
+    if (gutSec) {
+      const triggerGut = () => {
+        const iframe = gutSec.querySelector("iframe") as HTMLIFrameElement | null;
+        const doc = iframe?.contentDocument;
+        const stage = doc?.querySelector(".stage") || doc?.body;
+        if (stage) {
+          stage.classList.add("is-animated");
+        }
+        if (doc && typeof (doc.defaultView as any)?.runBars === "function") {
+          (doc.defaultView as any).runBars();
+        }
+      };
+
+      gutObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              triggerGut();
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: [0, 0.1], rootMargin: "50px 0px 50px 0px" }
+      );
+      gutObserver.observe(gutSec);
+    }
+
+    // ------------------------------------------------------------------
+    // 3. Iframe Observer: Culture Cycle Matrix (#culture-cycle-sec)
+    // ------------------------------------------------------------------
+    const matrixSec = document.getElementById("culture-cycle-sec");
+    let matrixObserver: IntersectionObserver | null = null;
+
+    if (matrixSec) {
+      const triggerMatrix = () => {
+        const iframe = matrixSec.querySelector("iframe") as HTMLIFrameElement | null;
+        const doc = iframe?.contentDocument;
+        const frameEl = doc?.querySelector(".frame");
+        const matrixEl = doc?.getElementById("culture-cycle-matrix");
+        if (frameEl && matrixEl) {
+          frameEl.classList.add("is-intro");
+          matrixEl.classList.add("is-animated", "sweep-active");
+        }
+      };
+
+      matrixObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              triggerMatrix();
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: [0, 0.1], rootMargin: "50px 0px 50px 0px" }
+      );
+      matrixObserver.observe(matrixSec);
+    }
+
+    // ------------------------------------------------------------------
+    // 4. Count-Up Observer — Reveals Once & Remains at Target Value
+    // ------------------------------------------------------------------
+    const cuElements = Array.from(document.querySelectorAll<HTMLElement>("[data-cu]"));
+    const cuMap = new Map<HTMLElement, { targetText: string; isCounting: boolean; hasCounted: boolean }>();
+
+    cuElements.forEach((el) => {
+      const rawCu = el.getAttribute("data-cu");
+      const targetText = rawCu && rawCu !== "true" && rawCu !== "false" ? rawCu : el.textContent || "";
+      cuMap.set(el, { targetText, isCounting: false, hasCounted: false });
+      if (!el.textContent || el.textContent === "true") {
+        el.textContent = targetText;
+      }
+    });
+
+    const cuObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          const el = entry.target as HTMLElement;
+          const data = cuMap.get(el);
+          if (!data) return;
+
+          if (entry.isIntersecting) {
+            if (!data.hasCounted && !data.isCounting) {
+              data.isCounting = true;
+              observer.unobserve(el);
+              const t0 = performance.now();
+              const target = data.targetText;
+              const hasDigits = /\d/.test(target);
+
+              if (!hasDigits || reduce) {
+                el.textContent = target;
+                data.isCounting = false;
+                data.hasCounted = true;
+                return;
+              }
+
+              (function runCount(now) {
+                const progress = Math.min(1, (now - t0) / 1500);
+                const ease = 1 - Math.pow(1 - progress, 3);
+                el.textContent = target.replace(/\d+/g, (n) => String(Math.round(+n * ease)));
+                if (progress < 1) {
+                  requestAnimationFrame(runCount);
+                } else {
+                  el.textContent = target;
+                  data.isCounting = false;
+                  data.hasCounted = true;
+                }
+              })(t0);
+            }
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    cuElements.forEach((el) => cuObserver.observe(el));
+
+    // ------------------------------------------------------------------
+    // 5. Single Coordinated Scroll Handler (Progress Bar & Section Rail)
+    // ------------------------------------------------------------------
+    const secElements = Array.from(document.querySelectorAll<HTMLElement>("[data-n]"));
+    const railContainer = document.getElementById("rail");
+    let railDots: HTMLAnchorElement[] = [];
+
+    if (railContainer) {
+      railContainer.innerHTML = "";
+      railDots = secElements.map((s) => {
+        const a = document.createElement("a");
+        a.title = s.dataset.n || "";
+        a.href = "#";
+        a.onclick = (ev) => {
+          ev.preventDefault();
+          s.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+        };
+        railContainer.appendChild(a);
+        return a;
+      });
+    }
+
+    let ticking = false;
+    let activeRailIndex = -1;
+    let winH = window.innerHeight;
+    let docMaxScroll = Math.max(1, document.documentElement.scrollHeight - winH);
+
+    const updateMetrics = () => {
+      winH = window.innerHeight;
+      docMaxScroll = Math.max(1, document.documentElement.scrollHeight - winH);
+    };
+
+    window.addEventListener("resize", updateMetrics, { passive: true });
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+
+      requestAnimationFrame(() => {
+        ticking = false;
+        const y = window.scrollY;
+
+        // A. Top Progress Bar
+        const bar = document.getElementById("bar");
+        if (bar) {
+          bar.style.transform = `scaleX(${y / docMaxScroll})`;
+        }
+
+        // B. Active Section Rail Dot
+        let newActiveIndex = -1;
+        for (let i = 0; i < secElements.length; i++) {
+          const r = secElements[i].getBoundingClientRect();
+          if (r.top < winH * 0.5 && r.bottom > winH * 0.3) {
+            newActiveIndex = i;
+            break;
+          }
+        }
+
+        if (railContainer) {
+          if (newActiveIndex !== activeRailIndex) {
+            activeRailIndex = newActiveIndex;
+            for (let i = 0; i < railDots.length; i++) {
+              railDots[i].classList.toggle("on", i === activeRailIndex);
+            }
+          }
+          railContainer.style.opacity = y > winH * 0.4 ? "1" : "0";
+        }
+      });
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    // ------------------------------------------------------------------
+    // Cleanup Function (Zero Listener / Observer Leaks)
+    // ------------------------------------------------------------------
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", updateMetrics);
+      revealObserver.disconnect();
+      gutObserver?.disconnect();
+      matrixObserver?.disconnect();
+      cuObserver.disconnect();
+    };
   }, []);
 
-  useEffect(() => {
-    if (!isClient) return;
+  return (
+    <>
+      {/* Top Scroll Progress Bar */}
+      <div className="bar" id="bar" aria-hidden="true" />
 
-    // Load GSAP
-    const script = document.createElement("script");
-    script.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js";
-    script.async = true;
-    document.head.appendChild(script);
+      {/* Desktop Right-Side Section Rail */}
+      <nav className="rail" id="rail" aria-label="Sections" />
 
-    script.onload = () => {
-      initAnimations();
-    };
-
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, [isClient]);
-
-  const initAnimations = () => {
-    const gsap = (window as any).gsap;
-    const ScrollTrigger = (window as any).ScrollTrigger;
-
-    if (!gsap || !ScrollTrigger) return;
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Check for reduced motion preference
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (prefersReducedMotion) {
-      return; // Disable all animations
-    }
-
-    // 1. Hero stat cards fade in
-    const statCards = document.querySelectorAll(".bg-white.border");
-    if (statCards.length > 0) {
-      gsap.fromTo(
-        statCards,
-        { y: 24, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          stagger: 0.08,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: statCards[0],
-            start: "top 85%",
-            once: true,
-          },
+      {/* Global CSS Styles matching Ruminants motion system */}
+      <style jsx global>{`
+        /* Progress Bar */
+        .bar {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 3px;
+          background: #1F8A57;
+          transform-origin: 0 50%;
+          transform: scaleX(0);
+          z-index: 60;
         }
-      );
-    }
 
-    // 2. Section headings fade in
-    const headings = document.querySelectorAll("h2");
-    headings.forEach((heading) => {
-      gsap.fromTo(
-        heading,
-        { y: 24, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: heading,
-            start: "top 85%",
-            once: true,
-          },
+        /* Section Rail */
+        .rail {
+          position: fixed;
+          right: 18px;
+          top: 50%;
+          transform: translateY(-50%);
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          z-index: 40;
+          opacity: 0;
+          transition: opacity 0.4s;
         }
-      );
-    });
-
-    // 3. Cards fade in with stagger
-    const allCards = document.querySelectorAll(".bg-white.border.border-\\[\\#D5E9D8\\]");
-    allCards.forEach((card) => {
-      gsap.fromTo(
-        card,
-        { y: 24, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 85%",
-            once: true,
-          },
+        .rail a {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: rgba(16, 48, 31, 0.25);
+          transition: transform 0.4s, background-color 0.4s;
+          display: block;
         }
-      );
-    });
-
-    // 4. Bar chart animations
-    const bars = document.querySelectorAll(".bg-\\[\\#6BBF3A\\].rounded-sm");
-    bars.forEach((bar) => {
-      const width = (bar as HTMLElement).style.width;
-      gsap.fromTo(
-        bar,
-        { width: "0%" },
-        {
-          width: width,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: bar,
-            start: "top 85%",
-            once: true,
-          },
+        .rail a.on {
+          background: #1F8A57;
+          transform: scale(1.7);
         }
-      );
-    });
 
-    // 5. Table rows fade in
-    const tableRows = document.querySelectorAll("tbody tr");
-    if (tableRows.length > 0) {
-      gsap.fromTo(
-        tableRows,
-        { y: 24, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          stagger: 0.08,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: tableRows[0],
-            start: "top 85%",
-            once: true,
-          },
+        /* Hero Masked Vertical Reveal */
+        .ln {
+          display: block;
+          overflow: hidden;
+          padding-bottom: 0.18em;
+          margin-bottom: -0.18em;
         }
-      );
-    }
-
-    // 6. Quote fade in
-    const quote = document.querySelector("blockquote");
-    if (quote) {
-      gsap.fromTo(
-        quote,
-        { y: 24, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: quote,
-            start: "top 85%",
-            once: true,
-          },
+        .ln > span {
+          display: inline-block;
+          transform: translateY(105%);
+          animation: up 1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s forwards;
         }
-      );
-    }
-
-    // 7. References fade in
-    const references = document.querySelectorAll("ol li");
-    if (references.length > 0) {
-      gsap.fromTo(
-        references,
-        { y: 24, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          stagger: 0.04,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: references[0],
-            start: "top 85%",
-            once: true,
-          },
+        .ln + .ln > span {
+          animation-delay: 0.38s;
         }
-      );
-    }
+        .ln:nth-child(3) > span {
+          animation-delay: 0.56s;
+        }
+        @keyframes up {
+          to {
+            transform: none;
+          }
+        }
 
-    // Refresh ScrollTrigger after page load
-    window.addEventListener("load", () => {
-      ScrollTrigger.refresh();
-    });
-  };
+        /* Hero Quote Fade */
+        .quote {
+          opacity: 0;
+          animation: fade 1s 0.9s forwards;
+        }
+        @keyframes fade {
+          to {
+            opacity: 1;
+          }
+        }
 
-  return null;
+        /* Global Reveal System (.rv) */
+        .rv {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: opacity 0.9s, transform 0.9s;
+        }
+        .rv.in,
+        .rv.visible {
+          opacity: 1;
+          transform: none;
+        }
+        .rv.d1 {
+          transition-delay: 0.15s;
+        }
+        .rv.d2 {
+          transition-delay: 0.3s;
+        }
+        .rv.d3 {
+          transition-delay: 0.45s;
+        }
+        .rv.d4 {
+          transition-delay: 0.6s;
+        }
+
+        /* Stats Accent Line (.led) */
+        .led {
+          position: relative;
+        }
+        .led::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: -4px;
+          height: 2px;
+          width: 0;
+          background: #6BBF3A;
+          transition: width 1.2s 0.3s;
+        }
+        .led.in::after,
+        .led.visible::after {
+          width: 60px;
+        }
+
+        /* Gas Flow Path Animation (.flow) */
+        .flow {
+          fill: none;
+          stroke-width: 2.2;
+          stroke-dasharray: 6 5;
+          animation: dash 1.6s linear infinite;
+        }
+        @keyframes dash {
+          to {
+            stroke-dashoffset: -22;
+          }
+        }
+
+        /* Photo Clip Reveal (.ph) */
+        .ph {
+          position: relative;
+          border-radius: 8px;
+          overflow: hidden;
+          clip-path: inset(0 0 100% 0 round 8px);
+          transition: clip-path 1.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+        }
+        .ph.in,
+        .ph.visible,
+        .in .ph {
+          clip-path: inset(0 0 0 0 round 8px);
+        }
+
+        /* Callout Accent Line (.call) */
+        .call {
+          position: relative;
+        }
+        .call::before {
+          content: "";
+          position: absolute;
+          left: -3px;
+          top: 0;
+          width: 3px;
+          height: 0;
+          background: #1F8A57;
+          transition: height 1.2s 0.4s;
+        }
+        .call.in::before,
+        .call.visible::before,
+        .in .call::before {
+          height: 100%;
+        }
+
+        /* Mobile Breakpoint for Rail */
+        @media (max-width: 860px) {
+          .rail {
+            display: none !important;
+          }
+        }
+
+        /* Prefers Reduced Motion Accessibility Override */
+        @media (prefers-reduced-motion: reduce) {
+          .ln > span,
+          .quote,
+          .rv,
+          .ph,
+          .flow {
+            animation: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+            clip-path: none !important;
+            transition: none !important;
+          }
+          html {
+            scroll-behavior: auto !important;
+          }
+        }
+      `}</style>
+    </>
+  );
 }

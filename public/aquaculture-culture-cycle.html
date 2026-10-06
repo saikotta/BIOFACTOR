@@ -51,16 +51,16 @@
       box-sizing: border-box;
     }
 
-    html {
+    html,
+    body {
+      overflow: hidden;
       min-width: 320px;
+      margin: 0;
       background: var(--page);
       scroll-behavior: smooth;
     }
 
     body {
-      min-width: 320px;
-      margin: 0;
-      overflow-x: hidden;
       padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
       background: radial-gradient(ellipse 70% 58% at 0 0, rgba(232, 245, 233, .92), transparent 72%), var(--page);
       color: var(--ink);
@@ -176,8 +176,8 @@
     .headline-line-mask {
       display: block;
       overflow: hidden;
-      margin-block: -.035em;
-      padding-block: .035em;
+      padding-bottom: 0.18em;
+      margin-bottom: -0.18em;
     }
 
     .headline-line {
@@ -203,13 +203,10 @@
 
     .matrix-scroll {
       width: 100%;
-      overflow-x: auto;
+      overflow-x: hidden;
       overflow-y: visible;
-      overscroll-behavior-inline: contain;
       padding: 28px 8px 20px;
       margin-top: -10px;
-      scrollbar-color: rgba(13, 79, 49, .4) transparent;
-      -webkit-overflow-scrolling: touch;
     }
 
     .matrix {
@@ -220,7 +217,22 @@
       grid-template-rows: var(--header-height) repeat(4, var(--data-height));
       column-gap: 10px;
       width: 100%;
-      min-width: 860px;
+      min-width: 0;
+    }
+
+    @media (max-width: 860px) {
+      html, body {
+        overflow: auto;
+      }
+      .matrix-scroll {
+        overflow-x: auto;
+        overscroll-behavior-inline: contain;
+        scrollbar-color: rgba(13, 79, 49, .4) transparent;
+        -webkit-overflow-scrolling: touch;
+      }
+      .matrix {
+        min-width: 860px;
+      }
     }
 
     .row-label {
@@ -973,16 +985,6 @@
           mask.appendChild(text);
           return mask;
         }));
-
-        window.requestAnimationFrame(() => {
-          frame.classList.add("is-intro");
-          matrix.classList.add("is-animated", "sweep-active");
-          const introDuration = parseFloat(getComputedStyle(frame).getPropertyValue("--intro-duration")) * 1000;
-          window.setTimeout(() => {
-            frame.classList.remove("is-intro");
-            matrix.classList.remove("is-animated", "sweep-active");
-          }, introDuration);
-        });
       });
     })();
   </script>
