@@ -165,46 +165,52 @@ export default function NutrientsMatrix() {
             SECTION 2: ROOT EXUDATES & CROP CYCLE
             With 3-Line Heading & Larger Image Size
             ========================================== */}
-        <div className="space-y-8 br-rv">
+        {/* ==========================================
+            SECTION 2: ROOT EXUDATES & CROP CYCLE
+            With 3-Line Heading & Larger Image Size
+            ========================================== */}
+        <div className="space-y-8">
           {/* Top Heading & Narrative with Larger Image Side-by-Side */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Narrative with 3-Line Heading */}
-            <div className="lg:col-span-6 space-y-5">
-              <div className="flex items-center gap-3">
+            <div className="lg:col-span-6 space-y-5 br-rv">
+              <div className="flex items-center gap-3 br-rv br-d1">
                 <span className="w-8 h-[1.5px] bg-[#2D6A4F]" />
                 <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">
                   ACROSS THE CROP CYCLE
                 </span>
               </div>
-              <h3 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-[#173522] uppercase tracking-tight leading-[1.08]">
+              <h3 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-[#173522] uppercase tracking-tight leading-[1.08] br-rv br-d1">
                 ONE BIOLOGY,<br />
                 THREE ROLES,<br />
                 FROM SOWING TO SHELF.
               </h3>
-              <p className="text-base sm:text-lg text-[#173522]/90 font-sans leading-relaxed">
+              <p className="text-base sm:text-lg text-[#173522]/90 font-sans leading-relaxed br-rv br-d2">
                 Beneficial microbes work as nutrient enablers, disease managers, and quality and shelf-life enhancers. They are coordinated by chemical signals exchanged between root and microbe.
               </p>
             </div>
 
-            {/* Right: Larger Featured `one-biology.jpg` Image */}
-            <div className="group lg:col-span-6 relative w-full h-[340px] sm:h-[380px] lg:h-[420px] rounded-2xl overflow-hidden shadow-2xl border border-[#2D6A4F]/20 cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_45px_70px_-15px_rgba(23,53,34,0.3)] active:scale-[0.98]">
-              <Image
-                src="/images/nutriants/one-biology.jpg"
-                alt="One Biology, Three Roles across the crop cycle"
-                fill
-                className="object-cover object-center transition-transform duration-[800ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-105"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                priority
-              />
+            {/* Right: Larger Featured `one-biology.jpg` Image with Scroll Parallax */}
+            <div className="group lg:col-span-6 relative w-full h-[340px] sm:h-[380px] lg:h-[420px] rounded-2xl overflow-hidden shadow-2xl border border-[#2D6A4F]/20 cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_45px_70px_-15px_rgba(23,53,34,0.3)] active:scale-[0.98] br-ph br-rv br-d1">
+              <div className="br-ph-in relative w-full h-full">
+                <Image
+                  src="/images/nutriants/one-biology.jpg"
+                  alt="One Biology, Three Roles across the crop cycle"
+                  fill
+                  className="object-cover object-center transition-transform duration-[800ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-105"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                />
+              </div>
               <div className="absolute inset-0 bg-gradient-to-t from-[#173522]/30 via-transparent to-transparent pointer-events-none transition-opacity duration-300 group-hover:opacity-100 opacity-80" />
             </div>
           </div>
 
-          {/* Full Width White Card with Hover Effect */}
-          <div className="w-full p-6 sm:p-8 lg:p-10 rounded-2xl bg-white/95 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-xl space-y-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:border-[#2D6A4F]/40 cursor-pointer">
+          {/* Full Width White Card with Slide-Up Reveal Effect */}
+          <div className="w-full p-6 sm:p-8 lg:p-10 rounded-2xl bg-white/95 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-xl space-y-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:border-[#2D6A4F]/40 cursor-pointer br-rv br-d1">
             
             {/* Top Flow Diagram (Light background + Crisp dark lines & text + Perfect Root Spacing) */}
-            <div className="w-full bg-[#F4FAF4] rounded-xl p-6 sm:p-8 text-[#173522] flex items-center justify-center border border-[#2D6A4F]/15">
+            <div className="w-full bg-[#F4FAF4] rounded-xl p-6 sm:p-8 text-[#173522] flex items-center justify-center border border-[#2D6A4F]/15 br-rv br-d1">
               <svg viewBox="0 0 700 220" className="w-full max-w-[650px] h-auto font-mono text-xs select-none">
                 {/* Main Root Line */}
                 <path d="M 80 20 L 80 175" fill="none" stroke="#173522" strokeWidth="5" strokeLinecap="round" />
@@ -249,7 +255,7 @@ export default function NutrientsMatrix() {
             </div>
 
             {/* Bottom Horizontal Narrative */}
-            <div className="pt-4 border-t border-[#173522]/15 space-y-3">
+            <div className="pt-4 border-t border-[#173522]/15 space-y-3 br-rv br-d2 br-callout">
               <div className="flex items-center gap-2">
                 <span className="font-mono text-xs font-bold text-[#2D6A4F] uppercase tracking-wider">
                   ROOT EXUDATES · SIGNALS
@@ -270,14 +276,14 @@ export default function NutrientsMatrix() {
             Strict Visual & Structural Parity with Ruminants
             ========================================== */}
         <div className="space-y-6 pt-4">
-          <div className="space-y-2">
-            <div className="flex items-center gap-3">
+          <div className="space-y-2 br-rv">
+            <div className="flex items-center gap-3 br-rv br-d1">
               <span className="w-8 h-[1.5px] bg-[#2D6A4F]" />
               <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">
                 ALONG THE CROP CYCLE MATRIX
               </span>
             </div>
-            <h3 className="font-display font-extrabold text-3xl sm:text-4xl text-[#173522] uppercase tracking-tight">
+            <h3 className="font-display font-extrabold text-3xl sm:text-4xl text-[#173522] uppercase tracking-tight br-rv br-d2">
               WHERE BIOLOGY DOES THE WORK.
             </h3>
           </div>
