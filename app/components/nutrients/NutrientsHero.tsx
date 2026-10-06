@@ -117,14 +117,14 @@ export default function NutrientsHero() {
 
             {/* Main Display Headline */}
             <h1 className="font-sans font-extrabold uppercase text-white tracking-tight leading-[0.9] text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[88px] xl:text-[96px] mb-5 max-w-[850px] drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
-              <span className="br-ln block">BIOLOGY THAT</span>
+              <span className="br-ln block"><span>BIOLOGY THAT</span></span>
               <span className="br-ln br-d1 block">
-                <span className="text-[#B8E986]">MOVES</span> NUTRIENTS
+                <span><span className="text-[#B8E986]">MOVES</span> NUTRIENTS</span>
               </span>
             </h1>
 
             {/* Subtitle Copy */}
-            <p className="font-serif italic font-normal text-white/95 leading-[1.45] tracking-tight text-[1.25rem] sm:text-[1.4rem] md:text-[1.55rem] max-w-[640px] drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
+            <p className="font-serif italic font-normal text-white/95 leading-[1.45] tracking-tight text-[1.25rem] sm:text-[1.4rem] md:text-[1.55rem] max-w-[640px] drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)] br-quote">
               Converting unavailable soil reserves into active plant nutrition through living microbial pathways.
             </p>
           </div>

@@ -7,6 +7,7 @@ import NutrientsPrimaryApplications from "../components/nutrients/NutrientsPrima
 import NutrientsSecondaryMicronutrients from "../components/nutrients/NutrientsSecondaryMicronutrients";
 import NutrientsMatrix from "../components/nutrients/NutrientsMatrix";
 import NutrientsClosing from "../components/nutrients/NutrientsClosing";
+import NutrientsAnimations from "../components/nutrients/NutrientsAnimations";
 
 const interTight = Inter_Tight({
   subsets: ["latin"],
@@ -42,6 +43,7 @@ export default function NutrientsPage() {
       {/* Closing Editorial Statement & 21 Scientific References */}
       <NutrientsClosing />
       <ProductFooter />
+      <NutrientsAnimations />
     </main>
   );
 }

@@ -299,26 +299,21 @@ export default function PoultryScrollMotion() {
         }, { threshold: 0.6 }).observe(el);
       });
 
-      // br-rv Scroll Reveal generic integration
+      // br-rv & rv Scroll Reveal generic bidirectional integration
       const rvObserver = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("br-in");
-            rvObserver.unobserve(e.target);
+        entries.forEach((entry) => {
+          const target = entry.target as HTMLElement;
+
+          if (entry.isIntersecting) {
+            target.classList.add("br-in", "in", "visible");
+          } else if (entry.intersectionRatio < 0.05) {
+            target.classList.remove("br-in", "in", "visible");
           }
         });
-      }, { threshold: 0.18 });
+      }, { threshold: [0, 0.1], rootMargin: "30px 0px 30px 0px" });
 
-      page.querySelectorAll(".br-rv, .br-callout, .br-ln, .br-quote").forEach((el) => {
-        if (!el.classList.contains("br-in") && !el.hasAttribute("data-obs")) {
-          el.setAttribute("data-obs", "1");
-          const topOffset = el.getBoundingClientRect().top;
-          if (topOffset < window.innerHeight - (reduced ? 0 : 50)) {
-            setTimeout(() => el.classList.add("br-in"), 150);
-          } else {
-            rvObserver.observe(el);
-          }
-        }
+      page.querySelectorAll(".br-rv, .rv, .br-callout, .call, .br-ln, .ln, .br-quote, .quote, .br-ph, .ph, .br-mx-wrap, .mx").forEach((el) => {
+        rvObserver.observe(el);
       });
 
       /* ═══════════════════════════════════════════════════════════

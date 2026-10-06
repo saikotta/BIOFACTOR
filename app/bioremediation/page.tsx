@@ -8,6 +8,7 @@ import BioremidationOxygenConnect from "../components/bioremediation/Bioremidati
 import BioremidationApplications from "../components/bioremediation/BioremidationApplications";
 import BioremidationMatrix from "../components/bioremediation/BioremidationMatrix";
 import BioremidationClosing from "../components/bioremediation/BioremidationClosing";
+import BioremidationAnimations from "../components/bioremediation/BioremidationAnimations";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -69,6 +70,7 @@ export default function BioremediationPage() {
         <BioremidationClosing />
       </div>
       <ProductFooter />
+      <BioremidationAnimations />
     </main>
   );
 }

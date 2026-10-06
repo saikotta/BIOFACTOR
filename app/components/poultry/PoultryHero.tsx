@@ -21,18 +21,18 @@ export default function PoultryHero() {
         <div className={styles.contentBlock}>
           <div className={styles.eyebrowWrapper}>
             <span className={styles.eyebrowLine} aria-hidden="true" />
-            <span className={`${styles.eyebrowText} br-rv br-in`}>POULTRY</span>
+            <span className={`${styles.eyebrowText} br-rv`}>POULTRY</span>
           </div>
 
           {/* Main Display Headline (3-Line Editorial Structure matching Bio-Remediation) */}
           <h1 className={styles.headline} data-pm-hero-headline>
-            <span className="br-ln br-in"><span>BIOLOGY THAT</span></span>
-            <span className="br-ln br-d1 br-in"><span><span className={styles.accentProtects}>PROTECTS</span> THE</span></span>
-            <span className="br-ln br-d2 br-in"><span>FLOCK.</span></span>
+            <span className="br-ln"><span>BIOLOGY THAT</span></span>
+            <span className="br-ln br-d1"><span><span className={styles.accentProtects}>PROTECTS</span> THE</span></span>
+            <span className="br-ln br-d2"><span>FLOCK.</span></span>
           </h1>
 
           {/* Quotation Copy matching Bio-Remediation */}
-          <p className={`${styles.quotation} br-quote br-in`} data-pm-hero-subline>
+          <p className={`${styles.quotation} br-quote`} data-pm-hero-subline>
             Every bird carries a microbial community in its gut. Its health, growth and every egg it lays depend on that community.
           </p>
         </div>
