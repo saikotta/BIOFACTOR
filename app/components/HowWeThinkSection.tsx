@@ -38,7 +38,7 @@ export default function HowWeThinkSection() {
         {/* ================================================== */}
         <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-12 w-full">
           {/* LEFT COLUMN (~50% Width) */}
-          <div className="w-full lg:w-1/2 flex flex-col justify-start">
+          <div className="w-full lg:w-1/2 flex flex-col justify-start gap-3 sm:gap-4">
             {/* Technical Mono Eyebrow */}
             <div
               className="text-[11px] sm:text-xs lg:text-[13px] font-medium uppercase tracking-[0.2em] text-[#A9E889] mb-3"
@@ -52,7 +52,7 @@ export default function HowWeThinkSection() {
 
             {/* Editorial Serif Sentence 1 */}
             <p
-              className="text-[clamp(24px,2.5vw,43px)] font-normal text-[#F4F5EC] tracking-[-0.02em] leading-[1.15]"
+              className="text-[clamp(24px,2.5vw,43px)] font-normal text-[#F4F5EC] tracking-[-0.02em] leading-[1.2]"
               style={{
                 fontFamily: 'Georgia, "Times New Roman", serif',
               }}
@@ -61,13 +61,13 @@ export default function HowWeThinkSection() {
             </p>
 
             {/* Oversized Sans Word */}
-            <div className="text-[clamp(72px,9vw,155px)] font-bold text-[#F4F5EC] tracking-[-0.055em] leading-[0.86] my-2 sm:my-3">
+            <div className="text-[clamp(72px,9vw,155px)] font-bold text-[#F4F5EC] tracking-[-0.055em] leading-[1] my-1 sm:my-2">
               larger.
             </div>
 
             {/* Editorial Serif Sentence 2 */}
             <p
-              className="text-[clamp(24px,2.5vw,43px)] font-normal text-[#F4F5EC] tracking-[-0.02em] leading-[1.15]"
+              className="text-[clamp(24px,2.5vw,43px)] font-normal text-[#F4F5EC] tracking-[-0.02em] leading-[1.2]"
               style={{
                 fontFamily: 'Georgia, "Times New Roman", serif',
               }}
@@ -224,7 +224,6 @@ export default function HowWeThinkSection() {
     </section>
   );
 }
-
 
 
 

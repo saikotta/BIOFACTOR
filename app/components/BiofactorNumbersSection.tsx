@@ -17,15 +17,15 @@ const NUMBERS_EXCLUSION_ZONES = [
 const STATISTICS = [
   // ROW 1
   { number: "11", label: "PATENTS GRANTED" },
-  { number: "60+", label: "PROPRIETARY AND DEPOSITED STRAINS" },
-  { number: "100+", label: "PRODUCTS ACROSS SIX VERTICALS" },
-  { number: "550+", label: "TEAM MEMBERS" },
-  { number: "2000+", label: "DEALERS’ NETWORK" },
+  { number: "350+", label: "PROPRIETARY AND DEPOSITED STRAINS" },
+  { number: "200+", label: "PRODUCTS ACROSS SIX VERTICALS" },
+  { number: "600+", label: "TEAM MEMBERS" },
+  { number: "3000+", label: "DEALERS’ NETWORK" },
   // ROW 2
   { number: "2", label: "COUNTRIES BEYOND BHARAT" },
   { number: "20+", label: "INDIAN STATES" },
   { number: "2014", label: "FOUNDED, HYDERABAD" },
-  { number: "5 Lakhs+", label: "HAPPY FARMERS" },
+  { number: "1 Million+", label: "HAPPY FARMERS" },
 ];
 
 export default function BiofactorNumbersSection() {
@@ -80,20 +80,6 @@ export default function BiofactorNumbersSection() {
         {/* ELEGANT TOP COMPOSITION (HEADLINE REMOVED, PRESERVED COPY RE-INTEGRATED) */}
         <div className="max-w-3xl flex flex-col items-start text-left space-y-3 mb-12 lg:mb-16">
           
-          {/* Eyebrow */}
-          <div
-            className={`flex items-center gap-2.5 transition-all duration-700 ease-out ${
-              isRevealed || prefersReducedMotion
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-3"
-            }`}
-          >
-            <span className="w-2 h-2 rounded-full bg-[#059669] animate-pulse" />
-            <span className="text-xs sm:text-sm font-mono font-semibold tracking-[0.2em] text-[#059669] uppercase">
-              THE NUMBER BEHIND THE NAME
-            </span>
-          </div>
-
           {/* Primary Statement */}
           <h2
             className={`text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#071a14] leading-[1.2] transition-all duration-800 ease-out ${

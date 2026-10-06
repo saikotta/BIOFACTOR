@@ -194,7 +194,7 @@ export default function AboutSoilCompanySection() {
                     : "opacity-0"
                 }`}
             >
-              Biofac Inputs Private Limited, operating as Biofactor Biologicals, is a DSIR-recognised agri-biologicals company headquartered in Hyderabad. We’re built around two things: microbes and minerals &mdash; the Microbe &amp; Mineral&trade; platform is the center of our product portfolio &mdash; alongside a small, science-backed line of Bio Controls for pest and soil-borne diseases.
+              Biofac Inputs Private Limited, operating as Biofactor Biologicals, is a DSIR-recognised biotech company headquartered in Hyderabad. We’re built around two things: microbes and minerals &mdash; the Microbe &amp; Mineral&trade; platform is the center of our product portfolio.
             </p>
 
             {/* STAGE 2: Main Soil Company / OneHealth Statement */}
@@ -221,7 +221,7 @@ export default function AboutSoilCompanySection() {
           <div className="w-full lg:w-[56%] xl:w-[58%] max-w-[680px] xl:max-w-[700px] shrink-0 lg:-ml-[80px] xl:-ml-[96px]">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-4 lg:gap-5">
 
-              {/* STAGE 3: Card 1 - PRODUCT RANGE (100+) */}
+              {/* STAGE 3: Card 1 - PRODUCT RANGE (200+) */}
               <div
                 className={`relative overflow-hidden p-5 sm:p-6 rounded-[14px] flex flex-col justify-between h-[180px] min-h-[180px] lg:col-start-3 bg-[#176B3A] text-white ${
                   prefersReducedMotion
@@ -243,7 +243,7 @@ export default function AboutSoilCompanySection() {
                   </span>
                   <div>
                     <div className="text-[34px] sm:text-[36px] font-bold tracking-[-0.035em] leading-[0.95] mb-1.5">
-                      100+
+                      200+
                     </div>
                     <div className="text-[14px] sm:text-[15px] font-medium leading-[1.25] text-white/95 max-w-[110px] sm:max-w-[115px]">
                       products, six<br />verticals
@@ -268,7 +268,7 @@ export default function AboutSoilCompanySection() {
 
               {/* STAGE 3: Card 2 - VERTICALS */}
               <div
-                className={`relative overflow-hidden p-5 sm:p-6 rounded-[14px] flex flex-col justify-start h-[180px] min-h-[180px] lg:col-start-2 bg-[#2F7A44] text-white ${
+                className={`relative overflow-hidden p-5 sm:p-6 rounded-[14px] flex flex-col justify-between h-[180px] min-h-[180px] lg:col-start-2 bg-[#2F7A44] text-white ${
                   prefersReducedMotion
                     ? "opacity-100"
                     : isFrame4Animated
@@ -277,16 +277,16 @@ export default function AboutSoilCompanySection() {
                 }`}
               >
                 <div
-                  className={`relative z-10 flex flex-col justify-start h-full ${
+                  className={`relative z-10 flex flex-col justify-between h-full ${
                     !prefersReducedMotion && isFrame4Animated
                       ? "animate-s4-card-inner-2 opacity-65 fill-mode-forwards"
                       : ""
                   }`}
                 >
-                  <span className="text-[13px] sm:text-[14px] font-semibold tracking-[0.03em] uppercase leading-none text-white/80 block mb-3">
+                  <span className="text-[13px] sm:text-[14px] font-semibold tracking-[0.03em] uppercase leading-none text-white/80 block mb-1">
                     VERTICALS
                   </span>
-                  <div className="text-[14px] sm:text-[15px] font-medium leading-[1.25] text-white/95 w-full mt-0.5">
+                  <div className="text-[12px] sm:text-[13px] font-medium leading-[1.2] text-white/95 w-full">
                     <span className="whitespace-nowrap">Agri &middot;</span>{" "}
                     <span className="whitespace-nowrap">Aqua &middot;</span>{" "}
                     <span className="whitespace-nowrap">Poultry</span>
@@ -309,7 +309,7 @@ export default function AboutSoilCompanySection() {
                 </svg>
               </div>
 
-              {/* STAGE 3: Card 3 - IP (6 patents) */}
+              {/* STAGE 3: Card 3 - IP (11 patents) */}
               <div
                 className={`relative overflow-hidden p-5 sm:p-6 rounded-[14px] flex flex-col justify-between h-[180px] min-h-[180px] lg:col-start-3 bg-[#C8E4A9] text-[#17251C] ${
                   prefersReducedMotion
@@ -329,12 +329,12 @@ export default function AboutSoilCompanySection() {
                   <span className="text-[13px] sm:text-[14px] font-semibold tracking-[0.03em] uppercase leading-none text-[#155B2A] block">
                     IP
                   </span>
-                  <div>
-                    <div className="text-[27px] sm:text-[29px] font-bold text-[#155B2A] tracking-[-0.025em] leading-[1.02] mb-1.5">
-                      6 patents
+                  <div className="max-w-[calc(100%-40px)]">
+                    <div className="text-[20px] sm:text-[22px] font-bold text-[#155B2A] tracking-[-0.025em] leading-[1.05] mb-1.5">
+                      11 patents granted
                     </div>
-                    <div className="text-[14px] sm:text-[15px] font-medium leading-[1.25] text-[#17251C]/85 max-w-[125px] sm:max-w-[135px]">
-                      60+ filed / deposited<br />strains
+                    <div className="text-[12px] sm:text-[13px] font-medium leading-[1.2] text-[#17251C]/85 max-w-[150px]">
+                      350+ proprietary and patent deposited strains
                     </div>
                   </div>
                 </div>
@@ -352,7 +352,7 @@ export default function AboutSoilCompanySection() {
                 </svg>
               </div>
 
-              {/* STAGE 3: Card 4 - DOMESTIC REACH (16) */}
+              {/* STAGE 3: Card 4 - DOMESTIC REACH (20+) */}
               <div
                 className={`relative overflow-hidden p-5 sm:p-6 rounded-[14px] flex flex-col justify-between h-[180px] min-h-[180px] lg:col-start-1 bg-[#C8E4A9] text-[#17251C] ${
                   prefersReducedMotion
@@ -374,7 +374,7 @@ export default function AboutSoilCompanySection() {
                   </span>
                   <div>
                     <div className="text-[34px] sm:text-[36px] font-bold text-[#155B2A] tracking-[-0.035em] leading-[0.95] mb-1.5">
-                      16
+                      20+
                     </div>
                     <div className="text-[14px] sm:text-[15px] font-medium leading-[1.25] text-[#17251C]/85 max-w-[120px] sm:max-w-[128px]">
                       Indian states,<br />3,000+ dealers

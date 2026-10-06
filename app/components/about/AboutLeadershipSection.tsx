@@ -1,208 +1,257 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-const LEADERS = [
-  {
-    name: "Dr. L.N. Reddy",
-    role: "Founder & CEO",
-  },
-  {
-    name: "Dr. Anil Ahire",
-    role: "Director",
-  },
-  {
-    name: "Krishna Murali",
-    role: "Director",
-  },
-  {
-    name: "S. Reddy",
-    role: "Director, R&D",
-  },
+const TEAM = [
+  { name: "Dr. L.N. Reddy", role: "Founder & CEO", initials: "LR" },
+  { name: "Dr. Anil Ahire", role: "Director", initials: "AA" },
+  { name: "Krishna Murali", role: "Director", initials: "KM" },
+  { name: "S. Reddy", role: "Director, R&D", initials: "SR" },
 ];
 
-export default function AboutLeadershipSection() {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+const STYLES = `
+  .bio-leadership {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 80px 78px 100px;
+    color: #0c3319;
+    font-family: var(--font-poppins), Poppins, system-ui, sans-serif;
+  }
+  .bio-leadership-kicker {
+    display: block;
+    margin-bottom: 14px;
+    color: #17602d;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .bio-leadership-title {
+    max-width: 520px;
+    color: #17602d;
+    font-size: clamp(32px, 4.4vw, 48px);
+    font-weight: 700;
+    letter-spacing: -.01em;
+    line-height: 1.15;
+  }
+  .bio-leadership-team {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 40px;
+    margin: 72px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .bio-leadership-member {
+    min-width: 0;
+    text-align: center;
+  }
+  .bio-leadership-badge {
+    position: relative;
+    width: 132px;
+    height: 132px;
+    margin: 0 auto 28px;
+  }
+  .bio-leadership-ring {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+  .bio-leadership-ring circle {
+    fill: none;
+    stroke-width: 1.5;
+  }
+  .bio-leadership-track {
+    stroke: rgba(23, 96, 45, .15);
+  }
+  .bio-leadership-draw {
+    stroke: #17602d;
+    stroke-dasharray: 402;
+    stroke-dashoffset: 402;
+    transition: stroke-dashoffset 1.6s cubic-bezier(.65, 0, .25, 1);
+    transition-delay: calc(var(--member-index) * .18s);
+  }
+  .bio-leadership-fill {
+    position: absolute;
+    inset: 8px;
+    border-radius: 50%;
+    background: #17602d;
+    transform: scale(0);
+    transition: transform .6s cubic-bezier(.22, .8, .2, 1);
+  }
+  .bio-leadership-initials {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: #17602d;
+    font-size: 34px;
+    font-weight: 600;
+    letter-spacing: -.02em;
+    opacity: 0;
+    transform: scale(.8);
+    transition:
+      opacity .8s cubic-bezier(.22, .8, .2, 1),
+      transform .8s cubic-bezier(.22, .8, .2, 1),
+      color .4s;
+    transition-delay: calc(var(--member-index) * .18s + .7s);
+  }
+  .bio-leadership-name {
+    color: #0c3319;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity .8s cubic-bezier(.22, .8, .2, 1),
+      transform .8s cubic-bezier(.22, .8, .2, 1),
+      color .4s;
+    transition-delay: calc(var(--member-index) * .18s + .9s);
+  }
+  .bio-leadership-role {
+    margin-top: 6px;
+    color: #5d6f62;
+    font-size: 14px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity .8s cubic-bezier(.22, .8, .2, 1),
+      transform .8s cubic-bezier(.22, .8, .2, 1);
+    transition-delay: calc(var(--member-index) * .18s + 1.05s);
+  }
+  .bio-leadership-team.is-visible .bio-leadership-draw {
+    stroke-dashoffset: 0;
+  }
+  .bio-leadership-team.is-visible .bio-leadership-initials,
+  .bio-leadership-team.is-visible .bio-leadership-name,
+  .bio-leadership-team.is-visible .bio-leadership-role {
+    opacity: 1;
+    transform: none;
+  }
+  .bio-leadership-member:hover .bio-leadership-fill {
+    transform: scale(1);
+  }
+  .bio-leadership-member:hover .bio-leadership-initials {
+    color: #fff;
+    transform: scale(1.06);
+    transition-delay: 0s;
+  }
+  .bio-leadership-team.is-visible .bio-leadership-member:hover .bio-leadership-name {
+    color: #17602d;
+    transition-delay: 0s;
+  }
+  @media (max-width: 900px) {
+    .bio-leadership {
+      padding: 56px 24px 72px;
+    }
+    .bio-leadership-team {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 56px 24px;
+      margin-top: 48px;
+    }
+  }
+  @media (max-width: 520px) {
+    .bio-leadership-name {
+      font-size: 18px;
+    }
+    .bio-leadership-team {
+      column-gap: 12px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bio-leadership *,
+    .bio-leadership *::before,
+    .bio-leadership *::after {
+      transition: none !important;
+    }
+    .bio-leadership-draw {
+      stroke-dashoffset: 0;
+    }
+    .bio-leadership-initials,
+    .bio-leadership-name,
+    .bio-leadership-role {
+      opacity: 1;
+      transform: none;
+    }
+  }
+`;
 
-  // Frame 6 Replay State Machine
-  const [animationCycle, setAnimationCycle] = useState(0);
-  const armedRef = useRef(true);
-  const sectionRef = useRef<HTMLElement>(null);
+export default function AboutLeadershipSection() {
+  const teamRef = useRef<HTMLUListElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReducedMotion(mediaQuery.matches);
+    const team = teamRef.current;
+    if (!team) return;
 
-    const handleMediaChange = (e: MediaQueryListEvent) => {
-      setPrefersReducedMotion(e.matches);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) return;
+      const rect = team.getBoundingClientRect();
+      const visibleWidth = Math.max(0, Math.min(rect.right, window.innerWidth) - Math.max(rect.left, 0));
+      const visibleHeight = Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
+      const visibleRatio = (visibleWidth * visibleHeight) / (rect.width * rect.height);
+      if (visibleRatio >= 0.3) {
+        setIsVisible(true);
+        observer.disconnect();
+      }
     };
 
-    if ("addEventListener" in mediaQuery) {
-      mediaQuery.addEventListener("change", handleMediaChange);
-    }
-
-    // 1. PLAY OBSERVER (triggers entrance animation at >= 20% visibility)
-    const playObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (
-          entry.isIntersecting &&
-          entry.intersectionRatio >= 0.20 &&
-          armedRef.current
-        ) {
-          armedRef.current = false;
-          setAnimationCycle((prev) => prev + 1);
-        }
-      },
-      {
-        threshold: [0, 0.08, 0.14, 0.20, 0.26, 0.32],
-        rootMargin: "0px",
-      }
-    );
-
-    // 2. RE-ARM OBSERVER (re-arms armedRef when section leaves 25% expanded margin)
-    const rearmObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) {
-          armedRef.current = true;
-        }
-      },
-      {
-        threshold: 0,
-        rootMargin: "25% 0px 25% 0px",
-      }
-    );
-
-    if (sectionRef.current) {
-      playObserver.observe(sectionRef.current);
-      rearmObserver.observe(sectionRef.current);
-    }
-
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    observer.observe(team);
     return () => {
-      if (sectionRef.current) {
-        playObserver.unobserve(sectionRef.current);
-        rearmObserver.unobserve(sectionRef.current);
-      }
-      if ("removeEventListener" in mediaQuery) {
-        mediaQuery.removeEventListener("change", handleMediaChange);
-      }
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
 
-  const isAnimated = animationCycle > 0;
-
   return (
-    <section
-      ref={sectionRef}
-      className="relative w-full bg-[#EDF4ED] text-[#17251C] font-sans select-none pt-18 pb-18 sm:pt-20 sm:pb-20 lg:pt-22 lg:pb-22 border-none shadow-none overflow-hidden"
-    >
-      <div key={animationCycle} className="w-full max-w-[1450px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-20">
-        
-        {/* SECTION HEADING */}
-        <div className="mb-14 sm:mb-16 lg:mb-16">
-          <span
-            className={`block text-[11px] font-semibold tracking-[0.08em] uppercase text-[#155B2A] mb-2 ${
-              prefersReducedMotion
-                ? "opacity-100"
-                : isAnimated
-                ? "animate-s6-label opacity-0 fill-mode-forwards"
-                : "opacity-0"
-            }`}
-          >
-            LEADERSHIP
-          </span>
-          <h2 className="text-[clamp(26px,2.1vw,34px)] font-bold text-[#155B2A] tracking-[-0.025em] leading-[1.15] max-w-[400px] font-sans">
-            <div className="overflow-hidden py-0.5">
-              <span
-                className={`block ${
-                  prefersReducedMotion
-                    ? "opacity-100"
-                    : isAnimated
-                    ? "animate-s6-title-1 opacity-0 fill-mode-forwards"
-                    : "opacity-0"
-                }`}
-              >
-                The People Behind the
-              </span>
-            </div>
-            <div className="overflow-hidden py-0.5">
-              <span
-                className={`block ${
-                  prefersReducedMotion
-                    ? "opacity-100"
-                    : isAnimated
-                    ? "animate-s6-title-2 opacity-0 fill-mode-forwards"
-                    : "opacity-0"
-                }`}
-              >
-                Platform
-              </span>
-            </div>
-          </h2>
-        </div>
+    <section className="w-full bg-[#edf3ec]">
+      <style>{STYLES}</style>
+      <div className="bio-leadership">
+        <span className="bio-leadership-kicker">Leadership</span>
+        <h2 className="bio-leadership-title">The People Behind the Platform</h2>
 
-        {/* FOUR TALL LEADERSHIP CARDS GRID (WITH 3D PERSPECTIVE & LIGHT PASS) */}
-        <div className="relative mx-auto w-full max-w-[1240px] [perspective:1200px]">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 lg:gap-4">
-            {LEADERS.map((leader, idx) => {
-              const cardAnimClass = `animate-s6-card-${idx + 1}`;
-              const surfaceAnimClass = `animate-s6-surface-${idx + 1}`;
-              const plateAnimClass = `animate-s6-plate-${idx + 1}`;
-              const innerAnimClass = `animate-s6-plate-inner-${idx + 1}`;
-
-              return (
-                <div
-                  key={idx}
-                  className={`relative w-full h-[290px] sm:h-[305px] lg:h-[320px] bg-[#E3EBE3] rounded-[8px] overflow-hidden shadow-[0_2px_6px_rgba(0,0,0,0.03)] border-none ${
-                    prefersReducedMotion
-                      ? "opacity-100 transform-none"
-                      : isAnimated
-                      ? `${cardAnimClass} opacity-25 fill-mode-forwards`
-                      : "opacity-0"
-                  }`}
-                >
-                  {/* OPTICAL PORTRAIT SURFACE REVEAL SWEEP */}
-                  {!prefersReducedMotion && isAnimated && (
-                    <div
-                      className={`absolute inset-0 pointer-events-none bg-gradient-to-t from-white/14 via-white/06 to-transparent z-10 ${surfaceAnimClass}`}
-                    />
-                  )}
-
-                  {/* INSET WHITE NAME PLATE AT BOTTOM */}
-                  <div
-                    className={`absolute bottom-2.5 left-2.5 right-2.5 z-20 bg-white rounded-[6px] py-2 px-2.5 text-center flex flex-col items-center justify-center min-h-[48px] shadow-[0_2px_6px_rgba(0,0,0,0.04)] ${
-                      prefersReducedMotion
-                        ? "opacity-100"
-                        : isAnimated
-                        ? `${plateAnimClass} opacity-0 fill-mode-forwards`
-                        : "opacity-0"
-                    }`}
-                  >
-                    <div
-                      className={`w-full flex flex-col items-center justify-center ${
-                        !prefersReducedMotion && isAnimated
-                          ? `${innerAnimClass} opacity-65 fill-mode-forwards`
-                          : ""
-                      }`}
-                    >
-                      <h3 className="text-[12px] font-semibold text-[#17251C] tracking-[-0.01em] leading-tight">
-                        {leader.name}
-                      </h3>
-                      <p className="text-[9px] font-normal text-[#17251C]/70 tracking-normal mt-0.5">
-                        {leader.role}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* OPTIONAL GALLERY LIGHT PASS OVERLAY */}
-          {!prefersReducedMotion && isAnimated && (
-            <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-white/08 to-transparent z-30 animate-s6-gallery-light" />
-          )}
-        </div>
-
+        <ul
+          ref={teamRef}
+          className={`bio-leadership-team${isVisible ? " is-visible" : ""}`}
+        >
+          {TEAM.map((member, index) => (
+            <li
+              key={member.initials}
+              className="bio-leadership-member"
+              style={{ "--member-index": index } as React.CSSProperties}
+            >
+              <div className="bio-leadership-badge" aria-hidden="true">
+                <svg className="bio-leadership-ring" viewBox="0 0 132 132">
+                  <circle className="bio-leadership-track" cx="66" cy="66" r="64" />
+                  <circle className="bio-leadership-draw" cx="66" cy="66" r="64" />
+                </svg>
+                <span className="bio-leadership-fill" />
+                <span className="bio-leadership-initials">{member.initials}</span>
+              </div>
+              <h3 className="bio-leadership-name">{member.name}</h3>
+              <p className="bio-leadership-role">{member.role}</p>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

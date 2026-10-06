@@ -27,17 +27,9 @@ export default function PrimordialSection() {
       <div className="relative z-10 max-w-6xl mx-auto w-full">
         {/* Top Content Area */}
         <div className="max-w-2xl text-left">
-          {/* Eyebrow */}
-          <div className="text-xs sm:text-sm font-semibold tracking-wider uppercase text-[#07552D] mb-2 sm:mb-3">
-            Where it begins
-          </div>
-
-          {/* Main Heading with Subtle Cyan Underline Accent */}
+          {/* Main Heading */}
           <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-[48px] font-bold text-[#14231a] tracking-tight leading-[1.15]">
-            Biotechnology begins{" "}
-            <span className="relative inline-block border-b-2 border-cyan-400/90 pb-0.5">
-              here.
-            </span>
+            Biotechnology begins here.
           </h2>
         </div>
 

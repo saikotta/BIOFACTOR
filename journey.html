@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Our Journey of Impact – Biofactor Biologicals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #e3f1df;
+  font-family: 'Poppins', system-ui, sans-serif;
+  color: #4a5c4e;
+  min-height: 100vh;
+}
+
+/* ── page wrapper ──────────────────────────────── */
+.journey-section {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 64px 40px 64px 56px;
+  max-width: 1640px;
+  margin: 0 auto;
+  gap: 0;
+}
+
+/* ── left text column ──────────────────────────── */
+.journey-text {
+  flex: 0 0 252px;
+  min-width: 200px;
+  padding-right: 28px;
+  padding-top: 48px;
+}
+
+.journey-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #14702f;
+  margin-bottom: 14px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.journey-heading {
+  font-size: 1.95rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #14702f;
+  margin-bottom: 18px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s ease 0.14s, transform 0.55s ease 0.14s;
+}
+.journey-para {
+  font-size: 0.86rem;
+  line-height: 1.78;
+  color: #4a5c4e;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s ease 0.28s, transform 0.55s ease 0.28s;
+}
+.journey-eyebrow.vis,
+.journey-heading.vis,
+.journey-para.vis {
+  opacity: 1;
+  transform: none;
+}
+
+/* replay */
+.replay-btn {
+  margin-top: 26px;
+  padding: 8px 22px;
+  background: #14702f;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  font-family: inherit;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.4s ease 0.8s, background 0.2s;
+}
+.replay-btn:hover { background: #0e4e23; }
+.replay-btn.vis    { opacity: 1; }
+
+/* ── diagram scroller ──────────────────────────── */
+.journey-diagram {
+  flex: 1 1 auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+.journey-diagram-inner { min-width: 960px; }
+.journey-svg {
+  display: block;
+  width: 100%;
+  max-width: 1300px;
+  height: auto;
+}
+
+/* ── SVG pointer-event guard ───────────────────── */
+.journey-svg *          { pointer-events: none; }
+.journey-svg .hit       { pointer-events: all; cursor: pointer; }
+.journey-svg .lbl-group { pointer-events: all; cursor: pointer; }
+
+/* ── gear CSS keyframe animations ─────────────── */
+@keyframes gearCW  { to { transform: rotate(360deg);  } }
+@keyframes gearCCW { to { transform: rotate(-360deg); } }
+.gear-cw  { transform-origin: 0 0; animation: gearCW  8s linear infinite; }
+.gear-ccw { transform-origin: 0 0; animation: gearCCW 8s linear infinite; }
+
+/* ── reduced motion ────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .journey-eyebrow,
+  .journey-heading,
+  .journey-para     { opacity:1; transform:none; transition:none; }
+  .replay-btn       { opacity:1; transition:none; }
+  .gear-cw,
+  .gear-ccw         { animation:none; }
+}
+</style>
+</head>
+<body>
+
+<section class="journey-section" id="jSection">
+
+  <!-- ── left column ───────────────────────────── -->
+  <div class="journey-text">
+    <div class="journey-eyebrow" id="jEye">From 2014 to Now</div>
+    <h2 class="journey-heading"  id="jHead">Our Journey&nbsp;of Impact</h2>
+    <p  class="journey-para"     id="jPara">From a vision in 2014 to a global mission today — here's how Biofactor grew, innovated and built a healthier planet through science and nature.</p>
+    <button class="replay-btn" id="replayBtn" aria-label="Replay animation">↺ Replay</button>
+  </div>
+
+  <!-- ── diagram ────────────────────────────────── -->
+  <div class="journey-diagram">
+    <div class="journey-diagram-inner">
+      <svg id="jSvg" class="journey-svg"
+           viewBox="0 0 1300 680"
+           xmlns="http://www.w3.org/2000/svg"
+           role="img"
+           aria-label="Biofactor Biologicals journey from 2014 to 2024">
+        <defs>
+          <!-- per-box radial gradients: light centre → richer edge, never dark -->
+          <radialGradient id="rg0" cx="50%" cy="50%" r="65%">
+            <stop offset="0%" stop-color="#b8ecbc"/>
+            <stop offset="100%" stop-color="#2f9444"/>
+          </radialGradient>
+          <radialGradient id="rg1" cx="50%" cy="50%" r="65%">
+            <stop offset="0%" stop-color="#fde99a"/>
+            <stop offset="100%" stop-color="#d98518"/>
+          </radialGradient>
+          <radialGradient id="rg2" cx="50%" cy="50%" r="65%">
+            <stop offset="0%" stop-color="#c4f2c8"/>
+            <stop offset="100%" stop-color="#32a057"/>
+          </radialGradient>
+          <radialGradient id="rg3" cx="50%" cy="50%" r="65%">
+            <stop offset="0%" stop-color="#aaedcc"/>
+            <stop offset="100%" stop-color="#259a62"/>
+          </radialGradient>
+          <radialGradient id="rg4" cx="50%" cy="50%" r="65%">
+            <stop offset="0%" stop-color="#f0f0a0"/>
+            <stop offset="100%" stop-color="#8fa020"/>
+          </radialGradient>
+          <radialGradient id="rg5" cx="50%" cy="50%" r="65%">
+            <stop offset="0%" stop-color="#ccf2b0"/>
+            <stop offset="100%" stop-color="#3fa043"/>
+          </radialGradient>
+          <radialGradient id="rg6" cx="50%" cy="50%" r="65%">
+            <stop offset="0%" stop-color="#a4eece"/>
+            <stop offset="100%" stop-color="#23946a"/>
+          </radialGradient>
+          <radialGradient id="rg7" cx="50%" cy="50%" r="65%">
+            <stop offset="0%" stop-color="#fde5b0"/>
+            <stop offset="100%" stop-color="#c2701a"/>
+          </radialGradient>
+          <radialGradient id="rg8" cx="50%" cy="50%" r="65%">
+            <stop offset="0%" stop-color="#fef3b0"/>
+            <stop offset="100%" stop-color="#d89a1e"/>
+          </radialGradient>
+        </defs>
+        <!-- JS fills the rest -->
+      </svg>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   HELPERS
+═══════════════════════════════════════════════════════════════ */
+const NS = 'http://www.w3.org/2000/svg';
+const D2R = Math.PI / 180;
+
+function svgEl(tag, attrs, parent) {
+  const e = document.createElementNS(NS, tag);
+  if (attrs) for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, String(v));
+  if (parent) parent.appendChild(e);
+  return e;
+}
+
+function pt(cx, cy, r, deg) {
+  return [cx + r * Math.cos(deg * D2R), cy + r * Math.sin(deg * D2R)];
+}
+
+// Annular sector path (gap in degrees at each edge)
+function sectorD(cx, cy, ro, ri, a0, a1, gap = 2) {
+  const s = a0 + gap, e = a1 - gap;
+  const [x0, y0] = pt(cx, cy, ro, s);
+  const [x1, y1] = pt(cx, cy, ro, e);
+  const [x2, y2] = pt(cx, cy, ri, e);
+  const [x3, y3] = pt(cx, cy, ri, s);
+  const lg = (e - s) > 180 ? 1 : 0;
+  return `M${x0},${y0} A${ro},${ro} 0 ${lg},1 ${x1},${y1}` +
+         ` L${x2},${y2} A${ri},${ri} 0 ${lg},0 ${x3},${y3} Z`;
+}
+
+// Inner-ring decorative arc
+function innerArcD(cx, cy, ri, a0, a1, gap = 5) {
+  const s = a0 + gap, e = a1 - gap, r = ri + 7;
+  const [x0, y0] = pt(cx, cy, r, s);
+  const [x1, y1] = pt(cx, cy, r, e);
+  const lg = (e - s) > 180 ? 1 : 0;
+  return `M${x0},${y0} A${r},${r} 0 ${lg},1 ${x1},${y1}`;
+}
+
+// Outline arc (outside of ring)
+function outArcD(cx, cy, ro, a0, a1) {
+  const [x0, y0] = pt(cx, cy, ro, a0);
+  const [x1, y1] = pt(cx, cy, ro, a1);
+  const lg = (a1 - a0) > 180 ? 1 : 0;
+  return `M${x0},${y0} A${ro},${ro} 0 ${lg},1 ${x1},${y1}`;
+}
+
+function mid(a, b) { return (a + b) / 2; }
+
+/* ═══════════════════════════════════════════════════════════════
+   LAYOUT DATA
+═══════════════════════════════════════════════════════════════ */
+const RO = 120, RI = 58;   // outer / inner radius
+
+// Ring centres and types
+const RINGS = [
+  { cx: 490, cy: 380, type: 'bowl', oe: 14 },   // oe = outline extra
+  { cx: 680, cy: 348, type: 'hill', oe: 24 },
+  { cx: 870, cy: 380, type: 'bowl', oe: 14 },
+];
+
+// Box definitions
+// s/e = start/end angle in SVG degrees (y-down, CW positive)
+// Bowl arcs (lower half): angles 0–180
+// Hill arcs (upper half): angles 180–360
+// dotFrac: position of leader dot along (RI→RO) from RI
+const BOXES = [
+  // ── Bowl 1 ──────────────────────────────────────────────────────────────
+  { ring:0, s:120, e:180, rg:'rg0', year:'2014', icon:'leaf',
+    desc:['Establishment and manufacturing of','Biofertilizers in AP & TG'],
+    dir:'left',  lx: 282, ly: 360, dotFrac:0.92 },
+
+  { ring:0, s:60,  e:120, rg:'rg1', year:'2016', icon:'hen',
+    desc:['Entered into poultry segments &','Manufacturing of micron sized nutrients'],
+    dir:'below', lx: 490, ly: 558, dotFrac:0.5  },
+
+  { ring:0, s:0,   e:60,  rg:'rg2', year:'2017', icon:'fish',
+    desc:['Started Aqua Division'],
+    dir:'below', lx: 596, ly: 540, dotFrac:0.12 },
+
+  // ── Hill ────────────────────────────────────────────────────────────────
+  { ring:1, s:180, e:230, rg:'rg3', year:'2018', icon:'flask',
+    desc:['AADHAAR R&D centre','recognised by DSIR'],
+    dir:'left',  lx: 468, ly: 248, dotFrac:0.78 },
+
+  { ring:1, s:230, e:310, rg:'rg4', year:'2019', icon:'cow',
+    desc:['Started manufacturing of','large animals feed supplements'],
+    dir:'above', lx: 680, ly: 128, dotFrac:0.5  },
+
+  { ring:1, s:310, e:360, rg:'rg5', year:'2020', icon:'pins',
+    desc:['Started business expansion','in MH, KA and TN'],
+    dir:'right', lx: 902, ly: 248, dotFrac:0.22 },
+
+  // ── Bowl 2 ──────────────────────────────────────────────────────────────
+  { ring:2, s:120, e:180, rg:'rg6', year:'2022', icon:'magnify',
+    desc:['Research collaboration with','IIHR, IIOR, ANGRAU'],
+    dir:'below', lx: 840, ly: 555, dotFrac:0.92 },
+
+  { ring:2, s:60,  e:120, rg:'rg7', year:'2023', icon:'ladybug',
+    desc:['Research collaboration with CIRCOT','& Started Biocontrols division'],
+    dir:'below', lx: 940, ly: 572, dotFrac:0.5  },
+
+  { ring:2, s:0,   e:60,  rg:'rg8', year:'2024', icon:'tractor',
+    desc:['Operation in 16 states'],
+    dir:'right', lx:1090, ly: 360, dotFrac:0.12 },
+];
+
+/* ═══════════════════════════════════════════════════════════════
+   BUILD SVG
+═══════════════════════════════════════════════════════════════ */
+const svg  = document.getElementById('jSvg');
+
+// Background
+svgEl('rect', { x:0, y:0, width:1300, height:680, fill:'#e3f1df' }, svg);
+
+// ── Outline arcs (one per ring) ──────────────────────────────
+for (const rg of RINGS) {
+  const [a0, a1] = rg.type === 'bowl' ? [0, 180] : [180, 360];
+  svgEl('path', {
+    d: outArcD(rg.cx, rg.cy, RO + rg.oe, a0, a1),
+    fill: 'none', stroke: '#3f9a52', 'stroke-width': 1.4, opacity: 0.5
+  }, svg);
+}
+
+/* ── Illustration helpers ────────────────────────────────── */
+const IFS = 'rgba(255,255,240,0.18)';   // fill
+const IST = 'rgba(255,255,240,0.92)';   // stroke
+const SW  = 2.4;
+
+function illus(parent, icon) {
+  // parent is already translated to the icon centre
+  function add(tag, a) { return svgEl(tag, { fill: IFS, stroke: IST, 'stroke-width': SW, ...a }, parent); }
+  function line(x1,y1,x2,y2,extra) { return svgEl('line', { x1,y1,x2,y2, stroke:IST, 'stroke-width':SW, fill:'none', ...extra }, parent); }
+  function circ(cx,cy,r,extra) { return svgEl('circle',{cx,cy,r, fill:IFS, stroke:IST,'stroke-width':SW,...extra},parent); }
+  function path(d,extra) { return svgEl('path',{d, fill:IFS, stroke:IST,'stroke-width':SW,...extra},parent); }
+
+  if (icon === 'leaf') {
+    add('ellipse', { cx:0,cy:0, rx:13,ry:19, transform:'rotate(-20)' });
+    line(0,-19, 0,17, { transform:'rotate(-20)', 'stroke-width':1.4, opacity:0.7 });
+    line(0,-6,  7,1,  { transform:'rotate(-20)', 'stroke-width':1.2, opacity:0.6 });
+    line(0,4,  -6,9,  { transform:'rotate(-20)', 'stroke-width':1.2, opacity:0.6 });
+    for (const [dx,dy] of [[-17,9],[17,4],[-10,-13]]) {
+      svgEl('circle',{cx:dx,cy:dy,r:3.2,fill:'none',stroke:IST,'stroke-width':1.4},parent);
+      svgEl('circle',{cx:dx,cy:dy,r:0.9,fill:IST},parent);
+    }
+  } else if (icon === 'hen') {
+    add('ellipse', { cx:2,cy:2, rx:14,ry:11 });
+    circ(16,-10,7);
+    path('M13,-17 Q16,-22 18,-17 Q20,-22 22,-17');
+    add('polygon', { points:'22,-10 28,-12 22,-8', 'stroke-width':1.4 });
+    path('M-12,-2 Q-22,-14 -18,-3 Q-24,-8 -16,4', { fill:'none' });
+    svgEl('circle',{cx:18,cy:-11,r:1.8,fill:IST},parent);
+  } else if (icon === 'fish') {
+    add('ellipse', { cx:0,cy:-2, rx:18,ry:10 });
+    path('M-18,-6 Q-28,-2 -18,4');
+    svgEl('circle',{cx:12,cy:-4,r:2.2,fill:IST},parent);
+    path('M0,-12 Q5,-18 10,-12', { fill:'none' });
+    path('M-24,12 Q-18,7 -12,12 Q-6,7 0,12 Q6,7 12,12 Q18,7 24,12',
+         { fill:'none','stroke-width':1.7,opacity:0.75 });
+  } else if (icon === 'flask') {
+    path('M-6,-20 L-6,0 L-18,18 L18,18 L6,0 L6,-20 Z');
+    line(-8,-20, 8,-20, {});
+    for (const [bx,by] of [[-8,6],[2,12],[7,4]])
+      svgEl('circle',{cx:bx,cy:by,r:2.8,fill:'none',stroke:IST,'stroke-width':1.4,opacity:0.8},parent);
+  } else if (icon === 'cow') {
+    add('ellipse', { cx:0,cy:4, rx:18,ry:15 });
+    path('M-14,-12 Q-22,-26 -8,-20', { fill:'none' });
+    path('M14,-12 Q22,-26 8,-20',    { fill:'none' });
+    add('ellipse', { cx:-22,cy:-4, rx:5,ry:7, 'stroke-width':1.7 });
+    add('ellipse', { cx:22, cy:-4, rx:5,ry:7, 'stroke-width':1.7 });
+    svgEl('circle',{cx:-7,cy:0,r:2.8,fill:'none',stroke:IST,'stroke-width':1.4},parent);
+    svgEl('circle',{cx: 7,cy:0,r:2.8,fill:'none',stroke:IST,'stroke-width':1.4},parent);
+    add('ellipse', { cx:-5,cy:11, rx:3.5,ry:2.5, 'stroke-width':1.4 });
+    add('ellipse', { cx: 5,cy:11, rx:3.5,ry:2.5, 'stroke-width':1.4 });
+  } else if (icon === 'pins') {
+    circ(0,-14,8);  path('M0,-6 L0,10',{fill:'none'});
+    svgEl('ellipse',{cx:0,cy:14,rx:7,ry:3,fill:'none',stroke:IST,'stroke-width':1.3,opacity:0.6},parent);
+    circ(-18,-5,5,{'stroke-width':1.7}); path('M-18,0 L-18,11',{fill:'none','stroke-width':1.7});
+    circ( 18,-8,5,{'stroke-width':1.7}); path('M18,-3 L18,8', {fill:'none','stroke-width':1.7});
+  } else if (icon === 'magnify') {
+    circ(-4,-4,13);
+    line(6,6, 18,18, {'stroke-width':SW+0.6});
+    svgEl('ellipse',{cx:-4,cy:-4,rx:6,ry:9,fill:'none',stroke:IST,'stroke-width':1.4,transform:'rotate(-15,-4,-4)'},parent);
+    line(-4,-13,-4,5,{transform:'rotate(-15,-4,-4)','stroke-width':1.2,opacity:0.75});
+  } else if (icon === 'ladybug') {
+    add('ellipse', { cx:0,cy:3, rx:13,ry:15 });
+    circ(0,-16,6);
+    line(0,-13,0,18, {});
+    for (const [sx,sy] of [[-5,0],[5,0],[-5,10],[5,10]])
+      svgEl('circle',{cx:sx,cy:sy,r:3,fill:'none',stroke:IST,'stroke-width':1.4},parent);
+    path('M-4,-21 Q-10,-29 -6,-35',{fill:'none','stroke-width':1.5});
+    path('M4,-21 Q10,-29 6,-35', {fill:'none','stroke-width':1.5});
+    svgEl('circle',{cx:-6,cy:-35,r:1.8,fill:IST},parent);
+    svgEl('circle',{cx: 6,cy:-35,r:1.8,fill:IST},parent);
+  } else if (icon === 'tractor') {
+    svgEl('rect',{x:-20,y:-14,width:36,height:22,rx:4,fill:IFS,stroke:IST,'stroke-width':SW},parent);
+    svgEl('rect',{x: -8,y:-24,width:20,height:14,rx:3,fill:IFS,stroke:IST,'stroke-width':SW},parent);
+    svgEl('circle',{cx:-10,cy:16,r:15,fill:'none',stroke:IST,'stroke-width':SW},parent);
+    svgEl('circle',{cx:-10,cy:16,r: 6,fill:'none',stroke:IST,'stroke-width':1.3},parent);
+    svgEl('circle',{cx: 20,cy:16,r: 9,fill:'none',stroke:IST,'stroke-width':SW},parent);
+    line(-28,31, 34,31, {'stroke-width':1.5,opacity:0.55});
+  }
+}
+
+/* ── Gear-path helper ─────────────────────────── */
+function gearPath(teeth=10, ro=25, ri=18) {
+  let d = '';
+  for (let i = 0; i < teeth; i++) {
+    const a = (i / teeth) * Math.PI * 2;
+    const pts = [
+      [ri*Math.cos(a),      ri*Math.sin(a)],
+      [ro*Math.cos(a+0.17), ro*Math.sin(a+0.17)],
+      [ro*Math.cos(a+0.26), ro*Math.sin(a+0.26)],
+      [ri*Math.cos(a+0.43), ri*Math.sin(a+0.43)],
+    ];
+    d += (i === 0 ? 'M' : 'L') + pts.map(p => `${p[0].toFixed(2)},${p[1].toFixed(2)}`).join(' L');
+  }
+  return d + 'Z';
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TEXTURE CIRCLES (inside each sector)
+═══════════════════════════════════════════════════════════════ */
+function textureCircles(parent, cx, cy, a0, a1) {
+  const m = mid(a0, a1);
+  const mr = (RO + RI) / 2;
+  for (const [da, dr] of [[-14,mr+12],[14,mr-10],[0,mr+2],[-24,RI+22]]) {
+    const [px,py] = pt(cx, cy, dr, m + da);
+    svgEl('circle',{cx:px,cy:py, r:8.5, fill:'rgba(255,255,255,0.17)'},parent);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BUILD BOXES
+   Transform hierarchy per box:
+     outerG   (in svg, no transform ever)
+     └─ hoverG  (CSS translate outward on hover, style only)
+        └─ bloomG  (CSS scale+rotate on bloom, style only)
+           ├─ sector path / texture / inner-arc
+           └─ illus <g> (translate to icon centre via attribute — static after creation)
+═══════════════════════════════════════════════════════════════ */
+const BSTATE = []; // per-box state objects
+
+for (let bi = 0; bi < BOXES.length; bi++) {
+  const box = BOXES[bi];
+  const ring = RINGS[box.ring];
+  const { cx, cy } = ring;
+  const { s, e, rg, year, icon, desc, dir, lx, ly, dotFrac } = box;
+
+  // ── transform stack ────────────────────────────────────────
+  const outerG = svgEl('g', {}, svg);    // never has any transform
+
+  const hoverG = svgEl('g', {}, outerG); // CSS translate only (hover)
+  hoverG.style.transformOrigin = `${cx}px ${cy}px`;
+
+  const bloomG = svgEl('g', {}, hoverG); // CSS scale+rotate (bloom animation)
+  bloomG.style.transformOrigin = `${cx}px ${cy}px`;
+  bloomG.style.opacity = '0';
+  bloomG.style.transform = `scale(0) rotate(${mid(s,e) > 270 || mid(s,e) < 90 ? -12 : 12}deg)`;
+
+  // ── sector ─────────────────────────────────────────────────
+  const sd = sectorD(cx, cy, RO, RI, s, e);
+  const sPath = svgEl('path', { d: sd, fill: `url(#${rg})` }, bloomG);
+
+  // texture circles
+  textureCircles(bloomG, cx, cy, s, e);
+
+  // inner arc accent
+  svgEl('path', {
+    d: innerArcD(cx, cy, RI, s, e),
+    fill: 'none', stroke: 'rgba(255,255,255,0.5)', 'stroke-width': 1.4, 'stroke-linecap': 'round'
+  }, bloomG);
+
+  // illustration — placed at sector mid-radius via static attribute transform
+  const m = mid(s, e);
+  const mr = (RO + RI) / 2;
+  const [ix, iy] = pt(cx, cy, mr, m);
+  const iG = svgEl('g', { transform: `translate(${ix.toFixed(1)},${iy.toFixed(1)})` }, bloomG);
+  iG.style.opacity = '0';
+  illus(iG, icon);
+
+  // ── hit-area (never moves — child of svg root, appended after visible layer) ──
+  // Will be appended to svg AFTER all visible layers so it sits on top for events
+  const hitPath = svgEl('path', {
+    d: sd,
+    fill: 'transparent', stroke: 'transparent', 'stroke-width': 10,
+    class: 'hit',
+    tabindex: '0',
+    'aria-label': `${year}: ${desc.join(' ')}`
+  }); // don't append yet
+
+  // ── label group ────────────────────────────────────────────
+  const lblG = svgEl('g', { class: 'lbl-group', tabindex: '0', 'aria-label': `${year}: ${desc.join(' ')}` }, svg);
+  lblG.style.opacity = '0';
+
+  // Leader line: dot on sector, line to label anchor
+  const dotR = RI + (RO - RI) * dotFrac;
+  const [dotX, dotY] = pt(cx, cy, dotR, m);
+  const lineLen = Math.hypot(lx - dotX, ly - dotY);
+
+  svgEl('circle', { cx: dotX, cy: dotY, r: 3, fill: '#14702f' }, lblG);
+
+  const leaderLine = svgEl('line', {
+    x1: dotX, y1: dotY, x2: lx, y2: ly,
+    stroke: '#3f9a52', 'stroke-width': 1, opacity: 0.7
+  }, lblG);
+  // use CSS style for dashoffset so CSS transition works reliably
+  leaderLine.style.strokeDasharray  = String(lineLen);
+  leaderLine.style.strokeDashoffset = String(lineLen);
+
+  // label text — width bucket
+  const LW = (dir === 'left' || dir === 'right') ? 168 : (desc.length === 1 ? 116 : 150);
+  const textX = dir === 'left'  ? lx - LW / 2
+              : dir === 'right' ? lx + LW / 2
+              : lx; // above/below: lx is already the anchor cx
+  const yearY = dir === 'above' ? ly - 26 : ly + 8;
+
+  const yearT = svgEl('text', {
+    x: textX, y: yearY,
+    'text-anchor': 'middle',
+    'font-family': "'Poppins',system-ui,sans-serif",
+    'font-size': 18, 'font-weight': 700, fill: '#14702f'
+  }, lblG);
+  yearT.textContent = year;
+
+  desc.forEach((line, li) => {
+    const dt = svgEl('text', {
+      x: textX, y: yearY + 17 + li * 14,
+      'text-anchor': 'middle',
+      'font-family': "'Poppins',system-ui,sans-serif",
+      'font-size': 11, fill: '#4a5c4e'
+    }, lblG);
+    dt.textContent = line;
+  });
+
+  BSTATE.push({ outerG, hoverG, bloomG, iG, hitPath, lblG, leaderLine, lineLen, sPath, yearT, cx, cy, s, e, dir });
+}
+
+// ── Append hit-areas on top of everything ─────────────────
+for (const bs of BSTATE) svg.appendChild(bs.hitPath);
+
+/* ═══════════════════════════════════════════════════════════════
+   GEAR BADGES
+   posG  ← attribute transform: translate to ring centre (NEVER changes)
+   animG ← style only: opacity + scale (bloom-in animation)
+   spinG ← CSS keyframe: rotate (gear-cw / gear-ccw class)
+═══════════════════════════════════════════════════════════════ */
+const GEARS = [];
+
+for (let i = 0; i < RINGS.length; i++) {
+  const { cx, cy } = RINGS[i];
+
+  // posG: pure positioning, no style transforms ever
+  const posG  = svgEl('g', { transform: `translate(${cx},${cy})` }, svg);
+
+  // animG: scale in on animation start — style only
+  const animG = svgEl('g', {}, posG);
+  animG.style.transformOrigin = '0px 0px';
+  animG.style.transform  = 'scale(0.08)';
+  animG.style.opacity    = '0';
+
+  // pulsing halo (rAF-driven attribute r/opacity — no transform involved)
+  const halo = svgEl('circle', { cx:0,cy:0, r:36, fill:'rgba(20,112,47,0.18)' }, animG);
+  const phase0 = i * (Math.PI * 2 / 3);
+  (function startHalo(h, ph0) {
+    let ph = ph0;
+    function tick() {
+      ph += 0.017;
+      const frac = (Math.sin(ph) + 1) / 2;
+      h.setAttribute('opacity', (0.28 + 0.38 * frac).toFixed(3));
+      h.setAttribute('r',       (33   + 5    * frac).toFixed(2));
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  })(halo, phase0);
+
+  // dark disc
+  svgEl('circle', { cx:0, cy:0, r:30, fill:'#14702f' }, animG);
+
+  // spinning gear outline — CSS keyframe, transform-origin 0,0
+  const dir   = i % 2 === 1 ? 'gear-ccw' : 'gear-cw';
+  const spinG = svgEl('g', { class: dir }, animG);
+  spinG.style.transformOrigin = '0px 0px';
+  svgEl('path', { d: gearPath(10,25,19), fill:'none', stroke:'rgba(255,255,255,0.68)', 'stroke-width':1.3 }, spinG);
+
+  // small leaf centrepiece — static attribute rotation, not animated
+  svgEl('ellipse', { cx:0,cy:0, rx:6,ry:9, fill:'none', stroke:'#b0f4be','stroke-width':1.4, transform:'rotate(-20)' }, animG);
+  svgEl('line',    { x1:0,y1:-9, x2:0,y2:8, stroke:'#b0f4be','stroke-width':1, transform:'rotate(-20)', opacity:0.85 }, animG);
+
+  GEARS.push(animG);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SEED + VINE
+   Seed: position via setAttribute('transform','translate(x,y)')
+         opacity via style — never mix CSS transform + attribute transform on same element
+   Vine: pure attribute 'd' updates each frame
+═══════════════════════════════════════════════════════════════ */
+const vineEl = svgEl('path', {
+  d:'', fill:'none', stroke:'#3f9a52', 'stroke-width':2.2,
+  'stroke-linecap':'round', 'stroke-linejoin':'round', opacity:0.72
+}, svg);
+
+// seed <g>: ONLY receives setAttribute('transform','translate(x,y)') — no style.transform
+const seedG = svgEl('g', { transform:'translate(-100,-100)' }, svg); // start off-canvas
+svgEl('circle', { cx:0,cy:0, r:5.5, fill:'white', stroke:'#3f9a52','stroke-width':1.8 }, seedG);
+svgEl('ellipse',{ cx:0,cy:0, rx:2.4,ry:3.8, fill:'none', stroke:'rgba(63,154,82,0.9)','stroke-width':1, transform:'rotate(-20)' }, seedG);
+seedG.style.opacity = '0'; // opacity ONLY via style — separate from positional transform
+
+/* ═══════════════════════════════════════════════════════════════
+   SEED TRAVEL PATH
+   Ring 0 (bowl): outer arc from ~150° → 10° (left to right, CW)
+   Hop bezier from ring0-right to ring1-left
+   Ring 1 (hill): outer arc from ~205° → 335°
+   Hop bezier from ring1-right to ring2-left
+   Ring 2 (bowl): outer arc from ~150° → 10°
+═══════════════════════════════════════════════════════════════ */
+function arcPts(cx, cy, r, a0, a1, n = 28) {
+  const pts = [];
+  for (let i = 0; i <= n; i++) {
+    const a = a0 + (a1 - a0) * (i / n);
+    pts.push(pt(cx, cy, r, a));
+  }
+  return pts;
+}
+
+const R0 = RINGS[0], R1 = RINGS[1], R2 = RINGS[2];
+const SEG = {
+  p0: arcPts(R0.cx, R0.cy, RO + R0.oe, 148, 12,  24),
+  p1: arcPts(R1.cx, R1.cy, RO + R1.oe, 205, 335, 28),
+  p2: arcPts(R2.cx, R2.cy, RO + R2.oe, 148, 12,  24),
+};
+
+// Total normalised lengths: [0..0.38] ring0, [0.38..0.45] hop, [0.45..0.83] ring1, [0.83..0.90] hop, [0.90..1] ring2
+const T = { r0s:0, r0e:0.38, h1s:0.38, h1e:0.45, r1s:0.45, r1e:0.83, h2s:0.83, h2e:0.90, r2s:0.90, r2e:1 };
+
+function interpPts(pts, frac) {
+  const t  = Math.max(0, Math.min(1, frac));
+  const fi = t * (pts.length - 1);
+  const lo = Math.floor(fi);
+  const hi = Math.min(lo + 1, pts.length - 1);
+  const f  = fi - lo;
+  return [pts[lo][0] + (pts[hi][0] - pts[lo][0]) * f,
+          pts[lo][1] + (pts[hi][1] - pts[lo][1]) * f];
+}
+
+function quadBez(p0, p1, cp, t) {
+  const [x0,y0] = p0, [x1,y1] = p1, [mx,my] = cp;
+  return [
+    (1-t)*(1-t)*x0 + 2*(1-t)*t*mx + t*t*x1,
+    (1-t)*(1-t)*y0 + 2*(1-t)*t*my + t*t*y1,
+  ];
+}
+
+const HOP1_CP = [
+  (SEG.p0[SEG.p0.length-1][0] + SEG.p1[0][0]) / 2,
+  Math.min(SEG.p0[SEG.p0.length-1][1], SEG.p1[0][1]) - 52,
+];
+const HOP2_CP = [
+  (SEG.p1[SEG.p1.length-1][0] + SEG.p2[0][0]) / 2,
+  Math.min(SEG.p1[SEG.p1.length-1][1], SEG.p2[0][1]) - 44,
+];
+
+function seedAt(prog) {
+  const p = Math.max(0, Math.min(1, prog));
+  if (p <= T.r0e) return interpPts(SEG.p0, (p - T.r0s) / (T.r0e - T.r0s));
+  if (p <= T.h1e) return quadBez(SEG.p0[SEG.p0.length-1], SEG.p1[0], HOP1_CP, (p - T.h1s)/(T.h1e - T.h1s));
+  if (p <= T.r1e) return interpPts(SEG.p1, (p - T.r1s) / (T.r1e - T.r1s));
+  if (p <= T.h2e) return quadBez(SEG.p1[SEG.p1.length-1], SEG.p2[0], HOP2_CP, (p - T.h2s)/(T.h2e - T.h2s));
+  return interpPts(SEG.p2, (p - T.r2s) / (T.r2e - T.r2s));
+}
+
+function vineD(prog) {
+  let d = '';
+  const f = (p) => p[0].toFixed(1) + ',' + p[1].toFixed(1);
+
+  if (prog >= T.r0s) {
+    const slice = SEG.p0.slice(0, Math.max(2, Math.ceil(Math.min((prog - T.r0s) / (T.r0e - T.r0s), 1) * SEG.p0.length)));
+    d += 'M' + f(slice[0]) + slice.slice(1).map(p => ' L'+f(p)).join('');
+  }
+  if (prog >= T.h1e) {
+    const t = Math.min((prog - T.h1s) / (T.h1e - T.h1s), 1);
+    const [hx,hy] = quadBez(SEG.p0[SEG.p0.length-1], SEG.p1[0], HOP1_CP, t);
+    const [sx,sy] = SEG.p0[SEG.p0.length-1];
+    const mx = HOP1_CP[0], my = HOP1_CP[1];
+    d += ` M${sx.toFixed(1)},${sy.toFixed(1)} Q${mx.toFixed(1)},${my.toFixed(1)} ${hx.toFixed(1)},${hy.toFixed(1)}`;
+  }
+  if (prog >= T.r1s) {
+    const slice = SEG.p1.slice(0, Math.max(2, Math.ceil(Math.min((prog - T.r1s) / (T.r1e - T.r1s), 1) * SEG.p1.length)));
+    d += ' M' + f(slice[0]) + slice.slice(1).map(p => ' L'+f(p)).join('');
+  }
+  if (prog >= T.h2e) {
+    const t = Math.min((prog - T.h2s) / (T.h2e - T.h2s), 1);
+    const [hx,hy] = quadBez(SEG.p1[SEG.p1.length-1], SEG.p2[0], HOP2_CP, t);
+    const [sx,sy] = SEG.p1[SEG.p1.length-1];
+    const mx = HOP2_CP[0], my = HOP2_CP[1];
+    d += ` M${sx.toFixed(1)},${sy.toFixed(1)} Q${mx.toFixed(1)},${my.toFixed(1)} ${hx.toFixed(1)},${hy.toFixed(1)}`;
+  }
+  if (prog >= T.r2s) {
+    const slice = SEG.p2.slice(0, Math.max(2, Math.ceil(Math.min((prog - T.r2s) / (T.r2e - T.r2s), 1) * SEG.p2.length)));
+    d += ' M' + f(slice[0]) + slice.slice(1).map(p => ' L'+f(p)).join('');
+  }
+  return d || 'M0,0';
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BLOOM THRESHOLDS
+   Each box blooms when the seed has passed the midpoint of its arc.
+   Map mid-angle of each box → approximate overall progress value.
+═══════════════════════════════════════════════════════════════ */
+const BLOOM_AT = [
+  // Ring 0 boxes: progress within [T.r0s..T.r0e]
+  // box 0 (s=120,e=180): mid=150 → near start of ring0 arc (148→12, 150 is very start)
+  T.r0s + (T.r0e - T.r0s) * 0.05,
+  // box 1 (s=60,e=120): mid=90
+  T.r0s + (T.r0e - T.r0s) * 0.42,
+  // box 2 (s=0,e=60): mid=30
+  T.r0s + (T.r0e - T.r0s) * 0.78,
+
+  // Ring 1 boxes: progress within [T.r1s..T.r1e]
+  // box 3 (s=180,e=230): mid=205 → start of ring1 arc
+  T.r1s + (T.r1e - T.r1s) * 0.05,
+  // box 4 (s=230,e=310): mid=270
+  T.r1s + (T.r1e - T.r1s) * 0.50,
+  // box 5 (s=310,e=360): mid=335
+  T.r1s + (T.r1e - T.r1s) * 0.88,
+
+  // Ring 2 boxes: progress within [T.r2s..T.r2e]
+  T.r2s + (T.r2e - T.r2s) * 0.05,
+  T.r2s + (T.r2e - T.r2s) * 0.42,
+  T.r2s + (T.r2e - T.r2s) * 0.78,
+];
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATION ENGINE
+═══════════════════════════════════════════════════════════════ */
+const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const TOTAL_MS = 5400;
+
+let bloomed    = new Array(9).fill(false);
+let startTS    = null;
+let rafId      = null;
+let running    = false;
+
+function bloomBox(bs) {
+  const { bloomG, iG } = bs;
+  // Force reflow to reset before transition
+  bloomG.style.transition = 'none';
+  bloomG.style.opacity    = '0';
+  bloomG.style.transform  = `scale(0) rotate(${mid(bs.s,bs.e) > 180 ? -14 : 14}deg)`;
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      bloomG.style.transition = 'opacity 0.45s ease, transform 0.95s cubic-bezier(0.34,1.56,0.64,1)';
+      bloomG.style.opacity    = '1';
+      bloomG.style.transform  = 'scale(1) rotate(0deg)';
+      setTimeout(() => {
+        iG.style.transition = 'opacity 0.3s ease';
+        iG.style.opacity    = '1';
+      }, 320);
+    });
+  });
+}
+
+function drawLeader(bs) {
+  bs.lblG.style.opacity = '0';
+  bs.leaderLine.style.transition     = 'none';
+  bs.leaderLine.style.strokeDashoffset = String(bs.lineLen);
+
+  requestAnimationFrame(() => {
+    bs.lblG.style.transition = 'opacity 0.25s ease';
+    bs.lblG.style.opacity    = '1';
+    requestAnimationFrame(() => {
+      bs.leaderLine.style.transition       = 'stroke-dashoffset 0.55s ease';
+      bs.leaderLine.style.strokeDashoffset = '0';
+    });
+  });
+}
+
+function resetAll() {
+  bloomed   = new Array(9).fill(false);
+  startTS   = null;
+
+  ['jEye','jHead','jPara'].forEach(id => document.getElementById(id).classList.remove('vis'));
+  document.getElementById('replayBtn').classList.remove('vis');
+
+  GEARS.forEach(g => {
+    g.style.transition = 'none';
+    g.style.opacity    = '0';
+    g.style.transform  = 'scale(0.08)';
+  });
+
+  BSTATE.forEach(bs => {
+    bs.bloomG.style.transition = 'none';
+    bs.bloomG.style.opacity    = '0';
+    bs.bloomG.style.transform  = 'scale(0) rotate(0deg)';
+    bs.iG.style.transition     = 'none';
+    bs.iG.style.opacity        = '0';
+    bs.lblG.style.transition   = 'none';
+    bs.lblG.style.opacity      = '0';
+    bs.leaderLine.style.transition       = 'none';
+    bs.leaderLine.style.strokeDashoffset = String(bs.lineLen);
+  });
+
+  vineEl.setAttribute('d', '');
+  seedG.setAttribute('transform', 'translate(-100,-100)');
+  seedG.style.opacity = '0';
+}
+
+function showInstant() {
+  ['jEye','jHead','jPara'].forEach(id => document.getElementById(id).classList.add('vis'));
+  document.getElementById('replayBtn').classList.add('vis');
+
+  GEARS.forEach(g => { g.style.transition='none'; g.style.opacity='1'; g.style.transform='scale(1)'; });
+
+  BSTATE.forEach(bs => {
+    bs.bloomG.style.transition = 'none';
+    bs.bloomG.style.opacity    = '1';
+    bs.bloomG.style.transform  = 'scale(1) rotate(0deg)';
+    bs.iG.style.transition     = 'none';
+    bs.iG.style.opacity        = '1';
+    bs.lblG.style.transition   = 'none';
+    bs.lblG.style.opacity      = '1';
+    bs.leaderLine.style.transition       = 'none';
+    bs.leaderLine.style.strokeDashoffset = '0';
+  });
+
+  vineEl.setAttribute('d', '');
+  seedG.style.opacity = '0';
+}
+
+function startAnim() {
+  if (running) return;
+  running = true;
+
+  // Step 1: text fade-in
+  setTimeout(() => document.getElementById('jEye') .classList.add('vis'), 80);
+  setTimeout(() => document.getElementById('jHead').classList.add('vis'), 240);
+  setTimeout(() => document.getElementById('jPara').classList.add('vis'), 400);
+
+  // Step 2: gears pop in (staggered)
+  GEARS.forEach((g, i) => {
+    setTimeout(() => {
+      g.style.transition = 'opacity 0.45s ease, transform 0.6s cubic-bezier(0.34,1.56,0.64,1)';
+      g.style.opacity    = '1';
+      g.style.transform  = 'scale(1)';
+    }, 480 + i * 200);
+  });
+
+  // Step 3: seed + vine (starts at 500ms)
+  setTimeout(() => {
+    seedG.style.transition = 'opacity 0.3s ease';
+    seedG.style.opacity    = '1';
+
+    function frame(ts) {
+      if (!startTS) startTS = ts;
+      const prog = Math.min((ts - startTS) / TOTAL_MS, 1);
+
+      // move seed
+      const [sx, sy] = seedAt(prog);
+      seedG.setAttribute('transform', `translate(${sx.toFixed(1)},${sy.toFixed(1)})`);
+
+      // grow vine
+      vineEl.setAttribute('d', vineD(prog));
+
+      // trigger blooms
+      BLOOM_AT.forEach((threshold, i) => {
+        if (!bloomed[i] && prog >= threshold) {
+          bloomed[i] = true;
+          bloomBox(BSTATE[i]);
+          setTimeout(() => drawLeader(BSTATE[i]), 380);
+        }
+      });
+
+      if (prog < 1) {
+        rafId = requestAnimationFrame(frame);
+      } else {
+        // fade out seed
+        seedG.style.transition = 'opacity 0.5s ease';
+        seedG.style.opacity    = '0';
+        running = false;
+        setTimeout(() => document.getElementById('replayBtn').classList.add('vis'), 600);
+      }
+    }
+    rafId = requestAnimationFrame(frame);
+  }, 500);
+}
+
+// Replay
+document.getElementById('replayBtn').addEventListener('click', () => {
+  if (rafId) cancelAnimationFrame(rafId);
+  running = false;
+  resetAll();
+  setTimeout(startAnim, 80);
+});
+
+// Trigger on scroll into view
+if (REDUCED) {
+  showInstant();
+} else {
+  const obs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) { obs.disconnect(); startAnim(); }
+  }, { threshold: 0.12 });
+  obs.observe(document.getElementById('jSection'));
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HOVER / FOCUS
+   Only hoverG translates outward — bloomG (and its scale) is untouched.
+   The hit-area path never moves (it's a direct child of svg root).
+═══════════════════════════════════════════════════════════════ */
+function activateBox(i) {
+  const bs = BSTATE[i];
+  const m  = mid(bs.s, bs.e);
+  const [dx, dy] = [
+    8 * Math.cos(m * D2R),
+    8 * Math.sin(m * D2R),
+  ];
+  bs.hoverG.style.transition     = 'transform 0.22s ease';
+  bs.hoverG.style.transform      = `translate(${dx.toFixed(2)}px,${dy.toFixed(2)}px)`;
+  bs.sPath.setAttribute('stroke', 'rgba(255,255,255,0.85)');
+  bs.sPath.setAttribute('stroke-width', '2.5');
+  bs.yearT.style.textDecoration  = 'underline';
+}
+
+function deactivateBox(i) {
+  const bs = BSTATE[i];
+  bs.hoverG.style.transition = 'transform 0.22s ease';
+  bs.hoverG.style.transform  = 'translate(0,0)';
+  bs.sPath.removeAttribute('stroke');
+  bs.sPath.removeAttribute('stroke-width');
+  bs.yearT.style.textDecoration = 'none';
+}
+
+BSTATE.forEach((_, i) => {
+  const { hitPath, lblG } = BSTATE[i];
+  const on  = () => activateBox(i);
+  const off = () => deactivateBox(i);
+
+  hitPath.addEventListener('pointerenter', on);
+  hitPath.addEventListener('pointerleave', off);
+  hitPath.addEventListener('focus',        on);
+  hitPath.addEventListener('blur',         off);
+  lblG.addEventListener('pointerenter', on);
+  lblG.addEventListener('pointerleave', off);
+  lblG.addEventListener('focus',        on);
+  lblG.addEventListener('blur',         off);
+});
+</script>
+</body>
+</html>

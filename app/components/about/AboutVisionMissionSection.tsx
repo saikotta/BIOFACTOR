@@ -179,18 +179,6 @@ export default function AboutVisionMissionSection() {
               Our mission goes beyond farming. We build biological intelligence into every living system we touch &mdash; soil, water, crops, shrimp ponds, poultry, animals, even polluted lakes &mdash; because soil, animal, and human health are all part of the same chain. Wherever that chain runs, we want biology working alongside chemistry, not left out of it.
             </p>
 
-            {/* 3. DRAFT STATUS OUTLINED BADGE */}
-            <div
-              className={`inline-flex items-center px-4 py-2 rounded-[6px] border border-[#155B2A]/40 bg-transparent text-[13px] font-medium tracking-[0.02em] text-[#155B2A] ${prefersReducedMotion
-                  ? "opacity-100"
-                  : isAnimated
-                    ? "animate-s5-draft-badge opacity-0 fill-mode-forwards"
-                    : "opacity-0"
-                }`}
-            >
-              Draft &mdash; pending sign-off
-            </div>
-
           </div>
         </div>
 

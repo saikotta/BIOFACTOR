@@ -305,16 +305,16 @@ export default function ChemistryFieldSection() {
         ref={contentRef}
         className="relative z-20 w-full max-w-[1500px] mx-auto px-6 sm:px-10 md:px-16 lg:px-20 pt-16 sm:pt-20 lg:pt-24 pb-10 lg:pb-14 flex flex-col justify-center min-h-[580px]"
       >
-        {/* UPPER DESKTOP COMPOSITION: Headline & Supporting Text (Left) + 2x2 Scientific Table (Right) */}
-        <div className="w-full flex flex-col lg:flex-row items-center lg:items-stretch justify-between gap-10 lg:gap-12 xl:gap-14">
+        {/* Centered headline above the scientific information grid */}
+        <div className="w-full flex flex-col items-center gap-10 lg:gap-12">
           
-          {/* LEFT COLUMN: Large Extra-Bold Headline + Highlighted Supporting Sentence */}
-          <div className="w-full lg:w-[48%] xl:w-[46%] flex flex-col justify-center space-y-5 sm:space-y-6">
+          {/* Large Extra-Bold Headline */}
+          <div className="w-full flex flex-col items-center justify-center text-center">
             
             {/* STAGGERED HEADLINE */}
-            <div className="space-y-1">
+            <h2 className="w-full space-y-1 text-center text-[clamp(24px,4.1vw,74px)] font-extrabold tracking-[-0.04em] text-white leading-[1.04]">
               <div className="overflow-hidden py-0.5">
-                <h2
+                <span
                   style={{
                     opacity: isRevealed ? 1 : 0,
                     transform: isRevealed ? "translateY(0)" : "translateY(32px)",
@@ -322,14 +322,14 @@ export default function ChemistryFieldSection() {
                       ? "opacity 650ms ease-out 150ms, transform 650ms cubic-bezier(0.16, 1, 0.3, 1) 150ms"
                       : "none"
                   }}
-                  className="text-[36px] sm:text-[48px] md:text-[58px] lg:text-[clamp(48px,4.1vw,74px)] font-extrabold tracking-[-0.04em] text-white leading-[0.98]"
+                  className="block"
                 >
-                  A microorganism
-                </h2>
+                  A microorganism is more
+                </span>
               </div>
 
               <div className="overflow-hidden py-0.5">
-                <h2
+                <span
                   style={{
                     opacity: isRevealed ? 1 : 0,
                     transform: isRevealed ? "translateY(0)" : "translateY(34px)",
@@ -337,32 +337,16 @@ export default function ChemistryFieldSection() {
                       ? "opacity 680ms ease-out 220ms, transform 680ms cubic-bezier(0.16, 1, 0.3, 1) 220ms"
                       : "none"
                   }}
-                  className="text-[36px] sm:text-[48px] md:text-[58px] lg:text-[clamp(48px,4.1vw,74px)] font-extrabold tracking-[-0.04em] text-white leading-[0.98]"
-                >
-                  is more
-                </h2>
-              </div>
-
-              <div className="overflow-hidden py-0.5">
-                <h2
-                  style={{
-                    opacity: isRevealed ? 1 : 0,
-                    transform: isRevealed ? "translateY(0)" : "translateY(36px)",
-                    transition: isRevealed
-                      ? "opacity 700ms ease-out 300ms, transform 700ms cubic-bezier(0.16, 1, 0.3, 1) 300ms"
-                      : "none"
-                  }}
-                  className="text-[36px] sm:text-[48px] md:text-[58px] lg:text-[clamp(48px,4.1vw,74px)] font-extrabold tracking-[-0.04em] text-white leading-[0.98]"
+                  className="block"
                 >
                   than a cell.
-                </h2>
+                </span>
               </div>
-            </div>
-
+            </h2>
 
           </div>
 
-          {/* RIGHT COLUMN: 2x2 SCIENTIFIC TABLE WITH SUBTLE TRANSPARENT BACKING */}
+          {/* 2x2 SCIENTIFIC GRID WITH SUBTLE TRANSPARENT BACKING */}
           <div
             style={{
               opacity: isRevealed ? 1 : 0,
@@ -371,69 +355,69 @@ export default function ChemistryFieldSection() {
                 ? "opacity 750ms ease-out 350ms, transform 750ms cubic-bezier(0.16, 1, 0.3, 1) 350ms"
                 : "none"
             }}
-            className="w-full max-w-[620px] lg:w-[600px] xl:w-[620px] shrink-0 grid grid-cols-1 sm:grid-cols-2 border border-[rgba(170,220,185,0.34)] bg-[rgba(5,22,16,0.58)] rounded-none self-center"
+            className="w-full max-w-[1240px] shrink-0 grid grid-cols-1 sm:grid-cols-2 border border-[rgba(170,220,185,0.34)] bg-[rgba(5,22,16,0.58)] rounded-none self-center"
           >
             {/* Cell 1: Makes */}
-            <div className="p-7 sm:p-[30px] flex flex-col items-start justify-start sm:h-[170px] border-b border-[rgba(170,220,185,0.34)] sm:border-r">
-              <div className="flex items-center text-[#A9D99A] mb-5 sm:mb-6">
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.75">
+            <div className="p-5 sm:p-6 flex flex-col items-start justify-start border-b border-[rgba(170,220,185,0.34)] sm:border-r">
+              <div className="flex items-center text-[#A9D99A] mb-3">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.75">
                   <rect x="3" y="6" width="18" height="12" rx="6" />
                   <path d="M12 6v12" strokeDasharray="2 2" />
                 </svg>
               </div>
-              <h3 className="text-2xl sm:text-[26px] font-bold text-[#F4F7F2] tracking-tight leading-[1.1] mb-2.5 sm:mb-3">
+              <h3 className="text-xl sm:text-[22px] font-bold text-[#F4F7F2] tracking-tight leading-[1.1] mb-1.5">
                 Makes
               </h3>
-              <div className="text-[11px] sm:text-xs font-mono font-semibold tracking-[0.12em] uppercase text-[#B7D8B0] whitespace-nowrap">
+              <div className="text-[10px] sm:text-[11px] font-mono font-semibold tracking-[0.12em] uppercase text-[#B7D8B0] whitespace-nowrap">
                 ENZYMES &middot; METABOLITES
               </div>
             </div>
 
             {/* Cell 2: Transforms */}
-            <div className="p-7 sm:p-[30px] flex flex-col items-start justify-start sm:h-[170px] border-b border-[rgba(170,220,185,0.34)]">
-              <div className="flex items-center text-[#A9D99A] mb-5 sm:mb-6">
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.75">
+            <div className="p-5 sm:p-6 flex flex-col items-start justify-start border-b border-[rgba(170,220,185,0.34)]">
+              <div className="flex items-center text-[#A9D99A] mb-3">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.75">
                   <path d="M4 12a8 8 0 0114.93-4M20 12a8 8 0 01-14.93 4" strokeLinecap="round" />
                   <polyline points="19 4 19 8 15 8" />
                   <polyline points="5 20 5 16 9 16" />
                 </svg>
               </div>
-              <h3 className="text-2xl sm:text-[26px] font-bold text-[#F4F7F2] tracking-tight leading-[1.1] mb-2.5 sm:mb-3">
+              <h3 className="text-xl sm:text-[22px] font-bold text-[#F4F7F2] tracking-tight leading-[1.1] mb-1.5">
                 Transforms
               </h3>
-              <div className="text-[11px] sm:text-xs font-mono font-semibold tracking-[0.12em] uppercase text-[#B7D8B0] whitespace-nowrap">
+              <div className="text-[10px] sm:text-[11px] font-mono font-semibold tracking-[0.12em] uppercase text-[#B7D8B0] whitespace-nowrap">
                 NUTRIENTS &middot; MATTER
               </div>
             </div>
 
             {/* Cell 3: Responds */}
-            <div className="p-7 sm:p-[30px] flex flex-col items-start justify-start sm:h-[170px] border-b sm:border-b-0 border-[rgba(170,220,185,0.34)] sm:border-r">
-              <div className="flex items-center text-[#A9D99A] mb-5 sm:mb-6">
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.75">
+            <div className="p-5 sm:p-6 flex flex-col items-start justify-start border-b sm:border-b-0 border-[rgba(170,220,185,0.34)] sm:border-r">
+              <div className="flex items-center text-[#A9D99A] mb-3">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.75">
                   <circle cx="12" cy="12" r="8" />
                   <circle cx="12" cy="12" r="3" />
                   <path d="M12 2v2M12 20v2M2 12h2M20 12h2" />
                 </svg>
               </div>
-              <h3 className="text-2xl sm:text-[26px] font-bold text-[#F4F7F2] tracking-tight leading-[1.1] mb-2.5 sm:mb-3">
+              <h3 className="text-xl sm:text-[22px] font-bold text-[#F4F7F2] tracking-tight leading-[1.1] mb-1.5">
                 Responds
               </h3>
-              <div className="text-[11px] sm:text-xs font-mono font-semibold tracking-[0.12em] uppercase text-[#B7D8B0] whitespace-nowrap">
+              <div className="text-[10px] sm:text-[11px] font-mono font-semibold tracking-[0.12em] uppercase text-[#B7D8B0] whitespace-nowrap">
                 SIGNALS &middot; ENVIRONMENT
               </div>
             </div>
 
             {/* Cell 4: Adapts */}
-            <div className="p-7 sm:p-[30px] flex flex-col items-start justify-start sm:h-[170px]">
-              <div className="flex items-center text-[#A9D99A] mb-5 sm:mb-6">
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.75">
+            <div className="p-5 sm:p-6 flex flex-col items-start justify-start">
+              <div className="flex items-center text-[#A9D99A] mb-3">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.75">
                   <path d="M2 12c4-8 8 8 12 0s8 8 8 0" strokeLinecap="round" />
                 </svg>
               </div>
-              <h3 className="text-2xl sm:text-[26px] font-bold text-[#F4F7F2] tracking-tight leading-[1.1] mb-2.5 sm:mb-3">
+              <h3 className="text-xl sm:text-[22px] font-bold text-[#F4F7F2] tracking-tight leading-[1.1] mb-1.5">
                 Adapts
               </h3>
-              <div className="text-[11px] sm:text-xs font-mono font-semibold tracking-[0.12em] uppercase text-[#B7D8B0] whitespace-nowrap">
+              <div className="text-[10px] sm:text-[11px] font-mono font-semibold tracking-[0.12em] uppercase text-[#B7D8B0] whitespace-nowrap">
                 SOIL &middot; WATER &middot; HOST
               </div>
             </div>
