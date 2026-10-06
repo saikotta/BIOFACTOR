@@ -1551,3 +1551,119 @@ body {
     display: none !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BIO-REMEDIATION SCROLL-MOTION SYSTEM
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.br-rv {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.br-rv.br-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+.br-rv.br-d1 { transition-delay: 0.15s; }
+.br-rv.br-d2 { transition-delay: 0.3s; }
+
+.br-ph {
+  clip-path: inset(0 0 100% 0 round 22px);
+  transition: clip-path 1.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.br-ph.br-in {
+  clip-path: inset(0 0 0 0 round 22px);
+}
+
+.br-ln {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+.br-ln > span {
+  display: inline-block;
+  transform: translateY(105%);
+}
+.br-ln.br-in > span {
+  animation: br-up 1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s forwards;
+}
+
+@keyframes br-up {
+  to { transform: none; }
+}
+
+.br-quote {
+  opacity: 0;
+}
+.br-quote.br-in {
+  animation: br-fade 1s 0.9s forwards;
+}
+@keyframes br-fade {
+  to { opacity: 1; }
+}
+
+/* Callout border draw */
+.br-callout {
+  position: relative;
+}
+.br-callout::before {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: 0;
+  width: 2px;
+  height: 0;
+  background: #A6E05A; /* lime accent */
+  transition: height 1.2s 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.br-callout.br-in::before {
+  height: 100%;
+}
+
+/* Hover rows */
+.br-trow {
+  transition: background 0.35s, color 0.35s, padding 0.35s;
+}
+@media (hover: hover) {
+  .br-trow:hover {
+    background: #1F7A4D; /* green */
+    color: #fff;
+    padding-left: 1.25rem;
+  }
+}
+
+/* Motes */
+@keyframes br-mote {
+  0% { opacity: 0; transform: translateY(40px); }
+  20% { opacity: 0.7; }
+  100% { opacity: 0; transform: translateY(-220px); }
+}
+
+.br-motes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Matrix Column Hover Overrides */
+.br-mx-wrap.br-in .br-mx-col {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .br-rv, .br-ph, .br-ln > span, .br-quote, .br-callout::before {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    clip-path: none !important;
+    height: 100% !important;
+  }
+  .br-motes {
+    display: none !important;
+  }
+}
+

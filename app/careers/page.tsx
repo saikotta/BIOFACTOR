@@ -360,7 +360,7 @@ export default function CareersPage() {
         )}
 
         {/* Hero Section with Vibrant Background Image */}
-        <section className="relative text-white py-24 lg:py-32 overflow-hidden bg-emerald-950">
+        <section className="relative text-white py-14 lg:py-20 min-h-[58vh] flex items-center overflow-hidden bg-emerald-950">
           <div className="absolute inset-0 z-0">
             <img
               src={biofactor_career}
@@ -368,29 +368,34 @@ export default function CareersPage() {
               className="w-full h-full object-cover brightness-95 opacity-85"
             />
             {/* Reduced dark shadow overlay for vibrant image clarity */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-emerald-950/40 to-emerald-950/70" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-emerald-950/45 to-emerald-950/75" />
           </div>
 
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <div className="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/30 backdrop-blur-md px-4 py-2 rounded-full mb-6">
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={staggerContainer}
+              className="text-center max-w-4xl mx-auto"
+            >
+              <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/30 backdrop-blur-md px-4 py-1.5 rounded-full mb-4">
                 <span className="w-2 h-2 bg-emerald-300 rounded-full animate-pulse" />
                 <span className="text-emerald-100 font-mono text-xs font-semibold tracking-widest uppercase">We’re hiring!</span>
-              </div>
+              </motion.div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight font-display tracking-tight">
+              <motion.h1 variants={fadeInUp} className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight font-display tracking-tight">
                 Grow Your Career at
-                <span className="block text-emerald-300 mt-2">Biofactor</span>
-              </h1>
+                <span className="block text-emerald-300 mt-1">Biofactor</span>
+              </motion.h1>
 
-              <p className="text-lg lg:text-xl text-emerald-50 mb-12 max-w-3xl mx-auto leading-relaxed font-sans">
+              <motion.p variants={fadeInUp} className="text-base sm:text-lg lg:text-xl text-emerald-50 mb-8 max-w-2xl mx-auto leading-relaxed font-sans">
                 Join us in revolutionizing sustainable agriculture through innovative biological solutions.
-              </p>
+              </motion.p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-3 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                  className="inline-flex items-center justify-center gap-3 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300"
                 >
                   <FiMail />
                   Contact HR Department
@@ -398,20 +403,26 @@ export default function CareersPage() {
 
                 <a
                   href="#openings"
-                  className="inline-flex items-center justify-center gap-3 border-2 border-white/60 text-white font-bold px-8 py-4 rounded-xl hover:bg-white/20 hover:scale-105 transition-all duration-300 backdrop-blur-xs"
+                  className="inline-flex items-center justify-center gap-3 border-2 border-white/70 text-white font-bold px-8 py-3.5 rounded-xl hover:bg-white/20 hover:scale-105 active:scale-95 transition-all duration-300 backdrop-blur-xs"
                 >
                   View Open Positions
                   <FiArrowRight />
                 </a>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
         {/* Why Join Us */}
         <section id="why-join-us" className="py-20 relative bg-[#EAF3EA]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={fadeInUp}
+              className="text-center mb-16"
+            >
               <div className="inline-block mb-3">
                 <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">Why Choose Us</span>
               </div>
@@ -419,16 +430,25 @@ export default function CareersPage() {
               <p className="text-base sm:text-lg text-[#173522]/90 max-w-3xl mx-auto leading-relaxed font-sans">
                 Be part of a mission-driven team that's transforming agriculture while building meaningful careers
               </p>
-            </div>
+            </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.15 }}
+              variants={staggerContainer}
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
               {benefits.map((benefit, index) => (
-                <div 
+                <motion.div 
                   key={index} 
-                  className="group bg-white/90 rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-[#2D6A4F]/15 flex flex-col items-center text-center"
+                  variants={zoomIn}
+                  whileHover={{ scale: 1.05, y: -6, boxShadow: "0 16px 36px rgba(45,106,79,0.15)" }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group bg-white/90 rounded-2xl p-8 shadow-md border border-[#2D6A4F]/15 flex flex-col items-center text-center cursor-pointer transition-all duration-300"
                 >
                   <div className="text-[#2D6A4F] mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                    <div className="bg-[#EAF3EA] p-4 rounded-xl inline-flex justify-center items-center">
+                    <div className="bg-[#EAF3EA] p-4 rounded-xl inline-flex justify-center items-center group-hover:bg-[#2D6A4F] group-hover:text-white transition-colors duration-300">
                       {benefit.icon}
                     </div>
                   </div>
@@ -436,16 +456,22 @@ export default function CareersPage() {
                     {benefit.title}
                   </h3>
                   <p className="text-[#173522]/80 leading-relaxed text-sm font-sans">{benefit.description}</p>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
         {/* Current Openings */}
         <section id="openings" className="py-20 bg-white border-y border-[#2D6A4F]/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={fadeInUp}
+              className="text-center mb-16"
+            >
               <div className="inline-block mb-3">
                 <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">Join Our Team</span>
               </div>
@@ -453,9 +479,15 @@ export default function CareersPage() {
               <p className="text-base sm:text-lg text-[#173522]/90 max-w-2xl mx-auto font-sans">
                 Explore opportunities to contribute to sustainable agriculture
               </p>
-            </div>
+            </motion.div>
 
-            <div className="grid lg:grid-cols-2 gap-8">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.15 }}
+              variants={staggerContainer}
+              className="grid lg:grid-cols-2 gap-8"
+            >
               {loadingJobs ? (
                 <div className="lg:col-span-2 flex flex-col items-center justify-center py-20 text-[#173522]/60 gap-4">
                   <FiLoader className="animate-spin text-4xl text-[#2D6A4F]" />
@@ -473,9 +505,11 @@ export default function CareersPage() {
                 </div>
               ) : (
                 jobOpenings.map((job) => (
-                  <div 
+                  <motion.div 
                     key={job.id} 
-                    className="group rounded-2xl shadow-md hover:shadow-xl transition-all duration-500 border border-[#2D6A4F]/20 bg-white overflow-hidden h-full flex flex-col"
+                    variants={zoomIn}
+                    whileHover={{ scale: 1.02, y: -4, boxShadow: "0 18px 40px rgba(45,106,79,0.15)" }}
+                    className="group rounded-2xl shadow-md border border-[#2D6A4F]/20 bg-white overflow-hidden h-full flex flex-col transition-all duration-300"
                   >
                     <div className="p-8 flex-grow flex flex-col">
                       <div className="flex justify-between items-start mb-6">
@@ -548,17 +582,23 @@ export default function CareersPage() {
                         </button>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))
               )}
-            </div>
+            </motion.div>
           </div>
         </section>
 
-        {/* Our Hiring Process Section (Restored & Matched to biofactorbiologicals.com) */}
+        {/* Our Hiring Process Section */}
         <section id="process" className="py-20 bg-[#EAF3EA]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={fadeInUp}
+              className="text-center mb-16"
+            >
               <div className="inline-block mb-3">
                 <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">Application Process</span>
               </div>
@@ -566,28 +606,39 @@ export default function CareersPage() {
               <p className="text-base sm:text-lg text-[#173522]/90 max-w-2xl mx-auto font-sans">
                 A transparent and engaging journey from application to onboarding
               </p>
-            </div>
+            </motion.div>
 
             <div className="relative">
               {/* Timeline connector line */}
               <div className="absolute left-0 right-0 top-10 h-1 bg-[#2D6A4F]/20 hidden lg:block"></div>
               
-              <div className="grid lg:grid-cols-5 gap-8">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                variants={staggerContainer}
+                className="grid lg:grid-cols-5 gap-8"
+              >
                 {applicationSteps.map((step, index) => (
-                  <div key={index} className="relative">
+                  <motion.div 
+                    key={index} 
+                    variants={zoomIn}
+                    whileHover={{ scale: 1.06, y: -4 }}
+                    className="relative cursor-pointer"
+                  >
                     <div className="text-center flex flex-col items-center">
                       <div className="relative inline-flex items-center justify-center mb-6">
                         <div className="absolute inset-0 bg-[#2D6A4F]/30 rounded-full animate-ping"></div>
-                        <div className="relative bg-gradient-to-br from-[#2D6A4F] to-[#173522] text-white w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold shadow-lg border-4 border-[#EAF3EA]">
+                        <div className="relative bg-gradient-to-br from-[#2D6A4F] to-[#173522] text-white w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold shadow-lg border-4 border-[#EAF3EA] transition-transform duration-300 hover:scale-110">
                           {step.number}
                         </div>
                       </div>
                       <h3 className="text-lg font-bold text-[#173522] mb-2">{step.title}</h3>
                       <p className="text-[#173522]/80 text-xs sm:text-sm leading-relaxed font-sans">{step.description}</p>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>

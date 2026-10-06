@@ -105,7 +105,7 @@ export default function BioremidationMatrix() {
         <div className="w-full overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pb-8 pt-4">
           <div className="min-w-[960px] lg:min-w-0 w-full group/matrix br-mx-wrap" id="br-matrix">
             <div className="grid grid-cols-[130px_repeat(5,minmax(0,1fr))] lg:grid-cols-[140px_repeat(5,minmax(0,1fr))] gap-3 sm:gap-4.5 items-stretch">
-
+              
               {/* Left Column: Row Labels */}
               <div className="grid grid-rows-[150px_repeat(2,135px)]">
                 {/* Row 1 Label: Industrial */}
@@ -141,8 +141,8 @@ export default function BioremidationMatrix() {
                   key={colIdx}
                   data-c={colIdx + 1}
                   className={`relative grid grid-rows-[150px_repeat(2,135px)] rounded-[90px] border shadow-[0_12px_28px_rgba(23,53,34,0.18)] transition-all duration-300 ease-out hover:scale-[1.035] hover:-translate-y-2 hover:shadow-[0_22px_44px_rgba(23,53,34,0.22)] hover:z-20 cursor-pointer group/capsule group-hover/matrix:opacity-70 group-hover/matrix:hover:opacity-100 br-mx-col ${
-                    stage.darkText
-                      ? "text-[#F4FAEC] border-[#F4FAEC]/40"
+                    stage.darkText 
+                      ? "text-[#F4FAEC] border-[#F4FAEC]/40" 
                       : "text-[#173522] border-[#173522]/30"
                   }`}
                   style={{ backgroundColor: stage.bg }}
@@ -163,7 +163,7 @@ export default function BioremidationMatrix() {
 
                   {/* Cells */}
                   {stage.cells.map((cell, cellIdx) => (
-                    <div
+                    <div 
                       key={cellIdx}
                       className="flex flex-col justify-center text-center px-3 sm:px-4 border-t border-current/20"
                     >
@@ -171,14 +171,14 @@ export default function BioremidationMatrix() {
                         <>
                           <div className="relative block w-full h-[7px] mb-2.5 flex-shrink-0">
                             <div className="absolute top-1/2 left-0 w-full h-[2px] -translate-y-1/2 rounded-full bg-current/20" />
-                            <div
+                            <div 
                               className="absolute top-0 left-0 h-full rounded-full transition-all duration-500"
                               style={{ width: cell.fill, backgroundColor: getToneColor(cellIdx, stage.darkText) }}
                             />
                             <div
                               className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full transition-all duration-500 box-content"
-                              style={{
-                                left: cell.fill,
+                              style={{ 
+                                left: cell.fill, 
                                 backgroundColor: getToneColor(cellIdx, stage.darkText),
                                 boxShadow: `0 0 0 1px ${stage.bg}, 0 0 0 2px ${getToneColor(cellIdx, stage.darkText)}`
                               }}
