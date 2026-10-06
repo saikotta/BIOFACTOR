@@ -322,29 +322,8 @@ export default function PoultryScrollMotion() {
       });
 
       /* ═══════════════════════════════════════════════════════════
-         FOOTER  spotlight
+         FOOTER  (Standard solid dark footer)
       ═══════════════════════════════════════════════════════════ */
-      const footerEl = page.querySelector<HTMLElement>('[data-pm-section="footer"]');
-      let footerSpotlight: HTMLElement | null = null;
-      if (footerEl) {
-        footerSpotlight = document.createElement("div");
-        footerSpotlight.style.cssText = `
-          position:absolute;
-          top:-200px;left:50%;
-          transform:translateX(-50%) scale(.1);
-          width:1000px;height:400px;
-          background:radial-gradient(ellipse at center, rgba(140,198,63,.55) 0%, transparent 70%);
-          pointer-events:none;
-          z-index:0;
-          will-change:transform;
-          opacity:0;
-        `;
-        footerEl.style.position = "relative";
-        footerEl.style.overflow = "hidden";
-        const firstChild = footerEl.firstElementChild as HTMLElement;
-        if (firstChild) firstChild.style.position = "relative";
-        footerEl.insertBefore(footerSpotlight, footerEl.firstChild);
-      }
 
       /* ═══════════════════════════════════════════════════════════
          FLOATING SPHERES  –  light-green sections
@@ -409,9 +388,6 @@ export default function PoultryScrollMotion() {
       // progress bars
       const barCur: number[]   = bars.map(() => (reduced ? 1 : 0));
 
-      // footer spotlight
-      let footerCur: number = reduced ? 1 : 0;
-
       /* ═══════════════════════════════════════════════════════════
          REDUCED-MOTION: force everything visible immediately
       ═══════════════════════════════════════════════════════════ */
@@ -425,10 +401,6 @@ export default function PoultryScrollMotion() {
         bars.forEach(b => {
           b.style.width = `${(b._pmBarTarget ?? 1) * 100}%`;
         });
-        if (footerSpotlight) {
-          footerSpotlight.style.transform = "translateX(-50%) scale(1)";
-          footerSpotlight.style.opacity = "1";
-        }
         return;
       }
 
@@ -660,19 +632,6 @@ export default function PoultryScrollMotion() {
           const ty = offset * speed * 1000;
           el.style.transform = `translateY(${ty}px)`;
         });
-
-        /* ─────────────────────────────────────────────────────────
-           FOOTER spotlight
-           START 1, LENGTH .8
-        ───────────────────────────────────────────────────────── */
-        if (footerSpotlight && footerEl) {
-          const p   = progress(footerEl, vh, 1, 0.8);
-          const e   = eo(cl(p * 1));
-          footerCur = smooth(footerCur, e);
-          const c   = footerCur;
-          footerSpotlight.style.transform = `translateX(-50%) scale(${0.1 + c * 0.9})`;
-          footerSpotlight.style.opacity   = String(cl(p));
-        }
       }
 
       rafId = requestAnimationFrame(tick);
