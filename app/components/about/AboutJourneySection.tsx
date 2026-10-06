@@ -32,7 +32,7 @@ const MILESTONES: Milestone[] = [
     pill: "DOMESTIC SCALE",
     title: "200+ PRODUCTS, SIX VERTICALS",
     description:
-      "Growth to a presence in 16 Indian States, a Dealer Network Passing 3,000, and a Team Crossing 600.",
+      "Growth to a presence in 20+ Indian States, a Dealer Network Passing 3,000, and a Team Crossing 600.",
     align: "right",
   },
   {
@@ -263,8 +263,8 @@ export default function AboutJourneySection() {
                     <div
                       key={`pill-${item.id}-${cycle}`}
                       className={`relative bg-[#155B2A] text-white text-[12px] font-semibold tracking-[0.04em] uppercase px-4 py-1.5 rounded-full shadow-[0_2px_6px_rgba(21,91,42,0.12)] block z-10 s7-pill-interactive ${isActivated
-                          ? "animate-s7-pill"
-                          : "opacity-[0.35] scale-[0.88]"
+                        ? "animate-s7-pill"
+                        : "opacity-[0.35] scale-[0.88]"
                         }`}
                     >
                       {item.pill}
