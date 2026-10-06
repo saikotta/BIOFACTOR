@@ -41,7 +41,7 @@ export default function PoultryMineralBioavailability() {
       <iframe
         ref={frameRef}
         className="block w-full border-0"
-        src="/poultry-mineral-bioavailability.html?v=2&poultryStatic=1"
+        src="/poultry-mineral-bioavailability.html?v=2"
         title="Mineral bioavailability"
         loading="eager"
         style={{ height: "1800px" }}

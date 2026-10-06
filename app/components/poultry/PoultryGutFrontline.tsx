@@ -58,7 +58,7 @@ export default function PoultryGutFrontline() {
       <iframe
         ref={frameRef}
         className="block w-full border-0"
-        src="/first-colonisers.html?poultryStatic=1&poultryDiagramMotion=1"
+        src="/first-colonisers.html"
         title="First colonisers: how bacteria compete to establish in a chick's gut"
         loading="eager"
         style={{ height: "1500px" }}

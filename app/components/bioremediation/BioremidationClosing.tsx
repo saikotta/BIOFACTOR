@@ -45,7 +45,6 @@ export default function BioremidationClosing() {
           </div>
         </div>
       </div>
-
     </section>
   );
 }

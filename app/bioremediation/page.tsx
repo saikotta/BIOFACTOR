@@ -1,25 +1,19 @@
 import React from "react";
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Inter_Tight, Newsreader, JetBrains_Mono } from "next/font/google";
-import ProductFooter from "../components/ProductFooter";
+import { Bricolage_Grotesque, Newsreader, JetBrains_Mono } from "next/font/google";
 import BioremidationHero from "../components/bioremediation/BioremidationHero";
 import BioremidationDataStrip from "../components/bioremediation/BioremidationDataStrip";
 import BioremidationOxygenConnect from "../components/bioremediation/BioremidationOxygenConnect";
 import BioremidationApplications from "../components/bioremediation/BioremidationApplications";
 import BioremidationMatrix from "../components/bioremediation/BioremidationMatrix";
 import BioremidationClosing from "../components/bioremediation/BioremidationClosing";
+import BioremidationAnimations from "../components/bioremediation/BioremidationAnimations";
+import ProductFooter from "../components/ProductFooter";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
   weight: "800",
   variable: "--font-bricolage",
-  display: "swap",
-});
-
-const interTight = Inter_Tight({
-  subsets: ["latin"],
-  weight: ["700", "800"],
-  variable: "--font-inter-tight",
   display: "swap",
 });
 
@@ -46,7 +40,7 @@ export const metadata: Metadata = {
 export default function BioremediationPage() {
   return (
     <main
-      className={`${interTight.variable} ${bricolage.variable} ${newsreader.variable} ${jetbrainsMono.variable} relative min-h-screen w-full bg-[#EAF3EA] text-[#173522] selection:bg-[#B8E986] selection:text-[#173522] overflow-x-hidden`}
+      className={`${bricolage.variable} ${newsreader.variable} ${jetbrainsMono.variable} relative min-h-screen w-full bg-[#EAF3EA] text-[#173522] selection:bg-[#B8E986] selection:text-[#173522] overflow-x-hidden`}
     >
       {/* BIO-REMEDIATION PAGE CONTENT */}
       <div className="relative z-10 w-full">
@@ -69,6 +63,7 @@ export default function BioremediationPage() {
         <BioremidationClosing />
       </div>
       <ProductFooter />
+      <BioremidationAnimations />
     </main>
   );
 }

@@ -488,23 +488,24 @@
       const hostFrame = window.frameElement;
       const hostWindow = hostFrame ? window.parent : null;
       const texts = document.querySelectorAll(".eyebrow, h1, .copy-grid p");
-      texts.forEach((t, i) => {
-        t.style.transitionDelay = `${i * 0.15}s`;
-      });
 
-      let textRevealed = false;
       const triggerTextReveal = () => {
-        if (textRevealed) return;
-        if (hostFrame && hostWindow) {
-          const r = hostFrame.getBoundingClientRect();
-          if (r.top < hostWindow.innerHeight * 0.85 && r.bottom > 0) {
-            textRevealed = true;
-            texts.forEach((t) => t.classList.add("in"));
+        texts.forEach((t) => {
+          if (t.classList.contains("in")) return;
+          if (hostFrame && hostWindow) {
+            const frameRect = hostFrame.getBoundingClientRect();
+            const elemRect = t.getBoundingClientRect();
+            const elemTopInParent = frameRect.top + elemRect.top;
+            if (elemTopInParent < hostWindow.innerHeight * 0.88 && frameRect.bottom > 0) {
+              t.classList.add("in");
+            }
+          } else {
+            const elemRect = t.getBoundingClientRect();
+            if (elemRect.top < window.innerHeight * 0.88) {
+              t.classList.add("in");
+            }
           }
-        } else {
-          textRevealed = true;
-          texts.forEach((t) => t.classList.add("in"));
-        }
+        });
       };
 
       if (hostFrame && hostWindow) {
@@ -512,12 +513,14 @@
         triggerTextReveal();
       } else {
         const obs = new IntersectionObserver((entries) => {
-          if (entries.some((e) => e.isIntersecting)) {
-            texts.forEach((t) => t.classList.add("in"));
-            obs.disconnect();
-          }
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+            }
+          });
         }, { threshold: 0.1 });
-        obs.observe(document.body);
+        texts.forEach((t) => obs.observe(t));
+        triggerTextReveal();
       }
 
       function makeScene() {

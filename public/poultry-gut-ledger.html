@@ -772,25 +772,23 @@
 
       // Reveal text animations matching Bio-Remediation
       const texts = document.querySelectorAll(".page-title, .page-label");
-      let textRevealed = false;
       const triggerTextReveal = () => {
-        if (textRevealed) return;
-        if (hostFrame && hostWindow) {
-          const r = hostFrame.getBoundingClientRect();
-          if (r.top < hostWindow.innerHeight * 0.85 && r.bottom > 0) {
-            textRevealed = true;
-            texts.forEach((t, i) => {
-              t.style.transitionDelay = `${i * 0.15}s`;
+        texts.forEach((t) => {
+          if (t.classList.contains("in")) return;
+          if (hostFrame && hostWindow) {
+            const frameRect = hostFrame.getBoundingClientRect();
+            const elemRect = t.getBoundingClientRect();
+            const elemTopInParent = frameRect.top + elemRect.top;
+            if (elemTopInParent < hostWindow.innerHeight * 0.88 && frameRect.bottom > 0) {
               t.classList.add("in");
-            });
+            }
+          } else {
+            const elemRect = t.getBoundingClientRect();
+            if (elemRect.top < window.innerHeight * 0.88) {
+              t.classList.add("in");
+            }
           }
-        } else {
-          textRevealed = true;
-          texts.forEach((t, i) => {
-            t.style.transitionDelay = `${i * 0.15}s`;
-            t.classList.add("in");
-          });
-        }
+        });
       };
 
       if (hostFrame && hostWindow) {
@@ -806,6 +804,7 @@
           });
         }, { threshold: 0.1 });
         texts.forEach(t => revObs.observe(t));
+        triggerTextReveal();
       }
 
       function revealRow(row, index) {
