@@ -7,42 +7,40 @@ export default function NutrientsHero() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Standard reveal
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add("br-in");
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.18 });
+    // ── Bidirectional reveal: br-rv, br-mx-wrap, br-callout, br-ln, br-quote ──
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const target = entry.target as HTMLElement;
+          if (entry.isIntersecting) {
+            target.classList.add("br-in", "in");
+          } else if (entry.intersectionRatio < 0.05) {
+            target.classList.remove("br-in", "in");
+          }
+        });
+      },
+      { threshold: [0, 0.1], rootMargin: "30px 0px 30px 0px" }
+    );
 
-    const pio = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add("br-in");
-          pio.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.2 });
+    const initObservers = () => {
+      document
+        .querySelectorAll(".br-rv, .br-ln, .br-quote, .br-callout, .br-mx-wrap, .br-ph")
+        .forEach((el) => {
+          revealObserver.unobserve(el);
+          revealObserver.observe(el);
+        });
+    };
 
-    const initializeObservers = () => {
-      document.querySelectorAll(".br-rv, .br-mx-wrap, .br-callout, .br-ln").forEach((el) => {
-        if (!el.classList.contains("br-in") && !el.hasAttribute("data-obs")) {
-          el.setAttribute("data-obs", "1");
-          io.observe(el);
-        }
+    // ── Hero above-the-fold: fire br-ln / br-quote immediately after paint ──
+    const triggerAboveFold = () => {
+      document.querySelectorAll(".br-ln, .br-quote").forEach((el) => {
+        el.classList.add("br-in", "in");
       });
-      
-      document.querySelectorAll(".br-ph").forEach((p) => {
-        if (!p.classList.contains("br-in") && !p.hasAttribute("data-obs")) {
-          p.setAttribute("data-obs", "1");
-          pio.observe(p);
-        }
-      });
+    };
 
-      // Count Up
-      document.querySelectorAll("[data-cu]").forEach((el) => {
+    // Count-up animation
+    const initCountUp = () => {
+      document.querySelectorAll<HTMLElement>("[data-cu]").forEach((el) => {
         if (el.hasAttribute("data-obs")) return;
         el.setAttribute("data-obs", "1");
         const text = el.textContent || "";
@@ -53,36 +51,31 @@ export default function NutrientsHero() {
           const animate = (now: number) => {
             const p = reduce ? 1 : Math.min(1, (now - t0) / 1500);
             const k = 1 - Math.pow(1 - p, 3);
-            el.textContent = text.replace(/\d+(?:\.\d+)?/g, (n) => 
+            el.textContent = text.replace(/\d+(?:\.\d+)?/g, (n) =>
               n.includes('.') ? (Number(n) * k).toFixed(1) : Math.round(Number(n) * k).toString()
             );
             if (p < 1) requestAnimationFrame(animate);
           };
           requestAnimationFrame(animate);
-        }, { threshold: 0.6 }).observe(el);
+        }, { threshold: 0.5 }).observe(el);
       });
     };
 
-    // For above-the-fold hero elements, fire immediately with a short delay
-    // so the CSS transition has time to initialize before adding .br-in
-    const triggerHeroAnimations = () => {
-      document.querySelectorAll(".br-ln, .br-quote").forEach((el) => {
-        if (!el.classList.contains("br-in")) {
-          el.classList.add("br-in");
-        }
+    // Hero elements in viewport — trigger after paint
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        triggerAboveFold();
+        initObservers();
+        initCountUp();
       });
-    };
+    });
 
-    // Small delay so CSS paint is complete before animation starts
-    setTimeout(triggerHeroAnimations, 120);
-    setTimeout(triggerHeroAnimations, 350);
+    // Re-run for late-rendered components
+    setTimeout(() => { initObservers(); initCountUp(); }, 300);
+    setTimeout(() => { initObservers(); initCountUp(); }, 800);
+    setTimeout(() => { initObservers(); initCountUp(); }, 1800);
 
-    initializeObservers();
-    setTimeout(initializeObservers, 150);
-    setTimeout(initializeObservers, 500);
-    setTimeout(initializeObservers, 1500);
-
-    // Tracking (Bar)
+    // ── Progress bar ──
     let tk = false;
     const bar = document.getElementById("br-progress-bar");
     const onScroll = () => {
@@ -96,7 +89,7 @@ export default function NutrientsHero() {
           bar.style.transform = `scaleX(${Math.min(1, Math.max(0, y / mx))})`;
         }
         if (!reduce) {
-          document.querySelectorAll(".br-ph-in").forEach((p) => {
+          document.querySelectorAll<HTMLElement>(".br-ph-in").forEach((p) => {
             const r = p.parentElement?.getBoundingClientRect();
             if (r && r.bottom > 0 && r.top < window.innerHeight) {
               (p as HTMLElement).style.transform = `translateY(${((r.top + r.height / 2 - window.innerHeight / 2) * -0.06).toFixed(1)}px)`;
@@ -108,7 +101,10 @@ export default function NutrientsHero() {
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
 
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      revealObserver.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   return (
