@@ -280,10 +280,10 @@ export default function AboutJourneySection() {
                   <div className="w-full flex flex-col lg:flex-row items-start lg:items-center">
                     
                     {/* LEFT HALF (width: 50% on desktop) */}
-                    <div className="w-full lg:w-1/2 flex justify-start lg:justify-end items-start lg:items-center pl-10 lg:pl-0 lg:pr-8 xl:pr-10">
+                    <div className="w-full lg:w-1/2 flex justify-start lg:justify-end items-start lg:items-center pl-10 lg:pl-0 lg:pr-14 xl:pr-16">
                       {!isRight ? (
                         <div className="w-full flex flex-col items-start lg:items-end justify-end">
-                          {/* Left-side Text (adjacent to line, right-aligned text) */}
+                          {/* Left-side Text (adjacent to line, right-aligned text with comfortable gap) */}
                           <div
                             key={`copy-${item.id}-${cycle}`}
                             className={`flex flex-col items-start lg:items-end text-left lg:text-right max-w-[360px] lg:max-w-[420px] ${
@@ -304,10 +304,10 @@ export default function AboutJourneySection() {
                     </div>
 
                     {/* RIGHT HALF (width: 50% on desktop) */}
-                    <div className="w-full lg:w-1/2 flex justify-start items-start lg:items-center pl-10 lg:pl-8 xl:pl-10">
+                    <div className="w-full lg:w-1/2 flex justify-start items-start lg:items-center pl-10 lg:pl-14 xl:pl-16">
                       {isRight ? (
                         <div className="w-full flex flex-col items-start justify-start">
-                          {/* Right-side Text (adjacent to line, left-aligned text) */}
+                          {/* Right-side Text (adjacent to line, left-aligned text with comfortable gap) */}
                           <div
                             key={`copy-${item.id}-${cycle}`}
                             className={`flex flex-col items-start text-left max-w-[360px] lg:max-w-[420px] ${
@@ -335,13 +335,8 @@ export default function AboutJourneySection() {
 
         </div>
 
-        {/* BOTTOM DISCLAIMER */}
-        <div className="text-[10px] font-medium tracking-[0.05em] uppercase text-[#17251C]/60 text-center max-w-xl mx-auto mt-12 sm:mt-14 lg:mt-16 mb-10 sm:mb-12">
-          MILESTONES ABOVE ARE SEQUENCED LOGICALLY, NOT DATED &mdash; ONLY 2014 IS A CONFIRMED YEAR. SEND THE REAL DATES AND THIS BECOMES A PROPER TIMELINE.
-        </div>
-
         {/* FINAL CLOSING TAGLINE */}
-        <div className="pt-6 sm:pt-8 border-t border-[#155B2A]/15 text-center">
+        <div className="pt-6 sm:pt-8 border-t border-[#155B2A]/15 text-center mt-12 sm:mt-14 lg:mt-16">
           <span className="text-[9px] font-medium tracking-[0.14em] uppercase text-[#155B2A]/70">
             BIOFACTOR BIOLOGICALS&trade; &middot; MICROBE &middot; MINERAL &middot; METABIOME &middot; ONE HEALTH
           </span>
