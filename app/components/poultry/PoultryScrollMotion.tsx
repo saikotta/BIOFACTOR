@@ -1,711 +1,491 @@
 "use client";
 
-/**
- * PoultryScrollMotion
- *
- * A self-contained scroll-scrubbed motion system for the Poultry page.
- * Pure vanilla JS/DOM manipulation — no libraries, no CSS transitions for
- * the animated properties. Runs a single rAF loop; all effects are driven
- * by scroll position only (scrubbed forward on scroll-down, backward on
- * scroll-up). Continuous ambient loops (Ken Burns, spores, light-rays) are
- * CSS animations injected once at mount.
- *
- * Rules honoured from the spec:
- *  - progress p = clamp((vh*START - el.top) / (vh*LENGTH))
- *  - default START 0.98, LENGTH 0.45
- *  - smoothing: cur += (tgt - cur) * 0.34; snap < 0.003
- *  - easeOutCubic  eo(t) = 1 - (1-t)^3
- *  - easeOutBack   ob(t) = 1 + 2.7(t-1)^3 + 1.7(t-1)^2
- *  - animate only transform / opacity (+ border-radius, clip-path)
- *  - will-change: transform on moving elements
- *  - passive scroll listener
- *  - skip parallax when el > 50px outside viewport
- *  - prefers-reduced-motion: force p=1 everywhere, disable CSS loops
- *  - no blur, no preloader, no progress bar, no custom cursor
- */
+import React, { useEffect } from "react";
 
-import { useEffect } from "react";
-
-/* ─── easings ──────────────────────────────────────────────────────────── */
-const cl = (t: number) => Math.max(0, Math.min(1, t));
-const eo = (t: number) => { const c = cl(t); return 1 - (1 - c) ** 3; };
-const ob = (t: number) => {
-  const c = cl(t);
-  return 1 + 2.7 * (c - 1) ** 3 + 1.7 * (c - 1) ** 2;
-};
-
-/* ─── progress helper ───────────────────────────────────────────────────── */
-function progress(el: Element, vh: number, START = 0.98, LENGTH = 0.45): number {
-  const r = el.getBoundingClientRect();
-  if (r.bottom <= vh + 2) return 1;
-  return cl((vh * START - r.top) / (vh * LENGTH));
-}
-
-/* ─── word / letter splitter helpers ────────────────────────────────────── */
-function splitWords(el: HTMLElement): HTMLElement[] {
-  const text = el.innerText;
-  el.innerHTML = "";
-  return text.split(/\s+/).filter(Boolean).map((word, i) => {
-    const mask = document.createElement("span");
-    mask.style.cssText = "display:inline-block;overflow:hidden;vertical-align:bottom;";
-    const inner = document.createElement("span");
-    inner.style.cssText = "display:inline-block;will-change:transform;";
-    inner.textContent = word;
-    inner.dataset.pmWordIdx = String(i);
-    if (i > 0) mask.style.marginLeft = "0.25em";
-    mask.appendChild(inner);
-    el.appendChild(mask);
-    return inner;
-  });
-}
-
-function splitLetters(el: HTMLElement): HTMLElement[] {
-  const text = el.innerText;
-  el.innerHTML = "";
-  const letters: HTMLElement[] = [];
-  [...text].forEach((ch, i) => {
-    if (ch === " ") {
-      el.appendChild(document.createTextNode(" "));
-      return;
-    }
-    const span = document.createElement("span");
-    span.style.cssText = "display:inline-block;will-change:transform;";
-    span.textContent = ch;
-    span.dataset.pmLetterIdx = String(i);
-    el.appendChild(span);
-    letters.push(span);
-  });
-  return letters;
-}
-
-/* ─── spore CSS injection ───────────────────────────────────────────────── */
-function injectSporesCSS(reduced: boolean) {
-  if (reduced) return;
-  const style = document.createElement("style");
-  style.id = "pm-spore-style";
-  style.textContent = `
-@keyframes pm-spore-rise {
-  0%   { transform: translateY(0) translateX(0); opacity: 0; }
-  10%  { opacity: 0.85; }
-  80%  { opacity: 0.5; }
-  100% { transform: translateY(-80vh) translateX(var(--pm-spore-drift)); opacity: 0; }
-}
-@keyframes pm-ray-move {
-  from { background-position: 0 0; }
-  to   { background-position: 300px 0; }
-}
-@keyframes pm-kenburns {
-  from { transform: scale(1.02) translateX(-2%); }
-  to   { transform: scale(1.16) translateX(2%); }
-}
-@keyframes pm-float {
-  from { transform: translate(0, 0); }
-  to   { transform: translate(24px, -30px); }
-}
-  `;
-  document.head.appendChild(style);
-}
-
-/* ─── Spore factory ─────────────────────────────────────────────────────── */
-function createSpores(container: HTMLElement, reduced: boolean) {
-  const COUNT = 22;
-  for (let i = 0; i < COUNT; i++) {
-    const el = document.createElement("div");
-    const size = 3 + Math.random() * 7;
-    const left = 5 + Math.random() * 90;
-    const drift = -80 + Math.random() * 160;
-    const dur = 7 + Math.random() * 9;
-    const delay = -(Math.random() * 12);
-    el.style.cssText = `
-      position:absolute;
-      width:${size}px;height:${size}px;
-      border-radius:50%;
-      background:rgba(170,220,80,.6);
-      box-shadow:0 0 14px 4px rgba(170,220,80,.45);
-      left:${left}%;
-      bottom:5%;
-      pointer-events:none;
-      z-index:3;
-      --pm-spore-drift:${drift}px;
-      ${reduced
-        ? "opacity:0;"
-        : `animation:pm-spore-rise ${dur}s linear ${delay}s infinite;`}
-    `;
-    container.appendChild(el);
-  }
-}
-
-/* ─── Light-rays factory ────────────────────────────────────────────────── */
-function createRays(container: HTMLElement, hero: Element, reduced: boolean) {
-  const heroH = (hero as HTMLElement).offsetHeight || window.innerHeight;
-  container.style.cssText = `
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-    z-index:2;
-    background: repeating-linear-gradient(
-      105deg,
-      transparent 0px, transparent 90px,
-      rgba(255,240,180,.07) 90px, rgba(255,240,180,.07) 150px
-    );
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 60%);
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 60%);
-    ${reduced
-      ? ""
-      : `animation: pm-ray-move 16s linear infinite;`}
-  `;
-  void heroH; // suppress unused
-}
-
-
-
-/* ─── MAIN COMPONENT ────────────────────────────────────────────────────── */
 export default function PoultryScrollMotion() {
   useEffect(() => {
-    /* ---- reduced motion check ---- */
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    /* ---- inject ambient CSS ---- */
-    injectSporesCSS(reduced);
-
-    /* ---- wait for first paint so all DOM is ready ---- */
-    let rafId = 0;
-    let cleanupFn: (() => void) | null = null;
-
-    const init = () => {
-      const page = document.querySelector<HTMLElement>("[data-poultry-page]");
-      if (!page) return;
-
-      /* ═══════════════════════════════════════════════════════════
-         HERO  SETUP
-      ═══════════════════════════════════════════════════════════ */
-      const heroSection  = page.querySelector<HTMLElement>('[data-pm-section="hero"]');
-      const heroBg       = page.querySelector<HTMLElement>("[data-pm-hero-bg]");
-      const heroImg      = page.querySelector<HTMLElement>("[data-pm-hero-img]");
-      const heroRayEl    = page.querySelector<HTMLElement>("[data-pm-hero-rays]");
-      const heroSporeEl  = page.querySelector<HTMLElement>("[data-pm-hero-spores]");
-      const heroText     = page.querySelector<HTMLElement>("[data-pm-hero-text]");
-      const heroEyebrow  = page.querySelector<HTMLElement>("[data-pm-hero-eyebrow]");
-      const heroHeadline = page.querySelector<HTMLElement>("[data-pm-hero-headline]");
-      const heroSubline  = page.querySelector<HTMLElement>("[data-pm-hero-subline]");
-
-      /* Ken Burns on inner image */
-      if (heroImg && !reduced) {
-        heroImg.style.animation = "pm-kenburns 22s ease-in-out infinite alternate";
-        heroImg.style.transformOrigin = "center center";
+    // ------------------------------------------------------------------
+    // 1. Motes Generator (22 pale gold motes) — Generated ONCE
+    // ------------------------------------------------------------------
+    const m = document.querySelector(".motes");
+    if (m && m.children.length === 0) {
+      for (let i = 0; i < 22; i++) {
+        const e = document.createElement("i");
+        e.style.left = Math.random() * 100 + "%";
+        e.style.top = 40 + Math.random() * 55 + "%";
+        e.style.animationDelay = -Math.random() * 9 + "s";
+        e.style.animationDuration = 7 + Math.random() * 6 + "s";
+        m.appendChild(e);
       }
+    }
 
-      /* Light rays */
-      if (heroRayEl && heroSection) {
-        createRays(heroRayEl, heroSection, reduced);
-      }
+    // ------------------------------------------------------------------
+    // 2. Offscreen Continuous Animation Pausing (Hero motes)
+    // ------------------------------------------------------------------
+    const heroSec = document.querySelector('[data-ruminants-section="hero"]');
+    const motesEl = document.querySelector<HTMLElement>(".motes");
+    let heroObserver: IntersectionObserver | null = null;
 
-      /* Spores */
-      if (heroSporeEl) {
-        createSpores(heroSporeEl, reduced);
-      }
-
-      /* Hero entrance animations handled by CSS br-ln now */
-
-      /* ═══════════════════════════════════════════════════════════
-         DATA STRIP  setup  (panel fold-down)
-         START 1.02, LENGTH .3
-         Cursor soft light needs its own mousemove handler.
-      ═══════════════════════════════════════════════════════════ */
-      const stripSection = page.querySelector<HTMLElement>('[data-pm-section="datastrip"]');
-      const stripPanels  = Array.from(page.querySelectorAll<HTMLElement>("[data-pm-strip-panel]")).sort(
-        (a, b) => Number(a.dataset.pmStripPanel) - Number(b.dataset.pmStripPanel)
+    if (heroSec && motesEl) {
+      heroObserver = new IntersectionObserver(
+        (entries) => {
+          const isVisible = entries[0].isIntersecting;
+          motesEl.style.animationPlayState = isVisible ? "running" : "paused";
+          motesEl.style.display = isVisible ? "block" : "none";
+        },
+        { threshold: 0.02 }
       );
-      stripPanels.forEach(p => {
-        p.style.transformOrigin = "top center";
-        p.style.willChange = "transform";
-      });
+      heroObserver.observe(heroSec);
+    }
 
-      /* Cursor spotlight removed for solid dark table background */
-
-      /* ═══════════════════════════════════════════════════════════
-         HEADINGS  –  split and prepare
-      ═══════════════════════════════════════════════════════════ */
-      /* Rise: ThreeBirds main h2 */
-      const riseEl = page.querySelector<HTMLElement>('[data-pm-heading="rise"]');
-      let riseWords: HTMLElement[] = [];
-      if (riseEl) {
-        riseWords = splitWords(riseEl);
-        riseWords.forEach(w => { w.style.opacity = "0"; });
+    // ------------------------------------------------------------------
+    // 3. Reliable Viewport Reveal Observer (.rv, .ph, .led, .call)
+    // Triggers ONCE on downward scroll (150px rootMargin, 0 threshold).
+    // Once revealed, elements NEVER reset or hide.
+    // ------------------------------------------------------------------
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const target = entry.target as HTMLElement;
+            target.classList.add("in", "visible");
+            revealObserver.unobserve(target);
+          }
+        });
+      },
+      {
+        threshold: 0,
+        rootMargin: "150px 0px 150px 0px"
       }
+    );
 
-      /* Flip: Closing h2 */
-      const flipEl = page.querySelector<HTMLElement>('[data-pm-heading="flip"]');
-      let flipWords: HTMLElement[] = [];
-      if (flipEl) {
-        flipEl.style.perspective = "500px";
-        flipWords = splitWords(flipEl);
-        flipWords.forEach(w => {
-          w.style.transformOrigin = "top center";
-          w.style.opacity = "0";
-        });
+    const revealElements = Array.from(document.querySelectorAll<HTMLElement>(".rv, .led, .call, .ph"));
+    revealElements.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      // Immediate load check: if already inside or near viewport on mount, reveal right away
+      if (rect.top < window.innerHeight + 150 && rect.bottom > -150) {
+        el.classList.add("in", "visible");
+      } else {
+        revealObserver.observe(el);
       }
-
-      /* Lean: DataStrip editorial paragraph – get the text div */
-      const leanEl = stripSection?.querySelector<HTMLElement>(`[style*="Times New Roman"]`) ??
-                     stripSection?.querySelectorAll<HTMLElement>("div")[8] ?? null;
-      // We'll animate the whole block as "lean"
-
-      /* ═══════════════════════════════════════════════════════════
-         SPECIES FRAMES  –  mark will-change
-      ═══════════════════════════════════════════════════════════ */
-      const speciesFrames = Array.from(page.querySelectorAll<HTMLElement>("[data-pm-species-frame]"));
-      speciesFrames.forEach(f => {
-        f.style.willChange = "transform";
-        f.style.transformOrigin = "left center";
-      });
-      const speciesTexts = Array.from(page.querySelectorAll<HTMLElement>("[data-pm-species-text]"));
-      speciesTexts.forEach(t => { t.style.willChange = "transform"; });
-
-      /* ═══════════════════════════════════════════════════════════
-         MINI CARDS  –  per section group
-         Each [data-pm-mini-card] within a parent section is k-indexed.
-      ═══════════════════════════════════════════════════════════ */
-      const miniCards = Array.from(page.querySelectorAll<HTMLElement>("[data-pm-mini-card]"));
-      miniCards.forEach(c => { c.style.willChange = "transform"; });
-
-      /* ═══════════════════════════════════════════════════════════
-         PROGRESS BARS & COUNT-UPS (BIO-REMEDIATION STANDARD)
-      ═══════════════════════════════════════════════════════════ */
-      const bars = Array.from(page.querySelectorAll<HTMLElement>("[data-pm-bar]"));
-      bars.forEach(b => {
-        b._pmBarTarget = parseFloat(b.dataset.pmBar ?? "1");
-        b.style.width = "0%";
-      });
-
-      // data-cu Count-up initialization
-      page.querySelectorAll("[data-cu]").forEach((el) => {
-        if (el.hasAttribute("data-obs")) return;
-        el.setAttribute("data-obs", "1");
-        const text = el.textContent || "";
-        new IntersectionObserver((entries, observer) => {
-          if (!entries[0].isIntersecting) return;
-          observer.disconnect();
-          const t0 = performance.now();
-          const animate = (now: number) => {
-            const p = reduced ? 1 : Math.min(1, (now - t0) / 1500);
-            const k = 1 - Math.pow(1 - p, 3);
-            el.textContent = text.replace(/\d+(?:\.\d+)?/g, (n) => 
-              n.includes('.') ? (Number(n) * k).toFixed(1) : Math.round(Number(n) * k).toString()
-            );
-            if (p < 1) requestAnimationFrame(animate);
-          };
-          requestAnimationFrame(animate);
-        }, { threshold: 0.6 }).observe(el);
-      });
-
-      // br-rv Scroll Reveal generic integration
-      const rvObserver = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("br-in");
-            rvObserver.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.18 });
-
-      page.querySelectorAll(".br-rv, .br-callout, .br-ln, .br-quote").forEach((el) => {
-        if (!el.classList.contains("br-in") && !el.hasAttribute("data-obs")) {
-          el.setAttribute("data-obs", "1");
-          const topOffset = el.getBoundingClientRect().top;
-          if (topOffset < window.innerHeight - (reduced ? 0 : 50)) {
-            setTimeout(() => el.classList.add("br-in"), 150);
-          } else {
-            rvObserver.observe(el);
-          }
-        }
-      });
-
-      /* ═══════════════════════════════════════════════════════════
-         FOOTER  spotlight
-      ═══════════════════════════════════════════════════════════ */
-      const footerEl = page.querySelector<HTMLElement>('[data-pm-section="footer"]');
-      let footerSpotlight: HTMLElement | null = null;
-      if (footerEl) {
-        footerSpotlight = document.createElement("div");
-        footerSpotlight.style.cssText = `
-          position:absolute;
-          top:-200px;left:50%;
-          transform:translateX(-50%) scale(.1);
-          width:1000px;height:400px;
-          background:radial-gradient(ellipse at center, rgba(140,198,63,.55) 0%, transparent 70%);
-          pointer-events:none;
-          z-index:0;
-          will-change:transform;
-          opacity:0;
-        `;
-        footerEl.style.position = "relative";
-        footerEl.style.overflow = "hidden";
-        const firstChild = footerEl.firstElementChild as HTMLElement;
-        if (firstChild) firstChild.style.position = "relative";
-        footerEl.insertBefore(footerSpotlight, footerEl.firstChild);
-      }
-
-      /* ═══════════════════════════════════════════════════════════
-         FLOATING SPHERES  –  light-green sections
-      ═══════════════════════════════════════════════════════════ */
-      const sphereSections = [
-        page.querySelector<HTMLElement>('[data-pm-section="threebirds"]'),
-        page.querySelector<HTMLElement>('[data-pm-section="layers"]'),
-        page.querySelector<HTMLElement>('[data-pm-section="broilers"]'),
-      ].filter(Boolean) as HTMLElement[];
-
-      const sphereData: { el: HTMLElement; speed: number; section: HTMLElement }[] = [];
-
-      sphereSections.forEach(sec => {
-        const speeds = [.12,-.22,.18,-.3,.08,-.15,.35].map((s, i) => (i % 2 === 0 ? s : -s));
-        for (let i = 0; i < 7; i++) {
-          const size = 70 + Math.random() * 230;
-          const sphere = document.createElement("div");
-          sphere.style.cssText = `
-            position:absolute;
-            width:${size}px;height:${size}px;
-            border-radius:50%;
-            background:radial-gradient(circle at 35% 35%, #b8f068, #4a9a3a);
-            border:1px solid rgba(140,198,63,.3);
-            left:${Math.random() * 90}%;
-            top:${Math.random() * 80}%;
-            pointer-events:none;
-            z-index:0;
-            opacity:.18;
-            will-change:transform;
-            ${reduced ? "" : `animation:pm-float ${7 + Math.random() * 4}s ease-in-out ${-(Math.random() * 6)}s infinite alternate;`}
-          `;
-          sec.style.position = "relative";
-          sec.style.overflow = "hidden";
-          sec.appendChild(sphere);
-          sphereData.push({ el: sphere, speed: speeds[i], section: sec });
-        }
-      });
-
-      /* ═══════════════════════════════════════════════════════════
-         SMOOTHING STATE
-      ═══════════════════════════════════════════════════════════ */
-      // hero
-      let heroBgP: number = reduced ? 1 : 0, heroBgC: number = heroBgP;
-      let heroTxtP: number = reduced ? 1 : 0, heroTxtC: number = heroTxtP;
-
-      // strip panels: current smoothed value per panel
-      const stripCur: number[] = [0, 0, 0].map(() => (reduced ? 1 : 0));
-
-      // heading rise words
-      const riseCur: number[]  = riseWords.map(() => (reduced ? 1 : 0));
-      // heading flip words
-      const flipCur: number[]  = flipWords.map(() => (reduced ? 1 : 0));
-
-      // species frames
-      const frameCur: number[] = speciesFrames.map(() => (reduced ? 1 : 0));
-      // species texts
-      const textCur: number[]  = speciesTexts.map(() => (reduced ? 1 : 0));
-
-      // mini cards
-      const cardCur: number[]  = miniCards.map(() => (reduced ? 1 : 0));
-
-      // progress bars
-      const barCur: number[]   = bars.map(() => (reduced ? 1 : 0));
-
-      // footer spotlight
-      let footerCur: number = reduced ? 1 : 0;
-
-      /* ═══════════════════════════════════════════════════════════
-         REDUCED-MOTION: force everything visible immediately
-      ═══════════════════════════════════════════════════════════ */
-      if (reduced) {
-        riseWords.forEach(w => { w.style.opacity = "1"; w.style.transform = "none"; });
-        flipWords.forEach(w => { w.style.opacity = "1"; w.style.transform = "none"; });
-        stripPanels.forEach(p => { p.style.opacity = "1"; p.style.transform = "none"; });
-        speciesFrames.forEach(f => { f.style.opacity = "1"; f.style.transform = "none"; });
-        speciesTexts.forEach(t => { t.style.opacity = "1"; t.style.transform = "none"; });
-        miniCards.forEach(c => { c.style.opacity = "1"; c.style.transform = "none"; });
-        bars.forEach(b => {
-          b.style.width = `${(b._pmBarTarget ?? 1) * 100}%`;
-        });
-        if (footerSpotlight) {
-          footerSpotlight.style.transform = "translateX(-50%) scale(1)";
-          footerSpotlight.style.opacity = "1";
-        }
-        return;
-      }
-
-      /* ─── smooth helper ─────────────────────────────────────── */
-      function smooth(cur: number, tgt: number): number {
-        const next = cur + (tgt - cur) * 0.34;
-        return Math.abs(next - tgt) < 0.003 ? tgt : next;
-      }
-
-      /* ═══════════════════════════════════════════════════════════
-         rAF LOOP
-      ═══════════════════════════════════════════════════════════ */
-      let lastScrollY = -1;
-      const SNAP = 50; // px outside viewport threshold
-
-      function tick() {
-        rafId = requestAnimationFrame(tick);
-        const vh   = window.innerHeight;
-        const sy   = window.scrollY;
-        const same = sy === lastScrollY;
-        lastScrollY = sy;
-
-        /* ─────────────────────────────────────────────────────────
-           HERO parallax  (only while scrollY < 1.3 * vh)
-        ───────────────────────────────────────────────────────── */
-        if (heroBg && heroSection) {
-          const heroR = heroSection.getBoundingClientRect();
-          const inHeroZone = sy < 1.3 * vh && heroR.bottom > -SNAP;
-
-          const bgTgt  = inHeroZone ? 1 : heroBgC;
-          const txtTgt = inHeroZone ? 1 : heroTxtC;
-
-          heroBgC  = smooth(heroBgC,  same ? heroBgC  : (inHeroZone ? sy / vh : heroBgC));
-          heroTxtC = smooth(heroTxtC, same ? heroTxtC : (inHeroZone ? sy / vh : heroTxtC));
-
-          if (inHeroZone || !same) {
-            heroBg.style.transform = `none`;
-
-            const txtY     = sy * 0.28;
-            const txtScale = 1 + sy / 3500;
-            const txtOp    = Math.max(0, 1 - sy / (0.85 * vh));
-            if (heroText) {
-              heroText.style.transform = `translateY(${txtY}px) scale(${txtScale})`;
-              heroText.style.opacity   = String(txtOp);
-            }
-          }
-          void bgTgt; void txtTgt; // suppress unused
-        }
-
-        /* ─────────────────────────────────────────────────────────
-           DATA STRIP  panels  fold-down
-           START 1.02, LENGTH .3
-        ───────────────────────────────────────────────────────── */
-        if (stripSection && stripPanels.length) {
-          const pStrip = progress(stripSection, vh, 1.02, 0.3);
-          stripPanels.forEach((panel, idx) => {
-            const r = panel.getBoundingClientRect();
-            if (r.bottom < -SNAP || r.top > vh + SNAP) return;
-
-            const t   = eo(cl(pStrip * 1.9 - idx * 0.3));
-            const tgt = t;
-            stripCur[idx] = smooth(stripCur[idx], tgt);
-            const c = stripCur[idx];
-
-            const rotX = -95 + 95 * c;
-            const op   = cl(t * 2);
-            panel.style.transform = `perspective(700px) rotateX(${rotX}deg)`;
-            panel.style.opacity   = String(op);
-          });
-        }
-
-        /* ─────────────────────────────────────────────────────────
-           HEADING: RISE (ThreeBirds h2)
-           LENGTH .45
-        ───────────────────────────────────────────────────────── */
-        if (riseEl && riseWords.length) {
-          const r = riseEl.getBoundingClientRect();
-          if (r.bottom > -SNAP && r.top < vh + SNAP) {
-            const p = progress(riseEl, vh, 0.98, 0.45);
-            const N = riseWords.length;
-            riseWords.forEach((word, i) => {
-              const t   = eo(cl(p * 2.3 - i * 0.2));
-              riseCur[i] = smooth(riseCur[i], t);
-              const c = riseCur[i];
-              word.style.transform = `translateY(${(1 - c) * 115}%)`;
-              word.style.opacity   = String(c);
-              void N;
-            });
-          }
-        }
-
-        /* ─────────────────────────────────────────────────────────
-           HEADING: FLIP (Closing h2)
-           LENGTH .45
-        ───────────────────────────────────────────────────────── */
-        if (flipEl && flipWords.length) {
-          const r = flipEl.getBoundingClientRect();
-          if (r.bottom > -SNAP && r.top < vh + SNAP) {
-            const p = progress(flipEl, vh, 0.98, 0.45);
-            flipWords.forEach((word, i) => {
-              const t   = eo(cl(p * 2.3 - i * 0.2));
-              flipCur[i] = smooth(flipCur[i], t);
-              const c = flipCur[i];
-              word.style.transform = `perspective(500px) rotateX(${(1 - c) * -90}deg)`;
-              word.style.opacity   = String(t);
-            });
-          }
-        }
-
-        /* ─────────────────────────────────────────────────────────
-           SPECIES FRAMES
-        ───────────────────────────────────────────────────────── */
-        speciesFrames.forEach((frame, i) => {
-          const r = frame.getBoundingClientRect();
-          if (r.bottom < -SNAP || r.top > vh + SNAP) return;
-
-          const p   = progress(frame, vh, 0.98, 0.7);
-          const e   = eo(cl(p * 1.3));
-          const obt = ob(cl(p * 1.5));
-          const op  = cl(p * 4);
-
-          frameCur[i] = smooth(frameCur[i], e);
-          const c = frameCur[i];
-
-          if (i === 0) {
-            /* book-cover open: rotateY -100 to 0, origin left */
-            frame.style.transformOrigin = "left center";
-            frame.style.transform = `perspective(1100px) rotateY(${(1 - c) * -100}deg)`;
-            frame.style.opacity   = String(op);
-          } else if (i === 1) {
-            /* arc swing: translate + rotate + scale, easeOutBack */
-            const o = ob(cl(p * 1.5));
-            frame.style.transformOrigin = "left bottom";
-            frame.style.transform = `
-              translate(${(1 - o) * -280}px, ${(1 - o) * 170}px)
-              rotate(${(1 - o) * -18}deg)
-              scale(${0.65 + o * 0.35})
-            `;
-            frame.style.opacity = String(op);
-            void obt;
-          } else if (i === 2) {
-            /* blob morph: rotate + scale + border-radius */
-            frame.style.transformOrigin = "center center";
-            frame.style.transform = `rotate(${(1 - c) * -20}deg) scale(${0.5 + c * 0.5})`;
-            frame.style.borderRadius = `${(1 - c) * 50}%`;
-            frame.style.opacity = String(op);
-          }
-        });
-
-        /* ─────────────────────────────────────────────────────────
-           SPECIES TEXTS
-        ───────────────────────────────────────────────────────── */
-        speciesTexts.forEach((txt, i) => {
-          const r = txt.getBoundingClientRect();
-          if (r.bottom < -SNAP || r.top > vh + SNAP) return;
-
-          const p  = progress(txt, vh, 0.98, 0.55);
-          const e  = eo(cl(p * 1.4 - 0.25));
-          const op = cl(e * 1.6);
-
-          textCur[i] = smooth(textCur[i], e);
-          const c = textCur[i];
-
-          if (i === 0) {
-            /* translateX 90 + skewX -7 */
-            txt.style.transform = `translateX(${(1 - c) * 90}px) skewX(${(1 - c) * -7}deg)`;
-            txt.style.opacity   = String(op);
-          } else if (i === 1) {
-            /* rotateX from top */
-            txt.style.transformOrigin = "top center";
-            txt.style.transform = `perspective(900px) rotateX(${(1 - c) * -50}deg)`;
-            txt.style.opacity   = String(op);
-          } else if (i === 2) {
-            /* translateY + scale */
-            txt.style.transform = `translateY(${(1 - c) * 90}px) scale(${0.92 + c * 0.08})`;
-            txt.style.opacity   = String(op);
-          }
-        });
-
-        /* ─────────────────────────────────────────────────────────
-           MINI CARDS  (per-section, k-indexed within their parent)
-        ───────────────────────────────────────────────────────── */
-        miniCards.forEach((card, globalIdx) => {
-          const r = card.getBoundingClientRect();
-          if (r.bottom < -SNAP || r.top > vh + SNAP) return;
-
-          // find which section this card is in, get local index
-          const parentSection = card.closest("section") ?? card.closest("footer");
-          let k = globalIdx;
-          if (parentSection) {
-            const siblings = Array.from(parentSection.querySelectorAll("[data-pm-mini-card]"));
-            k = siblings.indexOf(card);
-          }
-          const p   = progress(card.closest("section") ?? card, vh, 0.98, 0.45);
-          const t   = cl(p * 1.5 - 0.55 - k * 0.15);
-          const obT = ob(t);
-          const op  = t;
-
-          cardCur[globalIdx] = smooth(cardCur[globalIdx], obT);
-          const c = cardCur[globalIdx];
-
-          card.style.transform = `translateY(${(1 - c) * 40}px)`;
-          card.style.opacity   = String(cl(op));
-        });
-
-        /* ─────────────────────────────────────────────────────────
-           PROGRESS BARS
-        ───────────────────────────────────────────────────────── */
-        bars.forEach((bar, i) => {
-          const r = bar.getBoundingClientRect();
-          if (r.bottom < -SNAP || r.top > vh + SNAP) return;
-
-          const section = bar.closest("section");
-          const p  = section ? progress(section, vh, 0.98, 0.45) : progress(bar, vh);
-          const pW = cl(p * 1.6 - 0.6);
-
-          barCur[i] = smooth(barCur[i], pW);
-          bar.style.width = `${(bar._pmBarTarget ?? 1) * barCur[i] * 100}%`;
-        });
-
-        /* ─────────────────────────────────────────────────────────
-           FLOATING SPHERES  parallax
-        ───────────────────────────────────────────────────────── */
-        sphereData.forEach(({ el, speed, section: sec }) => {
-          const sr = sec.getBoundingClientRect();
-          if (sr.bottom < -SNAP || sr.top > vh + SNAP) return;
-          const sCenter = sr.top + sr.height / 2;
-          const offset  = (sCenter - vh / 2) / vh;
-          const ty = offset * speed * 1000;
-          el.style.transform = `translateY(${ty}px)`;
-        });
-
-        /* ─────────────────────────────────────────────────────────
-           FOOTER spotlight
-           START 1, LENGTH .8
-        ───────────────────────────────────────────────────────── */
-        if (footerSpotlight && footerEl) {
-          const p   = progress(footerEl, vh, 1, 0.8);
-          const e   = eo(cl(p * 1));
-          footerCur = smooth(footerCur, e);
-          const c   = footerCur;
-          footerSpotlight.style.transform = `translateX(-50%) scale(${0.1 + c * 0.9})`;
-          footerSpotlight.style.opacity   = String(cl(p));
-        }
-      }
-
-      rafId = requestAnimationFrame(tick);
-
-      /* ═══════════════════════════════════════════════════════════
-         CLEANUP
-      ═══════════════════════════════════════════════════════════ */
-      cleanupFn = () => {
-        cancelAnimationFrame(rafId);
-      };
-    };
-
-    /* Run init on next paint to ensure DOM from server components is ready */
-    const raf0 = requestAnimationFrame(() => {
-      const raf1 = requestAnimationFrame(init);
-      return raf1;
     });
 
+    // ------------------------------------------------------------------
+    // 4. Count-Up Observer — EaseOutCubic count over 1.5s
+    // ------------------------------------------------------------------
+    const cuElements = Array.from(document.querySelectorAll<HTMLElement>("[data-cu]"));
+    const cuMap = new Map<HTMLElement, { targetText: string; isCounting: boolean; hasCounted: boolean }>();
+
+    cuElements.forEach((el) => {
+      const rawCu = el.getAttribute("data-cu");
+      const targetText = (rawCu && rawCu !== "true" && rawCu !== "false") ? rawCu : (el.textContent || "");
+      cuMap.set(el, { targetText, isCounting: false, hasCounted: false });
+      if (!el.textContent || el.textContent === "true") {
+        el.textContent = targetText;
+      }
+    });
+
+    const triggerCountUp = (el: HTMLElement) => {
+      const data = cuMap.get(el);
+      if (!data || data.hasCounted || data.isCounting) return;
+      data.isCounting = true;
+      const t0 = performance.now();
+      const target = data.targetText;
+
+      (function runCount(now) {
+        const progress = reduce ? 1 : Math.min(1, (now - t0) / 1500);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = target.replace(/\d+/g, (n) => String(Math.round(+n * ease)));
+        if (progress < 1) {
+          requestAnimationFrame(runCount);
+        } else {
+          el.textContent = target;
+          data.isCounting = false;
+          data.hasCounted = true;
+        }
+      })(t0);
+    };
+
+    const cuObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement;
+            triggerCountUp(el);
+            cuObserver.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0, rootMargin: "100px 0px 100px 0px" }
+    );
+
+    cuElements.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 100 && rect.bottom > -100) {
+        triggerCountUp(el);
+      } else {
+        cuObserver.observe(el);
+      }
+    });
+
+    // ------------------------------------------------------------------
+    // 5. Parallax Tracking for Visible Parallax Elements (.ph-in)
+    // ------------------------------------------------------------------
+    const visibleParallaxItems = new Set<HTMLElement>();
+    const parallaxObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const el = entry.target as HTMLElement;
+          if (entry.isIntersecting) {
+            visibleParallaxItems.add(el);
+          } else {
+            visibleParallaxItems.delete(el);
+          }
+        });
+      },
+      { rootMargin: "60px 0px 60px 0px" }
+    );
+
+    document.querySelectorAll<HTMLElement>(".ph-in").forEach((el) => {
+      parallaxObserver.observe(el);
+    });
+
+    // ------------------------------------------------------------------
+    // 6. Single Coordinated Scroll Handler (Top Bar & Section Rail)
+    // ------------------------------------------------------------------
+    const secElements = Array.from(document.querySelectorAll<HTMLElement>("[data-n]"));
+    const railContainer = document.getElementById("rail");
+    let railDots: HTMLAnchorElement[] = [];
+
+    if (railContainer) {
+      railContainer.innerHTML = "";
+      railDots = secElements.map((s) => {
+        const a = document.createElement("a");
+        a.title = s.dataset.n || "";
+        a.href = "#";
+        a.onclick = (ev) => {
+          ev.preventDefault();
+          s.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+        };
+        railContainer.appendChild(a);
+        return a;
+      });
+    }
+
+    let ticking = false;
+    let activeRailIndex = -1;
+    let winH = window.innerHeight;
+    let docMaxScroll = Math.max(1, document.documentElement.scrollHeight - winH);
+
+    const updateMetrics = () => {
+      winH = window.innerHeight;
+      docMaxScroll = Math.max(1, document.documentElement.scrollHeight - winH);
+    };
+
+    window.addEventListener("resize", updateMetrics, { passive: true });
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+
+      requestAnimationFrame(() => {
+        ticking = false;
+        const y = window.scrollY;
+
+        // A. Top Progress Bar
+        const bar = document.getElementById("bar");
+        if (bar) {
+          bar.style.transform = `scaleX(${y / docMaxScroll})`;
+        }
+
+        // B. Active Section Rail Dot
+        let newActiveIndex = -1;
+        for (let i = 0; i < secElements.length; i++) {
+          const r = secElements[i].getBoundingClientRect();
+          if (r.top < winH * 0.5 && r.bottom > winH * 0.3) {
+            newActiveIndex = i;
+            break;
+          }
+        }
+
+        if (railContainer) {
+          if (newActiveIndex !== activeRailIndex) {
+            activeRailIndex = newActiveIndex;
+            for (let i = 0; i < railDots.length; i++) {
+              railDots[i].classList.toggle("on", i === activeRailIndex);
+            }
+          }
+          railContainer.style.opacity = y > winH * 0.6 ? "1" : "0";
+        }
+
+        // C. Parallax Calculation for Parallax Elements (.ph-in)
+        if (!reduce && visibleParallaxItems.size > 0) {
+          const updates: Array<{ el: HTMLElement; offsetPx: string }> = [];
+          const vCenter = winH / 2;
+
+          visibleParallaxItems.forEach((pImg) => {
+            const parent = pImg.parentElement;
+            if (!parent) return;
+            const r = parent.getBoundingClientRect();
+            const elCenter = r.top + r.height / 2;
+            const offsetPx = ((elCenter - vCenter) * -0.06).toFixed(1);
+            updates.push({ el: pImg, offsetPx });
+          });
+
+          for (let i = 0; i < updates.length; i++) {
+            updates[i].el.style.transform = `scale(1.10) translate3d(0, ${updates[i].offsetPx}px, 0)`;
+          }
+        }
+      });
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    // ------------------------------------------------------------------
+    // Cleanup Function
+    // ------------------------------------------------------------------
     return () => {
-      cancelAnimationFrame(raf0);
-      cancelAnimationFrame(rafId);
-      if (cleanupFn) cleanupFn();
-      document.getElementById("pm-spore-style")?.remove();
-      document.getElementById("pm-cursor-light")?.remove();
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", updateMetrics);
+      heroObserver?.disconnect();
+      revealObserver.disconnect();
+      cuObserver.disconnect();
+      parallaxObserver.disconnect();
     };
   }, []);
 
-  return null;
-}
+  return (
+    <>
+      {/* Top Scroll Progress Bar */}
+      <div className="bar" id="bar" aria-hidden="true" />
 
-/* ─── Augment HTMLElement for the bar target ────────────────────────────── */
-declare global {
-  interface HTMLElement {
-    _pmBarTarget?: number;
-  }
+      {/* Desktop Right-Side Section Rail */}
+      <nav className="rail" id="rail" aria-label="Sections" />
+
+      {/* Standardized Motion System CSS (Matches locked Ruminants system) */}
+      <style jsx global>{`
+        /* Progress Bar */
+        .bar {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 3px;
+          background: #6DBE45;
+          transform-origin: 0 50%;
+          transform: scaleX(0);
+          z-index: 60;
+        }
+
+        /* Section Rail */
+        .rail {
+          position: fixed;
+          right: 18px;
+          top: 50%;
+          transform: translateY(-50%);
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          z-index: 40;
+          opacity: 0;
+          transition: opacity 0.4s;
+        }
+        .rail a {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: rgba(20, 51, 36, 0.25);
+          transition: transform 0.4s, background-color 0.4s;
+          display: block;
+        }
+        .rail a.on {
+          background: #6DBE45;
+          transform: scale(1.7);
+        }
+
+        /* Hero Motes */
+        .motes {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+        }
+        .motes i {
+          position: absolute;
+          width: 5px;
+          height: 5px;
+          border-radius: 50%;
+          background: #F4E3A1;
+          opacity: 0;
+          animation: mote 9s linear infinite;
+        }
+        @keyframes mote {
+          0% {
+            opacity: 0;
+            transform: translateY(40px);
+          }
+          20% {
+            opacity: 0.7;
+          }
+          100% {
+            opacity: 0;
+            transform: translateY(-220px);
+          }
+        }
+
+        /* Hero Masked Vertical Reveal */
+        .ln {
+          display: block;
+          overflow: hidden;
+          padding-bottom: 0.06em;
+        }
+        .ln > span {
+          display: inline-block;
+          transform: translateY(105%);
+          animation: up 1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s forwards;
+        }
+        .ln + .ln > span {
+          animation-delay: 0.38s;
+        }
+        .ln:nth-child(3) > span {
+          animation-delay: 0.56s;
+        }
+        @keyframes up {
+          to {
+            transform: none;
+          }
+        }
+
+        /* Hero Quote Fade */
+        .quote {
+          opacity: 0;
+          animation: fade 1s 0.9s forwards;
+        }
+        @keyframes fade {
+          to {
+            opacity: 1;
+          }
+        }
+
+        /* Global Reveal System (.rv) */
+        .rv {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: opacity 0.9s, transform 0.9s;
+        }
+        .rv.in,
+        .rv.visible {
+          opacity: 1;
+          transform: none;
+        }
+        .rv.d1 {
+          transition-delay: 0.15s;
+        }
+        .rv.d2 {
+          transition-delay: 0.3s;
+        }
+
+        /* Stats Accent Line */
+        .led {
+          position: relative;
+        }
+        .led::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: -4px;
+          height: 2px;
+          width: 0;
+          background: #6DBE45;
+          transition: width 1.2s 0.3s;
+        }
+        .led.in::after,
+        .led.visible::after {
+          width: 60px;
+        }
+
+        /* Photo Clip Reveal (.ph) */
+        .ph {
+          position: relative;
+          border-radius: 22px;
+          overflow: hidden;
+          clip-path: inset(0 0 100% 0 round 22px);
+          transition: clip-path 1.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+        }
+        .ph.in,
+        .ph.visible,
+        .in .ph {
+          clip-path: inset(0 0 0 0 round 22px);
+        }
+        .ph-in {
+          will-change: transform;
+        }
+
+        /* Table Row Hover (Desktop hover:hover devices only) */
+        @media (hover: hover) {
+          .trow {
+            transition: background 0.35s, color 0.35s, padding 0.35s;
+          }
+          .trow:hover {
+            background: #1B3B2B !important;
+            color: #ffffff !important;
+            padding-left: 24px !important;
+          }
+          .trow:hover * {
+            color: #ffffff !important;
+          }
+          .trow:hover sup {
+            color: #6DBE45 !important;
+          }
+        }
+
+        /* Callout Accent Line */
+        .call {
+          position: relative;
+        }
+        .call::before {
+          content: "";
+          position: absolute;
+          left: -3px;
+          top: 0;
+          width: 3px;
+          height: 0;
+          background: #6DBE45;
+          transition: height 1.2s 0.4s;
+        }
+        .call.in::before,
+        .call.visible::before,
+        .in .call::before {
+          height: 100%;
+        }
+
+        /* Mobile Breakpoint for Rail */
+        @media (max-width: 860px) {
+          .rail {
+            display: none !important;
+          }
+        }
+
+        /* Prefers Reduced Motion Accessibility Override */
+        @media (prefers-reduced-motion: reduce) {
+          .ln > span,
+          .quote,
+          .rv,
+          .ph,
+          .motes i {
+            animation: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+            clip-path: none !important;
+            transition: none !important;
+          }
+          html {
+            scroll-behavior: auto !important;
+          }
+        }
+      `}</style>
+    </>
+  );
 }

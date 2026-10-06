@@ -2,7 +2,7 @@ import React from "react";
 
 export default function PoultryLayers() {
   return (
-    <section className="w-full relative overflow-hidden py-8 lg:py-12 min-h-[85vh] bg-[#DCE8D5]" data-pm-section="layers">
+    <section className="w-full relative overflow-hidden py-8 lg:py-12 bg-[#DCE8D5]" data-ruminants-section="layers" data-n="Layers">
       {/* Subtle capsule decorations */}
       <div className="absolute inset-0 opacity-[0.08] pointer-events-none">
         <svg width="100%" height="100%" viewBox="0 0 1600 846" fill="none">
@@ -30,11 +30,11 @@ export default function PoultryLayers() {
         </svg>
       </div>
 
-      <div className="relative z-10 w-full max-w-[1600px] mx-auto pl-[clamp(20px,5vw,72px)] pr-5 lg:pr-12 h-full flex flex-col justify-center">
+      <div className="relative z-10 w-full max-w-[1600px] mx-auto pl-[clamp(20px,5vw,72px)] pr-5 lg:pr-12">
         {/* Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           {/* Left Side - Content */}
-          <div className="space-y-6 lg:space-y-8 w-[95%] pl-8 lg:pl-16" data-pm-species-text="1">
+          <div className="rv space-y-6 lg:space-y-8 w-[95%] pl-8 lg:pl-16">
             {/* Small Label */}
             <div className="font-mono text-xs font-semibold tracking-[0.25em] text-[#2D5A42] uppercase mb-2">
               COMMERCIAL EGG PRODUCTION
@@ -51,19 +51,19 @@ export default function PoultryLayers() {
             </div>
 
             {/* Body Heading */}
-            <h3 className="font-space-grotesk font-semibold text-xl lg:text-2xl text-[#1a1a1a] tracking-tight leading-tight mb-4 br-rv">
+            <h3 className="rv font-space-grotesk font-semibold text-xl lg:text-2xl text-[#1a1a1a] tracking-tight leading-tight mb-4">
               A long laying cycle needs a stable gut.
             </h3>
 
             {/* Body Paragraph */}
-            <p className="text-base lg:text-lg text-[#2d2d2d] leading-relaxed mb-6 br-rv br-d1" style={{ fontFamily: 'Georgia, Times New Roman, Times, serif' }}>
+            <p className="rv d1 text-base lg:text-lg text-[#2d2d2d] leading-relaxed mb-6" style={{ fontFamily: 'Georgia, Times New Roman, Times, serif' }}>
               A laying hen produces for a year or more, and every egg draws heavily on calcium and phosphorus. A balanced gut community supports feed efficiency and mineral uptake across the whole cycle, and helps keep Salmonella out of the flock and off the eggs.
             </p>
 
             {/* Feature Boxes */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 br-rv br-d2">
+            <div className="rv d2 grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               {/* Left Feature Box */}
-              <div className="border border-[#c4d4c4] p-5">
+              <div className="trow border border-[#c4d4c4] p-5 rounded-lg transition-all">
                 <div className="font-space-grotesk font-bold text-base text-[#1a1a1a] mb-2">
                   More eggs per kg feed
                 </div>
@@ -73,7 +73,7 @@ export default function PoultryLayers() {
               </div>
 
               {/* Right Feature Box */}
-              <div className="border border-[#c4d4c4] p-5">
+              <div className="trow border border-[#c4d4c4] p-5 rounded-lg transition-all">
                 <div className="font-space-grotesk font-bold text-base text-[#1a1a1a] mb-2">
                   Stronger shells
                 </div>
@@ -84,7 +84,7 @@ export default function PoultryLayers() {
             </div>
 
             {/* Highlighted Statement with Vertical Accent Line */}
-            <div className="flex gap-4 mb-6 br-rv br-d2">
+            <div className="call rv d2 flex gap-4 mb-6">
               <div className="w-1 bg-[#6BBF3A] flex-shrink-0" />
               <div>
                 <p className="text-base lg:text-lg text-[#1a1a1a] leading-relaxed font-medium" style={{ fontFamily: 'Georgia, Times New Roman, Times, serif' }}>
@@ -100,17 +100,15 @@ export default function PoultryLayers() {
             <div className="w-full h-[1px] bg-[#c4d4c4]" />
           </div>
 
-          {/* Right Side - Image */}
-          <div className="flex flex-col items-center" data-pm-species-frame="1">
-            {/* Spacer to align image top with "A long laying cycle needs a stable gut." */}
-            <div className="h-[60px] lg:h-[90px]" />
-            {/* Image */}
-            <div className="group cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_25px_50px_-12px_rgba(45,90,66,0.25)] active:scale-[0.98] w-[75%] h-[520px] lg:h-[580px] rounded-sm overflow-hidden" data-layer-image>
+          {/* Right Side - Image in Ruminants .ph Photo Clip Container */}
+          <div className="rv d1 flex flex-col items-center pt-4 lg:pt-8">
+            <div className="ph w-[85%] h-[480px] lg:h-[540px] rounded-lg overflow-hidden bg-[#E8EFE6] relative">
               <img
                 src="/images/poultry-hero-right.png"
                 alt="Layers - sustained lay, strong shells and gut"
                 loading="eager"
-                className="w-full h-full object-cover transition-transform duration-[800ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-105"
+                decoding="async"
+                className="ph-in w-full h-full object-cover block will-change-transform scale-110"
               />
             </div>
           </div>

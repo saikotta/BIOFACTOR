@@ -104,7 +104,6 @@ export const EVIDENCE_CONTENT = {
   title: "Six technologies. 11 patented. Huge microbial strain bank",
   stats: [
     { to: 11, label: "Patents granted" },
-    { to: 2, label: "Patented Platforms — Bioencapsulation & MAMSP" },
     { to: 350, suffix: "+", label: "Microbial strain bank" },
   ],
   closing: "BIOFACTOR BIOLOGICALS® — MICROBE · MINERAL · METABIOME · ONE HEALTH",

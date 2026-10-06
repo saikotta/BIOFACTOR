@@ -51,15 +51,75 @@ interface JobOpening {
   responsibilities: string;
   skills: string[];
   status: string;
+  is_demo?: boolean;
 }
+
+const DEMO_JOBS: JobOpening[] = [
+  {
+    id: "demo-1",
+    title: "Research Associate — Microbiology",
+    department: "Research & Development",
+    job_type: "Full Time",
+    experience: "1–3 Years",
+    salary: "",
+    location: "Hyderabad, Telangana",
+    description: "Support microbial research, laboratory studies and biological product development.",
+    responsibilities: "Conduct strain isolation, culture maintenance, and laboratory assays under supervisor guidance.",
+    skills: ["Microbiology", "Aseptic Technique", "Lab Assays"],
+    status: "OPEN",
+    is_demo: true,
+  },
+  {
+    id: "demo-2",
+    title: "Field Agronomist",
+    department: "Agronomy & Field Operations",
+    job_type: "Full Time",
+    experience: "2–4 Years",
+    salary: "",
+    location: "Hyderabad, Telangana",
+    description: "Work with field teams to support product trials, crop programs and farmer engagement.",
+    responsibilities: "Design field trial plots, monitor crop performance metrics, and deliver agronomic support.",
+    skills: ["Crop Protection", "Field Trials", "Farmer Advisory"],
+    status: "OPEN",
+    is_demo: true,
+  },
+  {
+    id: "demo-3",
+    title: "Quality Control Executive",
+    department: "Quality Assurance",
+    job_type: "Full Time",
+    experience: "1–3 Years",
+    salary: "",
+    location: "Hyderabad, Telangana",
+    description: "Support quality testing, documentation and consistency across biological product workflows.",
+    responsibilities: "Perform batch sample testing, maintain QA records, and ensure regulatory compliance.",
+    skills: ["Quality Control", "QA Documentation", "Batch Analysis"],
+    status: "OPEN",
+    is_demo: true,
+  },
+];
 
 export default function CareersPage() {
   const [isApplying, setIsApplying] = useState(false);
+  const [isHrModalOpen, setIsHrModalOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState<JobOpening | null>(null);
-  const [jobOpenings, setJobOpenings] = useState<JobOpening[]>([]);
-  const [loadingJobs, setLoadingJobs] = useState(true);
+  const [jobOpenings, setJobOpenings] = useState<JobOpening[]>(DEMO_JOBS);
+  const [loadingJobs, setLoadingJobs] = useState(false);
   const [uploadProgress, setUploadProgress] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const displayJobs = jobOpenings.length > 0 ? jobOpenings : DEMO_JOBS;
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsHrModalOpen(false);
+        setIsApplying(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const getApiUrl = (endpoint: string) => {
     const base = (typeof process !== 'undefined' && process.env?.NEXT_PUBLIC_API_URL) || 'http://localhost:8000/api/v1';
@@ -173,13 +233,19 @@ export default function CareersPage() {
         });
 
         const displayJobs = jobsArray.filter((job: any) => ['open', 'closed', 'filled'].includes(job.status?.toLowerCase() || 'open'));
-        setJobOpenings(displayJobs);
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('biofactor_jobs_cache_v2', JSON.stringify(displayJobs));
+        if (displayJobs.length > 0) {
+          setJobOpenings(displayJobs);
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('biofactor_jobs_cache_v2', JSON.stringify(displayJobs));
+          }
+        } else {
+          setJobOpenings(DEMO_JOBS);
         }
+      } else {
+        setJobOpenings((prev) => (prev.length > 0 && !prev[0].is_demo ? prev : DEMO_JOBS));
       }
     } catch {
-      // Graceful fallback
+      setJobOpenings((prev) => (prev.length > 0 && !prev[0].is_demo ? prev : DEMO_JOBS));
     } finally {
       if (isInitial) setLoadingJobs(false);
     }
@@ -210,6 +276,14 @@ export default function CareersPage() {
 
   const handleApplicationSubmit = async (e: React.FormEvent) => {
     if (e && e.preventDefault) e.preventDefault();
+
+    if (selectedJob?.is_demo) {
+      setToast({
+        message: "Demo opening — application submission is disabled.",
+        type: "error"
+      });
+      return;
+    }
 
     if (applicationForm.resume) {
       const MAX_SIZE_MB = 5;
@@ -393,13 +467,14 @@ export default function CareersPage() {
               </motion.p>
 
               <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center gap-3 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300"
+                <button
+                  type="button"
+                  onClick={() => setIsHrModalOpen(true)}
+                  className="inline-flex items-center justify-center gap-3 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
                 >
                   <FiMail />
                   Contact HR Department
-                </Link>
+                </button>
 
                 <a
                   href="#openings"
@@ -481,111 +556,102 @@ export default function CareersPage() {
               </p>
             </motion.div>
 
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.15 }}
-              variants={staggerContainer}
-              className="grid lg:grid-cols-2 gap-8"
+            <div
+              className={`grid md:grid-cols-2 ${displayJobs.length >= 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-2'} gap-8 opacity-100`}
             >
               {loadingJobs ? (
-                <div className="lg:col-span-2 flex flex-col items-center justify-center py-20 text-[#173522]/60 gap-4">
+                <div className="lg:col-span-3 flex flex-col items-center justify-center py-20 text-[#173522]/60 gap-4">
                   <FiLoader className="animate-spin text-4xl text-[#2D6A4F]" />
                   <p className="font-mono text-xs font-bold tracking-widest uppercase">Loading open positions...</p>
                 </div>
-              ) : jobOpenings.length === 0 ? (
-                <div className="lg:col-span-2 text-center py-20 bg-[#EAF3EA] rounded-3xl border border-dashed border-[#2D6A4F]/30 flex flex-col items-center justify-center gap-4">
-                  <p className="text-[#173522]/80 font-medium italic">No open positions at the moment. Check back later!</p>
-                  <button
-                    onClick={() => fetchJobs(false)}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#2D6A4F] hover:bg-[#173522] text-white text-xs font-mono font-bold uppercase rounded-xl transition-all shadow-md hover:scale-105 cursor-pointer"
-                  >
-                    🔄 Refresh Openings
-                  </button>
-                </div>
-              ) : (
-                jobOpenings.map((job) => (
-                  <motion.div 
-                    key={job.id} 
-                    variants={zoomIn}
-                    whileHover={{ scale: 1.02, y: -4, boxShadow: "0 18px 40px rgba(45,106,79,0.15)" }}
-                    className="group rounded-2xl shadow-md border border-[#2D6A4F]/20 bg-white overflow-hidden h-full flex flex-col transition-all duration-300"
-                  >
-                    <div className="p-8 flex-grow flex flex-col">
-                      <div className="flex justify-between items-start mb-6">
-                        <div>
-                          <h3 className="text-xl font-bold text-[#173522] group-hover:text-[#2D6A4F] transition-colors mb-1">
-                            {job.title}
-                          </h3>
-                          <p className="text-sm font-semibold text-[#2D6A4F]">{job.department}</p>
-                        </div>
-                        <span className="px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#EAF3EA] text-[#2D6A4F]">
+              ) : displayJobs.map((job) => (
+                <div 
+                  key={job.id} 
+                  className="group rounded-2xl shadow-md border border-[#2D6A4F]/20 bg-white overflow-hidden h-full flex flex-col transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-xl opacity-100"
+                >
+                  <div className="p-8 flex-grow flex flex-col">
+                    <div className="flex justify-between items-start gap-3 mb-6">
+                      <div>
+                        <h3 className="text-xl font-bold text-[#173522] group-hover:text-[#2D6A4F] transition-colors mb-1">
+                          {job.title}
+                        </h3>
+                        <p className="text-sm font-semibold text-[#2D6A4F]">{job.department}</p>
+                      </div>
+                      <div className="flex flex-col items-end gap-1.5 shrink-0">
+                        {job.is_demo && (
+                          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-extrabold uppercase tracking-wider bg-amber-100 text-amber-900 border border-amber-300">
+                            DEMO OPENING
+                          </span>
+                        )}
+                        <span className="px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#EAF3EA] text-[#2D6A4F]">
                           {job.job_type}
                         </span>
                       </div>
-                      
-                      <div className="space-y-4 mb-6">
-                        <div className="flex items-center gap-6 text-sm text-[#173522]/80 font-medium">
-                          <span className="flex items-center gap-2">
-                            <FiMapPin className="text-[#2D6A4F]" />
-                            {job.location}
-                          </span>
-                          <span className="flex items-center gap-2">
-                            <FiBriefcase className="text-[#2D6A4F]" />
-                            {job.experience}
-                          </span>
-                        </div>
-                        <div className="text-[#173522]/90 leading-relaxed text-sm font-sans">
-                          {job.description}
-                        </div>
-                        {job.responsibilities && (
-                          <div className="mt-4">
-                            <h4 className="font-bold text-[#173522] text-sm mb-2">What You'll Do:</h4>
-                            <div className="text-[#173522]/80 text-sm leading-relaxed whitespace-pre-line font-sans">
-                              {job.responsibilities}
-                            </div>
-                          </div>
-                        )}
+                    </div>
+                    
+                    <div className="space-y-4 mb-6">
+                      <div className="flex items-center gap-6 text-sm text-[#173522]/80 font-medium">
+                        <span className="flex items-center gap-2">
+                          <FiMapPin className="text-[#2D6A4F]" />
+                          {job.location}
+                        </span>
+                        <span className="flex items-center gap-2">
+                          <FiBriefcase className="text-[#2D6A4F]" />
+                          {job.experience}
+                        </span>
                       </div>
-                      
-                      {job.skills && job.skills.length > 0 && (
-                        <div className="mb-8">
-                          <h4 className="font-bold text-[#173522] text-xs uppercase tracking-wider mb-3 font-mono">Key Skills:</h4>
-                          <div className="flex flex-wrap gap-2">
-                            {job.skills.map((skill, idx) => (
-                              <span 
-                                key={idx} 
-                                className="px-3 py-1 rounded-full text-xs font-medium bg-[#EAF3EA] text-[#173522]"
-                              >
-                                {skill}
-                              </span>
-                            ))}
+                      <div className="text-[#173522]/90 leading-relaxed text-sm font-sans">
+                        {job.description}
+                      </div>
+                      {job.responsibilities && (
+                        <div className="mt-4">
+                          <h4 className="font-bold text-[#173522] text-sm mb-2">What You'll Do:</h4>
+                          <div className="text-[#173522]/80 text-sm leading-relaxed whitespace-pre-line font-sans">
+                            {job.responsibilities}
                           </div>
                         </div>
                       )}
-                      
-                      <div className="flex justify-between items-center pt-6 border-t border-[#2D6A4F]/10 mt-auto">
+                    </div>
+                    
+                    {job.skills && job.skills.length > 0 && (
+                      <div className="mb-8">
+                        <h4 className="font-bold text-[#173522] text-xs uppercase tracking-wider mb-3 font-mono">Key Skills:</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {job.skills.map((skill, idx) => (
+                            <span 
+                              key={idx} 
+                              className="px-3 py-1 rounded-full text-xs font-medium bg-[#EAF3EA] text-[#173522]"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    
+                    <div className={`flex items-center pt-6 border-t border-[#2D6A4F]/10 mt-auto ${job.salary && job.salary.trim() !== '' && job.salary !== 'Competitive' && job.salary !== 'Not Specified' ? 'justify-between' : 'justify-end'}`}>
+                      {job.salary && job.salary.trim() !== '' && job.salary !== 'Competitive' && job.salary !== 'Not Specified' && (
                         <div>
                           <span className="text-[#173522]/60 text-xs uppercase tracking-wider font-mono">Expected Salary</span>
                           <p className="font-bold text-[#2D6A4F]">
                             {job.salary && !job.salary.includes('₹') ? `₹${job.salary}` : job.salary}
                           </p>
                         </div>
-                        <button
-                          onClick={() => {
-                            setSelectedJob(job);
-                            setIsApplying(true);
-                          }}
-                          className="px-6 py-3 bg-[#2D6A4F] hover:bg-[#173522] text-white font-bold rounded-xl transition-all shadow-md hover:shadow-lg flex items-center gap-2 cursor-pointer text-sm"
-                        >
-                          Apply Now <FiArrowRight />
-                        </button>
-                      </div>
+                      )}
+                      <button
+                        onClick={() => {
+                          setSelectedJob(job);
+                          setIsApplying(true);
+                        }}
+                        className="px-6 py-3 bg-[#2D6A4F] hover:bg-[#173522] text-white font-bold rounded-xl transition-all shadow-md hover:shadow-lg flex items-center gap-2 cursor-pointer text-sm"
+                      >
+                        Apply Now <FiArrowRight />
+                      </button>
                     </div>
-                  </motion.div>
-                ))
-              )}
-            </motion.div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -770,6 +836,101 @@ export default function CareersPage() {
                   </button>
                 </div>
               </form>
+            </div>
+          </div>
+        )}
+
+        {/* HR Contact Modal */}
+        {isHrModalOpen && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs transition-opacity duration-200"
+            onClick={() => setIsHrModalOpen(false)}
+          >
+            <div
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="hr-dialog-title"
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-2xl max-w-[420px] w-full p-6 sm:p-7 shadow-2xl border border-[#2D6A4F]/20 relative transform transition-all duration-200 ease-out text-[#173522]"
+            >
+              {/* Close Button */}
+              <button
+                type="button"
+                onClick={() => setIsHrModalOpen(false)}
+                aria-label="Close HR Contact Dialog"
+                className="absolute top-5 right-5 text-gray-400 hover:text-[#173522] text-xl transition-colors cursor-pointer p-1 rounded-lg hover:bg-gray-100"
+              >
+                <FiX />
+              </button>
+
+              {/* Header */}
+              <div className="flex items-center gap-3.5 mb-4">
+                <div className="w-10 h-10 rounded-xl bg-[#EAF3EA] text-[#2D6A4F] flex items-center justify-center text-lg shrink-0">
+                  <FiMail />
+                </div>
+                <div>
+                  <h2 id="hr-dialog-title" className="text-lg font-bold text-[#173522] leading-snug">
+                    Contact HR Department
+                  </h2>
+                  <p className="text-xs text-[#173522]/65 font-medium">Biofactor Biologicals</p>
+                </div>
+              </div>
+
+              <div className="h-px bg-[#2D6A4F]/10 w-full mb-5" />
+
+              {/* Contact Information Details (Reused existing project content) */}
+              <div className="space-y-4 text-sm font-sans mb-6">
+                <div className="flex items-start gap-3">
+                  <FiMail className="text-[#2D6A4F] text-base mt-0.5 shrink-0" />
+                  <div>
+                    <span className="text-[11px] font-mono font-semibold text-[#173522]/50 uppercase tracking-wider block">Email</span>
+                    <a href="mailto:info@biofactor.in" className="font-semibold text-[#173522] hover:text-[#2D6A4F] transition-colors">
+                      info@biofactor.in
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <FiMapPin className="text-[#2D6A4F] text-base mt-0.5 shrink-0" />
+                  <div>
+                    <span className="text-[11px] font-mono font-semibold text-[#173522]/50 uppercase tracking-wider block">Phone</span>
+                    <a href="tel:7013074400" className="font-semibold text-[#173522] hover:text-[#2D6A4F] transition-colors">
+                      +91 7013074400
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <FiBriefcase className="text-[#2D6A4F] text-base mt-0.5 shrink-0" />
+                  <div>
+                    <span className="text-[11px] font-mono font-semibold text-[#173522]/50 uppercase tracking-wider block">Visiting Hours</span>
+                    <p className="text-[#173522]/80 text-xs leading-relaxed font-medium">
+                      9:30 AM – 6:30 PM, Monday to Saturday
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <FiMapPin className="text-[#2D6A4F] text-base mt-0.5 shrink-0" />
+                  <div>
+                    <span className="text-[11px] font-mono font-semibold text-[#173522]/50 uppercase tracking-wider block">Head Office</span>
+                    <p className="text-[#173522]/80 text-xs leading-relaxed font-medium">
+                      Hyderabad, Telangana 500090
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action CTA */}
+              <div className="pt-2">
+                <Link
+                  href="/contact"
+                  onClick={() => setIsHrModalOpen(false)}
+                  className="w-full inline-flex items-center justify-center gap-2 bg-[#2D6A4F] hover:bg-[#173522] text-white font-bold text-xs font-mono uppercase py-3 rounded-xl transition-all shadow-md hover:shadow-lg"
+                >
+                  Go to Contact Page <FiArrowRight />
+                </Link>
+              </div>
             </div>
           </div>
         )}

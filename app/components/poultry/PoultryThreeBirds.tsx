@@ -2,11 +2,10 @@ import React from "react";
 
 export default function PoultryThreeBirds() {
   return (
-    <section className="w-full bg-[#EAF3EA] py-8 lg:py-12 text-[#0a2d1a] relative overflow-hidden" data-pm-section="threebirds">
+    <section className="w-full bg-[#EAF3EA] py-8 lg:py-12 text-[#0a2d1a] relative overflow-hidden" data-ruminants-section="threebirds" data-n="Breeders">
       {/* Subtle bacterial background decorations */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <svg width="100%" height="100%" viewBox="0 0 1600 846" fill="none">
-          {/* Scattered capsule outlines */}
           <rect x="100" y="150" width="30" height="12" rx="6" stroke="#2d4a3a" strokeWidth="1" transform="rotate(15, 115, 156)" />
           <rect x="200" y="300" width="25" height="10" rx="5" stroke="#4a7c59" strokeWidth="1" transform="rotate(-10, 212, 305)" />
           <rect x="300" y="500" width="28" height="11" rx="5.5" stroke="#3d4a3a" strokeWidth="1" transform="rotate(5, 314, 505)" />
@@ -33,7 +32,7 @@ export default function PoultryThreeBirds() {
 
       <div className="relative z-10 w-full max-w-[1600px] mx-auto pl-[clamp(20px,5vw,72px)] pr-5 lg:pr-12">
         {/* MAIN HEADLINE - Aligned with Hero Header */}
-        <div className="mb-6 lg:mb-8 max-w-5xl pl-8 lg:pl-12">
+        <div className="rv mb-6 lg:mb-8 max-w-5xl pl-8 lg:pl-12">
           {/* Small Label with Horizontal Line */}
           <div className="flex items-center gap-3 mb-[14px]">
             <span className="w-8 h-[1.5px] bg-[#0B6B52]" />
@@ -42,7 +41,7 @@ export default function PoultryThreeBirds() {
             </span>
           </div>
           {/* Main Headline */}
-          <h2 className="font-extrabold text-[clamp(2.4rem,6.4vw,5.8rem)] text-[#0a2d1a] leading-[.96]" style={{ fontFamily: "var(--font-bricolage), 'Helvetica Neue', Arial, sans-serif", letterSpacing: "-.035em" }} data-pm-heading="rise">
+          <h2 className="font-extrabold text-[clamp(2.4rem,6.4vw,5.8rem)] text-[#0a2d1a] leading-[.96]" style={{ fontFamily: "var(--font-bricolage), 'Helvetica Neue', Arial, sans-serif", letterSpacing: "-.035em" }}>
             Breeders, layers and broilers need different things from the gut.
           </h2>
         </div>
@@ -50,7 +49,7 @@ export default function PoultryThreeBirds() {
         {/* Two Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-1">
           {/* LEFT SECTION - Breeder Text and Image */}
-          <div className="space-y-6 w-[85%] pl-8 lg:pl-16" data-pm-species-frame="0">
+          <div className="rv space-y-6 w-[85%] pl-8 lg:pl-16">
             {/* LEFT SECTION TEXT */}
             <div className="space-y-3">
               <div className="font-mono text-xs font-semibold tracking-[0.2em] text-[#2D5A42] uppercase">
@@ -71,32 +70,34 @@ export default function PoultryThreeBirds() {
               </div>
             </div>
 
-            {/* Breeder Image */}
-            <div className="group cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_25px_50px_-12px_rgba(45,90,66,0.25)] active:scale-[0.98] rounded-sm overflow-hidden">
+            {/* Breeder Image in Ruminants .ph Photo Clip Container */}
+            <div className="ph w-full aspect-[4/3] lg:h-[520px] rounded-lg overflow-hidden bg-[#E8EFE6] relative">
               <img
                 src="/images/poultry-breeders.png"
                 alt="Breeder hens"
-                className="w-full h-[450px] lg:h-[520px] object-cover transition-transform duration-[800ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-105"
+                loading="eager"
+                decoding="async"
+                className="ph-in w-full h-full object-cover object-center block will-change-transform scale-110"
               />
             </div>
           </div>
 
           {/* RIGHT MAIN CONTENT - Aligned with BREEDERS heading */}
-          <div className="space-y-4 lg:space-y-6 pt-8 lg:pt-12 pl-0" data-pm-species-text="0">
+          <div className="space-y-4 lg:space-y-6 pt-8 lg:pt-12 pl-0">
             {/* Heading */}
-            <h3 className="font-space-grotesk font-semibold text-[clamp(1.5rem,2.5vw,2.5rem)] text-[#0a2d1a] tracking-tight leading-tight br-rv">
+            <h3 className="rv font-space-grotesk font-semibold text-[clamp(1.5rem,2.5vw,2.5rem)] text-[#0a2d1a] tracking-tight leading-tight">
               A healthy breeder passes on a healthy start.
             </h3>
 
             {/* Body Paragraph */}
-            <p className="text-base lg:text-lg text-[#2d4a3a] leading-relaxed br-rv br-d1" style={{ fontFamily: 'Times New Roman, Times, serif' }}>
+            <p className="rv d1 text-base lg:text-lg text-[#2d4a3a] leading-relaxed" style={{ fontFamily: 'Times New Roman, Times, serif' }}>
               Breeder hens can pass pathogens such as <span className="italic">Salmonella</span> to the next generation through the egg. Keeping the breeder gut stable reduces what reaches the egg, and applying beneficial bacteria in the hatchery protects the embryo and gives the chick its first beneficial microbes.
             </p>
 
             {/* Information Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 br-rv br-d2">
+            <div className="rv d2 grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Left Card */}
-              <div className="border border-[#c4d4c4] p-5" data-pm-mini-card="0">
+              <div className="trow border border-[#c4d4c4] p-5 rounded-lg transition-all">
                 <div className="font-space-grotesk font-bold text-base text-[#0a2d1a] mb-2">
                   Less vertical transmission
                 </div>
@@ -106,7 +107,7 @@ export default function PoultryThreeBirds() {
               </div>
 
               {/* Right Card */}
-              <div className="border border-[#c4d4c4] p-5" data-pm-mini-card="1">
+              <div className="trow border border-[#c4d4c4] p-5 rounded-lg transition-all">
                 <div className="font-space-grotesk font-bold text-base text-[#0a2d1a] mb-2">
                   Hatchery protection
                 </div>
@@ -117,7 +118,7 @@ export default function PoultryThreeBirds() {
             </div>
 
             {/* Chart Panel */}
-            <div className="border border-[#c4d4c4] p-4 lg:p-5 br-rv br-d2">
+            <div className="rv d2 border border-[#c4d4c4] p-4 lg:p-5 rounded-lg">
               <div className="font-space-grotesk font-bold text-sm text-[#0a2d1a] mb-1">
                 Hatching eggs sprayed with probiotic bacteria
               </div>
@@ -131,10 +132,10 @@ export default function PoultryThreeBirds() {
                 <div className="space-y-1">
                   <div className="flex justify-between items-end">
                     <span className="font-mono text-[10px] text-[#2d4a3a] uppercase">Untreated</span>
-                    <span className="font-space-grotesk font-bold text-xs text-[#f0799c]"><span data-cu>60</span>–<span data-cu>70</span>%</span>
+                    <span className="font-space-grotesk font-bold text-xs text-[#f0799c]"><span data-cu="60–70%">60–70%</span></span>
                   </div>
                   <div className="w-full h-3 bg-[#e8e8e8] rounded overflow-hidden">
-                    <div className="h-full bg-[#f0799c] rounded" style={{ width: '65%' }} data-pm-bar="0.65"></div>
+                    <div className="h-full bg-[#f0799c] rounded" style={{ width: '65%' }}></div>
                   </div>
                 </div>
 
@@ -142,10 +143,10 @@ export default function PoultryThreeBirds() {
                 <div className="space-y-1">
                   <div className="flex justify-between items-end">
                     <span className="font-mono text-[10px] text-[#2d4a3a] uppercase">Chemical disinfectant</span>
-                    <span className="font-space-grotesk font-bold text-xs text-[#d47a7a]"><span data-cu>60</span>–<span data-cu>70</span>%</span>
+                    <span className="font-space-grotesk font-bold text-xs text-[#d47a7a]"><span data-cu="60–70%">60–70%</span></span>
                   </div>
                   <div className="w-full h-3 bg-[#e8e8e8] rounded overflow-hidden">
-                    <div className="h-full bg-[#d47a7a] rounded" style={{ width: '65%' }} data-pm-bar="0.65"></div>
+                    <div className="h-full bg-[#d47a7a] rounded" style={{ width: '65%' }}></div>
                   </div>
                 </div>
 
@@ -153,10 +154,10 @@ export default function PoultryThreeBirds() {
                 <div className="space-y-1">
                   <div className="flex justify-between items-end">
                     <span className="font-mono text-[10px] text-[#2d4a3a] uppercase">Probiotic spray</span>
-                    <span className="font-space-grotesk font-bold text-xs text-[#8fdcc0]">&lt;<span data-cu>20</span>%</span>
+                    <span className="font-space-grotesk font-bold text-xs text-[#8fdcc0]">&lt;<span data-cu="20%">20%</span></span>
                   </div>
                   <div className="w-full h-3 bg-[#e8e8e8] rounded overflow-hidden">
-                    <div className="h-full bg-[#8fdcc0] rounded" style={{ width: '18%' }} data-pm-bar="0.18"></div>
+                    <div className="h-full bg-[#8fdcc0] rounded" style={{ width: '18%' }}></div>
                   </div>
                 </div>
               </div>
@@ -169,7 +170,6 @@ export default function PoultryThreeBirds() {
           </div>
         </div>
       </div>
-
     </section>
   );
 }

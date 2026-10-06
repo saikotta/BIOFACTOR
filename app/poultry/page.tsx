@@ -45,42 +45,44 @@ export default function PoultryPage() {
   return (
     <main
       data-poultry-page
-      className={`${bricolage.variable} ${spaceGrotesk.variable} ${newsreader.variable} ${jetbrainsMono.variable} w-full selection:bg-[#b8e986] selection:text-black overflow-x-hidden bg-[#EAF3EA]`}
+      className={`${bricolage.variable} ${spaceGrotesk.variable} ${newsreader.variable} ${jetbrainsMono.variable} relative w-full selection:bg-[#b8e986] selection:text-black overflow-x-hidden bg-[#EAF3EA]`}
     >
-      {/* FRAME 1: APPROVED HERO - Dark background */}
-      <PoultryHero />
+      <div className="relative z-10 w-full">
+        {/* FRAME 1: APPROVED HERO */}
+        <PoultryHero />
 
-      {/* FRAME 2: DATA STRIP - Dark brown background */}
-      <PoultryDataStrip />
+        {/* FRAME 2: DATA STRIP */}
+        <PoultryDataStrip />
 
-      {/* FRAME 3: GUT FRONTLINE - New dark background */}
-      <PoultryGutFrontline />
+        {/* FRAME 3: GUT FRONTLINE */}
+        <PoultryGutFrontline />
 
-      {/* FRAME 4: THREE BIRDS, THREE PRIORITIES - New dark background */}
-      <PoultryThreeBirds />
+        {/* FRAME 4: THREE BIRDS, THREE PRIORITIES */}
+        <PoultryThreeBirds />
 
-      {/* FRAME 4.5: LAYERS - New dark background */}
-      <PoultryLayers />
+        {/* FRAME 4.5: LAYERS */}
+        <PoultryLayers />
 
-      {/* FRAME 4.6: BROILERS - New dark background */}
-      <PoultryBroilers />
+        {/* FRAME 4.6: BROILERS */}
+        <PoultryBroilers />
 
-      {/* FRAME 5: GUT RESTORATION AND DISEASE MANAGEMENT - New dark background */}
-      <PoultryGutRestoration />
+        {/* FRAME 5: GUT RESTORATION AND DISEASE MANAGEMENT */}
+        <PoultryGutRestoration />
 
-      {/* FRAME 6: MINERAL BIOAVAILABILITY - New dark background */}
-      <PoultryMineralBioavailability />
+        {/* FRAME 6: MINERAL BIOAVAILABILITY */}
+        <PoultryMineralBioavailability />
 
-      {/* FRAME 7: PRODUCTION CYCLE - New dark background */}
-      <PoultryProductionCycle />
+        {/* FRAME 7: PRODUCTION CYCLE */}
+        <PoultryProductionCycle />
 
-      {/* FRAME 8: CLOSING & REFERENCES - New dark background */}
-      <PoultryClosing />
+        {/* FRAME 8: CLOSING & REFERENCES */}
+        <PoultryClosing />
 
-      {/* FOOTER */}
-      <ProductFooter />
+        {/* FOOTER */}
+        <ProductFooter />
+      </div>
 
-      {/* SCROLL MOTION SYSTEM — client-only, renders null to DOM */}
+      {/* SCROLL MOTION SYSTEM — standardized with locked Ruminants motion engine */}
       <PoultryScrollMotion />
     </main>
   );

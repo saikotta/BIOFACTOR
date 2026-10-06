@@ -2,7 +2,7 @@ import React from "react";
 
 export default function PoultryBroilers() {
   return (
-    <section className="w-full relative overflow-hidden py-8 lg:py-12 min-h-[85vh] bg-[#DDE9D5]" data-pm-section="broilers">
+    <section className="w-full relative overflow-hidden py-8 lg:py-12 bg-[#DDE9D5]" data-ruminants-section="broilers" data-n="Broilers">
       {/* Subtle capsule decorations */}
       <div className="absolute inset-0 opacity-[0.08] pointer-events-none">
         <svg width="100%" height="100%" viewBox="0 0 1600 846" fill="none">
@@ -30,23 +30,24 @@ export default function PoultryBroilers() {
         </svg>
       </div>
 
-      <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 lg:px-12 h-full flex flex-col justify-center">
+      <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 lg:px-12">
         {/* Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
-          {/* Left Side - Broiler image */}
-          <div className="flex items-center justify-center">
-            <div className="group cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_25px_50px_-12px_rgba(45,90,66,0.25)] active:scale-[0.98] w-[75%] aspect-[3/4] max-h-[600px] overflow-hidden rounded-sm" data-broiler-image data-pm-species-frame="2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-start">
+          {/* Left Side - Broiler image in Ruminants .ph Photo Clip Container */}
+          <div className="rv flex items-center justify-center pt-4 lg:pt-8">
+            <div className="ph w-[85%] aspect-[3/4] max-h-[560px] rounded-lg overflow-hidden bg-[#E8EFE6] relative">
               <img
                 src="/images/poultry-broilers.png"
                 alt="Broilers in a commercial poultry production setting"
                 loading="eager"
-                className="w-full h-full object-cover block transition-transform duration-[800ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-105"
+                decoding="async"
+                className="ph-in w-full h-full object-cover block will-change-transform scale-110"
               />
             </div>
           </div>
 
           {/* Right Side - Explanatory Content */}
-          <div className="space-y-6 lg:space-y-8" data-pm-species-text="2">
+          <div className="rv d1 space-y-6 lg:space-y-8">
             {/* Broilers heading and priority above the explanatory matter */}
             <div className="flex flex-col justify-start items-start space-y-4">
               <div className="font-mono text-xs font-semibold tracking-[0.25em] text-[#2D5A42] uppercase">
@@ -63,19 +64,19 @@ export default function PoultryBroilers() {
             </div>
 
             {/* Body Heading */}
-            <h3 className="font-space-grotesk font-semibold text-xl lg:text-2xl text-[#1a1a1a] tracking-tight leading-tight mb-4 br-rv">
+            <h3 className="rv font-space-grotesk font-semibold text-xl lg:text-2xl text-[#1a1a1a] tracking-tight leading-tight mb-4">
               Fast growth depends on a gut that stays intact.
             </h3>
 
             {/* Body Paragraph */}
-            <p className="text-base lg:text-lg text-[#2d2d2d] leading-relaxed mb-6 br-rv br-d1" style={{ fontFamily: 'Georgia, Times New Roman, Times, serif' }}>
+            <p className="rv d1 text-base lg:text-lg text-[#2d2d2d] leading-relaxed mb-6" style={{ fontFamily: 'Georgia, Times New Roman, Times, serif' }}>
               Gut damage in broilers, caused by <span className="italic">Clostridium perfringens</span>, can hinder growth. <span className="italic">Bacillus</span> probiotics offer a biological solution.
             </p>
 
             {/* Two-column Box */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 br-rv br-d2">
+            <div className="rv d2 grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               {/* Left Box - Growth and FCR */}
-              <div className="border border-[#2D5A42] p-5" data-pm-mini-card="0">
+              <div className="trow border border-[#2D5A42] p-5 rounded-lg transition-all">
                 <div className="font-space-grotesk font-bold text-base text-[#1a1a1a] mb-2">
                   Growth and FCR
                 </div>
@@ -85,7 +86,7 @@ export default function PoultryBroilers() {
               </div>
 
               {/* Right Box - Gut lesions */}
-              <div className="border border-[#2D5A42] p-5" data-pm-mini-card="1">
+              <div className="trow border border-[#2D5A42] p-5 rounded-lg transition-all">
                 <div className="font-space-grotesk font-bold text-base text-[#1a1a1a] mb-2">
                   Gut lesions
                 </div>
@@ -96,7 +97,7 @@ export default function PoultryBroilers() {
             </div>
 
             {/* Highlighted Statement with Vertical Accent Line */}
-            <div className="flex gap-4 mb-6 br-rv br-d2">
+            <div className="call rv d2 flex gap-4 mb-6">
               <div className="w-1 bg-[#2D5A42] flex-shrink-0" />
               <div>
                 <h4 className="font-space-grotesk font-bold text-base text-[#1a1a1a] mb-2">

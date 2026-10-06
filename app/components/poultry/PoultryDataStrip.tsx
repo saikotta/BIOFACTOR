@@ -1,30 +1,23 @@
-"use client";
-
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 
 export default function PoultryDataStrip() {
-  const tableRef = useRef<HTMLDivElement>(null);
-  const sectionRef = useRef<HTMLDivElement>(null);
-
   return (
-    <section ref={sectionRef} className="w-full" data-pm-section="datastrip">
+    <section className="w-full" data-ruminants-section="stats" data-n="Key Stats">
       {/* Full-Bleed Dark Brown Table */}
       <div
-        ref={tableRef}
         className="w-full bg-[#1B3B2B] py-9 lg:py-[44px] relative overflow-hidden"
         style={{
           borderTop: '1px solid rgba(109, 190, 69, 0.3)',
           borderBottom: '1px solid rgba(109, 190, 69, 0.3)'
         }}
       >
-
         <div className="w-full max-w-[1440px] mx-auto px-5 md:px-8 lg:px-[clamp(48px,5vw,72px)] relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 items-stretch">
             {/* Cell 1: ~US$6 bn */}
-            <div className="md:pr-8 lg:pr-10 md:border-r pb-6 md:pb-0 border-b md:border-b-0 flex flex-col justify-between h-full" style={{ borderColor: 'rgba(109, 190, 69, 0.25)', borderRightWidth: '1px' }} data-pm-strip-panel="0">
+            <div className="led rv md:pr-8 lg:pr-10 md:border-r pb-6 md:pb-0 border-b md:border-b-0 flex flex-col justify-between h-full" style={{ borderColor: 'rgba(109, 190, 69, 0.25)', borderRightWidth: '1px' }} data-stat>
               <div>
-                <div className="font-display font-normal text-[clamp(2.9rem,3.5vw,3.8rem)] tracking-tight leading-none mb-5" style={{ color: '#6DBE45' }}>
-                  ~US$<span data-cu>6</span> bn
+                <div className="font-display font-normal text-[clamp(2.9rem,3.5vw,3.8rem)] tracking-tight leading-none mb-5" style={{ color: '#6DBE45' }} data-cu="~US$6 bn">
+                  ~US$6 bn
                 </div>
                 <p className="text-[15px] sm:text-[16px] leading-[1.55] font-normal" style={{ color: '#E8F3DD' }}>
                   Estimated yearly global cost of necrotic enteritis, a gut disease of broilers.
@@ -39,13 +32,13 @@ export default function PoultryDataStrip() {
             </div>
 
             {/* Cell 2: 2006 */}
-            <div className="md:px-8 lg:px-10 md:border-r pb-6 md:pb-0 border-b md:border-b-0 flex flex-col justify-between h-full" style={{ borderColor: 'rgba(109, 190, 69, 0.25)', borderRightWidth: '1px' }} data-pm-strip-panel="1">
+            <div className="led rv d1 md:px-8 lg:px-10 md:border-r pb-6 md:pb-0 border-b md:border-b-0 flex flex-col justify-between h-full" style={{ borderColor: 'rgba(109, 190, 69, 0.25)', borderRightWidth: '1px' }} data-stat>
               <div>
-                <div className="font-display font-normal text-[clamp(2.9rem,3.5vw,3.8rem)] tracking-tight leading-none mb-5" style={{ color: '#6DBE45' }}>
-                  <span data-cu>2006</span>
+                <div className="font-display font-normal text-[clamp(2.9rem,3.5vw,3.8rem)] tracking-tight leading-none mb-5" style={{ color: '#6DBE45' }} data-cu="2006">
+                  2006
                 </div>
                 <p className="text-[15px] sm:text-[16px] leading-[1.55] font-normal" style={{ color: '#E8F3DD' }}>
-                  The EU banned all antibiotics as feed growth promoters. Other markets have followed, including India's 2019 ban on colistin for food animals.
+                  The EU banned all antibiotics as feed growth promoters. Other markets have followed, including India&apos;s 2019 ban on colistin for food animals.
                 </p>
               </div>
 
@@ -57,10 +50,10 @@ export default function PoultryDataStrip() {
             </div>
 
             {/* Cell 3: 10–30% */}
-            <div className="md:pl-8 lg:pl-10 flex flex-col justify-between h-full" data-pm-strip-panel="2">
+            <div className="led rv d2 md:pl-8 lg:pl-10 flex flex-col justify-between h-full" data-stat>
               <div>
-                <div className="font-display font-normal text-[clamp(2.9rem,3.5vw,3.8rem)] tracking-tight leading-none mb-5" style={{ color: '#6DBE45' }}>
-                  <span data-cu>10</span>–<span data-cu>30</span>%
+                <div className="font-display font-normal text-[clamp(2.9rem,3.5vw,3.8rem)] tracking-tight leading-none mb-5" style={{ color: '#6DBE45' }} data-cu="10–30%">
+                  10–30%
                 </div>
                 <p className="text-[15px] sm:text-[16px] leading-[1.55] font-normal" style={{ color: '#E8F3DD' }}>
                   of the phosphorus in corn and soybean meal is available to poultry. The rest passes through into the litter.
@@ -78,11 +71,11 @@ export default function PoultryDataStrip() {
       </div>
 
       {/* 3. Bottom Editorial Paragraph */}
-      <div className="w-full py-8 lg:py-11 bg-[#E8F3EA]">
+      <div className="rv w-full pt-6 lg:pt-8 pb-3 lg:pb-4 bg-[#E8F3EA] !min-h-0">
         <div className="w-full max-w-[1440px] mx-auto px-5 md:px-8 lg:px-[clamp(48px,5vw,72px)]">
           <div className="max-w-[850px]">
             <div
-              className="text-[clamp(1.25rem,1.55vw,1.5rem)] leading-[1.52] br-rv"
+              className="text-[clamp(1.25rem,1.55vw,1.5rem)] leading-[1.52]"
               style={{
                 fontFamily: '"Times New Roman", Times, serif',
                 color: '#0a2d1a',
@@ -94,9 +87,6 @@ export default function PoultryDataStrip() {
           </div>
         </div>
       </div>
-
-      {/* Transition Band from Frame 2 to Frame 3 */}
-      <div className="w-full h-[4px] sm:h-[6px] lg:h-[8px] bg-[#E8F3EA]" aria-hidden="true" />
     </section>
   );
 }
