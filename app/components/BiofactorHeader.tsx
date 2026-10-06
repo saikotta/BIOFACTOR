@@ -17,7 +17,7 @@ const NAV_ITEMS = [
 const PRODUCT_ITEMS = [
   { name: "Ruminants", href: "/ruminants" },
   { name: "Poultry", href: "/poultry" },
-  { name: "Nutrients", href: "/nutrients" },
+  { name: "Agriculture", href: "/nutrients" },
   { name: "Bioremediation", href: "/bioremediation" },
   { name: "Aquaculture", href: "/aquaculture" },
 ];

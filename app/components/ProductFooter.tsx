@@ -12,7 +12,7 @@ const companyLinks = [
 const productLinks = [
   { label: "Poultry", href: "/poultry" },
   { label: "Ruminants", href: "/ruminants" },
-  { label: "Nutrients", href: "/nutrients" },
+  { label: "Agriculture", href: "/nutrients" },
   { label: "Bioremediation", href: "/bioremediation" },
   { label: "Aquaculture", href: "/aquaculture" },
 ];

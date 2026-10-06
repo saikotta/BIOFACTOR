@@ -88,7 +88,7 @@ export default function BiofactorFooter() {
                 { label: "Ruminants", href: "/ruminants" },
                 { label: "Aquaculture", href: "/aquaculture" },
                 { label: "Bioremediation", href: "/bioremediation" },
-                { label: "Nutrients", href: "/nutrients" },
+                { label: "Agriculture", href: "/nutrients" },
               ].map((item) => (
                 <Link
                   key={item.label}
