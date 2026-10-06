@@ -30,7 +30,7 @@ const MILESTONES: Milestone[] = [
   {
     id: 3,
     pill: "DOMESTIC SCALE",
-    title: "100+ PRODUCTS, SIX VERTICALS",
+    title: "200+ PRODUCTS, SIX VERTICALS",
     description:
       "Growth to a presence in 16 Indian States, a Dealer Network Passing 3,000, and a Team Crossing 600.",
     align: "right",
@@ -46,7 +46,7 @@ const MILESTONES: Milestone[] = [
   {
     id: 5,
     pill: "TODAY",
-    title: "9 PATENTS. 60+ STRAINS. ONE CHAIN.",
+    title: "11 PATENTS. 60+ STRAINS. ONE CHAIN.",
     description:
       "A Commercially Packaging Journey from Soil To People Across Everything We Build.",
     align: "right",
@@ -191,14 +191,13 @@ export default function AboutJourneySection() {
   return (
     <section className="relative w-full bg-[#EDF4ED] text-[#17251C] font-sans select-none pt-16 pb-14 sm:pt-20 sm:pb-16 lg:pt-24 lg:pb-20 border-none shadow-none">
       <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16">
-        
+
         {/* SECTION INTRO */}
         <div
           ref={headingRef}
           key={`heading-${headingCycle}`}
-          className={`mb-6 sm:mb-7 lg:mb-8 text-center lg:text-left ${
-            headingCycle > 0 ? "animate-s7-heading" : "opacity-0 translate-y-[22px]"
-          }`}
+          className={`mb-6 sm:mb-7 lg:mb-8 text-center lg:text-left ${headingCycle > 0 ? "animate-s7-heading" : "opacity-0 translate-y-[22px]"
+            }`}
         >
           <span className="block text-[11px] font-semibold tracking-[0.08em] uppercase text-[#155B2A] mb-1.5">
             OUR JOURNEY
@@ -210,7 +209,7 @@ export default function AboutJourneySection() {
 
         {/* VERTICAL EDITORIAL TIMELINE */}
         <div ref={timelineContainerRef} className="relative w-full max-w-[1400px] mx-auto">
-          
+
           {/* Delicate Central Vertical Base Axis Line */}
           <div className="absolute top-3 bottom-4 left-4 lg:left-1/2 w-[1px] bg-[#155B2A]/25 -translate-x-1/2 pointer-events-none z-0" />
 
@@ -239,9 +238,8 @@ export default function AboutJourneySection() {
                   {/* Timeline Connection Pulse Dot */}
                   <div
                     key={`pulse-${item.id}-${cycle}`}
-                    className={`absolute top-4 left-4 lg:left-1/2 w-3 h-3 rounded-full bg-[#155B2A] pointer-events-none z-0 ${
-                      isActivated ? "animate-s7-pulse" : "opacity-0"
-                    }`}
+                    className={`absolute top-4 left-4 lg:left-1/2 w-3 h-3 rounded-full bg-[#155B2A] pointer-events-none z-0 ${isActivated ? "animate-s7-pulse" : "opacity-0"
+                      }`}
                   />
 
                   {/* Milestone Centered Pill */}
@@ -249,28 +247,25 @@ export default function AboutJourneySection() {
                     {/* Pill Halo Effect */}
                     <div
                       key={`halo-${item.id}-${cycle}`}
-                      className={`absolute -inset-1 rounded-full bg-[#155B2A] pointer-events-none ${
-                        isActivated ? "animate-s7-pill-halo" : "opacity-0"
-                      }`}
+                      className={`absolute -inset-1 rounded-full bg-[#155B2A] pointer-events-none ${isActivated ? "animate-s7-pill-halo" : "opacity-0"
+                        }`}
                     />
 
                     {/* TODAY Milestone Finishing Pulse */}
                     {item.id === 5 && (
                       <div
                         key={`today-pulse-${cycle}`}
-                        className={`absolute -inset-1 rounded-full bg-[#155B2A]/20 pointer-events-none ${
-                          isActivated ? "animate-s7-today-pulse" : "opacity-0"
-                        }`}
+                        className={`absolute -inset-1 rounded-full bg-[#155B2A]/20 pointer-events-none ${isActivated ? "animate-s7-today-pulse" : "opacity-0"
+                          }`}
                       />
                     )}
 
                     <div
                       key={`pill-${item.id}-${cycle}`}
-                      className={`relative bg-[#155B2A] text-white text-[12px] font-semibold tracking-[0.04em] uppercase px-4 py-1.5 rounded-full shadow-[0_2px_6px_rgba(21,91,42,0.12)] block z-10 s7-pill-interactive ${
-                        isActivated
+                      className={`relative bg-[#155B2A] text-white text-[12px] font-semibold tracking-[0.04em] uppercase px-4 py-1.5 rounded-full shadow-[0_2px_6px_rgba(21,91,42,0.12)] block z-10 s7-pill-interactive ${isActivated
                           ? "animate-s7-pill"
                           : "opacity-[0.35] scale-[0.88]"
-                      }`}
+                        }`}
                     >
                       {item.pill}
                     </div>
@@ -278,7 +273,7 @@ export default function AboutJourneySection() {
 
                   {/* Desktop Alternating Row Composition (Full 50/50 split across 1400px container) */}
                   <div className="w-full flex flex-col lg:flex-row items-start lg:items-center">
-                    
+
                     {/* LEFT HALF (width: 50% on desktop) */}
                     <div className="w-full lg:w-1/2 flex justify-start lg:justify-end items-start lg:items-center pl-10 lg:pl-0 lg:pr-14 xl:pr-16">
                       {!isRight ? (
@@ -286,9 +281,8 @@ export default function AboutJourneySection() {
                           {/* Left-side Text (adjacent to line, right-aligned text with comfortable gap) */}
                           <div
                             key={`copy-${item.id}-${cycle}`}
-                            className={`flex flex-col items-start lg:items-end text-left lg:text-right max-w-[360px] lg:max-w-[420px] ${
-                              isActivated ? "animate-s7-copy" : "opacity-0 translate-y-[16px]"
-                            }`}
+                            className={`flex flex-col items-start lg:items-end text-left lg:text-right max-w-[360px] lg:max-w-[420px] ${isActivated ? "animate-s7-copy" : "opacity-0 translate-y-[16px]"
+                              }`}
                           >
                             <h3 className="text-[15px] font-bold text-[#17251C] tracking-[-0.01em] leading-[1.25] uppercase mb-1.5">
                               {item.title}
@@ -310,9 +304,8 @@ export default function AboutJourneySection() {
                           {/* Right-side Text (adjacent to line, left-aligned text with comfortable gap) */}
                           <div
                             key={`copy-${item.id}-${cycle}`}
-                            className={`flex flex-col items-start text-left max-w-[360px] lg:max-w-[420px] ${
-                              isActivated ? "animate-s7-copy" : "opacity-0 translate-y-[16px]"
-                            }`}
+                            className={`flex flex-col items-start text-left max-w-[360px] lg:max-w-[420px] ${isActivated ? "animate-s7-copy" : "opacity-0 translate-y-[16px]"
+                              }`}
                           >
                             <h3 className="text-[15px] font-bold text-[#17251C] tracking-[-0.01em] leading-[1.25] uppercase mb-1.5">
                               {item.title}
