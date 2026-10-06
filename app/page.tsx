@@ -5,6 +5,7 @@ import ChemistryFieldSection from "./components/ChemistryFieldSection";
 import BiofactorNumbersSection from "./components/BiofactorNumbersSection";
 import HowWeThinkSection from "./components/HowWeThinkSection";
 import MicrobeField from "./components/MicrobeField";
+import BiofactorFooter from "./components/BiofactorFooter";
 
 export default function Home() {
   return (
@@ -13,18 +14,11 @@ export default function Home() {
       <BiofactorScrollHero>
         <BiofactorHero />
       </BiofactorScrollHero>
-
-      {/* Section 2: Primordial Elements */}
       <PrimordialSection />
-
-      {/* Section 3: Real-World Agriculture / Chemistry Completed */}
       <ChemistryFieldSection />
-
-      {/* Section 4: The Number Behind the Name */}
       <BiofactorNumbersSection />
-
-      {/* Section 5: How We Think */}
       <HowWeThinkSection />
+      <BiofactorFooter />
     </main>
   );
 }

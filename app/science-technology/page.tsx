@@ -12,6 +12,7 @@ import {
   Visual06,
 } from "../components/science-technology/Visuals";
 import { SECTIONS } from "../components/science-technology/content";
+import BiofactorFooter from "../components/BiofactorFooter";
 
 export const metadata: Metadata = {
   title: "Science & Technology — Biofactor Biologicals",
@@ -32,7 +33,6 @@ export default function ScienceTechnologyPage() {
     <main style={{ background: "#EDF4ED" }} className="w-full min-h-screen block">
       <DepthMeter />
       <ScienceHero />
-
       <div id="tech-sections">
         {SECTIONS.map((sec, i) => (
           <TechSection
@@ -49,8 +49,8 @@ export default function ScienceTechnologyPage() {
           </TechSection>
         ))}
       </div>
-
       <Evidence />
+      <BiofactorFooter />
     </main>
   );
 }

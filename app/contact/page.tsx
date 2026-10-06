@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import styles from "./contact.module.css";
+import BiofactorFooter from "../components/BiofactorFooter";
 
 export default function ContactPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -226,6 +227,7 @@ export default function ContactPage() {
   };
 
   return (
+    <>
     <div className={`contactContainer ${styles.contactContainer}`} ref={containerRef}>
       {/* Top Vine Progress Bar */}
       <div id="vine"></div>
@@ -264,7 +266,6 @@ export default function ContactPage() {
           <div className="bg"></div>
           <canvas id="spores" ref={canvasRef}></canvas>
           <div className="scan"></div>
-          <h2>“CONNECT US”</h2>
           <i className="k k1"></i>
           <i className="k k2"></i>
           <i className="k k3"></i>
@@ -556,5 +557,7 @@ export default function ContactPage() {
         </footer>
       </section>
     </div>
+    <BiofactorFooter />
+    </>
   );
 }

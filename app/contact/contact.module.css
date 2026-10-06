@@ -273,21 +273,6 @@
   transition: top 2s cubic-bezier(.6, 0, .25, 1) .2s, opacity .5s 2.2s;
 }
 
-.contactContainer :global(.imgwrap h2) {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  margin: 0;
-  color: #fffffff0;
-  font-size: clamp(26px, 3.6vw, 50px);
-  text-shadow: 0 4px 24px #0006;
-  opacity: 0;
-  transition: opacity 1.2s var(--ease) 1.5s;
-  font-family: Poppins, system-ui, sans-serif;
-  font-weight: 800;
-}
-
 .contactContainer :global(.fr.act h2),
 .contactContainer :global(.act h2) {
   opacity: 1;
@@ -362,7 +347,8 @@
 .contactContainer :global(.strips) {
   display: flex;
   gap: 16px;
-  height: min(56vh, 440px);
+  height: auto;
+  align-items: stretch;
 }
 
 .contactContainer :global(.strip) {
@@ -371,10 +357,12 @@
   border-radius: 22px;
   overflow: hidden;
   color: #fff;
-  padding: 28px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 20px;
+  min-height: 0;
   cursor: pointer;
   background: linear-gradient(160deg, var(--g7), var(--g9));
   clip-path: inset(100% 0 0 0 round 22px);
@@ -835,7 +823,7 @@
     height: auto;
   }
   .contactContainer :global(.strip) {
-    min-height: 120px;
+    min-height: 0;
   }
   .contactContainer :global(.deal) {
     grid-template-columns: 1fr 1fr;
