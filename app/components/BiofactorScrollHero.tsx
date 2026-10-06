@@ -9,10 +9,7 @@ interface BiofactorScrollHeroProps {
   posterSrc?: string;
 }
 
-export default function BiofactorScrollHero({
-  children,
-  posterSrc = "/images/nutriants/nutriants-hero.jpg",
-}: BiofactorScrollHeroProps) {
+export default function BiofactorScrollHero({ children }: BiofactorScrollHeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
@@ -220,13 +217,6 @@ export default function BiofactorScrollHero({
     <div ref={containerRef} className="relative w-full h-[500vh] bg-[#0A1A10]">
       {/* Sticky Full-Screen Canvas Background (offset below fixed navbar so top leaves never enter header) */}
       <div className="sticky top-[64px] md:top-[72px] h-[calc(100vh-64px)] md:h-[calc(100vh-72px)] w-full overflow-hidden z-0 bg-[#0A1A10]">
-        {posterSrc && (
-          <img
-            src={posterSrc}
-            alt="Hero Background"
-            className="absolute inset-0 w-full h-full object-cover object-center z-0 opacity-90"
-          />
-        )}
         <canvas
           ref={canvasRef}
           className="absolute inset-0 w-full h-full block z-10"
