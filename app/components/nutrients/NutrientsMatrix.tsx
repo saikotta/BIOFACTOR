@@ -255,7 +255,7 @@ export default function NutrientsMatrix() {
             </div>
 
             {/* Bottom Horizontal Narrative */}
-            <div className="pt-4 border-t border-[#173522]/15 space-y-3 br-rv br-d2 br-callout">
+            <div className="pt-4 border-t border-[#173522]/15 space-y-3 br-rv br-d2">
               <div className="flex items-center gap-2">
                 <span className="font-mono text-xs font-bold text-[#2D6A4F] uppercase tracking-wider">
                   ROOT EXUDATES · SIGNALS
