@@ -361,16 +361,16 @@ export default function NutrientsMatrix() {
                             <div className="relative block w-full h-[7px] mb-2.5 flex-shrink-0">
                               <div className="absolute top-1/2 left-0 w-full h-[2px] -translate-y-1/2 rounded-full bg-current/20" />
                               <div 
-                                className="absolute top-0 left-0 h-full rounded-full transition-all duration-500"
-                                style={{ width: cell.fill, backgroundColor: getToneColor(cellIdx, stage.darkText) }}
+                                className="br-mx-bar absolute top-0 left-0 h-full rounded-full"
+                                style={{ "--bar-fill": cell.fill, backgroundColor: getToneColor(cellIdx, stage.darkText) } as React.CSSProperties}
                               />
                               <div
-                                className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full transition-all duration-500 box-content"
+                                className="br-mx-dot absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full box-content"
                                 style={{ 
-                                  left: cell.fill, 
+                                  "--bar-fill": cell.fill, 
                                   backgroundColor: getToneColor(cellIdx, stage.darkText),
                                   boxShadow: `0 0 0 1px ${stage.bg}, 0 0 0 2px ${getToneColor(cellIdx, stage.darkText)}`
-                                }}
+                                } as React.CSSProperties}
                               />
                             </div>
                             <p className="font-serif text-[13px] sm:text-[14px] leading-snug pt-1">
