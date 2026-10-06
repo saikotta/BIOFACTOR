@@ -165,46 +165,52 @@ export default function NutrientsMatrix() {
             SECTION 2: ROOT EXUDATES & CROP CYCLE
             With 3-Line Heading & Larger Image Size
             ========================================== */}
-        <div className="space-y-8 br-rv">
+        {/* ==========================================
+            SECTION 2: ROOT EXUDATES & CROP CYCLE
+            With 3-Line Heading & Larger Image Size
+            ========================================== */}
+        <div className="space-y-8">
           {/* Top Heading & Narrative with Larger Image Side-by-Side */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Narrative with 3-Line Heading */}
-            <div className="lg:col-span-6 space-y-5">
-              <div className="flex items-center gap-3">
+            <div className="lg:col-span-6 space-y-5 br-rv">
+              <div className="flex items-center gap-3 br-rv br-d1">
                 <span className="w-8 h-[1.5px] bg-[#2D6A4F]" />
                 <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">
                   ACROSS THE CROP CYCLE
                 </span>
               </div>
-              <h3 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-[#173522] uppercase tracking-tight leading-[1.08]">
+              <h3 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-[#173522] uppercase tracking-tight leading-[1.08] br-rv br-d1">
                 ONE BIOLOGY,<br />
                 THREE ROLES,<br />
                 FROM SOWING TO SHELF.
               </h3>
-              <p className="text-base sm:text-lg text-[#173522]/90 font-sans leading-relaxed">
+              <p className="text-base sm:text-lg text-[#173522]/90 font-sans leading-relaxed br-rv br-d2">
                 Beneficial microbes work as nutrient enablers, disease managers, and quality and shelf-life enhancers. They are coordinated by chemical signals exchanged between root and microbe.
               </p>
             </div>
 
-            {/* Right: Larger Featured `one-biology.jpg` Image */}
-            <div className="group lg:col-span-6 relative w-full h-[340px] sm:h-[380px] lg:h-[420px] rounded-2xl overflow-hidden shadow-2xl border border-[#2D6A4F]/20 cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_45px_70px_-15px_rgba(23,53,34,0.3)] active:scale-[0.98]">
-              <Image
-                src="/images/nutriants/one-biology.jpg"
-                alt="One Biology, Three Roles across the crop cycle"
-                fill
-                className="object-cover object-center transition-transform duration-[800ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-105"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                priority
-              />
+            {/* Right: Larger Featured `one-biology.jpg` Image with Scroll Parallax */}
+            <div className="group lg:col-span-6 relative w-full h-[340px] sm:h-[380px] lg:h-[420px] rounded-2xl overflow-hidden shadow-2xl border border-[#2D6A4F]/20 cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_45px_70px_-15px_rgba(23,53,34,0.3)] active:scale-[0.98] br-ph br-rv br-d1">
+              <div className="br-ph-in relative w-full h-full">
+                <Image
+                  src="/images/nutriants/one-biology.jpg"
+                  alt="One Biology, Three Roles across the crop cycle"
+                  fill
+                  className="object-cover object-center transition-transform duration-[800ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-105"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                />
+              </div>
               <div className="absolute inset-0 bg-gradient-to-t from-[#173522]/30 via-transparent to-transparent pointer-events-none transition-opacity duration-300 group-hover:opacity-100 opacity-80" />
             </div>
           </div>
 
-          {/* Full Width White Card with Hover Effect */}
-          <div className="w-full p-6 sm:p-8 lg:p-10 rounded-2xl bg-white/95 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-xl space-y-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:border-[#2D6A4F]/40 cursor-pointer">
+          {/* Full Width White Card with Slide-Up Reveal Effect */}
+          <div className="w-full p-6 sm:p-8 lg:p-10 rounded-2xl bg-white/95 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-xl space-y-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:border-[#2D6A4F]/40 cursor-pointer br-rv br-d1">
             
             {/* Top Flow Diagram (Light background + Crisp dark lines & text + Perfect Root Spacing) */}
-            <div className="w-full bg-[#F4FAF4] rounded-xl p-6 sm:p-8 text-[#173522] flex items-center justify-center border border-[#2D6A4F]/15">
+            <div className="w-full bg-[#F4FAF4] rounded-xl p-6 sm:p-8 text-[#173522] flex items-center justify-center border border-[#2D6A4F]/15 br-rv br-d1">
               <svg viewBox="0 0 700 220" className="w-full max-w-[650px] h-auto font-mono text-xs select-none">
                 {/* Main Root Line */}
                 <path d="M 80 20 L 80 175" fill="none" stroke="#173522" strokeWidth="5" strokeLinecap="round" />
@@ -249,7 +255,7 @@ export default function NutrientsMatrix() {
             </div>
 
             {/* Bottom Horizontal Narrative */}
-            <div className="pt-4 border-t border-[#173522]/15 space-y-3">
+            <div className="pt-4 border-t border-[#173522]/15 space-y-3 br-rv br-d2">
               <div className="flex items-center gap-2">
                 <span className="font-mono text-xs font-bold text-[#2D6A4F] uppercase tracking-wider">
                   ROOT EXUDATES · SIGNALS
@@ -259,7 +265,7 @@ export default function NutrientsMatrix() {
                 Why nutrients arrive when the crop asks
               </h4>
               <p className="text-base text-[#173522]/90 font-sans leading-relaxed">
-                Plants invest <strong>up to 20–40% of the carbon they fix</strong> in root exudates.⁶ That is sugars, organic acids and signal molecules released into the soil. Exudation changes with the plant's nutrient status. Under phosphorus deficiency, for example, roots release more organic acids such as malate.⁶ Microbes living on this carbon are most active where and when roots are growing hardest, so <strong>release tracks the crop's demand</strong> instead of arriving in a single dose.
+                Plants invest <strong>up to 20–40% of the carbon they fix</strong> in root exudates. That is sugars, organic acids and signal molecules released into the soil. Exudation changes with the plant's nutrient status. Under phosphorus deficiency, for example, roots release more organic acids such as malate. Microbes living on this carbon are most active where and when roots are growing hardest, so <strong>release tracks the crop's demand</strong> instead of arriving in a single dose.
               </p>
             </div>
           </div>
@@ -270,14 +276,14 @@ export default function NutrientsMatrix() {
             Strict Visual & Structural Parity with Ruminants
             ========================================== */}
         <div className="space-y-6 pt-4">
-          <div className="space-y-2">
-            <div className="flex items-center gap-3">
+          <div className="space-y-2 br-rv">
+            <div className="flex items-center gap-3 br-rv br-d1">
               <span className="w-8 h-[1.5px] bg-[#2D6A4F]" />
               <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">
                 ALONG THE CROP CYCLE MATRIX
               </span>
             </div>
-            <h3 className="font-display font-extrabold text-3xl sm:text-4xl text-[#173522] uppercase tracking-tight">
+            <h3 className="font-display font-extrabold text-3xl sm:text-4xl text-[#173522] uppercase tracking-tight br-rv br-d2">
               WHERE BIOLOGY DOES THE WORK.
             </h3>
           </div>
@@ -361,16 +367,16 @@ export default function NutrientsMatrix() {
                             <div className="relative block w-full h-[7px] mb-2.5 flex-shrink-0">
                               <div className="absolute top-1/2 left-0 w-full h-[2px] -translate-y-1/2 rounded-full bg-current/20" />
                               <div 
-                                className="absolute top-0 left-0 h-full rounded-full transition-all duration-500"
-                                style={{ width: cell.fill, backgroundColor: getToneColor(cellIdx, stage.darkText) }}
+                                className="br-mx-bar absolute top-0 left-0 h-full rounded-full"
+                                style={{ "--bar-fill": cell.fill, backgroundColor: getToneColor(cellIdx, stage.darkText) } as React.CSSProperties}
                               />
                               <div
-                                className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full transition-all duration-500 box-content"
+                                className="br-mx-dot absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full box-content"
                                 style={{ 
-                                  left: cell.fill, 
+                                  "--bar-fill": cell.fill, 
                                   backgroundColor: getToneColor(cellIdx, stage.darkText),
                                   boxShadow: `0 0 0 1px ${stage.bg}, 0 0 0 2px ${getToneColor(cellIdx, stage.darkText)}`
-                                }}
+                                } as React.CSSProperties}
                               />
                             </div>
                             <p className="font-serif text-[13px] sm:text-[14px] leading-snug pt-1">
@@ -414,7 +420,7 @@ export default function NutrientsMatrix() {
               <p className="text-xs sm:text-sm text-[#173522]/85 font-sans">
                 average yield gain from biofertilisers in dry climates, and +14.9% in tropical climates.
               </p>
-              <div className="pt-2 text-[11px] font-mono text-[#2D6A4F] font-semibold">171 publications · Global meta-analysis¹</div>
+              <div className="pt-2 text-[11px] font-mono text-[#2D6A4F] font-semibold">171 publications · Global meta-analysis</div>
             </div>
 
             <div className="p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-lg space-y-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-[#2D6A4F]/40 cursor-pointer">
@@ -423,7 +429,7 @@ export default function NutrientsMatrix() {
               <p className="text-xs sm:text-sm text-[#173522]/85 font-sans">
                 average reduction in disease with Bacillus biocontrol agents compared with untreated controls.
               </p>
-              <div className="pt-2 text-[11px] font-mono text-[#C25975] font-semibold">399 studies · Meta-analysis⁷</div>
+              <div className="pt-2 text-[11px] font-mono text-[#C25975] font-semibold">399 studies · Meta-analysis</div>
             </div>
 
             <div className="p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-lg space-y-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-[#2D6A4F]/40 cursor-pointer">
@@ -432,7 +438,7 @@ export default function NutrientsMatrix() {
               <p className="text-xs sm:text-sm text-[#173522]/85 font-sans">
                 less soft rot and black mold in tomato treated with Bacillus subtilis. 40–60% less rot in leafy greens.
               </p>
-              <div className="pt-2 text-[11px] font-mono text-[#D97706] font-semibold">Post-harvest biocontrol review¹⁰</div>
+              <div className="pt-2 text-[11px] font-mono text-[#D97706] font-semibold">Post-harvest biocontrol review</div>
             </div>
           </div>
         </div>
@@ -471,7 +477,7 @@ export default function NutrientsMatrix() {
           </div>
 
           <p className="text-xs font-mono text-[#173522]/70 pt-2 border-t border-[#173522]/10">
-            Scale 0–25%. Nitrogen-use efficiency also improved by +5.8 kg yield per kg N applied. Source: Schütz et al. 2018.¹
+            Scale 0–25%. Nitrogen-use efficiency also improved by +5.8 kg yield per kg N applied. Source: Schütz et al. 2018.
           </p>
         </div>
 

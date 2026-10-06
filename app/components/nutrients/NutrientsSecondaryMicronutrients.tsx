@@ -27,10 +27,10 @@ export default function NutrientsSecondaryMicronutrients() {
       symbol: "S",
       type: "SECONDARY",
       title: "Released from organic matter",
-      body: "Soil bacteria and fungi use sulphatase enzymes to free sulphate from organic compounds. Sulphur-oxidising bacteria convert elemental sulphur into sulphate that roots can take up.¹³ ¹⁴",
+      body: "Soil bacteria and fungi use sulphatase enzymes to free sulphate from organic compounds. Sulphur-oxidising bacteria convert elemental sulphur into sulphate that roots can take up.",
       metric: (
         <span>
-          <strong className="text-[#2D6A4F] font-bold">&gt;95%</strong> of soil sulphur is in organic form, locked away from roots until microbes release it.¹³
+          <strong className="text-[#2D6A4F] font-bold">&gt;95%</strong> of soil sulphur is in organic form, locked away from roots until microbes release it.
         </span>
       ),
     },
@@ -38,10 +38,10 @@ export default function NutrientsSecondaryMicronutrients() {
       symbol: "Ca · Mg",
       type: "SECONDARY",
       title: "Dissolved from carbonates",
-      body: "Calcite-dissolving bacteria lower pH with organic acids, and some Bacillus strains produce carbonic anhydrase. Organic acid anions then chelate calcium and magnesium into soluble forms.¹⁹",
+      body: "Calcite-dissolving bacteria lower pH with organic acids, and some Bacillus strains produce carbonic anhydrase. Organic acid anions then chelate calcium and magnesium into soluble forms.",
       metric: (
         <span>
-          Most relevant in <strong className="text-[#173522] font-bold">calcareous, alkaline soils</strong>, where Ca is abundant but tied up as CaCO₃.¹⁹
+          Most relevant in <strong className="text-[#173522] font-bold">calcareous, alkaline soils</strong>, where Ca is abundant but tied up as CaCO₃.
         </span>
       ),
     },
@@ -49,14 +49,14 @@ export default function NutrientsSecondaryMicronutrients() {
       symbol: "Zn",
       type: "MICRO",
       title: "Solubilised and moved into grain",
-      body: "Zinc-solubilising bacteria release gluconic acid and chelators that dissolve insoluble zinc compounds. Mycorrhizal fungi extend the root’s reach for zinc.¹⁵ ¹⁶",
+      body: "Zinc-solubilising bacteria release gluconic acid and chelators that dissolve insoluble zinc compounds. Mycorrhizal fungi extend the root’s reach for zinc.",
       metric: (
         <div className="space-y-1">
           <div>
-            <strong className="text-[#2D6A4F] font-bold">+23%</strong> grain Zn in wheat with a bacterial consortium in field trials.¹⁵
+            <strong className="text-[#2D6A4F] font-bold">+23%</strong> grain Zn in wheat with a bacterial consortium in field trials.
           </div>
           <div>
-            <strong className="text-[#2D6A4F] font-bold">+13%</strong> fruit Zn with mycorrhizal fungi (104 articles, 263 trials).¹⁶
+            <strong className="text-[#2D6A4F] font-bold">+13%</strong> fruit Zn with mycorrhizal fungi (104 articles, 263 trials).
           </div>
         </div>
       ),
@@ -65,10 +65,10 @@ export default function NutrientsSecondaryMicronutrients() {
       symbol: "Fe",
       type: "MICRO",
       title: "Captured by siderophores",
-      body: "In aerated soils, iron sits as insoluble Fe³⁺. Microbial siderophores bind it into soluble complexes, and iron-reducing bacteria convert it to the more soluble Fe²⁺.¹⁸ ²⁰",
+      body: "In aerated soils, iron sits as insoluble Fe³⁺. Microbial siderophores bind it into soluble complexes, and iron-reducing bacteria convert it to the more soluble Fe²⁺.",
       metric: (
         <span>
-          <strong className="text-[#2D6A4F] font-bold">+7%</strong> average Fe concentration in crops with mycorrhizal fungi.¹⁷
+          <strong className="text-[#2D6A4F] font-bold">+7%</strong> average Fe concentration in crops with mycorrhizal fungi.
         </span>
       ),
     },
@@ -76,10 +76,10 @@ export default function NutrientsSecondaryMicronutrients() {
       symbol: "Cu",
       type: "MICRO",
       title: "Taken up through fungal networks",
-      body: "Mycorrhizal hyphae explore soil beyond the root’s depletion zone and pass copper back to the plant.¹⁷",
+      body: "Mycorrhizal hyphae explore soil beyond the root’s depletion zone and pass copper back to the plant.",
       metric: (
         <span>
-          <strong className="text-[#2D6A4F] font-bold">+29%</strong> average Cu concentration in crops with mycorrhizal fungi (233 publications).¹⁷
+          <strong className="text-[#2D6A4F] font-bold">+29%</strong> average Cu concentration in crops with mycorrhizal fungi (233 publications).
         </span>
       ),
     },
@@ -87,10 +87,10 @@ export default function NutrientsSecondaryMicronutrients() {
       symbol: "Mn · B",
       type: "MICRO",
       title: "Where the evidence is still thin",
-      body: "Manganese and boron matter. Boron is short in about 31% of agricultural soils worldwide.²¹ But published evidence for consistent microbial gains is limited, so we do not claim them here.",
+      body: "Manganese and boron matter. Boron is short in about 31% of agricultural soils worldwide. But published evidence for consistent microbial gains is limited, so we do not claim them here.",
       metric: (
         <span>
-          Mycorrhizal fungi showed <strong className="text-[#173522] font-bold">no average Mn gain</strong> (-4%, not significant).¹⁷
+          Mycorrhizal fungi showed <strong className="text-[#173522] font-bold">no average Mn gain</strong> (-4%, not significant).
         </span>
       ),
     },
@@ -136,7 +136,7 @@ export default function NutrientsSecondaryMicronutrients() {
                       <strong>They produce chelators</strong> such as siderophores that keep trace metals soluble and plant-accessible.
                     </li>
                     <li>
-                      <strong>They make enzymes</strong> that free bound nutrients from soil organic matter.¹⁸
+                      <strong>They make enzymes</strong> that free bound nutrients from soil organic matter.
                     </li>
                   </ul>
                 </div>
@@ -173,7 +173,7 @@ export default function NutrientsSecondaryMicronutrients() {
                   <div key={idx} className="p-4 rounded-xl bg-white/80 border border-[#2D6A4F]/15 space-y-2">
                     <div className="flex justify-between items-center text-xs font-bold font-mono text-[#173522]">
                       <span className="text-sm font-semibold">{item.symbol} <span className="text-xs font-normal text-[#173522]/60 font-sans">({item.name})</span></span>
-                      <span className="text-sm font-bold text-[#2D6A4F]"><span data-cu>{item.percent}</span>%</span>
+                      <span className="text-sm font-bold text-[#2D6A4F]"><span data-cu>{item.percent}</span>% short</span>
                     </div>
                     <div className="w-full h-3 bg-[#EAF3EA] rounded-full overflow-hidden border border-[#2D6A4F]/10">
                       <div
@@ -187,9 +187,9 @@ export default function NutrientsSecondaryMicronutrients() {
 
               {/* Chart Footnote */}
               <div className="pt-4 border-t border-[#173522]/10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-[11px] sm:text-xs text-[#173522]/70 font-sans">
-                <p>Scale 0–100%. Sillanpää (FAO, 1990), cited in Graham 2008.²¹</p>
+                <p>Scale 0–100%. Sillanpää (FAO, 1990), cited in Graham 2008.</p>
                 <p className="text-[#2D6A4F] font-medium leading-normal">
-                  Regional surveys can run higher: in India, 242,827 recent samples showed 58.6% of soils short of sulphur and 51.2% short of zinc.¹²
+                  Regional surveys can run higher: in India, 242,827 recent samples showed 58.6% of soils short of sulphur and 49% short of zinc.
                 </p>
               </div>
             </div>

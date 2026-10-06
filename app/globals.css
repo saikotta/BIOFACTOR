@@ -1545,10 +1545,42 @@ body {
 .br-mx-col:nth-child(5) { transition-delay: 0.45s; }
 .br-mx-col:nth-child(6) { transition-delay: 0.55s; }
 
-.br-mx-wrap.br-in .br-mx-col {
+.br-mx-wrap.br-in .br-mx-col,
+.br-mx-wrap.in .br-mx-col,
+.br-mx-wrap.visible .br-mx-col {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Matrix Cell Progress Bar Fill & Glowing Tip Dot Animations */
+.br-mx-bar {
+  width: 0% !important;
+  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.br-mx-dot {
+  left: 0% !important;
+  transition: left 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.br-mx-wrap.br-in .br-mx-bar,
+.br-mx-wrap.in .br-mx-bar,
+.br-mx-wrap.visible .br-mx-bar {
+  width: var(--bar-fill, 0%) !important;
+}
+
+.br-mx-wrap.br-in .br-mx-dot,
+.br-mx-wrap.in .br-mx-dot,
+.br-mx-wrap.visible .br-mx-dot {
+  left: var(--bar-fill, 0%) !important;
+}
+
+.br-mx-col:nth-child(1) .br-mx-bar, .br-mx-col:nth-child(1) .br-mx-dot { transition-delay: 0.25s; }
+.br-mx-col:nth-child(2) .br-mx-bar, .br-mx-col:nth-child(2) .br-mx-dot { transition-delay: 0.40s; }
+.br-mx-col:nth-child(3) .br-mx-bar, .br-mx-col:nth-child(3) .br-mx-dot { transition-delay: 0.55s; }
+.br-mx-col:nth-child(4) .br-mx-bar, .br-mx-col:nth-child(4) .br-mx-dot { transition-delay: 0.70s; }
+.br-mx-col:nth-child(5) .br-mx-bar, .br-mx-col:nth-child(5) .br-mx-dot { transition-delay: 0.85s; }
+.br-mx-col:nth-child(6) .br-mx-bar, .br-mx-col:nth-child(6) .br-mx-dot { transition-delay: 1.00s; }
 
 @media (prefers-reduced-motion: reduce) {
   .br-rv, .br-ph, .br-ln > span, .br-quote, .br-callout::before {
