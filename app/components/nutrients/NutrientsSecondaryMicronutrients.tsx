@@ -189,7 +189,7 @@ export default function NutrientsSecondaryMicronutrients() {
               <div className="pt-4 border-t border-[#173522]/10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-[11px] sm:text-xs text-[#173522]/70 font-sans">
                 <p>Scale 0–100%. Sillanpää (FAO, 1990), cited in Graham 2008.</p>
                 <p className="text-[#2D6A4F] font-medium leading-normal">
-                  Global average shown above. Regional surveys run higher: in India, 242,827 recent samples showed 58.6% of soils short of sulphur and 51.2% short of zinc.
+                  Regional surveys can run higher: in India, 242,827 recent samples showed 58.6% of soils short of sulphur and 49% short of zinc.
                 </p>
               </div>
             </div>
