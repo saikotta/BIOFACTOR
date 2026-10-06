@@ -70,7 +70,8 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
       // Cap DPR at 2 to avoid unnecessary canvas workload on high-DPI screens
       const dpr = Math.min(2, window.devicePixelRatio || 1);
       const width = window.innerWidth;
-      const height = window.innerHeight;
+      const headerOffset = width >= 768 ? 72 : 64;
+      const height = Math.max(300, window.innerHeight - headerOffset);
 
       const targetCanvasWidth = Math.floor(width * dpr);
       const targetCanvasHeight = Math.floor(height * dpr);
@@ -151,10 +152,12 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
       if (!container) return;
 
       const rect = container.getBoundingClientRect();
-      const scrollableHeight = rect.height - window.innerHeight;
+      const headerOffset = window.innerWidth >= 768 ? 72 : 64;
+      const viewH = window.innerHeight - headerOffset;
+      const scrollableHeight = rect.height - viewH;
       if (scrollableHeight <= 0) return;
 
-      const scrolled = -rect.top;
+      const scrolled = -rect.top + headerOffset;
       const progress = Math.min(1, Math.max(0, scrolled / scrollableHeight));
 
       if (prefersReducedMotion) {
@@ -213,15 +216,15 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
   }, []);
 
   return (
-    <div ref={containerRef} className="relative w-full h-[400vh] bg-black">
-      {/* Sticky Full-Screen Canvas Background (Layer 0: Canvas) */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden z-0 bg-black">
+    <div ref={containerRef} className="relative w-full h-[500vh] bg-black">
+      {/* Sticky Full-Screen Canvas Background (offset below fixed navbar so top leaves never enter header) */}
+      <div className="sticky top-[64px] md:top-[72px] h-[calc(100vh-64px)] md:h-[calc(100vh-72px)] w-full overflow-hidden z-0 bg-black">
         <canvas
           ref={canvasRef}
           className="absolute inset-0 w-full h-full block"
         />
 
-        {/* Cinematic Atmospheric Left Dark Gradient (Layer 1: Shadow Overlay - Vertically reshaped to expose natural top-left hero light for logo contrast) */}
+        {/* Cinematic Atmospheric Left Dark Gradient */}
         <div
           className="absolute inset-0 pointer-events-none z-10"
           style={{
@@ -235,8 +238,8 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
         />
       </div>
 
-      {/* Sticky Hero Overlay (Layer 2: BIOFACTOR UI Layer) */}
-      <div className="sticky top-0 -mt-[100vh] h-screen w-full z-20 pointer-events-none flex flex-col justify-between">
+      {/* Sticky Hero Overlay */}
+      <div className="sticky top-[64px] md:top-[72px] -mt-[calc(100vh-64px)] md:-mt-[calc(100vh-72px)] h-[calc(100vh-64px)] md:h-[calc(100vh-72px)] w-full z-20 pointer-events-none flex flex-col justify-between">
         <div className="w-full h-full pointer-events-auto flex flex-col justify-between">
           {children}
         </div>

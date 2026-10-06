@@ -105,18 +105,18 @@ export default function NutrientsHero() {
       />
 
       <BiofactorScrollHero>
-        <div className="relative w-full h-full flex flex-col justify-end pb-12 lg:pb-16 px-6 sm:px-12 md:px-16 lg:px-20 max-w-[1700px] mx-auto z-20">
-          <div className="w-full max-w-3xl">
+        <div className="relative w-full h-full flex flex-col justify-end pb-14 sm:pb-16 lg:pb-20 px-6 sm:px-12 md:px-16 lg:px-20 max-w-[1700px] mx-auto z-20">
+          <div className="w-full max-w-4xl">
             {/* Eyebrow Label */}
-            <div className="flex items-center gap-2.5 mb-4">
-              <span className="w-6 h-[1.5px] bg-[#B8E986] opacity-85" aria-hidden="true" />
-              <span className="font-mono text-[13px] font-medium tracking-[0.14em] uppercase text-[#B8E986]">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-7 h-[1.5px] bg-[#B8E986] opacity-90" aria-hidden="true" />
+              <span className="font-mono text-[13px] sm:text-[14px] font-semibold tracking-[0.16em] uppercase text-[#B8E986]">
                 PLANT NUTRITION · BIOLOGICAL MOBILISATION
               </span>
             </div>
 
             {/* Main Display Headline */}
-            <h1 className="font-sans font-extrabold uppercase text-white tracking-tight leading-[0.9] text-[clamp(2.35rem,6.12vw,5.5rem)] lg:text-[88px] mb-5 max-w-[700px] drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
+            <h1 className="font-sans font-extrabold uppercase text-white tracking-tight leading-[0.9] text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[88px] xl:text-[96px] mb-5 max-w-[850px] drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
               <span className="br-ln block">BIOLOGY THAT</span>
               <span className="br-ln br-d1 block">
                 <span className="text-[#B8E986]">MOVES</span> NUTRIENTS
@@ -124,7 +124,7 @@ export default function NutrientsHero() {
             </h1>
 
             {/* Subtitle Copy */}
-            <p className="font-serif italic font-normal text-white/95 leading-relaxed tracking-tight text-[clamp(1.1rem,1.8vw,1.35rem)] max-w-[580px] drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+            <p className="font-serif italic font-normal text-white/95 leading-[1.45] tracking-tight text-[1.25rem] sm:text-[1.4rem] md:text-[1.55rem] max-w-[640px] drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
               Converting unavailable soil reserves into active plant nutrition through living microbial pathways.
             </p>
           </div>
