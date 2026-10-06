@@ -7,7 +7,7 @@ export default function Evidence() {
   const sectionRef = useRef<HTMLElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
   const [isIn, setIsIn] = useState(false);
-  const [counts, setCounts] = useState<string[]>(["11", "2", "350+"]);
+  const [counts, setCounts] = useState<string[]>(["11", "350+"]);
 
   // 1. Reveal observer for title & stats fade-in
   useEffect(() => {
@@ -53,7 +53,7 @@ export default function Evidence() {
             observer.disconnect();
 
             // Set initial start count to 0 right before animation
-            setCounts(["0", "0", "0"]);
+            setCounts(["0", "0"]);
             const startTime = performance.now();
             const duration = 1600;
 
@@ -64,11 +64,10 @@ export default function Evidence() {
 
               const c1 = Math.round(EVIDENCE_CONTENT.stats[0].to * easeK);
               const c2 = Math.round(EVIDENCE_CONTENT.stats[1].to * easeK);
-              const c3 = Math.round(EVIDENCE_CONTENT.stats[2].to * easeK);
 
-              const suf3 = k >= 1 ? EVIDENCE_CONTENT.stats[2].suffix || "" : "";
+              const suf2 = k >= 1 ? EVIDENCE_CONTENT.stats[1].suffix || "" : "";
 
-              setCounts([`${c1}`, `${c2}`, `${c3}${suf3}`]);
+              setCounts([`${c1}`, `${c2}${suf2}`]);
 
               if (k < 1) {
                 rafId = requestAnimationFrame(animate);
@@ -112,7 +111,7 @@ export default function Evidence() {
 
           <div ref={statsRef} className="stats">
             {EVIDENCE_CONTENT.stats.map((stat: { to: number; label: string; suffix?: string }, i: number) => {
-              const delays = ["0.25s", "0.45s", "0.6s"];
+              const delays = ["0.25s", "0.45s"];
               const finalVal = `${stat.to}${stat.suffix || ""}`;
               return (
                 <div
@@ -211,9 +210,17 @@ export default function Evidence() {
 
         .stats {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-          gap: 40px;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 60px;
           margin-top: 56px;
+          max-width: 880px;
+        }
+
+        @media (max-width: 640px) {
+          .stats {
+            grid-template-columns: 1fr;
+            gap: 40px;
+          }
         }
 
         .stat {

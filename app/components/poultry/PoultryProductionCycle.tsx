@@ -3,46 +3,72 @@
 import { useEffect, useRef } from "react";
 
 function fitFrame(frame: HTMLIFrameElement | null) {
-  const layout = frame?.contentDocument?.querySelector(".frame");
-  if (frame && layout) frame.style.height = `${layout.getBoundingClientRect().height}px`;
+  if (!frame) return;
+  const doc = frame.contentDocument;
+  if (!doc) return;
+  const target = doc.querySelector(".frame") || doc.querySelector("main") || doc.body;
+  if (!target) return;
+  const rect = target.getBoundingClientRect();
+  const style = doc.defaultView?.getComputedStyle(target);
+  const marginTop = parseFloat(style?.marginTop || "0");
+  const marginBottom = parseFloat(style?.marginBottom || "0");
+  const height = Math.ceil(rect.height + marginTop + marginBottom);
+  if (height > 0) frame.style.height = `${height}px`;
 }
 
 export default function PoultryProductionCycle() {
   const frameRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
+    const frame = frameRef.current;
     let resizeTimer = 0;
     let resizeFrame = 0;
+
     const scheduleFit = () => {
-      fitFrame(frameRef.current);
+      fitFrame(frame);
       window.cancelAnimationFrame(resizeFrame);
-      resizeFrame = window.requestAnimationFrame(() => fitFrame(frameRef.current));
+      resizeFrame = window.requestAnimationFrame(() => fitFrame(frame));
       window.clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(() => fitFrame(frameRef.current), 180);
+      resizeTimer = window.setTimeout(() => fitFrame(frame), 150);
     };
 
-    scheduleFit();
+    const observeDocument = () => {
+      const doc = frame?.contentDocument;
+      if (!doc || !doc.documentElement) return;
+      observer.disconnect();
+      observer.observe(doc.documentElement);
+      if (doc.body) observer.observe(doc.body);
+      scheduleFit();
+      void doc.fonts.ready.then(scheduleFit);
+    };
+
+    const observer = new ResizeObserver(() => scheduleFit());
+    frame?.addEventListener("load", observeDocument);
+    observeDocument();
     window.addEventListener("resize", scheduleFit, { passive: true });
-    void frameRef.current?.contentDocument?.fonts.ready.then(scheduleFit);
 
     return () => {
+      frame?.removeEventListener("load", observeDocument);
       window.removeEventListener("resize", scheduleFit);
+      observer.disconnect();
       window.cancelAnimationFrame(resizeFrame);
       window.clearTimeout(resizeTimer);
     };
   }, []);
 
   return (
-    <section className="w-full bg-[#d9ebd3]" data-poultry-static aria-label="Poultry biology at every life stage">
-      <iframe
-        ref={frameRef}
-        className="block w-full border-0"
-        src="/poultry-production-stages.html?v=1"
-        title="Poultry biology across life stages"
-        loading="eager"
-        style={{ height: "1600px" }}
-        onLoad={(event) => fitFrame(event.currentTarget)}
-      />
+    <section className="w-full bg-[#d9ebd3]" data-ruminants-section="cycle" data-n="Production Cycle" aria-label="Poultry biology at every life stage">
+      <div className="rv w-full">
+        <iframe
+          ref={frameRef}
+          className="block w-full border-0"
+          src="/poultry-production-stages.html?v=1"
+          title="Poultry biology across life stages"
+          loading="eager"
+          style={{ height: "400px" }}
+          onLoad={(event) => fitFrame(event.currentTarget)}
+        />
+      </div>
     </section>
   );
 }
