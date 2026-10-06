@@ -11,9 +11,9 @@ export default function Home() {
   return (
     <main className="relative isolate min-h-screen bg-[#EAF3EA] text-white selection:bg-green-500 selection:text-black">
       <MicrobeField />
-      <BiofactorScrollHero>
+      <section className="relative w-full min-h-[calc(100vh-64px)] md:min-h-[calc(100vh-72px)] bg-[#EAF3EA] flex items-center justify-center overflow-hidden">
         <BiofactorHero />
-      </BiofactorScrollHero>
+      </section>
       <PrimordialSection />
       <ChemistryFieldSection />
       <BiofactorNumbersSection />
