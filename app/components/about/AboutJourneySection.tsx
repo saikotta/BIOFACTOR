@@ -8,7 +8,6 @@ interface Milestone {
   title: string;
   description: string;
   align: "left" | "right";
-  hasPlaceholder: boolean;
 }
 
 const MILESTONES: Milestone[] = [
@@ -19,7 +18,6 @@ const MILESTONES: Milestone[] = [
     description:
       'Established in Hyderabad, under the founding statement: "Build The Best To Live With Nature\'s Partnership."',
     align: "right",
-    hasPlaceholder: true,
   },
   {
     id: 2,
@@ -28,7 +26,6 @@ const MILESTONES: Milestone[] = [
     description:
       "Development of the Microbe & Mineral™ platform and the two technologies: Metabiome™ & Chemoprotect™ and Microbe™ gets later patented.",
     align: "left",
-    hasPlaceholder: true,
   },
   {
     id: 3,
@@ -37,7 +34,6 @@ const MILESTONES: Milestone[] = [
     description:
       "Growth to a presence in 16 Indian States, a Dealer Network Passing 3,000, and a Team Crossing 600.",
     align: "right",
-    hasPlaceholder: true,
   },
   {
     id: 4,
@@ -46,7 +42,6 @@ const MILESTONES: Milestone[] = [
     description:
       "First international Product Licenses secured in East Africa — Biofactor's first steps Outside The Domestic Market.",
     align: "left",
-    hasPlaceholder: true,
   },
   {
     id: 5,
@@ -55,7 +50,6 @@ const MILESTONES: Milestone[] = [
     description:
       "A Commercially Packaging Journey from Soil To People Across Everything We Build.",
     align: "right",
-    hasPlaceholder: true,
   },
 ];
 
@@ -286,13 +280,13 @@ export default function AboutJourneySection() {
                   <div className="w-full flex flex-col lg:flex-row items-start lg:items-center">
                     
                     {/* LEFT HALF (width: 50% on desktop) */}
-                    <div className="w-full lg:w-1/2 flex justify-start lg:justify-end items-start lg:items-center pl-10 lg:pl-0 lg:pr-9 xl:pr-10">
+                    <div className="w-full lg:w-1/2 flex justify-start lg:justify-end items-start lg:items-center pl-10 lg:pl-0 lg:pr-8 xl:pr-10">
                       {!isRight ? (
-                        <div className="w-full flex flex-col sm:flex-row lg:flex-row items-start lg:items-center justify-end gap-5 lg:gap-7 xl:gap-8">
-                          {/* Left-side Text (extending outward to the left) */}
+                        <div className="w-full flex flex-col items-start lg:items-end justify-end">
+                          {/* Left-side Text (adjacent to line, right-aligned text) */}
                           <div
                             key={`copy-${item.id}-${cycle}`}
-                            className={`flex flex-col items-start lg:items-end text-left lg:text-right max-w-[320px] ${
+                            className={`flex flex-col items-start lg:items-end text-left lg:text-right max-w-[360px] lg:max-w-[420px] ${
                               isActivated ? "animate-s7-copy" : "opacity-0 translate-y-[16px]"
                             }`}
                           >
@@ -303,17 +297,6 @@ export default function AboutJourneySection() {
                               {item.description}
                             </p>
                           </div>
-                          {/* Left-side Grey Square */}
-                          {item.hasPlaceholder && (
-                            <div
-                              key={`img-${item.id}-${cycle}`}
-                              className={`w-[110px] h-[110px] sm:w-[125px] sm:h-[125px] lg:w-[140px] lg:h-[140px] bg-[#D2D3D2] rounded-[6px] flex-shrink-0 ${
-                                isActivated
-                                  ? "animate-s7-image-left"
-                                  : "opacity-[0.25] translate-x-[24px] translate-y-[14px] scale-[0.96]"
-                              }`}
-                            />
-                          )}
                         </div>
                       ) : (
                         <div className="hidden lg:block w-full" />
@@ -321,24 +304,13 @@ export default function AboutJourneySection() {
                     </div>
 
                     {/* RIGHT HALF (width: 50% on desktop) */}
-                    <div className="w-full lg:w-1/2 flex justify-start items-start lg:items-center pl-10 lg:pl-9 xl:pl-10">
+                    <div className="w-full lg:w-1/2 flex justify-start items-start lg:items-center pl-10 lg:pl-8 xl:pl-10">
                       {isRight ? (
-                        <div className="w-full flex flex-col sm:flex-row lg:flex-row items-start lg:items-center justify-start gap-5 lg:gap-7 xl:gap-8">
-                          {/* Right-side Grey Square */}
-                          {item.hasPlaceholder && (
-                            <div
-                              key={`img-${item.id}-${cycle}`}
-                              className={`w-[110px] h-[110px] sm:w-[125px] sm:h-[125px] lg:w-[140px] lg:h-[140px] bg-[#D2D3D2] rounded-[6px] flex-shrink-0 ${
-                                isActivated
-                                  ? "animate-s7-image-right"
-                                  : "opacity-[0.25] -translate-x-[24px] translate-y-[14px] scale-[0.96]"
-                              }`}
-                            />
-                          )}
-                          {/* Right-side Text (extending outward to the right) */}
+                        <div className="w-full flex flex-col items-start justify-start">
+                          {/* Right-side Text (adjacent to line, left-aligned text) */}
                           <div
                             key={`copy-${item.id}-${cycle}`}
-                            className={`flex flex-col items-start text-left max-w-[320px] ${
+                            className={`flex flex-col items-start text-left max-w-[360px] lg:max-w-[420px] ${
                               isActivated ? "animate-s7-copy" : "opacity-0 translate-y-[16px]"
                             }`}
                           >
