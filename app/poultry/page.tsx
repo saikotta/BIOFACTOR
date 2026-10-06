@@ -10,7 +10,7 @@ import PoultryGutRestoration from "../components/poultry/PoultryGutRestoration";
 import PoultryMineralBioavailability from "../components/poultry/PoultryMineralBioavailability";
 import PoultryProductionCycle from "../components/poultry/PoultryProductionCycle";
 import PoultryClosing from "../components/poultry/PoultryClosing";
-import PoultryFooter from "../components/poultry/PoultryFooter";
+import ProductFooter from "../components/ProductFooter";
 import PoultryScrollMotion from "../components/poultry/PoultryScrollMotion";
 
 const bricolage = Bricolage_Grotesque({
@@ -78,7 +78,7 @@ export default function PoultryPage() {
       <PoultryClosing />
 
       {/* FOOTER */}
-      <PoultryFooter />
+      <ProductFooter />
 
       {/* SCROLL MOTION SYSTEM — client-only, renders null to DOM */}
       <PoultryScrollMotion />

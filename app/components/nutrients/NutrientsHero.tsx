@@ -63,6 +63,20 @@ export default function NutrientsHero() {
       });
     };
 
+    // For above-the-fold hero elements, fire immediately with a short delay
+    // so the CSS transition has time to initialize before adding .br-in
+    const triggerHeroAnimations = () => {
+      document.querySelectorAll(".br-ln, .br-quote").forEach((el) => {
+        if (!el.classList.contains("br-in")) {
+          el.classList.add("br-in");
+        }
+      });
+    };
+
+    // Small delay so CSS paint is complete before animation starts
+    setTimeout(triggerHeroAnimations, 120);
+    setTimeout(triggerHeroAnimations, 350);
+
     initializeObservers();
     setTimeout(initializeObservers, 150);
     setTimeout(initializeObservers, 500);
