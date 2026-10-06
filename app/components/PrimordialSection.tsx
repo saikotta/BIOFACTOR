@@ -1,6 +1,11 @@
 "use client";
 
 import React from "react";
+import MicrobeField from "./MicrobeField";
+
+const PRIMORDIAL_EXCLUSION_ZONES = [
+  { xMinPct: 0.08, xMaxPct: 0.92, yMinPct: 0.15, yMaxPct: 0.85 },
+];
 
 export default function PrimordialSection() {
   return (
@@ -8,7 +13,18 @@ export default function PrimordialSection() {
       id="primordial-elements"
       className="relative z-20 w-full bg-transparent text-[#14231a] py-14 sm:py-20 md:py-24 px-5 sm:px-12 md:px-16 overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto w-full">
+      {/* Frame 2 MicrobeField Layer (~22 visible microbes, content area protected) */}
+      <div className="absolute inset-0 pointer-events-none z-0 opacity-85 contrast-110">
+        <MicrobeField
+          position="absolute"
+          densityMultiplier={3.4}
+          opacityMultiplier={1.5}
+          minVisibleCount={21}
+          exclusionZones={PRIMORDIAL_EXCLUSION_ZONES}
+        />
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto w-full">
         {/* Top Content Area */}
         <div className="max-w-2xl text-left">
           {/* Eyebrow */}

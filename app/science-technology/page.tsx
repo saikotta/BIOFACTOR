@@ -33,7 +33,7 @@ export default function ScienceTechnologyPage() {
     <main style={{ background: "#EDF4ED" }} className="w-full min-h-screen block">
       <DepthMeter />
       <ScienceHero />
-      <div id="tech-sections">
+      <div id="tech-sections" className="relative z-10">
         {SECTIONS.map((sec, i) => (
           <TechSection
             key={sec.id}

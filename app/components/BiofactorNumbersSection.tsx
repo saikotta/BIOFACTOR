@@ -1,6 +1,18 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import MicrobeField from "./MicrobeField";
+
+const NUMBERS_EXCLUSION_ZONES = [
+  // Band A: Top intro heading & statement block
+  { xMinPct: 0.04, xMaxPct: 0.62, yMinPct: 0.04, yMaxPct: 0.26 },
+  // Band B: Stats Grid Row 1 text region
+  { xMinPct: 0.06, xMaxPct: 0.94, yMinPct: 0.32, yMaxPct: 0.52 },
+  // Band C: Stats Grid Row 2 text region
+  { xMinPct: 0.06, xMaxPct: 0.94, yMinPct: 0.62, yMaxPct: 0.82 },
+  // Band D: Bottom international footnote
+  { xMinPct: 0.06, xMaxPct: 0.70, yMinPct: 0.88, yMaxPct: 0.96 },
+];
 
 const STATISTICS = [
   // ROW 1
@@ -52,7 +64,18 @@ export default function BiofactorNumbersSection() {
       id="biofactor-numbers-section"
       className="relative z-20 w-full py-16 lg:py-24 text-[#0a1a14] overflow-hidden select-none"
     >
-      <div className="w-full max-w-[1340px] mx-auto px-6 sm:px-10 lg:px-12 flex flex-col justify-between">
+      {/* MicrobeField Background Layer */}
+      <div className="absolute inset-0 pointer-events-none z-0 contrast-110">
+        <MicrobeField
+          position="absolute"
+          densityMultiplier={3.0}
+          opacityMultiplier={1.25}
+          minVisibleCount={20}
+          exclusionZones={NUMBERS_EXCLUSION_ZONES}
+        />
+      </div>
+
+      <div className="relative z-10 w-full max-w-[1340px] mx-auto px-6 sm:px-10 lg:px-12 flex flex-col justify-between">
         
         {/* ELEGANT TOP COMPOSITION (HEADLINE REMOVED, PRESERVED COPY RE-INTEGRATED) */}
         <div className="max-w-3xl flex flex-col items-start text-left space-y-3 mb-12 lg:mb-16">
@@ -145,7 +168,7 @@ export default function BiofactorNumbersSection() {
                   }}
                 >
                   {/* Large Visually Dominant Number */}
-                  <span className="font-sans font-black tracking-tight text-3xl sm:text-4xl lg:text-5xl text-[#071a14] leading-none mb-3">
+                  <span className={`font-sans font-black tracking-tight text-[#071a14] leading-none mb-3 whitespace-nowrap ${stat.number.length > 5 ? "text-2xl sm:text-3xl lg:text-[clamp(1.85rem,2.8vw,2.75rem)]" : "text-3xl sm:text-4xl lg:text-5xl"}`}>
                     {stat.number}
                   </span>
 

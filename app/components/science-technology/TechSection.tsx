@@ -1,6 +1,35 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import MicrobeField, { ExclusionZone } from "../MicrobeField";
+
+const EXCLUSION_ZONES_BY_INDEX: Record<number, ExclusionZone[]> = {
+  // 01 — Microbial Biotechnology (Text left, Diagram right)
+  0: [
+    { xMinPct: 0.05, xMaxPct: 0.45, yMinPct: 0.18, yMaxPct: 0.82 },
+    { xMinPct: 0.55, xMaxPct: 0.95, yMinPct: 0.18, yMaxPct: 0.82 },
+  ],
+  // 02 — METABYAUM (Diagram left, Text right)
+  1: [
+    { xMinPct: 0.05, xMaxPct: 0.45, yMinPct: 0.18, yMaxPct: 0.82 },
+    { xMinPct: 0.55, xMaxPct: 0.95, yMinPct: 0.18, yMaxPct: 0.82 },
+  ],
+  // 03 — E=m² (Text left, Diagram right)
+  2: [
+    { xMinPct: 0.05, xMaxPct: 0.45, yMinPct: 0.18, yMaxPct: 0.82 },
+    { xMinPct: 0.55, xMaxPct: 0.95, yMinPct: 0.18, yMaxPct: 0.82 },
+  ],
+  // 04 — Mineral Technology (Visual left, Text right)
+  3: [
+    { xMinPct: 0.05, xMaxPct: 0.45, yMinPct: 0.18, yMaxPct: 0.82 },
+    { xMinPct: 0.55, xMaxPct: 0.95, yMinPct: 0.18, yMaxPct: 0.82 },
+  ],
+  // 05 — Delivery Technologies (Text left, Visual right)
+  4: [
+    { xMinPct: 0.05, xMaxPct: 0.45, yMinPct: 0.18, yMaxPct: 0.82 },
+    { xMinPct: 0.55, xMaxPct: 0.95, yMinPct: 0.18, yMaxPct: 0.82 },
+  ],
+};
 
 const STOPS = [
   "#EDF4ED",
@@ -188,6 +217,7 @@ export default function TechSection({
   const words = title.split(" ");
   const stopStart = STOPS[index] || STOPS[0];
   const stopEnd = STOPS[index + 1] || STOPS[1];
+  const sectionExclusion = EXCLUSION_ZONES_BY_INDEX[index] || [];
 
   return (
     <section
@@ -204,6 +234,16 @@ export default function TechSection({
         className="bg"
         style={{ "--k": index } as React.CSSProperties}
       />
+
+      <div className="absolute inset-0 pointer-events-none z-0 contrast-110 opacity-90">
+        <MicrobeField
+          position="absolute"
+          densityMultiplier={2.2}
+          opacityMultiplier={1.15}
+          minVisibleCount={12}
+          exclusionZones={sectionExclusion}
+        />
+      </div>
 
       <div className="wrap">
         <div className="txt">
@@ -271,6 +311,7 @@ export default function TechSection({
         }
 
         .bg {
+          display: none;
           position: absolute;
           inset: -120px 0;
           z-index: -2;
@@ -308,6 +349,7 @@ export default function TechSection({
           gap: 36px;
           align-items: center;
           position: relative;
+          z-index: 10;
         }
 
         @media (min-width: 1024px) {
