@@ -2,8 +2,14 @@
 
 import { useEffect, useRef } from "react";
 
+interface GutFrameWindow extends Window {
+  runBars?: () => void;
+}
+
 function fitGutFrame(frame: HTMLIFrameElement | null) {
-  const stage = frame?.contentDocument?.querySelector<HTMLElement>(".stage") || frame?.contentDocument?.querySelector<HTMLElement>("#stage");
+  const stage =
+    frame?.contentDocument?.querySelector<HTMLElement>(".stage") ||
+    frame?.contentDocument?.querySelector<HTMLElement>("#stage");
   if (!frame || !stage) return;
 
   const frameWidth = frame.contentWindow?.innerWidth ?? 0;
@@ -84,18 +90,18 @@ export default function GutHealthSection() {
         loading="eager"
         style={{ height: "760px" }}
         onLoad={(event) => {
-          fitGutFrame(event.currentTarget);
-          const sec = document.getElementById("gut-health-sec");
-          if (sec) {
-            const rect = sec.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-              const doc = event.currentTarget.contentDocument;
-              const stage = doc?.querySelector(".stage") || doc?.body;
-              if (stage) stage.classList.add("is-animated");
-              if (doc && typeof (doc.defaultView as any)?.runBars === "function") {
-                (doc.defaultView as any).runBars();
-              }
-            }
+          const frame = event.currentTarget;
+          fitGutFrame(frame);
+          const section = document.getElementById("gut-health-sec");
+          if (!section) return;
+
+          const rect = section.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            frame.contentDocument
+              ?.querySelector<HTMLElement>(".stage")
+              ?.classList.add("is-animated");
+            const frameWindow = frame.contentWindow as GutFrameWindow | null;
+            frameWindow?.runBars?.();
           }
         }}
       />

@@ -7,13 +7,8 @@ function fitFrame(frame: HTMLIFrameElement | null) {
   const doc = frame.contentDocument;
   const frameEl = doc.querySelector<HTMLElement>(".frame");
   if (!frameEl) return;
-
-  // Measure real rendered content (.frame) height, ignoring inflated body/documentElement scrollHeight
   const height = Math.ceil(frameEl.getBoundingClientRect().height || frameEl.offsetHeight);
-
-  if (height > 0) {
-    frame.style.height = `${height + 12}px`;
-  }
+  if (height > 0) frame.style.height = `${height + 12}px`;
 }
 
 export default function CultureCycleTable() {
@@ -51,21 +46,18 @@ export default function CultureCycleTable() {
     frame.addEventListener("load", attachDocObserver);
     resizeObserver.observe(frame);
     attachDocObserver();
-
     void frame.contentDocument?.fonts.ready.then(scheduleFit);
 
-    const timer1 = setTimeout(scheduleFit, 300);
-    const timer2 = setTimeout(scheduleFit, 1200);
-    const timer3 = setTimeout(scheduleFit, 2500);
+    const t1 = setTimeout(scheduleFit, 300);
+    const t2 = setTimeout(scheduleFit, 1200);
+    const t3 = setTimeout(scheduleFit, 2500);
 
     return () => {
       window.removeEventListener("resize", scheduleFit);
       frame.removeEventListener("load", attachDocObserver);
       window.cancelAnimationFrame(resizeFrame);
       window.clearTimeout(resizeTimer);
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-      clearTimeout(timer3);
+      clearTimeout(t1); clearTimeout(t2); clearTimeout(t3);
       resizeObserver.disconnect();
       frameObserver.disconnect();
     };
@@ -89,18 +81,19 @@ export default function CultureCycleTable() {
         loading="eager"
         style={{ height: "780px" }}
         onLoad={(event) => {
-          fitFrame(event.currentTarget);
-          const sec = document.getElementById("culture-cycle-sec");
-          if (sec) {
-            const rect = sec.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-              const doc = event.currentTarget.contentDocument;
-              const frameEl = doc?.querySelector(".frame");
-              const matrix = doc?.getElementById("culture-cycle-matrix");
-              if (frameEl && matrix) {
-                frameEl.classList.add("is-intro");
-                matrix.classList.add("is-animated", "sweep-active");
-              }
+          const frame = event.currentTarget;
+          fitFrame(frame);
+          const section = document.getElementById("culture-cycle-sec");
+          if (!section) return;
+
+          const rect = section.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            const doc = frame.contentDocument;
+            const frameEl = doc?.querySelector<HTMLElement>(".frame");
+            const matrix = doc?.getElementById("culture-cycle-matrix");
+            if (frameEl && matrix) {
+              frameEl.classList.add("is-intro");
+              matrix.classList.add("is-animated", "sweep-active");
             }
           }
         }}

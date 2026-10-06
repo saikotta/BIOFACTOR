@@ -52,7 +52,7 @@ export default function AquacultureClosing() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-[#0B2318]"
+      className="relative w-full overflow-hidden bg-[#12301f]"
       aria-label="Aquaculture closing section"
     >
       {/* subtle radial glow */}
@@ -83,7 +83,7 @@ export default function AquacultureClosing() {
               }}
             >
               <span
-                className="font-inter-tight font-extrabold leading-none text-[#86EFAC]"
+                className="font-inter-tight font-extrabold leading-none text-[#6fbf73]"
                 style={{ fontSize: "clamp(3rem,5.5vw,4.5rem)", letterSpacing: "-0.03em" }}
               >
                 {counts[i]}
@@ -115,14 +115,14 @@ export default function AquacultureClosing() {
             {/* eyebrow */}
             <div className="mb-6 flex items-center gap-3">
               <span
-                className="h-[1.5px] w-7 bg-[#86EFAC]"
+                className="h-[1.5px] w-7 bg-[#6fbf73]"
                 style={{
                   transformOrigin: "left center",
                   animation: visible ? "acGrow .7s cubic-bezier(.16,1,.3,1) .4s both" : "none",
                 }}
               />
               <span
-                className="font-jetbrains text-[11px] font-medium uppercase tracking-[0.2em] text-[#86EFAC]"
+                className="font-jetbrains text-[11px] font-medium uppercase tracking-[0.2em] text-[#6fbf73]"
               >
                 THE BIOFACTOR APPROACH
               </span>
@@ -134,13 +134,13 @@ export default function AquacultureClosing() {
             >
               Manage the bottom,
               <br />
-              <em className="font-newsreader font-normal not-italic text-[#86EFAC]">
+              <em className="font-newsreader font-normal not-italic text-[#6fbf73]">
                 and the water follows.
               </em>
             </h2>
 
             <p
-              className="mt-7 font-newsreader text-[17px] leading-[1.7] text-white/60"
+              className="mt-7 font-newsreader text-[17px] leading-[1.7] text-[#cfe6bd]"
               style={{ maxWidth: "52ch" }}
             >
               A healthy pond starts a few millimetres below the surface of the
@@ -154,7 +154,7 @@ export default function AquacultureClosing() {
           <div className="flex flex-shrink-0 flex-col gap-4">
             <Link
               href="/about"
-              className="inline-flex items-center gap-3 border border-[#86EFAC]/30 px-8 py-4 font-inter-tight text-[14px] font-bold uppercase tracking-[0.14em] text-[#86EFAC] transition-colors duration-200 hover:bg-[#86EFAC] hover:text-[#0B2318]"
+              className="inline-flex items-center gap-3 border border-[#6fbf73]/40 px-8 py-4 font-inter-tight text-[14px] font-bold uppercase tracking-[0.14em] text-[#6fbf73] transition-colors duration-200 hover:bg-[#6fbf73] hover:text-[#12301f]"
             >
               About Biofactor
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">

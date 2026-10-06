@@ -15,19 +15,27 @@ export default function MineralsSection() {
 
     const observer = new IntersectionObserver(
       (entries, obs) => {
-        if (entries[0].isIntersecting) {
-          setFired(true);
-          obs.unobserve(el);
-        }
+        if (entries[0].isIntersecting) { setFired(true); obs.unobserve(el); }
       },
       { threshold: [0, 0.1] }
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
+
   return (
-    <section className="relative w-full px-6 py-20 md:px-12 lg:px-20 xl:px-32" data-n="Minerals" data-motion style={{ background: "linear-gradient(180deg, #E5F0D4 0%, #DDE9C8 50%, #D1E4B9 100%)" }}>
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-stretch gap-6 sm:grid-cols-12 lg:gap-10">
+    <section
+      className="relative w-full py-20"
+      data-n="Minerals"
+      data-motion
+      style={{
+        background: "linear-gradient(180deg, #E5F0D4 0%, #DDE9C8 50%, #D1E4B9 100%)",
+        paddingInline: "clamp(20px, 5vw, 72px)",
+      }}
+    >
+      <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 items-stretch gap-6 sm:grid-cols-12 lg:gap-10">
+
+        {/* Left — text + mineral list */}
         <div className="sm:col-span-6 rv">
           <h2 className="mb-8 font-inter-tight text-[clamp(36px,5vw,56px)] font-extrabold leading-[1.05] text-[#111111]">
             Minerals shrimp can actually use.
@@ -84,6 +92,7 @@ export default function MineralsSection() {
           </div>
         </div>
 
+        {/* Right — image */}
         <div className="flex flex-col gap-6 sm:col-span-6 sm:justify-between">
           <div className="ph rv d2 relative mt-0 aspect-[4/3] w-full overflow-hidden sm:mt-20 sm:aspect-square">
             <Image
@@ -97,7 +106,12 @@ export default function MineralsSection() {
         </div>
       </div>
 
-      <div className="rv d2 mx-auto mt-10 w-full max-w-[100%] rounded-[16px] border border-[#CFE3BB] bg-[#FFFFFF] p-3 sm:p-4 lg:p-5" ref={chartRef} style={{ borderTop: "3px solid #4CAF3F" }}>
+      {/* Survival chart */}
+      <div
+        className="rv d2 mx-auto mt-10 w-full max-w-[100%] rounded-[16px] border border-[#CFE3BB] bg-[#FFFFFF] p-3 sm:p-4 lg:p-5"
+        ref={chartRef}
+        style={{ borderTop: "3px solid #4CAF3F" }}
+      >
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="mb-1.5 font-jetbrains text-[10px] font-medium uppercase tracking-[0.18em] text-[#5A7A5E]">
@@ -107,7 +121,7 @@ export default function MineralsSection() {
               Why minerals matter
             </h3>
           </div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#C7DCCN] bg-white/70 px-2.5 py-1">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#c8ddb0] bg-white/70 px-2.5 py-1">
             <span className="h-2 w-2 rounded-full bg-[#5FBF86]" />
             <p className="font-jetbrains text-[9px] uppercase tracking-[0.14em] text-[#4b6b57]">Survival rate</p>
           </div>
@@ -115,47 +129,28 @@ export default function MineralsSection() {
 
         <div className="space-y-3">
           {[
-            {
-              label: "Without minerals",
-              value: 45,
-              tone: "amber",
-              color: "#B8893A",
-              chip: "text-[#8F6828] bg-[#F9F1E5] border-[#E9D9BA]",
-            },
-            {
-              label: "With minerals",
-              value: 92,
-              tone: "green",
-              color: "#1F8A57",
-              chip: "text-[#0D4F31] bg-[#EAF7EF] border-[#C8E6D0]",
-            },
+            { label: "Without minerals", value: 45, tone: "amber", chip: "text-[#8F6828] bg-[#F9F1E5] border-[#E9D9BA]" },
+            { label: "With minerals",    value: 92, tone: "green", chip: "text-[#0D4F31] bg-[#EAF7EF] border-[#C8E6D0]" },
           ].map((item) => (
             <div key={item.label} className="grid gap-2.5 md:grid-cols-[150px_minmax(0,1fr)_76px] md:items-center md:gap-4">
               <p className="font-newsreader text-[14px] text-[#2B2B2B]">{item.label}</p>
-
               <div className="relative w-full">
-                <div className="absolute inset-0 grid grid-cols-5 gap-2 opacity-60">
-                  {[0, 1, 2, 3, 4].map((g) => (
-                    <span key={g} className="h-full border-l border-[#D5E2D7]" />
-                  ))}
-                </div>
-
                 <div className="relative h-8 overflow-hidden rounded-full border border-[#CFE2D1] bg-[#E8F0E9] shadow-inner">
                   <div
-                    className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-[#9FCF7B] via-[#5FBF86] to-[#1F8A57] transition-all duration-1000 ease-out"
+                    className="absolute inset-y-0 left-0 rounded-full transition-all duration-1000 ease-out"
                     style={{
                       width: fired ? `${item.value}%` : "0%",
-                      background: item.tone === "amber" ? "linear-gradient(90deg, #D7A55D 0%, #C48D3A 100%)" : "linear-gradient(90deg, #7BCB9A 0%, #5FBF86 45%, #1F8A57 100%)",
+                      background: item.tone === "amber"
+                        ? "linear-gradient(90deg, #D7A55D 0%, #C48D3A 100%)"
+                        : "linear-gradient(90deg, #7BCB9A 0%, #5FBF86 45%, #1F8A57 100%)",
                     }}
                   />
                 </div>
               </div>
-
               <div className="flex justify-end">
                 <span
                   className={`inline-flex min-w-[52px] items-center justify-center rounded-full border px-2 py-0.5 font-inter-tight text-[13px] font-bold ${item.chip}`}
                   data-cu={`${item.value}%`}
-                  style={{ opacity: 1 }}
                 >
                   {item.value}%
                 </span>
