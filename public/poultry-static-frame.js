@@ -44,6 +44,9 @@
       transform: none !important;
       filter: none !important;
     }
+    html[data-poultry-static] :is(.capsule, .ambient-blob, .microbe-rod, .mineral-orbit) {
+      display: none !important;
+    }
     html[data-poultry-static] .headline-line {
       opacity: 1 !important;
       transform: none !important;

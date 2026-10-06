@@ -28,6 +28,13 @@
   filter: none !important;
 }
 
+.page :global(.br-rv),
+.page :global(.br-quote),
+.page :global(.br-ln > span) {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 .page :global([data-pm-section="threebirds"]),
 .page :global([data-pm-section="layers"]),
 .page :global([data-pm-section="broilers"]),
