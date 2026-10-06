@@ -6,9 +6,13 @@ const TOTAL_FRAMES = 240;
 
 interface BiofactorScrollHeroProps {
   children: React.ReactNode;
+  posterSrc?: string;
 }
 
-export default function BiofactorScrollHero({ children }: BiofactorScrollHeroProps) {
+export default function BiofactorScrollHero({
+  children,
+  posterSrc = "/images/nutriants/nutriants-hero.jpg",
+}: BiofactorScrollHeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
@@ -89,7 +93,7 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
       ctx.clearRect(0, 0, width, height);
 
       // Deep dark base fill
-      ctx.fillStyle = "#000000";
+      ctx.fillStyle = "#0A1A10";
       ctx.fillRect(0, 0, width, height);
 
       // Draw image object-fit: cover scaling
@@ -137,14 +141,11 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
         drawFirstFrame();
       } else {
         firstImg.onload = () => {
-          if ("decode" in firstImg) {
-            firstImg.decode().then(drawFirstFrame).catch(drawFirstFrame);
-          } else {
-            drawFirstFrame();
-          }
+          drawFirstFrame();
         };
       }
     }
+    requestAnimationFrame(drawFirstFrame);
 
     // Calculate section-relative scroll progress (0..1) -> targetFrame (0..239)
     const handleScroll = () => {
@@ -216,30 +217,29 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
   }, []);
 
   return (
-    <div ref={containerRef} className="relative w-full h-[500vh] bg-black">
+    <div ref={containerRef} className="relative w-full h-[500vh] bg-[#0A1A10]">
       {/* Sticky Full-Screen Canvas Background (offset below fixed navbar so top leaves never enter header) */}
-      <div className="sticky top-[64px] md:top-[72px] h-[calc(100vh-64px)] md:h-[calc(100vh-72px)] w-full overflow-hidden z-0 bg-black">
+      <div className="sticky top-[64px] md:top-[72px] h-[calc(100vh-64px)] md:h-[calc(100vh-72px)] w-full overflow-hidden z-0 bg-[#0A1A10]">
+        {posterSrc && (
+          <img
+            src={posterSrc}
+            alt="Hero Background"
+            className="absolute inset-0 w-full h-full object-cover object-center z-0 opacity-90"
+          />
+        )}
         <canvas
           ref={canvasRef}
-          className="absolute inset-0 w-full h-full block"
+          className="absolute inset-0 w-full h-full block z-10"
         />
 
-        {/* Cinematic Atmospheric Left Dark Gradient */}
-        <div
-          className="absolute inset-0 pointer-events-none z-10"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.02) 10%, rgba(0,0,0,0.35) 24%, rgba(0,0,0,0.85) 36%, rgba(0,0,0,0.85) 100%)",
-            maskImage:
-              "linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.75) 20%, rgba(0,0,0,0.35) 36%, rgba(0,0,0,0.08) 45%, rgba(0,0,0,0) 50%)",
-            WebkitMaskImage:
-              "linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.75) 20%, rgba(0,0,0,0.35) 36%, rgba(0,0,0,0.08) 45%, rgba(0,0,0,0) 50%)",
-          }}
-        />
+        {/* Multi-stage Shadow and Gradient Overlay */}
+        <div className="absolute inset-0 z-20 bg-gradient-to-t from-[#0A1A10] via-[#0A1A10]/30 to-transparent opacity-90 pointer-events-none" />
+        <div className="absolute inset-0 z-20 bg-gradient-to-r from-[#0A1A10]/80 via-[#0A1A10]/30 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 z-20 shadow-[inset_0_0_120px_rgba(0,0,0,0.85)] pointer-events-none" />
       </div>
 
       {/* Sticky Hero Overlay */}
-      <div className="sticky top-[64px] md:top-[72px] -mt-[calc(100vh-64px)] md:-mt-[calc(100vh-72px)] h-[calc(100vh-64px)] md:h-[calc(100vh-72px)] w-full z-20 pointer-events-none flex flex-col justify-between">
+      <div className="sticky top-[64px] md:top-[72px] -mt-[calc(100vh-64px)] md:-mt-[calc(100vh-72px)] h-[calc(100vh-64px)] md:h-[calc(100vh-72px)] w-full z-30 pointer-events-none flex flex-col justify-between">
         <div className="w-full h-full pointer-events-auto flex flex-col justify-between">
           {children}
         </div>
