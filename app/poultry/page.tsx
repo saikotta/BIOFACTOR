@@ -1,5 +1,6 @@
 import React from "react";
 import { Bricolage_Grotesque, Inter_Tight, Newsreader, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import PoultryScrollMotion from "../components/poultry/PoultryScrollMotion";
 import PoultryHero from "../components/poultry/PoultryHero";
 import PoultryDataStrip from "../components/poultry/PoultryDataStrip";
 import PoultryGutFrontline from "../components/poultry/PoultryGutFrontline";
@@ -54,6 +55,9 @@ export default function PoultryPage() {
       data-poultry-page
       className={`${styles.page} ${interTight.variable} ${bricolage.variable} ${spaceGrotesk.variable} ${newsreader.variable} ${jetbrainsMono.variable} w-full selection:bg-[#b8e986] selection:text-black overflow-x-hidden`}
     >
+      {/* Scroll animation & interaction engine */}
+      <PoultryScrollMotion />
+
       {/* FRAME 1: APPROVED HERO - Dark background */}
       <PoultryHero />
 
