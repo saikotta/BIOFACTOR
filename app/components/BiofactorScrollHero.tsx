@@ -222,10 +222,9 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
           className="absolute inset-0 w-full h-full block z-10"
         />
 
-        {/* Multi-stage Shadow and Gradient Overlay */}
-        <div className="absolute inset-0 z-20 bg-gradient-to-t from-[#0A1A10] via-[#0A1A10]/30 to-transparent opacity-90 pointer-events-none" />
-        <div className="absolute inset-0 z-20 bg-gradient-to-r from-[#0A1A10]/80 via-[#0A1A10]/30 to-transparent pointer-events-none" />
-        <div className="absolute inset-0 z-20 shadow-[inset_0_0_120px_rgba(0,0,0,0.85)] pointer-events-none" />
+        {/* Soft, Light Atmospheric Gradient Overlay */}
+        <div className="absolute inset-0 z-20 bg-gradient-to-t from-[#0A1A10]/45 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 z-20 bg-gradient-to-r from-[#0A1A10]/30 via-transparent to-transparent pointer-events-none" />
       </div>
 
       {/* Sticky Hero Overlay */}
