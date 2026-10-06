@@ -37,7 +37,7 @@ export default function PoultryProductionCycle() {
       <iframe
         ref={frameRef}
         className="block w-full border-0"
-        src="/poultry-production-stages.html?v=1&poultryStatic=1"
+        src="/poultry-production-stages.html?v=1"
         title="Poultry biology across life stages"
         loading="eager"
         style={{ height: "1600px" }}

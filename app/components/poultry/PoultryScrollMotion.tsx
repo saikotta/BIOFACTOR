@@ -299,26 +299,52 @@ export default function PoultryScrollMotion() {
         }, { threshold: 0.6 }).observe(el);
       });
 
-      // br-rv & rv Scroll Reveal generic bidirectional integration
+      // br-rv Scroll Reveal generic integration
       const rvObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          const target = entry.target as HTMLElement;
-
-          if (entry.isIntersecting) {
-            target.classList.add("br-in", "in", "visible");
-          } else if (entry.intersectionRatio < 0.05) {
-            target.classList.remove("br-in", "in", "visible");
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("br-in");
+            rvObserver.unobserve(e.target);
           }
         });
-      }, { threshold: [0, 0.1], rootMargin: "30px 0px 30px 0px" });
+      }, { threshold: 0.18 });
 
-      page.querySelectorAll(".br-rv, .rv, .br-callout, .call, .br-ln, .ln, .br-quote, .quote, .br-ph, .ph, .br-mx-wrap, .mx").forEach((el) => {
-        rvObserver.observe(el);
+      page.querySelectorAll(".br-rv, .br-callout, .br-ln, .br-quote").forEach((el) => {
+        if (!el.classList.contains("br-in") && !el.hasAttribute("data-obs")) {
+          el.setAttribute("data-obs", "1");
+          const topOffset = el.getBoundingClientRect().top;
+          if (topOffset < window.innerHeight - (reduced ? 0 : 50)) {
+            setTimeout(() => el.classList.add("br-in"), 150);
+          } else {
+            rvObserver.observe(el);
+          }
+        }
       });
 
       /* ═══════════════════════════════════════════════════════════
-         FOOTER  (Standard solid dark footer)
+         FOOTER  spotlight
       ═══════════════════════════════════════════════════════════ */
+      const footerEl = page.querySelector<HTMLElement>('[data-pm-section="footer"]');
+      let footerSpotlight: HTMLElement | null = null;
+      if (footerEl) {
+        footerSpotlight = document.createElement("div");
+        footerSpotlight.style.cssText = `
+          position:absolute;
+          top:-200px;left:50%;
+          transform:translateX(-50%) scale(.1);
+          width:1000px;height:400px;
+          background:radial-gradient(ellipse at center, rgba(140,198,63,.55) 0%, transparent 70%);
+          pointer-events:none;
+          z-index:0;
+          will-change:transform;
+          opacity:0;
+        `;
+        footerEl.style.position = "relative";
+        footerEl.style.overflow = "hidden";
+        const firstChild = footerEl.firstElementChild as HTMLElement;
+        if (firstChild) firstChild.style.position = "relative";
+        footerEl.insertBefore(footerSpotlight, footerEl.firstChild);
+      }
 
       /* ═══════════════════════════════════════════════════════════
          FLOATING SPHERES  –  light-green sections
@@ -383,6 +409,9 @@ export default function PoultryScrollMotion() {
       // progress bars
       const barCur: number[]   = bars.map(() => (reduced ? 1 : 0));
 
+      // footer spotlight
+      let footerCur: number = reduced ? 1 : 0;
+
       /* ═══════════════════════════════════════════════════════════
          REDUCED-MOTION: force everything visible immediately
       ═══════════════════════════════════════════════════════════ */
@@ -396,6 +425,10 @@ export default function PoultryScrollMotion() {
         bars.forEach(b => {
           b.style.width = `${(b._pmBarTarget ?? 1) * 100}%`;
         });
+        if (footerSpotlight) {
+          footerSpotlight.style.transform = "translateX(-50%) scale(1)";
+          footerSpotlight.style.opacity = "1";
+        }
         return;
       }
 
@@ -627,6 +660,19 @@ export default function PoultryScrollMotion() {
           const ty = offset * speed * 1000;
           el.style.transform = `translateY(${ty}px)`;
         });
+
+        /* ─────────────────────────────────────────────────────────
+           FOOTER spotlight
+           START 1, LENGTH .8
+        ───────────────────────────────────────────────────────── */
+        if (footerSpotlight && footerEl) {
+          const p   = progress(footerEl, vh, 1, 0.8);
+          const e   = eo(cl(p * 1));
+          footerCur = smooth(footerCur, e);
+          const c   = footerCur;
+          footerSpotlight.style.transform = `translateX(-50%) scale(${0.1 + c * 0.9})`;
+          footerSpotlight.style.opacity   = String(cl(p));
+        }
       }
 
       rafId = requestAnimationFrame(tick);

@@ -1,6 +1,5 @@
 import React from "react";
-import { Bricolage_Grotesque, Inter_Tight, Newsreader, JetBrains_Mono, Space_Grotesk } from "next/font/google";
-import PoultryScrollMotion from "../components/poultry/PoultryScrollMotion";
+import { Bricolage_Grotesque, Newsreader, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import PoultryHero from "../components/poultry/PoultryHero";
 import PoultryDataStrip from "../components/poultry/PoultryDataStrip";
 import PoultryGutFrontline from "../components/poultry/PoultryGutFrontline";
@@ -11,20 +10,13 @@ import PoultryGutRestoration from "../components/poultry/PoultryGutRestoration";
 import PoultryMineralBioavailability from "../components/poultry/PoultryMineralBioavailability";
 import PoultryProductionCycle from "../components/poultry/PoultryProductionCycle";
 import PoultryClosing from "../components/poultry/PoultryClosing";
-import ProductFooter from "../components/ProductFooter";
-import styles from "./PoultryPage.module.css";
+import PoultryFooter from "../components/poultry/PoultryFooter";
+import PoultryScrollMotion from "../components/poultry/PoultryScrollMotion";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
   weight: "800",
   variable: "--font-bricolage",
-  display: "swap",
-});
-
-const interTight = Inter_Tight({
-  subsets: ["latin"],
-  weight: ["700", "800"],
-  variable: "--font-inter-tight",
   display: "swap",
 });
 
@@ -53,11 +45,8 @@ export default function PoultryPage() {
   return (
     <main
       data-poultry-page
-      className={`${styles.page} ${interTight.variable} ${bricolage.variable} ${spaceGrotesk.variable} ${newsreader.variable} ${jetbrainsMono.variable} w-full selection:bg-[#b8e986] selection:text-black overflow-x-hidden`}
+      className={`${bricolage.variable} ${spaceGrotesk.variable} ${newsreader.variable} ${jetbrainsMono.variable} w-full selection:bg-[#b8e986] selection:text-black overflow-x-hidden bg-[#EAF3EA]`}
     >
-      {/* Scroll animation & interaction engine */}
-      <PoultryScrollMotion />
-
       {/* FRAME 1: APPROVED HERO - Dark background */}
       <PoultryHero />
 
@@ -89,7 +78,10 @@ export default function PoultryPage() {
       <PoultryClosing />
 
       {/* FOOTER */}
-      <ProductFooter />
+      <PoultryFooter />
+
+      {/* SCROLL MOTION SYSTEM — client-only, renders null to DOM */}
+      <PoultryScrollMotion />
     </main>
   );
 }
