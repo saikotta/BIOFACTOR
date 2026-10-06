@@ -1,9 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-// Reuse the identical CSS module from Bioremediation to keep things perfectly synced without creating new files
-import styles from "../bioremediation/BioremidationHero.module.css";
+import React, { useEffect } from "react";
+import BiofactorScrollHero from "../BiofactorScrollHero";
 
 export default function NutrientsHero() {
   useEffect(() => {
@@ -106,42 +104,32 @@ export default function NutrientsHero() {
         className="fixed top-0 left-0 right-0 h-[3px] bg-[#B8E986] origin-left scale-x-0 z-[60]"
       />
 
-      <section className={styles.heroSection} id="s1">
-        {/* Background Image Container */}
-        <div className={styles.bgWrapper}>
-          <img
-            src="/images/nutriants/nutriants-hero.jpg"
-            alt="Soil Microbiology and Plant Nutrition"
-            className={styles.bgImage}
-          />
-        </div>
-
-
-
-        {/* Restrained Readability Overlay */}
-        <div className={styles.overlay} aria-hidden="true" />
-
-        <div className={styles.container}>
-          <div className={styles.contentBlock}>
+      <BiofactorScrollHero>
+        <div className="relative w-full h-full flex flex-col justify-end pb-12 lg:pb-16 px-6 sm:px-12 md:px-16 lg:px-20 max-w-[1700px] mx-auto z-20">
+          <div className="w-full max-w-3xl">
             {/* Eyebrow Label */}
-            <div className={styles.eyebrowWrapper}>
-              <span className={styles.eyebrowLine} aria-hidden="true" style={{ background: '#B8E986' }} />
-              <span className={styles.eyebrowText} style={{ color: '#B8E986' }}>PLANT NUTRITION · BIOLOGICAL MOBILISATION</span>
+            <div className="flex items-center gap-2.5 mb-4">
+              <span className="w-6 h-[1.5px] bg-[#B8E986] opacity-85" aria-hidden="true" />
+              <span className="font-mono text-[13px] font-medium tracking-[0.14em] uppercase text-[#B8E986]">
+                PLANT NUTRITION · BIOLOGICAL MOBILISATION
+              </span>
             </div>
 
             {/* Main Display Headline */}
-            <h1 className={styles.headline}>
-              <span className="br-ln"><span>BIOLOGY THAT</span></span>
-              <span className="br-ln br-d1"><span><span className="text-[#B8E986]">MOVES</span> NUTRIENTS</span></span>
+            <h1 className="font-sans font-extrabold uppercase text-white tracking-tight leading-[0.9] text-[clamp(2.35rem,6.12vw,5.5rem)] lg:text-[88px] mb-5 max-w-[700px] drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
+              <span className="br-ln block">BIOLOGY THAT</span>
+              <span className="br-ln br-d1 block">
+                <span className="text-[#B8E986]">MOVES</span> NUTRIENTS
+              </span>
             </h1>
 
             {/* Subtitle Copy */}
-            <p className={`${styles.subtitle} br-quote br-in`} style={{ color: '#EAF3EA' }}>
+            <p className="font-serif italic font-normal text-white/95 leading-relaxed tracking-tight text-[clamp(1.1rem,1.8vw,1.35rem)] max-w-[580px] drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
               Converting unavailable soil reserves into active plant nutrition through living microbial pathways.
             </p>
           </div>
         </div>
-      </section>
+      </BiofactorScrollHero>
     </>
   );
 }
