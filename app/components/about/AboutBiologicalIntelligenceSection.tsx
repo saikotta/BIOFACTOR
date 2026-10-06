@@ -78,7 +78,7 @@ export default function AboutBiologicalIntelligenceSection() {
         <div className="relative z-10 w-full max-w-[1700px] mx-auto px-6 sm:px-12 md:px-16 lg:px-20 xl:px-24 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
           
           {/* LEFT COLUMN: Editorial Text & Prominent Main Statement */}
-          <div className="w-full lg:w-[50%] xl:w-[48%] max-w-2xl flex flex-col items-start justify-center">
+          <div className="relative w-full lg:w-[50%] xl:w-[48%] max-w-2xl flex flex-col items-start justify-center md:-left-0.5 lg:-left-4">
             
             {/* STAGE 2: Introductory Paragraphs */}
             <div className="max-w-[600px] flex flex-col gap-4 sm:gap-5">
@@ -178,7 +178,6 @@ export default function AboutBiologicalIntelligenceSection() {
     </section>
   );
 }
-
 
 
 

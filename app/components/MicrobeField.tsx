@@ -51,15 +51,24 @@ const HUES = [
   "rgb(112, 172, 140)", // Softened Bio Green
 ];
 
+export type ExclusionZone = {
+  xMinPct: number;
+  xMaxPct: number;
+  yMinPct: number;
+  yMaxPct: number;
+};
+
 interface MicrobeFieldProps {
   densityMultiplier?: number;
   motionMultiplier?: number;
   opacityMultiplier?: number;
   rotationMultiplier?: number;
   position?: "fixed" | "absolute";
+  exclusionZones?: ExclusionZone[];
+  minVisibleCount?: number;
 }
 
-const M = 80; // wrap margin in px
+const M = 45; // wrap margin in px
 
 export default function MicrobeField({
   densityMultiplier = 1.0,
@@ -67,6 +76,8 @@ export default function MicrobeField({
   opacityMultiplier = 1.0,
   rotationMultiplier = 1.0,
   position = "fixed",
+  exclusionZones = [],
+  minVisibleCount,
 }: MicrobeFieldProps = {}) {
   const ref = useRef<HTMLCanvasElement>(null);
 
@@ -95,15 +106,9 @@ export default function MicrobeField({
       const currentY = window.scrollY;
       const dy = currentY - lastY;
       lastY = currentY;
-      // Accumulate scroll impulse into smooth velocity buffer
-      scrollVelocity += dy * 0.45;
-
-      // Pause animation during scroll
-      isScrolling = true;
-      if (scrollTimeout) clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        isScrolling = false;
-      }, 150);
+      // Smoothly accumulate bounded scroll impulse into velocity buffer
+      const impulse = Math.max(-30, Math.min(30, dy * 0.25));
+      scrollVelocity = Math.max(-40, Math.min(40, scrollVelocity + impulse));
     };
 
     function sprite(kind: Kind, len: number, rad: number, hue: string) {
@@ -161,12 +166,72 @@ export default function MicrobeField({
       return { c, w, h };
     }
 
-    const wrap = (v: number, size: number) => ((((v + M) % (size + 2 * M)) + size + 2 * M) % (size + 2 * M)) - M;
+    const wrap = (v: number, size: number) => {
+      const span = size + 2 * M;
+      return ((((v + M) % span) + span) % span) - M;
+    };
 
     const smoothstep = (min: number, max: number, val: number) => {
       const x = Math.max(0, Math.min(1, (val - min) / (max - min)));
       return x * x * (3 - 2 * x);
     };
+
+    function getSafePerimeterPosition(
+      candX: number,
+      candY: number,
+      z: number
+    ): { x: number; y: number } {
+      if (!exclusionZones || exclusionZones.length === 0 || z < 0.25) {
+        return { x: candX, y: candY };
+      }
+
+      for (const zone of exclusionZones) {
+        const xMin = zone.xMinPct * W;
+        const xMax = zone.xMaxPct * W;
+        const yMin = zone.yMinPct * H;
+        const yMax = zone.yMaxPct * H;
+
+        if (candX >= xMin && candX <= xMax && candY >= yMin && candY <= yMax) {
+          // Calculate all available safe perimeter regions around the zone
+          const regions: Array<{ x: number; y: number }> = [];
+
+          // Region 0: Above zone
+          if (yMin > 40) {
+            regions.push({
+              x: Math.random() * W,
+              y: 15 + Math.random() * Math.max(yMin - 30, 20),
+            });
+          }
+          // Region 1: Below zone
+          if (H - yMax > 40) {
+            regions.push({
+              x: Math.random() * W,
+              y: yMax + 15 + Math.random() * Math.max(H - yMax - 30, 20),
+            });
+          }
+          // Region 2: Right of zone
+          if (W - xMax > 40) {
+            regions.push({
+              x: xMax + 15 + Math.random() * Math.max(W - xMax - 30, 20),
+              y: Math.random() * H,
+            });
+          }
+          // Region 3: Left of zone
+          if (xMin > 40) {
+            regions.push({
+              x: 15 + Math.random() * Math.max(xMin - 30, 20),
+              y: Math.random() * H,
+            });
+          }
+
+          if (regions.length > 0) {
+            return regions[(Math.random() * regions.length) | 0];
+          }
+        }
+      }
+
+      return { x: candX, y: candY };
+    }
 
     function build() {
       // Configurable count formula: clamp min/max scaled by densityMultiplier
@@ -187,7 +252,15 @@ export default function MicrobeField({
       for (let i = 0; i < n; i++) {
         const col = i % cols;
         const row = Math.floor(i / cols);
-        const z = Math.random();
+        
+        // Stratified depth assignment: 25% Large foreground, 45% Midground, 30% Small background
+        const depthR = Math.random();
+        const z = depthR < 0.25
+          ? 0.75 + Math.random() * 0.25
+          : depthR < 0.70
+          ? 0.35 + Math.random() * 0.40
+          : 0.05 + Math.random() * 0.30;
+
         const r = Math.random();
         const kind: Kind = r < 0.62 ? "rod" : r < 0.88 ? "coccus" : "spiral";
 
@@ -198,9 +271,30 @@ export default function MicrobeField({
         const len = (kind === "rod" ? baseRaw * (3.2 + Math.random() * 2) : kind === "spiral" ? baseRaw * 6 : baseRaw * 2) * m;
         const s = sprite(kind, len, base, HUES[(Math.random() * HUES.length) | 0]);
 
-        // Jitter within grid square (0.15 to 0.85 offset)
-        const x = (col + 0.15 + Math.random() * 0.70) * cellW;
-        const y = (row + 0.15 + Math.random() * 0.70) * cellH;
+        // Jitter within grid square with multi-region safe placement & minimum spatial separation (58px minimum spacing)
+        let candX = (col + 0.10 + Math.random() * 0.80) * cellW;
+        let candY = (row + 0.10 + Math.random() * 0.80) * cellH;
+        let safePos = getSafePerimeterPosition(candX, candY, z);
+
+        for (let attempt = 0; attempt < 10; attempt++) {
+          let tooClose = false;
+          const minDist = 58; // 58px center-to-center minimum spacing
+          for (const other of cells) {
+            const dx = safePos.x - other.x;
+            const dy = safePos.y - other.y;
+            if (dx * dx + dy * dy < minDist * minDist) {
+              tooClose = true;
+              break;
+            }
+          }
+          if (!tooClose) break;
+          candX = (col + Math.random()) * cellW;
+          candY = (row + Math.random()) * cellH;
+          safePos = getSafePerimeterPosition(candX, candY, z);
+        }
+
+        const x = safePos.x;
+        const y = safePos.y;
 
         // Varied organic 360-degree direction and time-based velocity
         const dirAngle = Math.random() * Math.PI * 2;
@@ -226,6 +320,10 @@ export default function MicrobeField({
 
     // Nearest section resolver for microscope magnification (zoomT) and quorum links (linkT)
     function getNearestSectionState(): { sectionId: string; zoomT: number; linkT: number } {
+      if (position === "absolute") {
+        return { sectionId: "Section", zoomT: 1.00, linkT: 0.00 };
+      }
+
       const mid = (window.innerHeight || 800) * 0.5;
 
       const heroElem = document.querySelector("main > div");
@@ -259,6 +357,151 @@ export default function MicrobeField({
       return bestState;
     }
 
+    function applyExclusionSteering(cell: Cell, width: number, height: number, deltaTime: number) {
+      if (!exclusionZones || exclusionZones.length === 0 || cell.z < 0.25) return;
+
+      for (const zone of exclusionZones) {
+        const xMin = zone.xMinPct * width;
+        const xMax = zone.xMaxPct * width;
+        const yMin = zone.yMinPct * height;
+        const yMax = zone.yMaxPct * height;
+        const zoneCx = (xMin + xMax) / 2;
+        const zoneCy = (yMin + yMax) / 2;
+        const halfW = (xMax - xMin) / 2 + 25;
+        const halfH = (yMax - yMin) / 2 + 25;
+
+        const dx = cell.x - zoneCx;
+        const dy = cell.y - zoneCy;
+        const absDx = Math.abs(dx);
+        const absDy = Math.abs(dy);
+
+        if (absDx < halfW && absDy < halfH) {
+          const dist = Math.hypot(dx, dy) || 1;
+          const nx = dx / dist;
+          const ny = dy / dist;
+
+          // Tiny local deflection force (15 * dt) to gently curve trajectory around text without acceleration spikes
+          const steerForce = 15 * deltaTime;
+          cell.vx += nx * steerForce;
+          cell.vy += ny * steerForce;
+
+          // Soft boundary nudge out if deeply inside text box
+          if (absDx < halfW - 10 && absDy < halfH - 10) {
+            if (halfW - absDx < halfH - absDy) {
+              cell.x = dx > 0 ? xMax + 10 : xMin - 10;
+            } else {
+              cell.y = dy > 0 ? yMax + 10 : yMin - 10;
+            }
+          }
+        }
+      }
+    }
+
+    let lastCoverageCheck = 0;
+
+    function checkSpatialCoverage(time: number, width: number, height: number) {
+      if (reduce || cells.length === 0 || time - lastCoverageCheck < 800) return;
+      lastCoverageCheck = time;
+
+      const cols = 4;
+      const rows = 3;
+      const cellW = width / cols;
+      const cellH = height / rows;
+
+      // Count visible cells per quadrant
+      const counts = new Int32Array(12);
+      for (let i = 0; i < cells.length; i++) {
+        const cItem = cells[i];
+        if (cItem.x >= 10 && cItem.x <= width - 10 && cItem.y >= 10 && cItem.y <= height - 10) {
+          const col = Math.min(cols - 1, Math.max(0, (cItem.x / cellW) | 0));
+          const row = Math.min(rows - 1, Math.max(0, (cItem.y / cellH) | 0));
+          counts[row * cols + col]++;
+        }
+      }
+
+      // Identify open quadrants (not inside foreground exclusion zones)
+      const openQuadrants: number[] = [];
+      for (let r = 0; r < rows; r++) {
+        for (let cIdx = 0; cIdx < cols; cIdx++) {
+          const idx = r * cols + cIdx;
+          const qCx = (cIdx + 0.5) * cellW;
+          const qCy = (r + 0.5) * cellH;
+
+          let isInsideZone = false;
+          if (exclusionZones && exclusionZones.length > 0) {
+            for (const zone of exclusionZones) {
+              if (
+                qCx >= zone.xMinPct * width &&
+                qCx <= zone.xMaxPct * width &&
+                qCy >= zone.yMinPct * height &&
+                qCy <= zone.yMaxPct * height
+              ) {
+                isInsideZone = true;
+                break;
+              }
+            }
+          }
+          if (!isInsideZone) {
+            openQuadrants.push(idx);
+          }
+        }
+      }
+
+      if (openQuadrants.length === 0) return;
+
+      const emptyQuadrants = openQuadrants.filter((qIdx) => counts[qIdx] === 0);
+
+      if (emptyQuadrants.length > 0) {
+        // ONLY select cells that are strictly OFFSCREEN (never touch or pathfind visible cells!)
+        let offscreenIdx = -1;
+        let maxOffDist = -1;
+
+        for (let i = 0; i < cells.length; i++) {
+          const cItem = cells[i];
+          const isOff = cItem.x < -15 || cItem.x > width + 15 || cItem.y < -15 || cItem.y > height + 15;
+          if (isOff) {
+            const dx = cItem.x < 0 ? -cItem.x : cItem.x > width ? cItem.x - width : 0;
+            const dy = cItem.y < 0 ? -cItem.y : cItem.y > height ? cItem.y - height : 0;
+            const dist = dx * dx + dy * dy;
+            if (dist > maxOffDist) {
+              maxOffDist = dist;
+              offscreenIdx = i;
+            }
+          }
+        }
+
+        if (offscreenIdx >= 0) {
+          const targetQ = emptyQuadrants[(Math.random() * emptyQuadrants.length) | 0];
+          const targetRow = (targetQ / cols) | 0;
+          const targetCol = targetQ % cols;
+          const targetCx = (targetCol + 0.5) * cellW;
+          const targetCy = (targetRow + 0.5) * cellH;
+
+          const cToMove = cells[offscreenIdx];
+          let spawnX = targetCx;
+          let spawnY = targetCy;
+
+          if (targetCol === 0) spawnX = -35;
+          else if (targetCol === cols - 1) spawnX = width + 35;
+          else if (targetRow === 0) spawnY = -35;
+          else if (targetRow === rows - 1) spawnY = height + 35;
+          else {
+            spawnX = Math.random() < 0.5 ? -35 : width + 35;
+          }
+
+          cToMove.x = spawnX;
+          cToMove.y = spawnY;
+
+          // Shallow diagonal inward angle (avoid pure horizontal or vertical vectors)
+          const baseInwardAngle = Math.atan2(targetCy - spawnY, targetCx - spawnX);
+          const inwardAngle = baseInwardAngle + (Math.random() - 0.5) * 0.8;
+          const speed = (10 + Math.random() * 12) * motionMultiplier * (0.5 + cToMove.z * 0.5); // 10-22 px/sec (~0.2 px/frame)
+          cToMove.vx = Math.cos(inwardAngle) * speed;
+          cToMove.vy = Math.sin(inwardAngle) * speed;
+        }
+      }
+    }
+
     function draw(now: number) {
       if (!ctx) return;
       const dt = Math.min((now - lastTime) / 1000, 0.05);
@@ -266,15 +509,9 @@ export default function MicrobeField({
 
       ctx.clearRect(0, 0, W, H);
 
-      // Skip animation during scroll for performance
-      if (isScrolling) {
-        ctx.globalAlpha = 1;
-        return;
-      }
-
       // Smooth exponential momentum decay for scroll-reactive velocity
       if (!reduce) {
-        scrollVelocity *= 0.91;
+        scrollVelocity *= 0.90;
       } else {
         scrollVelocity = 0;
       }
@@ -294,19 +531,27 @@ export default function MicrobeField({
       const cx = W / 2;
       const cy = H / 2;
 
+      // Throttled 4x3 Spatial Coverage Check (runs every 800ms to keep open quadrants populated without affecting visible motion)
+      checkSpatialCoverage(now, W, H);
+
       // Track rendered screen positions for Quorum Cell-to-Cell Communication
       const pos: { px: number; py: number; cell: Cell; index: number }[] = [];
 
       for (let i = 0; i < cells.length; i++) {
         const c = cells[i];
         if (!reduce) {
-          // LAYER 1: Continuous time-based linear drift + organic lateral S-curve wave
-          const waveX = Math.cos(now * 0.001 * c.waveFreq + c.phase) * c.waveAmp * 0.2;
-          const waveY = Math.sin(now * 0.001 * c.waveFreq + c.phase) * c.waveAmp * 0.2;
-
-          c.x += (c.vx + waveX) * dt;
-          c.y += (c.vy + waveY) * dt;
+          // LAYER 1: Calm, continuous multi-directional fluid drift (no artificial horizontal wave oscillation)
+          c.x += c.vx * dt;
+          c.y += c.vy * dt;
           c.a += c.va * dt;
+
+          // Clamp translational speed to calm fluid range (10-24 px/sec => ~0.15-0.35 px/frame)
+          const currentSpeed = Math.hypot(c.vx, c.vy);
+          const maxSpeed = (10 + c.z * 12) * motionMultiplier;
+          if (currentSpeed > maxSpeed && currentSpeed > 0) {
+            c.vx = (c.vx / currentSpeed) * maxSpeed;
+            c.vy = (c.vy / currentSpeed) * maxSpeed;
+          }
 
           // LAYER 2: Temporary scroll-reactive depth-scaled parallax displacement
           const parallaxFactor = 0.18 + c.z * 0.37; // Far (0.18) -> Med (0.365) -> Near (0.55)
@@ -314,6 +559,80 @@ export default function MicrobeField({
 
           c.x = wrap(c.x, W);
           c.y = wrap(c.y, H);
+
+          // Smooth trajectory steering around exclusion zones (curves naturally around text/cards without hard teleporting)
+          if (exclusionZones.length > 0 && c.z >= 0.25) {
+            applyExclusionSteering(c, W, H, dt);
+          }
+
+          // LAYER 3: Gentle live drift separation (prevents moving microbes from forming clusters)
+          for (let j = i + 1; j < cells.length; j++) {
+            const c2 = cells[j];
+            if (c2.z < 0.25) continue; // Allow soft background depth overlap
+
+            const dx = c.x - c2.x;
+            const dy = c.y - c2.y;
+            const distSq = dx * dx + dy * dy;
+            const minDist = 58; // 58px center-to-center minimum spacing
+
+            if (distSq > 0 && distSq < minDist * minDist) {
+              const dist = Math.sqrt(distSq);
+              const overlap = minDist - dist;
+              const nx = dx / dist;
+              const ny = dy / dist;
+              // Very gentle 4% separation displacement nudge per frame
+              const force = overlap * 0.04;
+              c.x += nx * force;
+              c.y += ny * force;
+            }
+          }
+        }
+
+        // VISIBLE POPULATION SAFEGUARD
+        let visibleCount = 0;
+        for (let k = 0; k < cells.length; k++) {
+          const cellItem = cells[k];
+          if (cellItem.x >= 10 && cellItem.x <= W - 10 && cellItem.y >= 10 && cellItem.y <= H - 10) {
+            visibleCount++;
+          }
+        }
+
+        const targetMinVisible = minVisibleCount !== undefined
+          ? minVisibleCount
+          : Math.round(Math.min(24, Math.max(12, cells.length * 0.80)));
+
+        if (!reduce && visibleCount < targetMinVisible && cells.length > 0) {
+          let farthestIdx = -1;
+          let maxOffDist = -1;
+          for (let k = 0; k < cells.length; k++) {
+            const cellItem = cells[k];
+            const dx = cellItem.x < 0 ? -cellItem.x : cellItem.x > W ? cellItem.x - W : 0;
+            const dy = cellItem.y < 0 ? -cellItem.y : cellItem.y > H ? cellItem.y - H : 0;
+            const offDist = dx * dx + dy * dy;
+            if (offDist > maxOffDist) {
+              maxOffDist = offDist;
+              farthestIdx = k;
+            }
+          }
+
+          if (farthestIdx >= 0 && maxOffDist > 0) {
+            const cellToRecycle = cells[farthestIdx];
+            const edge = (Math.random() * 4) | 0;
+            let candX = 0;
+            let candY = 0;
+            if (edge === 0) { candX = Math.random() * W; candY = -45; }
+            else if (edge === 1) { candX = W + 45; candY = Math.random() * H; }
+            else if (edge === 2) { candX = Math.random() * W; candY = H + 45; }
+            else { candX = -45; candY = Math.random() * H; }
+
+            cellToRecycle.x = candX;
+            cellToRecycle.y = candY;
+
+            const inwardAngle = Math.atan2(cy - cellToRecycle.y, cx - cellToRecycle.x) + (Math.random() - 0.5) * 0.6;
+            const speed = (3.5 + Math.random() * 4.5) * motionMultiplier * (0.6 + cellToRecycle.z * 0.7);
+            cellToRecycle.vx = Math.cos(inwardAngle) * speed;
+            cellToRecycle.vy = Math.sin(inwardAngle) * speed;
+          }
         }
 
         // REFERENCE RADIAL DEPTH SPREAD FORMULA

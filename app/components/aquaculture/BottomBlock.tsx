@@ -1,18 +1,21 @@
-"use client";
-
 import React from "react";
 
 export default function BottomBlock() {
   return (
     <>
+      {/* ── SECTION 1: heading + pond diagram ── */}
       <section
-        className="relative w-full overflow-hidden px-6 py-20 md:px-12 lg:px-20 xl:px-32"
+        className="relative w-full overflow-hidden py-20"
         data-n="Pond Bottom"
         data-motion
         style={{ background: "linear-gradient(180deg, #E5F0D4 0%, #DDE9C8 50%, #D1E4B9 100%)" }}
       >
-        <div className="relative z-10 mx-auto flex max-w-6xl flex-col gap-8">
-          <div className="flex w-full flex-col items-start gap-4 rv">
+        <div
+          className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-col gap-8"
+          style={{ paddingInline: "clamp(20px, 5vw, 72px)" }}
+        >
+          {/* Header text */}
+          <div className="rv flex w-full flex-col items-start gap-4">
             <div className="flex items-center gap-3">
               <div className="h-[1.5px] w-7 bg-[#4b6b57]" />
               <span
@@ -56,26 +59,18 @@ export default function BottomBlock() {
                 textAlign: "left",
               }}
             >
-              Uneaten feed, faeces and dead plankton settle on the bottom every day. Just below the surface of that sludge there is no oxygen, and microbes break it down anaerobically. The by-products seep up into the water where the shrimp live.
+              Uneaten feed, faeces and dead plankton settle on the bottom every
+              day. Just below the surface of that sludge there is no oxygen, and
+              microbes break it down anaerobically. The by-products seep up into
+              the water where the shrimp live.
             </p>
           </div>
 
-          <div
-            className="ph rv d2"
-            style={{
-              border: "1px solid #CFE3BB",
-              borderTop: "3px solid #4CAF3F",
-              borderRadius: "12px",
-              padding: "28px",
-              background: "#FFFFFF",
-              width: "100%",
-              overflowX: "auto",
-            }}
-          >
+          <div className="ph rv d2 w-full">
             <svg
               viewBox="0 0 1092 465"
               xmlns="http://www.w3.org/2000/svg"
-              style={{ width: "100%", minWidth: "520px", display: "block" }}
+              style={{ width: "100%", display: "block" }}
               aria-label="Cross-section showing pond-bottom organic matter settling into toxic gases"
               role="img"
             >
@@ -143,14 +138,16 @@ export default function BottomBlock() {
         </div>
       </section>
 
+      {/* ── SECTION 2: image + toxin cards ── */}
       <section
-        className="w-full px-6 pb-10 pt-24 text-[#10301f] md:px-12 md:pb-14 md:pt-28 lg:px-20 lg:pb-16 lg:pt-28 xl:px-32"
-        data-n="How Toxins Form"
-        data-motion
-        style={{ background: "linear-gradient(180deg, #D1E4B9 0%, #C4DEA9 50%, #D9EBC4 100%)" }}
+        className="w-full pb-10 pt-24 text-[#10301f] md:pb-14 md:pt-28 lg:pb-16 lg:pt-28"
+        style={{ background: "linear-gradient(180deg, #e1f0d3 0%, #d8ebc8 100%)" }}
       >
-        <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-8 md:grid-cols-12 lg:gap-12">
-          <div className="ph order-2 mx-auto w-[88%] md:order-1 md:col-span-4 md:col-start-1 md:row-start-1 md:w-full md:self-center">
+        <div
+          className="mx-auto grid w-full max-w-[1440px] grid-cols-1 items-start gap-8 md:grid-cols-12 lg:gap-12"
+          style={{ paddingInline: "clamp(20px, 5vw, 72px)" }}
+        >
+          <div className="order-2 mx-auto w-[88%] md:order-1 md:col-span-4 md:col-start-1 md:row-start-1 md:w-full md:self-center">
             <div
               role="img"
               aria-label="Pond bottom image"
@@ -159,7 +156,7 @@ export default function BottomBlock() {
             />
           </div>
 
-          <div className="order-1 md:order-2 md:col-span-8 md:col-start-5 md:row-start-1 rv">
+          <div className="order-1 md:order-2 md:col-span-8 md:col-start-5 md:row-start-1">
             <p
               style={{ fontFamily: "var(--font-jetbrains), monospace" }}
               className="text-[10px] font-medium uppercase leading-none tracking-[0.24em] text-[#5A7A5E]"
@@ -172,39 +169,56 @@ export default function BottomBlock() {
                 fontSize: "clamp(48px, 8vw, 88px)",
                 lineHeight: 0.82,
               }}
-              className="mt-3 font-extrabold tracking-normal text-[#1F8A57]"
+              className="mt-3 font-extrabold tracking-normal text-[#2f8f4e]"
             >
               BOTTOM
             </h2>
-            <div className="mt-3 flex flex-col gap-[6px] rv d1">
-              <div className="flex items-center gap-2" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", letterSpacing: "0.04em", color: "#4b6b57", whiteSpace: "nowrap" }}>
+
+            <div className="mt-3 flex flex-col gap-[6px]">
+              <div
+                className="flex items-center gap-2"
+                style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", letterSpacing: "0.04em", color: "#4b6b57", whiteSpace: "nowrap" }}
+              >
                 <span style={{ display: "inline-block", width: "16px", height: "2px", background: "#B8893A", flexShrink: 0 }} />
                 No oxygen below a few mm
               </div>
-              <div className="flex items-center gap-2" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", letterSpacing: "0.04em", color: "#4b6b57", whiteSpace: "nowrap" }}>
+              <div
+                className="flex items-center gap-2"
+                style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", letterSpacing: "0.04em", color: "#4b6b57", whiteSpace: "nowrap" }}
+              >
                 <span style={{ display: "inline-block", width: "16px", height: "2px", background: "#B8893A", flexShrink: 0 }} />
                 Organic load builds up every day
               </div>
             </div>
-            <h2 className="mb-5 mt-4 font-inter-tight text-[clamp(24px,2.5vw,34px)] font-bold leading-tight text-[#10301f] rv d1">
+
+            <h2 className="mb-5 mt-4 font-inter-tight text-[clamp(24px,2.5vw,34px)] font-bold leading-tight text-[#10301f]">
               Three toxic metabolites, one source.
             </h2>
-            <div className="grid grid-cols-1 gap-px border border-[#CFE3BB] bg-[#CFE3BB] sm:grid-cols-2">
-              <article className="rv d1 bg-[#FFFFFF] p-4 md:p-5" style={{ borderTop: "3px solid #4CAF3F" }}>
+
+            <div className="grid grid-cols-1 gap-px border border-[#c8e0b2] bg-[#c8e0b2] sm:grid-cols-2">
+              <article className="bg-[rgba(255,255,255,0.75)] p-4 md:p-5" style={{ borderTop: "3px solid #2f8f4e", border: "1px solid rgba(47,143,78,0.2)" }}>
                 <h3 className="font-inter-tight text-[16px] font-bold text-[#10301f]">Ammonia (NH₃)</h3>
-                <p className="mt-1 font-newsreader text-[15px] leading-[1.5] text-[#4b6b57]">Released as proteins in feed and faeces break down in the sediment.</p>
+                <p className="mt-1 font-newsreader text-[15px] leading-[1.5] text-[#4b6b57]">
+                  Released as proteins in feed and faeces break down in the sediment.
+                </p>
               </article>
-              <article className="rv d2 bg-[#FFFFFF] p-4 md:p-5" style={{ borderTop: "3px solid #4CAF3F" }}>
+              <article className="bg-[rgba(255,255,255,0.75)] p-4 md:p-5" style={{ borderTop: "3px solid #2f8f4e", border: "1px solid rgba(47,143,78,0.2)" }}>
                 <h3 className="font-inter-tight text-[16px] font-bold text-[#10301f]">Nitrite (NO₂⁻)</h3>
-                <p className="mt-1 font-newsreader text-[15px] leading-[1.5] text-[#4b6b57]">Accumulates when low oxygen at the bottom stops nitrification halfway.</p>
+                <p className="mt-1 font-newsreader text-[15px] leading-[1.5] text-[#4b6b57]">
+                  Accumulates when low oxygen at the bottom stops nitrification halfway.
+                </p>
               </article>
-              <article className="rv d3 bg-[#FFFFFF] p-4 md:p-5" style={{ borderTop: "3px solid #4CAF3F" }}>
+              <article className="bg-[rgba(255,255,255,0.75)] p-4 md:p-5" style={{ borderTop: "3px solid #2f8f4e", border: "1px solid rgba(47,143,78,0.2)" }}>
                 <h3 className="font-inter-tight text-[16px] font-bold text-[#10301f]">Hydrogen sulphide (H₂S)</h3>
-                <p className="mt-1 font-newsreader text-[15px] leading-[1.5] text-[#4b6b57]">Produced by sulphate-reducing bacteria such as <em>Desulfovibrio</em> in oxygen-free sediment.</p>
+                <p className="mt-1 font-newsreader text-[15px] leading-[1.5] text-[#4b6b57]">
+                  Produced by sulphate-reducing bacteria such as <em>Desulfovibrio</em> in oxygen-free sediment.
+                </p>
               </article>
-              <article className="rv d4 bg-[#FFFFFF] p-4 md:p-5" style={{ borderTop: "3px solid #4CAF3F" }}>
+              <article className="bg-[rgba(255,255,255,0.75)] p-4 md:p-5" style={{ borderTop: "3px solid #2f8f4e", border: "1px solid rgba(47,143,78,0.2)" }}>
                 <h3 className="font-inter-tight text-[16px] font-bold text-[#10301f]">Released upward</h3>
-                <p className="mt-1 font-newsreader text-[15px] leading-[1.5] text-[#4b6b57]">All three diffuse into the water column, where they stress shrimp, suppress feeding and weaken immunity.</p>
+                <p className="mt-1 font-newsreader text-[15px] leading-[1.5] text-[#4b6b57]">
+                  All three diffuse into the water column, where they stress shrimp, suppress feeding and weaken immunity.
+                </p>
               </article>
             </div>
           </div>

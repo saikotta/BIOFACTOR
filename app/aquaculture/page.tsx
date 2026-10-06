@@ -36,7 +36,8 @@ const jetbrainsMono = JetBrains_Mono({
 export default function AquaculturePage() {
   return (
     <main
-      className={`${interTight.variable} ${newsreader.variable} ${jetbrainsMono.variable} w-full selection:bg-[#6BBF3A] selection:text-black overflow-x-hidden bg-[#EDF7DF]`}
+      className={`${interTight.variable} ${newsreader.variable} ${jetbrainsMono.variable} w-full selection:bg-[#6BBF3A] selection:text-black overflow-x-hidden`}
+      style={{ background: "linear-gradient(180deg, #f4f9ee 0%, #eaf4df 25%, #d6ebc6 55%, #c4e0b2 80%, #b6d8a3 100%)" }}
     >
       <AquacultureHero />
       <AquacultureDataStrip />

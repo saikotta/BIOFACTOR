@@ -741,22 +741,29 @@
 
 /* ---------- FRAME 5: dealt cards ---------- */
 .contactContainer :global(.f5) {
-  background: var(--mint);
+  background: #fff;
+  padding-inline: 8vw;
 }
 
 .contactContainer :global(.deal) {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
+  gap: clamp(24px, 2.1vw, 40px);
   perspective: 1200px;
 }
 
 .contactContainer :global(.sc) {
-  background: #fff;
-  border-radius: 22px;
-  padding: 34px 22px;
+  background: #effcf5;
+  border: 1px solid #c9f5df;
+  border-radius: 20px;
+  min-height: 256px;
+  padding: 30px 24px;
   text-align: center;
-  box-shadow: 0 24px 40px -26px rgba(15, 61, 38, .5);
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   transform: translateX(calc((1.5 - var(--k)) * (100% + 22px))) rotate(calc((var(--k) - 1.5) * 7deg));
   opacity: 0;
   transition: transform 1.5s var(--ease) calc((3 - var(--k)) * 90ms + 300ms), opacity .5s var(--ease) calc((3 - var(--k)) * 90ms + 300ms), translate .3s;
@@ -768,32 +775,36 @@
   opacity: 1;
 }
 
-.contactContainer :global(.sc .n) {
-  font-size: clamp(34px, 3.6vw, 50px);
-  font-weight: 800;
-  color: var(--g7);
-  font-family: Poppins, system-ui, sans-serif;
+.contactContainer :global(.sc h4) {
+  margin: 24px 0 0;
+  color: #17202c;
+  font-size: clamp(18px, 1.35vw, 25px);
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .contactContainer :global(.sc p) {
-  margin: 6px 0 0;
-  color: var(--mut);
+  margin: 14px 0 0;
+  color: #566273;
+  font-size: clamp(15px, 1.05vw, 20px);
+  line-height: 1.5;
 }
 
 .contactContainer :global(.sc .ic) {
-  width: 54px;
-  height: 54px;
+  width: 70px;
+  height: 70px;
+  flex: 0 0 70px;
   border-radius: 16px;
-  background: var(--mint);
-  margin: 0 auto 14px;
+  background: #fff;
+  margin: 0;
   display: grid;
   place-items: center;
 }
 
 .contactContainer :global(.sc svg) {
-  width: 26px;
-  height: 26px;
-  stroke: var(--g7);
+  width: 34px;
+  height: 34px;
+  stroke: #009d70;
   fill: none;
   stroke-width: 1.8;
   stroke-linecap: round;
@@ -827,6 +838,9 @@
   }
   .contactContainer :global(.deal) {
     grid-template-columns: 1fr 1fr;
+  }
+  .contactContainer :global(.f5) {
+    padding-inline: 7vw;
   }
   .contactContainer :global(.dots) {
     display: none;

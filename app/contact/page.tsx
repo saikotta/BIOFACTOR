@@ -507,47 +507,39 @@ export default function ContactPage() {
                 <path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6z" />
               </svg>
             </div>
-            <div className="n" data-c="100" data-s="+">
-              0
-            </div>
-            <p>Agricultural specialists</p>
+            <h4>Trusted Solutions</h4>
+            <p>FCO Supported agricultural products</p>
           </div>
 
           <div className="sc" style={{ "--k": 1 } as any}>
+            <div className="ic">
+              <svg viewBox="0 0 24 24">
+                <path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3" />
+              </svg>
+            </div>
+            <h4>Award Winning</h4>
+            <p>Recognized for innovation in agri-tech</p>
+          </div>
+
+          <div className="sc" style={{ "--k": 2 } as any}>
+            <div className="ic">
+              <svg viewBox="0 0 24 24">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M10 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM20 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <h4>Expert Team</h4>
+            <p>100+ agricultural specialists</p>
+          </div>
+
+          <div className="sc" style={{ "--k": 3 } as any}>
             <div className="ic">
               <svg viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="9" />
                 <circle cx="12" cy="12" r="4" />
               </svg>
             </div>
-            <div className="n" data-c="10000" data-s="+">
-              0
-            </div>
-            <p>Farmers with higher yields</p>
-          </div>
-
-          <div className="sc" style={{ "--k": 2 } as any}>
-            <div className="ic">
-              <svg viewBox="0 0 24 24">
-                <path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3" />
-              </svg>
-            </div>
-            <div className="n" data-c="25" data-s="+">
-              0
-            </div>
-            <p>Awards &amp; recognitions</p>
-          </div>
-
-          <div className="sc" style={{ "--k": 3 } as any}>
-            <div className="ic">
-              <svg viewBox="0 0 24 24">
-                <path d="m5 12 5 5 9-10" />
-              </svg>
-            </div>
-            <div className="n" data-c="98" data-s="%">
-              0
-            </div>
-            <p>Client satisfaction</p>
+            <h4>Proven Results</h4>
+            <p>Increased yields for 10,000+ farmers</p>
           </div>
         </div>
 

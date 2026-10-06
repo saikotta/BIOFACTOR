@@ -141,7 +141,7 @@ export default function AboutLeadershipSection() {
         </div>
 
         {/* FOUR TALL LEADERSHIP CARDS GRID (WITH 3D PERSPECTIVE & LIGHT PASS) */}
-        <div className="relative w-full max-w-[1240px] [perspective:1200px]">
+        <div className="relative mx-auto w-full max-w-[1240px] [perspective:1200px]">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 lg:gap-4">
             {LEADERS.map((leader, idx) => {
               const cardAnimClass = `animate-s6-card-${idx + 1}`;
@@ -152,7 +152,7 @@ export default function AboutLeadershipSection() {
               return (
                 <div
                   key={idx}
-                  className={`relative w-full h-[290px] sm:h-[305px] lg:h-[320px] bg-[#D2D6D0] rounded-[8px] overflow-hidden shadow-[0_2px_6px_rgba(0,0,0,0.03)] border-none ${
+                  className={`relative w-full h-[290px] sm:h-[305px] lg:h-[320px] bg-[#E3EBE3] rounded-[8px] overflow-hidden shadow-[0_2px_6px_rgba(0,0,0,0.03)] border-none ${
                     prefersReducedMotion
                       ? "opacity-100 transform-none"
                       : isAnimated

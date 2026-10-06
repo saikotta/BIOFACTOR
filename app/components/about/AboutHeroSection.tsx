@@ -102,7 +102,7 @@ export default function AboutHeroSection() {
         
         {/* Left Column: Masked Headline & Supporting Copy */}
         <div
-          className="w-full md:w-1/2 max-w-2xl py-5 md:py-6 flex flex-col items-start justify-center z-30"
+          className="w-full md:w-[72%] max-w-none py-5 md:py-6 flex flex-col items-start justify-center z-30"
           style={{
             transform: `translateY(${textTranslateY}px)`,
             opacity: textOpacity,
@@ -173,8 +173,8 @@ export default function AboutHeroSection() {
             <img
               src="/images/about-ecosystem.png"
               alt="Biofactor Ecosystem Artwork"
-              className="w-full h-auto object-contain block drop-shadow-[0_2px_10px_rgba(20,122,70,0.04)]"
-              style={{ opacity: 0.45 }}
+              className="w-full h-auto object-contain block drop-shadow-[0_4px_24px_rgba(20,122,70,0.12)]"
+              style={{ opacity: 0.28 }}
             />
           </div>
         </div>
@@ -183,7 +183,3 @@ export default function AboutHeroSection() {
     </section>
   );
 }
-
-
-
-

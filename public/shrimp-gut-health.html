@@ -12,9 +12,9 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:      #EAF6EC;
-  --glow:    #e8f5e4;
-  --panel:   rgba(255, 255, 255, 0.75);
+  --bg:      #c9e3b6;
+  --glow:    #d6ebc6;
+  --panel:   rgba(255, 255, 255, 0.70);
   --phov:    rgba(255, 255, 255, 0.95);
   --ink:     #0b2416;
   --muted:   #21432f;
@@ -64,18 +64,18 @@ sup { color: var(--green); font-weight: 600; font-size: .75em; vertical-align: s
 #wrap {
   position: relative; z-index: 1;
   display: flex; align-items: center; justify-content: center;
-  width: 1280px; height: 800px;
+  width: 1280px; min-height: 800px;
   transform-origin: center center;
 }
 
 .stage, #stage {
-  width: 1280px; height: 800px;
-  padding: 38px 56px;
+  width: 1280px; min-height: 800px;
+  padding: 38px calc(max(0px, (100vw - 1440px) / 2) + clamp(20px, 5vw, 72px)) 32px;
   display: grid;
-  grid-template-columns: 570px 1fr;
-  grid-template-rows: auto auto auto 1fr;
-  column-gap: 40px;
-  row-gap: 16px;
+  grid-template-columns: 480px 1fr;
+  grid-template-rows: auto auto auto auto;
+  column-gap: 36px;
+  row-gap: 14px;
 }
 
 /* ── PANEL STYLES ── */
@@ -111,10 +111,10 @@ body.is-animated .rise {
 }
 
 /* ══════════════════════════════════════════
-   ROW 1: HEADER (Col 1)
+   ROW 1: HEADER — full width across both cols
 ══════════════════════════════════════════ */
 .sec-head {
-  grid-column: 1;
+  grid-column: 1 / -1;
   grid-row: 1;
   display: flex;
   flex-direction: column;
@@ -136,11 +136,13 @@ body.is-animated .rise {
 h1 {
   font-family: "Bricolage Grotesque", sans-serif;
   font-weight: 800;
-  font-size: 44px;
+  font-size: 52px;
   line-height: 1.05;
   letter-spacing: -.025em;
   color: var(--ink);
 }
+
+.headline-line { display: block; }
 
 /* ══════════════════════════════════════════
    ROW 2: MATTER (Col 1, below Header)
@@ -151,6 +153,7 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  justify-content: center;
 }
 
 .lede {
@@ -162,20 +165,24 @@ h1 {
 }
 
 /* ══════════════════════════════════════════
-   DIAGRAM (Col 2, Spans Rows 1 & 2 beside Header & Matter)
+   DIAGRAM (Col 2 row 2, parallel to matter)
 ══════════════════════════════════════════ */
 .sec-diagram {
   grid-column: 2;
-  grid-row: 1 / 3;
+  grid-row: 2;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  gap: 8px;
-  padding: 0 10px;
+  gap: 10px;
+  box-sizing: border-box;
+  width: min(640px, calc(100% - 24px));
+  margin-left: 24px;
+  padding: 14px 0;
   position: relative;
   background: transparent;
   border: none;
+  border-radius: 0;
   box-shadow: none;
 }
 
@@ -184,7 +191,7 @@ h1 {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 440px;
+  gap: 8px;
 }
 
 .diag-eyebrow {
@@ -196,39 +203,45 @@ h1 {
 .diag-caption {
   font-size: 9.5px; font-weight: 600; letter-spacing: .12em;
   text-transform: uppercase; color: var(--muted); opacity: .75;
+  text-align: right;
 }
 
 .dsvg {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 4px 0;
+  justify-content: flex-end;
 }
 .dsvg svg {
   width: 100%;
-  max-width: 330px;
-  max-height: 130px;
+  max-width: 500px;
+  height: auto;
+  max-height: none;
 }
 
 /* Legend directly inside Diagram */
 .diag-legend {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-top: 4px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 8px;
+  margin-top: 2px;
+  width: 100%;
 }
 
 .leg-row {
-  display: flex; align-items: center; gap: 7px;
-  font: 600 11.5px/1.2 "Instrument Sans", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  min-width: 0;
+  font: 600 11px/1.3 "Instrument Sans", sans-serif;
   color: var(--ink);
+  text-align: left;
 }
 
 .leg-dot {
-  width: 8.5px; height: 8.5px; border-radius: 50%; flex-shrink: 0;
+  width: 8.5px; height: 8.5px; border-radius: 50%; flex: 0 0 8.5px;
   background: var(--c);
   animation: pulseDot 2.4s ease-in-out infinite;
   animation-delay: var(--pd, 0s);
@@ -331,10 +344,14 @@ h1 {
   justify-content: space-between;
   gap: 36px;
   padding: 18px 30px;
+  width: 100%;
+  min-width: 0;
 }
 
 .cleft {
-  width: 400px; flex-shrink: 0;
+  flex: 0 1 400px;
+  width: 400px;
+  min-width: 0;
   display: flex; flex-direction: column; gap: 4px;
 }
 
@@ -361,25 +378,30 @@ h1 {
 }
 
 .cright {
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 0;
   display: flex; flex-direction: column;
   justify-content: center; gap: 12px;
 }
 
 .bbar {
-  display: flex; align-items: center; gap: 12px;
+  display: grid;
+  grid-template-columns: minmax(96px, 124px) minmax(0, 1fr) 88px;
+  align-items: center;
+  gap: 12px;
 }
 
 .blbl {
-  width: 124px; flex-shrink: 0;
+  min-width: 0;
   font-family: "Instrument Sans", sans-serif;
-  font-size: 13px; font-weight: 700;
+  font-size: clamp(11px, 1vw, 13px); font-weight: 700;
+  line-height: 1.25;
   color: var(--ink); text-align: right;
 }
-.blbl span { display: block; font-weight: 400; font-size: 9.5px; color: var(--muted); }
+.blbl span { display: block; font-weight: 400; font-size: 9.5px; line-height: 1.3; color: var(--muted); }
 
 .btrk {
-  flex: 1; height: 14px;
+  width: 100%; min-width: 0; height: 14px;
   background: var(--track); border-radius: 99px;
   overflow: hidden;
 }
@@ -392,10 +414,11 @@ h1 {
 }
 
 .bcnt {
-  width: 100px; flex-shrink: 0;
+  min-width: 0;
   font-family: "Instrument Sans", sans-serif;
-  font-size: 13px; font-weight: 700;
+  font-size: clamp(10px, 1vw, 13px); font-weight: 700;
   color: var(--green); text-align: left;
+  white-space: nowrap;
 }
 
 /* ══════════════════════════════════════════
@@ -407,14 +430,36 @@ h1 {
   #wrap { width: 100%; height: auto; transform: none !important; }
   .stage, #stage {
     width: 100%; height: auto;
-    padding: 24px 18px 40px;
+    padding: 24px clamp(20px, 5vw, 72px) 40px;
     display: flex; flex-direction: column; gap: 18px;
   }
-  h1 { font-size: 32px; }
-  .sec-diagram { height: auto; padding: 18px 0; }
+  h1 { font-size: clamp(21px, 5vw, 32px); }
+  .sec-diagram {
+    width: 100%;
+    height: auto;
+    margin-left: 0;
+    padding: 14px 0;
+  }
+  .dsvg svg { max-width: 100%; }
+  .diag-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .diag-caption { text-align: left; }
+  .diag-legend {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+  .leg-row { font-size: 11px; }
   .sec-boxes { grid-template-columns: 1fr; }
-  .sec-chart { flex-direction: column; gap: 16px; padding: 20px; }
-  .cleft { width: 100%; }
+  .sec-chart { flex-direction: column; gap: 16px; padding: 18px 16px; }
+  .cleft { flex: 0 1 auto; width: 100%; }
+  .cright { flex: 0 1 auto; width: 100%; }
+  .bbar { grid-template-columns: minmax(70px, .8fr) minmax(28px, 1fr) minmax(58px, auto); gap: 8px; }
+  .blbl { font-size: 11px; }
+  .blbl span { font-size: 9px; }
+  .bcnt { font-size: 10px; }
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -449,7 +494,10 @@ h1 {
       <span class="eyebrow-bar"></span>
       Inside the shrimp
     </p>
-    <h1>A healthy gut is the first line of disease defence.</h1>
+    <h1>
+      <span class="headline-line">A healthy gut is the</span>
+      <span class="headline-line">first line of disease defence.</span>
+    </h1>
   </header>
 
   <!-- ── ROW 2: MATTER (Col 1, below Header) ── -->
@@ -577,7 +625,13 @@ h1 {
   /* ── SCALE ── */
   var wrap = document.getElementById('wrap');
   function scale(){
-    if(window.innerWidth <= 860){ wrap.style.transform=''; return; }
+    if(new URLSearchParams(window.location.search).has('embed') || window.innerWidth <= 860){
+      wrap.style.transform='';
+      wrap.style.width='100%';
+      wrap.style.height='auto';
+      wrap.style.justifyContent='flex-start';
+      return;
+    }
     var s = Math.min(window.innerWidth/1280, window.innerHeight/800);
     wrap.style.transform = 'scale('+s+')';
   }
