@@ -38,6 +38,26 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Ruminants & Livestock Nutrition | Rumen Fermentation Boosters",
+  description: "Optimize rumen fermentation and cattle gut health with Biofactor's biological feed additives and bio-available mineral supplements.",
+  keywords: [
+    "Rumen Fermentation Boosters",
+    "Cattle Feed Additives",
+    "Dairy Cattle Gut Health",
+    "Bio-Available Minerals for Livestock",
+    "Livestock Nutritional Supplements",
+    "Ruminant Bio-efficiency"
+  ],
+  openGraph: {
+    title: "Ruminants & Livestock Nutrition | Rumen Fermentation Boosters",
+    description: "Optimize rumen fermentation and cattle gut health with Biofactor's biological feed additives and bio-available mineral supplements.",
+    url: "https://biofactor.in/ruminants",
+  },
+};
+
 export default function RuminantsPage() {
   return (
     <main

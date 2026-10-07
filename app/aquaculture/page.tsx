@@ -33,6 +33,28 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Aquaculture Solutions | Probiotics & Bioremediation for Shrimp Farming",
+  description: "Discover Biofactor's advanced biological solutions for aquaculture, including probiotics, shrimp gut health supplements, pond bioremediation, and vibrio control.",
+  keywords: [
+    "Probiotics for Aquaculture",
+    "Shrimp Gut Health Supplements",
+    "Pond Bioremediation Solutions",
+    "Aquaculture Water Quality Management",
+    "Vibrio Control in Shrimp Farming",
+    "Pond Bottom Sludge Treatment",
+    "Biofloc Microbial Culture",
+    "Fish & Shrimp Yield Enhancers"
+  ],
+  openGraph: {
+    title: "Aquaculture Solutions | Probiotics & Bioremediation for Shrimp Farming",
+    description: "Discover Biofactor's advanced biological solutions for aquaculture, including probiotics, shrimp gut health supplements, pond bioremediation, and vibrio control.",
+    url: "https://biofactor.in/aquaculture",
+  },
+};
+
 export default function AquaculturePage() {
   return (
     <main

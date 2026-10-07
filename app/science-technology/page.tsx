@@ -15,9 +15,21 @@ import { SECTIONS } from "../components/science-technology/content";
 import BiofactorFooter from "../components/BiofactorFooter";
 
 export const metadata: Metadata = {
-  title: "Science & Technology — Biofactor Biologicals",
+  title: "Science & Biotechnology | Microbial Fermentation & Enzyme Technology",
   description:
-    "Biological Intelligence isn't one product or one patent. It's six technologies working together — each one solving a different part of the same problem: how do you make biology reliable enough to trust in a system built on chemistry?",
+    "Discover Biofactor's six core biological technologies, including spore-forming bacillus strains, targeted enzyme blends, and advanced microbial fermentation.",
+  keywords: [
+    "Spore-Forming Bacillus Strains",
+    "Industrial Microbial Fermentation",
+    "Targeted Enzyme Blends",
+    "Agricultural Biotechnology Research",
+    "Microflora Balancing Technologies"
+  ],
+  openGraph: {
+    title: "Science & Biotechnology | Biofactor Biologicals",
+    description: "Discover Biofactor's six core biological technologies, including spore-forming bacillus strains, targeted enzyme blends, and advanced microbial fermentation.",
+    url: "https://biofactor.in/science-technology",
+  },
 };
 
 export default function ScienceTechnologyPage() {
