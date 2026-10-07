@@ -1,0 +1,31 @@
+.smallWord {
+  transform-origin: center;
+  animation: smallWordDrift 4.8s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes smallWordDrift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  25% {
+    transform: translate3d(1px, -2px, 0) rotate(-0.6deg);
+  }
+
+  50% {
+    transform: translate3d(0, -3px, 0) rotate(0deg);
+  }
+
+  75% {
+    transform: translate3d(-1px, -1px, 0) rotate(0.6deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .smallWord {
+    animation: none;
+    will-change: auto;
+  }
+}

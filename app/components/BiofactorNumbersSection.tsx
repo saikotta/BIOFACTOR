@@ -17,7 +17,8 @@ const NUMBERS_EXCLUSION_ZONES = [
 const STATISTICS = [
   // ROW 1
   { number: "11", label: "PATENTS GRANTED" },
-  { number: "350+", label: "PROPRIETARY AND DEPOSITED STRAINS" },
+  { number: "42", label: "PROPRIETARY AND DEPOSITED STRAINS" },
+  { number: "350+", label: "CONSTRAINTS STRAINS CULTURE BANK" },
   { number: "200+", label: "PRODUCTS ACROSS SIX VERTICALS" },
   { number: "600+", label: "TEAM MEMBERS" },
   { number: "3000+", label: "DEALERS’ NETWORK" },
@@ -130,7 +131,7 @@ export default function BiofactorNumbersSection() {
               // Mobile (2 cols): right border on odd items except last (idx % 2 === 0 && idx < 8), bottom border on rows 1..4 (idx < 8)
               // Desktop/Tablet (5 cols): right border on items 0..3 & 5..7 ((idx + 1) % 5 !== 0 && idx !== 8), bottom border on row 1 (idx < 5)
               const isMobileRight = (idx + 1) % 2 !== 0 && idx < 8;
-              const isDesktopRight = (idx + 1) % 5 !== 0 && idx !== 8;
+              const isDesktopRight = ((idx + 1) % 5 !== 0 && idx !== 8) || idx === 8;
 
               const isMobileBottom = idx < 8;
               const isDesktopBottom = idx < 5;
