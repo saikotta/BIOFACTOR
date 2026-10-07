@@ -65,11 +65,11 @@ export default function RuminantsFooter() {
             <span className="font-mono text-[11px] font-semibold tracking-[0.2em] text-white/40 uppercase">Company</span>
             <nav className="flex flex-col gap-3">
               {[
-                { label: "About Us",           href: "/about" },
-                { label: "Our Story",          href: "/about" },
+                { label: "About",                href: "/about" },
+                { label: "One Health",           href: "/one-health" },
                 { label: "Science & Technology", href: "/science-technology" },
-                { label: "One Health",         href: "/one-health" },
-                { label: "Careers",            href: "#" },
+                { label: "Resources",            href: "/resources" },
+                { label: "Careers",              href: "/careers" },
               ].map((item) => (
                 <Link
                   key={item.label}
@@ -87,11 +87,11 @@ export default function RuminantsFooter() {
             <span className="font-mono text-[11px] font-semibold tracking-[0.2em] text-white/40 uppercase">Products</span>
             <nav className="flex flex-col gap-3">
               {[
-                { label: "Poultry",        href: "/poultry" },
-                { label: "Ruminants",      href: "/ruminants" },
                 { label: "Aquaculture",    href: "/aquaculture" },
                 { label: "Bioremediation", href: "/bioremediation" },
                 { label: "Overview",       href: "/" },
+                { label: "Poultry",         href: "/poultry" },
+                { label: "Ruminants",       href: "/ruminants" },
               ].map((item) => (
                 <Link
                   key={item.label}

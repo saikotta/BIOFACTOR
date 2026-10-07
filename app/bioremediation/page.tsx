@@ -32,9 +32,22 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Bio-Remediation — Biofactor Biologicals",
+  title: "Environmental Bioremediation Solutions | Microbial Waste & Water Treatment",
   description:
-    "Targeted microbial consortia that degrade complex organic contaminants, eliminate toxic sludge, and restore natural water quality without synthetic chemicals.",
+    "Targeted microbial consortia that degrade complex organic contaminants, eliminate toxic sludge, and restore natural water and soil quality.",
+  keywords: [
+    "Environmental Bioremediation",
+    "Microbial Waste Treatment",
+    "Soil Bioremediation Solutions",
+    "Biological Wastewater Treatment",
+    "Microbial Soil Restoration",
+    "Ecological Remediation Technology"
+  ],
+  openGraph: {
+    title: "Environmental Bioremediation Solutions | Biofactor Biologicals",
+    description: "Targeted microbial consortia that degrade complex organic contaminants, eliminate toxic sludge, and restore natural water and soil quality.",
+    url: "https://biofactor.in/bioremediation",
+  },
 };
 
 export default function BioremediationPage() {

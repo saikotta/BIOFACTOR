@@ -41,6 +41,27 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Poultry Nutrition & Gut Health | Biological Poultry Supplements",
+  description: "Advanced biological poultry supplements, probiotics, prebiotics, and mineral bioavailability for broiler and layer gut health optimization.",
+  keywords: [
+    "Poultry Probiotics and Prebiotics",
+    "Poultry Gut Microflora Optimization",
+    "Broiler & Layer Feed Supplements",
+    "Mineral Bioavailability for Poultry",
+    "Natural Immunity Boosters for Poultry",
+    "Poultry Farm Pathogen Management",
+    "Sustainable Poultry Production Solutions"
+  ],
+  openGraph: {
+    title: "Poultry Nutrition & Gut Health | Biological Poultry Supplements",
+    description: "Advanced biological poultry supplements, probiotics, prebiotics, and mineral bioavailability for broiler and layer gut health optimization.",
+    url: "https://biofactor.in/poultry",
+  },
+};
+
 export default function PoultryPage() {
   return (
     <main

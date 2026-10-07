@@ -2,19 +2,19 @@ import React from "react";
 import Link from "next/link";
 
 const companyLinks = [
-  { label: "About Us", href: "/about" },
-  { label: "Our Story", href: "/about" },
-  { label: "Science & Technology", href: "/science-technology" },
+  { label: "About", href: "/about" },
   { label: "One Health", href: "/one-health" },
-  { label: "Careers", href: "#" },
+  { label: "Science & Technology", href: "/science-technology" },
+  { label: "Resources", href: "/resources" },
+  { label: "Careers", href: "/careers" },
 ];
 
 const productLinks = [
+  { label: "Agriculture", href: "/nutrients" },
+  { label: "Aquaculture", href: "/aquaculture" },
+  { label: "Bioremediation", href: "/bioremediation" },
   { label: "Poultry", href: "/poultry" },
   { label: "Ruminants", href: "/ruminants" },
-  { label: "Agriculture", href: "/nutrients" },
-  { label: "Bioremediation", href: "/bioremediation" },
-  { label: "Aquaculture", href: "/aquaculture" },
 ];
 
 const contactLinks = [

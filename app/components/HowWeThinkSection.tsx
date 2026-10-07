@@ -200,16 +200,7 @@ export default function HowWeThinkSection() {
         {/* ================================================== */}
         {/* 5. BRAND / CTA ROW */}
         {/* ================================================== */}
-        <div className="w-full flex flex-col md:flex-row items-center justify-between gap-6 pt-6 mb-4 border-t border-[rgba(244,245,236,0.18)] mt-10 sm:mt-12">
-          {/* Middle / Left: Official Logo */}
-          <div className="flex items-center">
-            <img
-              src="/images/biofactor-official-logo.png"
-              alt="Biofactor Biologicals"
-              className="h-9 sm:h-11 w-auto object-contain brightness-0 invert opacity-90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.25)]"
-            />
-          </div>
-
+        <div className="w-full flex flex-row items-center justify-end gap-6 pt-6 mb-4 border-t border-[rgba(244,245,236,0.18)] mt-10 sm:mt-12">
           {/* Right: CTA Button */}
           <div className="flex items-center gap-3 flex-wrap">
             <a

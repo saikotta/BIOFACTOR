@@ -1,0 +1,9 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Host
+Host: https://biofactor.in
+
+# Sitemaps
+Sitemap: https://biofactor.in/sitemap.xml
