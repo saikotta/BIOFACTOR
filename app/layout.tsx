@@ -10,7 +10,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Biofactor Biologicals — Completing Chemical Systems with Biological Intelligence",
+  title: "Biofactor Biologicals",
   description: "Chemistry built modern agriculture. It can't finish the job alone.",
 };
 
