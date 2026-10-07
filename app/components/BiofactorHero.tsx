@@ -24,12 +24,13 @@ export default function BiofactorHero() {
 
         {/* 2-Line Centered Desktop Headline */}
         <h1 className="text-[2.25rem] sm:text-4xl md:text-5xl lg:text-[clamp(3.5rem,4.8vw,5.5rem)] font-extrabold uppercase text-[#EAF3EA] leading-[1.08] tracking-tight flex flex-col items-center justify-center gap-2 sm:gap-3 text-center w-full">
-          <span className="whitespace-normal md:whitespace-nowrap block text-[#EAF3EA]">
-            THE NEXT <span className="text-[#7FE0A4]">BIG</span> THING
+          <span className="flex flex-col md:flex-row items-center justify-center md:whitespace-nowrap text-[#EAF3EA] gap-y-1 md:gap-x-2 lg:gap-x-3">
+            <span>THE NEXT</span>
+            <span><span className="text-[#7FE0A4]">BIG</span> THING</span>
           </span>
-          <span className="inline-flex items-end justify-center flex-wrap md:flex-nowrap gap-x-2 sm:gap-x-2.5 lg:gap-x-3">
+          <span className="flex flex-col md:flex-row items-start md:items-end justify-center gap-y-3 md:gap-x-2 sm:gap-x-2.5 lg:gap-x-3 mt-1 md:mt-0">
             <span className="text-[#EAF3EA] leading-none">IS REALLY</span>
-            <span className={`${styles.smallWord} inline-flex shrink-0 items-center justify-center px-2.5 sm:px-3 md:px-4 lg:px-4 py-0.5 sm:py-0.5 md:py-1 lg:py-1.5 text-[9px] sm:text-[10px] md:text-[12px] lg:text-[14px] font-mono font-bold tracking-[0.2em] normal-case text-white bg-[#1a4225] rounded-full shadow-sm select-none whitespace-nowrap border-none`}>
+            <span className={`${styles.smallWord} inline-flex shrink-0 items-center justify-center px-4 sm:px-3 md:px-4 lg:px-4 py-1 sm:py-0.5 md:py-1 lg:py-1.5 text-[12px] sm:text-[10px] md:text-[12px] lg:text-[14px] font-mono font-bold tracking-[0.2em] normal-case text-white bg-[#1a4225] rounded-full shadow-sm select-none whitespace-nowrap border-none`}>
               Small.
             </span>
           </span>
