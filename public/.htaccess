@@ -1,0 +1,23 @@
+# Disable directory listing (prevents 403 when indexing is requested but missing index.html)
+Options -Indexes
+
+# Custom 404 error page (Next.js provides 404.html on export)
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1) If the request is for an existing file or directory, serve it directly.
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # 2) If the request is missing a trailing slash and matching folder exists, add it.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_URI} !/$
+  RewriteRule ^(.*)$ /$1/ [L,R=301]
+
+  # 3) Internal rewrite: if a corresponding .html exists (for fallback), rewrite it without redirecting.
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^(.*)/$ /$1.html [L]
+</IfModule>
