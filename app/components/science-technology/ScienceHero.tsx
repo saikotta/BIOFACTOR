@@ -134,7 +134,7 @@ export default function ScienceHero() {
 
         .st-hero-wrap {
           position: relative;
-          z-index: 1;
+          z-index: 10;
           width: 100%;
           max-width: 1280px;
           margin: 0 auto;

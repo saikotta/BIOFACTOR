@@ -82,9 +82,38 @@ export default function MicrobeField3D() {
     const group = new THREE.Group();
     scene.add(group);
 
-    const mat = new THREE.MeshStandardMaterial({ roughness: 0.4 });
+    const mat = new THREE.MeshStandardMaterial({ roughness: 0.4, transparent: true });
+    mat.onBeforeCompile = (shader) => {
+      shader.vertexShader = `
+        attribute float instanceOpacity;
+        varying float vInstanceOpacity;
+        ${shader.vertexShader}
+      `.replace(
+        "#include <color_vertex>",
+        `#include <color_vertex>
+         vInstanceOpacity = instanceOpacity;`
+      );
+
+      shader.fragmentShader = `
+        varying float vInstanceOpacity;
+        ${shader.fragmentShader}
+      `.replace(
+        "#include <opaque_fragment>",
+        `#include <opaque_fragment>
+         gl_FragColor.a *= vInstanceOpacity;`
+      );
+    };
+
     const sphereGeo = new THREE.SphereGeometry(0.07, 12, 10);
     const rodGeo = new THREE.CylinderGeometry(0.035, 0.035, 0.24, 10);
+
+    const sphereOpacity = new Float32Array(NS).fill(1.0);
+    const sphereOpacityAttr = new THREE.InstancedBufferAttribute(sphereOpacity, 1);
+    sphereGeo.setAttribute("instanceOpacity", sphereOpacityAttr);
+
+    const rodOpacity = new Float32Array(NR).fill(1.0);
+    const rodOpacityAttr = new THREE.InstancedBufferAttribute(rodOpacity, 1);
+    rodGeo.setAttribute("instanceOpacity", rodOpacityAttr);
 
     const sm = new THREE.InstancedMesh(sphereGeo, mat, NS);
     const rd = new THREE.InstancedMesh(rodGeo, mat, NR);
@@ -118,6 +147,8 @@ export default function MicrobeField3D() {
     let px = 0;
     let py = 0;
     let isVisible = true;
+    let currentIsDesktop = false;
+    let currentHw = 1;
     const t0 = performance.now();
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -138,9 +169,16 @@ export default function MicrobeField3D() {
 
       const hh = Math.tan((15 * Math.PI) / 180) * 8;
       const hw = hh * camera.aspect;
+      currentHw = hw;
+      currentIsDesktop = w >= 861;
 
       for (let i = 0; i < TOTAL; i++) {
-        B[i].x = (Math.random() * 1.5 - 0.3) * hw;
+        if (currentIsDesktop) {
+          const u = 0.50 + Math.random() * 0.62;
+          B[i].x = hw * (2 * u - 1);
+        } else {
+          B[i].x = (Math.random() * 1.5 - 0.3) * hw;
+        }
         B[i].y = (Math.random() * 2 - 1) * hh * 0.95;
         B[i].z = Math.random() * 3.5 - 2.5;
       }
@@ -156,6 +194,9 @@ export default function MicrobeField3D() {
       px += (mx * 0.4 - px) * 0.05;
       py += (-my * 0.25 - py) * 0.05;
       group.position.set(px, -py, 0);
+
+      const hw = currentHw;
+      const isDesktop = currentIsDesktop;
 
       for (let i = 0; i < TOTAL; i++) {
         const isSphere = i < NS;
@@ -175,10 +216,32 @@ export default function MicrobeField3D() {
         );
         dummyObj.updateMatrix();
         mesh.setMatrixAt(instIdx, dummyObj.matrix);
+
+        let op = 1.0;
+        if (isDesktop) {
+          const worldX = dummyObj.position.x + px;
+          const u = (worldX + hw) / (2 * hw);
+          if (u < 0.52) {
+            op = 0.0;
+          } else if (u < 0.60) {
+            const norm = (u - 0.52) / 0.08;
+            op = norm * norm * (3 - 2 * norm);
+          } else {
+            op = 1.0;
+          }
+        }
+
+        if (isSphere) {
+          sphereOpacity[instIdx] = op;
+        } else {
+          rodOpacity[instIdx] = op;
+        }
       }
 
       sm.instanceMatrix.needsUpdate = true;
       rd.instanceMatrix.needsUpdate = true;
+      sphereOpacityAttr.needsUpdate = true;
+      rodOpacityAttr.needsUpdate = true;
       renderer.render(scene, camera);
     };
 
