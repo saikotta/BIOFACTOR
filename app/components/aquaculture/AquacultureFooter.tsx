@@ -93,11 +93,11 @@ export default function AquacultureFooter() {
               <span className="font-mono text-[11px] font-semibold tracking-[0.2em] text-[#cfe6bd]/40 uppercase">Company</span>
               <nav className="flex flex-col gap-3">
                 {[
-                  { label: "About Us",             href: "/about" },
-                  { label: "Our Story",            href: "/about" },
-                  { label: "Science & Technology", href: "/science-technology" },
+                  { label: "About",                href: "/about" },
                   { label: "One Health",           href: "/one-health" },
-                  { label: "Careers",              href: "#" },
+                  { label: "Science & Technology", href: "/science-technology" },
+                  { label: "Resources",            href: "/resources" },
+                  { label: "Careers",              href: "/careers" },
                 ].map((item) => (
                   <Link key={item.label} href={item.href} className="font-sans text-sm text-[#cfe6bd]/75 hover:text-[#cfe6bd] transition-colors">
                     {item.label}

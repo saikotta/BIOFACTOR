@@ -18,7 +18,7 @@ const STATISTICS = [
   // ROW 1
   { number: "11", label: "PATENTS GRANTED" },
   { number: "42", label: "PROPRIETARY AND DEPOSITED STRAINS" },
-  { number: "350+", label: "CONSTRAINTS STRAINS CULTURE BANK" },
+  { number: "350+", label: "MICROBIAL STRAIN BANK" },
   { number: "200+", label: "PRODUCTS ACROSS SIX VERTICALS" },
   { number: "600+", label: "TEAM MEMBERS" },
   { number: "3000+", label: "DEALERS’ NETWORK" },
