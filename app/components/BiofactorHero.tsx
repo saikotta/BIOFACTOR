@@ -4,26 +4,17 @@ import React from "react";
 import MicrobeField from "./MicrobeField";
 import styles from "./BiofactorHero.module.css";
 
-const HERO_EXCLUSION_ZONES = [
-  // Band A: Eyebrow ("BEYOND THE NAKED EYE")
-  { xMinPct: 0.35, xMaxPct: 0.65, yMinPct: 0.22, yMaxPct: 0.30 },
-  // Band B: Headline (2-line centered statement)
-  { xMinPct: 0.16, xMaxPct: 0.84, yMinPct: 0.33, yMaxPct: 0.61 },
-  // Band C: Subtitle ("A new frontier exists beyond the naked eye.")
-  { xMinPct: 0.30, xMaxPct: 0.70, yMinPct: 0.65, yMaxPct: 0.74 },
-];
-
 export default function BiofactorHero() {
   return (
-    <div className="relative w-full h-full bg-transparent select-none font-sans flex flex-col items-center justify-center px-6 sm:px-12 md:px-16 overflow-hidden">
-      {/* Restored MicrobeField Component - Frame 1 Population (~30 visible microbes, headline protected) */}
-      <div className="absolute inset-0 pointer-events-none z-0 contrast-125">
+    <div className="relative w-full min-h-[calc(100vh-64px)] md:min-h-[calc(100vh-72px)] flex flex-col items-center justify-center px-6 sm:px-12 md:px-16 overflow-hidden select-none font-sans bg-transparent isolate">
+      {/* MicrobeField Component - Frame 1 Full Viewport Coverage with Text-Safe Smooth Fading */}
+      <div className="absolute inset-0 pointer-events-none z-0">
         <MicrobeField
           position="absolute"
-          densityMultiplier={4.6}
-          opacityMultiplier={1.65}
-          minVisibleCount={30}
-          exclusionZones={HERO_EXCLUSION_ZONES}
+          desktopCount={56}
+          mobileCount={28}
+          opacityMultiplier={1.0}
+          textFading={true}
         />
       </div>
 
@@ -55,3 +46,4 @@ export default function BiofactorHero() {
     </div>
   );
 }
+
