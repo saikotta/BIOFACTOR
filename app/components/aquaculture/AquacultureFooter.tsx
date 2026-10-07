@@ -111,11 +111,11 @@ export default function AquacultureFooter() {
               <span className="font-mono text-[11px] font-semibold tracking-[0.2em] text-[#cfe6bd]/40 uppercase">Products</span>
               <nav className="flex flex-col gap-3">
                 {[
-                  { label: "Poultry",        href: "/poultry" },
-                  { label: "Ruminants",      href: "/ruminants" },
                   { label: "Aquaculture",    href: "/aquaculture" },
                   { label: "Bioremediation", href: "/bioremediation" },
                   { label: "Overview",       href: "/" },
+                  { label: "Poultry",         href: "/poultry" },
+                  { label: "Ruminants",       href: "/ruminants" },
                 ].map((item) => (
                   <Link key={item.label} href={item.href} className="font-sans text-sm text-[#cfe6bd]/75 hover:text-[#cfe6bd] transition-colors">
                     {item.label}

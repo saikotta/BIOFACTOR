@@ -10,11 +10,11 @@ const companyLinks = [
 ];
 
 const productLinks = [
+  { label: "Agriculture", href: "/nutrients" },
+  { label: "Aquaculture", href: "/aquaculture" },
+  { label: "Bioremediation", href: "/bioremediation" },
   { label: "Poultry", href: "/poultry" },
   { label: "Ruminants", href: "/ruminants" },
-  { label: "Agriculture", href: "/nutrients" },
-  { label: "Bioremediation", href: "/bioremediation" },
-  { label: "Aquaculture", href: "/aquaculture" },
 ];
 
 const contactLinks = [
