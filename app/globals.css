@@ -1,23 +1,24 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #000000;
-  --color-foreground: #ffffff;
+  --color-background: #EDF4ED;
+  --color-foreground: #143324;
   --font-sans: var(--font-poppins), system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-poppins), system-ui, -apple-system, sans-serif;
   --font-serif: var(--font-poppins), system-ui, -apple-system, sans-serif;
 }
 
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
+  --background: #EDF4ED;
+  --foreground: #143324;
 }
 
-body {
-  background-color: #000000;
-  color: #ffffff;
+html, body {
+  background-color: #EDF4ED;
+  color: #143324;
   font-family: var(--font-poppins), system-ui, -apple-system, sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100vw;
 }
 
 /* Poultry page animations removed */
@@ -1434,7 +1435,7 @@ body {
 
 /* body overflow-x guard */
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════

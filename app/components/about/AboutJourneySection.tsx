@@ -26,10 +26,10 @@ export default function AboutJourneySection() {
 
     /* Recompute height whenever the iframe's width changes */
     const setHeight = () => {
-      const w = iframe.offsetWidth;
-      if (!w) return;
+      // If we enforce a minWidth, the actual pixel width we want the ratio calculated on is at least 960
+      const w = Math.max(960, iframe.offsetWidth || 960);
       /* Match the infographic aspect ratio and preserve the 85px heading-to-art gap. */
-      const artOffset = window.innerWidth < 900 ? 85 : 85 - (w * 0.0147);
+      const artOffset = w < 900 ? 85 : 85 - (w * 0.0147);
       const h = Math.round(w * (830 / 1480) + artOffset);
       iframe.style.height = `${h}px`;
     };
@@ -54,20 +54,23 @@ export default function AboutJourneySection() {
       aria-label="Our Journey"
       style={{ width: "100%", background: "#eef6ec", lineHeight: 0 }}
     >
-      <iframe
-        ref={iframeRef}
-        src="/journey.html"
-        title="Our Journey — Biofac infographic"
-        scrolling="no"
-        style={{
-          display: "block",
-          width: "100%",
-          /* height driven by ResizeObserver above; fallback keeps the ratio */
-          height: "calc(min(56.08vw, 96vh) + 85px)",
-          border: "none",
-          overflow: "hidden",
-        }}
-      />
+      <div className="w-full overflow-x-auto overflow-y-hidden" style={{ WebkitOverflowScrolling: "touch" }}>
+        <div style={{ minWidth: "960px", position: "relative" }}>
+          <iframe
+            ref={iframeRef}
+            src="/journey.html"
+            title="Our Journey — Biofac infographic"
+            scrolling="no"
+            style={{
+              display: "block",
+              width: "100%",
+              height: "650px", // Will be overridden by ResizeObserver
+              border: "none",
+              overflow: "hidden",
+            }}
+          />
+        </div>
+      </div>
     </section>
   );
 }

@@ -680,14 +680,14 @@ export default function AboutImpactJourney() {
         </div>
 
         {/* ── diagram scroller ── */}
-        <div className="flex-1 overflow-x-auto overflow-y-hidden">
-          <div style={{ minWidth:"960px" }}>
+        <div className="flex-1 overflow-x-auto overflow-y-hidden mt-6 lg:mt-0 pb-6 lg:pb-0">
+          <div style={{ minWidth:"960px", minHeight:"500px", position:"relative" }}>
             <svg
               id="jSvg"
               ref={svgRef}
               viewBox="0 0 1300 680"
               xmlns="http://www.w3.org/2000/svg"
-              style={{ display:"block", width:"100%", maxWidth:"1300px", height:"auto" }}
+              style={{ display:"block", width:"100%", maxWidth:"1300px", height:"auto", aspectRatio:"1300/680" }}
               role="img"
               aria-label="Biofactor Biologicals journey diagram from 2014 to 2024"
             >

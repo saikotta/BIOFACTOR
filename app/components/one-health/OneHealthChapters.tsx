@@ -239,9 +239,16 @@ export default function OneHealthChapters() {
   // IntersectionObserver for Panel Reveals
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
+    const container = containerRef.current;
+    if (!container) return;
+    
+    const panels = container.querySelectorAll('.health-panel');
 
-    panelRefs.current.forEach((panel, idx) => {
-      if (!panel) return;
+    panels.forEach((panel) => {
+      const idxStr = panel.getAttribute('data-idx');
+      if (idxStr === null) return;
+      const idx = parseInt(idxStr, 10);
+      
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
@@ -421,10 +428,11 @@ export default function OneHealthChapters() {
               return (
                 <div
                   key={`desktop-${ch.id}`}
+                  data-idx={idx}
                   ref={(el) => {
                     panelRefs.current[idx] = el;
                   }}
-                  className="min-h-screen flex flex-col justify-center py-20 relative z-10"
+                  className="health-panel min-h-screen flex flex-col justify-center py-20 relative z-10"
                 >
                   {/* Text Block Container */}
                   <div
@@ -542,12 +550,13 @@ export default function OneHealthChapters() {
               return (
                 <div
                   key={`mobile-${ch.id}`}
+                  data-idx={idx}
                   ref={(el) => {
                     if (!panelRefs.current[idx]) {
                       panelRefs.current[idx] = el;
                     }
                   }}
-                  className="min-h-screen flex flex-col justify-center py-16 relative z-10"
+                  className="health-panel min-h-screen flex flex-col justify-center py-16 relative z-10"
                 >
                   <div
                     className={`relative z-10 max-w-[440px] flex flex-col items-start text-left transition-all duration-1000 ease-out ${

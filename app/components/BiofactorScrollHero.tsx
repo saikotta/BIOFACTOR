@@ -12,6 +12,7 @@ interface BiofactorScrollHeroProps {
 export default function BiofactorScrollHero({ children }: BiofactorScrollHeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
   const targetFrameRef = useRef<number>(0);
   const currentFrameRef = useRef<number>(0);
@@ -23,6 +24,9 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
+
+    const isMobile = window.innerWidth < 768;
+    const frameStep = isMobile ? 2 : 1;
 
     const getFrameUrl = (index: number) => {
       const padded = String(index + 1).padStart(4, "0");
@@ -66,6 +70,7 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
         }
       }
 
+      // If no valid frame is loaded yet, keep existing canvas/poster content without clearing to black
       if (!img || !img.complete || img.naturalWidth === 0) return;
 
       // Cap DPR at 2 to avoid unnecessary canvas workload on high-DPI screens
@@ -89,10 +94,6 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
       ctx.scale(dpr, dpr);
       ctx.clearRect(0, 0, width, height);
 
-      // Deep dark base fill
-      ctx.fillStyle = "#0A1A10";
-      ctx.fillRect(0, 0, width, height);
-
       // Draw image object-fit: cover scaling
       const imgAspect = img.naturalWidth / img.naturalHeight;
       const canvasAspect = width / height;
@@ -114,38 +115,64 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
       ctx.restore();
     };
 
-    // Preload all 240 frame images as early as possible without creating objects during scroll
     const images: HTMLImageElement[] = new Array(TOTAL_FRAMES);
-
-    for (let i = 0; i < TOTAL_FRAMES; i++) {
-      const img = new Image();
-      img.src = getFrameUrl(i);
-      if ("decode" in img) {
-        img.decode().catch(() => {});
-      }
-      images[i] = img;
-    }
     imagesRef.current = images;
 
-    // Draw initial frame (index 0) as soon as ready
-    const firstImg = images[0];
-    const drawFirstFrame = () => {
+    let isDestroyed = false;
+
+    // Frame loader helper that only stores the element in images[] once onload succeeds
+    const loadFrame = (idx: number): Promise<HTMLImageElement | null> => {
+      if (images[idx]?.complete && images[idx].naturalWidth > 0) {
+        return Promise.resolve(images[idx]);
+      }
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.src = getFrameUrl(idx);
+        img.onload = () => {
+          images[idx] = img;
+          resolve(img);
+        };
+        img.onerror = () => {
+          resolve(null);
+        };
+      });
+    };
+
+    // Load initial frame (index 0) immediately and render without delay
+    loadFrame(0).then((firstImg) => {
+      if (isDestroyed || !firstImg) return;
       renderFrame(0);
       lastRenderedFrameRef.current = 0;
-    };
-    if (firstImg) {
-      if (firstImg.complete) {
-        drawFirstFrame();
-      } else {
-        firstImg.onload = () => {
-          drawFirstFrame();
-        };
-      }
-    }
-    requestAnimationFrame(drawFirstFrame);
+    });
 
-    // Calculate section-relative scroll progress (0..1) -> targetFrame (0..239)
+    // Progressive queue with controlled concurrency so network isn't saturated for navigation
+    const loadProgressive = async () => {
+      await new Promise((r) => setTimeout(r, 100));
+      if (isDestroyed) return;
+
+      const indices: number[] = [];
+      for (let i = 1; i < TOTAL_FRAMES; i += frameStep) {
+        indices.push(i);
+      }
+
+      const CONCURRENCY = isMobile ? 3 : 6;
+      let currentIndex = 0;
+
+      const worker = async () => {
+        while (currentIndex < indices.length && !isDestroyed) {
+          const idx = indices[currentIndex++];
+          await loadFrame(idx);
+        }
+      };
+
+      await Promise.all(Array.from({ length: CONCURRENCY }, () => worker()));
+    };
+
+    loadProgressive();
+
+    // Desktop: calculate section-relative scroll progress (0..1) -> targetFrame (0..239)
     const handleScroll = () => {
+      if (isMobile) return;
       const container = containerRef.current;
       if (!container) return;
 
@@ -165,8 +192,8 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
       }
     };
 
-    // Continuous LERP animation loop using requestAnimationFrame
-    const loop = () => {
+    // Desktop: continuous LERP animation loop on scroll scrub
+    const desktopLoop = () => {
       const lerpFactor = 0.28;
       const diff = targetFrameRef.current - currentFrameRef.current;
 
@@ -189,23 +216,46 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
         lastRenderedFrameRef.current = roundedFrame;
       }
 
-      animFrameIdRef.current = requestAnimationFrame(loop);
+      animFrameIdRef.current = requestAnimationFrame(desktopLoop);
+    };
+
+    // Mobile: smooth continuous playback loop so hero is alive with microbial animation without empty scroll traps
+    let mobileFrame = 0;
+    let lastMobileTime = performance.now();
+    const MOBILE_FRAME_INTERVAL = 1000 / 24; // 24 FPS
+
+    const mobileLoop = (now: number) => {
+      if (isDestroyed) return;
+      if (now - lastMobileTime >= MOBILE_FRAME_INTERVAL) {
+        lastMobileTime = now;
+        if (!prefersReducedMotion) {
+          mobileFrame = (mobileFrame + 1) % TOTAL_FRAMES;
+          renderFrame(mobileFrame);
+        }
+      }
+      animFrameIdRef.current = requestAnimationFrame(mobileLoop);
     };
 
     const handleResize = () => {
       lastRenderedFrameRef.current = -1;
-      renderFrame(currentFrameRef.current);
+      renderFrame(isMobile ? mobileFrame : currentFrameRef.current);
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    if (isMobile) {
+      animFrameIdRef.current = requestAnimationFrame(mobileLoop);
+    } else {
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      handleScroll();
+      animFrameIdRef.current = requestAnimationFrame(desktopLoop);
+    }
+
     window.addEventListener("resize", handleResize);
 
-    // Initial trigger
-    handleScroll();
-    loop();
-
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      isDestroyed = true;
+      if (!isMobile) {
+        window.removeEventListener("scroll", handleScroll);
+      }
       window.removeEventListener("resize", handleResize);
       if (animFrameIdRef.current) {
         cancelAnimationFrame(animFrameIdRef.current);
@@ -214,23 +264,37 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
   }, []);
 
   return (
-    <div ref={containerRef} className="relative w-full h-[500vh] bg-[#0A1A10]">
-      {/* Sticky Full-Screen Canvas Background (offset below fixed navbar so top leaves never enter header) */}
-      <div className="sticky top-[64px] md:top-[72px] h-[calc(100vh-64px)] md:h-[calc(100vh-72px)] w-full overflow-hidden z-0 bg-[#0A1A10]">
+    <div
+      ref={containerRef}
+      className="relative w-full h-[calc(100vh-64px)] md:h-[400vh] bg-[#0A1A10]"
+    >
+      {/* Hero Container: Clean relative block on mobile (0 extra height/delay), sticky on desktop */}
+      <div className="relative md:sticky md:top-[72px] h-full md:h-[calc(100vh-72px)] w-full overflow-hidden z-0 bg-[#0A1A10]">
+        {/* Instant Native Poster Image - zero blank delay on first load or resize */}
+        <img
+          src="/frames/frame_0001.webp"
+          alt="Biofactor nutrients animation background"
+          className="absolute inset-0 w-full h-full object-cover z-0 select-none pointer-events-none"
+        />
+
+        {/* Animated Canvas */}
         <canvas
           ref={canvasRef}
           className="absolute inset-0 w-full h-full block z-10"
         />
 
-        {/* Soft, Light Atmospheric Gradient Overlay */}
-        <div className="absolute inset-0 z-20 bg-gradient-to-t from-[#0A1A10]/45 via-transparent to-transparent pointer-events-none" />
-        <div className="absolute inset-0 z-20 bg-gradient-to-r from-[#0A1A10]/30 via-transparent to-transparent pointer-events-none" />
-      </div>
+        {/* Atmospheric Gradient Overlays for contrast and typography readability */}
+        <div className="absolute inset-0 z-20 bg-gradient-to-t from-[#0A1A10]/60 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 z-20 bg-gradient-to-r from-[#0A1A10]/40 via-transparent to-transparent pointer-events-none" />
 
-      {/* Sticky Hero Overlay */}
-      <div className="sticky top-[64px] md:top-[72px] -mt-[calc(100vh-64px)] md:-mt-[calc(100vh-72px)] h-[calc(100vh-64px)] md:h-[calc(100vh-72px)] w-full z-30 pointer-events-none flex flex-col justify-between">
-        <div className="w-full h-full pointer-events-auto flex flex-col justify-between">
-          {children}
+        {/* Hero Content Overlay */}
+        <div
+          ref={overlayRef}
+          className="absolute inset-0 z-30 pointer-events-none flex flex-col justify-between"
+        >
+          <div className="w-full h-full pointer-events-auto flex flex-col justify-between">
+            {children}
+          </div>
         </div>
       </div>
     </div>

@@ -61,8 +61,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="en" className={`${poppins.variable} dark h-full antialiased`} suppressHydrationWarning>
-      <body className="min-h-full bg-black text-white font-sans selection:bg-emerald-500 selection:text-black overflow-x-hidden" suppressHydrationWarning>
+    <html lang="en" className={`${poppins.variable} h-full antialiased overflow-x-clip`} style={{ maxWidth: '100vw' }} suppressHydrationWarning>
+      <body className="min-h-full bg-[#EDF4ED] text-[#143324] font-sans selection:bg-emerald-500 selection:text-black overflow-x-clip" suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

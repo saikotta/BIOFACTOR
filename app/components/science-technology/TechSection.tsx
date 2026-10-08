@@ -375,8 +375,9 @@ export default function TechSection({
           font-size: clamp(120px, 14vw, 210px);
           font-weight: 700;
           line-height: 1;
-          color: transparent;
+          color: rgba(31, 122, 77, 0.05);
           -webkit-text-stroke: 1.4px rgba(31, 122, 77, 0.22);
+          color: transparent;
           pointer-events: none;
           will-change: transform;
         }
@@ -569,6 +570,7 @@ export default function TechSection({
           height: clamp(320px, 40vw, 480px);
           border-radius: 32px;
           overflow: hidden;
+          background-color: #EAF3EA;
           background: radial-gradient(90% 90% at 30% 20%, #fbf8ee, #e4ebd9);
           border: 1px solid rgba(31, 122, 77, 0.18);
           box-shadow: 0 30px 60px -30px rgba(20, 51, 36, 0.35);

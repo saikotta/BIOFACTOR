@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const NAV_ITEMS = [
   { name: "HOME", href: "/" },
@@ -25,8 +25,27 @@ const PRODUCT_ITEMS = [
 export default function BiofactorHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [productDropdownOpen, setProductDropdownOpen] = useState(false);
+  const [mobileProductOpen, setMobileProductOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close mobile menus on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setProductDropdownOpen(false);
+    setMobileProductOpen(false);
+  }, [pathname]);
+
+  // Warm up and prefetch all product routes for instant transitions
+  useEffect(() => {
+    PRODUCT_ITEMS.forEach((product) => {
+      router.prefetch(product.href);
+    });
+    NAV_ITEMS.forEach((item) => {
+      router.prefetch(item.href);
+    });
+  }, [router]);
 
   // Check if PRODUCTS should be active (when on /ruminants, /poultry, /bioremediation, /aquaculture, /nutrients, or /products)
   const isProductActive =
@@ -49,7 +68,7 @@ export default function BiofactorHeader() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 w-full bg-[#d9ead3] border-t-2 border-[#93c47d] border-b border-[#167A4A]/12">
+    <header className="fixed top-0 left-0 right-0 z-[9999] w-full bg-[#d9ead3] border-t-2 border-[#93c47d] border-b border-[#167A4A]/12">
       <div className="w-full max-w-[1700px] mx-auto h-[64px] md:h-[72px] px-4 sm:px-6 md:px-8 lg:px-10 flex items-center justify-between">
         {/* Left Side: Official Biofactor Logo */}
         <Link href="/" className="flex items-center group flex-shrink-0">
@@ -126,6 +145,7 @@ export default function BiofactorHeader() {
                               <Link
                                 key={item.name}
                                 href={item.href}
+                                prefetch={true}
                                 onClick={() => setProductDropdownOpen(false)}
                                 className={`block px-4 py-2 text-sm font-semibold tracking-wider uppercase transition-colors hover:bg-[#167A4A]/10 ${
                                   isActive
@@ -189,7 +209,7 @@ export default function BiofactorHeader() {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-[#d9ead3] border-b border-[#167A4A]/12 shadow-lg px-8 py-5 flex flex-col gap-3.5 z-50">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-[#d9ead3] border-b border-[#167A4A]/12 shadow-lg px-8 py-5 flex flex-col gap-3.5 z-[9999] max-h-[calc(100vh-72px)] overflow-y-auto">
           {NAV_ITEMS.map((item, index) => {
             const isActive = pathname === item.href;
             // Insert PRODUCT dropdown after ABOUT (index 1)
@@ -198,7 +218,11 @@ export default function BiofactorHeader() {
                 <React.Fragment key={item.name}>
                   <Link
                     href={item.href}
-                    onClick={() => setMobileMenuOpen(false)}
+                    prefetch={true}
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setMobileProductOpen(false);
+                    }}
                     className={`text-sm font-semibold tracking-wider uppercase py-2 border-b border-[#167A4A]/12 ${
                       isActive
                         ? "text-[#167A4A] font-bold"
@@ -211,9 +235,10 @@ export default function BiofactorHeader() {
                   {/* Mobile PRODUCTS Dropdown */}
                   <div>
                     <button
-                      onClick={() => setProductDropdownOpen(!productDropdownOpen)}
-                      className={`w-full text-left text-sm font-semibold tracking-wider uppercase py-2 flex items-center justify-between relative border-b border-[#167A4A]/12 ${
-                        isProductActive || productDropdownOpen
+                      type="button"
+                      onClick={() => setMobileProductOpen((prev) => !prev)}
+                      className={`w-full text-left text-sm font-semibold tracking-wider uppercase py-2 flex items-center justify-between relative border-b border-[#167A4A]/12 cursor-pointer ${
+                        isProductActive || mobileProductOpen
                           ? "text-[#167A4A] font-bold"
                           : "text-[#26382D] hover:text-[#167A4A]"
                       }`}
@@ -228,34 +253,35 @@ export default function BiofactorHeader() {
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className={`transition-transform ${productDropdownOpen ? "rotate-180" : ""}`}
+                        className={`transition-transform ${mobileProductOpen ? "rotate-180" : ""}`}
                       >
                         <polyline points="6 9 12 15 18 9" />
                       </svg>
-                      {(isProductActive || productDropdownOpen) && (
+                      {(isProductActive || mobileProductOpen) && (
                         <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#167A4A] rounded-full" />
                       )}
                     </button>
 
-                    {productDropdownOpen && (
-                      <div className="pl-4">
-                        {PRODUCT_ITEMS.map((item) => {
-                          const isActive = pathname === item.href;
+                    {mobileProductOpen && (
+                      <div className="pl-4 flex flex-col pt-1">
+                        {PRODUCT_ITEMS.map((product) => {
+                          const isProdActive = pathname === product.href;
                           return (
                             <Link
-                              key={item.name}
-                              href={item.href}
+                              key={product.name}
+                              href={product.href}
+                              prefetch={true}
                               onClick={() => {
                                 setMobileMenuOpen(false);
-                                setProductDropdownOpen(false);
+                                setMobileProductOpen(false);
                               }}
-                              className={`block py-2 text-sm font-semibold tracking-wider uppercase ${
-                                isActive
+                              className={`w-full text-left py-2 px-2 text-sm font-semibold tracking-wider uppercase block rounded transition-colors ${
+                                isProdActive
                                   ? "bg-[#167A4A]/20 text-[#167A4A] font-bold"
-                                  : "text-[#26382D]"
+                                  : "text-[#26382D] hover:text-[#167A4A] hover:bg-[#167A4A]/10"
                               }`}
                             >
-                              {item.name}
+                              {product.name}
                             </Link>
                           );
                         })}
@@ -270,7 +296,11 @@ export default function BiofactorHeader() {
               <Link
                 key={item.name}
                 href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
+                prefetch={true}
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setMobileProductOpen(false);
+                }}
                 className={`text-sm font-semibold tracking-wider uppercase py-2 border-b border-[#167A4A]/12 last:border-none ${
                   isActive
                     ? "text-[#167A4A] font-bold"

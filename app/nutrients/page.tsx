@@ -1,6 +1,5 @@
 import React from "react";
 import type { Metadata } from "next";
-import BiofactorHeader from "../components/BiofactorHeader";
 import NutrientsHero from "../components/nutrients/NutrientsHero";
 import NutrientsComparativeCard from "../components/nutrients/NutrientsComparativeCard";
 import NutrientsPrimaryApplications from "../components/nutrients/NutrientsPrimaryApplications";
@@ -31,10 +30,7 @@ export const metadata: Metadata = {
 
 export default function NutrientsPage() {
   return (
-    <main className="min-h-screen w-full bg-[#EAF3EA] text-[#173522] flex flex-col font-sans selection:bg-[#2D6A4F] selection:text-[#EAF3EA]">
-      {/* Fixed Navigation Bar */}
-      <BiofactorHeader />
-
+    <main className="min-h-screen w-full bg-[#EAF3EA] text-[#173522] font-sans selection:bg-[#2D6A4F] selection:text-[#EAF3EA]">
       {/* Hero Section */}
       <NutrientsHero />
 
