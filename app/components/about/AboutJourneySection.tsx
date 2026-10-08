@@ -15,10 +15,23 @@
    parent layout changes width after mount.
    ========================================================================== */
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export default function AboutJourneySection() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  // Default to "/journey/" for production / Vercel (matches trailingSlash: true export)
+  const [iframeSrc, setIframeSrc] = useState("/journey/");
+
+  useEffect(() => {
+    // In local development (next dev on localhost), use direct file /journey.html
+    if (
+      typeof window !== "undefined" &&
+      (window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1")
+    ) {
+      setIframeSrc("/journey.html");
+    }
+  }, []);
 
   useEffect(() => {
     const iframe = iframeRef.current;
@@ -58,7 +71,7 @@ export default function AboutJourneySection() {
         <div style={{ minWidth: "960px", position: "relative" }}>
           <iframe
             ref={iframeRef}
-            src="/journey.html"
+            src={iframeSrc}
             title="Our Journey — Biofac infographic"
             scrolling="no"
             style={{

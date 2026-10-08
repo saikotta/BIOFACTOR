@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Our Journey — From 2014 to Now</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ---------- Theme tokens (light + dark) ---------- */
+:root{
+  --bg:#eef6ec; --bg2:#e2f0df; --ink:#12331f; --muted:#587061;
+  --green:#18723a; --gold:#c8950b; --arc:rgba(24,114,58,.3);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0b1710; --bg2:#12281c; --ink:#e9f4ec; --muted:#9fb7a7;
+        --green:#4cc57c; --gold:#e6b43a; --arc:rgba(76,197,124,.38);}
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;color:var(--ink);
+  font-family:Poppins,system-ui,sans-serif;
+  background:radial-gradient(ellipse at 50% 42%,var(--bg2),var(--bg) 72%)}
+.wrap{height:100vh;display:flex;justify-content:center;align-items:flex-start}
+
+/* ---------- Stage: fixed 1480x830 ratio, always fits the viewport ---------- */
+.stage{position:relative;aspect-ratio:1480/830;--art-offset:calc(85px - 1.47cqw);
+  width:min(100vw,calc(100vh*1480/830));container-type:inline-size}
+.stage svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;transform:translateY(var(--art-offset))}
+.lbl{margin-top:var(--art-offset)}
+
+/* ---------- Heading ---------- */
+.head{position:absolute;left:2.8%;top:5.5%;pointer-events:none}
+.eyebrow{font-size:clamp(12px,1cqw,18px);font-weight:600;letter-spacing:.22em;color:var(--green)}
+.title{margin:.25em 0 0;font-size:clamp(30px,3.2cqw,64px);font-weight:700;line-height:1.08;color:var(--green)}
+
+/* ---------- Labels (HTML, positioned in % of the stage) ---------- */
+.lbl{position:absolute;left:calc(var(--x)*1%);top:calc(var(--y)*1%);width:calc(var(--w)*1%)}
+.lbl.left  {transform:translate(-100%,-50%);text-align:right}
+.lbl.right {transform:translateY(-50%)}
+.lbl.bottom{transform:translateX(-50%);text-align:center}
+.lbl.top   {transform:translate(-50%,-100%);text-align:center}
+.in{animation:up .9s var(--ease) var(--d) backwards;transition:transform .5s var(--ease)}
+.lbl.hot .in{transform:translateY(-4px)}
+@keyframes up{from{opacity:0;transform:translateY(14px)}}
+.st{font-size:clamp(9.5px,.8cqw,15px);font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.nm{font-size:clamp(22px,2.1cqw,44px);font-weight:700;line-height:1.15;color:var(--c)}
+.tt{font-size:clamp(13px,1.2cqw,24px);font-weight:600;line-height:1.3}
+.ds{font-size:clamp(11.5px,1.04cqw,20px);color:var(--muted);line-height:1.38;margin-top:.25em}
+.green{--c:var(--green)} .gold{--c:var(--gold)}
+
+/* ---------- SVG parts + animation ---------- */
+.arc{fill:none;stroke:var(--arc);stroke-width:1.5;stroke-linecap:round;stroke-dasharray:1;
+  animation:draw 1.4s var(--ease) var(--d) backwards}
+@keyframes draw{from{stroke-dashoffset:1}}
+.pop{transform-box:fill-box;transform-origin:center;animation:pop .8s cubic-bezier(.34,1.56,.64,1) var(--d) backwards}
+@keyframes pop{from{opacity:0;transform:scale(0)}}
+/* wedge entrance: slide out from hub centre */
+.wen{animation:slide 1s var(--ease) var(--d) backwards}
+@keyframes slide{from{opacity:0;transform:translate(var(--sx),var(--sy))}}
+/* hover lift along radius */
+.lift{--l:0;transform:translate(calc(var(--ux)*var(--l)*1px),calc(var(--uy)*var(--l)*1px));
+  transition:transform .5s var(--ease),filter .5s var(--ease)}
+.lift.hot{--l:11}
+.wh{cursor:pointer;filter:drop-shadow(0 3px 5px rgba(0,0,0,.2))}
+.wh.hot{filter:drop-shadow(0 12px 14px rgba(0,0,0,.35)) brightness(1.07)}
+/* Ken Burns idle zoom/drift on each wedge's inner scene group */
+.kb{transform-box:fill-box;transform-origin:center;animation:kb 11s ease-in-out var(--kd) infinite alternate}
+@keyframes kb{to{transform:translate(var(--kx),var(--ky)) scale(1.12)}}
+.edge{fill:none;stroke:rgba(255,255,255,.55);stroke-width:1.5}
+.conn line{stroke:var(--c);stroke-width:1.5;stroke-dasharray:1;animation:draw .7s var(--ease) var(--d) backwards}
+.conn circle{fill:var(--c);stroke:#fff;stroke-width:2}
+.hub-bg{fill:#fff;filter:drop-shadow(0 4px 10px rgba(0,0,0,.25))}
+.hub-ring{fill:none;stroke:#18723a;stroke-width:2}
+
+/* ---------- Mobile list (hidden on desktop) ---------- */
+.list{display:none}
+@media (max-width:899px){
+  html,body{overflow:auto;height:auto}
+  .wrap{display:block;height:auto}
+  .stage{width:100%;aspect-ratio:auto}
+  .stage{--art-offset:85px}
+  .stage svg{position:static;height:auto;aspect-ratio:1480/830;display:block;margin-top:var(--art-offset);transform:none}
+  .lbl{margin-top:0}
+  .head{position:static;padding:22px 20px 0}
+  .lbl,.conn{display:none}
+  .list{display:block;margin:0;padding:8px 20px 36px;list-style:none}
+  .list li{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--arc)}
+  .list .n{width:34px;height:34px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-weight:600;font-size:13px}
+  .list .st{font-size:11px} .list .nm{font-size:22px} .list .tt{font-size:15px} .list .ds{font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="stage" id="stage">
+  <div class="head"><div class="eyebrow">OUR JOURNEY</div><h2 class="title">From 2014<br>to Now</h2></div>
+  <svg id="art" viewBox="0 0 1480 830" aria-hidden="true"></svg>
+  <ol class="list" id="list"></ol>
+</div></div>
+
+<script>
+/* ============================================================
+   DATA
+   ============================================================ */
+
+/* Five milestones — exact text from spec */
+const MS = [
+  { n:'01', st:'01 \u00b7 2014 \u2014 Founded',
+    num:2014, from:1990, rest:'',
+    t:'Biofac Inputs Private Limited',
+    d:'Established in Hyderabad, under the founding statement: \u201cBuild The Best To Live With Nature\u2019s Partnership.\u201d',
+    c:'green', side:'left' },
+  { n:'02', st:'02 \u00b7 The Platform Takes Shape',
+    num:null, from:0, rest:'',
+    t:'Microbe &amp; Mineral\u2122 Is Built',
+    d:'Development of the Microbe &amp; Mineral\u2122 platform and the two technologies: Metabiome\u2122 &amp; Chemoprotect\u2122. Microbe\u2122 gets later patented.',
+    c:'gold', side:'bottom' },
+  { n:'03', st:'03 \u00b7 Domestic Scale',
+    num:200, from:0, rest:'+ products',
+    t:'Six Verticals',
+    d:'Growth to a presence in 20+ Indian States, a Dealer Network Passing 3,000, and a Team Crossing 600.',
+    c:'gold', side:'top' },
+  { n:'04', st:'04 \u00b7 Beyond Bharat',
+    num:null, from:0, rest:'',
+    t:'Malawi &amp; Kenya',
+    d:'First international Product Licenses secured in East Africa \u2014 Biofac\u2019s first steps outside the domestic market.',
+    c:'gold', side:'bottom' },
+  { n:'05', st:'05 \u00b7 Today',
+    num:11, from:0, rest:' patents',
+    t:'350+<br>MICROBIAL STRAIN<br>BANK',
+    d:'A commercially packaged journey from Soil to People across everything we build.',
+    c:'green', side:'right' }
+];
+
+/* Three rings: cx/cy = centre in viewBox, bottom = true for U-shape (0-180°), false for ∩-shape (180-360°) */
+const RINGS = [
+  { cx:450,  cy:450, bottom:true  },  /* left  — U  */
+  { cx:740,  cy:380, bottom:false },  /* mid   — ∩  */
+  { cx:1030, cy:450, bottom:true  }   /* right — U  */
+];
+
+/*
+ * Wedge slots within each half-ring.
+ * r = ring index, k = slot (0/1/2 from the start of that half).
+ * bottom ring slot order (θ=0→180): k0=right wedge, k1=bottom, k2=left.
+ * top ring slot order   (θ=180→360): k0=left, k1=centre, k2=right.
+ * m = index into MS (undefined = picture-only).
+ * s = scene key. tractor = boolean flag for field scene variant.
+ * Array order controls entrance sequence.
+ */
+const WEDGES = [
+  { r:0, k:2, s:'leavesDark', m:0 },        /* left ring  — left wedge   — milestone 01 */
+  { r:0, k:1, s:'soil',       m:1 },        /* left ring  — bottom wedge — milestone 02 */
+  { r:0, k:0, s:'leavesGreen'     },        /* left ring  — right wedge  — picture only */
+  { r:1, k:0, s:'olive'           },        /* mid ring   — left wedge   — picture only */
+  { r:1, k:1, s:'microbe',    m:2 },        /* mid ring   — centre wedge — milestone 03 */
+  { r:1, k:2, s:'flask'           },        /* mid ring   — right wedge  — picture only */
+  { r:2, k:2, s:'leavesDark'      },        /* right ring — left wedge   — picture only */
+  { r:2, k:1, s:'field',      m:3 },        /* right ring — bottom wedge — milestone 04 */
+  { r:2, k:0, s:'field', tractor:true, m:4} /* right ring — right wedge  — milestone 05 */
+];
+
+/* ============================================================
+   GEOMETRY HELPERS
+   ============================================================ */
+const R = 175, RI = 105, GAP = 1.5;
+const rad = d => d * Math.PI / 180;
+const f   = n => n.toFixed(3);
+
+/* Point on a circle: (cx+r·cosθ, cy+r·sinθ) — SVG y-axis points down */
+const P = (cx, cy, rr, deg) => [cx + rr * Math.cos(rad(deg)), cy + rr * Math.sin(rad(deg))];
+
+/* Annular sector path from angle a1→a2 (clockwise, sweep-flag 1) */
+const wedgePath = (cx, cy, a1, a2) => {
+  const [ox1,oy1] = P(cx,cy,R,a1),  [ox2,oy2] = P(cx,cy,R,a2);
+  const [ix2,iy2] = P(cx,cy,RI,a2), [ix1,iy1] = P(cx,cy,RI,a1);
+  return `M${f(ox1)} ${f(oy1)}A${R} ${R} 0 0 1 ${f(ox2)} ${f(oy2)}` +
+         `L${f(ix2)} ${f(iy2)}A${RI} ${RI} 0 0 0 ${f(ix1)} ${f(iy1)}Z`;
+};
+
+/* Half-circle arc path for outline arcs */
+const arcPath = (cx, cy, rr, bot) => {
+  const [x1,y1] = P(cx,cy,rr, bot ? 0   : 180);
+  const [x2,y2] = P(cx,cy,rr, bot ? 180 : 360);
+  return `M${f(x1)} ${f(y1)}A${rr} ${rr} 0 0 1 ${f(x2)} ${f(y2)}`;
+};
+
+/* ============================================================
+   SCENE BUILDING HELPERS
+   Small SVG illustrations drawn around local (0,0); clipped later.
+   Every scene returns [gradStops:[color0,color1], innerSVG, extraDefs?]
+   ============================================================ */
+
+/* Single leaf shape centred at (x,y), rotated rot°, scaled s */
+const leaf = (x, y, rot, s, fill) =>
+  `<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s})">` +
+  `<path d="M0 0C14-16 38-16 52 0C38 16 14 16 0 0Z" fill="${fill}"/>` +
+  `<path d="M3 0H46" stroke="rgba(255,255,255,.28)" stroke-width="1.4"/></g>`;
+
+/* Upright sprout with two leaves */
+const sprout = (x, y, s) =>
+  `<g transform="translate(${x} ${y}) scale(${s})">` +
+  `<path d="M0 40V0" stroke="#7bd36a" stroke-width="4" stroke-linecap="round"/>` +
+  leaf(0,  3, -38, .9, '#9be68a') +
+  leaf(0,  9, 218, .8, '#5fc455') +
+  `</g>`;
+
+/* Cluster of 8 leaves from a palette */
+const leavesBlock = (cols, v) =>
+  [[-70,-30,-30,1.3],[-40,35,20,1.4],[10,-55,-60,1.2],[30,28,-15,1.5],
+   [62,-10,35,1.2],[-20,-8,70,1.3],[-85,20,-70,1.1],[80,35,-40,1.1]]
+  .map((l,i) => leaf(l[0], l[1], l[2]+(v||0)*40, l[3], cols[i%cols.length]))
+  .join('');
+
+/* ============================================================
+   SCENE DEFINITIONS
+   Each key: function(id, opts) -> [gradColors, innerSVG, extraDefs?]
+   ============================================================ */
+const SCENES = {
+
+  /* Dark green foliage with central sprout */
+  leavesDark(id, o) {
+    return [
+      ['#0f4a22','#1e7a3a'],
+      `<ellipse cx="0" cy="-40" rx="110" ry="50" fill="rgba(255,255,255,.07)"/>` +
+      leavesBlock(['#1c6b32','#14522a','#26883f'], o && o.v ? o.v : 0) +
+      sprout(0, -8, 1.3)
+    ];
+  },
+
+  /* Golden soil with a sprouting seedling */
+  soil(id) {
+    return [
+      ['#f9e7a6','#f0c25c'],
+      `<path d="M-150 18Q-70 0 0 14T150 8V150H-150Z" fill="url(#${id}g)"/>` +
+      `<circle cx="-60" cy="50" r="2.5" fill="#6b430f"/>` +
+      `<circle cx="40"  cy="62" r="3"   fill="#6b430f"/>` +
+      `<circle cx="70"  cy="40" r="2"   fill="#6b430f"/>` +
+      sprout(0, -26, 1.4),
+      /* extra gradient def */
+      `<linearGradient id="${id}g" x1="0" y1="0" x2="0" y2="1">` +
+      `<stop offset="0" stop-color="#d49a32"/><stop offset="1" stop-color="#8a5a14"/></linearGradient>`
+    ];
+  },
+
+  /* Bright green leaf cluster (picture-only) */
+  leavesGreen() {
+    return [
+      ['#3fa84c','#b8e46e'],
+      leavesBlock(['#2f9a43','#4fb653','#86d466'], 0)
+    ];
+  },
+
+  /* Olive grove rows with small tree icons and a sprout */
+  olive() {
+    const trees = [[-70,5],[-30,-2],[30,-2],[72,6],[-52,36],[52,36],[0,26]]
+      .map(p =>
+        `<g transform="translate(${p[0]} ${p[1]})">` +
+        `<rect x="-1.5" y="6" width="3" height="9" fill="#5a4326"/>` +
+        `<circle r="11" fill="#98ad62"/>` +
+        `<circle cx="-3" cy="-3" r="6" fill="#b3c47c"/>` +
+        `</g>`
+      ).join('');
+    const rows = [-120,-60,0,60,120]
+      .map(x => `<path d="M${(x*.15).toFixed(1)} -12L${(x*1.7).toFixed(1)} 150" stroke="#4d6a28" stroke-width="3" opacity=".55"/>`)
+      .join('');
+    return [
+      ['#d9eebd','#7ea04a'],
+      `<rect y="-12" x="-150" width="300" height="170" fill="#7d9f49"/>` +
+      rows + trees + sprout(0, 12, 1)
+    ];
+  },
+
+  /* Microbe / molecule network on teal */
+  microbe() {
+    const pts = [[-62,-40],[-10,-62],[52,-32],[72,20],[22,52],[-42,42],[-4,-4]];
+    const edges = [[0,1],[1,2],[2,3],[3,4],[4,5],[5,0],[6,0],[6,1],[6,2],[6,3],[6,4],[6,5]];
+    const lines = edges.map(e =>
+      `<line x1="${pts[e[0]][0]}" y1="${pts[e[0]][1]}" x2="${pts[e[1]][0]}" y2="${pts[e[1]][1]}" ` +
+      `stroke="#7ff0e0" stroke-opacity=".5" stroke-width="2"/>`
+    ).join('');
+    const nodes = pts.map((q,i) =>
+      `<circle cx="${q[0]}" cy="${q[1]}" r="${i===6?15:9}" fill="rgba(127,240,224,.18)"/>` +
+      `<circle cx="${q[0]}" cy="${q[1]}" r="${i===6?8:5}" fill="#9ff8ea"/>`
+    ).join('');
+    return [['#0f8088','#06343d'], lines + nodes];
+  },
+
+  /* Lab flask glowing amber */
+  flask(id) {
+    return [
+      ['#2e1b0c','#6d431b'],
+      `<circle cy="14" r="95" fill="url(#${id}g)"/>` +
+      `<path d="M-12-62H12V-30L52 40Q60 56 44 58H-44Q-60 56-52 40L-12-30Z" ` +
+      `fill="rgba(255,255,255,.16)" stroke="#ffd98a" stroke-width="2.5"/>` +
+      `<path d="M-30 14L-52 40Q-60 56-44 58H44Q60 56 52 40L30 14Z" fill="url(#${id}l)"/>` +
+      `<rect x="-16" y="-66" width="32" height="7" rx="3" fill="#ffd98a"/>` +
+      `<circle cx="-8" cy="30" r="4" fill="#fff3c4" opacity=".8"/>` +
+      `<circle cx="10" cy="42" r="3" fill="#fff3c4" opacity=".8"/>` +
+      `<circle cx="2"  cy="8"  r="3" fill="#fff3c4" opacity=".7"/>`,
+      /* extra gradient defs */
+      `<radialGradient id="${id}g">` +
+      `<stop offset="0" stop-color="#ffb43a" stop-opacity=".75"/>` +
+      `<stop offset="1" stop-color="#ffb43a" stop-opacity="0"/></radialGradient>` +
+      `<linearGradient id="${id}l" x1="0" y1="0" x2="0" y2="1">` +
+      `<stop offset="0" stop-color="#ffd35c"/><stop offset="1" stop-color="#e8870f"/></linearGradient>`
+    ];
+  },
+
+  /* Golden wheat field, optionally with a tractor */
+  field(id, o) {
+    const rows = [-120,-60,0,60,120]
+      .map(x => `<path d="M${(x*.3).toFixed(1)} 8L${(x*1.8).toFixed(1)} 150" stroke="#b9830f" stroke-width="3" opacity=".6"/>`)
+      .join('');
+    const tractor = o && o.tractor
+      ? `<g transform="translate(18 10) scale(.95)">` +
+        `<rect x="-42" y="-14" width="42" height="20" rx="5" fill="#1f8a3f"/>` +
+        `<rect x="-2"  y="-38" width="28" height="30" rx="4" fill="#176b31"/>` +
+        `<rect x="2"   y="-33" width="19" height="14" rx="2" fill="#cfe9f3"/>` +
+        `<rect x="-34" y="-26" width="4"  height="13" fill="#333"/>` +
+        `<circle cx="12"  cy="10" r="17" fill="#222"/>` +
+        `<circle cx="12"  cy="10" r="7"  fill="#e0b020"/>` +
+        `<circle cx="-28" cy="16" r="10" fill="#222"/>` +
+        `<circle cx="-28" cy="16" r="4"  fill="#e0b020"/>` +
+        `</g>`
+      : '';
+    return [
+      ['#ffeaa8','#f6c04a'],
+      `<circle cx="-58" cy="-55" r="42" fill="#fff6cf" opacity=".4"/>` +
+      `<circle cx="-58" cy="-55" r="26" fill="#fff6cf"/>` +
+      `<path d="M-150 14L150-8V150H-150Z" fill="#d9a21f"/>` +
+      rows + tractor
+    ];
+  }
+};
+
+/* ============================================================
+   BUILD THE SVG
+   ============================================================ */
+const svg   = document.getElementById('art');
+const stage = document.getElementById('stage');
+
+/* Helper: inline style string for lift/hover variables */
+const liftStyle = (ux, uy, c) =>
+  `style="--ux:${f(ux)};--uy:${f(uy)}${c ? `;--c:var(--${c})` : ''}"`;
+
+let defs = '', arcs = '', hubs = '', wedges = '', conns = '', labels = '';
+
+/* ── 1. Hubs + outline arcs ───────────────────────────────────────── */
+RINGS.forEach((g, i) => {
+  const d = 0.1 + i * 0.15;
+
+  /* Gear teeth (10 × 36°) */
+  const teeth = Array.from({ length:10 }, (_, t) =>
+    `<rect x="-2.6" y="-30" width="5.2" height="9" rx="1.5" transform="rotate(${t*36})"/>`
+  ).join('');
+
+  hubs +=
+    `<g transform="translate(${g.cx} ${g.cy})">` +
+    `<g class="pop" style="--d:${d}s">` +
+    /* white disc with shadow */
+    `<circle r="48" class="hub-bg"/>` +
+    /* green ring */
+    `<circle r="41" class="hub-ring"/>` +
+    /* rotating gear */
+    `<g fill="#18723a">` +
+    `<circle r="19" fill="none" stroke="#18723a" stroke-width="4"/>` +
+    `<g><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="60s" repeatCount="indefinite"/>` +
+    teeth + `</g>` +
+    /* leaf */
+    `<path d="M0-12C10-8 10 6 0 12C-10 6-10-8 0-12Z"/>` +
+    `<path d="M0-8V9" stroke="#fff" stroke-width="1.4"/>` +
+    `</g>` +
+    `</g></g>`;
+
+  /* Two faint outline arcs at R+16 and R+32 */
+  [16, 32].forEach((o, j) => {
+    arcs += `<path class="arc" pathLength="1" style="--d:${0.5+i*.12+j*.1}s" d="${arcPath(g.cx, g.cy, R+o, g.bottom)}"/>`;
+  });
+});
+
+/* ── 2. Wedges + connectors + labels ──────────────────────────────── */
+/*
+ * Connector line directions (unit vector, line length).
+ * left/right wedges: horizontal 60 px; bottom/top: 36 px vertical.
+ */
+const DIRS = { left:[-1,0,60], right:[1,0,60], bottom:[0,1,36], top:[0,-1,40] };
+
+WEDGES.forEach((w, i) => {
+  const g    = RINGS[w.r];
+  /* angle base: 0 for bottom half (U), 180 for top half (∩) */
+  const base = g.bottom ? 0 : 180;
+  const a1   = base + w.k*60 + GAP;
+  const a2   = base + w.k*60 + 60 - GAP;
+  const mid  = base + w.k*60 + 30;           /* mid-angle of wedge */
+  const ux   = Math.cos(rad(mid));            /* outward unit vector */
+  const uy   = Math.sin(rad(mid));
+  const id   = 'w' + i;
+  const d    = 1.0 + i * 0.22;               /* entrance delay */
+
+  /* scene artwork */
+  const sc   = SCENES[w.s](id, w);
+  const gradCols = sc[0];
+  const inner    = sc[1];
+  const extraDefs = sc[2] || '';
+
+  /* centre of the inner scene group in absolute coords */
+  const m = P(g.cx, g.cy, 140, mid);
+
+  /* Ken-Burns drift values — alternated per wedge */
+  const kx = ((i%3)-1)*6, ky = (((i+1)%3)-1)*5;
+
+  /* ── wedge group ── */
+  wedges +=
+    /* outer entrance group: slides in from hub */
+    `<g class="wen" style="--d:${d}s;--sx:${f(-ux*40)}px;--sy:${f(-uy*40)}px">` +
+    /* hover wrapper: lifts along radius, brightness on hover */
+    `<g class="wh lift" data-i="${i}" ${liftStyle(ux, uy, null)}>` +
+    /* clip-path + gradient defs live inside the group so they move with it */
+    `<defs>` +
+    `<clipPath id="${id}c" clipPathUnits="userSpaceOnUse">` +
+    `<path d="${wedgePath(g.cx, g.cy, a1, a2)}"/></clipPath>` +
+    `<linearGradient id="${id}b" x1="0" y1="0" x2="0" y2="1">` +
+    `<stop offset="0" stop-color="${gradCols[0]}"/>` +
+    `<stop offset="1" stop-color="${gradCols[1]}"/></linearGradient>` +
+    extraDefs +
+    `</defs>` +
+    /* clipped scene */
+    `<g clip-path="url(#${id}c)">` +
+    `<g transform="translate(${f(m[0])} ${f(m[1])})">` +
+    `<g class="kb" style="--kx:${kx}px;--ky:${ky}px;--kd:-${(i*1.3).toFixed(1)}s">` +
+    /* gradient background fill */
+    `<rect x="-150" y="-150" width="300" height="300" fill="url(#${id}b)"/>` +
+    inner +
+    `</g></g></g>` +
+    /* white inner edge stroke */
+    `<path class="edge" d="${wedgePath(g.cx, g.cy, a1, a2)}"/>` +
+    `</g></g>`;
+
+  /* ── connector + label (milestone wedges only) ── */
+  if (w.m !== undefined) {
+    const M    = MS[w.m];
+    const D    = DIRS[M.side];
+    /* anchor point A = outer edge at mid-angle */
+    const A    = P(g.cx, g.cy, R, mid);
+    /* end of connector line E */
+    const E    = [A[0] + D[0]*D[2], A[1] + D[1]*D[2]];
+    /* label start L = 6px beyond E */
+    const L    = [E[0] + D[0]*6,    E[1] + D[1]*6];
+    const cd   = d + 0.75;   /* connector appears after wedge */
+    /* label width in % of 1480 */
+    const wide = (M.side==='left' || M.side==='right') ? 195 : 500;
+
+    conns +=
+      `<g class="conn lift" data-i="${i}" ${liftStyle(ux, uy, M.c)}>` +
+      `<line pathLength="1" ` +
+      `x1="${f(A[0])}" y1="${f(A[1])}" x2="${f(E[0])}" y2="${f(E[1])}" style="--d:${cd}s"/>` +
+      `<circle class="pop" cx="${f(A[0])}" cy="${f(A[1])}" r="5" style="--d:${(cd-.1).toFixed(2)}s"/>` +
+      `</g>`;
+
+    labels +=
+      `<div class="lbl ${M.side}" data-i="${i}" ` +
+      `style="--x:${f(L[0]/14.8)};--y:${f(L[1]/8.3)};--w:${f(wide/14.8)}">` +
+      `<div class="in ${M.c}" style="--d:${(cd+.2).toFixed(2)}s">` +
+      `<div class="st">${M.st}</div>` +
+      (M.num === null ? '' :
+        `<div class="nm" data-from="${M.from}" data-to="${M.num}" data-rest="${M.rest}" data-delay="${cd+.2}">${M.from}${M.rest}</div>`) +
+      `<div class="tt">${M.t}</div>` +
+      `<div class="ds">${M.d}</div>` +
+      `</div></div>`;
+  }
+});
+
+/* Inject everything into the SVG and stage */
+svg.innerHTML = `<defs>${defs}</defs>${arcs}${hubs}${wedges}${conns}`;
+stage.insertAdjacentHTML('beforeend', labels);
+
+/* ============================================================
+   COUNT-UP ANIMATION
+   Counts from data-from to data-to over 1500 ms, appends data-rest.
+   ============================================================ */
+document.querySelectorAll('.nm').forEach(el => {
+  const from  = +el.dataset.from;
+  const to    = +el.dataset.to;
+  const rest  =  el.dataset.rest;
+  const t0    = performance.now() + el.dataset.delay * 1000;
+  const T     = 1500;
+
+  const tick = now => {
+    const p = Math.min(Math.max((now - t0) / T, 0), 1);
+    const e = 1 - Math.pow(1 - p, 3);          /* ease-out cubic */
+    el.textContent = Math.round(from + (to - from) * e) + rest;
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+});
+
+/* ============================================================
+   HOVER — wedge, connector and label stay in sync via data-i
+   ============================================================ */
+const hot = (i, on) =>
+  document.querySelectorAll(`[data-i="${i}"]`).forEach(n => n.classList.toggle('hot', on));
+
+document.querySelectorAll('[data-i]').forEach(n => {
+  n.addEventListener('mouseenter', () => hot(n.dataset.i, true));
+  n.addEventListener('mouseleave', () => hot(n.dataset.i, false));
+});
+
+/* ============================================================
+   MOBILE FALLBACK LIST
+   ============================================================ */
+document.getElementById('list').innerHTML = MS.map(M =>
+  `<li class="${M.c}"><span class="n">${M.n}</span><div>` +
+  `<div class="st">${M.st}</div>` +
+  (M.num === null ? '' : `<div class="nm">${M.num}${M.rest}</div>`) +
+  `<div class="tt">${M.t}</div>` +
+  `<div class="ds">${M.d}</div>` +
+  `</div></li>`
+).join('');
+</script>
+</body>
+</html>
