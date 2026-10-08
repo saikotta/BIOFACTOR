@@ -6,7 +6,7 @@ import styles from "./BiofactorHero.module.css";
 
 export default function BiofactorHero() {
   return (
-    <div className="relative w-full min-h-[calc(100vh-64px)] md:min-h-[calc(100vh-72px)] flex flex-col items-center justify-center px-6 sm:px-12 md:px-16 overflow-hidden select-none font-sans bg-transparent isolate">
+    <div className="relative w-full min-h-screen pt-20 md:pt-24 pb-12 flex flex-col items-center justify-center px-6 sm:px-12 md:px-16 overflow-hidden select-none font-sans bg-transparent isolate">
       {/* MicrobeField Component - Frame 1 Full Viewport Coverage with Text-Safe Smooth Fading */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <MicrobeField

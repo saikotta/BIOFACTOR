@@ -77,20 +77,18 @@ export default function AboutHeroSection() {
   return (
     <section
       ref={sectionRef}
-      className={`relative w-full h-auto min-h-[420px] md:h-[430px] overflow-hidden select-none font-sans border-b border-[#147A46]/12 flex items-center justify-between ${
-        !isInView ? "is-paused" : ""
-      }`}
+      className={`relative w-full h-auto min-h-[460px] md:min-h-[500px] md:h-[540px] overflow-hidden select-none font-sans border-b border-[#147A46]/12 flex items-center justify-between pt-24 md:pt-32 pb-4 ${!isInView ? "is-paused" : ""
+        }`}
       style={{
         backgroundColor: "#B8DDA3",
       }}
     >
       {/* 1. Cinematic Background Atmosphere Radial Highlight */}
       <div
-        className={`absolute inset-0 pointer-events-none z-0 ${
-          prefersReducedMotion
+        className={`absolute inset-0 pointer-events-none z-0 ${prefersReducedMotion
             ? "opacity-100"
             : "animate-s1-atmos fill-mode-forwards"
-        }`}
+          }`}
         style={{
           background:
             "radial-gradient(ellipse at 42% 48%, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.08) 30%, transparent 65%)",
@@ -99,10 +97,10 @@ export default function AboutHeroSection() {
 
       {/* Main Layout Container */}
       <div className="relative z-20 w-full max-w-[1700px] mx-auto px-6 sm:px-12 md:px-16 lg:px-20 h-full flex flex-col md:flex-row items-center justify-between">
-        
+
         {/* Left Column: Masked Headline & Supporting Copy */}
         <div
-          className="w-full md:w-[72%] max-w-none py-5 md:py-6 flex flex-col items-start justify-center z-30"
+          className="w-full md:w-[72%] max-w-none pt-4 md:pt-6 pb-6 md:pb-8 flex flex-col items-start justify-center z-30"
           style={{
             transform: `translateY(${textTranslateY}px)`,
             opacity: textOpacity,
@@ -113,13 +111,12 @@ export default function AboutHeroSection() {
             {/* Masked Line 1: Build the Best to Live, With (100ms delay) */}
             <div className="overflow-hidden py-0.5">
               <span
-                className={`block ${
-                  prefersReducedMotion
+                className={`block ${prefersReducedMotion
                     ? "opacity-100"
                     : hasTriggered
-                    ? "animate-s1-line1 opacity-0 fill-mode-forwards"
-                    : "opacity-0"
-                }`}
+                      ? "animate-s1-line1 opacity-0 fill-mode-forwards"
+                      : "opacity-0"
+                  }`}
               >
                 Build the Best to Live, With
               </span>
@@ -128,13 +125,12 @@ export default function AboutHeroSection() {
             {/* Masked Line 2: Nature's Partnership (250ms delay with left-to-right clip reveal) */}
             <div className="overflow-hidden py-0.5">
               <span
-                className={`block text-[#147A46] mt-1 sm:mt-2 origin-left ${
-                  prefersReducedMotion
+                className={`block text-[#147A46] mt-1 sm:mt-2 origin-left ${prefersReducedMotion
                     ? "opacity-100"
                     : hasTriggered
-                    ? "animate-s1-line2 opacity-0 fill-mode-forwards"
-                    : "opacity-0"
-                }`}
+                      ? "animate-s1-line2 opacity-0 fill-mode-forwards"
+                      : "opacity-0"
+                  }`}
               >
                 Nature&apos;s Partnership
               </span>
@@ -143,13 +139,12 @@ export default function AboutHeroSection() {
 
           {/* Founding Statement (650ms delay) */}
           <p
-            className={`mt-4 sm:mt-5 text-base sm:text-lg md:text-xl text-[#425A49] font-normal leading-relaxed max-w-lg ${
-              prefersReducedMotion
+            className={`mt-4 sm:mt-5 text-base sm:text-lg md:text-xl text-[#425A49] font-normal leading-relaxed max-w-lg ${prefersReducedMotion
                 ? "opacity-100"
                 : hasTriggered
-                ? "animate-s1-subtext opacity-0 fill-mode-forwards"
-                : "opacity-0"
-            }`}
+                  ? "animate-s1-subtext opacity-0 fill-mode-forwards"
+                  : "opacity-0"
+              }`}
           >
             That&apos;s been our founding statement since 2014.
           </p>
@@ -157,13 +152,12 @@ export default function AboutHeroSection() {
 
         {/* Right / Center Area: Soft Materialize Entrance for Ecosystem PNG Artwork (300ms delay, translateY(20px) scale(0.985) blur(2px) -> translateY(0) scale(1) blur(0)) */}
         <div
-          className={`absolute right-0 bottom-0 pointer-events-none select-none z-10 w-[88vw] sm:w-[71vw] md:w-[66vw] lg:w-[64vw] xl:w-[62vw] max-w-[1140px] h-auto flex items-end justify-end overflow-hidden ${
-            prefersReducedMotion
+          className={`absolute right-0 bottom-0 pointer-events-none select-none z-10 w-[88vw] sm:w-[71vw] md:w-[66vw] lg:w-[64vw] xl:w-[62vw] max-w-[1140px] h-auto flex items-end justify-end overflow-hidden ${prefersReducedMotion
               ? "opacity-100"
               : hasTriggered
-              ? "animate-s1-ecosystem opacity-0 fill-mode-forwards"
-              : "opacity-0"
-          }`}
+                ? "animate-s1-ecosystem opacity-0 fill-mode-forwards"
+                : "opacity-0"
+            }`}
           style={{
             transform: `translateY(${ecosystemScrollY}px)`,
           }}

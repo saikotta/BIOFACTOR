@@ -70,14 +70,13 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
         }
       }
 
-      // If no valid frame is loaded yet, keep existing canvas/poster content without clearing to black
+      // If no valid frame is loaded yet, keep existing canvas content
       if (!img || !img.complete || img.naturalWidth === 0) return;
 
       // Cap DPR at 2 to avoid unnecessary canvas workload on high-DPI screens
       const dpr = Math.min(2, window.devicePixelRatio || 1);
       const width = window.innerWidth;
-      const headerOffset = width >= 768 ? 72 : 64;
-      const height = Math.max(300, window.innerHeight - headerOffset);
+      const height = Math.max(300, window.innerHeight);
 
       const targetCanvasWidth = Math.floor(width * dpr);
       const targetCanvasHeight = Math.floor(height * dpr);
@@ -120,7 +119,7 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
 
     let isDestroyed = false;
 
-    // Frame loader helper that only stores the element in images[] once onload succeeds
+    // Frame loader helper
     const loadFrame = (idx: number): Promise<HTMLImageElement | null> => {
       if (images[idx]?.complete && images[idx].naturalWidth > 0) {
         return Promise.resolve(images[idx]);
@@ -138,14 +137,14 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
       });
     };
 
-    // Load initial frame (index 0) immediately and render without delay
+    // Load initial frame immediately
     loadFrame(0).then((firstImg) => {
       if (isDestroyed || !firstImg) return;
       renderFrame(0);
       lastRenderedFrameRef.current = 0;
     });
 
-    // Progressive queue with controlled concurrency so network isn't saturated for navigation
+    // Progressive queue with controlled concurrency
     const loadProgressive = async () => {
       await new Promise((r) => setTimeout(r, 100));
       if (isDestroyed) return;
@@ -170,19 +169,18 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
 
     loadProgressive();
 
-    // Desktop: calculate section-relative scroll progress (0..1) -> targetFrame (0..239)
+    // Desktop: calculate section-relative scroll progress
     const handleScroll = () => {
       if (isMobile) return;
       const container = containerRef.current;
       if (!container) return;
 
       const rect = container.getBoundingClientRect();
-      const headerOffset = window.innerWidth >= 768 ? 72 : 64;
-      const viewH = window.innerHeight - headerOffset;
+      const viewH = window.innerHeight;
       const scrollableHeight = rect.height - viewH;
       if (scrollableHeight <= 0) return;
 
-      const scrolled = -rect.top + headerOffset;
+      const scrolled = -rect.top;
       const progress = Math.min(1, Math.max(0, scrolled / scrollableHeight));
 
       if (prefersReducedMotion) {
@@ -192,7 +190,7 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
       }
     };
 
-    // Desktop: continuous LERP animation loop on scroll scrub
+    // Desktop continuous LERP loop
     const desktopLoop = () => {
       const lerpFactor = 0.28;
       const diff = targetFrameRef.current - currentFrameRef.current;
@@ -219,10 +217,10 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
       animFrameIdRef.current = requestAnimationFrame(desktopLoop);
     };
 
-    // Mobile: smooth continuous playback loop so hero is alive with microbial animation without empty scroll traps
+    // Mobile continuous loop
     let mobileFrame = 0;
     let lastMobileTime = performance.now();
-    const MOBILE_FRAME_INTERVAL = 1000 / 24; // 24 FPS
+    const MOBILE_FRAME_INTERVAL = 1000 / 24;
 
     const mobileLoop = (now: number) => {
       if (isDestroyed) return;
@@ -266,11 +264,11 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[calc(100vh-64px)] md:h-[400vh] bg-[#0A1A10]"
+      className="relative w-full h-screen md:h-[400vh] bg-[#0A1A10]"
     >
-      {/* Hero Container: Clean relative block on mobile (0 extra height/delay), sticky on desktop */}
-      <div className="relative md:sticky md:top-[72px] h-full md:h-[calc(100vh-72px)] w-full overflow-hidden z-0 bg-[#0A1A10]">
-        {/* Instant Native Poster Image - zero blank delay on first load or resize */}
+      {/* Sticky container starting at top 0 */}
+      <div className="relative md:sticky md:top-0 h-full md:h-screen w-full overflow-hidden z-0 bg-[#0A1A10]">
+        {/* Instant Native Poster Image */}
         <img
           src="/frames/frame_0001.webp"
           alt="Biofactor nutrients animation background"
@@ -283,14 +281,14 @@ export default function BiofactorScrollHero({ children }: BiofactorScrollHeroPro
           className="absolute inset-0 w-full h-full block z-10"
         />
 
-        {/* Atmospheric Gradient Overlays for contrast and typography readability */}
+        {/* Atmospheric Gradient Overlays */}
         <div className="absolute inset-0 z-20 bg-gradient-to-t from-[#0A1A10]/60 via-transparent to-transparent pointer-events-none" />
         <div className="absolute inset-0 z-20 bg-gradient-to-r from-[#0A1A10]/40 via-transparent to-transparent pointer-events-none" />
 
         {/* Hero Content Overlay */}
         <div
           ref={overlayRef}
-          className="absolute inset-0 z-30 pointer-events-none flex flex-col justify-between"
+          className="absolute inset-0 z-30 pointer-events-none flex flex-col justify-between pt-16 md:pt-20"
         >
           <div className="w-full h-full pointer-events-auto flex flex-col justify-between">
             {children}

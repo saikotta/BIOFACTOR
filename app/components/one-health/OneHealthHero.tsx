@@ -107,7 +107,7 @@ export default function OneHealthHero({
   const headlineWords = headlineText.split(" ");
 
   return (
-    <section className="relative w-full min-h-[calc(100vh-64px)] md:min-h-[calc(100vh-72px)] bg-[#EDF4ED] text-[#173522] font-sans overflow-visible flex flex-col justify-start select-none">
+    <section className="relative w-full min-h-screen bg-[#EDF4ED] text-[#173522] font-sans overflow-visible flex flex-col justify-start select-none">
       {/* 1. Biological Atmosphere & Hero Radial Background Glow Layers */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <div
@@ -131,8 +131,8 @@ export default function OneHealthHero({
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-[#147A46] opacity-[0.08]" />
       </div>
 
-      {/* Main Content Layout Wrapper (pt-5 = 20px top padding, pb-10 = 40px bottom padding) */}
-      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-8 pt-5 pb-10 flex-1 flex flex-col items-center justify-start text-center overflow-visible">
+      {/* Main Content Layout Wrapper (pt-20 md:pt-24 for floating capsule header clearance) */}
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-8 pt-20 md:pt-24 pb-10 flex-1 flex flex-col items-center justify-start text-center overflow-visible">
 
         {/* TOP TEXT BLOCK: Centered Hierarchy (relative z-20 to stay above orbit canvas) */}
         <div className="w-full max-w-4xl mx-auto text-center flex flex-col items-center relative z-20">

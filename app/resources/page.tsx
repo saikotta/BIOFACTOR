@@ -129,7 +129,7 @@ export default function ResourcesPage() {
 
       <div>
         {/* ── HERO ─────────────────────────────────────────────── */}
-        <section className="relative min-h-[calc(100vh-72px)] flex flex-col overflow-hidden bg-emerald-950 px-4">
+        <section className="relative min-h-screen pt-20 md:pt-24 flex flex-col overflow-hidden bg-emerald-950 px-4">
 
           {/* Background image — data-hero-bg for zoom-out */}
           <div className="absolute inset-0 z-0" data-hero-bg>

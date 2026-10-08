@@ -434,7 +434,7 @@ export default function CareersPage() {
         )}
 
         {/* Hero Section with Vibrant Background Image */}
-        <section className="relative text-white py-14 lg:py-20 min-h-[58vh] flex items-center overflow-hidden bg-emerald-950">
+        <section className="relative text-white min-h-screen pt-24 md:pt-32 pb-16 md:pb-24 flex items-center overflow-hidden bg-emerald-950">
           <div className="absolute inset-0 z-0">
             <img
               src={biofactor_career}

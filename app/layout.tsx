@@ -68,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <BiofactorHeader />
-        <div className="pt-[64px] md:pt-[72px]">
+        <div className="w-full">
           {children}
         </div>
       </body>
