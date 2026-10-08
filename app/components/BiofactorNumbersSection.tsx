@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 import MicrobeField from "./MicrobeField";
 
 const NUMBERS_EXCLUSION_ZONES = [
@@ -28,6 +28,80 @@ const STATISTICS = [
   { number: "2014", label: "FOUNDED, HYDERABAD" },
   { number: "1 Million+", label: "HAPPY FARMERS" },
 ];
+
+/**
+ * Parses a numeric statistic string into its numeric value and textual suffix/prefix.
+ * e.g., "350+" -> { numericValue: 350, suffix: "+" }
+ *       "1 Million+" -> { numericValue: 1, suffix: " Million+" }
+ */
+function parseStatNumber(raw: string) {
+  const match = raw.match(/^(\d+)(.*)$/);
+  if (match) {
+    return {
+      numericValue: parseInt(match[1], 10),
+      suffix: match[2],
+    };
+  }
+  return { numericValue: null, suffix: raw };
+}
+
+/**
+ * Smooth easeOutCubic animated counter component
+ */
+function AnimatedCounter({
+  targetString,
+  isRevealed,
+  prefersReducedMotion,
+  className,
+}: {
+  targetString: string;
+  isRevealed: boolean;
+  prefersReducedMotion: boolean;
+  className?: string;
+}) {
+  const [count, setCount] = useState(0);
+  const { numericValue, suffix } = useMemo(
+    () => parseStatNumber(targetString),
+    [targetString]
+  );
+
+  useEffect(() => {
+    if (!isRevealed || numericValue === null || prefersReducedMotion) {
+      if (numericValue !== null) setCount(numericValue);
+      return;
+    }
+
+    let animationFrameId: number;
+    const startTime = performance.now();
+    const duration = 1600; // 1.6s
+
+    const update = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // easeOutCubic easing for smooth count deceleration
+      const ease = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(ease * numericValue));
+
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(update);
+      }
+    };
+
+    animationFrameId = requestAnimationFrame(update);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isRevealed, numericValue, prefersReducedMotion]);
+
+  if (numericValue === null || prefersReducedMotion) {
+    return <span className={className}>{targetString}</span>;
+  }
+
+  return (
+    <span className={className}>
+      {count}
+      {suffix}
+    </span>
+  );
+}
 
 export default function BiofactorNumbersSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -78,7 +152,7 @@ export default function BiofactorNumbersSection() {
 
       <div className="relative z-10 w-full max-w-[1340px] mx-auto px-6 sm:px-10 lg:px-12 flex flex-col justify-between">
         
-        {/* ELEGANT TOP COMPOSITION (HEADLINE REMOVED, PRESERVED COPY RE-INTEGRATED) */}
+        {/* ELEGANT TOP COMPOSITION */}
         <div className="max-w-3xl flex flex-col items-start text-left space-y-3 mb-12 lg:mb-16">
           
           {/* Primary Statement */}
@@ -114,7 +188,7 @@ export default function BiofactorNumbersSection() {
 
         </div>
 
-        {/* FULL-WIDTH HORIZONTAL STATISTICS STRIP (10 STATS: 2 ROWS OF 5 ON DESKTOP/TABLET) */}
+        {/* FULL-WIDTH HORIZONTAL STATISTICS STRIP (10 STATS WITH HOVER & COUNT ANIMATIONS) */}
         <div
           className={`w-full border-t border-b border-[#071a14]/15 transition-all duration-1000 ease-out ${
             isRevealed || prefersReducedMotion
@@ -127,9 +201,6 @@ export default function BiofactorNumbersSection() {
         >
           <div className="grid grid-cols-2 md:grid-cols-5 w-full">
             {STATISTICS.map((stat, idx) => {
-              // Exact editorial border math for 9 items:
-              // Mobile (2 cols): right border on odd items except last (idx % 2 === 0 && idx < 8), bottom border on rows 1..4 (idx < 8)
-              // Desktop/Tablet (5 cols): right border on items 0..3 & 5..7 ((idx + 1) % 5 !== 0 && idx !== 8), bottom border on row 1 (idx < 5)
               const isMobileRight = (idx + 1) % 2 !== 0 && idx < 8;
               const isDesktopRight = ((idx + 1) % 5 !== 0 && idx !== 8) || idx === 8;
 
@@ -147,20 +218,36 @@ export default function BiofactorNumbersSection() {
               return (
                 <div
                   key={idx}
-                  className={`flex flex-col justify-start py-7 lg:py-9 px-4 sm:px-6 lg:px-8 ${borderClasses} transition-all duration-700 ease-out`}
+                  tabIndex={0}
+                  className={`group relative flex flex-col justify-start py-7 lg:py-9 px-4 sm:px-6 lg:px-8 ${borderClasses} 
+                    transition-[transform,box-shadow,border-radius] duration-300 ease-in-out cursor-pointer outline-none
+                    hover:bg-[#167A4A] hover:border-[#167A4A] hover:shadow-xl hover:shadow-[#167A4A]/25 hover:scale-[1.03] hover:-translate-y-1 hover:z-20 hover:rounded-2xl
+                    focus:bg-[#167A4A] focus:border-[#167A4A] focus:shadow-xl focus:scale-[1.03] focus:-translate-y-1 focus:z-20 focus:rounded-2xl
+                    focus-visible:bg-[#167A4A] focus-visible:border-[#167A4A] focus-visible:shadow-xl focus-visible:scale-[1.03] focus-visible:-translate-y-1 focus-visible:z-20 focus-visible:rounded-2xl
+                    focus-within:bg-[#167A4A] focus-within:border-[#167A4A] focus-within:shadow-xl focus-within:scale-[1.03] focus-within:-translate-y-1 focus-within:z-20 focus-within:rounded-2xl
+                    active:bg-[#167A4A] active:border-[#167A4A] active:scale-[0.98] active:rounded-2xl
+                    motion-reduce:transition-none
+                  `}
                   style={{
                     opacity: isRevealed || prefersReducedMotion ? 1 : 0,
                     transform: isRevealed || prefersReducedMotion ? "translateY(0)" : "translateY(16px)",
                     transitionDelay: prefersReducedMotion ? "0ms" : `${350 + idx * 45}ms`,
                   }}
                 >
-                  {/* Large Visually Dominant Number */}
-                  <span className={`font-sans font-black tracking-tight text-[#071a14] leading-none mb-3 whitespace-nowrap ${stat.number.length > 5 ? "text-2xl sm:text-3xl lg:text-[clamp(1.85rem,2.8vw,2.75rem)]" : "text-3xl sm:text-4xl lg:text-5xl"}`}>
-                    {stat.number}
-                  </span>
+                  {/* Large Visually Dominant Number with Count Animation & White Instant Hover Color */}
+                  <AnimatedCounter
+                    targetString={stat.number}
+                    isRevealed={isRevealed}
+                    prefersReducedMotion={prefersReducedMotion}
+                    className={`font-sans font-black tracking-tight text-[#071a14] group-hover:text-white group-focus:text-white group-focus-within:text-white group-focus-visible:text-white group-active:text-white leading-none mb-3 whitespace-nowrap ${
+                      stat.number.length > 5
+                        ? "text-2xl sm:text-3xl lg:text-[clamp(1.85rem,2.8vw,2.75rem)]"
+                        : "text-3xl sm:text-4xl lg:text-5xl"
+                    }`}
+                  />
 
-                  {/* Restrained Uppercase Label */}
-                  <span className="font-sans text-xs sm:text-sm font-semibold tracking-wider text-[#134e3a] uppercase leading-tight">
+                  {/* Restrained Uppercase Label with Light Green Instant Hover Color */}
+                  <span className="font-sans text-xs sm:text-sm font-semibold tracking-wider text-[#134e3a] group-hover:text-[#E2F8CE] group-focus:text-[#E2F8CE] group-focus-within:text-[#E2F8CE] group-focus-visible:text-[#E2F8CE] group-active:text-[#E2F8CE] uppercase leading-tight">
                     {stat.label}
                   </span>
                 </div>
@@ -192,3 +279,4 @@ export default function BiofactorNumbersSection() {
     </section>
   );
 }
+
