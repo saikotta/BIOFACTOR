@@ -258,14 +258,14 @@ export default function MicrobeField({
       if (desktopCount !== undefined && mobileCount !== undefined) {
         n = W >= 861 ? desktopCount : mobileCount;
       } else {
-        const baseRawN = (W * H) / 48000;
-        const minN = Math.round(4 * Math.min(densityMultiplier, 1.25));
-        const maxN = Math.round(8 * densityMultiplier);
+        const baseRawN = (W * H) / 34000;
+        const minN = Math.round(6 * Math.min(densityMultiplier, 1.25));
+        const maxN = Math.round(14 * densityMultiplier);
         n = minVisibleCount !== undefined ? minVisibleCount : Math.round(Math.min(maxN, Math.max(minN, baseRawN * densityMultiplier)));
       }
 
       cells = [];
-      const targetMinDist = W >= 861 ? 110 : 70;
+      const targetMinDist = W >= 861 ? 75 : 50;
       let currentMinDist = targetMinDist;
 
       for (let i = 0; i < n; i++) {
@@ -443,6 +443,9 @@ export default function MicrobeField({
 
       const pos: { px: number; py: number; cell: Cell; index: number }[] = [];
 
+      // Sort cells by depth so far microbes render behind near microbes
+      cells.sort((a, b) => a.z - b.z);
+
       for (let i = 0; i < cells.length; i++) {
         const c = cells[i];
         if (!reduce) {
@@ -458,13 +461,30 @@ export default function MicrobeField({
             c.vy = (c.vy / currentSpeed) * maxSpeed;
           }
 
-          const parallaxFactor = 0.18 + c.z * 0.37;
-          c.y -= scrollVelocity * parallaxFactor * dt * 60 * 0.15;
+          // 3D Forward Scroll Motion: Microbes zoom forward toward the screen/face when scrolling down
+          const forwardSpeed = scrollVelocity * (0.012 + c.z * 0.025) * dt * 4.0;
+          c.z += forwardSpeed;
 
-          // NaN / Finite Safeguard
-          if (!isFinite(c.x) || !isFinite(c.y) || !isFinite(c.vx) || !isFinite(c.vy) || !isFinite(c.fadeAlpha)) {
+          // Vertical parallax response
+          const parallaxFactor = 0.12 + c.z * 0.25;
+          c.y -= scrollVelocity * parallaxFactor * dt * 60 * 0.08;
+
+          // Recycle microbes when they pass the camera (z > 1.25) or recede too far (z < 0.02)
+          if (c.z > 1.25) {
+            c.z = 0.05 + Math.random() * 0.15;
             c.x = Math.random() * W;
             c.y = Math.random() * H;
+          } else if (c.z < 0.02) {
+            c.z = 1.05 + Math.random() * 0.15;
+            c.x = Math.random() * W;
+            c.y = Math.random() * H;
+          }
+
+          // NaN / Finite Safeguard
+          if (!isFinite(c.x) || !isFinite(c.y) || !isFinite(c.z) || !isFinite(c.vx) || !isFinite(c.vy) || !isFinite(c.fadeAlpha)) {
+            c.x = Math.random() * W;
+            c.y = Math.random() * H;
+            c.z = 0.1 + Math.random() * 0.8;
             const dirAngle = Math.random() * Math.PI * 2;
             const speed = (3.5 + Math.random() * 4.5) * motionMultiplier * (0.6 + c.z * 0.7);
             c.vx = Math.cos(dirAngle) * speed;
@@ -500,8 +520,15 @@ export default function MicrobeField({
           }
         }
 
+        // Standard position matching original SS 1 layout
         const px = cx + (c.x - cx) * (1 + (zoom - 1) * c.z * 0.6);
         const py = cy + (c.y - cy) * (1 + (zoom - 1) * c.z * 0.6);
+
+        // Smooth camera proximity fade out only when microbe passes very near camera (z > 1.12)
+        let cameraFade = 1.0;
+        if (c.z > 1.12) {
+          cameraFade = Math.max(0, 1.0 - (c.z - 1.12) / 0.18);
+        }
 
         // Pure function of current position with smooth 0.4s bidirectional fade
         let targetAlpha = 1;
@@ -518,17 +545,17 @@ export default function MicrobeField({
           c.fadeAlpha = 1.0;
         }
 
-        if (c.fadeAlpha <= 0.005) {
+        if (c.fadeAlpha <= 0.005 || cameraFade <= 0.005) {
           continue;
         }
 
-        const k = zoom * (0.75 + c.z * 0.5);
+        const k = zoom * (0.65 + c.z * 0.55);
 
         pos.push({ px, py, cell: c, index: i });
 
-        // Problem 2 Fix: Far / Medium / Near layer opacities = 0.6 / 0.8 / 1.0
+        // Far / Medium / Near layer opacities
         const layerBaseAlpha = c.z < 0.35 ? 0.60 : c.z < 0.72 ? 0.80 : 1.00;
-        ctx.globalAlpha = Math.min(1.0, layerBaseAlpha * opacityMultiplier * c.fadeAlpha);
+        ctx.globalAlpha = Math.min(1.0, layerBaseAlpha * opacityMultiplier * c.fadeAlpha * cameraFade);
 
         ctx.save();
         ctx.translate(px, py);
