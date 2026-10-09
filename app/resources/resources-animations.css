@@ -207,20 +207,22 @@
 /* ══════════════════════════════════════════════
    5. CARDS — entrance + hover state management
 ══════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════
+   5. CARDS — entrance + hover state management
+══════════════════════════════════════════════ */
 [data-card] {
-  opacity: 0;
-  transform: scale(0.88);
-  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-              border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 1;
+  transform: none;
+  transition: box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              background-color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
   position: relative;
   overflow: hidden;
 }
 [data-card].in {
   opacity: 1;
-  transform: scale(1);
+  transform: none;
 }
 
 /* Deep shadow on hover — only when live */
@@ -235,9 +237,9 @@
   overflow: hidden;
 }
 [data-card-img] img {
-  clip-path: inset(50% 50% 50% 50%);
-  transform: scale(1.35);
-  filter: saturate(0.6) brightness(0.9);
+  clip-path: inset(0% 0% 0% 0%);
+  transform: scale(1);
+  filter: saturate(1) brightness(1);
   transition: clip-path 1.1s cubic-bezier(0.22, 1, 0.36, 1),
               transform 1.6s cubic-bezier(0.22, 1, 0.36, 1),
               filter 1s cubic-bezier(0.22, 1, 0.36, 1);
@@ -273,8 +275,8 @@
    7. CARD TAGS — horizontal slide in
 ══════════════════════════════════════════════ */
 [data-tag] {
-  opacity: 0;
-  transform: translateX(-14px);
+  opacity: 1;
+  transform: none;
   transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
               transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -312,11 +314,11 @@
 }
 
 /* ══════════════════════════════════════════════
-   9. CARD TEXT AREA children — staggered fade+scale
+   9. CARD TEXT AREA children — default visible
 ══════════════════════════════════════════════ */
 [data-body] > * {
-  opacity: 0;
-  transform: scale(0.96);
+  opacity: 1;
+  transform: none;
   transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
               transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -374,14 +376,23 @@
 }
 
 /* ══════════════════════════════════════════════
-   12. FOOTER LINKS
+   13. CONTINUOUS AUTO-SCROLLING PDF PREVIEW
 ══════════════════════════════════════════════ */
-footer [data-footer-link] {
-  display: inline-block;
-  transition: padding-left 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-              color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+@keyframes continuousPdfScroll {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
 }
-footer [data-footer-link]:hover {
-  padding-left: 8px;
-  color: #7CC242;
+
+.animate-pdf-scroll {
+  animation: continuousPdfScroll 22s linear infinite;
+  will-change: transform;
 }
+
+.animate-pdf-scroll:hover {
+  animation-play-state: paused;
+}
+
