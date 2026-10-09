@@ -25,7 +25,7 @@ export default function AboutVisionMissionSection() {
   return (
     <section ref={containerRef} className="w-full bg-[#e6fbc9] overflow-hidden">
       <iframe
-        src="/vision-mission-chain/"
+        src="/vision-mission-chain.html"
         title="Vision & Mission Chain"
         className="w-full border-none block"
         style={{ height: iframeHeight }}

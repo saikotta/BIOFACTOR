@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from "react";
 
 export default function AboutJourneySection() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const iframeSrc = "/journey/";
+  const iframeSrc = "/journey.html";
 
   useEffect(() => {
     const iframe = iframeRef.current;
