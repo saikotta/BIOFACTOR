@@ -37,15 +37,7 @@ export default function BiofactorHeader() {
     setMobileProductOpen(false);
   }, [pathname]);
 
-  // Warm up and prefetch all product routes for instant transitions
-  useEffect(() => {
-    PRODUCT_ITEMS.forEach((product) => {
-      router.prefetch(product.href);
-    });
-    NAV_ITEMS.forEach((item) => {
-      router.prefetch(item.href);
-    });
-  }, [router]);
+
 
   // Check if PRODUCTS should be active
   const isProductActive =
@@ -105,11 +97,12 @@ export default function BiofactorHeader() {
                     <div
                       className="relative"
                       ref={dropdownRef}
+                      onMouseEnter={() => setProductDropdownOpen(true)}
+                      onMouseLeave={() => setProductDropdownOpen(false)}
                     >
                       <button
                         type="button"
-                        onClick={() => setProductDropdownOpen(!productDropdownOpen)}
-                        onMouseEnter={() => setProductDropdownOpen(true)}
+                        onClick={() => setProductDropdownOpen(true)}
                         className={`text-xs xl:text-[13px] font-semibold tracking-wider uppercase transition-all px-3.5 py-1.5 rounded-full whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
                           isProductActive || productDropdownOpen
                             ? "bg-[#167A4A] text-white shadow-sm font-bold"
@@ -134,11 +127,7 @@ export default function BiofactorHeader() {
 
                       {/* HORIZONTAL Dropdown Menu (FoundingLegals Capsule Sub-bar Style) */}
                       {productDropdownOpen && (
-                        <div
-                          className="absolute top-full left-1/2 -translate-x-1/2 pt-3 z-50 animate-in fade-in slide-in-from-top-2 duration-200"
-                          onMouseEnter={() => setProductDropdownOpen(true)}
-                          onMouseLeave={() => setProductDropdownOpen(false)}
-                        >
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                           <div className="bg-[#d9ead3]/95 backdrop-blur-lg border border-[#167A4A]/20 shadow-[0_12px_36px_0_rgba(22,122,74,0.18)] rounded-full px-4 py-2 flex items-center gap-1 sm:gap-2 whitespace-nowrap">
                             {PRODUCT_ITEMS.map((prod, idx) => {
                               const isProdActive = pathname === prod.href;
@@ -149,7 +138,7 @@ export default function BiofactorHeader() {
                                   )}
                                   <Link
                                     href={prod.href}
-                                    prefetch={true}
+                                    prefetch={false}
                                     onClick={() => setProductDropdownOpen(false)}
                                     className={`px-3 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-200 ${
                                       isProdActive
@@ -220,7 +209,7 @@ export default function BiofactorHeader() {
                   <React.Fragment key={item.name}>
                     <Link
                       href={item.href}
-                      prefetch={true}
+                      prefetch={false}
                       onClick={() => {
                         setMobileMenuOpen(false);
                         setMobileProductOpen(false);
@@ -268,7 +257,7 @@ export default function BiofactorHeader() {
                               <Link
                                 key={product.name}
                                 href={product.href}
-                                prefetch={true}
+                                prefetch={false}
                                 onClick={() => {
                                   setMobileMenuOpen(false);
                                   setMobileProductOpen(false);
@@ -294,7 +283,7 @@ export default function BiofactorHeader() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  prefetch={true}
+                  prefetch={false}
                   onClick={() => {
                     setMobileMenuOpen(false);
                     setMobileProductOpen(false);

@@ -638,8 +638,8 @@ export default function MicrobeField({
     const resize = () => {
       if (!cv || !ctx) return;
       const parent = cv.parentElement || cv;
-      const parentW = parent.clientWidth || window.innerWidth || 1000;
-      const parentH = parent.clientHeight || window.innerHeight || 800;
+      const parentW = Math.max(window.innerWidth || 1000, parent.clientWidth || 0);
+      const parentH = Math.max(window.innerHeight || 800, parent.clientHeight || 0);
       const widthChanged = Math.round(parentW) !== Math.round(W);
       W = Math.max(100, parentW);
       H = Math.max(100, parentH);
@@ -652,6 +652,9 @@ export default function MicrobeField({
     };
 
     resize();
+    const rafInit = requestAnimationFrame(() => {
+      resize();
+    });
 
     const io = new IntersectionObserver(
       (entries) => {
@@ -692,6 +695,7 @@ export default function MicrobeField({
 
     return () => {
       cancelAnimationFrame(raf);
+      cancelAnimationFrame(rafInit);
       io.disconnect();
       ro.disconnect();
       window.removeEventListener("resize", resize);
