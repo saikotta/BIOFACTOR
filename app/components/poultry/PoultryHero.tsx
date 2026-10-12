@@ -25,7 +25,7 @@ export default function PoultryHero() {
           {/* Eyebrow Label */}
           <div className={styles.eyebrowWrapper}>
             <span className={styles.eyebrowLine} aria-hidden="true" />
-            <span className={styles.eyebrowText}>— POULTRY</span>
+            <span className={styles.eyebrowText}>POULTRY</span>
           </div>
 
           {/* Main Display Headline (3-Line Editorial Structure matching Ruminants) */}

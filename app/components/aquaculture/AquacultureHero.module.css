@@ -6,7 +6,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: flex-end;
   overflow: hidden;
   background-color: #03110d;
 }
@@ -55,7 +55,7 @@
   margin-right: auto;
   padding-left: clamp(20px, 5vw, 72px);
   padding-right: clamp(20px, 5vw, 72px);
-  padding-top: clamp(8rem, 16vh, 12rem);
+  padding-top: clamp(4rem, 8vh, 6rem);
   padding-bottom: clamp(3rem, 6vh, 5rem);
 }
 
