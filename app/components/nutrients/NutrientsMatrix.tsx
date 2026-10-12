@@ -36,7 +36,7 @@ const NUTRIENT_STAGES: StageColumn[] = [
     darkText: false,
     cells: [
       { text: "Peak N demand met by fixation & mobilisation", fill: "90%", barColor: "#2D6A4F" },
-      { text: "Induced systemic resistance primes plant", fill: "80%", barColor: "#C25975", sup: "8" },
+      { text: "Induced systemic resistance primes plant", fill: "80%", barColor: "#C25975" },
       { text: "Balanced nutrition builds sound tissue", fill: "70%", barColor: "#D97706" },
     ],
   },
@@ -47,7 +47,7 @@ const NUTRIENT_STAGES: StageColumn[] = [
     darkText: false,
     cells: [
       { text: "P and K support flowering & energy transfer", fill: "85%", barColor: "#2D6A4F" },
-      { text: "Lipopeptides act against foliar pathogens", fill: "85%", barColor: "#C25975", sup: "9" },
+      { text: "Lipopeptides act against foliar pathogens", fill: "85%", barColor: "#C25975" },
       { text: "Better set and uniformity", fill: "75%", barColor: "#D97706" },
     ],
   },
@@ -57,9 +57,9 @@ const NUTRIENT_STAGES: StageColumn[] = [
     bg: "#66BB6A",
     darkText: true,
     cells: [
-      { text: "K for filling; Zn & Fe loading into grain", fill: "85%", barColor: "#2D6A4F", sup: "15" },
+      { text: "K for filling; Zn & Fe loading into grain", fill: "85%", barColor: "#2D6A4F" },
       { text: "Primed defences hold through fill", fill: "75%", barColor: "#C25975" },
-      { text: "Protein, sugars, soluble solids", fill: "85%", barColor: "#D97706", sup: "11" },
+      { text: "Protein, sugars, soluble solids", fill: "85%", barColor: "#D97706" },
     ],
   },
   {
@@ -69,8 +69,8 @@ const NUTRIENT_STAGES: StageColumn[] = [
     darkText: true,
     cells: [
       { text: "—", fill: "0%", barColor: "#2D6A4F", empty: true },
-      { text: "Biocontrol of storage rots", fill: "80%", barColor: "#F472B6", sup: "10" },
-      { text: "Less decay in storage and at retail", fill: "90%", barColor: "#FBBF24", sup: "10" },
+      { text: "Biocontrol of storage rots", fill: "80%", barColor: "#F472B6" },
+      { text: "Less decay in storage and at retail", fill: "90%", barColor: "#FBBF24" },
     ],
   },
 ];
