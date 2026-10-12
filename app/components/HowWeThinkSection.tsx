@@ -204,7 +204,7 @@ export default function HowWeThinkSection() {
           {/* Right: CTA Button */}
           <div className="flex items-center gap-3 flex-wrap">
             <a
-              href="/science-technology"
+              href="/science-technology/"
               className="bg-[#A9E889] hover:bg-[#97d876] text-[#06271A] font-semibold text-xs sm:text-sm px-6 sm:px-7 h-[46px] sm:h-[50px] flex items-center justify-center rounded-lg transition-colors text-center shadow-sm"
             >
               EXPLORE OUR SCIENCE

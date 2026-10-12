@@ -734,7 +734,7 @@ export default function ContactPage() {
               Get personalized solutions for your farming needs. Our team of agricultural
               experts is ready to help you increase yield and maximize profits.
             </p>
-            <Link href="/science-technology">
+            <Link href="/science-technology/">
               <button className="btn a" style={{ "--d": 1050, marginTop: "22px" } as React.CSSProperties}>
                 Explore Science &amp; Tech →
               </button>

@@ -2,24 +2,24 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const NAV_ITEMS = [
   { name: "HOME", href: "/" },
-  { name: "ABOUT", href: "/about" },
-  { name: "ONE HEALTH", href: "/one-health" },
-  { name: "SCIENCE & TECHNOLOGY", href: "/science-technology" },
-  { name: "RESOURCES", href: "/resources" },
-  { name: "CAREERS", href: "/careers" },
-  { name: "CONTACT", href: "/contact" },
+  { name: "ABOUT", href: "/about/" },
+  { name: "ONE HEALTH", href: "/one-health/" },
+  { name: "SCIENCE & TECHNOLOGY", href: "/science-technology/" },
+  { name: "RESOURCES", href: "/resources/" },
+  { name: "CAREERS", href: "/careers/" },
+  { name: "CONTACT", href: "/contact/" },
 ];
 
 const PRODUCT_ITEMS = [
-  { name: "Agriculture", href: "/nutrients" },
-  { name: "Aquaculture", href: "/aquaculture" },
-  { name: "Bioremediation", href: "/bioremediation" },
-  { name: "Poultry", href: "/poultry" },
-  { name: "Ruminants", href: "/ruminants" },
+  { name: "Agriculture", href: "/nutrients/" },
+  { name: "Aquaculture", href: "/aquaculture/" },
+  { name: "Bioremediation", href: "/bioremediation/" },
+  { name: "Poultry", href: "/poultry/" },
+  { name: "Ruminants", href: "/ruminants/" },
 ];
 
 export default function BiofactorHeader() {
@@ -27,26 +27,30 @@ export default function BiofactorHeader() {
   const [productDropdownOpen, setProductDropdownOpen] = useState(false);
   const [mobileProductOpen, setMobileProductOpen] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Close mobile menus on route change
+  // Normalize path helper for comparing routes (handles trailing slashes cleanly)
+  const isPathActive = (href: string) => {
+    const current = pathname ? pathname.replace(/\/+$/, "") || "/" : "/";
+    const target = href.replace(/\/+$/, "") || "/";
+    return current === target;
+  };
+
+  // Close menus when route changes
   useEffect(() => {
     setMobileMenuOpen(false);
     setProductDropdownOpen(false);
     setMobileProductOpen(false);
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
   }, [pathname]);
 
-
-
-  // Check if PRODUCTS should be active
+  // Check if PRODUCTS dropdown should be active
   const isProductActive =
-    pathname === "/ruminants" ||
-    pathname === "/poultry" ||
-    pathname === "/bioremediation" ||
-    pathname === "/aquaculture" ||
-    pathname === "/nutrients" ||
-    pathname.startsWith("/products");
+    PRODUCT_ITEMS.some((prod) => isPathActive(prod.href)) ||
+    (pathname ? pathname.startsWith("/products") : false);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -56,8 +60,30 @@ export default function BiofactorHeader() {
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+      }
+    };
   }, []);
+
+  const handleMouseEnter = () => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
+    setProductDropdownOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+    hoverTimeoutRef.current = setTimeout(() => {
+      setProductDropdownOpen(false);
+    }, 150);
+  };
 
   return (
     <div className="fixed top-2 sm:top-3.5 left-0 right-0 z-[9999] px-3 sm:px-6 pointer-events-none w-full max-w-[1440px] mx-auto">
@@ -77,7 +103,7 @@ export default function BiofactorHeader() {
           {/* Right Side Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1.5 lg:gap-2.5 xl:gap-3.5 ml-auto">
             {NAV_ITEMS.map((item, index) => {
-              const isActive = pathname === item.href;
+              const isActive = isPathActive(item.href);
               // Insert PRODUCTS dropdown after ABOUT (index 1)
               if (index === 1) {
                 return (
@@ -97,12 +123,15 @@ export default function BiofactorHeader() {
                     <div
                       className="relative"
                       ref={dropdownRef}
-                      onMouseEnter={() => setProductDropdownOpen(true)}
-                      onMouseLeave={() => setProductDropdownOpen(false)}
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
                     >
                       <button
                         type="button"
-                        onClick={() => setProductDropdownOpen(true)}
+                        onClick={() => {
+                          if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+                          setProductDropdownOpen((prev) => !prev);
+                        }}
                         className={`text-xs xl:text-[13px] font-semibold tracking-wider uppercase transition-all px-3.5 py-1.5 rounded-full whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
                           isProductActive || productDropdownOpen
                             ? "bg-[#167A4A] text-white shadow-sm font-bold"
@@ -125,12 +154,16 @@ export default function BiofactorHeader() {
                         </svg>
                       </button>
 
-                      {/* HORIZONTAL Dropdown Menu (FoundingLegals Capsule Sub-bar Style) */}
+                      {/* HORIZONTAL Dropdown Menu (Capsule Sub-bar Style) */}
                       {productDropdownOpen && (
-                        <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                        <div
+                          className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200"
+                          onMouseEnter={handleMouseEnter}
+                          onMouseLeave={handleMouseLeave}
+                        >
                           <div className="bg-[#d9ead3]/95 backdrop-blur-lg border border-[#167A4A]/20 shadow-[0_12px_36px_0_rgba(22,122,74,0.18)] rounded-full px-4 py-2 flex items-center gap-1 sm:gap-2 whitespace-nowrap">
                             {PRODUCT_ITEMS.map((prod, idx) => {
-                              const isProdActive = pathname === prod.href;
+                              const isProdActive = isPathActive(prod.href);
                               return (
                                 <React.Fragment key={prod.name}>
                                   {idx > 0 && (
@@ -138,8 +171,10 @@ export default function BiofactorHeader() {
                                   )}
                                   <Link
                                     href={prod.href}
-                                    prefetch={false}
-                                    onClick={() => setProductDropdownOpen(false)}
+                                    onClick={() => {
+                                      // Allow navigation transition to register before closing
+                                      setTimeout(() => setProductDropdownOpen(false), 80);
+                                    }}
                                     className={`px-3 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-200 ${
                                       isProdActive
                                         ? "bg-[#167A4A] text-white shadow-sm"
@@ -202,17 +237,18 @@ export default function BiofactorHeader() {
         {mobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 mt-2 bg-[#d9ead3]/95 backdrop-blur-xl border border-[#167A4A]/20 rounded-3xl shadow-[0_16px_40px_rgba(22,122,74,0.2)] p-5 flex flex-col gap-2.5 z-[9999] max-h-[calc(100vh-100px)] overflow-y-auto">
             {NAV_ITEMS.map((item, index) => {
-              const isActive = pathname === item.href;
+              const isActive = isPathActive(item.href);
               // Insert PRODUCT dropdown after ABOUT (index 1)
               if (index === 1) {
                 return (
                   <React.Fragment key={item.name}>
                     <Link
                       href={item.href}
-                      prefetch={false}
                       onClick={() => {
-                        setMobileMenuOpen(false);
-                        setMobileProductOpen(false);
+                        setTimeout(() => {
+                          setMobileMenuOpen(false);
+                          setMobileProductOpen(false);
+                        }, 80);
                       }}
                       className={`text-xs font-bold tracking-wider uppercase px-4 py-2.5 rounded-xl transition-all ${
                         isActive
@@ -252,15 +288,16 @@ export default function BiofactorHeader() {
                       {mobileProductOpen && (
                         <div className="flex flex-wrap gap-2 pt-3">
                           {PRODUCT_ITEMS.map((product) => {
-                            const isProdActive = pathname === product.href;
+                            const isProdActive = isPathActive(product.href);
                             return (
                               <Link
                                 key={product.name}
                                 href={product.href}
-                                prefetch={false}
                                 onClick={() => {
-                                  setMobileMenuOpen(false);
-                                  setMobileProductOpen(false);
+                                  setTimeout(() => {
+                                    setMobileMenuOpen(false);
+                                    setMobileProductOpen(false);
+                                  }, 80);
                                 }}
                                 className={`px-3 py-1.5 text-xs font-bold tracking-wider uppercase rounded-full transition-all ${
                                   isProdActive
@@ -283,10 +320,11 @@ export default function BiofactorHeader() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  prefetch={false}
                   onClick={() => {
-                    setMobileMenuOpen(false);
-                    setMobileProductOpen(false);
+                    setTimeout(() => {
+                      setMobileMenuOpen(false);
+                      setMobileProductOpen(false);
+                    }, 80);
                   }}
                   className={`text-xs font-bold tracking-wider uppercase px-4 py-2.5 rounded-xl transition-all ${
                     isActive

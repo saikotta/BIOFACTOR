@@ -924,8 +924,10 @@ export default function CareersPage() {
               {/* Action CTA */}
               <div className="pt-2">
                 <Link
-                  href="/contact"
-                  onClick={() => setIsHrModalOpen(false)}
+                  href="/contact/"
+                  onClick={() => {
+                    setTimeout(() => setIsHrModalOpen(false), 80);
+                  }}
                   className="w-full inline-flex items-center justify-center gap-2 bg-[#2D6A4F] hover:bg-[#173522] text-white font-bold text-xs font-mono uppercase py-3 rounded-xl transition-all shadow-md hover:shadow-lg"
                 >
                   Go to Contact Page <FiArrowRight />

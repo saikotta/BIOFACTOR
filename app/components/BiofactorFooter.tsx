@@ -67,11 +67,11 @@ export default function BiofactorFooter() {
             <span className="font-mono text-xs font-bold tracking-[0.18em] text-[#167A4A] uppercase">Company</span>
             <nav className="flex flex-col gap-2.5">
               {[
-                { label: "About", href: "/about" },
-                { label: "One Health", href: "/one-health" },
-                { label: "Science & Technology", href: "/science-technology" },
-                { label: "Resources", href: "/resources" },
-                { label: "Careers", href: "/careers" },
+                { label: "About", href: "/about/" },
+                { label: "One Health", href: "/one-health/" },
+                { label: "Science & Technology", href: "/science-technology/" },
+                { label: "Resources", href: "/resources/" },
+                { label: "Careers", href: "/careers/" },
               ].map((item) => (
                 <Link
                   key={item.label}
@@ -90,11 +90,11 @@ export default function BiofactorFooter() {
             <span className="font-mono text-xs font-bold tracking-[0.18em] text-[#167A4A] uppercase">Products</span>
             <nav className="flex flex-col gap-2.5">
               {[
-                { label: "Agriculture", href: "/nutrients" },
-                { label: "Aquaculture", href: "/aquaculture" },
-                { label: "Bioremediation", href: "/bioremediation" },
-                { label: "Poultry", href: "/poultry" },
-                { label: "Ruminants", href: "/ruminants" },
+                { label: "Agriculture", href: "/nutrients/" },
+                { label: "Aquaculture", href: "/aquaculture/" },
+                { label: "Bioremediation", href: "/bioremediation/" },
+                { label: "Poultry", href: "/poultry/" },
+                { label: "Ruminants", href: "/ruminants/" },
               ].map((item) => (
                 <Link
                   key={item.label}
@@ -113,20 +113,31 @@ export default function BiofactorFooter() {
             <span className="font-mono text-xs font-bold tracking-[0.18em] text-[#167A4A] uppercase">Contact</span>
             <nav className="flex flex-col gap-2.5">
               {[
-                { label: "Contact Us", href: "/contact" },
-                { label: "info@biofactor.in", href: "mailto:info@biofactor.in" },
-                { label: "+91 7013074400", href: "tel:7013074400" },
-                { label: "Hyderabad, Telangana", href: "/contact" },
-              ].map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  data-footer-link
-                  className="font-sans text-sm text-[#26382D] hover:text-[#167A4A] font-medium transition-colors"
-                >
-                  {item.label}
-                </Link>
-              ))}
+                { label: "Contact Us", href: "/contact/", isExternal: false },
+                { label: "info@biofactor.in", href: "mailto:info@biofactor.in", isExternal: true },
+                { label: "+91 7013074400", href: "tel:7013074400", isExternal: true },
+                { label: "Hyderabad, Telangana", href: "/contact/", isExternal: false },
+              ].map((item) =>
+                item.isExternal ? (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    data-footer-link
+                    className="font-sans text-sm text-[#26382D] hover:text-[#167A4A] font-medium transition-colors"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    data-footer-link
+                    className="font-sans text-sm text-[#26382D] hover:text-[#167A4A] font-medium transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                )
+              )}
             </nav>
           </div>
 
