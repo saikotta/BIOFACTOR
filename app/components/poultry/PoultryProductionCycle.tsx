@@ -47,17 +47,49 @@ export default function PoultryProductionCycle() {
     observeDocument();
     window.addEventListener("resize", scheduleFit, { passive: true });
 
+    // Trigger matrix entrance animation when #poultry-cycle-sec enters viewport
+    const sec = document.getElementById("poultry-cycle-sec");
+    const triggerMatrixAnimation = () => {
+      const doc = frame?.contentDocument;
+      if (!doc) return;
+      const frameEl = doc.querySelector(".frame");
+      const matrix = doc.getElementById("life-stage-matrix");
+      if (frameEl && matrix) {
+        frameEl.classList.add("is-intro");
+        matrix.classList.add("is-animated", "sweep-active");
+      }
+    };
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          triggerMatrixAnimation();
+          io.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sec) io.observe(sec);
+
     return () => {
       frame?.removeEventListener("load", observeDocument);
       window.removeEventListener("resize", scheduleFit);
       observer.disconnect();
+      io.disconnect();
       window.cancelAnimationFrame(resizeFrame);
       window.clearTimeout(resizeTimer);
     };
   }, []);
 
   return (
-    <section className="w-full bg-[#d9ebd3]" data-ruminants-section="cycle" data-n="Production Cycle" aria-label="Poultry biology at every life stage">
+    <section
+      id="poultry-cycle-sec"
+      className="w-full bg-[#d9ebd3]"
+      data-ruminants-section="cycle"
+      data-n="Production Cycle"
+      aria-label="Poultry biology at every life stage"
+    >
       <div className="rv w-full">
         <iframe
           ref={frameRef}
@@ -65,8 +97,23 @@ export default function PoultryProductionCycle() {
           src="/poultry-production-stages.html?v=1"
           title="Poultry biology across life stages"
           loading="eager"
-          style={{ height: "400px" }}
-          onLoad={(event) => fitFrame(event.currentTarget)}
+          style={{ height: "1200px" }}
+          onLoad={(event) => {
+            fitFrame(event.currentTarget);
+            const sec = document.getElementById("poultry-cycle-sec");
+            if (sec) {
+              const rect = sec.getBoundingClientRect();
+              if (rect.top < window.innerHeight && rect.bottom > 0) {
+                const doc = event.currentTarget.contentDocument;
+                const frameEl = doc?.querySelector(".frame");
+                const matrix = doc?.getElementById("life-stage-matrix");
+                if (frameEl && matrix) {
+                  frameEl.classList.add("is-intro");
+                  matrix.classList.add("is-animated", "sweep-active");
+                }
+              }
+            }
+          }}
         />
       </div>
     </section>

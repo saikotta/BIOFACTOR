@@ -52,6 +52,31 @@ export default function CultureCycleTable() {
     const t2 = setTimeout(scheduleFit, 1200);
     const t3 = setTimeout(scheduleFit, 2500);
 
+    // Trigger matrix entrance animation when #culture-cycle-sec enters viewport
+    const sec = document.getElementById("culture-cycle-sec");
+    const triggerMatrixAnimation = () => {
+      const doc = frame?.contentDocument;
+      if (!doc) return;
+      const frameEl = doc.querySelector<HTMLElement>(".frame");
+      const matrix = doc.getElementById("culture-cycle-matrix");
+      if (frameEl && matrix) {
+        frameEl.classList.add("is-intro");
+        matrix.classList.add("is-animated", "sweep-active");
+      }
+    };
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          triggerMatrixAnimation();
+          io.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sec) io.observe(sec);
+
     return () => {
       window.removeEventListener("resize", scheduleFit);
       frame.removeEventListener("load", attachDocObserver);
@@ -60,6 +85,7 @@ export default function CultureCycleTable() {
       clearTimeout(t1); clearTimeout(t2); clearTimeout(t3);
       resizeObserver.disconnect();
       frameObserver.disconnect();
+      io.disconnect();
     };
   }, []);
 
