@@ -4,6 +4,7 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -53,10 +54,11 @@
   max-width: 1440px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: auto;
   padding-left: clamp(20px, 5vw, 72px);
   padding-right: clamp(20px, 5vw, 72px);
-  padding-top: clamp(4rem, 8vh, 6rem);
-  padding-bottom: clamp(3rem, 6vh, 5rem);
+  padding-top: 1.5rem;
+  padding-bottom: clamp(1.25rem, 2.5vh, 2rem);
 }
 
 /* Content block */
@@ -65,6 +67,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-top: auto;
 }
 
 /* Eyebrow */
@@ -72,7 +75,7 @@
   display: flex;
   align-items: center;
   gap: 0.625rem;
-  margin-bottom: 1.125rem;
+  margin-bottom: 0.85rem;
 }
 
 .eyebrowLine {
@@ -99,7 +102,7 @@
   color: #f8fafc;
   letter-spacing: -0.03em;
   line-height: 0.9;
-  margin-bottom: 1.35rem;
+  margin-bottom: 1rem;
   max-width: 650px;
   font-size: clamp(2.35rem, 6.12vw, 5.5rem);
 }

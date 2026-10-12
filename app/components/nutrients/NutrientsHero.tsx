@@ -109,7 +109,7 @@ export default function NutrientsHero() {
 
   return (
     <>
-      <div 
+      <div
         id="br-progress-bar"
         className="fixed top-0 left-0 right-0 h-[3px] bg-[#B8E986] origin-left scale-x-0 z-[60]"
       />
@@ -134,6 +134,7 @@ export default function NutrientsHero() {
             </h1>
 
             {/* Subtitle Copy */}
+
             <p className="font-serif italic font-normal text-white/90 leading-[1.45] tracking-tight text-[1.25rem] sm:text-[1.4rem] md:text-[1.55rem] max-w-[640px] br-quote">
               Converting unavailable soil reserves into active plant nutrition through living microbial pathways.
             </p>
