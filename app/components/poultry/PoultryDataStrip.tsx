@@ -77,7 +77,7 @@ export default function PoultryDataStrip() {
                 className="font-jetbrains uppercase"
                 style={{ fontSize: "0.75rem", letterSpacing: "0.1em", color: "#9be39f" }}
               >
-                {s.source}{s.sup ? <sup>{s.sup}</sup> : null}
+                {s.source}
               </span>
             </div>
           ))}

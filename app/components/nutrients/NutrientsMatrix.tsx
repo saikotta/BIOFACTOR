@@ -391,9 +391,6 @@ export default function NutrientsMatrix() {
                             </div>
                             <p className="br-mx-cell-text font-serif text-[13px] sm:text-[14px] leading-snug pt-1">
                               {cell.text}
-                              {cell.sup && (
-                                <sup className="text-[9px] font-mono ml-0.5">{cell.sup}</sup>
-                              )}
                             </p>
                           </>
                         ) : (

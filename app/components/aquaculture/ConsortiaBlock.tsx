@@ -112,7 +112,6 @@ export default function ConsortiaBlock() {
             <p className="mt-3 font-jetbrains text-[10px] uppercase tracking-[0.14em] text-[#cfe6bd]/50">
               Xu &amp; Pan 2013,{" "}
               <em className="not-italic normal-case text-[#cfe6bd]/40">Aquaculture</em>
-              <sup className="text-[#6fbf73]/70"> 7</sup>
             </p>
           </div>
 

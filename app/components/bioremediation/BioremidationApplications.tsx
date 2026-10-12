@@ -55,7 +55,7 @@ export default function BioremidationApplications() {
                   Specialist microbes for specialist pollutants.
                 </h5>
                 <p className="text-base sm:text-lg text-[#26382D]/85 leading-relaxed max-w-2xl font-sans">
-                  Industrial effluents carry compounds that ordinary sewage bacteria rarely meet. Azo dyes make up about two-thirds of synthetic dyes, and an estimated 10–15% of dye produced is discarded into the environment.<sup className="text-[10px]">4</sup> Tannery effluent can carry hexavalent chromium, which is toxic and carcinogenic.
+                  Industrial effluents carry compounds that ordinary sewage bacteria rarely meet. Azo dyes make up about two-thirds of synthetic dyes, and an estimated 10–15% of dye produced is discarded into the environment. Tannery effluent can carry hexavalent chromium, which is toxic and carcinogenic.
                 </p>
               </div>
 
@@ -66,7 +66,7 @@ export default function BioremidationApplications() {
                     DYE DECOLOURISATION
                   </span>
                   <p className="text-sm sm:text-base text-[#173522]/90 leading-relaxed font-sans">
-                    Bacterial azoreductases split the azo bond without oxygen. An aerobic step then breaks down the aromatic amines this produces.<sup className="text-[10px]">4</sup>
+                    Bacterial azoreductases split the azo bond without oxygen. An aerobic step then breaks down the aromatic amines this produces.
                   </p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-6 items-baseline pt-4 border-t border-[#173522]/08">
@@ -74,7 +74,7 @@ export default function BioremidationApplications() {
                     CHROMIUM DETOXIFICATION
                   </span>
                   <p className="text-sm sm:text-base text-[#173522]/90 leading-relaxed font-sans">
-                    Chromium-resistant bacteria reduce toxic Cr(VI) to far less mobile and less toxic Cr(III).<sup className="text-[10px]">5</sup>
+                    Chromium-resistant bacteria reduce toxic Cr(VI) to far less mobile and less toxic Cr(III).
                   </p>
                 </div>
               </div>
@@ -85,7 +85,7 @@ export default function BioremidationApplications() {
                   50% OF 100 MG/L Cr(VI) REDUCED IN 24 HOURS
                 </span>
                 <p className="font-serif italic text-sm sm:text-base text-[#173522]/90 leading-relaxed">
-                  Bacteria isolated from tannery effluent achieved this, and an enriched tannery community removed Cr(VI) completely at up to 5 mg/L within 24 hours. Without active microbes, organic matter alone reduced only 13%.<sup className="text-[10px]">5</sup>
+                  Bacteria isolated from tannery effluent achieved this, and an enriched tannery community removed Cr(VI) completely at up to 5 mg/L within 24 hours. Without active microbes, organic matter alone reduced only 13%.
                 </p>
               </div>
             </div>
@@ -101,7 +101,7 @@ export default function BioremidationApplications() {
                   Where biology helps most is downstream of the tank.
                 </h5>
                 <p className="text-base sm:text-lg text-[#26382D]/85 leading-relaxed max-w-2xl font-sans">
-                  A septic tank is already an anaerobic digester. Its own bacteria break down solids slowly, and sludge still builds up and must be emptied. In many countries the larger problem is what happens next: septage collected from tanks is often dumped untreated into drains, fields and water bodies. In India, for example, 60% of urban toilets rely on on-site systems, and in 2021 only about 28% of the country’s sewage was actually treated.<sup className="text-[10px]">21</sup>
+                  A septic tank is already an anaerobic digester. Its own bacteria break down solids slowly, and sludge still builds up and must be emptied. In many countries the larger problem is what happens next: septage collected from tanks is often dumped untreated into drains, fields and water bodies. In India, for example, 60% of urban toilets rely on on-site systems, and in 2021 only about 28% of the country’s sewage was actually treated.
                 </p>
               </div>
 
@@ -131,7 +131,7 @@ export default function BioremidationApplications() {
                   EVIDENCE-BASED SOLUTIONS
                 </span>
                 <p className="font-serif italic text-sm sm:text-base text-[#173522]/90 leading-relaxed">
-                  <strong className="font-bold font-sans not-italic">Not every claim holds up.</strong> A double-blind trial in 48 working septic tanks found no significant long-term reduction in solids from commercial biological additives across all maintenance levels.<sup className="text-[10px]">8</sup> We design septic solutions around evidence, not around dosing a tank that is already working.
+                  <strong className="font-bold font-sans not-italic">Not every claim holds up.</strong> A double-blind trial in 48 working septic tanks found no significant long-term reduction in solids from commercial biological additives across all maintenance levels. We design septic solutions around evidence, not around dosing a tank that is already working.
                 </p>
               </div>
             </div>

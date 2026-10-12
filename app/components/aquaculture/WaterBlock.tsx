@@ -9,7 +9,7 @@ const ZONES = [
     body: (
       <>
         Nitrifying bacteria near aerators convert ammonia to nitrate, and{" "}
-        <em>Bacillus</em> clear dissolved organic matter so the plankton bloom stays steady.<sup>7</sup>
+        <em>Bacillus</em> clear dissolved organic matter so the plankton bloom stays steady.
       </>
     ),
   },
@@ -20,7 +20,7 @@ const ZONES = [
     body: (
       <>
         Facultative and photosynthetic bacteria such as{" "}
-        <em>Rhodopseudomonas palustris</em> keep taking up ammonia and nitrite through night-time oxygen dips.<sup>8</sup>
+        <em>Rhodopseudomonas palustris</em> keep taking up ammonia and nitrite through night-time oxygen dips.
       </>
     ),
   },

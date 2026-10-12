@@ -74,7 +74,7 @@ export default function BioremidationDataStrip() {
                 className="font-jetbrains uppercase"
                 style={{ fontSize: "0.75rem", letterSpacing: "0.1em", color: "#9be39f" }}
               >
-                {s.source}<sup>{s.sup}</sup>
+                {s.source}
               </span>
             </div>
           ))}
