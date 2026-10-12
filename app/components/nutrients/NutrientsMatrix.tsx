@@ -55,7 +55,7 @@ const NUTRIENT_STAGES: StageColumn[] = [
     number: "04",
     name: "GRAIN / FILL",
     bg: "#66BB6A",
-    darkText: false,
+    darkText: true,
     cells: [
       { text: "K for filling; Zn & Fe loading into grain", fill: "85%", barColor: "#2D6A4F", sup: "15" },
       { text: "Primed defences hold through fill", fill: "75%", barColor: "#C25975" },
