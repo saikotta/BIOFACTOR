@@ -1,72 +1,86 @@
 import React from "react";
 
+const stats = [
+  {
+    value: "~US$6 bn",
+    desc: "Estimated yearly global cost of necrotic enteritis, a gut disease of broilers.",
+    source: "2015 industry estimate",
+    sup: "",
+  },
+  {
+    value: "2006",
+    desc: "The EU banned all antibiotics as feed growth promoters. Other markets have followed, including India's 2019 ban on colistin for food animals.",
+    source: "European Commission · India",
+    sup: "",
+  },
+  {
+    value: "10–30%",
+    desc: "of the phosphorus in corn and soybean meal is available to poultry. The rest passes through into the litter.",
+    source: "Feed phosphorus",
+    sup: "",
+  },
+];
+
 export default function PoultryDataStrip() {
   return (
     <section className="w-full" data-ruminants-section="stats" data-n="Key Stats">
-      {/* Full-Bleed Dark Brown Table */}
+      {/* Full-Bleed Dark Green Data Table */}
       <div
-        className="w-full bg-[#1B3B2B] py-9 lg:py-[44px] relative overflow-hidden"
+        className="w-full"
         style={{
-          borderTop: '1px solid rgba(109, 190, 69, 0.3)',
-          borderBottom: '1px solid rgba(109, 190, 69, 0.3)'
+          background: "#1f4d38",
+          borderTop: "1px solid rgba(255,255,255,0.08)",
         }}
       >
-        <div className="w-full max-w-[1440px] mx-auto px-5 md:px-8 lg:px-[clamp(48px,5vw,72px)] relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 items-stretch">
-            {/* Cell 1: ~US$6 bn */}
-            <div className="led rv md:pr-8 lg:pr-10 md:border-r pb-6 md:pb-0 border-b md:border-b-0 flex flex-col justify-between h-full" style={{ borderColor: 'rgba(109, 190, 69, 0.25)', borderRightWidth: '1px' }} data-stat>
-              <div>
-                <div className="font-display font-normal text-[clamp(2.9rem,3.5vw,3.8rem)] tracking-tight leading-none mb-5" style={{ color: '#6DBE45' }} data-cu="~US$6 bn">
-                  ~US$6 bn
-                </div>
-                <p className="text-[15px] sm:text-[16px] leading-[1.55] font-normal" style={{ color: '#E8F3DD' }}>
-                  Estimated yearly global cost of necrotic enteritis, a gut disease of broilers.
-                </p>
-              </div>
+        <div className="w-full max-w-[1440px] mx-auto grid grid-cols-1 sm:grid-cols-3">
+          {stats.map((s, i) => (
+            <div
+              key={i}
+              className={`flex flex-col py-10 sm:py-12 ${
+                i < stats.length - 1 ? "border-b sm:border-b-0 sm:border-r" : ""
+              }`}
+              style={{
+                paddingInline: "clamp(20px, 5vw, 72px)",
+                borderColor: "rgba(107,191,58,0.18)",
+              }}
+            >
+              <span
+                data-cu={s.value}
+                className="font-inter-tight font-extrabold leading-none mb-5"
+                style={{
+                  fontSize: "clamp(2.4rem,4.5vw,3.4rem)",
+                  color: "#9be39f",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                {s.value}
+              </span>
 
-              <div className="pt-2.5 mt-6 border-t" style={{ borderColor: 'rgba(109, 190, 69, 0.2)', borderTopWidth: '1px' }}>
-                <span className="font-mono text-[10px] sm:text-[11px] font-semibold tracking-[0.08em] uppercase" style={{ color: '#6DBE45' }}>
-                  2015 industry estimate
-                </span>
-              </div>
+              <p
+                className="font-newsreader flex-1 mb-0"
+                style={{
+                  fontSize: "clamp(0.95rem,1.2vw,1.05rem)",
+                  lineHeight: 1.65,
+                  color: "rgba(234,244,223,0.80)",
+                }}
+              >
+                {s.desc}
+              </p>
+
+              <div
+                className="my-5"
+                style={{ width: "2.5rem", height: "1px", background: "rgba(107,191,58,0.35)" }}
+                aria-hidden="true"
+              />
+
+              <span
+                className="font-jetbrains uppercase"
+                style={{ fontSize: "0.75rem", letterSpacing: "0.1em", color: "#9be39f" }}
+              >
+                {s.source}{s.sup ? <sup>{s.sup}</sup> : null}
+              </span>
             </div>
-
-            {/* Cell 2: 2006 */}
-            <div className="led rv d1 md:px-8 lg:px-10 md:border-r pb-6 md:pb-0 border-b md:border-b-0 flex flex-col justify-between h-full" style={{ borderColor: 'rgba(109, 190, 69, 0.25)', borderRightWidth: '1px' }} data-stat>
-              <div>
-                <div className="font-display font-normal text-[clamp(2.9rem,3.5vw,3.8rem)] tracking-tight leading-none mb-5" style={{ color: '#6DBE45' }} data-cu="2006">
-                  2006
-                </div>
-                <p className="text-[15px] sm:text-[16px] leading-[1.55] font-normal" style={{ color: '#E8F3DD' }}>
-                  The EU banned all antibiotics as feed growth promoters. Other markets have followed, including India&apos;s 2019 ban on colistin for food animals.
-                </p>
-              </div>
-
-              <div className="pt-2.5 mt-6 border-t" style={{ borderColor: 'rgba(109, 190, 69, 0.2)', borderTopWidth: '1px' }}>
-                <span className="font-mono text-[10px] sm:text-[11px] font-semibold tracking-[0.08em] uppercase" style={{ color: '#6DBE45' }}>
-                  European Commission · India
-                </span>
-              </div>
-            </div>
-
-            {/* Cell 3: 10–30% */}
-            <div className="led rv d2 md:pl-8 lg:pl-10 flex flex-col justify-between h-full" data-stat>
-              <div>
-                <div className="font-display font-normal text-[clamp(2.9rem,3.5vw,3.8rem)] tracking-tight leading-none mb-5" style={{ color: '#6DBE45' }} data-cu="10–30%">
-                  10–30%
-                </div>
-                <p className="text-[15px] sm:text-[16px] leading-[1.55] font-normal" style={{ color: '#E8F3DD' }}>
-                  of the phosphorus in corn and soybean meal is available to poultry. The rest passes through into the litter.
-                </p>
-              </div>
-
-              <div className="pt-2.5 mt-6 border-t" style={{ borderColor: 'rgba(109, 190, 69, 0.2)', borderTopWidth: '1px' }}>
-                <span className="font-mono text-[10px] sm:text-[11px] font-semibold tracking-[0.08em] uppercase" style={{ color: '#6DBE45' }}>
-                  Feed phosphorus
-                </span>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 

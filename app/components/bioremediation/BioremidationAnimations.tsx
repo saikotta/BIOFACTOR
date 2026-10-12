@@ -65,44 +65,55 @@ export default function BioremidationAnimations() {
       }
     });
 
+    const triggerCountUp = (el: HTMLElement) => {
+      const data = cuMap.get(el);
+      if (!data || data.hasCounted || data.isCounting) return;
+      data.isCounting = true;
+      const t0 = performance.now();
+      const target = data.targetText;
+
+      (function runCount(now) {
+        const progress = reduce ? 1 : Math.min(1, (now - t0) / 1500);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = target.replace(/\d+(?:\.\d+)?/g, (n) =>
+          n.includes(".") ? (Number(n) * ease).toFixed(1) : Math.round(Number(n) * ease).toString()
+        );
+        if (progress < 1) {
+          requestAnimationFrame(runCount);
+        } else {
+          el.textContent = target;
+          data.isCounting = false;
+          data.hasCounted = true;
+        }
+      })(t0);
+    };
+
     const cuObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           const el = entry.target as HTMLElement;
-          const data = cuMap.get(el);
-          if (!data) return;
-
           if (entry.isIntersecting) {
-            if (!data.hasCounted && !data.isCounting) {
-              data.isCounting = true;
-              const t0 = performance.now();
-              const target = data.targetText;
-
-              (function runCount(now) {
-                const progress = reduce ? 1 : Math.min(1, (now - t0) / 1500);
-                const ease = 1 - Math.pow(1 - progress, 3);
-                el.textContent = target.replace(/\d+(?:\.\d+)?/g, (n) =>
-                  n.includes(".") ? (Number(n) * ease).toFixed(1) : Math.round(Number(n) * ease).toString()
-                );
-                if (progress < 1) {
-                  requestAnimationFrame(runCount);
-                } else {
-                  el.textContent = target;
-                  data.isCounting = false;
-                  data.hasCounted = true;
-                }
-              })(t0);
-            }
+            triggerCountUp(el);
           } else if (entry.intersectionRatio === 0) {
-            data.hasCounted = false;
-            el.textContent = data.targetText;
+            const data = cuMap.get(el);
+            if (data) {
+              data.hasCounted = false;
+              el.textContent = data.targetText;
+            }
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.1, rootMargin: "50px 0px 50px 0px" }
     );
 
-    cuElements.forEach((el) => cuObserver.observe(el));
+    cuElements.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 50 && rect.bottom > -50) {
+        triggerCountUp(el);
+      } else {
+        cuObserver.observe(el);
+      }
+    });
 
     // ------------------------------------------------------------------
     // 4. Parallax Scroll Observer (.br-ph-in, .ph-in)

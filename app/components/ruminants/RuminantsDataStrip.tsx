@@ -1,63 +1,86 @@
 import React from "react";
 
+const stats = [
+  {
+    value: "944 Mt",
+    desc: "of milk was forecast to be produced worldwide in 2023. The largest producer, India, supplies about a quarter.",
+    source: "FAO / FAOSTAT",
+    sup: "",
+  },
+  {
+    value: "up to 12%",
+    desc: "of a ruminant's energy intake is lost as methane during rumen fermentation.",
+    source: "FAO",
+    sup: "",
+  },
+  {
+    value: "19–26%",
+    desc: "of early- and mid-lactation dairy cows show subacute ruminal acidosis in surveys.",
+    source: "PLAIZIER ET AL. 2008",
+    sup: "",
+  },
+];
+
 export default function RuminantsDataStrip() {
   return (
     <section className="w-full" data-ruminants-section="stats" data-n="Key Stats" data-motion style={{ minHeight: 0 }}>
-      {/* 1. Pale Mint Editorial Data Band with Top Border */}
-      <div className="w-full bg-[#D8E8D3] text-[#173522] border-t-4 border-[#6DBE45] pt-4 pb-3 md:pt-5 md:pb-4 lg:pt-6 lg:pb-4">
-        <div className="w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)]">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 lg:gap-16 items-stretch">
-            {/* Cell 1: 944 Mt */}
-            <div className="led rv flex flex-col justify-between h-full space-y-4" data-stat>
-              <div>
-                <div className="font-display font-extrabold text-[clamp(2.75rem,3.8vw,4.5rem)] text-[#173522] tracking-tight leading-none mb-3" data-cu="944 Mt">
-                  944 Mt
-                </div>
-                <p className="text-sm sm:text-base text-[#173522]/90 leading-relaxed font-normal max-w-sm">
-                  of milk was forecast to be produced worldwide in 2023. The largest producer, India, supplies about a quarter.
-                </p>
-              </div>
-              <div className="pt-3 border-t border-[#173522]/20" data-stat-rule>
-                <span className="font-mono text-xs font-semibold tracking-widest text-[#173522]/70 uppercase">
-                  FAO / FAOSTAT
-                </span>
-              </div>
-            </div>
+      {/* 1. Deep Forest Editorial Data Band */}
+      <div
+        className="w-full"
+        style={{
+          background: "#1f4d38",
+          borderTop: "1px solid rgba(255,255,255,0.08)",
+        }}
+      >
+        <div className="w-full max-w-[1440px] mx-auto grid grid-cols-1 sm:grid-cols-3">
+          {stats.map((s, i) => (
+            <div
+              key={i}
+              className={`flex flex-col py-10 sm:py-12 ${
+                i < stats.length - 1 ? "border-b sm:border-b-0 sm:border-r" : ""
+              }`}
+              style={{
+                paddingInline: "clamp(20px, 5vw, 72px)",
+                borderColor: "rgba(107,191,58,0.18)",
+              }}
+            >
+              <span
+                data-cu={s.value}
+                className="font-inter-tight font-extrabold leading-none mb-5"
+                style={{
+                  fontSize: "clamp(2.4rem,4.5vw,3.4rem)",
+                  color: "#9be39f",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                {s.value}
+              </span>
 
-            {/* Cell 2: up to 12% */}
-            <div className="led rv d1 flex flex-col justify-between h-full space-y-4" data-stat>
-              <div>
-                <div className="font-display font-extrabold text-[clamp(2.75rem,3.8vw,4.5rem)] text-[#2D6A4F] tracking-tight leading-none mb-3" data-cu="up to 12%">
-                  up to 12%
-                </div>
-                <p className="text-sm sm:text-base text-[#173522]/90 leading-relaxed font-normal max-w-sm">
-                  of a ruminant&apos;s energy intake is lost as methane during rumen fermentation.
-                </p>
-              </div>
-              <div className="pt-3 border-t border-[#173522]/20" data-stat-rule>
-                <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">
-                  FAO
-                </span>
-              </div>
-            </div>
+              <p
+                className="font-newsreader flex-1 mb-0"
+                style={{
+                  fontSize: "clamp(0.95rem,1.2vw,1.05rem)",
+                  lineHeight: 1.65,
+                  color: "rgba(234,244,223,0.80)",
+                }}
+              >
+                {s.desc}
+              </p>
 
-            {/* Cell 3: 19–26% */}
-            <div className="led rv d2 flex flex-col justify-between h-full space-y-4" data-stat>
-              <div>
-                <div className="font-display font-extrabold text-[clamp(2.75rem,3.8vw,4.5rem)] text-[#2D6A4F] tracking-tight leading-none mb-3" data-cu="19–26%">
-                  19–26%
-                </div>
-                <p className="text-sm sm:text-base text-[#173522]/90 leading-relaxed font-normal max-w-sm">
-                  of early- and mid-lactation dairy cows show subacute ruminal acidosis in surveys.
-                </p>
-              </div>
-              <div className="pt-3 border-t border-[#173522]/20" data-stat-rule>
-                <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">
-                  PLAIZIER ET AL. 2008
-                </span>
-              </div>
+              <div
+                className="my-5"
+                style={{ width: "2.5rem", height: "1px", background: "rgba(107,191,58,0.35)" }}
+                aria-hidden="true"
+              />
+
+              <span
+                className="font-jetbrains uppercase"
+                style={{ fontSize: "0.75rem", letterSpacing: "0.1em", color: "#9be39f" }}
+              >
+                {s.source}{s.sup ? <sup>{s.sup}</sup> : null}
+              </span>
             </div>
-          </div>
+          ))}
         </div>
       </div>
 

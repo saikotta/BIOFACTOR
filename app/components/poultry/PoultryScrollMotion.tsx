@@ -97,7 +97,9 @@ export default function PoultryScrollMotion() {
       (function runCount(now) {
         const progress = reduce ? 1 : Math.min(1, (now - t0) / 1500);
         const ease = 1 - Math.pow(1 - progress, 3);
-        el.textContent = target.replace(/\d+/g, (n) => String(Math.round(+n * ease)));
+        el.textContent = target.replace(/\d+(?:\.\d+)?/g, (n) =>
+          n.includes(".") ? (Number(n) * ease).toFixed(1) : Math.round(Number(n) * ease).toString()
+        );
         if (progress < 1) {
           requestAnimationFrame(runCount);
         } else {

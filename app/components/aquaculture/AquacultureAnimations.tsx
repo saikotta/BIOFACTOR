@@ -115,48 +115,58 @@ export default function AquacultureAnimations() {
       }
     });
 
+    const triggerCountUp = (el: HTMLElement) => {
+      const data = cuMap.get(el);
+      if (!data || data.hasCounted || data.isCounting) return;
+      data.isCounting = true;
+      const t0 = performance.now();
+      const target = data.targetText;
+      const hasDigits = /\d/.test(target);
+
+      if (!hasDigits || reduce) {
+        el.textContent = target;
+        data.isCounting = false;
+        data.hasCounted = true;
+        return;
+      }
+
+      (function runCount(now) {
+        const progress = Math.min(1, (now - t0) / 1500);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = target.replace(/\d+(?:\.\d+)?/g, (n) =>
+          n.includes(".") ? (Number(n) * ease).toFixed(1) : Math.round(Number(n) * ease).toString()
+        );
+        if (progress < 1) {
+          requestAnimationFrame(runCount);
+        } else {
+          el.textContent = target;
+          data.isCounting = false;
+          data.hasCounted = true;
+        }
+      })(t0);
+    };
+
     const cuObserver = new IntersectionObserver(
       (entries, observer) => {
         entries.forEach((entry) => {
-          const el = entry.target as HTMLElement;
-          const data = cuMap.get(el);
-          if (!data) return;
-
           if (entry.isIntersecting) {
-            if (!data.hasCounted && !data.isCounting) {
-              data.isCounting = true;
-              observer.unobserve(el);
-              const t0 = performance.now();
-              const target = data.targetText;
-              const hasDigits = /\d/.test(target);
-
-              if (!hasDigits || reduce) {
-                el.textContent = target;
-                data.isCounting = false;
-                data.hasCounted = true;
-                return;
-              }
-
-              (function runCount(now) {
-                const progress = Math.min(1, (now - t0) / 1500);
-                const ease = 1 - Math.pow(1 - progress, 3);
-                el.textContent = target.replace(/\d+/g, (n) => String(Math.round(+n * ease)));
-                if (progress < 1) {
-                  requestAnimationFrame(runCount);
-                } else {
-                  el.textContent = target;
-                  data.isCounting = false;
-                  data.hasCounted = true;
-                }
-              })(t0);
-            }
+            const el = entry.target as HTMLElement;
+            triggerCountUp(el);
+            observer.unobserve(el);
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: "50px 0px 50px 0px" }
     );
 
-    cuElements.forEach((el) => cuObserver.observe(el));
+    cuElements.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 50 && rect.bottom > -50) {
+        triggerCountUp(el);
+      } else {
+        cuObserver.observe(el);
+      }
+    });
 
     // ------------------------------------------------------------------
     // 5. Single Coordinated Scroll Handler (Progress Bar & Section Rail)

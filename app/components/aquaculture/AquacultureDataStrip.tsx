@@ -41,6 +41,7 @@ export default function AquacultureDataStrip() {
             }}
           >
             <span
+              data-cu={s.value}
               className="font-inter-tight font-extrabold leading-none mb-5"
               style={{
                 fontSize: "clamp(2.4rem,4.5vw,3.4rem)",

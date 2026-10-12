@@ -1,63 +1,83 @@
 import React from "react";
 
+const stats = [
+  {
+    value: "3.4 bn",
+    desc: "people still lacked safely managed sanitation in 2024.",
+    source: "WHO / UNICEF JMP",
+    sup: "9",
+  },
+  {
+    value: "14",
+    desc: "countries could report how much of their industrial wastewater is treated. The rest of the world has no reliable data.",
+    source: "UN-WATER, 2021",
+    sup: "3",
+  },
+  {
+    value: "56%",
+    desc: "of household wastewater worldwide was safely treated in 2020. Data on industrial wastewater is too thin for a global figure.",
+    source: "UN-WATER, 2021",
+    sup: "3",
+  },
+];
+
 export default function BioremidationDataStrip() {
   return (
     <section className="w-full">
-      {/* 1. Deep Forest Editorial Data Band — Directly Attached to Hero Section without Top White Gap */}
-      <div className="w-full bg-[#1B3B2B] text-[#F1F3EA] py-8 md:py-10 lg:py-12 border-t border-[#2A523D]">
-        <div className="w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)]">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 lg:gap-16 items-stretch">
-            {/* Cell 1: 3.4 bn */}
-            <div className="flex flex-col justify-between h-full space-y-4 br-rv">
-              <div>
-                <div className="font-display font-extrabold text-[clamp(2.75rem,3.8vw,4.5rem)] text-[#90CDF4] tracking-tight leading-none mb-3" data-cu>
-                  3.4 bn
-                </div>
-                <p className="text-sm sm:text-base text-[#F1F3EA]/90 leading-relaxed font-normal max-w-sm">
-                  people still lacked safely managed sanitation in 2024.
-                </p>
-              </div>
-              <div className="pt-3 border-t border-[#F1F3EA]/15 relative">
-                <span className="font-mono text-xs font-semibold tracking-widest text-[#90CDF4] uppercase inline-flex items-baseline">
-                  WHO / UNICEF JMP<sup className="text-[10px] font-semibold text-[#90CDF4] relative -top-[5px] ml-[2px]">9</sup>
-                </span>
-              </div>
-            </div>
+      {/* 1. Deep Forest Editorial Data Band */}
+      <div
+        className="w-full"
+        style={{ background: "#1f4d38", borderTop: "1px solid rgba(255,255,255,0.08)" }}
+      >
+        <div className="w-full max-w-[1440px] mx-auto grid grid-cols-1 sm:grid-cols-3">
+          {stats.map((s, i) => (
+            <div
+              key={i}
+              className={`flex flex-col py-10 sm:py-12 ${
+                i < stats.length - 1 ? "border-b sm:border-b-0 sm:border-r" : ""
+              }`}
+              style={{
+                paddingInline: "clamp(20px, 5vw, 72px)",
+                borderColor: "rgba(107,191,58,0.18)",
+              }}
+            >
+              <span
+                data-cu={s.value}
+                className="font-inter-tight font-extrabold leading-none mb-5"
+                style={{
+                  fontSize: "clamp(2.4rem,4.5vw,3.4rem)",
+                  color: "#9be39f",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                {s.value}
+              </span>
 
-            {/* Cell 2: 14 */}
-            <div className="flex flex-col justify-between h-full space-y-4 br-rv br-d1">
-              <div>
-                <div className="font-display font-extrabold text-[clamp(2.75rem,3.8vw,4.5rem)] text-[#E0B063] tracking-tight leading-none mb-3" data-cu>
-                  14
-                </div>
-                <p className="text-sm sm:text-base text-[#F1F3EA]/90 leading-relaxed font-normal max-w-sm">
-                  countries could report how much of their industrial wastewater is treated. The rest of the world has no reliable data.
-                </p>
-              </div>
-              <div className="pt-3 border-t border-[#F1F3EA]/15 relative">
-                <span className="font-mono text-xs font-semibold tracking-widest text-[#E0B063] uppercase inline-flex items-baseline">
-                  UN-WATER, 2021<sup className="text-[10px] font-semibold text-[#E0B063] relative -top-[5px] ml-[2px]">3</sup>
-                </span>
-              </div>
-            </div>
+              <p
+                className="font-newsreader flex-1 mb-0"
+                style={{
+                  fontSize: "clamp(0.95rem,1.2vw,1.05rem)",
+                  lineHeight: 1.65,
+                  color: "rgba(234,244,223,0.80)",
+                }}
+              >
+                {s.desc}
+              </p>
 
-            {/* Cell 3: 56% */}
-            <div className="flex flex-col justify-between h-full space-y-4 br-rv br-d2">
-              <div>
-                <div className="font-display font-extrabold text-[clamp(2.75rem,3.8vw,4.5rem)] text-[#81E6D9] tracking-tight leading-none mb-3" data-cu>
-                  56%
-                </div>
-                <p className="text-sm sm:text-base text-[#F1F3EA]/90 leading-relaxed font-normal max-w-sm">
-                  of household wastewater worldwide was safely treated in 2020. Data on industrial wastewater is too thin for a global figure.
-                </p>
-              </div>
-              <div className="pt-3 border-t border-[#F1F3EA]/15 relative">
-                <span className="font-mono text-xs font-semibold tracking-widest text-[#81E6D9] uppercase inline-flex items-baseline">
-                  UN-WATER, 2021<sup className="text-[10px] font-semibold text-[#81E6D9] relative -top-[5px] ml-[2px]">3</sup>
-                </span>
-              </div>
+              <div
+                className="my-5"
+                style={{ width: "2.5rem", height: "1px", background: "rgba(107,191,58,0.35)" }}
+                aria-hidden="true"
+              />
+
+              <span
+                className="font-jetbrains uppercase"
+                style={{ fontSize: "0.75rem", letterSpacing: "0.1em", color: "#9be39f" }}
+              >
+                {s.source}<sup>{s.sup}</sup>
+              </span>
             </div>
-          </div>
+          ))}
         </div>
       </div>
 
