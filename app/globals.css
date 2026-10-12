@@ -1533,55 +1533,139 @@ body {
   z-index: 10;
 }
 
-/* Matrix Column Staggered Entrance Animations */
+/* ==========================================================================
+   NUTRIENTS CROP CYCLE MATRIX — IDENTICAL PARITY WITH RUMINANTS CAPSULE ANIMATIONS
+   ========================================================================== */
 .br-mx-col {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.br-mx-col:nth-child(1) { transition-delay: 0.05s; }
-.br-mx-col:nth-child(2) { transition-delay: 0.15s; }
-.br-mx-col:nth-child(3) { transition-delay: 0.25s; }
-.br-mx-col:nth-child(4) { transition-delay: 0.35s; }
-.br-mx-col:nth-child(5) { transition-delay: 0.45s; }
-.br-mx-col:nth-child(6) { transition-delay: 0.55s; }
-
-.br-mx-wrap.br-in .br-mx-col,
-.br-mx-wrap.in .br-mx-col,
-.br-mx-wrap.visible .br-mx-col {
+  position: relative;
+  overflow: hidden;
+  will-change: transform, opacity;
+  transform-origin: bottom;
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Matrix Cell Progress Bar Fill & Glowing Tip Dot Animations */
+/* Light sweep reflection across each capsule */
+.br-mx-col::before {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  border-radius: inherit;
+  content: "";
+  pointer-events: none;
+  width: 48%;
+  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.38), transparent);
+  opacity: 0;
+  transform: translateX(-120%);
+  overflow: hidden;
+}
+
+.br-mx-wrap.sweep-active .br-mx-col::before {
+  animation: br-light-sweep 1.4s cubic-bezier(0.65, 0, 0.35, 1) 2.2s both;
+  will-change: transform, opacity;
+}
+
+@keyframes br-light-sweep {
+  from { opacity: 0; transform: translateX(-120%); }
+  18%  { opacity: 1; }
+  to   { opacity: 0; transform: translateX(120%); }
+}
+
+/* Rising Capsule Animation from down (translateY 100% -> 0) matching Ruminants */
+.br-mx-wrap.is-animated .br-mx-col {
+  opacity: 0.6;
+  transform: translateY(100%) scale(1);
+  animation: br-capsule-fill 1.2s cubic-bezier(0.65, 0, 0.35, 1) calc(0.4s + var(--c, 0) * 0.12s) both;
+  will-change: transform, opacity;
+}
+
+@keyframes br-capsule-fill {
+  from { transform: translateY(100%) scale(1); opacity: 0.6; }
+  to   { transform: translateY(0) scale(1);   opacity: 1; }
+}
+
+/* Header Text Rise */
+.br-mx-wrap.is-animated .br-mx-head {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: br-text-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) calc(0.9s + var(--c, 0) * 0.1s) both;
+  will-change: transform, opacity;
+}
+
+@keyframes br-text-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Cell Content Rise */
+.br-mx-wrap.is-animated .br-mx-cell-text {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: br-cell-rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) calc(1.2s + var(--c, 0) * 0.08s + var(--r, 0) * 0.12s) both;
+  will-change: transform, opacity;
+}
+
+@keyframes br-cell-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Left Column Row Labels Rise */
+.br-mx-row-label {
+  will-change: transform, opacity;
+}
+
+.br-mx-wrap.is-animated .br-mx-row-label {
+  opacity: 0;
+  transform: translateX(-10px);
+  animation: br-row-rise 0.56s cubic-bezier(0.16, 1, 0.3, 1) calc(1.5s + var(--r, 0) * 0.12s) both;
+}
+
+@keyframes br-row-rise {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Cell Progress Bar & Dot Appear and Fill */
 .br-mx-bar {
   width: 0% !important;
-  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .br-mx-dot {
   left: 0% !important;
-  transition: left 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: left 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.br-mx-wrap.is-animated .br-mx-bar,
+.br-mx-wrap.is-animated .br-mx-dot {
+  opacity: 0;
+  animation: br-bar-appear 0.5s cubic-bezier(0.16, 1, 0.3, 1) calc(1.4s + var(--c, 0) * 0.08s + var(--r, 0) * 0.12s) both;
+}
+
+@keyframes br-bar-appear {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 .br-mx-wrap.br-in .br-mx-bar,
 .br-mx-wrap.in .br-mx-bar,
-.br-mx-wrap.visible .br-mx-bar {
+.br-mx-wrap.visible .br-mx-bar,
+.br-mx-wrap.is-animated .br-mx-bar {
   width: var(--bar-fill, 0%) !important;
+  transition-delay: calc(1.4s + var(--c, 0) * 0.08s + var(--r, 0) * 0.12s);
 }
 
 .br-mx-wrap.br-in .br-mx-dot,
 .br-mx-wrap.in .br-mx-dot,
-.br-mx-wrap.visible .br-mx-dot {
+.br-mx-wrap.visible .br-mx-dot,
+.br-mx-wrap.is-animated .br-mx-dot {
   left: var(--bar-fill, 0%) !important;
+  transition-delay: calc(1.4s + var(--c, 0) * 0.08s + var(--r, 0) * 0.12s);
 }
-
-.br-mx-col:nth-child(1) .br-mx-bar, .br-mx-col:nth-child(1) .br-mx-dot { transition-delay: 0.25s; }
-.br-mx-col:nth-child(2) .br-mx-bar, .br-mx-col:nth-child(2) .br-mx-dot { transition-delay: 0.40s; }
-.br-mx-col:nth-child(3) .br-mx-bar, .br-mx-col:nth-child(3) .br-mx-dot { transition-delay: 0.55s; }
-.br-mx-col:nth-child(4) .br-mx-bar, .br-mx-col:nth-child(4) .br-mx-dot { transition-delay: 0.70s; }
-.br-mx-col:nth-child(5) .br-mx-bar, .br-mx-col:nth-child(5) .br-mx-dot { transition-delay: 0.85s; }
-.br-mx-col:nth-child(6) .br-mx-bar, .br-mx-col:nth-child(6) .br-mx-dot { transition-delay: 1.00s; }
 
 @media (prefers-reduced-motion: reduce) {
   .br-rv, .br-ph, .br-ln > span, .br-quote, .br-callout::before {
@@ -1692,11 +1776,6 @@ body {
   z-index: 10;
 }
 
-/* Matrix Column Hover Overrides */
-.br-mx-wrap.br-in .br-mx-col {
-  opacity: 1;
-  transform: translateY(0);
-}
 
 @media (prefers-reduced-motion: reduce) {
   .br-rv, .br-ph, .br-ln > span, .br-quote, .br-callout::before {

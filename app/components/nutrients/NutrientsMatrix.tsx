@@ -275,7 +275,7 @@ export default function NutrientsMatrix() {
             SECTION 3: 5-STAGE CROP CYCLE MATRIX TABLE (SLENDER CAPSULE FORMAT)
             Strict Visual & Structural Parity with Ruminants
             ========================================== */}
-        <div className="space-y-6 pt-4">
+        <div className="space-y-6 pt-4 overflow-hidden">
           <div className="space-y-2 br-rv">
             <div className="flex items-center gap-3 br-rv br-d1">
               <span className="w-8 h-[1.5px] bg-[#2D6A4F]" />
@@ -295,7 +295,10 @@ export default function NutrientsMatrix() {
                 {/* Left Column: Row Labels */}
                 <div className="grid grid-rows-[150px_repeat(3,135px)]">
                   {/* Row 1 Label: Nutrient Enabler */}
-                  <div className="row-start-2 flex items-center gap-2.5 pr-2">
+                  <div 
+                    className="br-mx-row-label row-start-2 flex items-center gap-2.5 pr-2"
+                    style={{ "--r": 0 } as React.CSSProperties}
+                  >
                     <span className="w-1.5 h-1.5 rounded-full bg-[#173522] flex-shrink-0" />
                     <div>
                       <h3 className="font-display font-bold text-xs sm:text-sm lg:text-[14px] text-[#173522] leading-tight">
@@ -308,7 +311,10 @@ export default function NutrientsMatrix() {
                   </div>
 
                   {/* Row 2 Label: Disease Manager */}
-                  <div className="row-start-3 flex items-center gap-2.5 pr-2">
+                  <div 
+                    className="br-mx-row-label row-start-3 flex items-center gap-2.5 pr-2"
+                    style={{ "--r": 1 } as React.CSSProperties}
+                  >
                     <span className="w-1.5 h-1.5 rounded-full bg-[#173522] flex-shrink-0" />
                     <div>
                       <h3 className="font-display font-bold text-xs sm:text-sm lg:text-[14px] text-[#173522] leading-tight">
@@ -321,7 +327,10 @@ export default function NutrientsMatrix() {
                   </div>
 
                   {/* Row 3 Label: Quality & Shelf Life */}
-                  <div className="row-start-4 flex items-center gap-2.5 pr-2">
+                  <div 
+                    className="br-mx-row-label row-start-4 flex items-center gap-2.5 pr-2"
+                    style={{ "--r": 2 } as React.CSSProperties}
+                  >
                     <span className="w-1.5 h-1.5 rounded-full bg-[#173522] flex-shrink-0" />
                     <div>
                       <h3 className="font-display font-bold text-xs sm:text-sm lg:text-[14px] text-[#173522] leading-tight">
@@ -343,10 +352,10 @@ export default function NutrientsMatrix() {
                         ? "text-[#F4FAEC] border-[#F4FAEC]/40" 
                         : "text-[#173522] border-[#173522]/30"
                     }`}
-                    style={{ backgroundColor: stage.bg }}
+                    style={{ backgroundColor: stage.bg, "--c": colIdx } as React.CSSProperties}
                   >
                     {/* Capsule Header */}
-                    <div className="flex flex-col items-center justify-center text-center px-3 sm:px-4">
+                    <div className="br-mx-head flex flex-col items-center justify-center text-center px-3 sm:px-4">
                       <span className="font-display font-bold text-xs tracking-wider block mb-2 opacity-90">
                         {stage.number}
                       </span>
@@ -360,6 +369,7 @@ export default function NutrientsMatrix() {
                     {stage.cells.map((cell, cellIdx) => (
                       <div 
                         key={cellIdx}
+                        style={{ "--r": cellIdx } as React.CSSProperties}
                         className="flex flex-col justify-center text-center px-3 sm:px-4 border-t border-current/20"
                       >
                         {!cell.empty ? (
@@ -379,7 +389,7 @@ export default function NutrientsMatrix() {
                                 } as React.CSSProperties}
                               />
                             </div>
-                            <p className="font-serif text-[13px] sm:text-[14px] leading-snug pt-1">
+                            <p className="br-mx-cell-text font-serif text-[13px] sm:text-[14px] leading-snug pt-1">
                               {cell.text}
                               {cell.sup && (
                                 <sup className="text-[9px] font-mono ml-0.5">{cell.sup}</sup>
@@ -387,7 +397,7 @@ export default function NutrientsMatrix() {
                             </p>
                           </>
                         ) : (
-                          <p className="font-mono text-sm opacity-40">—</p>
+                          <p className="br-mx-cell-text font-mono text-sm opacity-40">—</p>
                         )}
                       </div>
                     ))}

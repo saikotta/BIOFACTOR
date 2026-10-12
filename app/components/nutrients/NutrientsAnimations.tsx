@@ -29,10 +29,41 @@ export default function NutrientsAnimations() {
     );
 
     document
-      .querySelectorAll(".br-rv, .rv, .br-ln, .ln, .br-quote, .quote, .br-callout, .call, .br-ph, .ph, .br-mx-wrap, .mx")
+      .querySelectorAll(".br-rv, .rv, .br-ln, .ln, .br-quote, .quote, .br-callout, .call, .br-ph, .ph, .mx")
       .forEach((el) => {
         revealObserver.observe(el);
       });
+
+    // ------------------------------------------------------------------
+    // 1b. Matrix Entrance Observer (.br-mx-wrap) — Strict Parity with Ruminants
+    // Triggers staggered rising capsule-fill from bottom and light sweep
+    // ------------------------------------------------------------------
+    const matrixWraps = Array.from(document.querySelectorAll<HTMLElement>(".br-mx-wrap"));
+    let matrixTimer: number | null = null;
+
+    const matrixObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const el = entry.target as HTMLElement;
+          if (entry.isIntersecting) {
+            el.classList.add("is-animated", "sweep-active", "br-in", "in", "visible");
+            if (matrixTimer) window.clearTimeout(matrixTimer);
+            matrixTimer = window.setTimeout(() => {
+              el.classList.remove("is-animated", "sweep-active");
+            }, 3600);
+          } else if (entry.intersectionRatio < 0.05) {
+            el.classList.remove("is-animated", "sweep-active", "br-in", "in", "visible");
+            if (matrixTimer) window.clearTimeout(matrixTimer);
+          }
+        });
+      },
+      {
+        threshold: [0, 0.12],
+        rootMargin: "0px 0px -40px 0px",
+      }
+    );
+
+    matrixWraps.forEach((el) => matrixObserver.observe(el));
 
     // ------------------------------------------------------------------
     // 2. Count-Up Observer ([data-cu]) — Replays cleanly on scroll entry
@@ -124,6 +155,8 @@ export default function NutrientsAnimations() {
 
     return () => {
       revealObserver.disconnect();
+      matrixObserver.disconnect();
+      if (matrixTimer) window.clearTimeout(matrixTimer);
       cuObserver.disconnect();
       window.removeEventListener("scroll", onScroll);
     };
