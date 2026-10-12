@@ -17,11 +17,11 @@ const MS = [
 ];
 
 const ICONS = [
-  `<g transform="translate(0 -38) scale(1.4)"><path d="M-13 9 Q0 2 13 9 L11 14 H-11Z" fill="#8a5a2b"/><path d="M0 9 V-6" stroke="#3ea34f" stroke-width="2.6" stroke-linecap="round"/><path d="M0 -1 C-10 -1 -14 -9 -12 -13 C-4 -13 0 -9 0 -1Z" fill="#4cb860"/><path d="M0 -6 C8 -6 13 -12 12 -16 C4 -16 0 -12 0 -6Z" fill="#8bd36a"/></g>`,
-  `<g transform="translate(0 -38) scale(1.4)"><rect x="-12" y="10" width="24" height="4" rx="2" fill="#7b8794"/><path d="M-1 10 C10 10 12 1 7 -5" stroke="#7b8794" stroke-width="3.2" fill="none" stroke-linecap="round"/><rect x="-9" y="-14" width="8" height="19" rx="2" transform="rotate(28 -5 -4)" fill="#5b6b7d"/><rect x="-7" y="-18" width="4.5" height="5" rx="1" transform="rotate(28 -5 -4)" fill="#3a4654"/><rect x="-11" y="5" width="13" height="3" rx="1" fill="#9aa7b4"/><rect x="-8" y="5.5" width="6" height="1.6" fill="#c58bd8"/></g>`,
-  `<g transform="translate(0 -38) scale(1.4)"><path d="M-3 15 C-2 5 0 -4 4 -15" stroke="#2f8a47" stroke-width="2.4" fill="none" stroke-linecap="round"/><ellipse cx="-7" cy="7" rx="3" ry="6.5" transform="rotate(-55 -7 7)" fill="#5fc15a"/><ellipse cx="-5" cy="-3" rx="3" ry="6.5" transform="rotate(-55 -5 -3)" fill="#4cb860"/><ellipse cx="-1" cy="-12" rx="2.6" ry="5.5" transform="rotate(-40 -1 -12)" fill="#7ad06a"/><ellipse cx="6" cy="6" rx="3" ry="6.5" transform="rotate(55 6 6)" fill="#7ad06a"/><ellipse cx="7" cy="-4" rx="3" ry="6.5" transform="rotate(55 7 -4)" fill="#5fc15a"/></g>`,
-  `<g transform="translate(0 -38) scale(1.4)"><circle r="15" fill="#3b9ad9"/><path d="M-8 -9 Q-1 -14 5 -9 Q7 -3 0 -2 Q-7 0 -8 -9Z" fill="#6cc24a"/><path d="M4 4 Q11 3 12 8 Q8 12 3 9Z" fill="#6cc24a"/><path d="M-12 5 Q-9 3 -6 6 Q-8 11 -11 9Z" fill="#6cc24a"/><ellipse cx="-5" cy="-8" rx="4" ry="2" transform="rotate(-30 -5 -8)" fill="#fff" fill-opacity=".35"/></g>`,
-  `<g transform="translate(0 -38) scale(1.4)"><path d="M-9 -14 H9 V-5 C9 1 4 4 0 4 C-4 4 -9 1 -9 -5Z" fill="#f2b21b" stroke="#c98d0a" stroke-width="1.5" stroke-linejoin="round"/><path d="M-9 -11 H-14 C-14 -4 -11 -3 -8 -3 M9 -11 H14 C14 -4 11 -3 8 -3" fill="none" stroke="#c98d0a" stroke-width="2" stroke-linecap="round"/><rect x="-2" y="4" width="4" height="6" fill="#c98d0a"/><rect x="-8" y="10" width="16" height="5" rx="2" fill="#a87a0a"/><path d="M0 -12 L1.8 -8 L6 -8 L2.7 -5.5 L4 -1.5 L0 -4 L-4 -1.5 L-2.7 -5.5 L-6 -8 L-1.8 -8Z" fill="#fff" fill-opacity=".9"/></g>`,
+  `<g transform="translate(0 -30) scale(1.2)"><path d="M-13 9 Q0 2 13 9 L11 14 H-11Z" fill="#8a5a2b"/><path d="M0 9 V-6" stroke="#3ea34f" stroke-width="2.6" stroke-linecap="round"/><path d="M0 -1 C-10 -1 -14 -9 -12 -13 C-4 -13 0 -9 0 -1Z" fill="#4cb860"/><path d="M0 -6 C8 -6 13 -12 12 -16 C4 -16 0 -12 0 -6Z" fill="#8bd36a"/></g>`,
+  `<g transform="translate(0 -30) scale(1.2)"><rect x="-12" y="10" width="24" height="4" rx="2" fill="#7b8794"/><path d="M-1 10 C10 10 12 1 7 -5" stroke="#7b8794" stroke-width="3.2" fill="none" stroke-linecap="round"/><rect x="-9" y="-14" width="8" height="19" rx="2" transform="rotate(28 -5 -4)" fill="#5b6b7d"/><rect x="-7" y="-18" width="4.5" height="5" rx="1" transform="rotate(28 -5 -4)" fill="#3a4654"/><rect x="-11" y="5" width="13" height="3" rx="1" fill="#9aa7b4"/><rect x="-8" y="5.5" width="6" height="1.6" fill="#c58bd8"/></g>`,
+  `<g transform="translate(0 -30) scale(1.2)"><path d="M-3 15 C-2 5 0 -4 4 -15" stroke="#2f8a47" stroke-width="2.4" fill="none" stroke-linecap="round"/><ellipse cx="-7" cy="7" rx="3" ry="6.5" transform="rotate(-55 -7 7)" fill="#5fc15a"/><ellipse cx="-5" cy="-3" rx="3" ry="6.5" transform="rotate(-55 -5 -3)" fill="#4cb860"/><ellipse cx="-1" cy="-12" rx="2.6" ry="5.5" transform="rotate(-40 -1 -12)" fill="#7ad06a"/><ellipse cx="6" cy="6" rx="3" ry="6.5" transform="rotate(55 6 6)" fill="#7ad06a"/><ellipse cx="7" cy="-4" rx="3" ry="6.5" transform="rotate(55 7 -4)" fill="#5fc15a"/></g>`,
+  `<g transform="translate(0 -30) scale(1.2)"><circle r="15" fill="#3b9ad9"/><path d="M-8 -9 Q-1 -14 5 -9 Q7 -3 0 -2 Q-7 0 -8 -9Z" fill="#6cc24a"/><path d="M4 4 Q11 3 12 8 Q8 12 3 9Z" fill="#6cc24a"/><path d="M-12 5 Q-9 3 -6 6 Q-8 11 -11 9Z" fill="#6cc24a"/><ellipse cx="-5" cy="-8" rx="4" ry="2" transform="rotate(-30 -5 -8)" fill="#fff" fill-opacity=".35"/></g>`,
+  `<g transform="translate(0 -30) scale(1.2)"><path d="M-9 -14 H9 V-5 C9 1 4 4 0 4 C-4 4 -9 1 -9 -5Z" fill="#f2b21b" stroke="#c98d0a" stroke-width="1.5" stroke-linejoin="round"/><path d="M-9 -11 H-14 C-14 -4 -11 -3 -8 -3 M9 -11 H14 C14 -4 11 -3 8 -3" fill="none" stroke="#c98d0a" stroke-width="2" stroke-linecap="round"/><rect x="-2" y="4" width="4" height="6" fill="#c98d0a"/><rect x="-8" y="10" width="16" height="5" rx="2" fill="#a87a0a"/><path d="M0 -12 L1.8 -8 L6 -8 L2.7 -5.5 L4 -1.5 L0 -4 L-4 -1.5 L-2.7 -5.5 L-6 -8 L-1.8 -8Z" fill="#fff" fill-opacity=".9"/></g>`,
 ];
 
 const TRAVEL = 1700;
@@ -75,9 +75,13 @@ export default function AboutJourneySection() {
       const m = MS[i];
       const c = document.createElement("div");
       c.className = "card-journey " + (up ? "up" : "down");
-      c.style.left = Math.min(Math.max((p.x / W) * 100, 9), 91) + "%";
+      if (i === STOPS.length - 1) {
+        c.style.left = "min(87%, calc(100% - 135px))";
+      } else {
+        c.style.left = Math.min(Math.max((p.x / W) * 100, 9), 91) + "%";
+      }
       c.style.top = (p.y / H) * 100 + "%";
-      c.style.transform = `translate(-50%, ${up ? "calc(-100% - 50px)" : "12px"})`;
+      c.style.transform = `translate(-50%, ${up ? "calc(-100% - 56px)" : "20px"})`;
       const metaHtml = m[1] ? `${m[0]} <i class="meta-i">•</i> ${m[1]}` : m[0];
       c.innerHTML = `<div class="card-inner"><p class="meta-journey">${metaHtml}</p><p class="ttl-journey">${m[2]}</p></div>`;
       stage.appendChild(c);
@@ -185,14 +189,14 @@ export default function AboutJourneySection() {
       <style jsx global>{`
         .card-journey {
           position: absolute;
-          width: 240px;
+          width: clamp(180px, 18vw, 240px);
           text-align: center;
           z-index: 10;
         }
         .card-journey .card-inner {
           background: #ffffff;
           border-radius: 16px;
-          padding: 12px 16px;
+          padding: 10px 14px;
           box-shadow: 0 10px 30px -12px rgba(20, 112, 58, 0.45);
           opacity: 0;
           transform: scale(0.7);
@@ -269,8 +273,8 @@ export default function AboutJourneySection() {
           </div>
         </header>
 
-        <div className="overflow-x-auto overflow-y-visible pt-4 pb-10">
-          <div ref={stageRef} className="relative min-w-[1000px] aspect-[1500/700]">
+        <div className="w-full pt-8 pb-10" style={{ overflowX: "clip", overflowY: "visible" }}>
+          <div ref={stageRef} className="relative w-full aspect-[1500/700]">
             <svg
               className="absolute inset-0 w-full h-full"
               viewBox="0 0 1500 700"

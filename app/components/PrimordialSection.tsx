@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import MicrobeField from "./MicrobeField";
 
 const PRIMORDIAL_EXCLUSION_ZONES = [
@@ -8,6 +8,7 @@ const PRIMORDIAL_EXCLUSION_ZONES = [
 ];
 
 export default function PrimordialSection() {
+  const [activeCard, setActiveCard] = useState<number | null>(null);
   return (
     <section
       id="primordial-elements"
@@ -38,10 +39,21 @@ export default function PrimordialSection() {
           {/* Card 1: Not just / Observing life */}
           <div
             tabIndex={0}
+            onClick={() => setActiveCard((prev) => (prev === 0 ? null : 0))}
             aria-label="Card 1: Not just Observing life"
-            className="group relative rounded-[20px] border border-[#C6DDA8] bg-[#FAFDF7] transition-all duration-300 ease-in-out cursor-pointer outline-none focus-visible:bg-[#167A4A] focus-visible:border-[#167A4A] focus-within:bg-[#167A4A] focus-within:border-[#167A4A] [@media(hover:hover)]:hover:bg-[#167A4A] [@media(hover:hover)]:hover:border-[#167A4A] motion-reduce:transition-none"
+            className={`group relative rounded-[20px] border cursor-pointer outline-none transition-all duration-300 ease-in-out motion-reduce:transition-none ${
+              activeCard === 0
+                ? "bg-[#167A4A] border-[#167A4A]"
+                : "bg-[#FAFDF7] border-[#C6DDA8] focus-visible:bg-[#167A4A] focus-visible:border-[#167A4A] focus-within:bg-[#167A4A] focus-within:border-[#167A4A] [@media(hover:hover)]:hover:bg-[#167A4A] [@media(hover:hover)]:hover:border-[#167A4A]"
+            }`}
           >
-            <div className="w-full h-auto transition-all duration-300 ease-in-out group-focus-within:brightness-0 group-focus-within:invert group-focus-visible:brightness-0 group-focus-visible:invert [@media(hover:hover)]:group-hover:brightness-0 [@media(hover:hover)]:group-hover:invert motion-reduce:transition-none">
+            <div
+              className={`w-full h-auto transition-all duration-300 ease-in-out motion-reduce:transition-none ${
+                activeCard === 0
+                  ? "brightness-0 invert"
+                  : "group-focus-within:brightness-0 group-focus-within:invert group-focus-visible:brightness-0 group-focus-visible:invert [@media(hover:hover)]:group-hover:brightness-0 [@media(hover:hover)]:group-hover:invert"
+              }`}
+            >
               <svg
                 viewBox="0 0 403 410"
                 className="w-full h-auto block rounded-[20px]"
@@ -124,10 +136,21 @@ export default function PrimordialSection() {
           {/* Card 2: But / Understanding it */}
           <div
             tabIndex={0}
+            onClick={() => setActiveCard((prev) => (prev === 1 ? null : 1))}
             aria-label="Card 2: But Understanding it"
-            className="group relative rounded-[20px] border border-[#C6DDA8] bg-[#FAFDF7] transition-all duration-300 ease-in-out cursor-pointer outline-none focus-visible:bg-[#167A4A] focus-visible:border-[#167A4A] focus-within:bg-[#167A4A] focus-within:border-[#167A4A] [@media(hover:hover)]:hover:bg-[#167A4A] [@media(hover:hover)]:hover:border-[#167A4A] motion-reduce:transition-none"
+            className={`group relative rounded-[20px] border cursor-pointer outline-none transition-all duration-300 ease-in-out motion-reduce:transition-none ${
+              activeCard === 1
+                ? "bg-[#167A4A] border-[#167A4A]"
+                : "bg-[#FAFDF7] border-[#C6DDA8] focus-visible:bg-[#167A4A] focus-visible:border-[#167A4A] focus-within:bg-[#167A4A] focus-within:border-[#167A4A] [@media(hover:hover)]:hover:bg-[#167A4A] [@media(hover:hover)]:hover:border-[#167A4A]"
+            }`}
           >
-            <div className="w-full h-auto transition-all duration-300 ease-in-out group-focus-within:brightness-0 group-focus-within:invert group-focus-visible:brightness-0 group-focus-visible:invert [@media(hover:hover)]:group-hover:brightness-0 [@media(hover:hover)]:group-hover:invert motion-reduce:transition-none">
+            <div
+              className={`w-full h-auto transition-all duration-300 ease-in-out motion-reduce:transition-none ${
+                activeCard === 1
+                  ? "brightness-0 invert"
+                  : "group-focus-within:brightness-0 group-focus-within:invert group-focus-visible:brightness-0 group-focus-visible:invert [@media(hover:hover)]:group-hover:brightness-0 [@media(hover:hover)]:group-hover:invert"
+              }`}
+            >
               <svg
                 viewBox="418 0 403 410"
                 className="w-full h-auto block rounded-[20px]"
@@ -210,10 +233,21 @@ export default function PrimordialSection() {
           {/* Card 3: And / Working with it */}
           <div
             tabIndex={0}
+            onClick={() => setActiveCard((prev) => (prev === 2 ? null : 2))}
             aria-label="Card 3: And Working with it"
-            className="group relative rounded-[20px] border border-[#C6DDA8] bg-[#FAFDF7] transition-all duration-300 ease-in-out cursor-pointer outline-none focus-visible:bg-[#167A4A] focus-visible:border-[#167A4A] focus-within:bg-[#167A4A] focus-within:border-[#167A4A] [@media(hover:hover)]:hover:bg-[#167A4A] [@media(hover:hover)]:hover:border-[#167A4A] motion-reduce:transition-none"
+            className={`group relative rounded-[20px] border cursor-pointer outline-none transition-all duration-300 ease-in-out motion-reduce:transition-none ${
+              activeCard === 2
+                ? "bg-[#167A4A] border-[#167A4A]"
+                : "bg-[#FAFDF7] border-[#C6DDA8] focus-visible:bg-[#167A4A] focus-visible:border-[#167A4A] focus-within:bg-[#167A4A] focus-within:border-[#167A4A] [@media(hover:hover)]:hover:bg-[#167A4A] [@media(hover:hover)]:hover:border-[#167A4A]"
+            }`}
           >
-            <div className="w-full h-auto transition-all duration-300 ease-in-out group-focus-within:brightness-0 group-focus-within:invert group-focus-visible:brightness-0 group-focus-visible:invert [@media(hover:hover)]:group-hover:brightness-0 [@media(hover:hover)]:group-hover:invert motion-reduce:transition-none">
+            <div
+              className={`w-full h-auto transition-all duration-300 ease-in-out motion-reduce:transition-none ${
+                activeCard === 2
+                  ? "brightness-0 invert"
+                  : "group-focus-within:brightness-0 group-focus-within:invert group-focus-visible:brightness-0 group-focus-visible:invert [@media(hover:hover)]:group-hover:brightness-0 [@media(hover:hover)]:group-hover:invert"
+              }`}
+            >
               <svg
                 viewBox="836 0 403 410"
                 className="w-full h-auto block rounded-[20px]"

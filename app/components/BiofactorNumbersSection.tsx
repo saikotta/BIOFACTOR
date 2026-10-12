@@ -106,6 +106,7 @@ function AnimatedCounter({
 export default function BiofactorNumbersSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isRevealed, setIsRevealed] = useState(false);
+  const [activeCard, setActiveCard] = useState<number | null>(null);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
@@ -188,7 +189,7 @@ export default function BiofactorNumbersSection() {
 
         </div>
 
-        {/* FULL-WIDTH HORIZONTAL STATISTICS STRIP (10 STATS WITH HOVER & COUNT ANIMATIONS) */}
+        {/* FULL-WIDTH HORIZONTAL STATISTICS STRIP (REMAINS IN GRID SHAPE) */}
         <div
           className={`w-full border-t border-b border-[#071a14]/15 transition-all duration-1000 ease-out ${
             isRevealed || prefersReducedMotion
@@ -215,39 +216,47 @@ export default function BiofactorNumbersSection() {
                 "border-[#071a14]/15",
               ].join(" ");
 
+              const isActive = activeCard === idx;
+
               return (
                 <div
                   key={idx}
                   tabIndex={0}
+                  onClick={() => setActiveCard((prev) => (prev === idx ? null : idx))}
+                  aria-label={`${stat.number} ${stat.label}`}
                   className={`group relative flex flex-col justify-start py-7 lg:py-9 px-4 sm:px-6 lg:px-8 ${borderClasses} 
-                    transition-[transform,box-shadow,border-radius] duration-300 ease-in-out cursor-pointer outline-none
-                    hover:bg-[#167A4A] hover:border-[#167A4A] hover:shadow-xl hover:shadow-[#167A4A]/25 hover:scale-[1.03] hover:-translate-y-1 hover:z-20 hover:rounded-2xl
-                    focus:bg-[#167A4A] focus:border-[#167A4A] focus:shadow-xl focus:scale-[1.03] focus:-translate-y-1 focus:z-20 focus:rounded-2xl
-                    focus-visible:bg-[#167A4A] focus-visible:border-[#167A4A] focus-visible:shadow-xl focus-visible:scale-[1.03] focus-visible:-translate-y-1 focus-visible:z-20 focus-visible:rounded-2xl
-                    focus-within:bg-[#167A4A] focus-within:border-[#167A4A] focus-within:shadow-xl focus-within:scale-[1.03] focus-within:-translate-y-1 focus-within:z-20 focus-within:rounded-2xl
-                    active:bg-[#167A4A] active:border-[#167A4A] active:scale-[0.98] active:rounded-2xl
-                    motion-reduce:transition-none
+                    cursor-pointer outline-none transition-none rounded-none
+                    ${
+                      isActive
+                        ? "bg-[#167A4A] border-[#167A4A] z-10"
+                        : "hover:bg-[#167A4A] hover:border-[#167A4A] focus-visible:bg-[#167A4A] focus-visible:border-[#167A4A] focus-within:bg-[#167A4A] focus-within:border-[#167A4A]"
+                    }
                   `}
-                  style={{
-                    opacity: isRevealed || prefersReducedMotion ? 1 : 0,
-                    transform: isRevealed || prefersReducedMotion ? "translateY(0)" : "translateY(16px)",
-                    transitionDelay: prefersReducedMotion ? "0ms" : `${350 + idx * 45}ms`,
-                  }}
                 >
-                  {/* Large Visually Dominant Number with Count Animation & White Instant Hover Color */}
+                  {/* Large Visually Dominant Number with Count Animation */}
                   <AnimatedCounter
                     targetString={stat.number}
                     isRevealed={isRevealed}
                     prefersReducedMotion={prefersReducedMotion}
-                    className={`font-sans font-black tracking-tight text-[#071a14] group-hover:text-white group-focus:text-white group-focus-within:text-white group-focus-visible:text-white group-active:text-white leading-none mb-3 whitespace-nowrap ${
+                    className={`font-sans font-black tracking-tight leading-none mb-3 whitespace-nowrap transition-none ${
                       stat.number.length > 5
                         ? "text-2xl sm:text-3xl lg:text-[clamp(1.85rem,2.8vw,2.75rem)]"
                         : "text-3xl sm:text-4xl lg:text-5xl"
+                    } ${
+                      isActive
+                        ? "text-white"
+                        : "text-[#071a14] group-hover:text-white group-focus:text-white group-focus-within:text-white group-focus-visible:text-white"
                     }`}
                   />
 
-                  {/* Restrained Uppercase Label with Light Green Instant Hover Color */}
-                  <span className="font-sans text-xs sm:text-sm font-semibold tracking-wider text-[#134e3a] group-hover:text-[#E2F8CE] group-focus:text-[#E2F8CE] group-focus-within:text-[#E2F8CE] group-focus-visible:text-[#E2F8CE] group-active:text-[#E2F8CE] uppercase leading-tight">
+                  {/* Restrained Uppercase Label */}
+                  <span
+                    className={`font-sans text-xs sm:text-sm font-semibold tracking-wider uppercase leading-tight transition-none ${
+                      isActive
+                        ? "text-[#E2F8CE]"
+                        : "text-[#134e3a] group-hover:text-[#E2F8CE] group-focus:text-[#E2F8CE] group-focus-within:text-[#E2F8CE] group-focus-visible:text-[#E2F8CE]"
+                    }`}
+                  >
                     {stat.label}
                   </span>
                 </div>
