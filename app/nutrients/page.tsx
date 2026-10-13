@@ -1,5 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
+import { Newsreader } from "next/font/google";
 import NutrientsHero from "../components/nutrients/NutrientsHero";
 import NutrientsComparativeCard from "../components/nutrients/NutrientsComparativeCard";
 import NutrientsPrimaryApplications from "../components/nutrients/NutrientsPrimaryApplications";
@@ -8,6 +9,13 @@ import NutrientsMatrix from "../components/nutrients/NutrientsMatrix";
 import NutrientsClosing from "../components/nutrients/NutrientsClosing";
 import NutrientsAnimations from "../components/nutrients/NutrientsAnimations";
 import ProductFooter from "../components/ProductFooter";
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  variable: "--font-newsreader",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Biological Plant Nutrients & Biofertilizers | Soil Microbial Inoculants",
@@ -30,7 +38,7 @@ export const metadata: Metadata = {
 
 export default function NutrientsPage() {
   return (
-    <main className="min-h-screen w-full bg-[#EAF3EA] text-[#173522] font-sans selection:bg-[#2D6A4F] selection:text-[#EAF3EA]">
+    <main className={`${newsreader.variable} min-h-screen w-full bg-[#EAF3EA] text-[#173522] font-sans selection:bg-[#2D6A4F] selection:text-[#EAF3EA]`}>
       {/* Hero Section */}
       <NutrientsHero />
 

@@ -134,8 +134,10 @@ export default function NutrientsHero() {
             </h1>
 
             {/* Subtitle Copy */}
-
-            <p className="font-serif italic font-normal text-white/90 leading-[1.45] tracking-tight text-[1.25rem] sm:text-[1.4rem] md:text-[1.55rem] max-w-[640px] br-quote">
+            <p
+              style={{ fontFamily: 'var(--font-newsreader), "Newsreader", Georgia, serif' }}
+              className="italic font-normal text-white/95 leading-[1.45] tracking-[-0.01em] text-[clamp(1.15rem,1.85vw,1.45rem)] max-w-[640px] drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)] br-quote"
+            >
               Converting unavailable soil reserves into active plant nutrition through living microbial pathways.
             </p>
           </div>
