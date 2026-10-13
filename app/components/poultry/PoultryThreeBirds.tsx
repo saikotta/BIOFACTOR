@@ -1,6 +1,11 @@
+"use client";
+
 import React from "react";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 export default function PoultryThreeBirds() {
+  const { t } = useTranslation();
+
   return (
     <section className="w-full bg-[#EAF3EA] py-8 lg:py-12 text-[#0a2d1a] relative overflow-hidden" data-ruminants-section="threebirds" data-n="Breeders">
       {/* Subtle bacterial background decorations */}
@@ -37,12 +42,12 @@ export default function PoultryThreeBirds() {
           <div className="flex items-center gap-3 mb-[14px]">
             <span className="w-8 h-[1.5px] bg-[#0B6B52]" />
             <span className="font-mono text-xs font-semibold tracking-[0.14em] text-[#0B6B52] uppercase">
-              04 / BREEDERS, LAYERS AND BROILERS
+              {t("poultry_three_eyebrow")}
             </span>
           </div>
           {/* Main Headline */}
           <h2 className="font-extrabold text-[clamp(2.4rem,6.4vw,5.8rem)] text-[#0a2d1a] leading-[.96]" style={{ fontFamily: "var(--font-bricolage), 'Helvetica Neue', Arial, sans-serif", letterSpacing: "-.035em" }}>
-            Breeders, layers and broilers need different things from the gut.
+            {t("poultry_three_title")}
           </h2>
         </div>
 
@@ -53,19 +58,16 @@ export default function PoultryThreeBirds() {
             {/* LEFT SECTION TEXT */}
             <div className="space-y-3">
               <div className="font-mono text-xs font-semibold tracking-[0.2em] text-[#2D5A42] uppercase">
-                PARENT STOCK
+                {t("poultry_breeders_parent_stock")}
               </div>
 
               <div className="font-space-grotesk font-extrabold text-[clamp(2.5rem,6vw,6.5rem)] text-[#2D5A42] tracking-tight leading-[0.9]">
-                BREEDERS
+                {t("poultry_breeders_title")}
               </div>
 
               <div className="space-y-1">
                 <div className="font-mono text-xs font-semibold tracking-widest text-[#2d4a3a] uppercase">
-                  Priority · egg hygiene, hatchability
-                </div>
-                <div className="font-mono text-xs font-semibold tracking-widest text-[#2d4a3a] uppercase">
-                  and a clean start for the chick
+                  {t("poultry_breeders_priority")}
                 </div>
               </div>
             </div>
@@ -86,12 +88,12 @@ export default function PoultryThreeBirds() {
           <div className="space-y-4 lg:space-y-6 pt-8 lg:pt-12 pl-0">
             {/* Heading */}
             <h3 className="rv font-space-grotesk font-semibold text-[clamp(1.5rem,2.5vw,2.5rem)] text-[#0a2d1a] tracking-tight leading-tight">
-              A healthy breeder passes on a healthy start.
+              {t("poultry_breeders_h3")}
             </h3>
 
             {/* Body Paragraph */}
             <p className="rv d1 text-base lg:text-lg text-[#2d4a3a] leading-relaxed" style={{ fontFamily: 'Times New Roman, Times, serif' }}>
-              Breeder hens can pass pathogens such as <span className="italic">Salmonella</span> to the next generation through the egg. Keeping the breeder gut stable reduces what reaches the egg, and applying beneficial bacteria in the hatchery protects the embryo and gives the chick its first beneficial microbes.
+              {t("poultry_breeders_desc")}
             </p>
 
             {/* Information Cards */}
@@ -99,20 +101,20 @@ export default function PoultryThreeBirds() {
               {/* Left Card */}
               <div className="trow border border-[#c4d4c4] p-5 rounded-lg transition-all">
                 <div className="font-space-grotesk font-bold text-base text-[#0a2d1a] mb-2">
-                  Less vertical transmission
+                  {t("poultry_breeders_card1_title")}
                 </div>
                 <p className="text-sm text-[#2d4a3a] leading-relaxed" style={{ fontFamily: 'Times New Roman, Times, serif' }}>
-                  A stable breeder gut sheds fewer pathogens into the reproductive tract and onto eggs.
+                  {t("poultry_breeders_card1_desc")}
                 </p>
               </div>
 
               {/* Right Card */}
               <div className="trow border border-[#c4d4c4] p-5 rounded-lg transition-all">
                 <div className="font-space-grotesk font-bold text-base text-[#0a2d1a] mb-2">
-                  Hatchery protection
+                  {t("poultry_breeders_card2_title")}
                 </div>
                 <p className="text-sm text-[#2d4a3a] leading-relaxed" style={{ fontFamily: 'Times New Roman, Times, serif' }}>
-                  Beneficial bacteria sprayed onto hatching eggs compete with pathogens on the shell.
+                  {t("poultry_breeders_card2_desc")}
                 </p>
               </div>
             </div>

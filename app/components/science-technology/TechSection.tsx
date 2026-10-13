@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import MicrobeField, { ExclusionZone } from "../MicrobeField";
+import { useTranslation } from "../../i18n";
 
 const EXCLUSION_ZONES_BY_INDEX: Record<number, ExclusionZone[]> = {
   // 01 — Microbial Biotechnology (Text left, Diagram right)
@@ -213,8 +214,13 @@ export default function TechSection({
     return () => observer.disconnect();
   }, []);
 
+  const { t } = useTranslation();
   const numStr = String(index + 1).padStart(2, "0");
-  const words = title.split(" ");
+  const translatedLabel = t(`tech_${numStr}_label`, label);
+  const translatedTitle = t(`tech_${numStr}_title`, title);
+  const translatedBody = t(`tech_${numStr}_body`, body);
+  const translatedChain = chain?.map((c, i) => t(`tech_${numStr}_chain_${i + 1}`, c)) || [];
+  const words = translatedTitle.split(" ");
   const stopStart = STOPS[index] || STOPS[0];
   const stopEnd = STOPS[index + 1] || STOPS[1];
   const sectionExclusion = EXCLUSION_ZONES_BY_INDEX[index] || [];
@@ -259,7 +265,7 @@ export default function TechSection({
             />
           </div>
 
-          <p className="eyebrow fade">{label}</p>
+          <p className="eyebrow fade">{translatedLabel}</p>
 
           <h2>
             {words.map((word, k) => (
@@ -269,12 +275,12 @@ export default function TechSection({
             ))}
           </h2>
 
-          <p className="body fade d1">{body}</p>
+          <p className="body fade d1">{translatedBody}</p>
 
-          {chain && chain.length > 0 && (
+          {translatedChain && translatedChain.length > 0 && (
             <div className="chain">
-              <b style={{ "--i": 0 } as React.CSSProperties}>{chain[0]}</b>
-              {chain.slice(1).map((c, k) => (
+              <b style={{ "--i": 0 } as React.CSSProperties}>{translatedChain[0]}</b>
+              {translatedChain.slice(1).map((c, k) => (
                 <span key={k} className="chain-unit">
                   <u style={{ "--i": k } as React.CSSProperties}>→</u>
                   <b style={{ "--i": k + 1 } as React.CSSProperties}>{c}</b>

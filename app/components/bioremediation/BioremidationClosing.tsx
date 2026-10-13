@@ -1,16 +1,21 @@
+"use client";
+
 import React from "react";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 export default function BioremidationClosing() {
+  const { t } = useTranslation();
+
   return (
     <section className="w-full bg-[#173F2B] text-white pt-9 md:pt-10 lg:pt-[42px] pb-9 md:pb-10 lg:pb-[44px] overflow-hidden border-t border-[#167A4A]/25">
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)]">
         {/* TOP MICRO-LABELS */}
         <div className="flex items-center justify-between mb-7 md:mb-9">
           <span className="font-mono text-[11px] font-semibold tracking-[0.2em] text-white/50 uppercase">
-            BIOFACTOR · BIO-REMEDIATION
+            {t("biofactor_name")} · {t("nav_bioremediation")}
           </span>
           <span className="font-mono text-[11px] font-semibold tracking-[0.2em] text-white/50 uppercase">
-            FOCUS · <span className="text-[#B8E986]">WASTEWATER &amp; EFFLUENT</span>
+            {t("bio_closing_focus")}
           </span>
         </div>
 
@@ -23,12 +28,7 @@ export default function BioremidationClosing() {
 
             {/* Display Quote Text */}
             <h2 className="font-display font-extrabold text-[28px] sm:text-[36px] md:text-[42px] lg:text-[46px] xl:text-[48px] text-[#F8FAFC] tracking-tight leading-[1.05]">
-              Clean water is not the absence <br className="hidden sm:block" />
-              of microbes. It is the{" "}
-              <span className="font-serif italic text-[#B8E986] font-normal">
-                right microbes
-              </span>
-              , doing the work.
+              {t("bio_closing_statement")}
             </h2>
           </div>
 
@@ -36,10 +36,10 @@ export default function BioremidationClosing() {
           <div className="lg:col-span-5 xl:col-span-4 flex flex-col justify-center gap-3">
             <div>
               <div className="font-display font-extrabold text-lg sm:text-[21px] lg:text-[22px] tracking-[0.15em] uppercase text-white mb-1.5">
-                BIOFACTOR <span className="text-[#B8E986]">BIOLOGICALS</span>
+                {t("biofactor_name")} <span className="text-[#B8E986]">BIOLOGICALS</span>
               </div>
               <p className="font-serif italic text-sm sm:text-[16px] lg:text-[17px] text-white/70 leading-relaxed max-w-sm">
-                Turning microbial functions into measurable biological impact.
+                {t("nutrients_card1_tag")}
               </p>
             </div>
           </div>

@@ -1,27 +1,32 @@
-import React from "react";
+"use client";
 
-const stats = [
-  {
-    value: "944 Mt",
-    desc: "of milk was forecast to be produced worldwide in 2023. The largest producer, India, supplies about a quarter.",
-    source: "FAO / FAOSTAT",
-    sup: "",
-  },
-  {
-    value: "up to 12%",
-    desc: "of a ruminant's energy intake is lost as methane during rumen fermentation.",
-    source: "FAO",
-    sup: "",
-  },
-  {
-    value: "19–26%",
-    desc: "of early- and mid-lactation dairy cows show subacute ruminal acidosis in surveys.",
-    source: "PLAIZIER ET AL. 2008",
-    sup: "",
-  },
-];
+import React from "react";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 export default function RuminantsDataStrip() {
+  const { t } = useTranslation();
+
+  const stats = [
+    {
+      value: "944 Mt",
+      desc: t("ruminants_data_milk_desc"),
+      source: t("ruminants_data_milk_source"),
+      sup: "",
+    },
+    {
+      value: "up to 12%",
+      desc: t("ruminants_data_methane_desc"),
+      source: t("ruminants_data_methane_source"),
+      sup: "",
+    },
+    {
+      value: "19–26%",
+      desc: t("ruminants_data_acid_desc"),
+      source: t("ruminants_data_acid_source"),
+      sup: "",
+    },
+  ];
+
   return (
     <section className="w-full" data-ruminants-section="stats" data-n="Key Stats" data-motion style={{ minHeight: 0 }}>
       {/* 1. Deep Forest Editorial Data Band */}
@@ -89,8 +94,7 @@ export default function RuminantsDataStrip() {
         <div className="w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)]">
           <div className="max-w-[1040px]">
             <p className="font-serif text-lg sm:text-xl lg:text-[21px] xl:text-[22px] text-[#173522] leading-[1.48] font-normal" style={{ fontFamily: 'Times New Roman, Times, serif' }}>
-              Every kilogram of milk or meat depends on how well the rumen’s microbes ferment feed.{" "}
-              <span className="text-[#2D6A4F] font-medium italic">When that community is balanced</span>, the animal gets more energy and protein from the same ration, stays healthier through stress, and wastes less feed as gas.
+              {t("ruminants_data_pullquote")}
             </p>
           </div>
         </div>

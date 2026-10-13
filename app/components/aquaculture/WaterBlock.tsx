@@ -1,32 +1,27 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
-
-const ZONES = [
-  {
-    depth: "0 – 30 cm",
-    label: "Surface: aerobic",
-    color: "#1F8A57",
-    body: (
-      <>
-        Nitrifying bacteria near aerators convert ammonia to nitrate, and{" "}
-        <em>Bacillus</em> clear dissolved organic matter so the plankton bloom stays steady.
-      </>
-    ),
-  },
-  {
-    depth: "30 – 100 cm",
-    label: "Mid-water: micro-aerophilic",
-    color: "#5FBF86",
-    body: (
-      <>
-        Facultative and photosynthetic bacteria such as{" "}
-        <em>Rhodopseudomonas palustris</em> keep taking up ammonia and nitrite through night-time oxygen dips.
-      </>
-    ),
-  },
-];
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 export default function WaterBlock() {
+  const { t } = useTranslation();
+
+  const ZONES = [
+    {
+      depth: "0 – 30 cm",
+      label: t("aqua_water_surface_title"),
+      color: "#1F8A57",
+      body: t("aqua_water_surface_desc"),
+    },
+    {
+      depth: "30 – 100 cm",
+      label: t("aqua_water_mid_title"),
+      color: "#5FBF86",
+      body: t("aqua_water_mid_desc"),
+    },
+  ];
+
   return (
     <section
       className="relative w-full pb-16 pt-28 md:pb-16 md:pt-32 lg:pb-20 lg:pt-36"
@@ -47,14 +42,14 @@ export default function WaterBlock() {
               <div className="mb-2 flex items-center gap-2">
                 <span className="h-[2px] w-6 bg-[#1F8A57]" />
                 <p className="font-jetbrains text-[11px] font-bold uppercase tracking-[0.22em] text-[#1F8A57]">
-                  ABOVE THE BOTTOM
+                  {t("aqua_water_eyebrow")}
                 </p>
               </div>
               <h2 className="mb-2 font-inter-tight text-[54px] font-extrabold leading-[0.95] text-[#1F8A57] sm:text-[64px] lg:text-[72px]">
-                WATER
+                {t("aqua_water_title")}
               </h2>
               <p className="font-newsreader text-[18px] italic leading-[1.45] text-[#2B2B2B]">
-                Oxygen-rich at the surface. Low and shifting at night.
+                {t("aqua_water_subtitle")}
               </p>
             </div>
 
@@ -97,7 +92,7 @@ export default function WaterBlock() {
           <div className="flex flex-col gap-4 lg:col-span-7 lg:pt-24">
             <div className="border-b border-[#B8D5BF]/70 pb-1 rv d1">
               <h3 className="font-inter-tight text-[26px] font-extrabold leading-snug text-[#10301f] sm:text-[30px]">
-                Keeping the water column stable.
+                {t("aqua_water_heading")}
               </h3>
             </div>
 

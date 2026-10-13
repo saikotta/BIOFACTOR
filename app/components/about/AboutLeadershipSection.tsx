@@ -1,12 +1,13 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "../../i18n";
 
 const TEAM = [
-  { name: "Dr. L.N. Reddy", role: "Founder & CEO", initials: "LR" },
-  { name: "Dr. Anil Ahire", role: "Director", initials: "AA" },
-  { name: "Krishna Murali", role: "Director", initials: "KM" },
-  { name: "S. Reddy", role: "Director, R&D", initials: "SR" },
+  { name: "Dr. L.N. Reddy", roleKey: "about_lead_role_ceo", defaultRole: "Founder & CEO", initials: "LR" },
+  { name: "Dr. Anil Ahire", roleKey: "about_lead_role_director", defaultRole: "Director", initials: "AA" },
+  { name: "Krishna Murali", roleKey: "about_lead_role_director", defaultRole: "Director", initials: "KM" },
+  { name: "S. Reddy", roleKey: "about_lead_role_rnd", defaultRole: "Director, R&D", initials: "SR" },
 ];
 
 const STYLES = `
@@ -180,6 +181,7 @@ const STYLES = `
 `;
 
 export default function AboutLeadershipSection() {
+  const { t } = useTranslation();
   const teamRef = useRef<HTMLUListElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -226,8 +228,8 @@ export default function AboutLeadershipSection() {
     <section className="w-full bg-[#edf3ec]">
       <style>{STYLES}</style>
       <div className="bio-leadership">
-        <span className="bio-leadership-kicker">Leadership</span>
-        <h2 className="bio-leadership-title">The People Behind the Platform</h2>
+        <span className="bio-leadership-kicker">{t("about_leadership_kicker", "Leadership")}</span>
+        <h2 className="bio-leadership-title">{t("about_leadership_title", "The People Behind the Platform")}</h2>
 
         <ul
           ref={teamRef}
@@ -248,7 +250,7 @@ export default function AboutLeadershipSection() {
                 <span className="bio-leadership-initials">{member.initials}</span>
               </div>
               <h3 className="bio-leadership-name">{member.name}</h3>
-              <p className="bio-leadership-role">{member.role}</p>
+              <p className="bio-leadership-role">{t(member.roleKey, member.defaultRole)}</p>
             </li>
           ))}
         </ul>

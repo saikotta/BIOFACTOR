@@ -1,6 +1,11 @@
+"use client";
+
 import React from "react";
+import { useTranslation } from "../../i18n";
 
 export default function NutrientsPrimaryApplications() {
+  const { t } = useTranslation();
+
   return (
     <section id="primary-nutrients" className="relative w-full bg-[#EAF3EA] text-[#173522] pt-8 md:pt-12 lg:pt-16 pb-12 md:pb-16 overflow-hidden">
 
@@ -15,10 +20,10 @@ export default function NutrientsPrimaryApplications() {
             {/* Section Heading shifted rightwards */}
             <div className="w-full text-left space-y-1 pb-1 pl-12 sm:pl-20 lg:pl-24">
               <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#173522] uppercase tracking-tight">
-                NITROGEN
+                {t("nutrients_n_title", "NITROGEN")}
               </h2>
               <p className="font-serif italic text-xl sm:text-2xl text-[#2D6A4F] font-normal">
-                From the atmosphere to biology.
+                {t("nutrients_n_sub", "From the atmosphere to biology.")}
               </p>
             </div>
 
@@ -28,14 +33,14 @@ export default function NutrientsPrimaryApplications() {
                 N
               </span>
               <span className="font-mono text-[9px] sm:text-[10px] font-bold tracking-[0.2em] text-[#173522]/70 uppercase block -mt-6 sm:-mt-8 mb-2 transition-transform duration-700 group-hover:scale-105">
-                NITROGEN · ATOMIC NO. 7
+                {t("nutrients_n_atomic", "NITROGEN · ATOMIC NO. 7")}
               </span>
             </div>
 
             {/* Compact Percentage Bar Card */}
             <div className="w-full max-w-[340px] p-3.5 sm:p-4 rounded-xl bg-white/90 backdrop-blur-sm border border-[#1E40AF]/25 shadow-sm space-y-2.5 text-left br-rv br-d1">
               <div className="flex justify-between items-center font-mono text-[10px] font-bold text-[#173522] uppercase tracking-wider">
-                <span>EARTH'S ATMOSPHERE BY VOLUME</span>
+                <span>{t("nutrients_n_card_title", "EARTH'S ATMOSPHERE BY VOLUME")}</span>
                 <span className="text-[#1E40AF]">N₂</span>
               </div>
               <div className="w-full h-2 bg-[#EAF3EA] rounded-full overflow-hidden">
@@ -46,7 +51,7 @@ export default function NutrientsPrimaryApplications() {
                   ~<span data-cu>78</span>%
                 </div>
                 <div className="text-xs text-[#173522]/80 font-sans leading-snug">
-                  is nitrogen. Plants cannot use atmospheric N₂ directly.
+                  {t("nutrients_n_card_desc", "is nitrogen. Plants cannot use atmospheric N₂ directly.")}
                 </div>
               </div>
             </div>
@@ -56,10 +61,10 @@ export default function NutrientsPrimaryApplications() {
           <div className="lg:col-span-7 flex flex-col space-y-6 pt-1">
             <div className="space-y-4 text-base sm:text-lg text-[#173522]/90 leading-relaxed font-sans br-rv br-d1">
               <p>
-                The atmosphere contains approximately 78% nitrogen. Yet plants cannot use atmospheric N₂ directly. Nitrogen-fixing microorganisms convert that inert atmospheric nitrogen into biologically useful forms.
+                {t("nutrients_n_para1", "The atmosphere contains approximately 78% nitrogen. Yet plants cannot use atmospheric N₂ directly. Nitrogen-fixing microorganisms convert that inert atmospheric nitrogen into biologically useful forms.")}
               </p>
               <p>
-                Under suitable symbiotic conditions, legumes can fix more than 250 kg N per hectare in a growing season. In other systems, biological nitrogen fixation is lower and depends on the microorganism, crop, soil and environment.
+                {t("nutrients_n_para2", "Under suitable symbiotic conditions, legumes can fix more than 250 kg N per hectare in a growing season. In other systems, biological nitrogen fixation is lower and depends on the microorganism, crop, soil and environment.")}
               </p>
             </div>
 
@@ -67,19 +72,19 @@ export default function NutrientsPrimaryApplications() {
             <div className="border-t border-[#173522]/15 pt-4 space-y-4 br-rv br-d2">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 items-baseline">
                 <span className="font-mono text-xs font-bold text-[#2D6A4F] uppercase">
-                  GLOBAL FIXATION
+                  {t("nutrients_n_row1_title", "GLOBAL FIXATION")}
                 </span>
                 <span className="sm:col-span-2 text-sm sm:text-base text-[#173522]/90 font-sans">
-                  <strong>50–70 Tg N</strong> fixed biologically in agricultural systems every year, worldwide.
+                  <strong>50–70 Tg N</strong> {t("nutrients_n_row1_desc", "fixed biologically in agricultural systems every year, worldwide.")}
                 </span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 items-baseline border-t border-[#173522]/10 pt-3">
                 <span className="font-mono text-xs font-bold text-[#2D6A4F] uppercase">
-                  FIXATION CAPACITY
+                  {t("nutrients_n_row2_title", "FIXATION CAPACITY")}
                 </span>
                 <span className="sm:col-span-2 text-sm sm:text-base text-[#173522]/90 font-sans">
-                  <strong>Up to 311 kg N/ha</strong> reported for faba bean; up to 389 kg N/ha for red clover.
+                  <strong>Up to 311 kg N/ha</strong> {t("nutrients_n_row2_desc", "reported for faba bean; up to 389 kg N/ha for red clover.")}
                 </span>
               </div>
             </div>
@@ -87,10 +92,10 @@ export default function NutrientsPrimaryApplications() {
             {/* Editorial Pull Quote */}
             <div className="border-l-2 border-transparent pl-4 py-1 br-callout br-rv br-d2">
               <span className="font-mono text-[11px] font-bold tracking-widest text-[#2D6A4F] uppercase block mb-1">
-                BIOLOGICAL PRINCIPLE
+                {t("nutrients_n_principle_tag", "BIOLOGICAL PRINCIPLE")}
               </span>
               <p className="font-serif italic text-base sm:text-lg text-[#173522] leading-relaxed">
-                "Biology does not invent nitrogen. It opens a pathway to the largest nitrogen reservoir on Earth."
+                "{t("nutrients_n_principle_quote", "Biology does not invent nitrogen. It opens a pathway to the largest nitrogen reservoir on Earth.")}"
               </p>
             </div>
           </div>
@@ -104,10 +109,10 @@ export default function NutrientsPrimaryApplications() {
           <div className="lg:col-span-7 flex flex-col space-y-6 pt-1 order-2 lg:order-1">
             <div className="space-y-4 text-base sm:text-lg text-[#173522]/90 leading-relaxed font-sans br-rv br-d1">
               <p>
-                Phosphorus is abundant in many soils. Most of it, however, remains locked in insoluble mineral or chemically bound forms that plants cannot readily access.
+                {t("nutrients_p_para1", "Phosphorus is abundant in many soils. Most of it, however, remains locked in insoluble mineral or chemically bound forms that plants cannot readily access.")}
               </p>
               <p>
-                Phosphate-solubilising microorganisms release organic acids, chelating compounds and other metabolites that help convert these forms into more plant-available phosphorus.
+                {t("nutrients_p_para2", "Phosphate-solubilising microorganisms release organic acids, chelating compounds and other metabolites that help convert these forms into more plant-available phosphorus.")}
               </p>
             </div>
 
@@ -115,19 +120,19 @@ export default function NutrientsPrimaryApplications() {
             <div className="border-t border-[#173522]/15 pt-4 space-y-4 br-rv br-d2">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 items-baseline">
                 <span className="font-mono text-xs font-bold text-[#2D6A4F] uppercase">
-                  ORGANIC ACIDS
+                  {t("nutrients_p_row1_title", "ORGANIC ACIDS")}
                 </span>
                 <span className="sm:col-span-2 text-sm sm:text-base text-[#173522]/90 font-sans">
-                  <strong>Gluconic, citric &amp; oxalic acids</strong> release bound phosphate from calcium and iron complexes.
+                  <strong>Gluconic, citric &amp; oxalic acids</strong> {t("nutrients_p_row1_desc", "release bound phosphate from calcium and iron complexes.")}
                 </span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 items-baseline border-t border-[#173522]/10 pt-3">
                 <span className="font-mono text-xs font-bold text-[#2D6A4F] uppercase">
-                  P-USE EFFICIENCY
+                  {t("nutrients_p_row2_title", "P-USE EFFICIENCY")}
                 </span>
                 <span className="sm:col-span-2 text-sm sm:text-base text-[#173522]/90 font-sans">
-                  <strong>+7.5 kg yield / kg P</strong> average gain with biofertilisers across field trials worldwide.
+                  <strong>+7.5 kg yield / kg P</strong> {t("nutrients_p_row2_desc", "average gain with biofertilisers across field trials worldwide.")}
                 </span>
               </div>
             </div>
@@ -135,10 +140,10 @@ export default function NutrientsPrimaryApplications() {
             {/* Editorial Pull Quote */}
             <div className="border-l-2 border-transparent pl-4 py-1 br-callout br-rv br-d2">
               <span className="font-mono text-[11px] font-bold tracking-widest text-[#2D6A4F] uppercase block mb-1">
-                BIOLOGICAL PRINCIPLE
+                {t("nutrients_n_principle_tag", "BIOLOGICAL PRINCIPLE")}
               </span>
               <p className="font-serif italic text-base sm:text-lg text-[#173522] leading-relaxed">
-                "The real question is not simply 'how much phosphorus is added.' It is: how much of the phosphorus already present can biology make accessible?"
+                "{t("nutrients_p_principle_quote", "The real question is not simply how much phosphorus is added. It is: how much of the phosphorus already present can biology make accessible?")}"
               </p>
             </div>
           </div>
@@ -148,10 +153,10 @@ export default function NutrientsPrimaryApplications() {
             {/* Section Heading shifted rightwards */}
             <div className="w-full text-left space-y-1 pb-1 pl-12 sm:pl-20 lg:pl-24">
               <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#173522] uppercase tracking-tight">
-                PHOSPHORUS
+                {t("nutrients_p_title", "PHOSPHORUS")}
               </h2>
               <p className="font-serif italic text-xl sm:text-2xl text-[#2D6A4F] font-normal">
-                From locked-up to available.
+                {t("nutrients_p_sub", "From locked-up to available.")}
               </p>
             </div>
 
@@ -161,15 +166,15 @@ export default function NutrientsPrimaryApplications() {
                 P
               </span>
               <span className="font-mono text-[9px] sm:text-[10px] font-bold tracking-[0.2em] text-[#173522]/70 uppercase block -mt-6 sm:-mt-8 mb-2 transition-transform duration-700 group-hover:scale-105">
-                PHOSPHORUS · ATOMIC NO. 15
+                {t("nutrients_p_atomic", "PHOSPHORUS · ATOMIC NO. 15")}
               </span>
             </div>
 
             {/* Compact Percentage Bar Card */}
             <div className="w-full max-w-[340px] p-3.5 sm:p-4 rounded-xl bg-white/90 backdrop-blur-sm border border-[#92400E]/25 shadow-sm space-y-2.5 text-left br-rv br-d1">
               <div className="flex justify-between items-center font-mono text-[10px] font-bold text-[#173522] uppercase tracking-wider">
-                <span>APPLIED FERTILISER P USED BY THE CROP</span>
-                <span className="text-[#92400E]">SEASON 1</span>
+                <span>{t("nutrients_p_card_title", "APPLIED FERTILISER P USED BY THE CROP")}</span>
+                <span className="text-[#92400E]">{t("nutrients_p_card_season", "SEASON 1")}</span>
               </div>
               <div className="w-full h-2 bg-[#EAF3EA] rounded-full overflow-hidden">
                 <div className="h-full bg-[#92400E] rounded-full w-[25%]" />
@@ -179,7 +184,7 @@ export default function NutrientsPrimaryApplications() {
                   10–25%
                 </div>
                 <div className="text-xs text-[#173522]/80 font-sans leading-snug">
-                  The rest is rapidly fixed in the soil.
+                  {t("nutrients_p_card_desc", "The rest is rapidly fixed in the soil.")}
                 </div>
               </div>
             </div>
@@ -195,10 +200,10 @@ export default function NutrientsPrimaryApplications() {
             {/* Section Heading shifted rightwards */}
             <div className="w-full text-left space-y-1 pb-1 pl-12 sm:pl-20 lg:pl-24">
               <h2 className="font-display font-extrabold text-4xl sm:text-5xl text-[#173522] uppercase tracking-tight">
-                POTASSIUM
+                {t("nutrients_k_title", "POTASSIUM")}
               </h2>
               <p className="font-serif italic text-xl sm:text-2xl text-[#2D6A4F] font-normal">
-                From mineral reserves to plant availability.
+                {t("nutrients_k_sub", "From mineral reserves to plant availability.")}
               </p>
             </div>
 
@@ -208,15 +213,15 @@ export default function NutrientsPrimaryApplications() {
                 K
               </span>
               <span className="font-mono text-[9px] sm:text-[10px] font-bold tracking-[0.2em] text-[#173522]/70 uppercase block -mt-6 sm:-mt-8 mb-2 transition-transform duration-700 group-hover:scale-105">
-                POTASSIUM · ATOMIC NO. 19
+                {t("nutrients_k_atomic", "POTASSIUM · ATOMIC NO. 19")}
               </span>
             </div>
 
             {/* Compact Percentage Bar Card */}
             <div className="w-full max-w-[340px] p-3.5 sm:p-4 rounded-xl bg-white/90 backdrop-blur-sm border border-[#6B21A8]/25 shadow-sm space-y-2.5 text-left br-rv br-d1">
               <div className="flex justify-between items-center font-mono text-[10px] font-bold text-[#173522] uppercase tracking-wider">
-                <span>TOTAL SOIL K HELD IN MINERAL FORMS</span>
-                <span className="text-[#6B21A8]">FELDSPAR · MICA</span>
+                <span>{t("nutrients_k_card_title", "TOTAL SOIL K HELD IN MINERAL FORMS")}</span>
+                <span className="text-[#6B21A8]">{t("nutrients_k_card_minerals", "FELDSPAR · MICA")}</span>
               </div>
               <div className="w-full h-2 bg-[#EAF3EA] rounded-full overflow-hidden">
                 <div className="h-full bg-[#6B21A8] rounded-full w-[95%]" />
@@ -226,7 +231,7 @@ export default function NutrientsPrimaryApplications() {
                   <span data-cu>90</span>–98%
                 </div>
                 <div className="text-xs text-[#173522]/80 font-sans leading-snug">
-                  of the total K in most soils is not readily available to plants.
+                  {t("nutrients_k_card_desc", "of the total K in most soils is not readily available to plants.")}
                 </div>
               </div>
             </div>
@@ -236,10 +241,10 @@ export default function NutrientsPrimaryApplications() {
           <div className="lg:col-span-7 flex flex-col space-y-6 pt-1">
             <div className="space-y-4 text-base sm:text-lg text-[#173522]/90 leading-relaxed font-sans br-rv br-d1">
               <p>
-                Soils can contain enormous quantities of potassium. Only a small fraction is immediately available to plants.
+                {t("nutrients_k_para1", "Soils can contain enormous quantities of potassium. Only a small fraction is immediately available to plants.")}
               </p>
               <p>
-                Potassium-solubilising microorganisms release potassium from mineral sources through organic-acid production and biological weathering.
+                {t("nutrients_k_para2", "Potassium-solubilising microorganisms release potassium from mineral sources through organic-acid production and biological weathering.")}
               </p>
             </div>
 
@@ -247,19 +252,19 @@ export default function NutrientsPrimaryApplications() {
             <div className="border-t border-[#173522]/15 pt-4 space-y-4 br-rv br-d2">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 items-baseline">
                 <span className="font-mono text-xs font-bold text-[#2D6A4F] uppercase">
-                  DIRECT RECOVERY
+                  {t("nutrients_k_row1_title", "DIRECT RECOVERY")}
                 </span>
                 <span className="sm:col-span-2 text-sm sm:text-base text-[#173522]/90 font-sans">
-                  <strong>Only 2–10%</strong> of soil K is in water-soluble &amp; exchangeable forms roots can take up directly.
+                  <strong>Only 2–10%</strong> {t("nutrients_k_row1_desc", "of soil K is in water-soluble & exchangeable forms roots can take up directly.")}
                 </span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 items-baseline border-t border-[#173522]/10 pt-3">
                 <span className="font-mono text-xs font-bold text-[#2D6A4F] uppercase">
-                  WEATHERING MECHANISM
+                  {t("nutrients_k_row2_title", "WEATHERING MECHANISM")}
                 </span>
                 <span className="sm:col-span-2 text-sm sm:text-base text-[#173522]/90 font-sans">
-                  <strong>Acidolysis &amp; chelation</strong> break silicate lattices to release soluble potassium ions.
+                  <strong>Acidolysis &amp; chelation</strong> {t("nutrients_k_row2_desc", "break silicate lattices to release soluble potassium ions.")}
                 </span>
               </div>
             </div>
@@ -267,10 +272,10 @@ export default function NutrientsPrimaryApplications() {
             {/* Editorial Pull Quote */}
             <div className="border-l-2 border-transparent pl-4 py-1 br-callout br-rv br-d2">
               <span className="font-mono text-[11px] font-bold tracking-widest text-[#2D6A4F] uppercase block mb-1">
-                BIOLOGICAL PRINCIPLE
+                {t("nutrients_n_principle_tag", "BIOLOGICAL PRINCIPLE")}
               </span>
               <p className="font-serif italic text-base sm:text-lg text-[#173522] leading-relaxed">
-                "Again, the opportunity is not simply to add more potassium. It is to unlock more of what already exists."
+                "{t("nutrients_k_principle_quote", "Again, the opportunity is not simply to add more potassium. It is to unlock more of what already exists.")}"
               </p>
             </div>
           </div>

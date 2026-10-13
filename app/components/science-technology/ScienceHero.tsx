@@ -54,7 +54,7 @@ export default function ScienceHero() {
       <MicrobeField3D />
 
       <div className="st-hero-wrap">
-        <p className="st-eyebrow">{HERO_CONTENT.eyebrow}</p>
+        <p className="st-eyebrow">{t("science_hero_eyebrow", HERO_CONTENT.eyebrow)}</p>
 
         <h1 className="st-h1">
           {language === "en" ? (
@@ -91,18 +91,13 @@ export default function ScienceHero() {
               />
               <b className="st-tile-num">{tile.number}</b>
               <span className="st-tile-label">
-                {tile.labelLines.map((line, i) => (
-                  <React.Fragment key={i}>
-                    {i > 0 && <br />}
-                    {line}
-                  </React.Fragment>
-                ))}
+                {t(`tech_tile_${index + 1}`, tile.labelLines.join(" "))}
               </span>
             </a>
           ))}
         </nav>
 
-        <p className="st-hint">{HERO_CONTENT.hint}</p>
+        <p className="st-hint">{t("science_hero_hint", HERO_CONTENT.hint)}</p>
       </div>
 
       <svg

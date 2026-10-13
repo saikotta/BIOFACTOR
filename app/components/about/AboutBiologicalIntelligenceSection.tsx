@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
+import { useTranslation } from "../../i18n";
 
 export default function AboutBiologicalIntelligenceSection() {
+  const { t } = useTranslation();
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [animationCycle, setAnimationCycle] = useState(0);
   const armedRef = useRef(true);
@@ -91,7 +93,10 @@ export default function AboutBiologicalIntelligenceSection() {
                     : "opacity-0"
                 }`}
               >
-                Farming today runs on chemistry. It&apos;s taken agriculture a long way &mdash; but soil, water, and animals aren&apos;t machines. They&apos;re living systems, and living systems need more than chemistry alone can give them.
+                {t(
+                  "about_bio_intel_para1",
+                  "Farming today runs on chemistry. It's taken agriculture a long way — but soil, water, and animals aren't machines. They're living systems, and living systems need more than chemistry alone can give them."
+                )}
               </p>
               <p
                 className={`text-[clamp(15px,1.05vw,18px)] leading-[1.62] text-[#17251C] font-normal ${
@@ -102,7 +107,10 @@ export default function AboutBiologicalIntelligenceSection() {
                     : "opacity-0"
                 }`}
               >
-                So we set out to build that missing piece: biology that works alongside the chemistry farmers already use, not against it.
+                {t(
+                  "about_bio_intel_para2",
+                  "So we set out to build that missing piece: biology that works alongside the chemistry farmers already use, not against it."
+                )}
               </p>
             </div>
 
@@ -110,10 +118,10 @@ export default function AboutBiologicalIntelligenceSection() {
             <div className="mt-10 sm:mt-12 lg:mt-14 mb-8 sm:mb-10 lg:mb-12 max-w-[570px]">
               <h2 className="text-[clamp(44px,3.2vw,58px)] font-bold tracking-[-0.025em] leading-[1.08] text-[#155B2A] font-sans">
                 {[
-                  { line: "We complete", animClass: "animate-s2-line-1" },
-                  { line: "chemical systems", animClass: "animate-s2-line-2" },
-                  { line: "with biological", animClass: "animate-s2-line-3" },
-                  { line: "intelligence.", animClass: "animate-s2-line-4" },
+                  { line: t("about_bio_intel_quote_1", "We complete"), animClass: "animate-s2-line-1" },
+                  { line: t("about_bio_intel_quote_2", "chemical systems"), animClass: "animate-s2-line-2" },
+                  { line: t("about_bio_intel_quote_3", "with biological"), animClass: "animate-s2-line-3" },
+                  { line: t("about_bio_intel_quote_4", "intelligence."), animClass: "animate-s2-line-4" },
                 ].map((item, idx) => (
                   <div key={idx} className="overflow-hidden py-0.5">
                     <span
@@ -143,7 +151,10 @@ export default function AboutBiologicalIntelligenceSection() {
                     : "opacity-0"
                 }`}
               >
-                That idea is where we started, and it&apos;s still what every product we make comes back to.
+                {t(
+                  "about_bio_intel_closing",
+                  "That idea is where we started, and it's still what every product we make comes back to."
+                )}
               </p>
             </div>
 

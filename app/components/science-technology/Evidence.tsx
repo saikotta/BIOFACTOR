@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { EVIDENCE_CONTENT } from "./content";
+import { useTranslation } from "../../i18n";
 
 export default function Evidence() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -89,7 +90,14 @@ export default function Evidence() {
     };
   }, []);
 
-  const titleWords = EVIDENCE_CONTENT.title.split(" ");
+  const { t } = useTranslation();
+  const eyebrow = t("science_evidence_eyebrow", EVIDENCE_CONTENT.eyebrow);
+  const title = t("science_evidence_title", EVIDENCE_CONTENT.title);
+  const titleWords = title.split(" ");
+  const statLabels = [
+    t("science_evidence_stat_1", EVIDENCE_CONTENT.stats[0].label),
+    t("science_evidence_stat_2", EVIDENCE_CONTENT.stats[1].label),
+  ];
 
   return (
     <>
@@ -99,7 +107,7 @@ export default function Evidence() {
         className={`proof ${isIn ? "in" : ""}`}
       >
         <div className="wrap">
-          <p className="eyebrow fade">{EVIDENCE_CONTENT.eyebrow}</p>
+          <p className="eyebrow fade">{eyebrow}</p>
 
           <h2>
             {titleWords.map((word: string, k: number) => (
@@ -122,7 +130,7 @@ export default function Evidence() {
                   <div className="num" aria-label={finalVal}>
                     {counts[i]}
                   </div>
-                  <span className="lbl">{stat.label}</span>
+                  <span className="lbl">{statLabels[i]}</span>
                 </div>
               );
             })}
@@ -131,7 +139,7 @@ export default function Evidence() {
       </section>
 
       <div role="contentinfo" className="closing-strip">
-        {EVIDENCE_CONTENT.closing}
+        {t("science_evidence_closing", EVIDENCE_CONTENT.closing)}
       </div>
 
       <style jsx>{`

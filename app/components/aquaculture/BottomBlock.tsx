@@ -1,6 +1,11 @@
+"use client";
+
 import React from "react";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 export default function BottomBlock() {
+  const { t } = useTranslation();
+
   return (
     <>
       {/* ── SECTION 1: heading + pond diagram ── */}
@@ -28,7 +33,7 @@ export default function BottomBlock() {
                   color: "#4b6b57",
                 }}
               >
-                THE POND BOTTOM
+                {t("aqua_bottom_eyebrow")}
               </span>
             </div>
 
@@ -44,7 +49,7 @@ export default function BottomBlock() {
                 margin: 0,
               }}
             >
-              Where organic load turns into toxic gas.
+              {t("aqua_bottom_title")}
             </h1>
 
             <p
@@ -59,10 +64,7 @@ export default function BottomBlock() {
                 textAlign: "left",
               }}
             >
-              Uneaten feed, faeces and dead plankton settle on the bottom every
-              day. Just below the surface of that sludge there is no oxygen, and
-              microbes break it down anaerobically. The by-products seep up into
-              the water where the shrimp live.
+              {t("aqua_bottom_desc")}
             </p>
           </div>
 
@@ -161,7 +163,7 @@ export default function BottomBlock() {
               style={{ fontFamily: "var(--font-jetbrains), monospace" }}
               className="text-[10px] font-medium uppercase leading-none tracking-[0.24em] text-[#5A7A5E]"
             >
-              HOW TOXINS FORM
+              {t("aqua_bottom_how_toxins")}
             </p>
             <h2
               style={{
@@ -171,7 +173,7 @@ export default function BottomBlock() {
               }}
               className="mt-3 font-extrabold tracking-normal text-[#2f8f4e]"
             >
-              BOTTOM
+              {t("aqua_bottom_bottom_label")}
             </h2>
 
             <div className="mt-3 flex flex-col gap-[6px]">
@@ -180,44 +182,44 @@ export default function BottomBlock() {
                 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", letterSpacing: "0.04em", color: "#4b6b57", whiteSpace: "nowrap" }}
               >
                 <span style={{ display: "inline-block", width: "16px", height: "2px", background: "#B8893A", flexShrink: 0 }} />
-                No oxygen below a few mm
+                {t("aqua_data_mm_desc")}
               </div>
               <div
                 className="flex items-center gap-2"
                 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", letterSpacing: "0.04em", color: "#4b6b57", whiteSpace: "nowrap" }}
               >
                 <span style={{ display: "inline-block", width: "16px", height: "2px", background: "#B8893A", flexShrink: 0 }} />
-                Organic load builds up every day
+                {t("aqua_bottom_desc")}
               </div>
             </div>
 
             <h2 className="mb-5 mt-4 font-inter-tight text-[clamp(24px,2.5vw,34px)] font-bold leading-tight text-[#10301f]">
-              Three toxic metabolites, one source.
+              {t("aqua_bottom_three_toxins")}
             </h2>
 
             <div className="grid grid-cols-1 gap-px border border-[#c8e0b2] bg-[#c8e0b2] sm:grid-cols-2">
               <article className="bg-[rgba(255,255,255,0.75)] p-4 md:p-5" style={{ borderTop: "3px solid #2f8f4e", border: "1px solid rgba(47,143,78,0.2)" }}>
-                <h3 className="font-inter-tight text-[16px] font-bold text-[#10301f]">Ammonia (NH₃)</h3>
+                <h3 className="font-inter-tight text-[16px] font-bold text-[#10301f]">{t("aqua_bottom_nh3_title")}</h3>
                 <p className="mt-1 font-newsreader text-[15px] leading-[1.5] text-[#4b6b57]">
-                  Released as proteins in feed and faeces break down in the sediment.
+                  {t("aqua_bottom_nh3_desc")}
                 </p>
               </article>
               <article className="bg-[rgba(255,255,255,0.75)] p-4 md:p-5" style={{ borderTop: "3px solid #2f8f4e", border: "1px solid rgba(47,143,78,0.2)" }}>
-                <h3 className="font-inter-tight text-[16px] font-bold text-[#10301f]">Nitrite (NO₂⁻)</h3>
+                <h3 className="font-inter-tight text-[16px] font-bold text-[#10301f]">{t("aqua_bottom_no2_title")}</h3>
                 <p className="mt-1 font-newsreader text-[15px] leading-[1.5] text-[#4b6b57]">
-                  Accumulates when low oxygen at the bottom stops nitrification halfway.
+                  {t("aqua_bottom_no2_desc")}
                 </p>
               </article>
               <article className="bg-[rgba(255,255,255,0.75)] p-4 md:p-5" style={{ borderTop: "3px solid #2f8f4e", border: "1px solid rgba(47,143,78,0.2)" }}>
-                <h3 className="font-inter-tight text-[16px] font-bold text-[#10301f]">Hydrogen sulphide (H₂S)</h3>
+                <h3 className="font-inter-tight text-[16px] font-bold text-[#10301f]">{t("aqua_bottom_h2s_title")}</h3>
                 <p className="mt-1 font-newsreader text-[15px] leading-[1.5] text-[#4b6b57]">
-                  Produced by sulphate-reducing bacteria such as <em>Desulfovibrio</em> in oxygen-free sediment.
+                  {t("aqua_bottom_h2s_desc")}
                 </p>
               </article>
               <article className="bg-[rgba(255,255,255,0.75)] p-4 md:p-5" style={{ borderTop: "3px solid #2f8f4e", border: "1px solid rgba(47,143,78,0.2)" }}>
-                <h3 className="font-inter-tight text-[16px] font-bold text-[#10301f]">Released upward</h3>
+                <h3 className="font-inter-tight text-[16px] font-bold text-[#10301f]">{t("aqua_bottom_upward_title")}</h3>
                 <p className="mt-1 font-newsreader text-[15px] leading-[1.5] text-[#4b6b57]">
-                  All three diffuse into the water column, where they stress shrimp, suppress feeding and weaken immunity.
+                  {t("aqua_bottom_upward_desc")}
                 </p>
               </article>
             </div>

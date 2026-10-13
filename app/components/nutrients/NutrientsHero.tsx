@@ -2,8 +2,11 @@
 
 import React, { useEffect } from "react";
 import BiofactorScrollHero from "../BiofactorScrollHero";
+import { useTranslation } from "../../i18n";
 
 export default function NutrientsHero() {
+  const { t, language } = useTranslation();
+
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -121,16 +124,24 @@ export default function NutrientsHero() {
             <div className="flex items-center gap-3 mb-4">
               <span className="w-7 h-[1.5px] bg-[#B8E986] opacity-90" aria-hidden="true" />
               <span className="font-mono text-[13px] sm:text-[14px] font-semibold tracking-[0.16em] uppercase text-[#B8E986]">
-                PLANT NUTRITION · BIOLOGICAL MOBILISATION
+                {t("nutrients_hero_eyebrow", "PLANT NUTRITION · BIOLOGICAL MOBILISATION")}
               </span>
             </div>
 
             {/* Main Display Headline */}
             <h1 className="font-sans font-extrabold uppercase text-white tracking-tight leading-[0.9] text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[88px] xl:text-[96px] mb-5 max-w-[850px]">
-              <span className="br-ln block"><span>BIOLOGY THAT</span></span>
-              <span className="br-ln br-d1 block">
-                <span><span className="text-[#B8E986]">MOVES</span> NUTRIENTS</span>
-              </span>
+              {language === "en" ? (
+                <>
+                  <span className="br-ln block"><span>BIOLOGY THAT</span></span>
+                  <span className="br-ln br-d1 block">
+                    <span><span className="text-[#B8E986]">MOVES</span> NUTRIENTS</span>
+                  </span>
+                </>
+              ) : (
+                <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-extrabold leading-tight">
+                  {t("agri_hero_title", "BIOLOGY THAT MOVES NUTRIENTS")}
+                </span>
+              )}
             </h1>
 
             {/* Subtitle Copy */}
@@ -138,7 +149,7 @@ export default function NutrientsHero() {
               style={{ fontFamily: 'var(--font-newsreader), "Newsreader", Georgia, serif' }}
               className="italic font-normal text-white/95 leading-[1.45] tracking-[-0.01em] text-[clamp(1.15rem,1.85vw,1.45rem)] max-w-[640px] drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)] br-quote"
             >
-              Converting unavailable soil reserves into active plant nutrition through living microbial pathways.
+              {t("nutrients_hero_subtitle", "Converting unavailable soil reserves into active plant nutrition through living microbial pathways.")}
             </p>
           </div>
         </div>

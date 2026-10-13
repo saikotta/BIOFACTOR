@@ -1,7 +1,12 @@
+"use client";
+
 import React from "react";
 import MicrobeField from "../MicrobeField";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 export default function RuminantsLifeStages() {
+  const { t } = useTranslation();
+
   return (
     <section id="s2" className="relative w-full bg-[#EAF3EA] text-[#173522] pt-6 md:pt-7 lg:pt-8 pb-20 md:pb-28 lg:pb-36 overflow-hidden" data-ruminants-section="life" data-n="Stages" data-motion>
       {/* Floating Microorganism Graphics Layer over #EAF3EA */}
@@ -24,12 +29,12 @@ export default function RuminantsLifeStages() {
           <div className="flex items-center gap-3 mb-4" data-motion-eyebrow>
             <span className="w-8 h-[1.5px] bg-[#2D6A4F]" />
             <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">
-              02 / TARGETED ANIMAL APPLICATIONS
+              {t("ruminants_stages_eyebrow")}
             </span>
           </div>
 
           <h2 className="font-display font-extrabold text-[clamp(2.25rem,3.8vw,4rem)] text-[#173522] tracking-tight leading-[1.02] uppercase mb-12 md:mb-20 lg:mb-[80px] max-w-[1000px]" data-motion-heading>
-            From the first week of life to peak lactation.
+            {t("ruminants_stages_title")}
           </h2>
         </div>
 
@@ -41,13 +46,13 @@ export default function RuminantsLifeStages() {
             <div className="lg:col-span-5 flex flex-col space-y-6 rv">
               <div>
                 <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase block mb-2">
-                  STAGE 01 — REARING
+                  {t("ruminants_calves_stage")}
                 </span>
                 <h3 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-[#173522] tracking-tight uppercase mb-3" data-stage-heading>
-                  CALVES
+                  {t("ruminants_calves_title")}
                 </h3>
                 <p className="font-mono text-xs sm:text-sm text-[#26382D]/70 tracking-wide uppercase">
-                  Early-life gut colonisation &amp; early rumen development.
+                  {t("ruminants_calves_desc_short")}
                 </p>
               </div>
 
@@ -68,10 +73,10 @@ export default function RuminantsLifeStages() {
             <div className="lg:col-span-7 flex flex-col justify-center space-y-6">
               <div className="space-y-4 pt-2 rv d1">
                 <h4 className="font-serif font-semibold text-2xl sm:text-3xl text-[#173522] leading-snug">
-                  A calf starts life as a single-stomached animal.
+                  {t("ruminants_calves_h4")}
                 </h4>
                 <p className="text-base sm:text-lg text-[#26382D]/85 leading-relaxed max-w-2xl font-sans">
-                  The first few weeks of life determine how quickly the calf transitions from milk dependence to a fully functioning adult rumen. Early microbial seeding accelerates ruminal papillae development and establishes foundational gut immunity that persists into adulthood.
+                  {t("ruminants_calves_desc")}
                 </p>
               </div>
 
@@ -79,18 +84,18 @@ export default function RuminantsLifeStages() {
               <div className="pt-6 border-t border-[#173522]/12 space-y-5 rv d2">
                 <div className="trow grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-6 items-baseline p-3 rounded-lg transition-all">
                   <span className="tl font-mono text-xs font-bold tracking-widest text-[#2D6A4F] uppercase">
-                    EARLY WEANING
+                    {t("ruminants_calves_wean_title")}
                   </span>
                   <p className="td text-sm sm:text-base text-[#173522]/90 leading-relaxed font-sans">
-                    Up to 14 days earlier transition to solid feed through accelerated ruminal papillae growth.
+                    {t("ruminants_calves_wean_desc")}
                   </p>
                 </div>
                 <div className="trow grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-6 items-baseline p-3 rounded-lg transition-all pt-4 border-t border-[#173522]/08">
                   <span className="tl font-mono text-xs font-bold tracking-widest text-[#2D6A4F] uppercase">
-                    IMMUNE BOOSTER
+                    {t("ruminants_calves_immune_title")}
                   </span>
                   <p className="td text-sm sm:text-base text-[#173522]/90 leading-relaxed font-sans">
-                    Lower incidence of calf scours and early respiratory issues through competitive exclusion.
+                    {t("ruminants_calves_immune_desc")}
                   </p>
                 </div>
               </div>
@@ -98,10 +103,10 @@ export default function RuminantsLifeStages() {
               {/* Key Programming Note - Refined Pull-Quote Style */}
               <div className="call rv d2 pt-6 border-l-2 border-[#2D6A4F] pl-6 my-2">
                 <span className="font-mono text-[11px] font-bold tracking-widest text-[#2D6A4F] uppercase block mb-1">
-                  EARLY MICROBIOME PROGRAMMING
+                  {t("ruminants_calves_callout_title")}
                 </span>
                 <p className="font-serif italic text-sm sm:text-base text-[#173522]/90 leading-relaxed">
-                  Intervention in the first 4 weeks of life creates a permanent shift in ruminal microbial architecture that improves feed conversion efficiency across the animal&apos;s entire productive lifetime.
+                  {t("ruminants_calves_callout_desc")}
                 </p>
               </div>
             </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import { useTranslation } from "../../i18n";
 
 const D =
   "M60 10 V190 C60 250 100 285 170 285 H340 C440 285 480 395 600 395 C720 395 760 160 880 160 C1000 160 1040 395 1160 395 C1280 395 1320 160 1420 160";
@@ -8,12 +9,12 @@ const STOP_X = [250, 600, 880, 1160, 1400];
 const W = 1500;
 const H = 700;
 
-const MS = [
-  ["2014", "Founded", "Biofac Inputs Private Limited"],
-  ["The Platform Takes Shape", "", "Microbe & Mineral™ Is Built"],
-  ["Domestic Scale", "", "200+ Products"],
-  ["Beyond Bharat", "", "Malawi & Kenya"],
-  ["Today", "Leadership", "350+ Microbial Strain Bank & 11 Patents"],
+const MS_CONFIG = [
+  { yearKey: "about_journey_m1_year", defaultYear: "2014", tagKey: "about_journey_m1_tag", defaultTag: "Founded", descKey: "about_journey_m1_desc", defaultDesc: "Biofac Inputs Private Limited" },
+  { yearKey: "about_journey_m2_year", defaultYear: "The Platform Takes Shape", tagKey: "", defaultTag: "", descKey: "about_journey_m2_desc", defaultDesc: "Microbe & Mineral™ Is Built" },
+  { yearKey: "about_journey_m3_year", defaultYear: "Domestic Scale", tagKey: "", defaultTag: "", descKey: "about_journey_m3_desc", defaultDesc: "200+ Products" },
+  { yearKey: "about_journey_m4_year", defaultYear: "Beyond Bharat", tagKey: "", defaultTag: "", descKey: "about_journey_m4_desc", defaultDesc: "Malawi & Kenya" },
+  { yearKey: "about_journey_m5_year", defaultYear: "Today", tagKey: "about_journey_m5_tag", defaultTag: "Leadership", descKey: "about_journey_m5_desc", defaultDesc: "350+ Microbial Strain Bank & 11 Patents" },
 ];
 
 const ICONS = [
@@ -30,6 +31,7 @@ const FIRST = 2400;
 const LOOP_DELAY = 3000;
 
 export default function AboutJourneySection() {
+  const { t, language } = useTranslation();
   const stageRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<SVGPathElement>(null);
   const beeRef = useRef<SVGGElement>(null);
@@ -72,7 +74,7 @@ export default function AboutJourneySection() {
       nodeEls.push(g);
 
       const up = i % 2 === 0;
-      const m = MS[i];
+      const m = MS_CONFIG[i];
       const c = document.createElement("div");
       c.className = "card-journey " + (up ? "up" : "down");
       if (i === STOPS.length - 1) {
@@ -82,8 +84,11 @@ export default function AboutJourneySection() {
       }
       c.style.top = (p.y / H) * 100 + "%";
       c.style.transform = `translate(-50%, ${up ? "calc(-100% - 56px)" : "20px"})`;
-      const metaHtml = m[1] ? `${m[0]} <i class="meta-i">•</i> ${m[1]}` : m[0];
-      c.innerHTML = `<div class="card-inner"><p class="meta-journey">${metaHtml}</p><p class="ttl-journey">${m[2]}</p></div>`;
+      const metaYear = t(m.yearKey, m.defaultYear);
+      const metaTag = m.tagKey ? t(m.tagKey, m.defaultTag) : "";
+      const metaDesc = t(m.descKey, m.defaultDesc);
+      const metaHtml = metaTag ? `${metaYear} <i class="meta-i">•</i> ${metaTag}` : metaYear;
+      c.innerHTML = `<div class="card-inner"><p class="meta-journey">${metaHtml}</p><p class="ttl-journey">${metaDesc}</p></div>`;
       stage.appendChild(c);
       cardEls.push(c);
     });
@@ -182,7 +187,7 @@ export default function AboutJourneySection() {
       clearTimeout(timer);
       observer.disconnect();
     };
-  }, []);
+  }, [language]);
 
   return (
     <section className="w-full bg-[#eef5e6] text-[#0f3d24] py-8 sm:py-12">
@@ -265,10 +270,10 @@ export default function AboutJourneySection() {
         <header className="flex justify-between items-end gap-4 mt-3 mb-2">
           <div>
             <p className="text-[14px] font-bold tracking-[0.14em] uppercase text-[#14703a] mb-1.5 m-0">
-              OUR JOURNEY
+              {t("about_journey_kicker", "OUR JOURNEY")}
             </p>
             <h2 className="font-serif text-[clamp(28px,4.5vw,42px)] m-0 text-[#14703a] font-bold">
-              From 2014 to Now
+              {t("about_journey_title", "From 2014 to Now")}
             </h2>
           </div>
         </header>

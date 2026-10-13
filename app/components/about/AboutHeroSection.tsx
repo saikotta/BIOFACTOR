@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
+import { useTranslation } from "../../i18n";
 
 export default function AboutHeroSection() {
+  const { t } = useTranslation();
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [isInView, setIsInView] = useState(true);
@@ -118,7 +120,7 @@ export default function AboutHeroSection() {
                       : "opacity-0"
                   }`}
               >
-                Build the Best to Live, With
+                {t("about_hero_line1", "Build the Best to Live, With")}
               </span>
             </div>
 
@@ -132,7 +134,7 @@ export default function AboutHeroSection() {
                       : "opacity-0"
                   }`}
               >
-                Nature&apos;s Partnership
+                {t("about_hero_line2", "Nature's Partnership")}
               </span>
             </div>
           </h1>
@@ -146,7 +148,7 @@ export default function AboutHeroSection() {
                   : "opacity-0"
               }`}
           >
-            That&apos;s been our founding statement since 2014.
+            {t("about_hero_founding", "That's been our founding statement since 2014.")}
           </p>
         </div>
 

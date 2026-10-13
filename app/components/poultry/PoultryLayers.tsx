@@ -1,6 +1,11 @@
+"use client";
+
 import React from "react";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 export default function PoultryLayers() {
+  const { t } = useTranslation();
+
   return (
     <section className="w-full relative overflow-hidden py-8 lg:py-12 bg-[#DCE8D5]" data-ruminants-section="layers" data-n="Layers">
       {/* Subtle capsule decorations */}
@@ -37,27 +42,27 @@ export default function PoultryLayers() {
           <div className="rv space-y-6 lg:space-y-8 w-[95%] pl-8 lg:pl-16">
             {/* Small Label */}
             <div className="font-mono text-xs font-semibold tracking-[0.25em] text-[#2D5A42] uppercase mb-2">
-              COMMERCIAL EGG PRODUCTION
+              {t("poultry_layers_label")}
             </div>
 
             {/* Large Heading */}
             <h2 className="font-space-grotesk font-extrabold text-[clamp(4rem,8vw,8rem)] text-[#2D5A42] tracking-tight leading-[0.85] uppercase mb-4">
-              LAYERS
+              {t("poultry_layers_title")}
             </h2>
 
             {/* Priority */}
             <div className="font-mono text-xs font-semibold tracking-[0.2em] text-[#2d2d2d] uppercase max-w-md mb-6">
-              Priority · sustained lay, strong shells and gut stability over a long cycle
+              {t("poultry_layers_priority")}
             </div>
 
             {/* Body Heading */}
             <h3 className="rv font-space-grotesk font-semibold text-xl lg:text-2xl text-[#1a1a1a] tracking-tight leading-tight mb-4">
-              A long laying cycle needs a stable gut.
+              {t("poultry_layers_h3")}
             </h3>
 
             {/* Body Paragraph */}
             <p className="rv d1 text-base lg:text-lg text-[#2d2d2d] leading-relaxed mb-6" style={{ fontFamily: 'Georgia, Times New Roman, Times, serif' }}>
-              A laying hen produces for a year or more, and every egg draws heavily on calcium and phosphorus. A balanced gut community supports feed efficiency and mineral uptake across the whole cycle, and helps keep Salmonella out of the flock and off the eggs.
+              {t("poultry_layers_desc")}
             </p>
 
             {/* Feature Boxes */}
@@ -65,20 +70,20 @@ export default function PoultryLayers() {
               {/* Left Feature Box */}
               <div className="trow border border-[#c4d4c4] p-5 rounded-lg transition-all">
                 <div className="font-space-grotesk font-bold text-base text-[#1a1a1a] mb-2">
-                  More eggs per kg feed
+                  {t("poultry_layers_card1_title")}
                 </div>
                 <p className="text-sm text-[#2d2d2d] leading-relaxed" style={{ fontFamily: 'Georgia, Times New Roman, Times, serif' }}>
-                  Better digestion and nutrient absorption in the gut.
+                  {t("poultry_layers_card1_desc")}
                 </p>
               </div>
 
               {/* Right Feature Box */}
               <div className="trow border border-[#c4d4c4] p-5 rounded-lg transition-all">
                 <div className="font-space-grotesk font-bold text-base text-[#1a1a1a] mb-2">
-                  Stronger shells
+                  {t("poultry_layers_card2_title")}
                 </div>
                 <p className="text-sm text-[#2d2d2d] leading-relaxed" style={{ fontFamily: 'Georgia, Times New Roman, Times, serif' }}>
-                  Better mineral uptake supports shell formation, especially late in lay.
+                  {t("poultry_layers_card2_desc")}
                 </p>
               </div>
             </div>
@@ -88,11 +93,8 @@ export default function PoultryLayers() {
               <div className="w-1 bg-[#6BBF3A] flex-shrink-0" />
               <div>
                 <p className="text-base lg:text-lg text-[#1a1a1a] leading-relaxed font-medium" style={{ fontFamily: 'Georgia, Times New Roman, Times, serif' }}>
-                  More eggs, thicker shells. A meta-analysis of 47 studies found probiotics increased egg production, eggshell thickness and eggshell weight, and lowered feed per egg.
+                  {t("poultry_layers_callout")}
                 </p>
-                <a href="https://1aeac708-3778-4d03-9206-4cc07b2aea77.frame.claudeusercontent.com/_f/1790257515-c213/?__frame_v=manifest.670f8fc4f84795ee.json#p6" target="_blank" rel="noopener noreferrer" className="font-mono text-xs text-[#6BBF3A] hover:text-[#1a1a1a] transition-colors mt-2 inline-block">
-                  [6]
-                </a>
               </div>
             </div>
 

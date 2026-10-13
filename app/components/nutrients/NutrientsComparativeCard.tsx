@@ -1,6 +1,11 @@
+"use client";
+
 import React from "react";
+import { useTranslation } from "../../i18n";
 
 export default function NutrientsComparativeCard() {
+  const { t } = useTranslation();
+
   return (
     <section className="relative w-full bg-[#EAF3EA] text-[#173522] pt-8 pb-12 md:pb-16 overflow-hidden">
       <div className="relative z-10 w-full max-w-[1536px] mx-auto px-4 md:px-8 lg:px-10">
@@ -13,10 +18,10 @@ export default function NutrientsComparativeCard() {
             {/* Left Block (50% Equal Width) */}
             <div className="space-y-3 lg:pr-4 br-rv br-d1">
               <span className="font-mono text-xs font-bold tracking-widest text-[#2D6A4F] uppercase block">
-                01 / THE CONUNDRUM
+                {t("nutrients_card1_tag", "01 / THE CONUNDRUM")}
               </span>
               <p className="font-sans text-base sm:text-lg text-[#173522]/90 leading-relaxed">
-                "A large proportion of the nutrients required for plant growth exists in nature in forms that are unavailable, inaccessible or difficult for plants to absorb."
+                &ldquo;{t("nutrients_card1_text", "A large proportion of the nutrients required for plant growth exists in nature in forms that are unavailable, inaccessible or difficult for plants to absorb.")}&rdquo;
               </p>
             </div>
 
@@ -26,10 +31,10 @@ export default function NutrientsComparativeCard() {
             {/* Right Block (50% Equal Width) */}
             <div className="space-y-3 lg:pl-8 border-t border-[#2D6A4F]/20 pt-6 lg:border-t-0 lg:pt-0 br-rv br-d2">
               <span className="font-mono text-xs font-bold tracking-widest text-[#2D6A4F] uppercase block">
-                02 / THE BIOLOGICAL EQUATION
+                {t("nutrients_card2_tag", "02 / THE BIOLOGICAL EQUATION")}
               </span>
               <p className="font-sans text-base sm:text-lg text-[#173522]/90 leading-relaxed">
-                "This is where biology changes the equation. Microorganisms can fix atmospheric nitrogen, solubilise phosphorus and mobilise potassium, converting inaccessible nutrient pools into forms that can enter the plant–soil nutrient cycle."
+                &ldquo;{t("nutrients_card2_text", "This is where biology changes the equation. Microorganisms can fix atmospheric nitrogen, solubilise phosphorus and mobilise potassium, converting inaccessible nutrient pools into forms that can enter the plant–soil nutrient cycle.")}&rdquo;
               </p>
             </div>
           </div>

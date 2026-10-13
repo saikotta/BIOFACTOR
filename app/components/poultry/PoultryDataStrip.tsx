@@ -1,27 +1,32 @@
-import React from "react";
+"use client";
 
-const stats = [
-  {
-    value: "~US$6 bn",
-    desc: "Estimated yearly global cost of necrotic enteritis, a gut disease of broilers.",
-    source: "2015 industry estimate",
-    sup: "",
-  },
-  {
-    value: "2006",
-    desc: "The EU banned all antibiotics as feed growth promoters. Other markets have followed, including India's 2019 ban on colistin for food animals.",
-    source: "European Commission · India",
-    sup: "",
-  },
-  {
-    value: "10–30%",
-    desc: "of the phosphorus in corn and soybean meal is available to poultry. The rest passes through into the litter.",
-    source: "Feed phosphorus",
-    sup: "",
-  },
-];
+import React from "react";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 export default function PoultryDataStrip() {
+  const { t } = useTranslation();
+
+  const stats = [
+    {
+      value: "~US$6 bn",
+      desc: t("poultry_data_cost_desc"),
+      source: t("poultry_data_cost_source"),
+      sup: "",
+    },
+    {
+      value: "2006",
+      desc: t("poultry_data_ban_desc"),
+      source: t("poultry_data_ban_source"),
+      sup: "",
+    },
+    {
+      value: "10–30%",
+      desc: t("poultry_data_phos_desc"),
+      source: t("poultry_data_phos_source"),
+      sup: "",
+    },
+  ];
+
   return (
     <section className="w-full" data-ruminants-section="stats" data-n="Key Stats">
       {/* Full-Bleed Dark Green Data Table */}
@@ -95,8 +100,7 @@ export default function PoultryDataStrip() {
                 color: '#0a2d1a',
               }}
             >
-              As antibiotics leave poultry feed, the gut has to be protected in other ways.{" "}
-              <span className="font-medium" style={{ color: '#6DBE45' }}>Beneficial microbes and the fibres that feed them</span> can hold back pathogens, support growth and free up minerals the bird would otherwise waste.
+              {t("poultry_data_pullquote")}
             </div>
           </div>
         </div>

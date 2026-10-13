@@ -22,6 +22,7 @@ import {
 import styles from "./contact.module.css";
 import ContactSendMessage from "./_components/ContactSendMessage";
 import BiofactorFooter from "../components/BiofactorFooter";
+import { useTranslation } from "../i18n";
 
 // ---------------------------------------------------------------------------
 // Animation helpers
@@ -543,6 +544,7 @@ function ContactForm({ reduced }: { reduced: boolean }) {
 // ---------------------------------------------------------------------------
 
 export default function ContactPage() {
+  const { t, language } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const hiRef = useRef<HTMLDivElement>(null);
@@ -722,21 +724,24 @@ export default function ContactPage() {
         </div>
 
         {/* ================================================================
-            FRAME 1: HERO (unchanged)
+            FRAME 1: HERO
         ================================================================ */}
         <section className="fr hero act" data-n="Intro" id="frame-1">
-          <div className="lab">01 / 05 · GET IN TOUCH</div>
+          <div className="lab">{t("contact_f1_tag", "01 / 05 · GET IN TOUCH")}</div>
           <div>
             <h1 className="wipe">
-              Grow With <em>Expert</em> Agricultural Support
+              {language === "en" ? (
+                <>Grow With <em>Expert</em> Agricultural Support</>
+              ) : (
+                t("contact_f1_h1", "Grow With Expert Agricultural Support")
+              )}
             </h1>
             <p className="lead a" style={{ "--d": 900 } as React.CSSProperties}>
-              Get personalized solutions for your farming needs. Our team of agricultural
-              experts is ready to help you increase yield and maximize profits.
+              {t("contact_f1_lead", "Get personalized solutions for your farming needs. Our team of agricultural experts is ready to help you increase yield and maximize profits.")}
             </p>
             <Link href="/science-technology/">
               <button className="btn a" style={{ "--d": 1050, marginTop: "22px" } as React.CSSProperties}>
-                Explore Science &amp; Tech →
+                {t("contact_f1_cta", "Explore Science & Tech →")}
               </button>
             </Link>
           </div>
@@ -750,20 +755,20 @@ export default function ContactPage() {
         </section>
 
         {/* ================================================================
-            FRAME 2: REACH US (unchanged)
+            FRAME 2: REACH US
         ================================================================ */}
         <section className="fr f2" data-n="Contact" id="frame-2">
-          <div className="lab">02 / 05 · REACH US</div>
-          <h3 className="a">Three ways to reach our experts</h3>
+          <div className="lab">{t("contact_f2_tag", "02 / 05 · REACH US")}</div>
+          <h3 className="a">{t("contact_f2_h3", "Three ways to reach our experts")}</h3>
           <div className="strips" id="strips">
             <div className={`strip ${openStrip === 0 ? "open" : ""}`} style={{ "--d": 0 } as React.CSSProperties} onMouseEnter={() => setOpenStrip(0)} onClick={() => setOpenStrip(0)}>
               <div className="big">
                 <svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z" /></svg>
               </div>
               <div>
-                <h4>Call Us</h4>
+                <h4>{t("contact_f2_call", "Call Us")}</h4>
                 <div className="v">7013074400</div>
-                <div className="dt">Visiting hours: 9:30 AM – 6:30 PM, Monday to Saturday.</div>
+                <div className="dt">{t("contact_f2_call_desc", "Visiting hours: 9:30 AM – 6:30 PM, Monday to Saturday.")}</div>
               </div>
             </div>
             <div className={`strip ${openStrip === 1 ? "open" : ""}`} style={{ "--d": 140 } as React.CSSProperties} onMouseEnter={() => setOpenStrip(1)} onClick={() => setOpenStrip(1)}>
@@ -771,9 +776,9 @@ export default function ContactPage() {
                 <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>
               </div>
               <div>
-                <h4>Email Us</h4>
+                <h4>{t("contact_f2_email", "Email Us")}</h4>
                 <div className="v">info@biofactor.in</div>
-                <div className="dt">General inquiries. Our specialists reply within 24 hours.</div>
+                <div className="dt">{t("contact_f2_email_desc", "General inquiries. Our specialists reply within 24 hours.")}</div>
               </div>
             </div>
             <div className={`strip ${openStrip === 2 ? "open" : ""}`} style={{ "--d": 280 } as React.CSSProperties} onMouseEnter={() => setOpenStrip(2)} onClick={() => setOpenStrip(2)}>
@@ -781,9 +786,9 @@ export default function ContactPage() {
                 <svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z" /><circle cx="12" cy="10" r="2.5" /></svg>
               </div>
               <div>
-                <h4>Visit Us</h4>
-                <div className="v">Head Office</div>
-                <div className="dt">4 &amp; 5 Floors, Sai Medha Infra, Arca Satya Residency, Kousalya Colony, Bachupally, Hyderabad, Telangana 500090.</div>
+                <h4>{t("contact_f2_visit", "Visit Us")}</h4>
+                <div className="v">{t("contact_f2_visit_head_office", "Head Office")}</div>
+                <div className="dt">{t("contact_f2_visit_address", "4 & 5 Floors, Sai Medha Infra, Arca Satya Residency, Kousalya Colony, Bachupally, Hyderabad, Telangana 500090.")}</div>
               </div>
             </div>
           </div>
@@ -800,7 +805,7 @@ export default function ContactPage() {
           id="frame-4"
           style={{ background: "#f6f2e7", color: "#0f3b28" }}
         >
-          <div className="lab" style={{ color: "#2f7d57" }}>04 / 05 · VISITING HOURS</div>
+          <div className="lab" style={{ color: "#2f7d57" }}>{t("contact_f4_tag", "04 / 05 · VISITING HOURS")}</div>
 
           <div className={styles.f4Wrap}>
             {/* ---- LEFT ---- */}
@@ -811,13 +816,13 @@ export default function ContactPage() {
               viewport={VIEWPORT}
             >
               <motion.p variants={ITEM_VARIANT} className={styles.f4Eyebrow}>
-                04 / 05 · VISITING HOURS
+                {t("contact_f4_tag", "04 / 05 · VISITING HOURS")}
               </motion.p>
               <motion.h2 variants={ITEM_VARIANT} className={styles.f4Heading}>
-                We&rsquo;re open six days a week
+                {t("contact_f4_h2", "We’re open six days a week")}
               </motion.h2>
               <motion.p variants={ITEM_VARIANT} className={styles.f4Sub}>
-                Walk in or call us during these hours.
+                {t("contact_f4_sub", "Walk in or call us during these hours.")}
               </motion.p>
 
             </motion.div>
@@ -831,13 +836,11 @@ export default function ContactPage() {
               className={styles.hoursCard}
             >
               {/* 1. Day label */}
-              <p className={styles.hoursCardLabel}>Monday – Saturday</p>
+              <p className={styles.hoursCardLabel}>{t("contact_f4_mon_sat", "Monday – Saturday")}</p>
 
               {/* 2. Large time display */}
               <p className={styles.hoursTime}>
-                9:30 AM{" "}
-                <span className={styles.hoursTo}>to</span>
-                {" "}6:30 PM
+                {t("contact_f4_hours", "9:30 AM to 6:30 PM")}
               </p>
 
               {/* 3. Day tiles */}
@@ -906,39 +909,38 @@ export default function ContactPage() {
               {/* 5. Divider + Sunday note */}
               <hr className={styles.divider} />
               <p className={styles.sundayNote}>
-                <strong style={{ color: "#b03a2e" }}>Sunday:</strong> closed.
-                {" "}Call or message us and we'll get back on Monday.
+                {t("contact_f4_sunday", "Sunday: closed. Call or message us and we'll get back on Monday.")}
               </p>
             </motion.div>
           </div>
         </section>
 
         {/* ================================================================
-            FRAME 5: WHY CHOOSE US (unchanged)
+            FRAME 5: WHY CHOOSE US
         ================================================================ */}
         <section className="fr f5" data-n="Results" id="frame-5">
-          <div className="lab">05 / 05 · WHY CHOOSE US</div>
-          <h3 className="a">Why Choose Our Agricultural Solutions</h3>
+          <div className="lab">{t("contact_f5_tag", "05 / 05 · WHY CHOOSE US")}</div>
+          <h3 className="a">{t("contact_f5_heading", "Why Choose Our Agricultural Solutions")}</h3>
           <div className="deal">
             <div className="sc" style={{ "--k": 0 } as React.CSSProperties}>
               <div className="ic"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6z" /></svg></div>
-              <h4>Trusted Solutions</h4>
-              <p>FCO Supported agricultural products</p>
+              <h4>{t("contact_f5_trusted_title", "Trusted Solutions")}</h4>
+              <p>{t("contact_f5_trusted_desc", "FCO Supported agricultural products")}</p>
             </div>
             <div className="sc" style={{ "--k": 1 } as React.CSSProperties}>
               <div className="ic"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3" /></svg></div>
-              <h4>Award Winning</h4>
-              <p>Recognized for innovation in agri-tech</p>
+              <h4>{t("contact_f5_award_title", "Award Winning")}</h4>
+              <p>{t("contact_f5_award_desc", "Recognized for innovation in agri-tech")}</p>
             </div>
             <div className="sc" style={{ "--k": 2 } as React.CSSProperties}>
               <div className="ic"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M10 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM20 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" /></svg></div>
-              <h4>Expert Team</h4>
-              <p>100+ agricultural specialists</p>
+              <h4>{t("contact_f5_team_title", "Expert Team")}</h4>
+              <p>{t("contact_f5_team_desc", "100+ agricultural specialists")}</p>
             </div>
             <div className="sc" style={{ "--k": 3 } as React.CSSProperties}>
               <div className="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="4" /></svg></div>
-              <h4>Proven Results</h4>
-              <p>Increased yields for 10,000+ farmers</p>
+              <h4>{t("contact_f5_results_title", "Proven Results")}</h4>
+              <p>{t("contact_f5_results_desc", "Increased yields for 10,000+ farmers")}</p>
             </div>
           </div>
           <footer>

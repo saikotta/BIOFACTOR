@@ -1,17 +1,22 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 export default function NutrientsClosing() {
+  const { t } = useTranslation();
+
   return (
     <section className="w-full bg-[#173F2B] text-white pt-9 md:pt-10 lg:pt-[42px] pb-9 md:pb-10 lg:pb-[44px] overflow-hidden border-t border-[#167A4A]/25">
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)] space-y-10">
         {/* TOP MICRO-LABELS */}
         <div className="flex items-center justify-between">
           <span className="font-mono text-[11px] font-semibold tracking-[0.2em] text-white/50 uppercase">
-            BIOFACTOR · NUTRIENT BIOLOGY
+            {t("biofactor_name")} · {t("nav_nutrients")}
           </span>
           <span className="font-mono text-[11px] font-semibold tracking-[0.2em] text-white/50 uppercase">
-            FOCUS · <span className="text-[#B8E986]">RHIZOSPHERE &amp; PLANT NUTRITION</span>
+            {t("nutrients_closing_focus")}
           </span>
         </div>
 
@@ -24,11 +29,7 @@ export default function NutrientsClosing() {
 
             {/* Display Quote Text */}
             <h2 className="font-display font-extrabold text-[26px] sm:text-[34px] md:text-[38px] lg:text-[42px] text-[#F8FAFC] tracking-tight leading-[1.08] br-rv br-d1">
-              Because the future of plant nutrition is not only about what we put into the soil. <br className="hidden sm:block" />
-              It is also about what{" "}
-              <span className="font-serif italic text-[#B8E986] font-normal">
-                biology can unlock from it.
-              </span>
+              {t("nutrients_closing_statement")}
             </h2>
           </div>
 
@@ -45,10 +46,10 @@ export default function NutrientsClosing() {
             <div className="absolute inset-0 bg-gradient-to-t from-[#173F2B] via-transparent to-transparent opacity-60 pointer-events-none" />
             <div className="absolute bottom-4 left-4 right-4 z-10">
               <div className="font-display font-bold text-sm sm:text-base tracking-widest uppercase text-white">
-                BIOFACTOR <span className="text-[#B8E986]">BIOLOGICALS</span>
+                {t("biofactor_name")} <span className="text-[#B8E986]">BIOLOGICALS</span>
               </div>
               <p className="font-serif italic text-xs text-white/80">
-                Turning microbial functions into measurable biological impact.
+                {t("nutrients_card1_tag")}
               </p>
             </div>
           </div>

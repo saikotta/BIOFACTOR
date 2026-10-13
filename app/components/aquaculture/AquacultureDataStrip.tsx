@@ -1,27 +1,31 @@
-import React from "react";
+"use client";
 
-const stats = [
-  {
-    value: "~74%",
-    desc: "of the phosphorus added to a vannamei pond settles into the sediment. Only about a third of the nitrogen leaves as harvested shrimp.",
-    source: "Pond nutrient budget",
-    sup: "1",
-  },
-  {
-    value: "A few mm",
-    desc: "below the sediment surface, pore water usually holds no oxygen at all.",
-    source: "Boyd 2004",
-    sup: "14",
-  },
-  {
-    value: "<5 µg/L",
-    desc: "is the safe limit for hydrogen sulphide in brackish-water ponds. At 50–500 µg/L, half of exposed marine animals can die within 96 hours.",
-    source: "Boyd 2014",
-    sup: "3",
-  },
-];
+import React from "react";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 export default function AquacultureDataStrip() {
+  const { t } = useTranslation();
+
+  const stats = [
+    {
+      value: "~74%",
+      desc: t("aqua_data_p_desc"),
+      source: t("aqua_data_p_source"),
+      sup: "1",
+    },
+    {
+      value: "A few mm",
+      desc: t("aqua_data_mm_desc"),
+      source: t("aqua_data_mm_source"),
+      sup: "14",
+    },
+    {
+      value: "<5 µg/L",
+      desc: t("aqua_data_h2s_desc"),
+      source: t("aqua_data_h2s_source"),
+      sup: "3",
+    },
+  ];
   return (
     <section
       className="w-full"

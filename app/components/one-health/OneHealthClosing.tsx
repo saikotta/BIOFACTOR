@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 interface CycleNode {
   id: string;
@@ -9,19 +10,20 @@ interface CycleNode {
   imgSrc: string;
 }
 
-const CYCLE_NODES: CycleNode[] = [
-  { id: "soil", name: "SOIL", imgSrc: "/images/one-health/soil.webp" },
-  { id: "plant", name: "PLANT", imgSrc: "/images/one-health/plant.webp" },
-  { id: "animal", name: "ANIMAL", imgSrc: "/images/one-health/animal.webp" },
-  { id: "food", name: "FOOD", imgSrc: "/images/one-health/food.webp" },
-  { id: "people", name: "PEOPLE", imgSrc: "/images/one-health/people.webp" },
-  { id: "planet", name: "PLANET", imgSrc: "/images/one-health/planet.png" },
-];
-
 export default function OneHealthClosing() {
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isRevealed, setIsRevealed] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  const CYCLE_NODES: CycleNode[] = [
+    { id: "soil", name: t("one_health_chapter_soil_title"), imgSrc: "/images/one-health/soil.webp" },
+    { id: "plant", name: t("one_health_chapter_plant_title"), imgSrc: "/images/one-health/plant.webp" },
+    { id: "animal", name: t("one_health_chapter_animal_title"), imgSrc: "/images/one-health/animal.webp" },
+    { id: "food", name: t("one_health_chapter_food_title"), imgSrc: "/images/one-health/food.webp" },
+    { id: "people", name: t("one_health_chapter_people_title"), imgSrc: "/images/one-health/people.webp" },
+    { id: "planet", name: t("one_health_chapter_planet_title"), imgSrc: "/images/one-health/planet.png" },
+  ];
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -190,7 +192,7 @@ export default function OneHealthClosing() {
               transitionDelay: prefersReducedMotion ? "0ms" : "750ms",
             }}
           >
-            This is why we build agriculture, aquaculture, poultry, and animal health as one connected platform — not six separate businesses.
+            {t("one_health_closing_statement")}
           </p>
         </div>
 
@@ -204,7 +206,7 @@ export default function OneHealthClosing() {
 
           {/* Button Text & Arrow */}
           <span className="relative z-10 flex items-center gap-2">
-            See where this shows up across our verticals
+            {t("one_health_see_verticals")}
             <span className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-1">
               →
             </span>

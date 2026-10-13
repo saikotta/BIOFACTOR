@@ -1,6 +1,11 @@
+"use client";
+
 import React from "react";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 export default function RuminantsRumenFactory() {
+  const { t } = useTranslation();
+
   return (
     <section id="s1" className="relative w-full text-[#173522] pt-3 md:pt-4 lg:pt-5 pb-8 md:pb-9 lg:pb-10 overflow-hidden bg-[#EAF3EA]" data-ruminants-section="rumen" data-n="A living fermenter" data-motion>
       {/* Opaque Base Color Layer to Mask Global MicrobeField Canvas */}
@@ -12,19 +17,17 @@ export default function RuminantsRumenFactory() {
         <div className="flex items-center gap-3 mb-4" data-motion-eyebrow>
           <span className="w-8 h-[1.5px] bg-[#2D6A4F]" aria-hidden="true" />
           <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">
-            01 / A LIVING FERMENTER
+            {t("ruminants_rumen_eyebrow")}
           </span>
         </div>
 
         {/* Headline & Supporting Copy Stack */}
         <div className="rv max-w-[1020px] mb-12 md:mb-16">
           <h2 className="font-display font-extrabold text-[clamp(2.5rem,4vw,4.25rem)] text-[#173522] tracking-tight leading-[1.02] uppercase mb-6" data-motion-heading>
-            The rumen is a microbial
-            <br />
-            factory with one customer.
+            {t("ruminants_rumen_title")}
           </h2>
           <p className="font-serif text-lg sm:text-xl text-[#26382D]/85 leading-relaxed max-w-[920px]">
-            Bacteria, protozoa, fungi and archaea in the rumen break down fibre and starch. What they produce feeds the animal. What they waste leaves as methane.
+            {t("ruminants_rumen_desc")}
           </p>
         </div>
 

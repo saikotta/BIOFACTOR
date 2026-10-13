@@ -2,8 +2,10 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 export default function MineralsSection() {
+  const { t } = useTranslation();
   const chartRef = useRef<HTMLDivElement>(null);
   const [fired, setFired] = useState(false);
 
@@ -38,15 +40,15 @@ export default function MineralsSection() {
         {/* Left — text + mineral list */}
         <div className="sm:col-span-6 rv">
           <h2 className="mb-8 font-inter-tight text-[clamp(36px,5vw,56px)] font-extrabold leading-[1.05] text-[#111111]">
-            Minerals shrimp can actually use.
+            {t("aqua_minerals_title")}
           </h2>
 
           <div className="mb-10 max-w-3xl space-y-6 rv d1">
             <p className="font-newsreader text-[18px] leading-[1.6] text-[#2B2B2B]">
-              Shrimp absorb minerals directly from water through gills and exoskeleton. In low-salinity ponds, essential minerals like potassium, magnesium and calcium become limiting factors for growth and moulting.
+              {t("aqua_minerals_p1")}
             </p>
             <p className="font-newsreader text-[18px] leading-[1.6] text-[#2B2B2B]">
-              Chelated minerals improve bioavailability, allowing shrimp to maintain ion balance and complete successful moults even in freshwater conditions.
+              {t("aqua_minerals_p2")}
             </p>
           </div>
 
@@ -57,9 +59,9 @@ export default function MineralsSection() {
                 <h4 className="mt-1 font-inter-tight text-[32px] font-extrabold leading-none text-[#1F8A57]">P</h4>
               </div>
               <div>
-                <p className="mb-1 font-jetbrains text-[10px] uppercase tracking-[0.12em] text-[#5A7A5E]">Phosphorus</p>
+                <p className="mb-1 font-jetbrains text-[10px] uppercase tracking-[0.12em] text-[#5A7A5E]">{t("aqua_minerals_p_title")}</p>
                 <p className="font-newsreader text-[15px] leading-[1.5] text-[#2B2B2B]">
-                  Supports energy metabolism and skeletal development. Chelation prevents precipitation in alkaline water.
+                  {t("aqua_minerals_p_desc")}
                 </p>
               </div>
             </article>
@@ -70,9 +72,9 @@ export default function MineralsSection() {
                 <h4 className="mt-1 font-inter-tight text-[25px] font-extrabold leading-none text-[#1F8A57]">K·Mg</h4>
               </div>
               <div>
-                <p className="mb-1 font-jetbrains text-[10px] uppercase tracking-[0.12em] text-[#5A7A5E]">Potassium + magnesium</p>
+                <p className="mb-1 font-jetbrains text-[10px] uppercase tracking-[0.12em] text-[#5A7A5E]">{t("aqua_minerals_kmg_title")}</p>
                 <p className="font-newsreader text-[15px] leading-[1.5] text-[#2B2B2B]">
-                  Maintain osmotic balance. Critical for successful moulting in low-salinity conditions.
+                  {t("aqua_minerals_kmg_desc")}
                 </p>
               </div>
             </article>
@@ -83,9 +85,9 @@ export default function MineralsSection() {
                 <h4 className="mt-1 font-inter-tight text-[32px] font-extrabold leading-none text-[#1F8A57]">Ca</h4>
               </div>
               <div>
-                <p className="mb-1 font-jetbrains text-[10px] uppercase tracking-[0.12em] text-[#5A7A5E]">Calcium</p>
+                <p className="mb-1 font-jetbrains text-[10px] uppercase tracking-[0.12em] text-[#5A7A5E]">{t("aqua_minerals_ca_title")}</p>
                 <p className="font-newsreader text-[15px] leading-[1.5] text-[#2B2B2B]">
-                  Essential for exoskeleton formation. Chelated calcium improves absorption during intermoult periods.
+                  {t("aqua_minerals_ca_desc")}
                 </p>
               </div>
             </article>

@@ -1,27 +1,32 @@
-import React from "react";
+"use client";
 
-const stats = [
-  {
-    value: "3.4 bn",
-    desc: "people still lacked safely managed sanitation in 2024.",
-    source: "WHO / UNICEF JMP",
-    sup: "9",
-  },
-  {
-    value: "14",
-    desc: "countries could report how much of their industrial wastewater is treated. The rest of the world has no reliable data.",
-    source: "UN-WATER, 2021",
-    sup: "3",
-  },
-  {
-    value: "56%",
-    desc: "of household wastewater worldwide was safely treated in 2020. Data on industrial wastewater is too thin for a global figure.",
-    source: "UN-WATER, 2021",
-    sup: "3",
-  },
-];
+import React from "react";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 export default function BioremidationDataStrip() {
+  const { t } = useTranslation();
+
+  const stats = [
+    {
+      value: "3.4 bn",
+      desc: t("bio_data_34bn_desc"),
+      source: t("bio_data_34bn_source"),
+      sup: "9",
+    },
+    {
+      value: "14",
+      desc: t("bio_data_14_desc"),
+      source: t("bio_data_14_source"),
+      sup: "3",
+    },
+    {
+      value: "56%",
+      desc: t("bio_data_56pct_desc"),
+      source: t("bio_data_56pct_source"),
+      sup: "3",
+    },
+  ];
+
   return (
     <section className="w-full">
       {/* 1. Deep Forest Editorial Data Band */}
@@ -86,9 +91,7 @@ export default function BioremidationDataStrip() {
         <div className="w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)]">
           <div className="w-full">
             <p className="font-serif text-lg sm:text-xl lg:text-[21px] xl:text-[22px] text-[#173522] leading-[1.48] font-normal">
-              The gap between what we generate and what we treat ends up in rivers, lakes and groundwater.{" "}
-              <span className="text-[#2D6A4F] font-medium italic">Microbes are the workforce that closes it:</span>{" "}
-              they break down organic load, remove nitrogen, decolourise dyes and turn toxic metals into less harmful forms.
+              {t("bio_data_pullquote")}
             </p>
           </div>
         </div>

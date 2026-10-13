@@ -63,11 +63,9 @@ export default function HowWeThinkSection() {
             </p>
 
             {/* Oversized Sans Word */}
-            {language === "en" && (
-              <div className="text-[clamp(72px,9vw,155px)] font-bold text-[#F4F5EC] tracking-[-0.055em] leading-[1] my-1 sm:my-2">
-                larger.
-              </div>
-            )}
+            <div className="text-[clamp(48px,7vw,130px)] font-bold text-[#F4F5EC] tracking-[-0.04em] leading-[1] my-1 sm:my-2">
+              {t("how_we_think_larger", "larger.")}
+            </div>
 
             {/* Editorial Serif Sentence 2 */}
             <p
@@ -157,10 +155,10 @@ export default function HowWeThinkSection() {
                       'ui-monospace, "SFMono-Regular", "Cascadia Code", "Roboto Mono", monospace',
                   }}
                 >
-                  SYSTEMS
+                  {t("how_we_think_systems_tag", "SYSTEMS")}
                 </div>
                 <div className="text-2xl sm:text-[26px] lg:text-[28px] font-normal text-[#F4F5EC] tracking-[-0.025em] leading-[1.1]">
-                  Chemical, Biological &amp; Organic
+                  {t("how_we_think_systems_desc", "Chemical, Biological & Organic")}
                 </div>
               </div>
 
@@ -173,10 +171,10 @@ export default function HowWeThinkSection() {
                       'ui-monospace, "SFMono-Regular", "Cascadia Code", "Roboto Mono", monospace',
                   }}
                 >
-                  SIGNAL
+                  {t("how_we_think_signal_tag", "SIGNAL")}
                 </div>
                 <div className="text-2xl sm:text-[26px] lg:text-[28px] font-normal text-[#F4F5EC] tracking-[-0.025em] leading-[1.1]">
-                  Microbial intelligence.
+                  {t("how_we_think_signal_desc", "Microbial intelligence.")}
                 </div>
               </div>
 
@@ -189,10 +187,10 @@ export default function HowWeThinkSection() {
                       'ui-monospace, "SFMono-Regular", "Cascadia Code", "Roboto Mono", monospace',
                   }}
                 >
-                  SCALE
+                  {t("how_we_think_scale_tag", "SCALE")}
                 </div>
                 <div className="text-2xl sm:text-[26px] lg:text-[28px] font-normal text-[#F4F5EC] tracking-[-0.025em] leading-[1.1]">
-                  Biological potential.
+                  {t("how_we_think_scale_desc", "Biological potential.")}
                 </div>
               </div>
             </div>

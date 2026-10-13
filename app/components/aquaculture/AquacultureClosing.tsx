@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 const STATS = [
   { value: 93, unit: "%", label: "less H₂S in treated sediment" },
@@ -10,6 +11,7 @@ const STATS = [
 ];
 
 export default function AquacultureClosing() {
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
   const [counts, setCounts] = useState(STATS.map(() => 0));
@@ -124,7 +126,7 @@ export default function AquacultureClosing() {
               <span
                 className="font-jetbrains text-[11px] font-medium uppercase tracking-[0.2em] text-[#6fbf73]"
               >
-                THE BIOFACTOR APPROACH
+                {t("aqua_closing_eyebrow")}
               </span>
             </div>
 
@@ -132,21 +134,14 @@ export default function AquacultureClosing() {
               className="font-inter-tight font-extrabold leading-[0.96] text-white"
               style={{ fontSize: "clamp(44px,6.5vw,82px)", letterSpacing: "-0.03em" }}
             >
-              Manage the bottom,
-              <br />
-              <em className="font-newsreader font-normal not-italic text-[#6fbf73]">
-                and the water follows.
-              </em>
+              {t("aqua_closing_title")}
             </h2>
 
             <p
               className="mt-7 font-newsreader text-[17px] leading-[1.7] text-[#cfe6bd]"
               style={{ maxWidth: "52ch" }}
             >
-              A healthy pond starts a few millimetres below the surface of the
-              sediment. Our anaerobic and facultative consortia work exactly
-              there — breaking down organic load, removing toxic gases and
-              restoring the soil–water interface that shrimp depend on.
+              {t("aqua_closing_desc")}
             </p>
           </div>
 
@@ -156,7 +151,7 @@ export default function AquacultureClosing() {
               href="/about"
               className="inline-flex items-center gap-3 border border-[#6fbf73]/40 px-8 py-4 font-inter-tight text-[14px] font-bold uppercase tracking-[0.14em] text-[#6fbf73] transition-colors duration-200 hover:bg-[#6fbf73] hover:text-[#12301f]"
             >
-              About Biofactor
+              {t("aqua_closing_about_btn")}
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                 <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -165,7 +160,7 @@ export default function AquacultureClosing() {
               href="/bioremediation"
               className="inline-flex items-center gap-3 border border-white/15 px-8 py-4 font-inter-tight text-[14px] font-bold uppercase tracking-[0.14em] text-white/60 transition-colors duration-200 hover:border-white/40 hover:text-white"
             >
-              Bioremediation products
+              {t("aqua_closing_biorem_btn")}
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                 <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>

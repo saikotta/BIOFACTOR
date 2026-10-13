@@ -10,6 +10,7 @@ import {
 import { GiDna2 } from 'react-icons/gi';
 import BiofactorFooter from '../components/BiofactorFooter';
 import ResourcesAnimations from '../components/ResourcesAnimations';
+import { useTranslation } from '../i18n';
 import './resources-animations.css';
 
 const biofactor_resource = '/images/biofactor_resources.png';
@@ -54,6 +55,7 @@ interface ResourceItem {
 }
 
 export default function ResourcesPage() {
+  const { t, language } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
   const [selectedPaperId, setSelectedPaperId] = useState<number>(1);
@@ -261,13 +263,17 @@ export default function ResourcesPage() {
           <div className="relative z-10 text-center max-w-4xl mx-auto flex flex-col items-center pt-8 md:pt-14">
             <div className="inline-block px-5 py-2 rounded-full border border-emerald-400/40 bg-emerald-500/20 backdrop-blur-md mb-5">
               <span className="text-emerald-200 font-mono text-xs font-semibold uppercase tracking-widest flex items-center gap-2">
-                <GiDna2 className="text-sm" /> Biofactor Intelligence Hub
+                <GiDna2 className="text-sm" /> {t("resources_hub_tag", "Biofactor Intelligence Hub")}
               </span>
             </div>
 
             {/* Title */}
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-4 tracking-tight font-display leading-tight">
-              Scientific <span style={{ color: "#7CC242" }}>Resource Hub</span>
+              {language === "en" ? (
+                <>Scientific <span style={{ color: "#7CC242" }}>Resource Hub</span></>
+              ) : (
+                t("resources_hub_title", "Scientific Resource Hub")
+              )}
             </h1>
 
             {/* Subtitle */}
@@ -275,7 +281,7 @@ export default function ResourcesPage() {
               data-hero-sub
               className="text-emerald-100 text-sm md:text-base font-sans max-w-2xl mx-auto leading-relaxed mb-6"
             >
-              Explore our curated library of peer-reviewed research papers and scientific studies demonstrating microbial bio-stimulant performance and environmental impact.
+              {t("resources_hub_desc", "Explore our curated library of peer-reviewed research papers and scientific studies demonstrating microbial bio-stimulant performance and environmental impact.")}
             </p>
           </div>
 
@@ -287,7 +293,7 @@ export default function ResourcesPage() {
               <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-emerald-200 text-2xl pointer-events-none" />
               <input
                 type="text"
-                placeholder="Search research papers..."
+                placeholder={t("resources_search_placeholder", "Search research papers...")}
                 className="w-full pl-14 pr-12 py-4 rounded-2xl bg-white/20 backdrop-blur-md border border-white/35 text-white text-base md:text-lg placeholder-emerald-100/70 focus:bg-white/30 transition-all outline-none shadow-xl"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -308,7 +314,7 @@ export default function ResourcesPage() {
               data-hero-cue
               className="inline-flex flex-col items-center gap-1 text-emerald-200 hover:text-white transition-colors cursor-pointer"
             >
-              <span className="font-mono text-xs uppercase tracking-widest">Explore Catalog</span>
+              <span className="font-mono text-xs uppercase tracking-widest">{t("resources_explore_catalog", "Explore Catalog")}</span>
               <span className="rh-chevron">
                 <FaChevronDown />
               </span>
@@ -333,9 +339,9 @@ export default function ResourcesPage() {
                 <FaFlask />
               </div>
               <div>
-                <h2 className="text-2xl md:text-3xl font-extrabold text-[#173522] font-display">Research Papers</h2>
+                <h2 className="text-2xl md:text-3xl font-extrabold text-[#173522] font-display">{t("resources_section_heading", "Research Papers")}</h2>
                 <p className="text-[#173522]/70 text-sm font-sans mt-0.5">
-                  {filteredResources.length} Peer-reviewed studies • Click any paper to view live preview in right window
+                  {filteredResources.length} {t("resources_section_sub", "Peer-reviewed studies • Click any paper to view live preview in right window")}
                 </p>
               </div>
             </div>
@@ -366,7 +372,7 @@ export default function ResourcesPage() {
                       {/* Selected Indicator Badge */}
                       {isSelected && (
                         <div className="absolute top-3 left-3 z-20 px-3 py-1 bg-[#2D6A4F] text-white rounded-full text-[11px] font-mono font-bold tracking-wide flex items-center gap-1.5 shadow-md">
-                          <FiCheckCircle className="text-[#7CC242]" /> ACTIVE PREVIEW
+                          <FiCheckCircle className="text-[#7CC242]" /> {t("resources_active_preview", "ACTIVE PREVIEW")}
                         </div>
                       )}
 
@@ -436,15 +442,15 @@ export default function ResourcesPage() {
                   <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-[#EAF3EA] mb-4">
                     <FaMicroscope className="text-3xl text-[#2D6A4F]" />
                   </div>
-                  <h3 className="text-xl font-bold text-[#173522] mb-2">No research papers found</h3>
+                  <h3 className="text-xl font-bold text-[#173522] mb-2">{t("resources_no_papers", "No research papers found")}</h3>
                   <p className="text-[#173522]/70 text-sm max-w-md mx-auto mb-6 font-sans">
-                    Try adjusting your search terms.
+                    {t("resources_adjust_search", "Try adjusting your search terms.")}
                   </p>
                   <button 
                     onClick={() => setSearchQuery('')}
                     className="px-5 py-2.5 bg-[#2D6A4F] hover:bg-[#173522] text-white rounded-full font-bold transition-colors cursor-pointer text-xs"
                   >
-                    View All Research Papers
+                    {t("resources_view_all", "View All Research Papers")}
                   </button>
                 </div>
               )}
@@ -459,7 +465,7 @@ export default function ResourcesPage() {
                 <div className="flex items-center justify-between mb-2">
                   <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-[#2D6A4F] uppercase tracking-wider bg-[#EAF3EA] px-3 py-1 rounded-full border border-[#2D6A4F]/25">
                     <span className="w-2.5 h-2.5 rounded-full bg-[#7CC242] animate-pulse" />
-                    LIVE PREVIEWING PAPER {activePaper.id}
+                    {t("resources_live_previewing", "LIVE PREVIEWING PAPER")} {activePaper.id}
                   </span>
                 </div>
                 <h3 className="text-sm sm:text-base font-extrabold text-[#173522] leading-snug font-display line-clamp-2">
@@ -471,7 +477,7 @@ export default function ResourcesPage() {
                     onClick={() => handleOpenPdf(activePaper.pdfUrl)}
                     className="text-[11px] font-mono font-bold text-[#2D6A4F] hover:text-[#173522] underline flex items-center gap-1 cursor-pointer"
                   >
-                    Open PDF <FiExternalLink size={10} />
+                    {t("resources_open_pdf", "Open PDF")} <FiExternalLink size={10} />
                   </button>
                 </div>
               </div>
@@ -527,7 +533,7 @@ export default function ResourcesPage() {
 
                         {/* Abstract Box */}
                         <div className="bg-emerald-50/70 border-l-4 border-[#2D6A4F] p-3.5 rounded-r-lg mb-4 text-xs text-slate-700 leading-relaxed font-sans">
-                          <div className="font-bold text-[#173522] uppercase tracking-wider text-[10px] mb-1 font-mono">Abstract</div>
+                          <div className="font-bold text-[#173522] uppercase tracking-wider text-[10px] mb-1 font-mono">{t("resources_abstract", "Abstract")}</div>
                           {activePaper.description}
                         </div>
 
@@ -555,7 +561,7 @@ export default function ResourcesPage() {
 
                         {/* Key Results */}
                         <div className="space-y-1.5 text-xs text-slate-700 font-sans">
-                          <div className="font-bold text-slate-900 text-xs font-mono">Key Findings:</div>
+                          <div className="font-bold text-slate-900 text-xs font-mono">{t("resources_key_findings", "Key Findings:")}</div>
                           {activePaper.keyFindings.map((finding, idx) => (
                             <div key={idx} className="flex items-start gap-2">
                               <FiCheckCircle className="text-[#2D6A4F] shrink-0 mt-0.5" />
@@ -572,7 +578,7 @@ export default function ResourcesPage() {
                           <span className="text-[10px] font-mono text-[#2D6A4F] font-bold">Biofactor Research</span>
                         </div>
 
-                        <h5 className="text-xs font-bold text-slate-900 mb-2 font-mono uppercase tracking-wider">Quantitative Assay Table</h5>
+                        <h5 className="text-xs font-bold text-slate-900 mb-2 font-mono uppercase tracking-wider">{t("resources_quant_table", "Quantitative Assay Table")}</h5>
                         <div className="overflow-hidden border border-slate-200 rounded-lg mb-4 text-[11px] font-sans">
                           <table className="w-full text-left border-collapse">
                             <thead className="bg-[#173522] text-white font-mono">
@@ -599,7 +605,7 @@ export default function ResourcesPage() {
                             Approved Publication • Biofactor R&D
                           </div>
                           <span className="px-2 py-0.5 rounded border border-[#2D6A4F] text-[#2D6A4F] text-[10px] font-mono font-bold">
-                            ✓ VERIFIED
+                            ✓ {t("resources_verified", "VERIFIED")}
                           </span>
                         </div>
                       </div>

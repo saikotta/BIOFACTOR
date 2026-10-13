@@ -1,15 +1,16 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import { useTranslation } from "../../i18n";
 
-const CHAIN = [
-  ["Soil", "🌱"],
-  ["Crops", "🌾"],
-  ["Water", "💧"],
-  ["Shrimp ponds", "🦐"],
-  ["Poultry", "🐔"],
-  ["Animals", "🐄"],
-  ["Human health", "PERSON"]
+const CHAIN_KEYS = [
+  { key: "about_chain_soil", defaultName: "Soil", emoji: "🌱" },
+  { key: "about_chain_crops", defaultName: "Crops", emoji: "🌾" },
+  { key: "about_chain_water", defaultName: "Water", emoji: "💧" },
+  { key: "about_chain_shrimp", defaultName: "Shrimp ponds", emoji: "🦐" },
+  { key: "about_chain_poultry", defaultName: "Poultry", emoji: "🐔" },
+  { key: "about_chain_animals", defaultName: "Animals", emoji: "🐄" },
+  { key: "about_chain_human", defaultName: "Human health", emoji: "PERSON" }
 ];
 
 const PTS: [number, number][] = [
@@ -28,6 +29,7 @@ const FIRST = 900;
 const LOOP_DELAY = 3000;
 
 export default function AboutVisionMissionSection() {
+  const { t, language } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<SVGPathElement>(null);
   const trackRef = useRef<SVGPathElement>(null);
@@ -74,14 +76,15 @@ export default function AboutVisionMissionSection() {
     nodesG.innerHTML = "";
     const PERSON = `<g transform="translate(0 2) scale(1.3)"><circle cx="0" cy="-14" r="8.5" fill="#f1c19b"/><path d="M-17 20 C-17 2 -10 -3 0 -3 C10 -3 17 2 17 20Z" fill="#2f9a57"/><path d="M0 16 C-11 8 -7 0 0 5 C7 0 11 8 0 16Z" fill="#e8453c"/></g>`;
 
-    const nodeEls = CHAIN.map(([name, emoji], i) => {
+    const nodeEls = CHAIN_KEYS.map((item, i) => {
+      const name = t(item.key, item.defaultName);
       const g = document.createElementNS(NS, "g");
       g.setAttribute("class", "node-chain");
       g.setAttribute("transform", `translate(${PTS[i][0]} ${PTS[i][1]})`);
       g.innerHTML = `<circle class="ring-chain" r="40"/><g class="pop-chain"><circle class="disc-chain" r="36"/>${
-        emoji === "PERSON"
+        item.emoji === "PERSON"
           ? PERSON
-          : `<text text-anchor="middle" dominant-baseline="central" font-size="38">${emoji}</text>`
+          : `<text text-anchor="middle" dominant-baseline="central" font-size="38">${item.emoji}</text>`
       }</g><text class="lab-chain" y="68" text-anchor="middle">${name}</text>`;
       nodesG.appendChild(g);
       return g;
@@ -138,7 +141,7 @@ export default function AboutVisionMissionSection() {
       cancelAnimationFrame(raf);
       clearTimeout(timer);
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        reveal(CHAIN.length);
+        reveal(CHAIN_KEYS.length);
         place(1);
         return;
       }
@@ -151,7 +154,7 @@ export default function AboutVisionMissionSection() {
         if (t >= TOTAL) {
           place(1);
           if (bee) bee.style.opacity = "0";
-          reveal(CHAIN.length);
+          reveal(CHAIN_KEYS.length);
           timer = setTimeout(play, LOOP_DELAY);
           return;
         }
@@ -184,7 +187,7 @@ export default function AboutVisionMissionSection() {
       clearTimeout(timer);
       observer.disconnect();
     };
-  }, []);
+  }, [language]);
 
   return (
     <section className="w-full bg-[#e6fbc9] text-[#14210f] font-sans">
@@ -339,27 +342,26 @@ export default function AboutVisionMissionSection() {
         {/* RIGHT PANEL: VISION & MISSION TEXT */}
         <div className="self-center px-6 sm:px-12 lg:px-16 py-14 max-w-[640px]">
           <p className="m-0 mb-2 text-[14px] font-semibold text-[#14602b] tracking-[0.02em]">
-            Vision
+            {t("about_vision_kicker", "Vision")}
           </p>
           <h2 className="m-0 mb-5 text-[clamp(32px,3.6vw,48px)] leading-[1.12] font-bold text-[#14602b]">
-            A World Powered by Biological Intelligence
+            {t("about_vision_heading", "A World Powered by Biological Intelligence")}
           </h2>
           <p className="m-0 text-[clamp(16px,1.25vw,18px)] leading-[1.75] text-[#14210f]">
-            Life on Earth began when chemistry turned into biology. We believe
-            farming&apos;s future works the same way &mdash; chemistry and
-            biology working together, everywhere farming happens.
+            {t(
+              "about_vision_desc",
+              "Life on Earth began when chemistry turned into biology. We believe farming's future works the same way — chemistry and biology working together, everywhere farming happens."
+            )}
           </p>
 
           <p className="m-0 mt-14 mb-2 text-[14px] font-semibold text-[#14602b] tracking-[0.02em]">
-            Mission
+            {t("about_mission_kicker", "Mission")}
           </p>
           <p className="m-0 text-[clamp(16px,1.25vw,18px)] leading-[1.75] text-[#14210f]">
-            Our mission goes beyond farming. We build biological intelligence
-            into every living system we touch &mdash; soil, water, crops, shrimp
-            ponds, poultry, animals, even polluted lakes &mdash; because soil,
-            animal, and human health are all part of the same chain. Wherever
-            that chain runs, we want biology working alongside chemistry, not left
-            out of it.
+            {t(
+              "about_mission_desc",
+              "Our mission goes beyond farming. We build biological intelligence into every living system we touch — soil, water, crops, shrimp ponds, poultry, animals, even polluted lakes — because soil, animal, and human health are all part of the same chain. Wherever that chain runs, we want biology working alongside chemistry, not left out of it."
+            )}
           </p>
         </div>
       </div>

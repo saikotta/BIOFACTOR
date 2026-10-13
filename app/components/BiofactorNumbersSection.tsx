@@ -169,7 +169,10 @@ export default function BiofactorNumbersSection() {
               transitionDelay: prefersReducedMotion ? "0ms" : "100ms",
             }}
           >
-            A DSIR-recognised R&amp;D operation, built and sold from Hyderabad since 2014.
+            {t(
+              "stat_dsir_heading",
+              "A DSIR-recognised R&D operation, built and sold from Hyderabad since 2014."
+            )}
           </h2>
 
           {/* Biofactor Conviction Copy with Thin Green Left Border */}
@@ -184,8 +187,10 @@ export default function BiofactorNumbersSection() {
             }}
           >
             <p className="text-base sm:text-lg text-[#2a4d3e] font-normal leading-relaxed max-w-2xl">
-              At Biofactor, we explore this frontier with one conviction:
-              The more deeply we understand biology, the more intelligently we can innovate with it.
+              {t(
+                "stat_conviction_copy",
+                "At Biofactor, we explore this frontier with one conviction: The more deeply we understand biology, the more intelligently we can innovate with it."
+              )}
             </p>
           </div>
 

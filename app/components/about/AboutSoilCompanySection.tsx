@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
+import { useTranslation } from "../../i18n";
 
 export default function AboutSoilCompanySection() {
+  const { t } = useTranslation();
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   // Frame 3 Replay State Machine
@@ -194,7 +196,10 @@ export default function AboutSoilCompanySection() {
                     : "opacity-0"
                 }`}
             >
-              Biofac Inputs Private Limited, operating as Biofactor Biologicals, is a DSIR-recognised biotech company headquartered in Hyderabad. We’re built around two things: microbes and minerals &mdash; the Microbe &amp; Mineral&trade; platform is the center of our product portfolio.
+              {t(
+                "about_soil_desc",
+                "Biofac Inputs Private Limited, operating as Biofactor Biologicals, is a DSIR-recognised biotech company headquartered in Hyderabad. We’re built around two things: microbes and minerals — the Microbe & Mineral™ platform is the center of our product portfolio."
+              )}
             </p>
 
             {/* STAGE 2: Main Soil Company / OneHealth Statement */}
@@ -207,11 +212,11 @@ export default function AboutSoilCompanySection() {
                 }`}
             >
               <p>
-                <span className="text-[#17251C]/65 font-normal">We call ourselves </span>
-                <strong className="font-bold text-[#155B2A]">The Soil Company</strong>
-                <span className="font-normal"> because soil is where the </span>
-                <strong className="font-bold text-[#155B2A]">OneHealth</strong>
-                <span className="font-normal"> chain starts &mdash; and where most of what we build begins its work.</span>
+                <span className="text-[#17251C]/65 font-normal">{t("about_soil_statement_p1", "We call ourselves")} </span>
+                <strong className="font-bold text-[#155B2A]">{t("about_soil_the_soil_company", "The Soil Company")}</strong>
+                <span className="font-normal"> {t("about_soil_statement_p2", "because soil is where the")} </span>
+                <strong className="font-bold text-[#155B2A]">{t("about_soil_onehealth", "OneHealth")}</strong>
+                <span className="font-normal"> {t("about_soil_statement_p3", "chain starts — and where most of what we build begins its work.")}</span>
               </p>
             </div>
 
@@ -239,14 +244,14 @@ export default function AboutSoilCompanySection() {
                   }`}
                 >
                   <span className="text-[13px] sm:text-[14px] font-semibold tracking-[0.03em] uppercase leading-none text-white/80 block">
-                    PRODUCT RANGE
+                    {t("about_card_product_range", "PRODUCT RANGE")}
                   </span>
                   <div>
                     <div className="text-[34px] sm:text-[36px] font-bold tracking-[-0.035em] leading-[0.95] mb-1.5">
                       200+
                     </div>
                     <div className="text-[14px] sm:text-[15px] font-medium leading-[1.25] text-white/95 max-w-[110px] sm:max-w-[115px]">
-                      products, six<br />verticals
+                      {t("about_card_product_desc", "products, six verticals")}
                     </div>
                   </div>
                 </div>
@@ -284,17 +289,14 @@ export default function AboutSoilCompanySection() {
                   }`}
                 >
                   <span className="text-[13px] sm:text-[14px] font-semibold tracking-[0.03em] uppercase leading-none text-white/80 block mb-1">
-                    VERTICALS
+                    {t("about_card_verticals", "VERTICALS")}
                   </span>
                   <div className="text-[12px] sm:text-[13px] font-medium leading-[1.2] text-white/95 w-full">
-                    <span className="whitespace-nowrap">Agri &middot;</span>{" "}
-                    <span className="whitespace-nowrap">Aqua &middot;</span>{" "}
-                    <span className="whitespace-nowrap">Poultry</span>
+                    <span className="whitespace-nowrap">{t("about_card_verticals_line1", "Agri · Aqua · Poultry")}</span>
                     <br />
-                    <span className="whitespace-nowrap">Ruminants &middot;</span>{" "}
-                    <span className="whitespace-nowrap">Pet &middot;</span>
+                    <span className="whitespace-nowrap">{t("about_card_verticals_line2", "Ruminants · Pet ·")}</span>
                     <br />
-                    <span className="whitespace-nowrap max-w-[115px] inline-block">Bio-remediation</span>
+                    <span className="whitespace-nowrap max-w-[115px] inline-block">{t("about_card_verticals_line3", "Bio-remediation")}</span>
                   </div>
                 </div>
                 <svg
@@ -327,14 +329,14 @@ export default function AboutSoilCompanySection() {
                   }`}
                 >
                   <span className="text-[13px] sm:text-[14px] font-semibold tracking-[0.03em] uppercase leading-none text-[#155B2A] block">
-                    IP
+                    {t("about_card_ip_title", "IP")}
                   </span>
                   <div className="max-w-[calc(100%-40px)]">
                     <div className="text-[20px] sm:text-[22px] font-bold text-[#155B2A] tracking-[-0.025em] leading-[1.05] mb-1.5">
-                      11 patents granted
+                      {t("about_card_ip_granted", "11 patents granted")}
                     </div>
                     <div className="text-[12px] sm:text-[13px] font-medium leading-[1.2] text-[#17251C]/85 max-w-[150px]">
-                      350+ proprietary and patent deposited strains
+                      {t("about_card_ip_strains", "350+ proprietary and patent deposited strains")}
                     </div>
                   </div>
                 </div>
@@ -370,14 +372,14 @@ export default function AboutSoilCompanySection() {
                   }`}
                 >
                   <span className="text-[13px] sm:text-[14px] font-semibold tracking-[0.03em] uppercase leading-none text-[#155B2A] block">
-                    DOMESTIC REACH
+                    {t("about_card_domestic_title", "DOMESTIC REACH")}
                   </span>
                   <div>
                     <div className="text-[34px] sm:text-[36px] font-bold text-[#155B2A] tracking-[-0.035em] leading-[0.95] mb-1.5">
                       20+
                     </div>
                     <div className="text-[14px] sm:text-[15px] font-medium leading-[1.25] text-[#17251C]/85 max-w-[120px] sm:max-w-[128px]">
-                      Indian states,<br />3,000+ dealers
+                      {t("about_card_domestic_desc", "Indian states, 3,000+ dealers")}
                     </div>
                   </div>
                 </div>
@@ -409,14 +411,14 @@ export default function AboutSoilCompanySection() {
                   }`}
                 >
                   <span className="text-[13px] sm:text-[14px] font-semibold tracking-[0.03em] uppercase leading-none text-white/80 block">
-                    TEAM
+                    {t("about_card_team_title", "TEAM")}
                   </span>
                   <div>
                     <div className="text-[31px] sm:text-[33px] font-bold tracking-[-0.035em] leading-[0.95] mb-1.5">
                       600+
                     </div>
                     <div className="text-[14px] sm:text-[15px] font-medium leading-[1.25] text-white/95 w-full">
-                      people
+                      {t("about_card_team_desc", "people")}
                     </div>
                   </div>
                 </div>
@@ -450,14 +452,14 @@ export default function AboutSoilCompanySection() {
                   }`}
                 >
                   <span className="text-[13px] sm:text-[14px] font-semibold tracking-[0.03em] uppercase leading-none text-white/80 block">
-                    INTERNATIONAL
+                    {t("about_card_intl_title", "INTERNATIONAL")}
                   </span>
                   <div>
                     <div className="text-[22px] sm:text-[24px] font-bold tracking-[-0.02em] leading-[1.05] mb-1.5 max-w-[125px]">
-                      Malawi &amp;<br />Kenya
+                      {t("about_card_intl_countries", "Malawi & Kenya")}
                     </div>
                     <div className="text-[14px] sm:text-[15px] font-medium leading-[1.25] text-white/95 w-full">
-                      East Africa
+                      {t("about_card_intl_region", "East Africa")}
                     </div>
                   </div>
                 </div>

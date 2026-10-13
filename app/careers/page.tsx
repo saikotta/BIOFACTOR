@@ -17,6 +17,7 @@ import {
 import { FaLeaf, FaHandsHelping, FaChartLine } from 'react-icons/fa';
 import { motion, type Variants } from 'framer-motion';
 import BiofactorFooter from '../components/BiofactorFooter';
+import { useTranslation } from '../i18n';
 
 // Animation Variants
 const fadeInUp: Variants = {
@@ -100,6 +101,7 @@ const DEMO_JOBS: JobOpening[] = [
 ];
 
 export default function CareersPage() {
+  const { t, language } = useTranslation();
   const [isApplying, setIsApplying] = useState(false);
   const [isHrModalOpen, setIsHrModalOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState<JobOpening | null>(null);
@@ -362,61 +364,61 @@ export default function CareersPage() {
   const benefits = [
     {
       icon: <FaLeaf className="text-2xl" />,
-      title: "Sustainable Mission",
-      description: "Make a real impact on sustainable agriculture and environmental conservation"
+      title: t("careers_benefit_1_title", "Sustainable Mission"),
+      description: t("careers_benefit_1_desc", "Make a real impact on sustainable agriculture and environmental conservation")
     },
     {
       icon: <FaChartLine className="text-2xl" />,
-      title: "Career Growth",
-      description: "Clear growth paths with regular promotions and skill development programs"
+      title: t("careers_benefit_2_title", "Career Growth"),
+      description: t("careers_benefit_2_desc", "Clear growth paths with regular promotions and skill development programs")
     },
     {
       icon: <FiUsers className="text-2xl" />,
-      title: "Collaborative Culture",
-      description: "Work alongside passionate experts in agriculture and biotechnology"
+      title: t("careers_benefit_3_title", "Collaborative Culture"),
+      description: t("careers_benefit_3_desc", "Work alongside passionate experts in agriculture and biotechnology")
     },
     {
       icon: <FaHandsHelping className="text-2xl" />,
-      title: "Work-Life Balance",
-      description: "Flexible hours, remote options, and generous leave policies"
+      title: t("careers_benefit_4_title", "Work-Life Balance"),
+      description: t("careers_benefit_4_desc", "Flexible hours, remote options, and generous leave policies")
     },
     {
       icon: <FiAward className="text-2xl" />,
-      title: "Learning Opportunities",
-      description: "Sponsored training, workshops, and global conference participation"
+      title: t("careers_benefit_5_title", "Learning Opportunities"),
+      description: t("careers_benefit_5_desc", "Sponsored training, workshops, and global conference participation")
     },
     {
       icon: <FiBriefcase className="text-2xl" />,
-      title: "Comprehensive Benefits",
-      description: "Health insurance, retirement plans, bonuses, and wellness programs"
+      title: t("careers_benefit_6_title", "Comprehensive Benefits"),
+      description: t("careers_benefit_6_desc", "Health insurance, retirement plans, bonuses, and wellness programs")
     }
   ];
 
   const applicationSteps = [
     {
       number: "01",
-      title: "Submit Application",
-      description: "Send your resume and personalized cover letter highlighting your passion for sustainable agriculture"
+      title: t("careers_step_1_title", "Submit Application"),
+      description: t("careers_step_1_desc", "Send your resume and personalized cover letter highlighting your passion for sustainable agriculture")
     },
     {
       number: "02",
-      title: "Screening Call",
-      description: "Initial phone conversation with our HR team to discuss mutual expectations"
+      title: t("careers_step_2_title", "Screening Call"),
+      description: t("careers_step_2_desc", "Initial phone conversation with our HR team to discuss mutual expectations")
     },
     {
       number: "03",
-      title: "Technical Interview",
-      description: "In-depth discussion with our technical team about your expertise and approach"
+      title: t("careers_step_3_title", "Technical Interview"),
+      description: t("careers_step_3_desc", "In-depth discussion with our technical team about your expertise and approach")
     },
     {
       number: "04",
-      title: "Final Interview",
-      description: "Meeting with leadership to discuss vision alignment and career aspirations"
+      title: t("careers_step_4_title", "Final Interview"),
+      description: t("careers_step_4_desc", "Meeting with leadership to discuss vision alignment and career aspirations")
     },
     {
       number: "05",
-      title: "Offer & Onboarding",
-      description: "Welcome package and comprehensive onboarding to integrate you smoothly"
+      title: t("careers_step_5_title", "Offer & Onboarding"),
+      description: t("careers_step_5_desc", "Welcome package and comprehensive onboarding to integrate you smoothly")
     }
   ];
 
@@ -454,16 +456,16 @@ export default function CareersPage() {
             >
               <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/30 backdrop-blur-md px-4 py-1.5 rounded-full mb-4">
                 <span className="w-2 h-2 bg-emerald-300 rounded-full animate-pulse" />
-                <span className="text-emerald-100 font-mono text-xs font-semibold tracking-widest uppercase">We’re hiring!</span>
+                <span className="text-emerald-100 font-mono text-xs font-semibold tracking-widest uppercase">{t("careers_hiring_pill", "We’re hiring!")}</span>
               </motion.div>
 
               <motion.h1 variants={fadeInUp} className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight font-display tracking-tight">
-                Grow Your Career at
+                {t("careers_hero_h1", "Grow Your Career at")}
                 <span className="block text-emerald-300 mt-1">Biofactor</span>
               </motion.h1>
 
               <motion.p variants={fadeInUp} className="text-base sm:text-lg lg:text-xl text-emerald-50 mb-8 max-w-2xl mx-auto leading-relaxed font-sans">
-                Join us in revolutionizing sustainable agriculture through innovative biological solutions.
+                {t("careers_hero_sub", "Join us in revolutionizing sustainable agriculture through innovative biological solutions.")}
               </motion.p>
 
               <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -473,14 +475,14 @@ export default function CareersPage() {
                   className="inline-flex items-center justify-center gap-3 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
                 >
                   <FiMail />
-                  Contact HR Department
+                  {t("careers_contact_hr", "Contact HR Department")}
                 </button>
 
                 <a
                   href="#openings"
                   className="inline-flex items-center justify-center gap-3 border-2 border-white/70 text-white font-bold px-8 py-3.5 rounded-xl hover:bg-white/20 hover:scale-105 active:scale-95 transition-all duration-300 backdrop-blur-xs"
                 >
-                  View Open Positions
+                  {t("careers_view_positions", "View Open Positions")}
                   <FiArrowRight />
                 </a>
               </motion.div>
@@ -499,11 +501,11 @@ export default function CareersPage() {
               className="text-center mb-16"
             >
               <div className="inline-block mb-3">
-                <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">Why Choose Us</span>
+                <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">{t("careers_why_choose_tag", "Why Choose Us")}</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#173522] mb-4 tracking-tight">Why Join Biofactor?</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#173522] mb-4 tracking-tight">{t("careers_why_join_title", "Why Join Biofactor?")}</h2>
               <p className="text-base sm:text-lg text-[#173522]/90 max-w-3xl mx-auto leading-relaxed font-sans">
-                Be part of a mission-driven team that's transforming agriculture while building meaningful careers
+                {t("careers_why_join_desc", "Be part of a mission-driven team that's transforming agriculture while building meaningful careers")}
               </p>
             </motion.div>
 
@@ -548,11 +550,11 @@ export default function CareersPage() {
               className="text-center mb-16"
             >
               <div className="inline-block mb-3">
-                <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">Join Our Team</span>
+                <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">{t("careers_openings_tag", "Join Our Team")}</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#173522] mb-4 tracking-tight">Current Job Openings</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#173522] mb-4 tracking-tight">{t("careers_openings_title", "Current Job Openings")}</h2>
               <p className="text-base sm:text-lg text-[#173522]/90 max-w-2xl mx-auto font-sans">
-                Explore opportunities to contribute to sustainable agriculture
+                {t("careers_openings_desc", "Explore opportunities to contribute to sustainable agriculture")}
               </p>
             </motion.div>
 
@@ -562,7 +564,7 @@ export default function CareersPage() {
               {loadingJobs ? (
                 <div className="lg:col-span-3 flex flex-col items-center justify-center py-20 text-[#173522]/60 gap-4">
                   <FiLoader className="animate-spin text-4xl text-[#2D6A4F]" />
-                  <p className="font-mono text-xs font-bold tracking-widest uppercase">Loading open positions...</p>
+                  <p className="font-mono text-xs font-bold tracking-widest uppercase">{t("careers_loading_positions", "Loading open positions...")}</p>
                 </div>
               ) : displayJobs.map((job) => (
                 <div 
@@ -580,7 +582,7 @@ export default function CareersPage() {
                       <div className="flex flex-col items-end gap-1.5 shrink-0">
                         {job.is_demo && (
                           <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-extrabold uppercase tracking-wider bg-amber-100 text-amber-900 border border-amber-300">
-                            DEMO OPENING
+                            {t("careers_demo_opening", "DEMO OPENING")}
                           </span>
                         )}
                         <span className="px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#EAF3EA] text-[#2D6A4F]">
@@ -605,7 +607,7 @@ export default function CareersPage() {
                       </div>
                       {job.responsibilities && (
                         <div className="mt-4">
-                          <h4 className="font-bold text-[#173522] text-sm mb-2">What You'll Do:</h4>
+                          <h4 className="font-bold text-[#173522] text-sm mb-2">{t("careers_what_you_will_do", "What You'll Do:")}</h4>
                           <div className="text-[#173522]/80 text-sm leading-relaxed whitespace-pre-line font-sans">
                             {job.responsibilities}
                           </div>
@@ -615,7 +617,7 @@ export default function CareersPage() {
                     
                     {job.skills && job.skills.length > 0 && (
                       <div className="mb-8">
-                        <h4 className="font-bold text-[#173522] text-xs uppercase tracking-wider mb-3 font-mono">Key Skills:</h4>
+                        <h4 className="font-bold text-[#173522] text-xs uppercase tracking-wider mb-3 font-mono">{t("careers_key_skills", "Key Skills:")}</h4>
                         <div className="flex flex-wrap gap-2">
                           {job.skills.map((skill, idx) => (
                             <span 
@@ -632,7 +634,7 @@ export default function CareersPage() {
                     <div className={`flex items-center pt-6 border-t border-[#2D6A4F]/10 mt-auto ${job.salary && job.salary.trim() !== '' && job.salary !== 'Competitive' && job.salary !== 'Not Specified' ? 'justify-between' : 'justify-end'}`}>
                       {job.salary && job.salary.trim() !== '' && job.salary !== 'Competitive' && job.salary !== 'Not Specified' && (
                         <div>
-                          <span className="text-[#173522]/60 text-xs uppercase tracking-wider font-mono">Expected Salary</span>
+                          <span className="text-[#173522]/60 text-xs uppercase tracking-wider font-mono">{t("careers_expected_salary", "Expected Salary")}</span>
                           <p className="font-bold text-[#2D6A4F]">
                             {job.salary && !job.salary.includes('₹') ? `₹${job.salary}` : job.salary}
                           </p>
@@ -645,7 +647,7 @@ export default function CareersPage() {
                         }}
                         className="px-6 py-3 bg-[#2D6A4F] hover:bg-[#173522] text-white font-bold rounded-xl transition-all shadow-md hover:shadow-lg flex items-center gap-2 cursor-pointer text-sm"
                       >
-                        Apply Now <FiArrowRight />
+                        {t("careers_apply_now", "Apply Now")} <FiArrowRight />
                       </button>
                     </div>
                   </div>
@@ -666,11 +668,11 @@ export default function CareersPage() {
               className="text-center mb-16"
             >
               <div className="inline-block mb-3">
-                <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">Application Process</span>
+                <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">{t("careers_process_tag", "Application Process")}</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#173522] mb-4 tracking-tight">Our Hiring Process</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#173522] mb-4 tracking-tight">{t("careers_process_title", "Our Hiring Process")}</h2>
               <p className="text-base sm:text-lg text-[#173522]/90 max-w-2xl mx-auto font-sans">
-                A transparent and engaging journey from application to onboarding
+                {t("careers_process_desc", "A transparent and engaging journey from application to onboarding")}
               </p>
             </motion.div>
 

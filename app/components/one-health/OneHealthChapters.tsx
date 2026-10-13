@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import OneHealthChapterSphere from "./OneHealthChapterSphere";
 import OneHealthChainBand from "./OneHealthChainBand";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 interface ChapterData {
   id: string;
@@ -14,103 +15,6 @@ interface ChapterData {
   iconPath: React.ReactNode;
 }
 
-const CHAPTERS: ChapterData[] = [
-  {
-    id: "soil",
-    num: "01",
-    title: "Soil",
-    headline: "Where It Starts",
-    paragraph:
-      "Healthy soil is alive — full of microbes, minerals, and structure that let roots do their job. Everything else in this chain depends on getting soil right first.",
-    accent: "#8B5E34",
-    iconPath: (
-      <>
-        <path d="M3 17 Q6 12 9 17 T15 17 T21 17" />
-        <path d="M3 20 Q6 15 9 20 T15 20 T21 20" />
-      </>
-    ),
-  },
-  {
-    id: "plant",
-    num: "02",
-    title: "Plant",
-    headline: "The First Beneficiary",
-    paragraph:
-      "A plant grown in healthy soil is stronger before it's ever sprayed, fed, or harvested. Plant health starts underground, long before it shows above it.",
-    accent: "#3F7D4B",
-    iconPath: (
-      <>
-        <path d="M12 21 V9" />
-        <path d="M12 9 C9 9 7 6 7 3" />
-        <path d="M12 12 C15 12 17 9 17 6" />
-      </>
-    ),
-  },
-  {
-    id: "animal",
-    num: "03",
-    title: "Animal",
-    headline: "Sharing the Same Foundation",
-    paragraph:
-      "Animals raised on healthy feed and healthy land carry that health forward — into growth, into resistance to disease, into what they eventually become.",
-    accent: "#9A6B2E",
-    iconPath: (
-      <>
-        <circle cx="12" cy="8" r="2" />
-        <circle cx="7" cy="14" r="1.8" />
-        <circle cx="17" cy="14" r="1.8" />
-        <circle cx="12" cy="17" r="1.8" />
-      </>
-    ),
-  },
-  {
-    id: "food",
-    num: "04",
-    title: "Food",
-    headline: "What All of This Becomes",
-    paragraph:
-      "Every meal traces back through this chain — soil, plant, and animal all show up on a plate, whether anyone thinks about it or not.",
-    accent: "#B8482A",
-    iconPath: (
-      <>
-        <circle cx="12" cy="12" r="8" />
-        <circle cx="12" cy="12" r="3" />
-      </>
-    ),
-  },
-  {
-    id: "people",
-    num: "05",
-    title: "People",
-    headline: "The Point of All of It",
-    paragraph:
-      "Food quality isn't separate from soil quality. When the chain holds up from the start, it shows up in the people eating at the end of it.",
-    accent: "#9B6B43",
-    iconPath: (
-      <>
-        <circle cx="12" cy="7" r="3" />
-        <path d="M6 21 C6 15 9 13 12 13 C15 13 18 15 18 21" />
-      </>
-    ),
-  },
-  {
-    id: "planet",
-    num: "06",
-    title: "Planet",
-    headline: "What Holds the Whole Chain",
-    paragraph:
-      "Every link here draws on the same land, water, and climate. A chain that only works for one link at a time isn't sustainable — it has to hold across all of them, or it doesn't really hold.",
-    accent: "#2F8A9C",
-    iconPath: (
-      <>
-        <circle cx="12" cy="12" r="9" />
-        <ellipse cx="12" cy="12" rx="9" ry="4" />
-        <line x1="3" y1="12" x2="21" y2="12" />
-      </>
-    ),
-  },
-];
-
 const splitHeadlineIntoLines = (text: string): string[] => {
   const words = text.split(" ");
   if (words.length <= 3) return [text];
@@ -119,6 +23,99 @@ const splitHeadlineIntoLines = (text: string): string[] => {
 };
 
 export default function OneHealthChapters() {
+  const { t } = useTranslation();
+
+  const CHAPTERS: ChapterData[] = [
+    {
+      id: "soil",
+      num: "01",
+      title: t("one_health_chapter_soil_title"),
+      headline: t("one_health_chapter_soil_headline"),
+      paragraph: t("one_health_chapter_soil_para"),
+      accent: "#8B5E34",
+      iconPath: (
+        <>
+          <path d="M3 17 Q6 12 9 17 T15 17 T21 17" />
+          <path d="M3 20 Q6 15 9 20 T15 20 T21 20" />
+        </>
+      ),
+    },
+    {
+      id: "plant",
+      num: "02",
+      title: t("one_health_chapter_plant_title"),
+      headline: t("one_health_chapter_plant_headline"),
+      paragraph: t("one_health_chapter_plant_para"),
+      accent: "#3F7D4B",
+      iconPath: (
+        <>
+          <path d="M12 21 V9" />
+          <path d="M12 9 C9 9 7 6 7 3" />
+          <path d="M12 12 C15 12 17 9 17 6" />
+        </>
+      ),
+    },
+    {
+      id: "animal",
+      num: "03",
+      title: t("one_health_chapter_animal_title"),
+      headline: t("one_health_chapter_animal_headline"),
+      paragraph: t("one_health_chapter_animal_para"),
+      accent: "#9A6B2E",
+      iconPath: (
+        <>
+          <circle cx="12" cy="8" r="2" />
+          <circle cx="7" cy="14" r="1.8" />
+          <circle cx="17" cy="14" r="1.8" />
+          <circle cx="12" cy="17" r="1.8" />
+        </>
+      ),
+    },
+    {
+      id: "food",
+      num: "04",
+      title: t("one_health_chapter_food_title"),
+      headline: t("one_health_chapter_food_headline"),
+      paragraph: t("one_health_chapter_food_para"),
+      accent: "#B8482A",
+      iconPath: (
+        <>
+          <circle cx="12" cy="12" r="8" />
+          <circle cx="12" cy="12" r="3" />
+        </>
+      ),
+    },
+    {
+      id: "people",
+      num: "05",
+      title: t("one_health_chapter_people_title"),
+      headline: t("one_health_chapter_people_headline"),
+      paragraph: t("one_health_chapter_people_para"),
+      accent: "#9B6B43",
+      iconPath: (
+        <>
+          <circle cx="12" cy="7" r="3" />
+          <path d="M6 21 C6 15 9 13 12 13 C15 13 18 15 18 21" />
+        </>
+      ),
+    },
+    {
+      id: "planet",
+      num: "06",
+      title: t("one_health_chapter_planet_title"),
+      headline: t("one_health_chapter_planet_headline"),
+      paragraph: t("one_health_chapter_planet_para"),
+      accent: "#2F8A9C",
+      iconPath: (
+        <>
+          <circle cx="12" cy="12" r="9" />
+          <ellipse cx="12" cy="12" rx="9" ry="4" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+        </>
+      ),
+    },
+  ];
+
   const containerRef = useRef<HTMLDivElement>(null);
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
 

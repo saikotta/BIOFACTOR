@@ -1,6 +1,11 @@
+"use client";
+
 import React from "react";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 export default function PoultryBroilers() {
+  const { t } = useTranslation();
+
   return (
     <section className="w-full relative overflow-hidden py-8 lg:py-12 bg-[#DDE9D5]" data-ruminants-section="broilers" data-n="Broilers">
       {/* Subtle capsule decorations */}
@@ -51,26 +56,26 @@ export default function PoultryBroilers() {
             {/* Broilers heading and priority above the explanatory matter */}
             <div className="flex flex-col justify-start items-start space-y-4">
               <div className="font-mono text-xs font-semibold tracking-[0.25em] text-[#2D5A42] uppercase">
-                MEAT PRODUCTION
+                {t("poultry_broilers_label")}
               </div>
 
               <h2 className="font-space-grotesk font-extrabold text-[clamp(4rem,8vw,8rem)] text-[#2D5A42] tracking-tight leading-[0.85] uppercase">
-                BROILERS
+                {t("poultry_broilers_title")}
               </h2>
 
               <div className="font-mono text-xs font-semibold tracking-[0.2em] text-[#2d2d2d] uppercase max-w-md">
-                Priority · precisely fast, even growth, low FCR and control of genetic materials
+                {t("poultry_broilers_priority")}
               </div>
             </div>
 
             {/* Body Heading */}
             <h3 className="rv font-space-grotesk font-semibold text-xl lg:text-2xl text-[#1a1a1a] tracking-tight leading-tight mb-4">
-              Fast growth depends on a gut that stays intact.
+              {t("poultry_broilers_h3")}
             </h3>
 
             {/* Body Paragraph */}
             <p className="rv d1 text-base lg:text-lg text-[#2d2d2d] leading-relaxed mb-6" style={{ fontFamily: 'Georgia, Times New Roman, Times, serif' }}>
-              Gut damage in broilers, caused by <span className="italic">Clostridium perfringens</span>, can hinder growth. <span className="italic">Bacillus</span> probiotics offer a biological solution.
+              {t("poultry_broilers_desc")}
             </p>
 
             {/* Two-column Box */}
@@ -78,20 +83,20 @@ export default function PoultryBroilers() {
               {/* Left Box - Growth and FCR */}
               <div className="trow border border-[#2D5A42] p-5 rounded-lg transition-all">
                 <div className="font-space-grotesk font-bold text-base text-[#1a1a1a] mb-2">
-                  Growth and FCR
+                  {t("poultry_broilers_card1_title")}
                 </div>
                 <p className="text-sm text-[#2d2d2d] leading-relaxed" style={{ fontFamily: 'Georgia, Times New Roman, Times, serif' }}>
-                  Probiotics improved daily gain and feed conversion across 60 broiler studies.
+                  {t("poultry_broilers_card1_desc")}
                 </p>
               </div>
 
               {/* Right Box - Gut lesions */}
               <div className="trow border border-[#2D5A42] p-5 rounded-lg transition-all">
                 <div className="font-space-grotesk font-bold text-base text-[#1a1a1a] mb-2">
-                  Gut lesions
+                  {t("poultry_broilers_card2_title")}
                 </div>
                 <p className="text-sm text-[#2d2d2d] leading-relaxed" style={{ fontFamily: 'Georgia, Times New Roman, Times, serif' }}>
-                  <span className="italic">Bacillus subtilis</span> reduced necrotic enteritis lesions as well as antibiotics did.
+                  {t("poultry_broilers_card2_desc")}
                 </p>
               </div>
             </div>
@@ -101,10 +106,10 @@ export default function PoultryBroilers() {
               <div className="w-1 bg-[#2D5A42] flex-shrink-0" />
               <div>
                 <h4 className="font-space-grotesk font-bold text-base text-[#1a1a1a] mb-2">
-                  As effective as antibiotics on growth.
+                  {t("poultry_broilers_callout_title")}
                 </h4>
                 <p className="text-base lg:text-lg text-[#2d2d2d] leading-relaxed font-medium" style={{ fontFamily: 'Georgia, Times New Roman, Times, serif' }}>
-                  Across 28 controlled necrotic enteritis trials, <span className="italic">B. subtilis</span> matched in-feed antibiotics for body weight, daily gain, FCR and lesion scores. Antibiotics were still better at cutting mortality in severe outbreaks.
+                  {t("poultry_broilers_callout_desc")}
                 </p>
               </div>
             </div>

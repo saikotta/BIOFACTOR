@@ -236,11 +236,11 @@ export default function ContactSendMessage() {
 
   return (
     <section className={`fr f3 dark ${styles.section}`} data-n="Message" id="frame-3">
-      <div className={styles.frameLabel}>03 / 05 · SEND MESSAGE</div>
+      <div className={styles.frameLabel}>{t("contact_f3_tag", "03 / 05 · SEND MESSAGE")}</div>
       <div className={styles.layout}>
         <div className={styles.leftColumn}>
-          <h2 className={styles.heading}>Tell us what your farm needs</h2>
-          <p className={styles.areaLabel}>OUR AREAS OF EXPERTISE</p>
+          <h2 className={styles.heading}>{t("contact_f3_heading", "Tell us what your farm needs")}</h2>
+          <p className={styles.areaLabel}>{t("contact_f3_expertise_label", "OUR AREAS OF EXPERTISE")}</p>
           <div
             className={`${styles.honeycomb} ${reducedMotion ? styles.reduced : ""}`}
             aria-label="Areas of expertise"
@@ -291,7 +291,7 @@ export default function ContactSendMessage() {
             </div>
           </div>
           <p className={styles.hint}>
-            Hover a topic to explore it. Click to use it as your subject.
+            {t("contact_f3_hint", "Hover a topic to explore it. Click to use it as your subject.")}
           </p>
         </div>
 
@@ -305,25 +305,25 @@ export default function ContactSendMessage() {
             <div className={styles.formRow}>
               <div className={styles.field}>
                 <label htmlFor="contact-full-name">{t("contact_name", "Full Name")} *</label>
-                <input id="contact-full-name" name="name" value={form.name} onChange={updateField} placeholder="Enter your name" autoComplete="name" required />
+                <input id="contact-full-name" name="name" value={form.name} onChange={updateField} placeholder={t("contact_name_placeholder", "Enter your name")} autoComplete="name" required />
               </div>
               <div className={styles.field}>
                 <label htmlFor="contact-email">{t("contact_email", "Email Address")} *</label>
-                <input id="contact-email" name="email" type="email" value={form.email} onChange={updateField} placeholder="Enter your email" autoComplete="email" required />
+                <input id="contact-email" name="email" type="email" value={form.email} onChange={updateField} placeholder={t("contact_email_placeholder", "Enter your email")} autoComplete="email" required />
               </div>
             </div>
             <div className={styles.formRow}>
               <div className={styles.field}>
                 <label htmlFor="contact-phone">{t("contact_phone", "Phone Number")} *</label>
-                <input id="contact-phone" name="phone" type="tel" value={form.phone} onChange={updateField} placeholder="Enter phone number" autoComplete="tel" required />
+                <input id="contact-phone" name="phone" type="tel" value={form.phone} onChange={updateField} placeholder={t("contact_phone_placeholder", "Enter phone number")} autoComplete="tel" required />
               </div>
               <div className={styles.field}>
-                <label htmlFor="contact-area">Area (State &amp; District) *</label>
-                <input id="contact-area" name="area" value={form.area} onChange={updateField} placeholder="e.g., Telangana, Hyderabad" required />
+                <label htmlFor="contact-area">{t("contact_area", "Area (State & District)")} *</label>
+                <input id="contact-area" name="area" value={form.area} onChange={updateField} placeholder={t("contact_area_placeholder", "e.g., Telangana, Hyderabad")} required />
               </div>
             </div>
             <div className={styles.field} ref={dropdownRef}>
-              <label id="contact-subject-label">Subject *</label>
+              <label id="contact-subject-label">{t("contact_subject", "Subject")} *</label>
               <div className={styles.dropdownWrap}>
                 <button
                   ref={dropdownButtonRef}
@@ -354,7 +354,7 @@ export default function ContactSendMessage() {
                   onKeyDown={handleDropdownKeyDown}
                 >
                   <span className={selectedSubject ? "" : styles.placeholder}>
-                    {selectedSubject || "Select a subject"}
+                    {selectedSubject || t("contact_subject_select", "Select a subject")}
                   </span>
                   <svg className={styles.chevron} viewBox="0 0 20 20" aria-hidden="true">
                     <path d="m5 7.5 5 5 5-5" />
@@ -404,7 +404,7 @@ export default function ContactSendMessage() {
                 name="message"
                 value={form.message}
                 onChange={updateField}
-                placeholder="Tell us about your agricultural needs, farm size, crops grown..."
+                placeholder={t("contact_message_placeholder", "Tell us about your agricultural needs, farm size, crops grown...")}
                 rows={4}
                 required
               />
@@ -424,10 +424,10 @@ export default function ContactSendMessage() {
                 <circle cx="36" cy="36" r="32" />
                 <path d="m21 37 10 10 20-22" />
               </svg>
-              <h3>Thank you for sending!</h3>
-              <p>We received your message and will get back to you soon.</p>
+              <h3>{t("contact_thanks_title", "Thank you for sending!")}</h3>
+              <p>{t("contact_thanks_desc", "We received your message and will get back to you soon.")}</p>
               <div className={styles.progressTrack}><span /></div>
-              <small>Returning to the form...</small>
+              <small>{t("contact_returning_form", "Returning to the form...")}</small>
             </div>
           )}
         </div>

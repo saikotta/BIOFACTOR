@@ -1,6 +1,11 @@
+"use client";
+
 import React from "react";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 export default function BioremidationApplications() {
+  const { t } = useTranslation();
+
   return (
     <section id="s3" className="relative w-full bg-[#EAF3EA] text-[#173522] pt-8 md:pt-12 lg:pt-16 pb-8 md:pb-12 lg:pb-14 overflow-hidden">
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)]">
@@ -11,13 +16,12 @@ export default function BioremidationApplications() {
         <div className="flex items-center gap-3 mb-4 br-rv">
           <span className="w-8 h-[1.5px] bg-[#2D6A4F]" />
           <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">
-            DIFFERENT WASTES NEED DIFFERENT MICROBES
+            {t("bio_ind_eyebrow")}
           </span>
         </div>
 
         <h2 className="font-display font-extrabold text-[clamp(2.25rem,3.8vw,4rem)] text-[#173522] tracking-tight leading-[1.02] uppercase mb-12 md:mb-20 lg:mb-[80px] max-w-[1000px] br-rv br-d1">
-          DIFFERENT WASTES NEED<br />
-          DIFFERENT MICROBES.
+          {t("bio_ind_eyebrow")}
         </h2>
 
         {/* 2 Application Chapters */}
@@ -29,13 +33,13 @@ export default function BioremidationApplications() {
             <div className="lg:col-span-5 flex flex-col justify-center space-y-4">
               <div>
                 <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase block mb-2">
-                  TEXTILE · TANNERY · PROCESS
+                  {t("bio_ind_sub")}
                 </span>
                 <h1 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-[#173522] tracking-tight uppercase mb-2">
-                  INDUSTRIAL
+                  {t("bio_ind_title")}
                 </h1>
                 <p className="font-mono text-xs sm:text-sm text-[#26382D]/70 tracking-wide uppercase">
-                  Priority · colour, toxic metals, compounds normal sludge can't handle
+                  {t("bio_ind_priority")}
                 </p>
               </div>
 
@@ -52,10 +56,10 @@ export default function BioremidationApplications() {
             <div className="lg:col-span-7 flex flex-col justify-center space-y-6">
               <div className="space-y-4 br-rv">
                 <h5 className="font-serif font-semibold text-2xl sm:text-3xl text-[#173522] leading-snug">
-                  Specialist microbes for specialist pollutants.
+                  {t("bio_ind_h5")}
                 </h5>
                 <p className="text-base sm:text-lg text-[#26382D]/85 leading-relaxed max-w-2xl font-sans">
-                  Industrial effluents carry compounds that ordinary sewage bacteria rarely meet. Azo dyes make up about two-thirds of synthetic dyes, and an estimated 10–15% of dye produced is discarded into the environment. Tannery effluent can carry hexavalent chromium, which is toxic and carcinogenic.
+                  {t("bio_ind_desc")}
                 </p>
               </div>
 
@@ -63,18 +67,18 @@ export default function BioremidationApplications() {
               <div className="pt-6 border-t border-[#173522]/12 space-y-5 br-rv br-d1">
                 <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-6 items-baseline">
                   <span className="font-mono text-xs font-bold tracking-widest text-[#2D6A4F] uppercase">
-                    DYE DECOLOURISATION
+                    {t("bio_ind_dye_title")}
                   </span>
                   <p className="text-sm sm:text-base text-[#173522]/90 leading-relaxed font-sans">
-                    Bacterial azoreductases split the azo bond without oxygen. An aerobic step then breaks down the aromatic amines this produces.
+                    {t("bio_ind_dye_desc")}
                   </p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-6 items-baseline pt-4 border-t border-[#173522]/08">
                   <span className="font-mono text-xs font-bold tracking-widest text-[#2D6A4F] uppercase">
-                    CHROMIUM DETOXIFICATION
+                    {t("bio_ind_chrom_title")}
                   </span>
                   <p className="text-sm sm:text-base text-[#173522]/90 leading-relaxed font-sans">
-                    Chromium-resistant bacteria reduce toxic Cr(VI) to far less mobile and less toxic Cr(III).
+                    {t("bio_ind_chrom_desc")}
                   </p>
                 </div>
               </div>
@@ -82,10 +86,10 @@ export default function BioremidationApplications() {
               {/* Key Programming Note - Pull-Quote Style */}
               <div className="pt-6 pl-6 my-2 br-callout br-rv br-d2">
                 <span className="font-mono text-[11px] font-bold tracking-widest text-[#2D6A4F] uppercase block mb-1">
-                  50% OF 100 MG/L Cr(VI) REDUCED IN 24 HOURS
+                  {t("bio_ind_callout_title")}
                 </span>
                 <p className="font-serif italic text-sm sm:text-base text-[#173522]/90 leading-relaxed">
-                  Bacteria isolated from tannery effluent achieved this, and an enriched tannery community removed Cr(VI) completely at up to 5 mg/L within 24 hours. Without active microbes, organic matter alone reduced only 13%.
+                  {t("bio_ind_callout_desc")}
                 </p>
               </div>
             </div>
@@ -98,10 +102,10 @@ export default function BioremidationApplications() {
             <div className="lg:col-span-7 lg:order-1 order-2 flex flex-col justify-center space-y-6">
               <div className="space-y-4 br-rv">
                 <h5 className="font-serif font-semibold text-2xl sm:text-3xl text-[#173522] leading-snug">
-                  Where biology helps most is downstream of the tank.
+                  {t("bio_septic_h5")}
                 </h5>
                 <p className="text-base sm:text-lg text-[#26382D]/85 leading-relaxed max-w-2xl font-sans">
-                  A septic tank is already an anaerobic digester. Its own bacteria break down solids slowly, and sludge still builds up and must be emptied. In many countries the larger problem is what happens next: septage collected from tanks is often dumped untreated into drains, fields and water bodies. In India, for example, 60% of urban toilets rely on on-site systems, and in 2021 only about 28% of the country’s sewage was actually treated.
+                  {t("bio_septic_desc")}
                 </p>
               </div>
 
@@ -109,18 +113,18 @@ export default function BioremidationApplications() {
               <div className="pt-6 border-t border-[#173522]/12 space-y-5 br-rv br-d1">
                 <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-6 items-baseline">
                   <span className="font-mono text-xs font-bold tracking-widest text-[#2D6A4F] uppercase">
-                    SEPTAGE TREATMENT
+                    {t("bio_septic_septage_title")}
                   </span>
                   <p className="text-sm sm:text-base text-[#173522]/90 leading-relaxed font-sans">
-                    Collected sludge treated biologically at faecal sludge treatment plants before disposal or reuse.
+                    {t("bio_septic_septage_desc")}
                   </p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-6 items-baseline pt-4 border-t border-[#173522]/08">
                   <span className="font-mono text-xs font-bold tracking-widest text-[#2D6A4F] uppercase">
-                    ODOUR &amp; PATHOGEN LOAD
+                    {t("bio_septic_odour_title")}
                   </span>
                   <p className="text-sm sm:text-base text-[#173522]/90 leading-relaxed font-sans">
-                    Biological stabilisation reduces smell and makes handling safer.
+                    {t("bio_septic_odour_desc")}
                   </p>
                 </div>
               </div>
@@ -128,10 +132,10 @@ export default function BioremidationApplications() {
               {/* Key Programming Note - Pull-Quote Style */}
               <div className="pt-6 pl-6 my-2 br-callout br-rv br-d2">
                 <span className="font-mono text-[11px] font-bold tracking-widest text-[#2D6A4F] uppercase block mb-1">
-                  EVIDENCE-BASED SOLUTIONS
+                  {t("bio_septic_callout_title")}
                 </span>
                 <p className="font-serif italic text-sm sm:text-base text-[#173522]/90 leading-relaxed">
-                  <strong className="font-bold font-sans not-italic">Not every claim holds up.</strong> A double-blind trial in 48 working septic tanks found no significant long-term reduction in solids from commercial biological additives across all maintenance levels. We design septic solutions around evidence, not around dosing a tank that is already working.
+                  {t("bio_septic_callout_desc")}
                 </p>
               </div>
             </div>
@@ -140,13 +144,13 @@ export default function BioremidationApplications() {
             <div className="lg:col-span-5 lg:order-2 order-1 flex flex-col justify-center space-y-4">
               <div>
                 <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase block mb-2">
-                  ON-SITE SANITATION
+                  {t("bio_septic_sub")}
                 </span>
                 <h1 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-[#173522] tracking-tight uppercase mb-2">
-                  SEPTIC
+                  {t("bio_septic_title")}
                 </h1>
                 <p className="font-mono text-xs sm:text-sm text-[#26382D]/70 tracking-wide uppercase">
-                  Priority · safe septage handling, odour, groundwater protection
+                  {t("bio_septic_priority")}
                 </p>
               </div>
 

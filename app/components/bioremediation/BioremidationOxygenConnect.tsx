@@ -1,6 +1,11 @@
+"use client";
+
 import React from "react";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 export default function BioremidationOxygenConnect() {
+  const { t } = useTranslation();
+
   return (
     <section className="relative w-full text-[#173522] pt-6 md:pt-8 lg:pt-10 pb-16 md:pb-24 overflow-hidden bg-[#EAF3EA]" id="s2">
       {/* Pale Warm Botanical Base */}
@@ -12,17 +17,17 @@ export default function BioremidationOxygenConnect() {
         <div className="flex items-center gap-3 mb-4 br-rv">
           <span className="w-8 h-[1.5px] bg-[#2D6A4F]" aria-hidden="true" />
           <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">
-            HOW BIOLOGICAL TREATMENT WORKS
+            {t("bio_oxygen_eyebrow")}
           </span>
         </div>
 
         {/* Big Headline & Subtitle — Matched to SS1/SS2 */}
         <div className="max-w-[1100px] mb-10 md:mb-14 br-rv br-d1">
           <h2 className="font-display font-extrabold text-[clamp(2.25rem,4vw,4.25rem)] text-[#173522] tracking-tight leading-[1.04] mb-5 uppercase">
-            Three oxygen conditions, three kinds of microbial work.
+            {t("bio_oxygen_title")}
           </h2>
           <p className="font-serif text-lg sm:text-xl text-[#26382D]/85 leading-relaxed max-w-[920px]">
-            Good treatment moves wastewater through zones with no oxygen, low oxygen and plenty of oxygen. Each zone favours different microbes, and each removes a different part of the pollution.
+            {t("bio_oxygen_desc")}
           </p>
         </div>
 
@@ -35,10 +40,10 @@ export default function BioremidationOxygenConnect() {
               <div className="space-y-3">
                 <div>
                   <span className="font-mono text-xs font-bold tracking-widest text-[#167A4A] uppercase block">
-                    RAW WASTEWATER
+                    {t("bio_oxygen_raw_title")}
                   </span>
                   <span className="font-mono text-sm text-[#26382D] font-medium block mt-1 opacity-85">
-                    organics · N · P · dyes · metals
+                    {t("bio_oxygen_raw_sub")}
                   </span>
                 </div>
                 {/* Visual Arrow pointing into Anaerobic */}
@@ -54,16 +59,16 @@ export default function BioremidationOxygenConnect() {
                 <div className="rounded-xl border border-[#D69E2E]/60 bg-[#FFFDF5] p-5 flex flex-col justify-between min-h-[220px] transition-all hover:shadow-md hover:border-[#D69E2E]">
                   <div>
                     <div className="font-mono text-xs font-bold tracking-wider text-[#B7791F] uppercase mb-4 pb-2 border-b border-[#D69E2E]/20">
-                      ANAEROBIC · NO O₂
+                      {t("bio_oxygen_anaerobic_title")}
                     </div>
                     <ul className="space-y-2 text-sm text-[#2D3748] font-serif">
-                      <li className="font-medium">Solids broken down</li>
-                      <li className="font-medium">Azo dyes cleaved</li>
-                      <li className="font-medium">Cr(VI) reduced to Cr(III)</li>
+                      <li className="font-medium">{t("bio_oxygen_anaerobic_p1")}</li>
+                      <li className="font-medium">{t("bio_oxygen_anaerobic_p2")}</li>
+                      <li className="font-medium">{t("bio_oxygen_anaerobic_p3")}</li>
                     </ul>
                   </div>
                   <div className="pt-4 font-mono text-xs text-[#718096] italic">
-                    Biogas released
+                    {t("bio_oxygen_anaerobic_sub")}
                   </div>
                 </div>
 
@@ -77,15 +82,14 @@ export default function BioremidationOxygenConnect() {
                 <div className="rounded-xl border border-[#9F7AEA]/60 bg-[#FAF5FF] p-5 flex flex-col justify-between min-h-[220px] transition-all hover:shadow-md hover:border-[#9F7AEA] relative">
                   <div>
                     <div className="font-mono text-xs font-bold tracking-wider text-[#6B46C1] uppercase mb-4 pb-2 border-b border-[#9F7AEA]/20">
-                      ANOXIC · LOW O₂
+                      {t("bio_oxygen_anoxic_title")}
                     </div>
                     <div className="space-y-1 text-sm text-[#2D3748] font-serif">
-                      <p className="font-medium">Nitrate → N₂ gas</p>
-                      <p className="text-xs text-[#5A67D8] font-mono">(denitrification)</p>
+                      <p className="font-medium">{t("bio_oxygen_anoxic_p1")}</p>
                     </div>
                   </div>
                   <div className="pt-4 font-mono text-xs text-[#718096] leading-tight">
-                    Nitrogen leaves as harmless gas
+                    {t("bio_oxygen_anoxic_sub")}
                   </div>
                 </div>
 
@@ -106,16 +110,16 @@ export default function BioremidationOxygenConnect() {
 
                   <div>
                     <div className="font-mono text-xs font-bold tracking-wider text-[#2B6CB0] uppercase mb-4 pb-2 border-b border-[#4299E1]/20">
-                      AEROBIC · HIGH O₂
+                      {t("bio_oxygen_aerobic_title")}
                     </div>
                     <ul className="space-y-2 text-sm text-[#2D3748] font-serif">
-                      <li className="font-medium">Organic load oxidised</li>
-                      <li className="font-medium">Ammonia → nitrate</li>
-                      <li className="font-medium">Dye by-products broken down</li>
+                      <li className="font-medium">{t("bio_oxygen_aerobic_p1")}</li>
+                      <li className="font-medium">{t("bio_oxygen_aerobic_p2")}</li>
+                      <li className="font-medium">{t("bio_oxygen_aerobic_p3")}</li>
                     </ul>
                   </div>
                   <div className="pt-4 font-mono text-xs text-[#718096] italic">
-                    BOD and odour fall
+                    {t("bio_oxygen_aerobic_sub")}
                   </div>
                 </div>
               </div>
@@ -126,7 +130,7 @@ export default function BioremidationOxygenConnect() {
                   <div className="w-10 h-[1.5px] bg-[#167A4A]" />
                   <div className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-[#167A4A]" />
                   <span className="font-mono text-xs font-bold tracking-widest text-[#167A4A] uppercase ml-3 whitespace-nowrap">
-                    CLEANER<br />WATER
+                    {t("bio_oxygen_cleaner_water")}
                   </span>
                 </div>
               </div>

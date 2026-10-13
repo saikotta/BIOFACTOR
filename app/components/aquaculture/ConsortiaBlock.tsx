@@ -1,7 +1,12 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 export default function ConsortiaBlock() {
+  const { t } = useTranslation();
+
   return (
     <section
       className="relative w-full py-20"
@@ -16,13 +21,13 @@ export default function ConsortiaBlock() {
         {/* Left column — image + heading */}
         <div className="order-1 flex flex-col lg:order-2 lg:col-span-5 lg:col-start-8 rv">
           <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[#1F8A57]">
-            WHAT BIOLOGY DOES
+            {t("aqua_consortia_eyebrow")}
           </p>
           <h2 className="mb-4 font-inter-tight text-[72px] font-extrabold leading-[0.9] text-[#1F8A57]">
-            CONSORTIA
+            {t("aqua_consortia_title")}
           </h2>
           <p className="font-newsreader text-[18px] leading-[1.6] text-[#2B2B2B]">
-            Anaerobic and facultative probiotics working together
+            {t("aqua_consortia_subtitle")}
           </p>
           <div className="ph relative mt-8 aspect-square w-full overflow-hidden rounded-sm">
             <Image
@@ -38,39 +43,39 @@ export default function ConsortiaBlock() {
         {/* Right column — bullet content */}
         <div className="order-2 lg:order-1 lg:col-span-7 lg:col-start-1 rv d1">
           <h3 className="font-inter-tight font-bold text-[36px] text-[#111111] mb-6">
-            Anaerobic probiotics manage the load at its source.
+            {t("aqua_consortia_heading")}
           </h3>
 
           <p className="font-newsreader text-[18px] leading-[1.6] text-[#2B2B2B] mb-8">
-            Surface-water probiotics cannot reach the sediment, where the problem starts. Anaerobic and facultative bacteria can, and they work as a consortium.
+            {t("aqua_consortia_desc")}
           </p>
 
           <div className="space-y-6 mb-8">
             <div className="rv d1 border-l-4 border-[#1F8A57] pl-4">
-              <h4 className="font-inter-tight font-bold text-[18px] text-[#111111] mb-2">Digest the organic load</h4>
+              <h4 className="font-inter-tight font-bold text-[18px] text-[#111111] mb-2">{t("aqua_consortia_bullet1_title")}</h4>
               <p className="font-newsreader text-[16px] leading-[1.5] text-[#2B2B2B]">
-                Hydrolytic bacteria break down sludge, leaving less fuel for H₂S producers.
+                {t("aqua_consortia_bullet1_desc")}
               </p>
             </div>
 
             <div className="rv d2 border-l-4 border-[#1F8A57] pl-4">
-              <h4 className="font-inter-tight font-bold text-[18px] text-[#111111] mb-2">Remove nitrogen as gas</h4>
+              <h4 className="font-inter-tight font-bold text-[18px] text-[#111111] mb-2">{t("aqua_consortia_bullet2_title")}</h4>
               <p className="font-newsreader text-[16px] leading-[1.5] text-[#2B2B2B]">
-                Denitrifying bacteria convert nitrate and nitrite to harmless N₂, which leaves the pond for good.
+                {t("aqua_consortia_bullet2_desc")}
               </p>
             </div>
 
             <div className="rv d3 border-l-4 border-[#1F8A57] pl-4">
-              <h4 className="font-inter-tight font-bold text-[18px] text-[#111111] mb-2">Neutralise sulphide</h4>
+              <h4 className="font-inter-tight font-bold text-[18px] text-[#111111] mb-2">{t("aqua_consortia_bullet3_title")}</h4>
               <p className="font-newsreader text-[16px] leading-[1.5] text-[#2B2B2B]">
-                Sulphide-oxidising and photosynthetic bacteria convert H₂S before it reaches the water.
+                {t("aqua_consortia_bullet3_desc")}
               </p>
             </div>
 
             <div className="rv d4 border-l-4 border-[#1F8A57] pl-4">
-              <h4 className="font-inter-tight font-bold text-[18px] text-[#111111] mb-2">Protect the interface</h4>
+              <h4 className="font-inter-tight font-bold text-[18px] text-[#111111] mb-2">{t("aqua_consortia_bullet4_title")}</h4>
               <p className="font-newsreader text-[16px] leading-[1.5] text-[#2B2B2B]">
-                A lighter organic load uses less oxygen, helping keep the thin top layer of sediment oxidised.
+                {t("aqua_consortia_bullet4_desc")}
               </p>
             </div>
           </div>
@@ -94,7 +99,7 @@ export default function ConsortiaBlock() {
               93%
             </span>
             <p className="mt-1 font-jetbrains text-[10px] font-medium uppercase tracking-[0.18em] text-[#6fbf73]/60">
-              reduction in H₂S
+              {t("aqua_consortia_stat_sub")}
             </p>
           </div>
 
@@ -104,10 +109,7 @@ export default function ConsortiaBlock() {
           {/* Explanation */}
           <div>
             <p className="font-newsreader text-[16.5px] leading-[1.65] text-[#FFFFFF]">
-              When shrimp-pond sediment bacteria were given nitrate to use instead
-              of oxygen, they switched to oxidising sulphide. Shrimp stayed
-              unaffected by sulphide in the sediment as long as the soil–water
-              interface remained oxygenated.
+              {t("aqua_consortia_stat_desc")}
             </p>
             <p className="mt-3 font-jetbrains text-[10px] uppercase tracking-[0.14em] text-[#cfe6bd]/50">
               Xu &amp; Pan 2013,{" "}
