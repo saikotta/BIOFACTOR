@@ -38,7 +38,7 @@
   "chem_headline_part1": "एक सूक्ष्मजीव",
   "chem_headline_part2": "सिर्फ एक कोशिका से कहीं अधिक है।",
   "chem_grid_makes_title": "उत्पन्न करता है",
-  "chem_grid_makes_sub": "ENZYMES · METABOLITES",
+  "chem_grid_makes_sub": "एंजाइम्स · मेटाबोलाइट्स",
   "chem_grid_transforms_title": "परिवर्तित करता है",
   "chem_grid_transforms_sub": "पोषक तत्व · पदार्थ",
   "chem_grid_responds_title": "प्रतिक्रिया करता है",
@@ -494,5 +494,11 @@
   "tech_05_chain_3": "प्रदर्शन सक्षम करें।",
   "science_evidence_eyebrow": "प्रमाण",
   "science_evidence_title": "छह तकनीकें। 11 पेटेंट। विशाल माइक्रोबियल स्ट्रेन बैंक",
-  "science_evidence_stat_1": "प्राप्त पेटेंट"
+  "science_evidence_stat_1": "प्राप्त पेटेंट",
+  "primordial_card1_badge": "सिर्फ इतना ही नहीं",
+  "primordial_card2_badge": "बल्कि",
+  "primordial_card3_badge": "और",
+  "stat_international_tag": "भारत के बाहर 2 देश –",
+  "stat_international_desc": "मलावी और केन्या तक विस्तारित पहुंच",
+  "footer_location": "हैदराबाद, तेलंगाना"
 }

@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useTranslation } from "../i18n";
 
 export default function BiofactorFooter() {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
+  const headerTracking = language === "en" ? "tracking-[0.18em]" : "tracking-normal";
 
   return (
     <footer className="w-full bg-[#d9ead3]/90 backdrop-blur-md border-t border-[#93c47d]/50 text-[#143324] mt-auto relative z-10 shadow-[0_-8px_32px_rgba(22,122,74,0.08)]" data-pm-section="footer">
@@ -67,7 +68,7 @@ export default function BiofactorFooter() {
 
           {/* Col 2 — Company */}
           <div className="flex flex-col gap-4">
-            <span className="font-mono text-xs font-bold tracking-[0.18em] text-[#167A4A] uppercase">
+            <span className={`font-mono text-xs font-bold ${headerTracking} text-[#167A4A] uppercase`}>
               {t("footer_company", "Company")}
             </span>
             <nav className="flex flex-col gap-2.5">
@@ -92,7 +93,7 @@ export default function BiofactorFooter() {
 
           {/* Col 3 — Products */}
           <div className="flex flex-col gap-4">
-            <span className="font-mono text-xs font-bold tracking-[0.18em] text-[#167A4A] uppercase">
+            <span className={`font-mono text-xs font-bold ${headerTracking} text-[#167A4A] uppercase`}>
               {t("nav_products", "Products")}
             </span>
             <nav className="flex flex-col gap-2.5">
@@ -117,7 +118,7 @@ export default function BiofactorFooter() {
 
           {/* Col 4 — Contact */}
           <div className="flex flex-col gap-4">
-            <span className="font-mono text-xs font-bold tracking-[0.18em] text-[#167A4A] uppercase">
+            <span className={`font-mono text-xs font-bold ${headerTracking} text-[#167A4A] uppercase`}>
               {t("footer_contact", "Contact")}
             </span>
             <nav className="flex flex-col gap-2.5">
@@ -125,7 +126,7 @@ export default function BiofactorFooter() {
                 { label: t("nav_contact", "Contact Us"), href: "/contact/", isExternal: false },
                 { label: "info@biofactor.in", href: "mailto:info@biofactor.in", isExternal: true },
                 { label: "+91 7013074400", href: "tel:7013074400", isExternal: true },
-                { label: "Hyderabad, Telangana", href: "/contact/", isExternal: false },
+                { label: t("footer_location", "Hyderabad, Telangana"), href: "/contact/", isExternal: false },
               ].map((item) =>
                 item.isExternal ? (
                   <a

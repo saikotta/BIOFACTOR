@@ -284,10 +284,10 @@ export default function BiofactorNumbersSection() {
           }}
         >
           <span className="font-mono text-xs font-semibold tracking-wider text-[#059669] uppercase shrink-0">
-            2 COUNTRIES BEYOND BHARAT –
+            {t("stat_international_tag", "2 COUNTRIES BEYOND BHARAT –")}
           </span>
           <p className="text-xs sm:text-sm font-medium text-[#2a4d3e]/90 leading-relaxed">
-            Reach extended into Malawi and Kenya
+            {t("stat_international_desc", "Reach extended into Malawi and Kenya")}
           </p>
         </div>
 
