@@ -2,8 +2,11 @@
 
 import React from "react";
 import Link from "next/link";
+import { useTranslation } from "../i18n";
 
 export default function BiofactorFooter() {
+  const { t } = useTranslation();
+
   return (
     <footer className="w-full bg-[#d9ead3]/90 backdrop-blur-md border-t border-[#93c47d]/50 text-[#143324] mt-auto relative z-10 shadow-[0_-8px_32px_rgba(22,122,74,0.08)]" data-pm-section="footer">
       {/* Main footer content */}
@@ -20,7 +23,7 @@ export default function BiofactorFooter() {
               />
             </Link>
             <p className="font-sans text-sm leading-relaxed text-[#26382D]/80 max-w-[300px]">
-              Turning microbial functions into measurable biological impact across every production stage.
+              {t("footer_tagline", "Turning microbial functions into measurable biological impact across every production stage.")}
             </p>
             {/* Social icons */}
             <div className="flex items-center gap-3.5 mt-1">
@@ -47,7 +50,7 @@ export default function BiofactorFooter() {
               {/* YouTube */}
               <a href="https://www.youtube.com/@biofactor" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="w-9 h-9 rounded-full bg-[#167A4A]/10 flex items-center justify-center text-[#143324] hover:bg-[#167A4A] hover:text-white transition-all shadow-sm">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+                  <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
                   <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/>
                 </svg>
               </a>
@@ -64,22 +67,24 @@ export default function BiofactorFooter() {
 
           {/* Col 2 — Company */}
           <div className="flex flex-col gap-4">
-            <span className="font-mono text-xs font-bold tracking-[0.18em] text-[#167A4A] uppercase">Company</span>
+            <span className="font-mono text-xs font-bold tracking-[0.18em] text-[#167A4A] uppercase">
+              {t("footer_company", "Company")}
+            </span>
             <nav className="flex flex-col gap-2.5">
               {[
-                { label: "About", href: "/about/" },
-                { label: "One Health", href: "/one-health/" },
-                { label: "Science & Technology", href: "/science-technology/" },
-                { label: "Resources", href: "/resources/" },
-                { label: "Careers", href: "/careers/" },
+                { key: "nav_about", defaultLabel: "About", href: "/about/" },
+                { key: "nav_one_health", defaultLabel: "One Health", href: "/one-health/" },
+                { key: "nav_science_tech", defaultLabel: "Science & Technology", href: "/science-technology/" },
+                { key: "nav_resources", defaultLabel: "Resources", href: "/resources/" },
+                { key: "nav_careers", defaultLabel: "Careers", href: "/careers/" },
               ].map((item) => (
                 <Link
-                  key={item.label}
+                  key={item.key}
                   href={item.href}
                   data-footer-link
                   className="font-sans text-sm text-[#26382D] hover:text-[#167A4A] font-medium transition-colors"
                 >
-                  {item.label}
+                  {t(item.key, item.defaultLabel)}
                 </Link>
               ))}
             </nav>
@@ -87,22 +92,24 @@ export default function BiofactorFooter() {
 
           {/* Col 3 — Products */}
           <div className="flex flex-col gap-4">
-            <span className="font-mono text-xs font-bold tracking-[0.18em] text-[#167A4A] uppercase">Products</span>
+            <span className="font-mono text-xs font-bold tracking-[0.18em] text-[#167A4A] uppercase">
+              {t("nav_products", "Products")}
+            </span>
             <nav className="flex flex-col gap-2.5">
               {[
-                { label: "Agriculture", href: "/nutrients/" },
-                { label: "Aquaculture", href: "/aquaculture/" },
-                { label: "Bioremediation", href: "/bioremediation/" },
-                { label: "Poultry", href: "/poultry/" },
-                { label: "Ruminants", href: "/ruminants/" },
+                { key: "prod_agriculture", defaultLabel: "Agriculture", href: "/nutrients/" },
+                { key: "prod_aquaculture", defaultLabel: "Aquaculture", href: "/aquaculture/" },
+                { key: "prod_bioremediation", defaultLabel: "Bioremediation", href: "/bioremediation/" },
+                { key: "prod_poultry", defaultLabel: "Poultry", href: "/poultry/" },
+                { key: "prod_ruminants", defaultLabel: "Ruminants", href: "/ruminants/" },
               ].map((item) => (
                 <Link
-                  key={item.label}
+                  key={item.key}
                   href={item.href}
                   data-footer-link
                   className="font-sans text-sm text-[#26382D] hover:text-[#167A4A] font-medium transition-colors"
                 >
-                  {item.label}
+                  {t(item.key, item.defaultLabel)}
                 </Link>
               ))}
             </nav>
@@ -110,10 +117,12 @@ export default function BiofactorFooter() {
 
           {/* Col 4 — Contact */}
           <div className="flex flex-col gap-4">
-            <span className="font-mono text-xs font-bold tracking-[0.18em] text-[#167A4A] uppercase">Contact</span>
+            <span className="font-mono text-xs font-bold tracking-[0.18em] text-[#167A4A] uppercase">
+              {t("footer_contact", "Contact")}
+            </span>
             <nav className="flex flex-col gap-2.5">
               {[
-                { label: "Contact Us", href: "/contact/", isExternal: false },
+                { label: t("nav_contact", "Contact Us"), href: "/contact/", isExternal: false },
                 { label: "info@biofactor.in", href: "mailto:info@biofactor.in", isExternal: true },
                 { label: "+91 7013074400", href: "tel:7013074400", isExternal: true },
                 { label: "Hyderabad, Telangana", href: "/contact/", isExternal: false },
@@ -148,14 +157,14 @@ export default function BiofactorFooter() {
       <div className="border-t border-[#93c47d]/40 bg-[#cbe0c5]/50">
         <div className="w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)] py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="font-mono text-xs text-[#26382D]/70 tracking-wide font-medium">
-            © {new Date().getFullYear()} Biofactor Biologicals. All rights reserved.
+            © {new Date().getFullYear()} Biofactor Biologicals. {t("footer_rights_reserved", "All rights reserved.")}
           </p>
           <div className="flex items-center gap-6">
             <Link href="#" className="font-mono text-xs text-[#26382D]/70 hover:text-[#167A4A] tracking-wide transition-colors font-medium">
-              Terms & Conditions
+              {t("footer_terms", "Terms of Service")}
             </Link>
             <Link href="#" className="font-mono text-xs text-[#26382D]/70 hover:text-[#167A4A] tracking-wide transition-colors font-medium">
-              Privacy Policy
+              {t("footer_privacy", "Privacy Policy")}
             </Link>
           </div>
         </div>

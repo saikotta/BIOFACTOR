@@ -2,8 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import styles from "./BioremidationHero.module.css";
+import { useTranslation } from "../../i18n";
 
 export default function BioremidationHero() {
+  const { t, language } = useTranslation();
   const [motes, setMotes] = useState<Array<{ left: string; top: string; delay: string; duration: string }>>([]);
 
   useEffect(() => {
@@ -144,19 +146,27 @@ export default function BioremidationHero() {
             {/* Eyebrow Label */}
             <div className={styles.eyebrowWrapper}>
               <span className={styles.eyebrowLine} aria-hidden="true" />
-              <span className={styles.eyebrowText}>BIO-REMEDIATION</span>
+              <span className={styles.eyebrowText}>{t("prod_bioremediation", "BIO-REMEDIATION")}</span>
             </div>
 
             {/* Main Display Headline */}
             <h1 className={styles.headline}>
-              <span className="br-ln"><span>BIOLOGY THAT</span></span>
-              <span className="br-ln br-d1"><span><span className={styles.accentGreen}>CLEANS</span> WATER &amp;</span></span>
-              <span className="br-ln br-d2"><span>RESTORES ECOSYSTEMS.</span></span>
+              {language === "en" ? (
+                <>
+                  <span className="br-ln"><span>BIOLOGY THAT</span></span>
+                  <span className="br-ln br-d1"><span><span className={styles.accentGreen}>CLEANS</span> WATER &amp;</span></span>
+                  <span className="br-ln br-d2"><span>RESTORES ECOSYSTEMS.</span></span>
+                </>
+              ) : (
+                <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-extrabold leading-tight">
+                  {t("bio_hero_title", "BIOLOGY THAT CLEANS WATER & RESTORES ECOSYSTEMS.")}
+                </span>
+              )}
             </h1>
 
             {/* Subtitle Copy */}
             <p className={`${styles.subtitle} br-quote br-in`}>
-              Targeted microbial consortia that degrade complex organic contaminants, eliminate toxic sludge, and restore natural water quality without synthetic chemicals.
+              {t("bio_hero_subtitle", "Targeted microbial consortia that degrade complex organic contaminants, eliminate toxic sludge, and restore natural water quality without synthetic chemicals.")}
             </p>
           </div>
         </div>

@@ -2,12 +2,14 @@
 
 import React, { useState } from "react";
 import MicrobeField from "./MicrobeField";
+import { useTranslation } from "../i18n";
 
 const PRIMORDIAL_EXCLUSION_ZONES = [
   { xMinPct: 0.08, xMaxPct: 0.92, yMinPct: 0.15, yMaxPct: 0.85 },
 ];
 
 export default function PrimordialSection() {
+  const { t } = useTranslation();
   const [activeCard, setActiveCard] = useState<number | null>(null);
   return (
     <section
@@ -30,7 +32,7 @@ export default function PrimordialSection() {
         <div className="max-w-2xl text-left">
           {/* Main Heading */}
           <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-[48px] font-bold text-[#14231a] tracking-tight leading-[1.15]">
-            Biotechnology begins here.
+            {t("primordial_title", "Biotechnology begins here.")}
           </h2>
         </div>
 

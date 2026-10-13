@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import OneHealthOrbit3D from "./OneHealthOrbit3D";
+import { useTranslation } from "../../i18n";
 
 export interface DomainSlotConfig {
   id: "soil" | "plant" | "animal" | "food" | "people";
@@ -64,6 +65,7 @@ export default function OneHealthHero({
   domains = DEFAULT_DOMAINS,
   core = DEFAULT_CORE,
 }: OneHealthHeroProps) {
+  const { t, language } = useTranslation();
   const [hasEntered, setHasEntered] = useState(false);
   const [entranceProgress, setEntranceProgress] = useState(0);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -147,29 +149,33 @@ export default function OneHealthHero({
           >
             <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[#147A46]/25 bg-[#147A46]/10 text-[11px] font-mono font-semibold tracking-[0.25em] text-[#147A46] uppercase shadow-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-[#147A46] animate-pulse" />
-              ONE HEALTH
+              {t("nav_one_health", "ONE HEALTH")}
             </span>
           </div>
 
-          {/* Primary Headline: Everything Is Connected (12px gap below pill) */}
+          {/* Primary Headline */}
           <h1 className="mt-[12px] text-3xl sm:text-4xl lg:text-[clamp(2.4rem,3.8vw,4.2rem)] font-bold tracking-tight text-[#173522] leading-[1.05] flex flex-wrap justify-center gap-x-3">
-            {headlineWords.map((word, idx) => (
-              <span key={idx} className="overflow-hidden inline-block py-1">
-                <span
-                  className="inline-block transition-transform duration-700 ease-out"
-                  style={{
-                    transform:
-                      hasEntered || prefersReducedMotion
-                        ? "translateY(0)"
-                        : "translateY(110%)",
-                    transitionDelay: prefersReducedMotion ? "0ms" : `${idx * 70}ms`,
-                    color: word === "Connected" ? "#147A46" : undefined,
-                  }}
-                >
-                  {word}
+            {language === "en" ? (
+              headlineWords.map((word, idx) => (
+                <span key={idx} className="overflow-hidden inline-block py-1">
+                  <span
+                    className="inline-block transition-transform duration-700 ease-out"
+                    style={{
+                      transform:
+                        hasEntered || prefersReducedMotion
+                          ? "translateY(0)"
+                          : "translateY(110%)",
+                      transitionDelay: prefersReducedMotion ? "0ms" : `${idx * 70}ms`,
+                      color: word === "Connected" ? "#147A46" : undefined,
+                    }}
+                  >
+                    {word}
+                  </span>
                 </span>
-              </span>
-            ))}
+              ))
+            ) : (
+              <span className="text-[#147A46]">{t("one_health_hero_title", "Everything Is Connected")}</span>
+            )}
           </h1>
 
           {/* Supporting Copy (10px gap below heading) */}
@@ -180,7 +186,7 @@ export default function OneHealthHero({
                 : "opacity-0 translate-y-4"
             }`}
           >
-            “Soil, plant, animal, food, and people don&apos;t just feed into each other — they all draw on the same planet. That&apos;s not a supply chain. It&apos;s a cycle.”
+            {t("one_health_hero_subtitle", "“Soil, plant, animal, food, and people don't just feed into each other — they all draw on the same planet. That's not a supply chain. It's a cycle.”")}
           </p>
         </div>
 

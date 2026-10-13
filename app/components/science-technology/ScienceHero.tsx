@@ -3,8 +3,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import MicrobeField3D from "./MicrobeField3D";
 import { HERO_CONTENT, TILES } from "./content";
+import { useTranslation } from "../../i18n";
 
 export default function ScienceHero() {
+  const { t, language } = useTranslation();
   const [isLoaded, setIsLoaded] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
@@ -55,15 +57,23 @@ export default function ScienceHero() {
         <p className="st-eyebrow">{HERO_CONTENT.eyebrow}</p>
 
         <h1 className="st-h1">
-          <span className="st-mask">
-            <span>{HERO_CONTENT.h1Line1}</span>
-          </span>
-          <span className="st-mask">
-            <span>{HERO_CONTENT.h1Line2}</span>
-          </span>
+          {language === "en" ? (
+            <>
+              <span className="st-mask">
+                <span>{HERO_CONTENT.h1Line1}</span>
+              </span>
+              <span className="st-mask">
+                <span>{HERO_CONTENT.h1Line2}</span>
+              </span>
+            </>
+          ) : (
+            <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-extrabold leading-tight">
+              {t("science_hero_title", HERO_CONTENT.h1Line1 + " " + HERO_CONTENT.h1Line2)}
+            </span>
+          )}
         </h1>
 
-        <p className="st-lede">{HERO_CONTENT.lede}</p>
+        <p className="st-lede">{t("science_hero_subtitle", HERO_CONTENT.lede)}</p>
 
         <nav className="st-tiles-nav" aria-label="Technologies">
           {TILES.map((tile, index) => (

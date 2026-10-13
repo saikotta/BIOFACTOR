@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import BiofactorHeader from "./components/BiofactorHeader";
+import ClientProviders from "./components/ClientProviders";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -67,10 +68,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <BiofactorHeader />
-        <div className="w-full">
-          {children}
-        </div>
+        <ClientProviders>
+          <BiofactorHeader />
+          <div className="w-full">
+            {children}
+          </div>
+        </ClientProviders>
       </body>
     </html>
   );

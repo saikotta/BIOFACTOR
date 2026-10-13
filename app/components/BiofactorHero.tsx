@@ -3,8 +3,11 @@
 import React from "react";
 import MicrobeField from "./MicrobeField";
 import styles from "./BiofactorHero.module.css";
+import { useTranslation } from "../i18n";
 
 export default function BiofactorHero() {
+  const { t, language } = useTranslation();
+
   return (
     <div className="relative w-full min-h-screen pt-20 md:pt-24 pb-12 flex flex-col items-center justify-center px-6 sm:px-12 md:px-16 overflow-hidden select-none font-sans bg-transparent isolate">
       {/* MicrobeField Component - Frame 1 Full Viewport Coverage with Text-Safe Smooth Fading */}
@@ -21,27 +24,36 @@ export default function BiofactorHero() {
       {/* Centered Content Area: Typography (Above Microbe Layer) */}
       <div className="w-full max-w-4xl md:max-w-5xl lg:max-w-6xl py-12 md:py-16 my-auto relative z-10 flex flex-col items-center text-center">
 
-
         {/* 2-Line Centered Desktop Headline */}
         <h1 className="text-[2.25rem] sm:text-4xl md:text-5xl lg:text-[clamp(3.5rem,4.8vw,5.5rem)] font-extrabold uppercase text-[#EAF3EA] leading-[1.08] tracking-tight flex flex-col items-center justify-center gap-2 sm:gap-3 text-center w-full">
-          <span className="flex flex-col md:flex-row items-center justify-center md:whitespace-nowrap text-[#EAF3EA] gap-y-1 md:gap-x-2 lg:gap-x-3">
-            <span>THE NEXT</span>
-            <span><span className="text-[#7FE0A4]">BIG</span> THING</span>
-          </span>
-          <span className="flex flex-col md:flex-row items-start md:items-end justify-center gap-y-3 md:gap-x-2 sm:gap-x-2.5 lg:gap-x-3 mt-1 md:mt-0">
-            <span className="text-[#EAF3EA] leading-none">IS REALLY</span>
-            <span className={`${styles.smallWord} inline-flex shrink-0 items-center justify-center px-4 sm:px-3 md:px-4 lg:px-4 py-1 sm:py-0.5 md:py-1 lg:py-1.5 text-[12px] sm:text-[10px] md:text-[12px] lg:text-[14px] font-mono font-bold tracking-[0.2em] normal-case text-white bg-[#1a4225] rounded-full shadow-sm select-none whitespace-nowrap border-none`}>
-              Small.
+          {language === "en" ? (
+            <>
+              <span className="flex flex-col md:flex-row items-center justify-center md:whitespace-nowrap text-[#EAF3EA] gap-y-1 md:gap-x-2 lg:gap-x-3">
+                <span>THE NEXT</span>
+                <span><span className="text-[#7FE0A4]">BIG</span> THING</span>
+              </span>
+              <span className="flex flex-col md:flex-row items-start md:items-end justify-center gap-y-3 md:gap-x-2 sm:gap-x-2.5 lg:gap-x-3 mt-1 md:mt-0">
+                <span className="text-[#EAF3EA] leading-none">IS REALLY</span>
+                <span className={`${styles.smallWord} inline-flex shrink-0 items-center justify-center px-4 sm:px-3 md:px-4 lg:px-4 py-1 sm:py-0.5 md:py-1 lg:py-1.5 text-[12px] sm:text-[10px] md:text-[12px] lg:text-[14px] font-mono font-bold tracking-[0.2em] normal-case text-white bg-[#1a4225] rounded-full shadow-sm select-none whitespace-nowrap border-none`}>
+                  Small.
+                </span>
+              </span>
+            </>
+          ) : (
+            <span className="flex flex-col items-center justify-center text-[#EAF3EA] gap-y-2">
+              <span className="text-[#7FE0A4]">{t("hero_tagline_top")}</span>
+              <span className="text-[1.8rem] sm:text-3xl md:text-4xl font-normal text-white">
+                {t("hero_tagline_sub")}
+              </span>
             </span>
-          </span>
+          )}
         </h1>
 
         {/* Supporting Text */}
         <p className="mt-5 sm:mt-7 text-base sm:text-lg md:text-xl text-[#7FE0A4] font-light italic leading-relaxed tracking-wide max-w-xl mx-auto text-center">
-          A new frontier exists beyond the naked eye.
+          {t("hero_subtitle", "A new frontier exists beyond the naked eye.")}
         </p>
       </div>
     </div>
   );
 }
-

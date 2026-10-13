@@ -1,7 +1,12 @@
+"use client";
+
 import React from "react";
 import styles from "./PoultryHero.module.css";
+import { useTranslation } from "../../i18n";
 
 export default function PoultryHero() {
+  const { t, language } = useTranslation();
+
   return (
     <section className={styles.heroSection} data-ruminants-section="hero" data-n="Hero">
       {/* Background Image Container */}
@@ -25,27 +30,35 @@ export default function PoultryHero() {
           {/* Eyebrow Label */}
           <div className={styles.eyebrowWrapper}>
             <span className={styles.eyebrowLine} aria-hidden="true" />
-            <span className={styles.eyebrowText}>POULTRY</span>
+            <span className={styles.eyebrowText}>{t("prod_poultry", "POULTRY")}</span>
           </div>
 
           {/* Main Display Headline (3-Line Editorial Structure matching Ruminants) */}
           <h1 className={styles.headline}>
-            <span className="ln">
-              <span>BIOLOGY THAT</span>
-            </span>
-            <span className="ln">
-              <span>
-                <span className={styles.accentProtects}>PROTECTS</span> THE
+            {language === "en" ? (
+              <>
+                <span className="ln">
+                  <span>BIOLOGY THAT</span>
+                </span>
+                <span className="ln">
+                  <span>
+                    <span className={styles.accentProtects}>PROTECTS</span> THE
+                  </span>
+                </span>
+                <span className="ln">
+                  <span>FLOCK.</span>
+                </span>
+              </>
+            ) : (
+              <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-extrabold leading-tight">
+                {t("poultry_hero_title", "BIOLOGY THAT PROTECTS THE FLOCK.")}
               </span>
-            </span>
-            <span className="ln">
-              <span>FLOCK.</span>
-            </span>
+            )}
           </h1>
 
           {/* Quotation Copy matching Ruminants */}
           <p className={`quote ${styles.quotation}`}>
-            Every bird carries a microbial community in its gut. Its health, growth and every egg it lays depend on that community.
+            {t("poultry_hero_subtitle", "Every bird carries a microbial community in its gut. Its health, growth and every egg it lays depend on that community.")}
           </p>
         </div>
       </div>

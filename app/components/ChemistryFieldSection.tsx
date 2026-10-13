@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "../i18n";
 
 export default function ChemistryFieldSection() {
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const bgInnerRef = useRef<HTMLDivElement>(null);
   const fgRef = useRef<HTMLDivElement>(null);
@@ -324,7 +326,7 @@ export default function ChemistryFieldSection() {
                   }}
                   className="block"
                 >
-                  A microorganism is more
+                  {t("chem_headline_part1", "A microorganism is more")}
                 </span>
               </div>
 
@@ -339,7 +341,7 @@ export default function ChemistryFieldSection() {
                   }}
                   className="block"
                 >
-                  than a cell.
+                  {t("chem_headline_part2", "than a cell.")}
                 </span>
               </div>
             </h2>
@@ -366,10 +368,10 @@ export default function ChemistryFieldSection() {
                 </svg>
               </div>
               <h3 className="text-xl sm:text-[22px] font-bold text-[#F4F7F2] tracking-tight leading-[1.1] mb-1.5">
-                Makes
+                {t("chem_grid_makes_title", "Makes")}
               </h3>
               <div className="text-[10px] sm:text-[11px] font-mono font-semibold tracking-[0.12em] uppercase text-[#B7D8B0] whitespace-nowrap">
-                ENZYMES &middot; METABOLITES
+                {t("chem_grid_makes_sub", "ENZYMES · METABOLITES")}
               </div>
             </div>
 
@@ -383,10 +385,10 @@ export default function ChemistryFieldSection() {
                 </svg>
               </div>
               <h3 className="text-xl sm:text-[22px] font-bold text-[#F4F7F2] tracking-tight leading-[1.1] mb-1.5">
-                Transforms
+                {t("chem_grid_transforms_title", "Transforms")}
               </h3>
               <div className="text-[10px] sm:text-[11px] font-mono font-semibold tracking-[0.12em] uppercase text-[#B7D8B0] whitespace-nowrap">
-                NUTRIENTS &middot; MATTER
+                {t("chem_grid_transforms_sub", "NUTRIENTS · MATTER")}
               </div>
             </div>
 
@@ -400,10 +402,10 @@ export default function ChemistryFieldSection() {
                 </svg>
               </div>
               <h3 className="text-xl sm:text-[22px] font-bold text-[#F4F7F2] tracking-tight leading-[1.1] mb-1.5">
-                Responds
+                {t("chem_grid_responds_title", "Responds")}
               </h3>
               <div className="text-[10px] sm:text-[11px] font-mono font-semibold tracking-[0.12em] uppercase text-[#B7D8B0] whitespace-nowrap">
-                SIGNALS &middot; ENVIRONMENT
+                {t("chem_grid_responds_sub", "SIGNALS · ENVIRONMENT")}
               </div>
             </div>
 
@@ -415,10 +417,10 @@ export default function ChemistryFieldSection() {
                 </svg>
               </div>
               <h3 className="text-xl sm:text-[22px] font-bold text-[#F4F7F2] tracking-tight leading-[1.1] mb-1.5">
-                Adapts
+                {t("chem_grid_adapts_title", "Adapts")}
               </h3>
               <div className="text-[10px] sm:text-[11px] font-mono font-semibold tracking-[0.12em] uppercase text-[#B7D8B0] whitespace-nowrap">
-                SOIL &middot; WATER &middot; HOST
+                {t("chem_grid_adapts_sub", "SOIL · WATER · HOST")}
               </div>
             </div>
           </div>

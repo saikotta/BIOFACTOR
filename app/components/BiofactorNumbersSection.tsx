@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import MicrobeField from "./MicrobeField";
+import { useTranslation } from "../i18n";
 
 const NUMBERS_EXCLUSION_ZONES = [
   // Band A: Top intro heading & statement block
@@ -16,17 +17,17 @@ const NUMBERS_EXCLUSION_ZONES = [
 
 const STATISTICS = [
   // ROW 1
-  { number: "11", label: "PATENTS GRANTED" },
-  { number: "42", label: "PROPRIETARY AND DEPOSITED STRAINS" },
-  { number: "350+", label: "MICROBIAL STRAIN BANK" },
-  { number: "200+", label: "PRODUCTS ACROSS SIX VERTICALS" },
-  { number: "600+", label: "TEAM MEMBERS" },
-  { number: "3000+", label: "DEALERS’ NETWORK" },
+  { number: "11", key: "stat_patents", defaultLabel: "PATENTS GRANTED" },
+  { number: "42", key: "stat_strains", defaultLabel: "PROPRIETARY AND DEPOSITED STRAINS" },
+  { number: "350+", key: "stat_strain_bank", defaultLabel: "MICROBIAL STRAIN BANK" },
+  { number: "200+", key: "stat_products", defaultLabel: "PRODUCTS ACROSS SIX VERTICALS" },
+  { number: "600+", key: "stat_team", defaultLabel: "TEAM MEMBERS" },
+  { number: "3000+", key: "stat_dealers", defaultLabel: "DEALERS’ NETWORK" },
   // ROW 2
-  { number: "2", label: "COUNTRIES BEYOND BHARAT" },
-  { number: "20+", label: "INDIAN STATES" },
-  { number: "2014", label: "FOUNDED, HYDERABAD" },
-  { number: "1 Million+", label: "HAPPY FARMERS" },
+  { number: "2", key: "stat_countries", defaultLabel: "COUNTRIES BEYOND BHARAT" },
+  { number: "20+", key: "stat_states", defaultLabel: "INDIAN STATES" },
+  { number: "2014", key: "stat_founded", defaultLabel: "FOUNDED, HYDERABAD" },
+  { number: "1 Million+", key: "stat_farmers", defaultLabel: "HAPPY FARMERS" },
 ];
 
 /**
@@ -104,6 +105,7 @@ function AnimatedCounter({
 }
 
 export default function BiofactorNumbersSection() {
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const [isRevealed, setIsRevealed] = useState(false);
   const [activeCard, setActiveCard] = useState<number | null>(null);
@@ -223,7 +225,7 @@ export default function BiofactorNumbersSection() {
                   key={idx}
                   tabIndex={0}
                   onClick={() => setActiveCard((prev) => (prev === idx ? null : idx))}
-                  aria-label={`${stat.number} ${stat.label}`}
+                  aria-label={`${stat.number} ${t(stat.key, stat.defaultLabel)}`}
                   className={`group relative flex flex-col justify-start py-7 lg:py-9 px-4 sm:px-6 lg:px-8 ${borderClasses} 
                     cursor-pointer outline-none transition-none rounded-none
                     ${
@@ -257,7 +259,7 @@ export default function BiofactorNumbersSection() {
                         : "text-[#134e3a] group-hover:text-[#E2F8CE] group-focus:text-[#E2F8CE] group-focus-within:text-[#E2F8CE] group-focus-visible:text-[#E2F8CE]"
                     }`}
                   >
-                    {stat.label}
+                    {t(stat.key, stat.defaultLabel)}
                   </span>
                 </div>
               );

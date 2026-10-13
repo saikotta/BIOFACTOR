@@ -1,8 +1,10 @@
 "use client";
 
 import React from "react";
+import { useTranslation } from "../i18n";
 
 export default function HowWeThinkSection() {
+  const { t, language } = useTranslation();
   return (
     <section
       id="how-we-think-section"
@@ -47,7 +49,7 @@ export default function HowWeThinkSection() {
                   'ui-monospace, "SFMono-Regular", "Cascadia Code", "Roboto Mono", monospace',
               }}
             >
-              THE NEXT GENERATION OF TECHNOLOGY
+              {t("how_we_think_eyebrow", "THE NEXT GENERATION OF TECHNOLOGY")}
             </div>
 
             {/* Editorial Serif Sentence 1 */}
@@ -57,13 +59,15 @@ export default function HowWeThinkSection() {
                 fontFamily: 'Georgia, "Times New Roman", serif',
               }}
             >
-              won’t be defined by what we build
+              {t("how_we_think_quote_1", "won’t be defined by what we build")}
             </p>
 
             {/* Oversized Sans Word */}
-            <div className="text-[clamp(72px,9vw,155px)] font-bold text-[#F4F5EC] tracking-[-0.055em] leading-[1] my-1 sm:my-2">
-              larger.
-            </div>
+            {language === "en" && (
+              <div className="text-[clamp(72px,9vw,155px)] font-bold text-[#F4F5EC] tracking-[-0.055em] leading-[1] my-1 sm:my-2">
+                larger.
+              </div>
+            )}
 
             {/* Editorial Serif Sentence 2 */}
             <p
@@ -72,9 +76,7 @@ export default function HowWeThinkSection() {
                 fontFamily: 'Georgia, "Times New Roman", serif',
               }}
             >
-              It will be defined by what we learn to
-              <br />
-              understand
+              {t("how_we_think_quote_2", "It will be defined by what we unlock in biology.")}
             </p>
           </div>
 
@@ -205,9 +207,9 @@ export default function HowWeThinkSection() {
           <div className="flex items-center gap-3 flex-wrap">
             <a
               href="/science-technology/"
-              className="bg-[#A9E889] hover:bg-[#97d876] text-[#06271A] font-semibold text-xs sm:text-sm px-6 sm:px-7 h-[46px] sm:h-[50px] flex items-center justify-center rounded-lg transition-colors text-center shadow-sm"
+              className="bg-[#A9E889] hover:bg-[#97d876] text-[#06271A] font-semibold text-xs sm:text-sm px-6 sm:px-7 h-[46px] sm:h-[50px] flex items-center justify-center rounded-lg transition-colors text-center shadow-sm uppercase tracking-wider"
             >
-              EXPLORE OUR SCIENCE
+              {t("nav_science_tech", "EXPLORE OUR SCIENCE")}
             </a>
           </div>
         </div>

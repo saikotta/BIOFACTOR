@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from "react";
 import styles from "./ContactSendMessage.module.css";
+import { useTranslation } from "../../i18n";
 
 const TOPICS = [
   {
@@ -107,6 +108,7 @@ function TopicIcon({ icon, className }: { icon: string; className?: string }) {
 }
 
 export default function ContactSendMessage() {
+  const { t } = useTranslation();
   const [form, setForm] = useState<FormValues>(INITIAL_FORM);
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoveredTopic, setHoveredTopic] = useState<string | null>(null);
@@ -302,17 +304,17 @@ export default function ContactSendMessage() {
           >
             <div className={styles.formRow}>
               <div className={styles.field}>
-                <label htmlFor="contact-full-name">Full Name *</label>
+                <label htmlFor="contact-full-name">{t("contact_name", "Full Name")} *</label>
                 <input id="contact-full-name" name="name" value={form.name} onChange={updateField} placeholder="Enter your name" autoComplete="name" required />
               </div>
               <div className={styles.field}>
-                <label htmlFor="contact-email">Email Address *</label>
+                <label htmlFor="contact-email">{t("contact_email", "Email Address")} *</label>
                 <input id="contact-email" name="email" type="email" value={form.email} onChange={updateField} placeholder="Enter your email" autoComplete="email" required />
               </div>
             </div>
             <div className={styles.formRow}>
               <div className={styles.field}>
-                <label htmlFor="contact-phone">Phone Number *</label>
+                <label htmlFor="contact-phone">{t("contact_phone", "Phone Number")} *</label>
                 <input id="contact-phone" name="phone" type="tel" value={form.phone} onChange={updateField} placeholder="Enter phone number" autoComplete="tel" required />
               </div>
               <div className={styles.field}>
@@ -396,7 +398,7 @@ export default function ContactSendMessage() {
               )}
             </div>
             <div className={styles.field}>
-              <label htmlFor="contact-message">Your Message *</label>
+              <label htmlFor="contact-message">{t("contact_message", "Your Message")} *</label>
               <textarea
                 id="contact-message"
                 name="message"
@@ -407,7 +409,9 @@ export default function ContactSendMessage() {
                 required
               />
             </div>
-            <button type="submit" className={styles.submitButton}>Send Message</button>
+            <button type="submit" className={styles.submitButton}>
+              {t("contact_send", "Send Message")}
+            </button>
           </form>
 
           {submitted && (
