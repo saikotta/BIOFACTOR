@@ -122,10 +122,10 @@ export default function PoultryThreeBirds() {
             {/* Chart Panel */}
             <div className="rv d2 border border-[#c4d4c4] p-4 lg:p-5 rounded-lg">
               <div className="font-space-grotesk font-bold text-sm text-[#0a2d1a] mb-1">
-                Hatching eggs sprayed with probiotic bacteria
+                {t("poultry_three_chart_title", "Hatching eggs sprayed with probiotic bacteria")}
               </div>
               <p className="text-xs text-[#2d4a3a] mb-3 leading-relaxed" style={{ fontFamily: 'Times New Roman, Times, serif' }}>
-                Share of egg contents and embryos positive for Salmonella Enteritidis by day 18 of incubation
+                {t("poultry_three_chart_sub", "Share of egg contents and embryos positive for Salmonella Enteritidis by day 18 of incubation")}
               </p>
 
               {/* Bar Chart */}
@@ -133,7 +133,7 @@ export default function PoultryThreeBirds() {
                 {/* Untreated */}
                 <div className="space-y-1">
                   <div className="flex justify-between items-end">
-                    <span className="font-mono text-[10px] text-[#2d4a3a] uppercase">Untreated</span>
+                    <span className="font-mono text-[10px] text-[#2d4a3a] uppercase">{t("poultry_three_untreated", "Untreated")}</span>
                     <span className="font-space-grotesk font-bold text-xs text-[#f0799c]"><span data-cu="60–70%">60–70%</span></span>
                   </div>
                   <div className="w-full h-3 bg-[#e8e8e8] rounded overflow-hidden">
@@ -144,7 +144,7 @@ export default function PoultryThreeBirds() {
                 {/* Chemical disinfectant */}
                 <div className="space-y-1">
                   <div className="flex justify-between items-end">
-                    <span className="font-mono text-[10px] text-[#2d4a3a] uppercase">Chemical disinfectant</span>
+                    <span className="font-mono text-[10px] text-[#2d4a3a] uppercase">{t("poultry_three_disinfectant", "Chemical disinfectant")}</span>
                     <span className="font-space-grotesk font-bold text-xs text-[#d47a7a]"><span data-cu="60–70%">60–70%</span></span>
                   </div>
                   <div className="w-full h-3 bg-[#e8e8e8] rounded overflow-hidden">
@@ -155,7 +155,7 @@ export default function PoultryThreeBirds() {
                 {/* Probiotic spray */}
                 <div className="space-y-1">
                   <div className="flex justify-between items-end">
-                    <span className="font-mono text-[10px] text-[#2d4a3a] uppercase">Probiotic spray</span>
+                    <span className="font-mono text-[10px] text-[#2d4a3a] uppercase">{t("poultry_three_probiotic", "Probiotic spray")}</span>
                     <span className="font-space-grotesk font-bold text-xs text-[#8fdcc0]">&lt;<span data-cu="20%">20%</span></span>
                   </div>
                   <div className="w-full h-3 bg-[#e8e8e8] rounded overflow-hidden">
@@ -166,7 +166,7 @@ export default function PoultryThreeBirds() {
 
               {/* Chart Note */}
               <div className="font-mono text-[10px] text-[#4a7c59] leading-relaxed">
-                Scale 0–100%. 560 hatching eggs, two Lactobacillus strains. Kosuri et al. 2025, Poultry Science.[5]
+                {t("poultry_three_chart_note", "Scale 0–100%. 560 hatching eggs, two Lactobacillus strains. Kosuri et al. 2025, Poultry Science.[5]")}
               </div>
             </div>
           </div>

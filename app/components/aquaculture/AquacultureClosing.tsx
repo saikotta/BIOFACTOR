@@ -4,17 +4,17 @@ import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useTranslation } from "@/app/i18n/useTranslation";
 
-const STATS = [
-  { value: 93, unit: "%", label: "less H₂S in treated sediment" },
-  { value: 40, unit: "%", label: "of production lost to disease annually" },
-  { value: 3,  unit: "×", label: "more feed converts to growth" },
+const STATS_DATA = [
+  { value: 93, unit: "%", key: "aqua_closing_stat1" },
+  { value: 40, unit: "%", key: "aqua_closing_stat2" },
+  { value: 3,  unit: "×", key: "aqua_closing_stat3" },
 ];
 
 export default function AquacultureClosing() {
   const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
-  const [counts, setCounts] = useState(STATS.map(() => 0));
+  const [counts, setCounts] = useState(STATS_DATA.map(() => 0));
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -29,7 +29,7 @@ export default function AquacultureClosing() {
         observer.disconnect();
 
         if (reduced) {
-          setCounts(STATS.map((s) => s.value));
+          setCounts(STATS_DATA.map((s) => s.value));
           return;
         }
 
@@ -39,7 +39,7 @@ export default function AquacultureClosing() {
         const tick = (now: number) => {
           const p = Math.min((now - start) / duration, 1);
           const e = 1 - Math.pow(1 - p, 3);
-          setCounts(STATS.map((s) => Math.round(e * s.value)));
+          setCounts(STATS_DATA.map((s) => Math.round(e * s.value)));
           if (p < 1) requestAnimationFrame(tick);
         };
         requestAnimationFrame(tick);
@@ -70,13 +70,13 @@ export default function AquacultureClosing() {
       {/* ── STAT BAND ── */}
       <div className="relative border-b border-white/10">
         <div className="mx-auto grid max-w-[1440px] grid-cols-1 sm:grid-cols-3">
-          {STATS.map((s, i) => (
+          {STATS_DATA.map((s, i) => (
             <div
               key={i}
               className="flex flex-col items-center px-10 py-14 text-center"
               style={{
                 borderRight:
-                  i < STATS.length - 1
+                  i < STATS_DATA.length - 1
                     ? "1px solid rgba(255,255,255,0.08)"
                     : "none",
                 opacity: visible ? 1 : 0,
@@ -95,7 +95,7 @@ export default function AquacultureClosing() {
                 className="mt-3 font-newsreader text-[15px] leading-[1.55] text-white/55"
                 style={{ maxWidth: "18ch" }}
               >
-                {s.label}
+                {t(s.key)}
               </span>
             </div>
           ))}

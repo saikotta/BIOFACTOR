@@ -6,46 +6,64 @@ import { useTranslation } from "../../i18n";
 
 const TOPICS = [
   {
+    key: "topic_crop_protection",
+    descKey: "topic_crop_protection_desc",
     name: "Crop Protection",
     description: "Explore biological support for healthier crops and resilient protection.",
     icon: "shield",
   },
   {
+    key: "topic_irrigation",
+    descKey: "topic_irrigation_desc",
     name: "Irrigation",
     description: "Find biological solutions that help make every drop work harder.",
     icon: "water",
   },
   {
+    key: "topic_seeds",
+    descKey: "topic_seeds_desc",
     name: "Seeds",
     description: "Give seeds and young plants a stronger biological foundation.",
     icon: "seed",
   },
   {
+    key: "topic_fertilizers",
+    descKey: "topic_fertilizers_desc",
     name: "Fertilizers",
     description: "Build soil vitality with biology that works alongside nutrition.",
     icon: "flask",
   },
   {
+    key: "topic_ruminants",
+    descKey: "topic_ruminants_desc",
     name: "Ruminants",
     description: "Support animal wellbeing and productivity through biological innovation.",
     icon: "cow",
   },
   {
+    key: "topic_poultry",
+    descKey: "topic_poultry_desc",
     name: "Poultry",
     description: "Discover science-led biological solutions for poultry production.",
     icon: "bird",
   },
   {
+    key: "topic_agriculture",
+    descKey: "topic_agriculture_desc",
     name: "Agriculture",
     description: "Talk with us about practical solutions for your farming needs.",
     icon: "leaf",
   },
   {
+    key: "topic_bioremediation",
+    descKey: "topic_bioremediation_desc",
     name: "Bioremediation",
     description: "Use beneficial biology to help restore soil and environmental balance.",
     icon: "recycle",
   },
   {
+    key: "topic_aquaculture",
+    descKey: "topic_aquaculture_desc",
     name: "Aquaculture",
     description: "Support healthier aquatic environments with biological tools.",
     icon: "fish",
@@ -109,6 +127,19 @@ function TopicIcon({ icon, className }: { icon: string; className?: string }) {
 
 export default function ContactSendMessage() {
   const { t } = useTranslation();
+
+  const getTopicDisplayName = (topicName: string) => {
+    if (!topicName) return "";
+    if (topicName === "Other") return t("topic_other", "Other");
+    const matched = TOPICS.find((item) => item.name === topicName);
+    return matched ? t(matched.key, matched.name) : topicName;
+  };
+
+  const getTopicDisplayDesc = (topicName: string) => {
+    const matched = TOPICS.find((item) => item.name === topicName);
+    return matched ? t(matched.descKey, matched.description) : "";
+  };
+
   const [form, setForm] = useState<FormValues>(INITIAL_FORM);
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoveredTopic, setHoveredTopic] = useState<string | null>(null);
@@ -261,7 +292,7 @@ export default function ContactSendMessage() {
                       className={`${styles.hexButton} ${isActive ? styles.hexActive : ""} ${
                         isSelected ? styles.hexSelected : ""
                       }`}
-                      aria-label={`${topic.name}: ${topic.description}`}
+                      aria-label={`${t(topic.key, topic.name)}: ${t(topic.descKey, topic.description)}`}
                       aria-pressed={isSelected}
                       style={{
                         animationDelay: reducedMotion ? "0ms" : `${index * 60}ms`,
@@ -274,7 +305,7 @@ export default function ContactSendMessage() {
                     >
                       <span className={styles.hexInner}>
                         <TopicIcon icon={topic.icon} className={styles.hexIcon} />
-                        <span className={styles.hexName}>{topic.name}</span>
+                        <span className={styles.hexName}>{t(topic.key, topic.name)}</span>
                       </span>
                     </button>
                   );
@@ -286,8 +317,8 @@ export default function ContactSendMessage() {
           <div className={styles.infoPanel} key={activeTopic.name}>
             <TopicIcon icon={activeTopic.icon} className={styles.infoIcon} />
             <div>
-              <h3>{activeTopic.name}</h3>
-              <p>{activeTopic.description}</p>
+              <h3>{getTopicDisplayName(activeTopic.name)}</h3>
+              <p>{getTopicDisplayDesc(activeTopic.name)}</p>
             </div>
           </div>
           <p className={styles.hint}>
@@ -354,7 +385,7 @@ export default function ContactSendMessage() {
                   onKeyDown={handleDropdownKeyDown}
                 >
                   <span className={selectedSubject ? "" : styles.placeholder}>
-                    {selectedSubject || t("contact_subject_select", "Select a subject")}
+                    {getTopicDisplayName(selectedSubject) || t("contact_subject_select", "Select a subject")}
                   </span>
                   <svg className={styles.chevron} viewBox="0 0 20 20" aria-hidden="true">
                     <path d="m5 7.5 5 5 5-5" />
@@ -385,7 +416,7 @@ export default function ContactSendMessage() {
                           dropdownButtonRef.current?.focus();
                         }}
                       >
-                        {option}
+                        {getTopicDisplayName(option)}
                       </div>
                     ))}
                   </div>

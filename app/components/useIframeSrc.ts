@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 /**
  * Returns the environment-appropriate source URL for embedded HTML infographics.
@@ -18,9 +19,16 @@ import { useState, useEffect } from "react";
  * - Local dev (localhost): `/{slug}.html{query}` (direct file path)
  */
 export function useIframeSrc(initialPath: string): string {
+  const { language } = useTranslation();
   const [pathname, search] = initialPath.split("?");
   const cleanSlug = pathname.replace(/^\/|\.html$/g, "");
-  const query = search ? `?${search}` : "";
+  
+  const params = new URLSearchParams(search || "");
+  if (language) {
+    params.set("lang", language);
+  }
+  const queryStr = params.toString();
+  const query = queryStr ? `?${queryStr}` : "";
 
   const prodSrc = `/${cleanSlug}/${query}`;
   const devSrc = `/${cleanSlug}.html${query}`;
@@ -35,8 +43,10 @@ export function useIframeSrc(initialPath: string): string {
         window.location.hostname.endsWith(".local"))
     ) {
       setSrc(devSrc);
+    } else {
+      setSrc(prodSrc);
     }
-  }, [devSrc]);
+  }, [devSrc, prodSrc]);
 
   return src;
 }

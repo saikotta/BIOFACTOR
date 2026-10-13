@@ -67,7 +67,7 @@ export default function ScienceHero() {
               </span>
             </>
           ) : (
-            <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-extrabold leading-tight">
+            <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#143324] font-extrabold leading-tight">
               {t("science_hero_title", HERO_CONTENT.h1Line1 + " " + HERO_CONTENT.h1Line2)}
             </span>
           )}

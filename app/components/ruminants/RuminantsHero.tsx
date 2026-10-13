@@ -35,7 +35,7 @@ export default function RuminantsHero() {
           {/* Eyebrow Label */}
           <div className={styles.eyebrowWrapper} data-hero-eyebrow>
             <span className={styles.eyebrowLine} aria-hidden="true" />
-            <span className={styles.eyebrowText}>— {t("prod_ruminants", "RUMINANTS")}</span>
+            <span className={styles.eyebrowText}>{t("prod_ruminants", "RUMINANTS")}</span>
           </div>
 
           {/* Main Display Headline — 3 lines, each masked with reference .ln class */}

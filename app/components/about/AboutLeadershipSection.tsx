@@ -4,10 +4,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "../../i18n";
 
 const TEAM = [
-  { name: "Dr. L.N. Reddy", roleKey: "about_lead_role_ceo", defaultRole: "Founder & CEO", initials: "LR" },
-  { name: "Dr. Anil Ahire", roleKey: "about_lead_role_director", defaultRole: "Director", initials: "AA" },
-  { name: "Krishna Murali", roleKey: "about_lead_role_director", defaultRole: "Director", initials: "KM" },
-  { name: "S. Reddy", roleKey: "about_lead_role_rnd", defaultRole: "Director, R&D", initials: "SR" },
+  { nameKey: "about_lead_name_1", defaultName: "Dr. L.N. Reddy", roleKey: "about_lead_role_ceo", defaultRole: "Founder & CEO", initials: "LR" },
+  { nameKey: "about_lead_name_2", defaultName: "Dr. Anil Ahire", roleKey: "about_lead_role_director", defaultRole: "Director", initials: "AA" },
+  { nameKey: "about_lead_name_3", defaultName: "Krishna Murali", roleKey: "about_lead_role_director", defaultRole: "Director", initials: "KM" },
+  { nameKey: "about_lead_name_4", defaultName: "S. Reddy", roleKey: "about_lead_role_rnd", defaultRole: "Director, R&D", initials: "SR" },
 ];
 
 const STYLES = `
@@ -249,7 +249,7 @@ export default function AboutLeadershipSection() {
                 <span className="bio-leadership-fill" />
                 <span className="bio-leadership-initials">{member.initials}</span>
               </div>
-              <h3 className="bio-leadership-name">{member.name}</h3>
+              <h3 className="bio-leadership-name">{t(member.nameKey, member.defaultName)}</h3>
               <p className="bio-leadership-role">{t(member.roleKey, member.defaultRole)}</p>
             </li>
           ))}

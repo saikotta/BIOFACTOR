@@ -1,17 +1,21 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { useTranslation } from "../../i18n";
 
 interface MatrixCell {
-  text: string;
+  textKey: string;
+  defaultText: string;
   fill: string;
   barColor: string;
   empty?: boolean;
-  sup?: string;
 }
 
 interface StageColumn {
   number: string;
-  name: string;
+  nameKey: string;
+  defaultName: string;
   bg: string;
   darkText: boolean;
   cells: MatrixCell[];
@@ -20,57 +24,62 @@ interface StageColumn {
 const NUTRIENT_STAGES: StageColumn[] = [
   {
     number: "01",
-    name: "ESTABLISHMENT",
+    nameKey: "nutrients_stage_01",
+    defaultName: "ESTABLISHMENT",
     bg: "#C8E6C9",
     darkText: false,
     cells: [
-      { text: "Root colonisation; early P for root growth", fill: "70%", barColor: "#2D6A4F" },
-      { text: "Root-zone protection against damping-off", fill: "65%", barColor: "#C25975" },
-      { text: "—", fill: "0%", barColor: "#D97706", empty: true },
+      { textKey: "nutrients_cell_01_0", defaultText: "Root colonisation; early P for root growth", fill: "70%", barColor: "#2D6A4F" },
+      { textKey: "nutrients_cell_01_1", defaultText: "Root-zone protection against damping-off", fill: "65%", barColor: "#C25975" },
+      { textKey: "", defaultText: "—", fill: "0%", barColor: "#D97706", empty: true },
     ],
   },
   {
     number: "02",
-    name: "VEGETATIVE",
+    nameKey: "nutrients_stage_02",
+    defaultName: "VEGETATIVE",
     bg: "#A5D6A7",
     darkText: false,
     cells: [
-      { text: "Peak N demand met by fixation & mobilisation", fill: "90%", barColor: "#2D6A4F" },
-      { text: "Induced systemic resistance primes plant", fill: "80%", barColor: "#C25975" },
-      { text: "Balanced nutrition builds sound tissue", fill: "70%", barColor: "#D97706" },
+      { textKey: "nutrients_cell_02_0", defaultText: "Peak N demand met by fixation & mobilisation", fill: "90%", barColor: "#2D6A4F" },
+      { textKey: "nutrients_cell_02_1", defaultText: "Induced systemic resistance primes plant", fill: "80%", barColor: "#C25975" },
+      { textKey: "nutrients_cell_02_2", defaultText: "Balanced nutrition builds sound tissue", fill: "70%", barColor: "#D97706" },
     ],
   },
   {
     number: "03",
-    name: "FLOWERING",
+    nameKey: "nutrients_stage_03",
+    defaultName: "FLOWERING",
     bg: "#81C784",
     darkText: false,
     cells: [
-      { text: "P and K support flowering & energy transfer", fill: "85%", barColor: "#2D6A4F" },
-      { text: "Lipopeptides act against foliar pathogens", fill: "85%", barColor: "#C25975" },
-      { text: "Better set and uniformity", fill: "75%", barColor: "#D97706" },
+      { textKey: "nutrients_cell_03_0", defaultText: "P and K support flowering & energy transfer", fill: "85%", barColor: "#2D6A4F" },
+      { textKey: "nutrients_cell_03_1", defaultText: "Lipopeptides act against foliar pathogens", fill: "85%", barColor: "#C25975" },
+      { textKey: "nutrients_cell_03_2", defaultText: "Better set and uniformity", fill: "75%", barColor: "#D97706" },
     ],
   },
   {
     number: "04",
-    name: "GRAIN / FILL",
+    nameKey: "nutrients_stage_04",
+    defaultName: "GRAIN / FILL",
     bg: "#66BB6A",
     darkText: true,
     cells: [
-      { text: "K for filling; Zn & Fe loading into grain", fill: "85%", barColor: "#2D6A4F" },
-      { text: "Primed defences hold through fill", fill: "75%", barColor: "#C25975" },
-      { text: "Protein, sugars, soluble solids", fill: "85%", barColor: "#D97706" },
+      { textKey: "nutrients_cell_04_0", defaultText: "K for filling; Zn & Fe loading into grain", fill: "85%", barColor: "#2D6A4F" },
+      { textKey: "nutrients_cell_04_1", defaultText: "Primed defences hold through fill", fill: "75%", barColor: "#C25975" },
+      { textKey: "nutrients_cell_04_2", defaultText: "Protein, sugars, soluble solids", fill: "85%", barColor: "#D97706" },
     ],
   },
   {
     number: "05",
-    name: "POST-HARVEST",
+    nameKey: "nutrients_stage_05",
+    defaultName: "POST-HARVEST",
     bg: "#4CAF50",
     darkText: true,
     cells: [
-      { text: "—", fill: "0%", barColor: "#2D6A4F", empty: true },
-      { text: "Biocontrol of storage rots", fill: "80%", barColor: "#F472B6" },
-      { text: "Less decay in storage and at retail", fill: "90%", barColor: "#FBBF24" },
+      { textKey: "", defaultText: "—", fill: "0%", barColor: "#2D6A4F", empty: true },
+      { textKey: "nutrients_cell_05_1", defaultText: "Biocontrol of storage rots", fill: "80%", barColor: "#F472B6" },
+      { textKey: "nutrients_cell_05_2", defaultText: "Less decay in storage and at retail", fill: "90%", barColor: "#FBBF24" },
     ],
   },
 ];
@@ -83,13 +92,15 @@ function getToneColor(rowIndex: number, isDark: boolean) {
 }
 
 export default function NutrientsMatrix() {
+  const { t } = useTranslation();
+
   return (
     <section id="nutrients-matrix" className="relative w-full bg-[#EAF3EA] text-[#173522] pt-8 md:pt-12 lg:pt-16 pb-12 md:pb-16 overflow-hidden">
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-[clamp(48px,5vw,72px)] space-y-16">
         
         {/* ==========================================
             SECTION 1: TRANSFORMATION TABLE (FIX. SOLUBILISE. MOBILISE.)
-            With Classic Green Background (#173522) - NO FALLING MICROBES
+            With Classic Green Background (#173522)
             ========================================== */}
         <div className="relative p-8 sm:p-12 md:p-14 rounded-3xl bg-[#173522] text-[#EAF3EA] shadow-2xl border border-[#2D6A4F]/40 space-y-10 overflow-hidden br-rv">
           <div className="relative z-10 space-y-8">
@@ -98,11 +109,11 @@ export default function NutrientsMatrix() {
               <div className="flex items-center gap-3">
                 <span className="w-6 h-[1.5px] bg-[#50E3C2]/80" />
                 <span className="font-mono text-xs font-semibold tracking-widest text-[#B8E986] uppercase">
-                  THE REAL POWER OF BIOLOGICALS
+                  {t("nutrients_mx_fix_eyebrow", "THE REAL POWER OF BIOLOGICALS")}
                 </span>
               </div>
               <h2 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight">
-                FIX. SOLUBILISE. <span className="text-[#50E3C2]">MOBILISE.</span>
+                {t("nutrients_mx_fix_heading", "FIX. SOLUBILISE.")} <span className="text-[#50E3C2]">{t("nutrients_mx_fix_heading_hl", "MOBILISE.")}</span>
               </h2>
             </div>
 
@@ -111,31 +122,31 @@ export default function NutrientsMatrix() {
               <table className="w-full text-left font-serif text-base sm:text-lg border-collapse">
                 <thead>
                   <tr className="border-b border-white/15 text-white/50 font-mono text-xs uppercase tracking-widest">
-                    <th className="py-3 px-4 font-normal">NUTRIENT</th>
-                    <th className="py-3 px-4 font-normal">FROM</th>
-                    <th className="py-3 px-4 font-normal">TO</th>
+                    <th className="py-3 px-4 font-normal">{t("nutrients_mx_fix_th_nutrient", "NUTRIENT")}</th>
+                    <th className="py-3 px-4 font-normal">{t("nutrients_mx_fix_th_from", "FROM")}</th>
+                    <th className="py-3 px-4 font-normal">{t("nutrients_mx_fix_th_to", "TO")}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/10 text-white/90">
                   <tr>
-                    <td className="py-4 px-4 font-bold text-[#60A5FA] font-sans">Nitrogen</td>
-                    <td className="py-4 px-4 text-white/80">Atmosphere</td>
-                    <td className="py-4 px-4 text-white/95">→ Biologically available nitrogen</td>
+                    <td className="py-4 px-4 font-bold text-[#60A5FA] font-sans">{t("nutrients_mx_n_label", "Nitrogen")}</td>
+                    <td className="py-4 px-4 text-white/80">{t("nutrients_mx_n_from", "Atmosphere")}</td>
+                    <td className="py-4 px-4 text-white/95">→ {t("nutrients_mx_n_to", "Biologically available nitrogen")}</td>
                   </tr>
                   <tr>
-                    <td className="py-4 px-4 font-bold text-[#FBBF24] font-sans">Phosphorus</td>
-                    <td className="py-4 px-4 text-white/80">Insoluble pools</td>
-                    <td className="py-4 px-4 text-white/95">→ More plant-available phosphorus</td>
+                    <td className="py-4 px-4 font-bold text-[#FBBF24] font-sans">{t("nutrients_mx_p_label", "Phosphorus")}</td>
+                    <td className="py-4 px-4 text-white/80">{t("nutrients_mx_p_from", "Insoluble pools")}</td>
+                    <td className="py-4 px-4 text-white/95">→ {t("nutrients_mx_p_to", "More plant-available phosphorus")}</td>
                   </tr>
                   <tr>
-                    <td className="py-4 px-4 font-bold text-[#C084FC] font-sans">Potassium</td>
-                    <td className="py-4 px-4 text-white/80">Mineral reserves</td>
-                    <td className="py-4 px-4 text-white/95">→ More accessible potassium</td>
+                    <td className="py-4 px-4 font-bold text-[#C084FC] font-sans">{t("nutrients_mx_k_label", "Potassium")}</td>
+                    <td className="py-4 px-4 text-white/80">{t("nutrients_mx_k_from", "Mineral reserves")}</td>
+                    <td className="py-4 px-4 text-white/95">→ {t("nutrients_mx_k_to", "More accessible potassium")}</td>
                   </tr>
                   <tr>
                     <td className="py-4 px-4 font-bold text-[#FEF08A] font-sans">S · Ca · Mg · Zn · Fe · Cu</td>
-                    <td className="py-4 px-4 text-white/80">Organic, carbonate and oxide-bound forms</td>
-                    <td className="py-4 px-4 text-white/95">→ Mineralised and chelated forms roots can absorb</td>
+                    <td className="py-4 px-4 text-white/80">{t("nutrients_mx_micro_from", "Organic, carbonate and oxide-bound forms")}</td>
+                    <td className="py-4 px-4 text-white/95">→ {t("nutrients_mx_micro_to", "Mineralised and chelated forms roots can absorb")}</td>
                   </tr>
                 </tbody>
               </table>
@@ -145,16 +156,16 @@ export default function NutrientsMatrix() {
             <div className="pt-8 border-t border-white/15 grid grid-cols-1 md:grid-cols-12 gap-6 items-end">
               {/* Left Side */}
               <div className="md:col-span-6 font-serif text-base sm:text-lg text-white/60 leading-relaxed">
-                This is the fundamental promise of biological nutrient management:
+                {t("nutrients_mx_promise", "This is the fundamental promise of biological nutrient management:")}
               </div>
 
               {/* Right Side */}
               <div className="md:col-span-6 text-left md:text-right space-y-1">
                 <div className="font-serif text-2xl sm:text-3xl text-white/40 line-through decoration-red-500/80 decoration-2">
-                  Not simply adding more.
+                  {t("nutrients_mx_not_adding", "Not simply adding more.")}
                 </div>
                 <div className="font-serif text-3xl sm:text-4xl text-white">
-                  But making <em className="italic font-normal">more available.</em>
+                  {t("nutrients_mx_making_avail", "But making more available.")}
                 </div>
               </div>
             </div>
@@ -163,34 +174,27 @@ export default function NutrientsMatrix() {
 
         {/* ==========================================
             SECTION 2: ROOT EXUDATES & CROP CYCLE
-            With 3-Line Heading & Larger Image Size
-            ========================================== */}
-        {/* ==========================================
-            SECTION 2: ROOT EXUDATES & CROP CYCLE
-            With 3-Line Heading & Larger Image Size
             ========================================== */}
         <div className="space-y-8">
           {/* Top Heading & Narrative with Larger Image Side-by-Side */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Left Narrative with 3-Line Heading */}
+            {/* Left Narrative with Heading */}
             <div className="lg:col-span-6 space-y-5 br-rv">
               <div className="flex items-center gap-3 br-rv br-d1">
                 <span className="w-8 h-[1.5px] bg-[#2D6A4F]" />
                 <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">
-                  ACROSS THE CROP CYCLE
+                  {t("nutrients_mx_cycle_eyebrow", "ACROSS THE CROP CYCLE")}
                 </span>
               </div>
               <h3 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-[#173522] uppercase tracking-tight leading-[1.08] br-rv br-d1">
-                ONE BIOLOGY,<br />
-                THREE ROLES,<br />
-                FROM SOWING TO SHELF.
+                {t("nutrients_mx_one_bio_heading", "ONE BIOLOGY, THREE ROLES, FROM SOWING TO SHELF.")}
               </h3>
               <p className="text-base sm:text-lg text-[#173522]/90 font-sans leading-relaxed br-rv br-d2">
-                Beneficial microbes work as nutrient enablers, disease managers, and quality and shelf-life enhancers. They are coordinated by chemical signals exchanged between root and microbe.
+                {t("nutrients_mx_one_bio_para", "Beneficial microbes work as nutrient enablers, disease managers, and quality and shelf-life enhancers. They are coordinated by chemical signals exchanged between root and microbe.")}
               </p>
             </div>
 
-            {/* Right: Larger Featured `one-biology.jpg` Image with Scroll Parallax */}
+            {/* Right: Featured Image */}
             <div className="group lg:col-span-6 relative w-full h-[340px] sm:h-[380px] lg:h-[420px] rounded-2xl overflow-hidden shadow-2xl border border-[#2D6A4F]/20 cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_45px_70px_-15px_rgba(23,53,34,0.3)] active:scale-[0.98] br-ph br-rv br-d1">
               <div className="br-ph-in relative w-full h-full">
                 <Image
@@ -206,24 +210,24 @@ export default function NutrientsMatrix() {
             </div>
           </div>
 
-          {/* Full Width White Card with Slide-Up Reveal Effect */}
+          {/* Full Width White Card */}
           <div className="w-full p-6 sm:p-8 lg:p-10 rounded-2xl bg-white/95 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-xl space-y-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:border-[#2D6A4F]/40 cursor-pointer br-rv br-d1">
             
-            {/* Top Flow Diagram (Light background + Crisp dark lines & text + Perfect Root Spacing) */}
+            {/* Top Flow Diagram */}
             <div className="w-full bg-[#F4FAF4] rounded-xl p-6 sm:p-8 text-[#173522] flex items-center justify-center border border-[#2D6A4F]/15 br-rv br-d1">
               <svg viewBox="0 0 700 220" className="w-full max-w-[650px] h-auto font-mono text-xs select-none">
                 {/* Main Root Line */}
                 <path d="M 80 20 L 80 175" fill="none" stroke="#173522" strokeWidth="5" strokeLinecap="round" />
                 {/* Side Root Branch */}
                 <path d="M 80 85 Q 115 120 150 155" fill="none" stroke="#173522" strokeWidth="4" strokeLinecap="round" />
-                {/* ROOT Label cleanly positioned below root line */}
+                {/* ROOT Label */}
                 <text x="68" y="198" fill="#2D6A4F" fontSize="11" fontWeight="bold">ROOT</text>
 
-                {/* Exudates Signal Arrow (Top Dark Green Dashed Arc) */}
+                {/* Exudates Signal Arrow */}
                 <path d="M 115 60 Q 280 15 440 60" fill="none" stroke="#2D6A4F" strokeWidth="2.5" strokeDasharray="6 4" markerEnd="url(#green-arrow)" />
                 <text x="200" y="32" fill="#2D6A4F" fontSize="11" fontWeight="bold" letterSpacing="0.1em">EXUDATES · SIGNALS</text>
 
-                {/* Microbe Capsules (Right side) */}
+                {/* Microbe Capsules */}
                 <g transform="translate(465, 35)">
                   <rect x="0" y="0" width="75" height="32" rx="16" fill="#EAF3EA" stroke="#2D6A4F" strokeWidth="2.5" />
                 </g>
@@ -237,9 +241,8 @@ export default function NutrientsMatrix() {
                   <rect x="0" y="0" width="75" height="32" rx="16" fill="#EAF3EA" stroke="#2D6A4F" strokeWidth="2.5" />
                 </g>
 
-                {/* Nutrients Released Arrow (Bottom Amber Dashed Arc) */}
+                {/* Nutrients Released Arrow */}
                 <path d="M 465 150 Q 300 180 155 135" fill="none" stroke="#D97706" strokeWidth="2.5" strokeDasharray="6 4" markerEnd="url(#gold-arrow)" />
-                {/* Text cleanly placed underneath without touching lines */}
                 <text x="180" y="195" fill="#D97706" fontSize="11" fontWeight="bold" letterSpacing="0.1em">N · P · K · Zn · Fe RELEASED</text>
 
                 {/* Arrowhead Definitions */}
@@ -258,33 +261,32 @@ export default function NutrientsMatrix() {
             <div className="pt-4 border-t border-[#173522]/15 space-y-3 br-rv br-d2">
               <div className="flex items-center gap-2">
                 <span className="font-mono text-xs font-bold text-[#2D6A4F] uppercase tracking-wider">
-                  ROOT EXUDATES · SIGNALS
+                  {t("nutrients_mx_root_label", "ROOT EXUDATES · SIGNALS")}
                 </span>
               </div>
               <h4 className="font-display font-extrabold text-xl sm:text-2xl text-[#173522] tracking-tight">
-                Why nutrients arrive when the crop asks
+                {t("nutrients_mx_root_heading", "Why nutrients arrive when the crop asks")}
               </h4>
               <p className="text-base text-[#173522]/90 font-sans leading-relaxed">
-                Plants invest <strong>up to 20–40% of the carbon they fix</strong> in root exudates. That is sugars, organic acids and signal molecules released into the soil. Exudation changes with the plant's nutrient status. Under phosphorus deficiency, for example, roots release more organic acids such as malate. Microbes living on this carbon are most active where and when roots are growing hardest, so <strong>release tracks the crop's demand</strong> instead of arriving in a single dose.
+                {t("nutrients_mx_root_para_intro", "Plants invest")} <strong>{t("nutrients_mx_root_para_bold1", "up to 20–40% of the carbon they fix")}</strong> {t("nutrients_mx_root_para_mid", "in root exudates. That is sugars, organic acids and signal molecules released into the soil. Exudation changes with the plant's nutrient status. Under phosphorus deficiency, for example, roots release more organic acids such as malate. Microbes living on this carbon are most active where and when roots are growing hardest, so")} <strong>{t("nutrients_mx_root_para_bold2", "release tracks the crop's demand")}</strong> {t("nutrients_mx_root_para_end", "instead of arriving in a single dose.")}
               </p>
             </div>
           </div>
         </div>
 
         {/* ==========================================
-            SECTION 3: 5-STAGE CROP CYCLE MATRIX TABLE (SLENDER CAPSULE FORMAT)
-            Strict Visual & Structural Parity with Ruminants
+            SECTION 3: 5-STAGE CROP CYCLE MATRIX TABLE
             ========================================== */}
         <div className="space-y-6 pt-4 overflow-hidden">
           <div className="space-y-2 br-rv">
             <div className="flex items-center gap-3 br-rv br-d1">
               <span className="w-8 h-[1.5px] bg-[#2D6A4F]" />
               <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase">
-                ALONG THE CROP CYCLE MATRIX
+                {t("nutrients_mx_matrix_eyebrow", "ALONG THE CROP CYCLE MATRIX")}
               </span>
             </div>
             <h3 className="font-display font-extrabold text-3xl sm:text-4xl text-[#173522] uppercase tracking-tight br-rv br-d2">
-              WHERE BIOLOGY DOES THE WORK.
+              {t("nutrients_mx_matrix_heading", "WHERE BIOLOGY DOES THE WORK.")}
             </h3>
           </div>
 
@@ -302,10 +304,10 @@ export default function NutrientsMatrix() {
                     <span className="w-1.5 h-1.5 rounded-full bg-[#173522] flex-shrink-0" />
                     <div>
                       <h3 className="font-display font-bold text-xs sm:text-sm lg:text-[14px] text-[#173522] leading-tight">
-                        Nutrient enabler
+                        {t("nutrients_row_nutrient_label", "Nutrient enabler")}
                       </h3>
                       <span className="font-serif text-[13px] text-[#173522]/80 mt-1 block">
-                        Root growth & colonisation
+                        {t("nutrients_row_nutrient_sub", "Root growth & colonisation")}
                       </span>
                     </div>
                   </div>
@@ -318,10 +320,10 @@ export default function NutrientsMatrix() {
                     <span className="w-1.5 h-1.5 rounded-full bg-[#173522] flex-shrink-0" />
                     <div>
                       <h3 className="font-display font-bold text-xs sm:text-sm lg:text-[14px] text-[#173522] leading-tight">
-                        Disease manager
+                        {t("nutrients_row_disease_label", "Disease manager")}
                       </h3>
                       <span className="font-serif text-[13px] text-[#173522]/80 mt-1 block">
-                        Protection & resistance
+                        {t("nutrients_row_disease_sub", "Protection & resistance")}
                       </span>
                     </div>
                   </div>
@@ -334,10 +336,10 @@ export default function NutrientsMatrix() {
                     <span className="w-1.5 h-1.5 rounded-full bg-[#173522] flex-shrink-0" />
                     <div>
                       <h3 className="font-display font-bold text-xs sm:text-sm lg:text-[14px] text-[#173522] leading-tight">
-                        Quality & shelf life
+                        {t("nutrients_row_quality_label", "Quality & shelf life")}
                       </h3>
                       <span className="font-serif text-[13px] text-[#173522]/80 mt-1 block">
-                        Uniformity & storage
+                        {t("nutrients_row_quality_sub", "Uniformity & storage")}
                       </span>
                     </div>
                   </div>
@@ -360,7 +362,7 @@ export default function NutrientsMatrix() {
                         {stage.number}
                       </span>
                       <strong className="font-display font-extrabold text-xs sm:text-sm lg:text-[15px] uppercase leading-tight block relative">
-                        {stage.name}
+                        {t(stage.nameKey, stage.defaultName)}
                         <span className="block w-8 h-[1px] bg-current mx-auto mt-2 opacity-55 scale-x-0 group-hover/capsule:scale-x-100 transition-transform duration-300" />
                       </strong>
                     </div>
@@ -390,7 +392,7 @@ export default function NutrientsMatrix() {
                               />
                             </div>
                             <p className="br-mx-cell-text font-serif text-[13px] sm:text-[14px] leading-snug pt-1">
-                              {cell.text}
+                              {t(cell.textKey, cell.defaultText)}
                             </p>
                           </>
                         ) : (
@@ -408,83 +410,81 @@ export default function NutrientsMatrix() {
 
         {/* ==========================================
             SECTION 4: META-ANALYSIS GLOBAL VALIDATION CARDS
-            With Clean Uniform Borders (No thick left border line)
             ========================================== */}
         <div className="space-y-8 br-rv">
           <div>
             <h3 className="font-display font-extrabold text-3xl sm:text-4xl text-[#173522] uppercase">
-              Validated across hundreds of studies.
+              {t("nutrients_valid_heading", "Validated across hundreds of studies.")}
             </h3>
             <p className="text-sm sm:text-base text-[#173522]/80 font-sans max-w-3xl mt-2">
-              These figures come from meta-analyses and reviews that pool many independent field and laboratory trials. They show what biology can do across many conditions, not what any single product guarantees.
+              {t("nutrients_valid_para", "These figures come from meta-analyses and reviews that pool many independent field and laboratory trials. They show what biology can do across many conditions, not what any single product guarantees.")}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-lg space-y-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-[#2D6A4F]/40 cursor-pointer">
-              <span className="font-mono text-xs font-bold text-[#2D6A4F] uppercase">NUTRIENT ENABLER</span>
+              <span className="font-mono text-xs font-bold text-[#2D6A4F] uppercase">{t("nutrients_valid_card1_label", "NUTRIENT ENABLER")}</span>
               <div className="font-display font-extrabold text-4xl text-[#173522]">+{<span data-cu>20</span>}%</div>
               <p className="text-xs sm:text-sm text-[#173522]/85 font-sans">
-                average yield gain from biofertilisers in dry climates, and +14.9% in tropical climates.
+                {t("nutrients_valid_card1_desc", "average yield gain from biofertilisers in dry climates, and +14.9% in tropical climates.")}
               </p>
-              <div className="pt-2 text-[11px] font-mono text-[#2D6A4F] font-semibold">171 publications · Global meta-analysis</div>
+              <div className="pt-2 text-[11px] font-mono text-[#2D6A4F] font-semibold">{t("nutrients_valid_card1_ref", "171 publications · Global meta-analysis")}</div>
             </div>
 
             <div className="p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-lg space-y-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-[#2D6A4F]/40 cursor-pointer">
-              <span className="font-mono text-xs font-bold text-[#C25975] uppercase">DISEASE MANAGER</span>
+              <span className="font-mono text-xs font-bold text-[#C25975] uppercase">{t("nutrients_valid_card2_label", "DISEASE MANAGER")}</span>
               <div className="font-display font-extrabold text-4xl text-[#173522]"><span data-cu>60</span>%</div>
               <p className="text-xs sm:text-sm text-[#173522]/85 font-sans">
-                average reduction in disease with Bacillus biocontrol agents compared with untreated controls.
+                {t("nutrients_valid_card2_desc", "average reduction in disease with Bacillus biocontrol agents compared with untreated controls.")}
               </p>
-              <div className="pt-2 text-[11px] font-mono text-[#C25975] font-semibold">399 studies · Meta-analysis</div>
+              <div className="pt-2 text-[11px] font-mono text-[#C25975] font-semibold">{t("nutrients_valid_card2_ref", "399 studies · Meta-analysis")}</div>
             </div>
 
             <div className="p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-lg space-y-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-[#2D6A4F]/40 cursor-pointer">
-              <span className="font-mono text-xs font-bold text-[#D97706] uppercase">QUALITY &amp; SHELF LIFE</span>
+              <span className="font-mono text-xs font-bold text-[#D97706] uppercase">{t("nutrients_valid_card3_label", "QUALITY & SHELF LIFE")}</span>
               <div className="font-display font-extrabold text-4xl text-[#173522]">50–<span data-cu>70</span>%</div>
               <p className="text-xs sm:text-sm text-[#173522]/85 font-sans">
-                less soft rot and black mold in tomato treated with Bacillus subtilis. 40–60% less rot in leafy greens.
+                {t("nutrients_valid_card3_desc", "less soft rot and black mold in tomato treated with Bacillus subtilis. 40–60% less rot in leafy greens.")}
               </p>
-              <div className="pt-2 text-[11px] font-mono text-[#D97706] font-semibold">Post-harvest biocontrol review</div>
+              <div className="pt-2 text-[11px] font-mono text-[#D97706] font-semibold">{t("nutrients_valid_card3_ref", "Post-harvest biocontrol review")}</div>
             </div>
           </div>
         </div>
 
         {/* ==========================================
             SECTION 5: YIELD RESPONSE BY CLIMATE CHART
-            With Hovering Card Effect
             ========================================== */}
         <div className="p-8 rounded-2xl bg-white/90 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-xl space-y-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:border-[#2D6A4F]/40 cursor-pointer">
           <div>
             <h4 className="font-display font-bold text-xl text-[#173522] uppercase">
-              Yield response to biofertilisers, by climate
+              {t("nutrients_yield_heading", "Yield response to biofertilisers, by climate")}
             </h4>
             <p className="text-xs text-[#173522]/70 font-sans mt-1">
-              Mean change in yield vs. untreated control (± standard error). Responses were strongest in dry and tropical climates.
+              {t("nutrients_yield_para", "Mean change in yield vs. untreated control (± standard error). Responses were strongest in dry and tropical climates.")}
             </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             <div className="p-4 rounded-xl bg-[#EAF3EA] border border-[#2D6A4F]/20">
-              <div className="font-mono text-xs font-bold text-[#2D6A4F] uppercase mb-1">DRY</div>
+              <div className="font-mono text-xs font-bold text-[#2D6A4F] uppercase mb-1">{t("nutrients_yield_dry", "DRY")}</div>
               <div className="font-display font-extrabold text-3xl text-[#173522]">+<span data-cu>20.0</span>%</div>
             </div>
             <div className="p-4 rounded-xl bg-[#EAF3EA] border border-[#2D6A4F]/20">
-              <div className="font-mono text-xs font-bold text-[#2D6A4F] uppercase mb-1">TROPICAL</div>
+              <div className="font-mono text-xs font-bold text-[#2D6A4F] uppercase mb-1">{t("nutrients_yield_tropical", "TROPICAL")}</div>
               <div className="font-display font-extrabold text-3xl text-[#173522]">+<span data-cu>14.9</span>%</div>
             </div>
             <div className="p-4 rounded-xl bg-[#EAF3EA] border border-[#2D6A4F]/20">
-              <div className="font-mono text-xs font-bold text-[#2D6A4F] uppercase mb-1">OCEANIC</div>
+              <div className="font-mono text-xs font-bold text-[#2D6A4F] uppercase mb-1">{t("nutrients_yield_oceanic", "OCEANIC")}</div>
               <div className="font-display font-extrabold text-3xl text-[#173522]">+<span data-cu>10.0</span>%</div>
             </div>
             <div className="p-4 rounded-xl bg-[#EAF3EA] border border-[#2D6A4F]/20">
-              <div className="font-mono text-xs font-bold text-[#2D6A4F] uppercase mb-1">CONTINENTAL</div>
+              <div className="font-mono text-xs font-bold text-[#2D6A4F] uppercase mb-1">{t("nutrients_yield_continental", "CONTINENTAL")}</div>
               <div className="font-display font-extrabold text-3xl text-[#173522]">+<span data-cu>8.5</span>%</div>
             </div>
           </div>
 
           <p className="text-xs font-mono text-[#173522]/70 pt-2 border-t border-[#173522]/10">
-            Scale 0–25%. Nitrogen-use efficiency also improved by +5.8 kg yield per kg N applied. Source: Schütz et al. 2018.
+            {t("nutrients_yield_footnote", "Scale 0–25%. Nitrogen-use efficiency also improved by +5.8 kg yield per kg N applied. Source: Schütz et al. 2018.")}
           </p>
         </div>
 

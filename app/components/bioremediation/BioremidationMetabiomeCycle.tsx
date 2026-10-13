@@ -1,8 +1,11 @@
 "use client";
 
 import React from "react";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 export default function BioremidationMetabiomeCycle() {
+  const { t } = useTranslation();
+
   return (
     <section id="metabiome-cycle" className="relative w-full bg-[#0F2015] text-[#EAF3EA] py-20 md:py-28 lg:py-36 overflow-hidden">
       {/* Background SVG / Glow Accents */}
@@ -15,17 +18,17 @@ export default function BioremidationMetabiomeCycle() {
         <div className="flex items-center gap-3 mb-4">
           <span className="w-8 h-[1.5px] bg-[#B8E986]" />
           <span className="font-mono text-xs font-semibold tracking-widest text-[#B8E986] uppercase">
-            HOW WE THINK
+            {t("bio_metabiome_eyebrow", "HOW WE THINK")}
           </span>
           <span className="w-8 h-[1.5px] bg-[#B8E986]" />
         </div>
 
         {/* Main Heading */}
         <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight uppercase max-w-4xl mb-4">
-          Nature works through communities, not single organisms
+          {t("bio_metabiome_heading", "Nature works through communities, not single organisms")}
         </h2>
         <p className="font-sans text-base sm:text-lg text-[#EAF3EA]/80 max-w-2xl mb-16 leading-relaxed">
-          The Metabiome Cycle illustrates how single microbes synthesize active metabolites to construct a resilient, intelligent biological web that self-regulates complex ecosystems.
+          {t("bio_metabiome_desc", "The Metabiome Cycle illustrates how single microbes synthesize active metabolites to construct a resilient, intelligent biological web that self-regulates complex ecosystems.")}
         </p>
 
         {/* METABIOME CYCLE ANIMATION CONTAINER */}
@@ -60,8 +63,8 @@ export default function BioremidationMetabiomeCycle() {
               <path d="M 880 200 Q 500 340 120 200" fill="none" stroke="url(#bridgeGradBio)" strokeWidth="2" strokeDasharray="8 8" className="opacity-40" />
             </svg>
 
-            {/* 4 NODES DISPLAY */}
-            <div className="relative z-10 w-full h-full flex items-center justify-between px-4 sm:px-12">
+            {/* Microbe Nodes Overlay */}
+            <div className="relative z-10 w-full flex items-center justify-between px-2 sm:px-8 max-w-[900px]">
               
               {/* NODE 1: MICROBE */}
               <div className="flex flex-col items-center group cursor-pointer">
@@ -73,10 +76,10 @@ export default function BioremidationMetabiomeCycle() {
                 </div>
                 <div className="mt-4 text-center">
                   <span className="font-mono text-xs sm:text-sm font-bold tracking-widest text-[#B8E986] uppercase block">
-                    01. MICROBE
+                    {t("bio_meta_node1_title", "01. MICROBE")}
                   </span>
                   <span className="font-sans text-xs text-[#EAF3EA]/70 mt-1 block">
-                    Single Organism Focus
+                    {t("bio_meta_node1_desc", "Single Organism Focus")}
                   </span>
                 </div>
               </div>
@@ -91,10 +94,10 @@ export default function BioremidationMetabiomeCycle() {
                 </div>
                 <div className="mt-4 text-center">
                   <span className="font-mono text-xs sm:text-sm font-bold tracking-widest text-[#78C88C] uppercase block">
-                    02. METABOLITE
+                    {t("bio_meta_node2_title", "02. METABOLITE")}
                   </span>
                   <span className="font-sans text-xs text-[#EAF3EA]/70 mt-1 block">
-                    Biochemical Output
+                    {t("bio_meta_node2_desc", "Biochemical Output")}
                   </span>
                 </div>
               </div>
@@ -109,10 +112,10 @@ export default function BioremidationMetabiomeCycle() {
                 </div>
                 <div className="mt-4 text-center">
                   <span className="font-mono text-xs sm:text-sm font-bold tracking-widest text-[#52B788] uppercase block">
-                    03. METABIOME
+                    {t("bio_meta_node3_title", "03. METABIOME")}
                   </span>
                   <span className="font-sans text-xs text-[#EAF3EA]/70 mt-1 block">
-                    Interconnected Web
+                    {t("bio_meta_node3_desc", "Interconnected Web")}
                   </span>
                 </div>
               </div>
@@ -127,10 +130,10 @@ export default function BioremidationMetabiomeCycle() {
                 </div>
                 <div className="mt-4 text-center">
                   <span className="font-mono text-xs sm:text-sm font-bold tracking-widest text-[#B8E986] uppercase block">
-                    04. INTEL
+                    {t("bio_meta_node4_title", "04. INTEL")}
                   </span>
                   <span className="font-sans text-xs text-[#EAF3EA]/70 mt-1 block">
-                    Systemic Intelligence
+                    {t("bio_meta_node4_desc", "Systemic Intelligence")}
                   </span>
                 </div>
               </div>
@@ -142,7 +145,7 @@ export default function BioremidationMetabiomeCycle() {
           <div className="mt-8 pt-6 border-t border-[#167A4A]/30 flex items-center justify-center gap-3">
             <span className="w-2.5 h-2.5 rounded-full bg-[#B8E986] animate-ping" />
             <span className="font-mono text-xs font-semibold tracking-widest text-[#B8E986] uppercase">
-              METABIOME CYCLE — ACTIVE CONTINUOUS SYNCHRONIZATION
+              {t("bio_meta_cycle_tag", "METABIOME CYCLE — ACTIVE CONTINUOUS SYNCHRONIZATION")}
             </span>
           </div>
         </div>

@@ -133,7 +133,7 @@ export default function AboutSoilCompanySection() {
                   : "opacity-0"
               }`}
           >
-            Who We Are
+            {t("about_soil_eyebrow", "Who We Are")}
           </span>
           <h2
             className={`text-[clamp(34px,3vw,48px)] font-bold text-[#155B2A] tracking-[-0.025em] leading-[1.1] max-w-xl mx-auto font-sans ${prefersReducedMotion
@@ -143,7 +143,7 @@ export default function AboutSoilCompanySection() {
                   : "opacity-0"
               }`}
           >
-            The Soil Company
+            {t("about_soil_title", "The Soil Company")}
           </h2>
         </div>
 

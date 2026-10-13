@@ -117,22 +117,24 @@ export default function MineralsSection() {
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="mb-1.5 font-jetbrains text-[10px] font-medium uppercase tracking-[0.18em] text-[#5A7A5E]">
-              LOW-SALINITY SURVIVAL
+              {t("aqua_minerals_eyebrow", "LOW-SALINITY SURVIVAL")}
             </p>
             <h3 className="font-inter-tight text-[clamp(20px,2.6vw,26px)] font-bold leading-tight text-[#10301f]">
-              Why minerals matter
+              {t("aqua_minerals_chart_title", "Why minerals matter")}
             </h3>
           </div>
           <div className="inline-flex items-center gap-2 rounded-full border border-[#c8ddb0] bg-white/70 px-2.5 py-1">
             <span className="h-2 w-2 rounded-full bg-[#5FBF86]" />
-            <p className="font-jetbrains text-[9px] uppercase tracking-[0.14em] text-[#4b6b57]">Survival rate</p>
+            <p className="font-jetbrains text-[9px] uppercase tracking-[0.14em] text-[#4b6b57]">
+              {t("aqua_minerals_survival_rate", "Survival rate")}
+            </p>
           </div>
         </div>
 
         <div className="space-y-3">
           {[
-            { label: "Without minerals", value: 45, tone: "amber", chip: "text-[#8F6828] bg-[#F9F1E5] border-[#E9D9BA]" },
-            { label: "With minerals",    value: 92, tone: "green", chip: "text-[#0D4F31] bg-[#EAF7EF] border-[#C8E6D0]" },
+            { label: t("aqua_minerals_without", "Without minerals"), value: 45, tone: "amber", chip: "text-[#8F6828] bg-[#F9F1E5] border-[#E9D9BA]" },
+            { label: t("aqua_minerals_with", "With minerals"),    value: 92, tone: "green", chip: "text-[#0D4F31] bg-[#EAF7EF] border-[#C8E6D0]" },
           ].map((item) => (
             <div key={item.label} className="grid gap-2.5 md:grid-cols-[150px_minmax(0,1fr)_76px] md:items-center md:gap-4">
               <p className="font-newsreader text-[14px] text-[#2B2B2B]">{item.label}</p>
