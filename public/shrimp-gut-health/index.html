@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en" style="color-scheme:light;">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Inside the Shrimp – Gut Health Infographic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&display=swap" rel="stylesheet">
+<style>
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #c9e3b6;
+  --glow:    #d6ebc6;
+  --panel:   rgba(255, 255, 255, 0.70);
+  --phov:    rgba(255, 255, 255, 0.95);
+  --ink:     #0b2416;
+  --muted:   #21432f;
+  --green:   #1f8a57;
+  --gdark:   #0d4f31;
+  --glt:     #5fbf86;
+  --lime:    #8aa31c;
+  --red:     #c0392b;
+  --line:    rgba(163, 201, 162, 0.55);
+  --line-h:  #6aaa7a;
+  --track:   #c6e0c4;
+  --ease:    cubic-bezier(.2, .7, .2, 1);
+}
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  font-family: "Instrument Sans", sans-serif;
+  color: var(--ink);
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse 65% 60% at 100% 0%, var(--glow) 0%, transparent 68%),
+    var(--bg);
+}
+
+sup { color: var(--green); font-weight: 600; font-size: .75em; vertical-align: super; }
+
+/* ── DRIFTING BACKGROUND DOTS ── */
+.dots-bg {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+  overflow: hidden;
+}
+.dot { position: absolute; border-radius: 50%; opacity: .30; }
+@keyframes du { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-24px) } }
+@keyframes dd { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY( 24px) } }
+@keyframes dl { 0%,100%{ transform: translateX(0) } 50%{ transform: translateX( 22px) } }
+@keyframes dr { 0%,100%{ transform: translateX(0) } 50%{ transform: translateX(-22px) } }
+
+/* ── SCALED STAGE WRAPPER ── */
+#wrap {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+  width: 1280px; min-height: 800px;
+  transform-origin: center center;
+}
+
+.stage, #stage {
+  width: 1280px; min-height: 800px;
+  padding: 38px calc(max(0px, (100vw - 1440px) / 2) + clamp(20px, 5vw, 72px)) 32px;
+  display: grid;
+  grid-template-columns: 480px 1fr;
+  grid-template-rows: auto auto auto auto;
+  column-gap: 36px;
+  row-gap: 14px;
+}
+
+/* ── PANEL STYLES ── */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  transition: border-color .25s, box-shadow .25s, background .25s;
+}
+.panel:hover {
+  border-color: var(--line-h);
+  box-shadow: 0 6px 24px rgba(13, 79, 49, 0.10);
+}
+
+/* ── ANIMATION UTILITIES ── */
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes growX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes slideUp { from { transform: translateY(110%); } to { transform: none; } }
+@keyframes pulseDot { 0%,100%{ transform: scale(1); opacity:.9 } 50%{ transform: scale(1.45); opacity:1 } }
+
+.rise {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .55s var(--ease), transform .55s var(--ease);
+  transition-delay: var(--t, 0s);
+}
+
+.stage.is-animated .rise,
+body.is-animated .rise {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ══════════════════════════════════════════
+   ROW 1: HEADER — full width across both cols
+══════════════════════════════════════════ */
+.sec-head {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eyebrow {
+  display: flex; align-items: center; gap: 10px;
+  font: 700 11px/1 "Instrument Sans", sans-serif;
+  letter-spacing: .24em; text-transform: uppercase;
+  color: var(--green);
+}
+.eyebrow-bar {
+  display: inline-block; width: 26px; height: 2px;
+  background: var(--green); transform-origin: left;
+  animation: growX .65s .05s var(--ease) both;
+}
+
+h1 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 52px;
+  line-height: 1.05;
+  letter-spacing: -.025em;
+  color: var(--ink);
+}
+
+.headline-line { display: block; }
+
+/* ══════════════════════════════════════════
+   ROW 2: MATTER (Col 1, below Header)
+══════════════════════════════════════════ */
+.sec-matter {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  justify-content: center;
+}
+
+.lede {
+  font-family: "Newsreader", serif;
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 52ch;
+}
+
+/* ══════════════════════════════════════════
+   DIAGRAM (Col 2 row 2, parallel to matter)
+══════════════════════════════════════════ */
+.sec-diagram {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  box-sizing: border-box;
+  width: min(640px, calc(100% - 24px));
+  margin-left: 24px;
+  padding: 14px 0;
+  position: relative;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.diag-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+}
+
+.diag-eyebrow {
+  font: 700 10.5px/1 "Instrument Sans", sans-serif;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--green);
+}
+
+.diag-caption {
+  font-size: 9.5px; font-weight: 600; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted); opacity: .75;
+  text-align: right;
+}
+
+.dsvg {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.dsvg svg {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  max-height: none;
+}
+
+/* Legend directly inside Diagram */
+.diag-legend {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 8px;
+  margin-top: 2px;
+  width: 100%;
+}
+
+.leg-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  min-width: 0;
+  font: 600 11px/1.3 "Instrument Sans", sans-serif;
+  color: var(--ink);
+  text-align: left;
+}
+
+.leg-dot {
+  width: 8.5px; height: 8.5px; border-radius: 50%; flex: 0 0 8.5px;
+  background: var(--c);
+  animation: pulseDot 2.4s ease-in-out infinite;
+  animation-delay: var(--pd, 0s);
+}
+
+/* SVG Animations */
+@keyframes drawgut { from { stroke-dashoffset: 900 } to { stroke-dashoffset: 0 } }
+@keyframes marchdash { from { stroke-dashoffset: 0 } to { stroke-dashoffset: -40 } }
+@keyframes cappulse { 0%,100%{ transform: scale(1) } 50%{ transform: scale(1.15) } }
+@keyframes vibdrift { 0%{ transform: translateX(0); opacity: .9 } 70%{ transform: translateX(28px); opacity: .25 } 100%{ transform: translateX(0); opacity: .9 } }
+@keyframes sigring { 0%{ r: 5; opacity: .85 } 100%{ r: 22; opacity: 0 } }
+@keyframes prebfloat { 0%{ transform: translateY(0); opacity: .88 } 55%{ transform: translateY(-12px); opacity: .35 } 100%{ transform: translateY(0); opacity: .88 } }
+
+.gut-wall { stroke-dasharray: 900; stroke-dashoffset: 900; animation: drawgut 2s ease forwards; }
+.lumen { animation: marchdash 2.5s linear infinite; }
+.cap { animation: cappulse 2.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.cap:nth-child(2){ animation-delay: .20s }
+.cap:nth-child(3){ animation-delay: .40s }
+.cap:nth-child(4){ animation-delay: .60s }
+.cap:nth-child(5){ animation-delay: .80s }
+.vib1 { animation: vibdrift 7s ease-in-out infinite; }
+.vib2 { animation: vibdrift 7s ease-in-out 1.6s infinite; }
+.sring { animation: sigring 2.6s ease-out infinite; }
+.pd { animation: prebfloat 5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.pd:nth-child(2){ animation-delay: .9s }
+.pd:nth-child(3){ animation-delay: 1.8s }
+.pd:nth-child(4){ animation-delay: 2.7s }
+
+/* ══════════════════════════════════════════
+   ROW 3: HORIZONTAL BOXES (Full width, 4 Columns)
+══════════════════════════════════════════ */
+.sec-boxes {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.box {
+  padding: 18px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.box::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 0; height: 3px;
+  background: linear-gradient(90deg, var(--green), var(--glt));
+  transition: width .4s ease;
+}
+.box:hover {
+  background: var(--phov);
+  border-color: var(--line-h);
+  box-shadow: 0 4px 18px rgba(13, 79, 49, 0.12);
+}
+.box:hover::before { width: 100%; }
+
+.btag {
+  display: inline-flex; align-items: center;
+  padding: 2.5px 9px;
+  font: 700 9.5px/1 "Instrument Sans", sans-serif;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--green); background: rgba(31, 138, 87, 0.12);
+  border: 1px solid rgba(31, 138, 87, 0.24); border-radius: 3px;
+  width: fit-content;
+}
+.btag.both {
+  color: #6b7a00; background: rgba(138, 163, 28, 0.14);
+  border-color: rgba(138, 163, 28, 0.30);
+}
+
+.btit {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 17.5px;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.bbod {
+  font-family: "Newsreader", serif;
+  font-size: 14px;
+  line-height: 1.52;
+  color: var(--muted);
+}
+
+/* ══════════════════════════════════════════
+   ROW 4: CHART (Full width, bottom)
+══════════════════════════════════════════ */
+.sec-chart {
+  grid-column: 1 / -1;
+  grid-row: 4;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  padding: 18px 30px;
+  width: 100%;
+  min-width: 0;
+}
+
+.cleft {
+  flex: 0 1 400px;
+  width: 400px;
+  min-width: 0;
+  display: flex; flex-direction: column; gap: 4px;
+}
+
+.ctit {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.csub {
+  font-family: "Newsreader", serif;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.csrc {
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 11px;
+  color: var(--muted); opacity: .8;
+  margin-top: 2px;
+}
+
+.cright {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex; flex-direction: column;
+  justify-content: center; gap: 12px;
+}
+
+.bbar {
+  display: grid;
+  grid-template-columns: minmax(96px, 124px) minmax(0, 1fr) 88px;
+  align-items: center;
+  gap: 12px;
+}
+
+.blbl {
+  min-width: 0;
+  font-family: "Instrument Sans", sans-serif;
+  font-size: clamp(11px, 1vw, 13px); font-weight: 700;
+  line-height: 1.25;
+  color: var(--ink); text-align: right;
+}
+.blbl span { display: block; font-weight: 400; font-size: 9.5px; line-height: 1.3; color: var(--muted); }
+
+.btrk {
+  width: 100%; min-width: 0; height: 14px;
+  background: var(--track); border-radius: 99px;
+  overflow: hidden;
+}
+
+.bfil {
+  height: 100%; border-radius: 99px;
+  background: linear-gradient(90deg, var(--glt), var(--green));
+  width: 0%;
+  transition: width 1.4s var(--ease);
+}
+
+.bcnt {
+  min-width: 0;
+  font-family: "Instrument Sans", sans-serif;
+  font-size: clamp(10px, 1vw, 13px); font-weight: 700;
+  color: var(--green); text-align: left;
+  white-space: nowrap;
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE (≤ 860px)
+══════════════════════════════════════════ */
+@media(max-width:860px){
+  html, body { overflow: auto; height: auto; }
+  body { align-items: flex-start; }
+  #wrap { width: 100%; height: auto; transform: none !important; }
+  .stage, #stage {
+    width: 100%; height: auto;
+    padding: 24px clamp(20px, 5vw, 72px) 40px;
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  h1 { font-size: clamp(21px, 5vw, 32px); }
+  .sec-diagram {
+    width: 100%;
+    height: auto;
+    margin-left: 0;
+    padding: 14px 0;
+  }
+  .dsvg svg { max-width: 100%; }
+  .diag-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .diag-caption { text-align: left; }
+  .diag-legend {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+  .leg-row { font-size: 11px; }
+  .sec-boxes { grid-template-columns: 1fr; }
+  .sec-chart { flex-direction: column; gap: 16px; padding: 18px 16px; }
+  .cleft { flex: 0 1 auto; width: 100%; }
+  .cright { flex: 0 1 auto; width: 100%; }
+  .bbar { grid-template-columns: minmax(70px, .8fr) minmax(28px, 1fr) minmax(58px, auto); gap: 8px; }
+  .blbl { font-size: 11px; }
+  .blbl span { font-size: 9px; }
+  .bcnt { font-size: 10px; }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .eyebrow-bar { transform: scaleX(1); }
+  .rise { opacity: 1; transform: none; }
+  .gut-wall { stroke-dashoffset: 0; }
+  .bfil { width: var(--w) !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- 7 Drifting background dots -->
+<div class="dots-bg" aria-hidden="true">
+  <div class="dot" style="width:6px;height:6px;background:#5fbf86;top:11%;left:7%;animation:du 11s ease-in-out infinite;"></div>
+  <div class="dot" style="width:5px;height:5px;background:#1f8a57;top:34%;left:19%;animation:dd 13s ease-in-out 1.1s infinite;"></div>
+  <div class="dot" style="width:8px;height:8px;background:#8aa31c;top:61%;left:4%;animation:dl 9s ease-in-out 2.2s infinite;"></div>
+  <div class="dot" style="width:4px;height:4px;background:#0d4f31;top:78%;left:31%;animation:dr 14s ease-in-out 3s infinite;"></div>
+  <div class="dot" style="width:7px;height:7px;background:#5fbf86;top:19%;left:84%;animation:dd 10s ease-in-out .6s infinite;"></div>
+  <div class="dot" style="width:5px;height:5px;background:#8aa31c;top:71%;left:91%;animation:du 8s ease-in-out 1.6s infinite;"></div>
+  <div class="dot" style="width:6px;height:6px;background:#1f8a57;top:49%;left:73%;animation:dl 12s ease-in-out 2.8s infinite;"></div>
+</div>
+
+<!-- Scaled wrapper + stage -->
+<div id="wrap">
+<div class="stage" id="stage">
+
+  <!-- ── ROW 1: HEADER (Col 1) ── -->
+  <header class="sec-head rise" style="--t:0s">
+    <p class="eyebrow">
+      <span class="eyebrow-bar"></span>
+      Inside the shrimp
+    </p>
+    <h1>
+      <span class="headline-line">A healthy gut is the</span>
+      <span class="headline-line">first line of disease defence.</span>
+    </h1>
+  </header>
+
+  <!-- ── ROW 2: MATTER (Col 1, below Header) ── -->
+  <div class="sec-matter rise" style="--t:.05s">
+    <p class="lede">
+      Disease costs tropical shrimp farming up to 40% of production a year.
+      Many bacterial diseases, including <em>Vibrio</em> infections such as AHPND, start by colonising the gut.
+      Probiotics add beneficial bacteria. Prebiotics feed them. Together they restore a gut community that resists pathogens and turns more feed into growth.
+    </p>
+  </div>
+
+  <!-- ── DIAGRAM (Col 2, Spans Rows 1 & 2 beside Header & Matter) ── -->
+  <figure class="sec-diagram rise" style="--t:.05s" aria-label="Animated shrimp midgut cross-section">
+    <div class="diag-top">
+      <span class="diag-eyebrow">Shrimp midgut · cross-section</span>
+      <span class="diag-caption">Midgut schematic · not to scale</span>
+    </div>
+
+    <div class="dsvg">
+      <svg viewBox="0 0 320 150" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Schematic of shrimp midgut showing probiotics, Vibrio and prebiotics" role="img">
+        <!-- gut wall outer -->
+        <ellipse class="gut-wall" cx="160" cy="75" rx="148" ry="56" stroke="#1f8a57" stroke-width="2.5" fill="#f1faee"/>
+
+        <!-- lumen inner dashed -->
+        <ellipse class="lumen" cx="160" cy="75" rx="108" ry="36" stroke="#5fbf86" stroke-width="1.5" fill="none" stroke-dasharray="7 5"/>
+
+        <!-- 5 probiotic capsules top wall -->
+        <g class="cap"><rect x="44"  y="22" width="20" height="11" rx="5.5" fill="#5fbf86" opacity=".93"/></g>
+        <g class="cap"><rect x="85"  y="15" width="20" height="11" rx="5.5" fill="#5fbf86" opacity=".93"/></g>
+        <g class="cap"><rect x="150" y="12" width="20" height="11" rx="5.5" fill="#5fbf86" opacity=".93"/></g>
+        <g class="cap"><rect x="215" y="15" width="20" height="11" rx="5.5" fill="#5fbf86" opacity=".93"/></g>
+        <g class="cap"><rect x="256" y="22" width="20" height="11" rx="5.5" fill="#5fbf86" opacity=".93"/></g>
+        <!-- 5 probiotic capsules bottom wall -->
+        <g class="cap"><rect x="44"  y="117" width="20" height="11" rx="5.5" fill="#5fbf86" opacity=".93"/></g>
+        <g class="cap"><rect x="85"  y="124" width="20" height="11" rx="5.5" fill="#5fbf86" opacity=".93"/></g>
+        <g class="cap"><rect x="150" y="127" width="20" height="11" rx="5.5" fill="#5fbf86" opacity=".93"/></g>
+        <g class="cap"><rect x="215" y="124" width="20" height="11" rx="5.5" fill="#5fbf86" opacity=".93"/></g>
+        <g class="cap"><rect x="256" y="117" width="20" height="11" rx="5.5" fill="#5fbf86" opacity=".93"/></g>
+
+        <!-- Vibrio wavy lines -->
+        <g class="vib1">
+          <path d="M98 68 q9-9 18 0 q9 9 18 0 q9-9 18 0" stroke="#0d4f31" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        </g>
+        <g class="vib2">
+          <path d="M162 86 q8-8 16 0 q8 8 16 0 q8-8 16 0" stroke="#0d4f31" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        </g>
+
+        <!-- expanding signal ring -->
+        <circle class="sring" cx="116" cy="68" r="5" stroke="#1f8a57" stroke-width="1.5" fill="none"/>
+
+        <!-- 4 prebiotic lime dots -->
+        <g class="pd"><circle cx="131" cy="57" r="5.5" fill="#8aa31c" opacity=".88"/></g>
+        <g class="pd"><circle cx="187" cy="95" r="4.5" fill="#8aa31c" opacity=".88"/></g>
+        <g class="pd"><circle cx="203" cy="54" r="5"   fill="#8aa31c" opacity=".88"/></g>
+        <g class="pd"><circle cx="146" cy="99" r="4"   fill="#8aa31c" opacity=".88"/></g>
+      </svg>
+    </div>
+
+    <!-- Legend directly inside Diagram -->
+    <div class="diag-legend">
+      <div class="leg-row"><span class="leg-dot" style="--c:#1f8a57;--pd:0s"></span>Probiotics line the gut wall</div>
+      <div class="leg-row"><span class="leg-dot" style="--c:#c0392b;--pd:.4s"></span><em>Vibrio</em> blocked, signals silenced</div>
+      <div class="leg-row"><span class="leg-dot" style="--c:#8aa31c;--pd:.8s"></span>Prebiotics feed the good bacteria</div>
+    </div>
+  </figure>
+
+  <!-- ── ROW 3: HORIZONTAL BOXES (Full width, replacing table) ── -->
+  <div class="sec-boxes">
+    <div class="panel box rise" style="--t:.10s">
+      <span class="btag">Probiotic</span>
+      <h3 class="btit">Competitive exclusion</h3>
+      <p class="bbod">Beneficial bacteria occupy attachment sites and nutrients on the gut wall, leaving less room for <em>Vibrio</em>.</p>
+    </div>
+
+    <div class="panel box rise" style="--t:.15s">
+      <span class="btag">Probiotic</span>
+      <h3 class="btit">Quorum quenching</h3>
+      <p class="bbod">Some <em>Bacillus</em> produce AHL-lactonase, which breaks down the signals <em>Vibrio</em> use to coordinate attack, reducing biofilm and mortality.</p>
+    </div>
+
+    <div class="panel box rise" style="--t:.20s">
+      <span class="btag">Prebiotic</span>
+      <h3 class="btit">Feeding the good bacteria</h3>
+      <p class="bbod">Oligosaccharides and β-glucans feed beneficial bacteria. Together with probiotics they form a synbiotic.</p>
+    </div>
+
+    <div class="panel box rise" style="--t:.25s">
+      <span class="btag both">Both</span>
+      <h3 class="btit">Immune priming &amp; digestion</h3>
+      <p class="bbod">A balanced gut community supports immune response and digestive enzymes, so more feed converts to growth.</p>
+    </div>
+  </div>
+
+  <!-- ── ROW 4: CHART (Full width, at bottom) ── -->
+  <section class="panel sec-chart rise" id="chart" style="--t:.30s" aria-label="Pooled shrimp probiotic trial results">
+    <div class="cleft">
+      <h3 class="ctit">What pooled shrimp studies show</h3>
+      <p class="csub">Meta-analysis of probiotic trials. Every pooled effect was in the beneficial direction.</p>
+      <p class="csrc">Toledo et al. 2019, <em>Aquaculture</em>.</p>
+    </div>
+    <div class="cright">
+      <div class="bbar">
+        <div class="blbl">Survival<span>improvement ↑</span></div>
+        <div class="btrk"><div class="bfil" id="bf0" style="--w:100%"></div></div>
+        <div class="bcnt" id="bc0">0 exp.</div>
+      </div>
+      <div class="bbar">
+        <div class="blbl">Growth rate<span>improvement ↑</span></div>
+        <div class="btrk"><div class="bfil" id="bf1" style="--w:60%"></div></div>
+        <div class="bcnt" id="bc1">0 exp.</div>
+      </div>
+      <div class="bbar">
+        <div class="blbl">FCR<span>improvement ↓</span></div>
+        <div class="btrk"><div class="bfil" id="bf2" style="--w:49%"></div></div>
+        <div class="bcnt" id="bc2">0 exp.</div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /stage -->
+</div><!-- /wrap -->
+
+<script>
+(function(){
+  /* ── SCALE ── */
+  var wrap = document.getElementById('wrap');
+  function scale(){
+    if(new URLSearchParams(window.location.search).has('embed') || window.innerWidth <= 860){
+      wrap.style.transform='';
+      wrap.style.width='100%';
+      wrap.style.height='auto';
+      wrap.style.justifyContent='flex-start';
+      return;
+    }
+    var s = Math.min(window.innerWidth/1280, window.innerHeight/800);
+    wrap.style.transform = 'scale('+s+')';
+  }
+  scale();
+  window.addEventListener('resize', scale);
+
+  /* ── ANIMATE BARS & COUNTERS ── */
+  var bars = [
+    { fill: 'bf0', cnt: 'bc0', maxW: 100, maxN: 100 },
+    { fill: 'bf1', cnt: 'bc1', maxW: 60,  maxN: 60  },
+    { fill: 'bf2', cnt: 'bc2', maxW: 49,  maxN: 49  }
+  ];
+  function ease(t){ return 1-Math.pow(1-t,3); }
+
+  var ran = false;
+  function runBars(){
+    var stage = document.getElementById('stage') || document.querySelector('.stage') || document.body;
+    if (stage) stage.classList.add('is-animated');
+    if (ran) return;
+    ran = true;
+    var dur = 1400, stag = 180;
+    bars.forEach(function(b, i){
+      var fill = document.getElementById(b.fill);
+      var cnt  = document.getElementById(b.cnt);
+      if (!fill || !cnt) return;
+      var t0 = performance.now() + i * stag;
+      function step(now){
+        var p = Math.min(Math.max(0, now - t0) / dur, 1);
+        var e = ease(p);
+        fill.style.width = (e * b.maxW) + '%';
+        cnt.textContent  = Math.round(e * b.maxN) + ' exp.';
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  function resetBars(){
+    /* reveal once: no-op */
+  }
+
+  window.runBars = runBars;
+  window.resetBars = resetBars;
+
+  // Fallback: Ensure bars run and elements are revealed after 1.2s if trigger hasn't fired
+  setTimeout(function(){
+    var stage = document.getElementById('stage') || document.querySelector('.stage') || document.body;
+    if (stage) stage.classList.add('is-animated');
+    if (!ran) runBars();
+  }, 1200);
+})();
+</script>
+</body>
+</html>

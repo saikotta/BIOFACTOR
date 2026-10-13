@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useIframeSrc } from "../useIframeSrc";
 
 function fitFrame(frame: HTMLIFrameElement | null) {
   if (!frame) return;
@@ -18,6 +19,7 @@ function fitFrame(frame: HTMLIFrameElement | null) {
 
 export default function PoultryGutFrontline() {
   const frameRef = useRef<HTMLIFrameElement>(null);
+  const frameSrc = useIframeSrc("/first-colonisers.html");
 
   useEffect(() => {
     const frame = frameRef.current;
@@ -62,7 +64,7 @@ export default function PoultryGutFrontline() {
         <iframe
           ref={frameRef}
           className="block w-full border-0"
-          src="/first-colonisers.html"
+          src={frameSrc}
           title="First colonisers: how bacteria compete to establish in a chick's gut"
           loading="eager"
           style={{ height: "400px" }}

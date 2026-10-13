@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useIframeSrc } from "../useIframeSrc";
 
 interface GutFrameWindow extends Window {
   runBars?: () => void;
@@ -33,6 +34,7 @@ function fitGutFrame(frame: HTMLIFrameElement | null) {
 
 export default function GutHealthSection() {
   const frameRef = useRef<HTMLIFrameElement>(null);
+  const frameSrc = useIframeSrc("/shrimp-gut-health.html?embed=1");
 
   useEffect(() => {
     const frame = frameRef.current;
@@ -85,7 +87,7 @@ export default function GutHealthSection() {
       <iframe
         ref={frameRef}
         className="block w-full border-0"
-        src="/shrimp-gut-health.html?embed=1"
+        src={frameSrc}
         title="A healthy gut is the first line of disease defence"
         loading="eager"
         style={{ height: "760px" }}

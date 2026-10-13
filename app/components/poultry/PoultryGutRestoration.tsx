@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useIframeSrc } from "../useIframeSrc";
 
 function fitFrame(frame: HTMLIFrameElement | null) {
   if (!frame) return;
@@ -18,6 +19,7 @@ function fitFrame(frame: HTMLIFrameElement | null) {
 
 export default function PoultryGutRestoration() {
   const frameRef = useRef<HTMLIFrameElement>(null);
+  const frameSrc = useIframeSrc("/poultry-gut-ledger.html");
 
   useEffect(() => {
     const frame = frameRef.current;
@@ -62,7 +64,7 @@ export default function PoultryGutRestoration() {
         <iframe
           ref={frameRef}
           className="block w-full border-0"
-          src="/poultry-gut-ledger.html"
+          src={frameSrc}
           title="Probiotics and prebiotics comparison ledger"
           loading="eager"
           style={{ height: "400px" }}

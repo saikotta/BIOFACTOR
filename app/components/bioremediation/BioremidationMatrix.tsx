@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useIframeSrc } from "../useIframeSrc";
 
 function fitFrame(frame: HTMLIFrameElement | null) {
   const layout = frame?.contentDocument?.querySelector(".frame");
@@ -9,6 +10,7 @@ function fitFrame(frame: HTMLIFrameElement | null) {
 
 export default function BioremidationMatrix() {
   const frameRef = useRef<HTMLIFrameElement>(null);
+  const frameSrc = useIframeSrc("/bioremediation-treatment-chain.html?v=1");
 
   useEffect(() => {
     let resizeTimer = 0;
@@ -68,7 +70,7 @@ export default function BioremidationMatrix() {
       <iframe
         ref={frameRef}
         className="block w-full border-0"
-        src="/bioremediation-treatment-chain.html?v=1"
+        src={frameSrc}
         title="Bioremediation across the treatment chain"
         loading="eager"
         style={{ height: "1200px" }}

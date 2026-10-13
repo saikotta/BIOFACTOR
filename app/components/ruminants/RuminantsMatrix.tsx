@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useIframeSrc } from "../useIframeSrc";
 
 function fitFrame(frame: HTMLIFrameElement | null) {
   const layout = frame?.contentDocument?.querySelector(".frame");
@@ -9,6 +10,7 @@ function fitFrame(frame: HTMLIFrameElement | null) {
 
 export default function RuminantsMatrix() {
   const frameRef = useRef<HTMLIFrameElement>(null);
+  const frameSrc = useIframeSrc("/ruminants-production-stages.html?v=1");
 
   useEffect(() => {
     let resizeTimer = 0;
@@ -63,7 +65,7 @@ export default function RuminantsMatrix() {
       <iframe
         ref={frameRef}
         className="block w-full border-0"
-        src="/ruminants-production-stages.html?v=1"
+        src={frameSrc}
         title="Ruminant biology across life stages"
         loading="eager"
         style={{ height: "1600px" }}

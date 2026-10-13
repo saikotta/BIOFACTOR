@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useIframeSrc } from "../useIframeSrc";
 
 function fitFrame(frame: HTMLIFrameElement | null) {
   if (!frame || !frame.contentDocument) return;
@@ -13,6 +14,7 @@ function fitFrame(frame: HTMLIFrameElement | null) {
 
 export default function CultureCycleTable() {
   const frameRef = useRef<HTMLIFrameElement>(null);
+  const frameSrc = useIframeSrc("/aquaculture-culture-cycle.html?v=2");
 
   useEffect(() => {
     const frame = frameRef.current;
@@ -102,7 +104,7 @@ export default function CultureCycleTable() {
       <iframe
         ref={frameRef}
         className="block w-full border-0"
-        src="/aquaculture-culture-cycle.html?v=2"
+        src={frameSrc}
         title="Aquaculture biology across culture cycle"
         loading="eager"
         style={{ height: "780px" }}

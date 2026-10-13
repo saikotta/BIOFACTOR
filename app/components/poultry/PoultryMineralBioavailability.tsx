@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useIframeSrc } from "../useIframeSrc";
 
 function fitFrame(frame: HTMLIFrameElement | null) {
   if (!frame) return;
@@ -18,6 +19,7 @@ function fitFrame(frame: HTMLIFrameElement | null) {
 
 export default function PoultryMineralBioavailability() {
   const frameRef = useRef<HTMLIFrameElement>(null);
+  const frameSrc = useIframeSrc("/poultry-mineral-bioavailability.html?v=2");
 
   useEffect(() => {
     const frame = frameRef.current;
@@ -62,7 +64,7 @@ export default function PoultryMineralBioavailability() {
         <iframe
           ref={frameRef}
           className="block w-full border-0"
-          src="/poultry-mineral-bioavailability.html?v=2"
+          src={frameSrc}
           title="Mineral bioavailability"
           loading="eager"
           style={{ height: "400px" }}

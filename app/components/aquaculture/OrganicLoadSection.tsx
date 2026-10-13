@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useIframeSrc } from "../useIframeSrc";
 
 function fitFrame(frame: HTMLIFrameElement | null) {
   if (!frame) return;
@@ -16,6 +17,7 @@ function fitFrame(frame: HTMLIFrameElement | null) {
 
 export default function OrganicLoadSection() {
   const frameRef = useRef<HTMLIFrameElement>(null);
+  const frameSrc = useIframeSrc("/pond-floor.html");
 
   useEffect(() => {
     const frame = frameRef.current;
@@ -57,7 +59,7 @@ export default function OrganicLoadSection() {
     >
       <iframe
         ref={frameRef}
-        src="/pond-floor.html"
+        src={frameSrc}
         title="Inside the pond floor: where toxins are born"
         className="block w-full border-0"
         loading="eager"

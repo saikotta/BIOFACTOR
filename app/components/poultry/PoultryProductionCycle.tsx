@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useIframeSrc } from "../useIframeSrc";
 
 function fitFrame(frame: HTMLIFrameElement | null) {
   if (!frame) return;
@@ -18,6 +19,7 @@ function fitFrame(frame: HTMLIFrameElement | null) {
 
 export default function PoultryProductionCycle() {
   const frameRef = useRef<HTMLIFrameElement>(null);
+  const frameSrc = useIframeSrc("/poultry-production-stages.html?v=1");
 
   useEffect(() => {
     const frame = frameRef.current;
@@ -94,7 +96,7 @@ export default function PoultryProductionCycle() {
         <iframe
           ref={frameRef}
           className="block w-full border-0"
-          src="/poultry-production-stages.html?v=1"
+          src={frameSrc}
           title="Poultry biology across life stages"
           loading="eager"
           style={{ height: "1200px" }}
