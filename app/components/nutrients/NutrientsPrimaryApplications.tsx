@@ -84,7 +84,7 @@ export default function NutrientsPrimaryApplications() {
                   {t("nutrients_n_row2_title", "FIXATION CAPACITY")}
                 </span>
                 <span className="sm:col-span-2 text-sm sm:text-base text-[#173522]/90 font-sans">
-                  <strong>Up to 311 kg N/ha</strong> {t("nutrients_n_row2_desc", "reported for faba bean; up to 389 kg N/ha for red clover.")}
+                  <strong>{t("nutrients_n_row2_value", "Up to 311 kg N/ha")}</strong> {t("nutrients_n_row2_desc", "reported for faba bean; up to 389 kg N/ha for red clover.")}
                 </span>
               </div>
             </div>
@@ -123,7 +123,7 @@ export default function NutrientsPrimaryApplications() {
                   {t("nutrients_p_row1_title", "ORGANIC ACIDS")}
                 </span>
                 <span className="sm:col-span-2 text-sm sm:text-base text-[#173522]/90 font-sans">
-                  <strong>Gluconic, citric &amp; oxalic acids</strong> {t("nutrients_p_row1_desc", "release bound phosphate from calcium and iron complexes.")}
+                  <strong>{t("nutrients_p_row1_compounds", "Gluconic, citric & oxalic acids")}</strong> {t("nutrients_p_row1_desc", "release bound phosphate from calcium and iron complexes.")}
                 </span>
               </div>
 
@@ -255,7 +255,7 @@ export default function NutrientsPrimaryApplications() {
                   {t("nutrients_k_row1_title", "DIRECT RECOVERY")}
                 </span>
                 <span className="sm:col-span-2 text-sm sm:text-base text-[#173522]/90 font-sans">
-                  <strong>Only 2–10%</strong> {t("nutrients_k_row1_desc", "of soil K is in water-soluble & exchangeable forms roots can take up directly.")}
+                  <strong>{t("nutrients_k_row1_amount", "Only 2–10%")}</strong> {t("nutrients_k_row1_desc", "of soil K is in water-soluble & exchangeable forms roots can take up directly.")}
                 </span>
               </div>
 
@@ -264,7 +264,7 @@ export default function NutrientsPrimaryApplications() {
                   {t("nutrients_k_row2_title", "WEATHERING MECHANISM")}
                 </span>
                 <span className="sm:col-span-2 text-sm sm:text-base text-[#173522]/90 font-sans">
-                  <strong>Acidolysis &amp; chelation</strong> {t("nutrients_k_row2_desc", "break silicate lattices to release soluble potassium ions.")}
+                  <strong>{t("nutrients_k_row2_process", "Acidolysis & chelation")}</strong> {t("nutrients_k_row2_desc", "break silicate lattices to release soluble potassium ions.")}
                 </span>
               </div>
             </div>

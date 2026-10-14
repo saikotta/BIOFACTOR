@@ -111,6 +111,8 @@ export default function CareersPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const displayJobs = jobOpenings.length > 0 ? jobOpenings : DEMO_JOBS;
+  const jobText = (job: JobOpening, field: string, fallback: string) =>
+    job.is_demo ? t(`careers_${job.id}_${field}`, fallback) : fallback;
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -575,9 +577,9 @@ export default function CareersPage() {
                     <div className="flex justify-between items-start gap-3 mb-6">
                       <div>
                         <h3 className="text-xl font-bold text-[#173522] group-hover:text-[#2D6A4F] transition-colors mb-1">
-                          {job.title}
+                          {jobText(job, "title", job.title)}
                         </h3>
-                        <p className="text-sm font-semibold text-[#2D6A4F]">{job.department}</p>
+                        <p className="text-sm font-semibold text-[#2D6A4F]">{jobText(job, "department", job.department)}</p>
                       </div>
                       <div className="flex flex-col items-end gap-1.5 shrink-0">
                         {job.is_demo && (
@@ -586,7 +588,7 @@ export default function CareersPage() {
                           </span>
                         )}
                         <span className="px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#EAF3EA] text-[#2D6A4F]">
-                          {job.job_type}
+                          {jobText(job, "job_type", job.job_type)}
                         </span>
                       </div>
                     </div>
@@ -595,21 +597,21 @@ export default function CareersPage() {
                       <div className="flex items-center gap-6 text-sm text-[#173522]/80 font-medium">
                         <span className="flex items-center gap-2">
                           <FiMapPin className="text-[#2D6A4F]" />
-                          {job.location}
+                          {job.is_demo ? t("careers_hyderabad_location", job.location) : job.location}
                         </span>
                         <span className="flex items-center gap-2">
                           <FiBriefcase className="text-[#2D6A4F]" />
-                          {job.experience}
+                          {jobText(job, "experience", job.experience)}
                         </span>
                       </div>
                       <div className="text-[#173522]/90 leading-relaxed text-sm font-sans">
-                        {job.description}
+                        {jobText(job, "description", job.description)}
                       </div>
                       {job.responsibilities && (
                         <div className="mt-4">
                           <h4 className="font-bold text-[#173522] text-sm mb-2">{t("careers_what_you_will_do", "What You'll Do:")}</h4>
                           <div className="text-[#173522]/80 text-sm leading-relaxed whitespace-pre-line font-sans">
-                            {job.responsibilities}
+                            {jobText(job, "responsibilities", job.responsibilities)}
                           </div>
                         </div>
                       )}
@@ -624,7 +626,7 @@ export default function CareersPage() {
                               key={idx} 
                               className="px-3 py-1 rounded-full text-xs font-medium bg-[#EAF3EA] text-[#173522]"
                             >
-                              {skill}
+                              {jobText(job, `skill_${idx + 1}`, skill)}
                             </span>
                           ))}
                         </div>
@@ -722,12 +724,12 @@ export default function CareersPage() {
                 <FiX />
               </button>
 
-              <h2 className="text-2xl font-bold text-[#173522] mb-2">Apply for {selectedJob.title}</h2>
-              <p className="text-[#173522]/70 mb-6 text-sm">Fill in your details to submit your application.</p>
+              <h2 className="text-2xl font-bold text-[#173522] mb-2">{t("careers_apply_for", "Apply for")} {jobText(selectedJob, "title", selectedJob.title)}</h2>
+              <p className="text-[#173522]/70 mb-6 text-sm">{t("careers_application_intro", "Fill in your details to submit your application.")}</p>
 
               <form onSubmit={handleApplicationSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-semibold text-[#173522] mb-1">Full Name *</label>
+                  <label className="block text-sm font-semibold text-[#173522] mb-1">{t("careers_full_name", "Full Name")} *</label>
                   <input 
                     type="text" 
                     required
@@ -739,7 +741,7 @@ export default function CareersPage() {
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-[#173522] mb-1">Email Address *</label>
+                    <label className="block text-sm font-semibold text-[#173522] mb-1">{t("careers_email_address", "Email Address")} *</label>
                     <input 
                       type="email" 
                       required
@@ -750,7 +752,7 @@ export default function CareersPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-[#173522] mb-1">Phone Number *</label>
+                    <label className="block text-sm font-semibold text-[#173522] mb-1">{t("careers_phone_number", "Phone Number")} *</label>
                     <input 
                       type="tel" 
                       required
@@ -763,7 +765,7 @@ export default function CareersPage() {
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-[#173522] mb-1">Current Company</label>
+                    <label className="block text-sm font-semibold text-[#173522] mb-1">{t("careers_current_company", "Current Company")}</label>
                     <input 
                       type="text" 
                       value={applicationForm.current_company}
@@ -773,7 +775,7 @@ export default function CareersPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-[#173522] mb-1">Years of Experience</label>
+                    <label className="block text-sm font-semibold text-[#173522] mb-1">{t("careers_years_experience", "Years of Experience")}</label>
                     <input 
                       type="text" 
                       value={applicationForm.experience_years}
@@ -784,7 +786,7 @@ export default function CareersPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-[#173522] mb-1">LinkedIn Profile URL</label>
+                  <label className="block text-sm font-semibold text-[#173522] mb-1">{t("careers_linkedin_url", "LinkedIn Profile URL")}</label>
                   <input 
                     type="url" 
                     value={applicationForm.linkedin_url}
@@ -795,7 +797,7 @@ export default function CareersPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-[#173522] mb-1">Upload Resume (PDF / DOCX, max 5MB)</label>
+                  <label className="block text-sm font-semibold text-[#173522] mb-1">{t("careers_upload_resume", "Upload Resume (PDF / DOCX, max 5MB)")}</label>
                   <input 
                     type="file" 
                     accept=".pdf,.doc,.docx"
@@ -805,7 +807,7 @@ export default function CareersPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-[#173522] mb-1">Cover Letter / Note</label>
+                  <label className="block text-sm font-semibold text-[#173522] mb-1">{t("careers_cover_letter", "Cover Letter / Note")}</label>
                   <textarea 
                     rows={3}
                     value={applicationForm.cover_letter}
@@ -821,7 +823,7 @@ export default function CareersPage() {
                     onClick={() => setIsApplying(false)}
                     className="px-6 py-2.5 border border-gray-300 rounded-xl text-gray-700 font-semibold hover:bg-gray-50 cursor-pointer"
                   >
-                    Cancel
+                    {t("careers_cancel", "Cancel")}
                   </button>
                   <button 
                     type="submit" 
@@ -830,10 +832,10 @@ export default function CareersPage() {
                   >
                     {isSubmitting ? (
                       <>
-                        <FiLoader className="animate-spin" /> Submitting...
+                        <FiLoader className="animate-spin" /> {t("careers_submitting", "Submitting...")}
                       </>
                     ) : (
-                      'Submit Application'
+                      t("careers_submit_application", "Submit Application")
                     )}
                   </button>
                 </div>
@@ -872,7 +874,7 @@ export default function CareersPage() {
                 </div>
                 <div>
                   <h2 id="hr-dialog-title" className="text-lg font-bold text-[#173522] leading-snug">
-                    Contact HR Department
+                    {t("careers_contact_hr", "Contact HR Department")}
                   </h2>
                   <p className="text-xs text-[#173522]/65 font-medium">Biofactor Biologicals</p>
                 </div>
@@ -885,7 +887,7 @@ export default function CareersPage() {
                 <div className="flex items-start gap-3">
                   <FiMail className="text-[#2D6A4F] text-base mt-0.5 shrink-0" />
                   <div>
-                    <span className="text-[11px] font-mono font-semibold text-[#173522]/50 uppercase tracking-wider block">Email</span>
+                    <span className="text-[11px] font-mono font-semibold text-[#173522]/50 uppercase tracking-wider block">{t("careers_email", "Email")}</span>
                     <a href="mailto:info@biofactor.in" className="font-semibold text-[#173522] hover:text-[#2D6A4F] transition-colors">
                       info@biofactor.in
                     </a>
@@ -895,7 +897,7 @@ export default function CareersPage() {
                 <div className="flex items-start gap-3">
                   <FiMapPin className="text-[#2D6A4F] text-base mt-0.5 shrink-0" />
                   <div>
-                    <span className="text-[11px] font-mono font-semibold text-[#173522]/50 uppercase tracking-wider block">Phone</span>
+                    <span className="text-[11px] font-mono font-semibold text-[#173522]/50 uppercase tracking-wider block">{t("careers_phone", "Phone")}</span>
                     <a href="tel:7013074400" className="font-semibold text-[#173522] hover:text-[#2D6A4F] transition-colors">
                       +91 7013074400
                     </a>
@@ -905,7 +907,7 @@ export default function CareersPage() {
                 <div className="flex items-start gap-3">
                   <FiBriefcase className="text-[#2D6A4F] text-base mt-0.5 shrink-0" />
                   <div>
-                    <span className="text-[11px] font-mono font-semibold text-[#173522]/50 uppercase tracking-wider block">Visiting Hours</span>
+                    <span className="text-[11px] font-mono font-semibold text-[#173522]/50 uppercase tracking-wider block">{t("careers_visiting_hours", "Visiting Hours")}</span>
                     <p className="text-[#173522]/80 text-xs leading-relaxed font-medium">
                       9:30 AM – 6:30 PM, Monday to Saturday
                     </p>
@@ -915,7 +917,7 @@ export default function CareersPage() {
                 <div className="flex items-start gap-3">
                   <FiMapPin className="text-[#2D6A4F] text-base mt-0.5 shrink-0" />
                   <div>
-                    <span className="text-[11px] font-mono font-semibold text-[#173522]/50 uppercase tracking-wider block">Head Office</span>
+                    <span className="text-[11px] font-mono font-semibold text-[#173522]/50 uppercase tracking-wider block">{t("careers_head_office", "Head Office")}</span>
                     <p className="text-[#173522]/80 text-xs leading-relaxed font-medium">
                       Hyderabad, Telangana 500090
                     </p>

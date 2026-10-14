@@ -14,7 +14,7 @@ export default function RuminantsDataStrip() {
       sup: "",
     },
     {
-      value: "up to 12%",
+      value: t("ruminants_data_methane_value"),
       desc: t("ruminants_data_methane_desc"),
       source: t("ruminants_data_methane_source"),
       sup: "",

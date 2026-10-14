@@ -35,7 +35,7 @@ export default function BiofactorHero() {
               <span className="flex flex-col md:flex-row items-start md:items-end justify-center gap-y-3 md:gap-x-2 sm:gap-x-2.5 lg:gap-x-3 mt-1 md:mt-0">
                 <span className="text-[#EAF3EA] leading-none">IS REALLY</span>
                 <span className={`${styles.smallWord} inline-flex shrink-0 items-center justify-center px-4 sm:px-3 md:px-4 lg:px-4 py-1 sm:py-0.5 md:py-1 lg:py-1.5 text-[12px] sm:text-[10px] md:text-[12px] lg:text-[14px] font-mono font-bold tracking-[0.2em] normal-case text-white bg-[#1a4225] rounded-full shadow-sm select-none whitespace-nowrap border-none`}>
-                  Small.
+                  {t("hero_small_word", "Small.")}
                 </span>
               </span>
             </>

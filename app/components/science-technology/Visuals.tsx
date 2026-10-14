@@ -1,9 +1,17 @@
 "use client";
 
 import React from "react";
+import { useTranslation } from "../../i18n";
 
 export function Visual01() {
-  const stages = ["strain", "isolated", "characterized", "tested", "formulation"];
+  const { t } = useTranslation();
+  const stages = [
+    t("science_visual_stage_strain", "strain"),
+    t("science_visual_stage_isolated", "isolated"),
+    t("science_visual_stage_characterized", "characterized"),
+    t("science_visual_stage_tested", "tested"),
+    t("science_visual_stage_formulation", "formulation"),
+  ];
   const dots = Array.from({ length: 60 });
 
   return (
@@ -31,7 +39,7 @@ export function Visual01() {
         className="st-tg"
         style={{ "--i": 5, position: "static", alignSelf: "flex-start" } as React.CSSProperties}
       >
-        350+ MICROBIAL STRAIN BANK
+        {t("science_visual_strain_bank", "350+ MICROBIAL STRAIN BANK")}
       </span>
 
       <style jsx>{`
@@ -189,6 +197,7 @@ export function Visual01() {
 }
 
 export function Visual02() {
+  const { t } = useTranslation();
   const paths = [
     "M200 200Q150 130 95 95",
     "M200 200Q270 150 320 120",
@@ -248,13 +257,13 @@ export function Visual02() {
       />
 
       <text x="95" y="146" textAnchor="middle" fill="#143324">
-        an enzyme
+        {t("science_visual_enzyme", "an enzyme")}
       </text>
       <text x="320" y="172" textAnchor="middle" fill="#143324">
-        an acid
+        {t("science_visual_acid", "an acid")}
       </text>
       <text x="200" y="372" textAnchor="middle" fill="#143324">
-        a signal molecule
+        {t("science_visual_signal", "a signal molecule")}
       </text>
 
       <style jsx>{`
@@ -269,26 +278,27 @@ export function Visual02() {
 }
 
 export function Visual03() {
+  const { t } = useTranslation();
   return (
     <svg viewBox="0 0 400 400" className="st-v-svg" aria-hidden="true">
       {/* --- INTEGRATED SCIENTIFIC DIAGRAM ANNOTATIONS --- */}
       {/* 01: Left Microbial Community Annotation */}
       <text x="60" y="110" textAnchor="middle" fill="#143324" style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.6px" }}>
         <tspan x="60" dy="0" fill="#1F7A4D" style={{ fontSize: "12px", fontWeight: 800 }}>01</tspan>
-        <tspan x="60" dy="14">MICROBIAL COMMUNITY</tspan>
+        <tspan x="60" dy="14">{t("science_visual_microbial_community", "MICROBIAL COMMUNITY")}</tspan>
       </text>
 
       {/* 02: Center Metabolites + Synergy Annotation */}
       <text x="205" y="110" textAnchor="middle" fill="#143324" style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.6px" }}>
         <tspan x="205" dy="0" fill="#1F7A4D" style={{ fontSize: "12px", fontWeight: 800 }}>02</tspan>
-        <tspan x="205" dy="14">METABOLITES + SYNERGY</tspan>
+        <tspan x="205" dy="14">{t("science_visual_metabolites_synergy", "METABOLITES + SYNERGY")}</tspan>
       </text>
 
       {/* 03: Right Biological Performance Annotation */}
       <text x="340" y="110" textAnchor="middle" fill="#143324" style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.6px" }}>
         <tspan x="340" dy="0" fill="#1F7A4D" style={{ fontSize: "12px", fontWeight: 800 }}>03</tspan>
-        <tspan x="340" dy="14">BIOLOGICAL</tspan>
-        <tspan x="340" dy="12">PERFORMANCE</tspan>
+        <tspan x="340" dy="14">{t("science_visual_biological", "BIOLOGICAL")}</tspan>
+        <tspan x="340" dy="12">{t("science_visual_performance", "PERFORMANCE")}</tspan>
       </text>
 
       {/* --- 1. LEFT SIDE / SOURCE: MICROBIAL COMMUNITY (6 abstract microbes) --- */}
@@ -470,6 +480,7 @@ export function Visual03() {
 }
 
 export function Visual04() {
+  const { t } = useTranslation();
   return (
     <svg viewBox="0 0 400 400" className="st-v-svg" aria-hidden="true">
       <circle
@@ -510,13 +521,13 @@ export function Visual04() {
       <circle className="rp" cx="200" cy="198" r="16" fill="none" stroke="#1F7A4D" />
 
       <text x="200" y="38" textAnchor="middle" fill="#143324">
-        microbiology
+        {t("science_visual_microbiology", "microbiology")}
       </text>
       <text x="8" y="318" textAnchor="start" fill="#143324">
-        mineral science
+        {t("science_visual_mineral_science", "mineral science")}
       </text>
       <text x="392" y="318" textAnchor="end" fill="#143324">
-        delivery technology
+        {t("science_visual_delivery_technology", "delivery technology")}
       </text>
       <text
         x="200"
@@ -524,7 +535,7 @@ export function Visual04() {
         textAnchor="middle"
         style={{ fontWeight: 700, fill: "#1F7A4D" }}
       >
-        Microbe &amp; Mineral™
+        {t("science_visual_microbe_mineral", "Microbe & Mineral™")}
       </text>
 
       <style jsx>{`
@@ -552,10 +563,11 @@ export function Visual04() {
 }
 
 export function Visual05() {
+  const { t } = useTranslation();
   const environments = [
-    { label: "soil", cls: "so" },
-    { label: "water", cls: "wa" },
-    { label: "gut systems", cls: "gu" },
+    { label: t("science_visual_soil", "soil"), cls: "so" },
+    { label: t("science_visual_water", "water"), cls: "wa" },
+    { label: t("science_visual_gut_systems", "gut systems"), cls: "gu" },
   ];
 
   return (
@@ -739,6 +751,7 @@ export function Visual05() {
   );
 }
 export function Visual06() {
+  const { t } = useTranslation();
   return (
     <svg viewBox="0 0 400 400" className="st-v-svg" aria-hidden="true">
       {/* Orbital Connecting Pathway */}
@@ -787,11 +800,11 @@ export function Visual06() {
           />
         </circle>
         <text x="0" y="4" textAnchor="middle" fill="#6B4226" style={{ fontSize: "10px", fontWeight: 700 }}>
-          45°
+          {t("science_visual_temp", "45°C")}
         </text>
       </g>
       <text x="70" y="42" textAnchor="middle" fill="#6B4226" style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.5px" }}>
-        45°C HEAT
+        {t("science_visual_heat", "45°C HEAT")}
       </text>
 
       {/* ===================================================
@@ -805,7 +818,7 @@ export function Visual06() {
         </circle>
       </g>
       <text x="330" y="42" textAnchor="middle" fill="#143324" style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.5px" }}>
-        STORAGE
+        {t("science_visual_storage", "STORAGE")}
       </text>
 
       {/* ===================================================
@@ -824,7 +837,7 @@ export function Visual06() {
         </circle>
       </g>
       <text x="70" y="338" textAnchor="middle" fill="#143324" style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.5px" }}>
-        TRANSPORT
+        {t("science_visual_transport", "TRANSPORT")}
       </text>
 
       {/* ===================================================
@@ -840,7 +853,7 @@ export function Visual06() {
         </circle>
       </g>
       <text x="330" y="338" textAnchor="middle" fill="#143324" style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.5px" }}>
-        FIELD APPLICATION
+        {t("science_visual_field_application", "FIELD APPLICATION")}
       </text>
 
       {/* ===================================================

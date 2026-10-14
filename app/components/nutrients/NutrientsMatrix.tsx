@@ -221,11 +221,11 @@ export default function NutrientsMatrix() {
                 {/* Side Root Branch */}
                 <path d="M 80 85 Q 115 120 150 155" fill="none" stroke="#173522" strokeWidth="4" strokeLinecap="round" />
                 {/* ROOT Label */}
-                <text x="68" y="198" fill="#2D6A4F" fontSize="11" fontWeight="bold">ROOT</text>
+                <text x="68" y="198" fill="#2D6A4F" fontSize="11" fontWeight="bold">{t("nutrients_diagram_root", "ROOT")}</text>
 
                 {/* Exudates Signal Arrow */}
                 <path d="M 115 60 Q 280 15 440 60" fill="none" stroke="#2D6A4F" strokeWidth="2.5" strokeDasharray="6 4" markerEnd="url(#green-arrow)" />
-                <text x="200" y="32" fill="#2D6A4F" fontSize="11" fontWeight="bold" letterSpacing="0.1em">EXUDATES · SIGNALS</text>
+                <text x="200" y="32" fill="#2D6A4F" fontSize="11" fontWeight="bold" letterSpacing="0.1em">{t("nutrients_diagram_exudates", "EXUDATES · SIGNALS")}</text>
 
                 {/* Microbe Capsules */}
                 <g transform="translate(465, 35)">
@@ -243,7 +243,7 @@ export default function NutrientsMatrix() {
 
                 {/* Nutrients Released Arrow */}
                 <path d="M 465 150 Q 300 180 155 135" fill="none" stroke="#D97706" strokeWidth="2.5" strokeDasharray="6 4" markerEnd="url(#gold-arrow)" />
-                <text x="180" y="195" fill="#D97706" fontSize="11" fontWeight="bold" letterSpacing="0.1em">N · P · K · Zn · Fe RELEASED</text>
+                <text x="180" y="195" fill="#D97706" fontSize="11" fontWeight="bold" letterSpacing="0.1em">{t("nutrients_diagram_released", "N · P · K · Zn · Fe RELEASED")}</text>
 
                 {/* Arrowhead Definitions */}
                 <defs>

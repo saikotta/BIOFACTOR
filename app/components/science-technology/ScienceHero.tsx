@@ -68,12 +68,12 @@ export default function ScienceHero() {
             </>
           ) : (
             <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#143324] font-extrabold leading-tight">
-              {t("science_hero_title", HERO_CONTENT.h1Line1 + " " + HERO_CONTENT.h1Line2)}
+              {`${t("science_hero_h1_line1", HERO_CONTENT.h1Line1)} ${t("science_hero_h1_line2", HERO_CONTENT.h1Line2)}`}
             </span>
           )}
         </h1>
 
-        <p className="st-lede">{t("science_hero_subtitle", HERO_CONTENT.lede)}</p>
+        <p className="st-lede">{t("science_hero_lede", HERO_CONTENT.lede)}</p>
 
         <nav className="st-tiles-nav" aria-label="Technologies">
           {TILES.map((tile, index) => (

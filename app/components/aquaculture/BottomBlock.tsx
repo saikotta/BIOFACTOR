@@ -73,7 +73,7 @@ export default function BottomBlock() {
               viewBox="0 0 1092 465"
               xmlns="http://www.w3.org/2000/svg"
               style={{ width: "100%", display: "block" }}
-              aria-label="Cross-section showing pond-bottom organic matter settling into toxic gases"
+              aria-label={t("aqua_bottom_diagram_label")}
               role="img"
             >
               <defs>
@@ -93,12 +93,12 @@ export default function BottomBlock() {
               <line x1="0" y1="230" x2="1092" y2="230" stroke="#C58F4A" strokeWidth="2.5" />
               <line x1="0" y1="242" x2="1092" y2="242" stroke="#C58F4A" strokeWidth="1" strokeDasharray="4 6" opacity="0.5" />
 
-              <text x="546" y="38" textAnchor="middle" fontFamily="'JetBrains Mono', monospace" fontSize="12" fontWeight="600" fill="#10301f" letterSpacing="2.2">WATER COLUMN · SHRIMP</text>
-              <text x="546" y="220" textAnchor="middle" fontFamily="'JetBrains Mono', monospace" fontSize="11" fontWeight="500" fill="#7A5A2F" letterSpacing="1.8">SOIL-WATER INTERFACE · THIN OXIDISED LAYER</text>
-              <text x="546" y="448" textAnchor="middle" fontFamily="'JetBrains Mono', monospace" fontSize="11.5" fontWeight="500" fill="#D9A566" letterSpacing="2.2">ANAEROBIC SEDIMENT · NO OXYGEN</text>
+              <text x="546" y="38" textAnchor="middle" fontFamily="'JetBrains Mono', monospace" fontSize="12" fontWeight="600" fill="#10301f" letterSpacing="2.2">{t("aqua_bottom_diagram_water")}</text>
+              <text x="546" y="220" textAnchor="middle" fontFamily="'JetBrains Mono', monospace" fontSize="11" fontWeight="500" fill="#7A5A2F" letterSpacing="1.8">{t("aqua_bottom_diagram_interface")}</text>
+              <text x="546" y="448" textAnchor="middle" fontFamily="'JetBrains Mono', monospace" fontSize="11.5" fontWeight="500" fill="#D9A566" letterSpacing="2.2">{t("aqua_bottom_diagram_sediment")}</text>
 
-              <text x="42" y="52" fontFamily="'Newsreader', serif" fontSize="14" fill="#3C5C48" fontWeight="500">Feed, faeces, dead plankton</text>
-              <text x="42" y="70" fontFamily="'Newsreader', serif" fontSize="14" fill="#3C5C48" fontWeight="500">settle daily</text>
+              <text x="42" y="52" fontFamily="'Newsreader', serif" fontSize="14" fill="#3C5C48" fontWeight="500">{t("aqua_bottom_diagram_settle_1")}</text>
+              <text x="42" y="70" fontFamily="'Newsreader', serif" fontSize="14" fill="#3C5C48" fontWeight="500">{t("aqua_bottom_diagram_settle_2")}</text>
 
               <line x1="440" y1="90" x2="440" y2="270" stroke="#D6456A" strokeWidth="2.2" strokeDasharray="6 5" className="flow" />
               <line x1="620" y1="120" x2="620" y2="270" stroke="#D6456A" strokeWidth="2.2" strokeDasharray="6 5" className="flow" />
@@ -108,13 +108,13 @@ export default function BottomBlock() {
               <polygon points="613,120 627,120 620,112" fill="#D6456A" />
               <polygon points="793,60 807,60 800,52" fill="#D6456A" />
 
-              <text x="440" y="74" textAnchor="middle" fontFamily="'JetBrains Mono', monospace" fontSize="11.5" fontWeight="600" fill="#D6456A" letterSpacing="1.2">NH₃ · ammonia</text>
-              <text x="620" y="102" textAnchor="middle" fontFamily="'JetBrains Mono', monospace" fontSize="11.5" fontWeight="600" fill="#D6456A" letterSpacing="1.2">NO₂⁻ · nitrite</text>
-              <text x="800" y="42" textAnchor="middle" fontFamily="'JetBrains Mono', monospace" fontSize="11.5" fontWeight="600" fill="#D6456A" letterSpacing="1.2">H₂S · hydrogen sulphide</text>
+              <text x="440" y="74" textAnchor="middle" fontFamily="'JetBrains Mono', monospace" fontSize="11.5" fontWeight="600" fill="#D6456A" letterSpacing="1.2">NH₃ · {t("aqua_bottom_diagram_ammonia")}</text>
+              <text x="620" y="102" textAnchor="middle" fontFamily="'JetBrains Mono', monospace" fontSize="11.5" fontWeight="600" fill="#D6456A" letterSpacing="1.2">NO₂⁻ · {t("aqua_bottom_diagram_nitrite")}</text>
+              <text x="800" y="42" textAnchor="middle" fontFamily="'JetBrains Mono', monospace" fontSize="11.5" fontWeight="600" fill="#D6456A" letterSpacing="1.2">H₂S · {t("aqua_bottom_diagram_h2s")}</text>
 
-              <text x="330" y="315" textAnchor="middle" fontFamily="'Newsreader', serif" fontSize="14.5" fill="rgba(255,255,255,0.88)">Organic N → ammonia</text>
-              <text x="530" y="360" textAnchor="middle" fontFamily="'Newsreader', serif" fontSize="14.5" fill="rgba(255,255,255,0.88)">Incomplete nitrification</text>
-              <text x="750" y="315" textAnchor="middle" fontFamily="'Newsreader', serif" fontSize="14.5" fill="rgba(255,255,255,0.88)">Sulphate-reducing bacteria</text>
+              <text x="330" y="315" textAnchor="middle" fontFamily="'Newsreader', serif" fontSize="14.5" fill="rgba(255,255,255,0.88)">{t("aqua_bottom_diagram_organic_n")}</text>
+              <text x="530" y="360" textAnchor="middle" fontFamily="'Newsreader', serif" fontSize="14.5" fill="rgba(255,255,255,0.88)">{t("aqua_bottom_diagram_nitrification")}</text>
+              <text x="750" y="315" textAnchor="middle" fontFamily="'Newsreader', serif" fontSize="14.5" fill="rgba(255,255,255,0.88)">{t("aqua_bottom_diagram_sulphate_bacteria")}</text>
 
               <g>
                 <rect x="30" y="338" width="28" height="14" rx="7" fill="none" stroke="#7EE0A8" strokeWidth="1.5" />
@@ -122,8 +122,8 @@ export default function BottomBlock() {
                 <circle cx="104" cy="350" r="7" fill="none" stroke="#7EE0A8" strokeWidth="1.5" />
                 <circle cx="46" cy="362" r="5" fill="none" stroke="#7EE0A8" strokeWidth="1.5" />
                 <rect x="55" y="368" width="26" height="11" rx="5.5" fill="none" stroke="#7EE0A8" strokeWidth="1.5" />
-                <text x="30" y="396" fontFamily="'JetBrains Mono', monospace" fontSize="10" fontWeight="600" fill="#7EE0A8" letterSpacing="1.2">ANAEROBIC CONSORTIA</text>
-                <text x="30" y="412" fontFamily="'Newsreader', serif" fontSize="12" fill="#A8ECC7" opacity="0.85">digest the organic load</text>
+                <text x="30" y="396" fontFamily="'JetBrains Mono', monospace" fontSize="10" fontWeight="600" fill="#7EE0A8" letterSpacing="1.2">{t("aqua_bottom_diagram_consortia")}</text>
+                <text x="30" y="412" fontFamily="'Newsreader', serif" fontSize="12" fill="#A8ECC7" opacity="0.85">{t("aqua_bottom_diagram_digest")}</text>
               </g>
 
               <g>
@@ -132,8 +132,8 @@ export default function BottomBlock() {
                 <rect x="910" y="342" width="22" height="12" rx="6" fill="none" stroke="#7EE0A8" strokeWidth="1.5" />
                 <circle cx="946" cy="350" r="5" fill="none" stroke="#7EE0A8" strokeWidth="1.5" />
                 <rect x="878" y="358" width="26" height="11" rx="5.5" fill="none" stroke="#7EE0A8" strokeWidth="1.5" />
-                <text x="850" y="396" fontFamily="'JetBrains Mono', monospace" fontSize="10" fontWeight="600" fill="#7EE0A8" letterSpacing="1.2">DENITRIFIERS · SULPHIDE OXIDISERS</text>
-                <text x="860" y="412" fontFamily="'Newsreader', serif" fontSize="12" fill="#A8ECC7" opacity="0.85">N → N₂ gas · H₂S → sulphur</text>
+                <text x="850" y="396" fontFamily="'JetBrains Mono', monospace" fontSize="10" fontWeight="600" fill="#7EE0A8" letterSpacing="1.2">{t("aqua_bottom_diagram_denitrifiers")}</text>
+                <text x="860" y="412" fontFamily="'Newsreader', serif" fontSize="12" fill="#A8ECC7" opacity="0.85">{t("aqua_bottom_diagram_reactions")}</text>
               </g>
             </svg>
           </div>

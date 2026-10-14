@@ -80,10 +80,10 @@ export default function RuminantsRumenFactory() {
               {/* LEFT INPUT WITH FLOW PATHWAY */}
               <g transform="translate(20, 35)">
                 <text x="0" y="0" fill="#167A4A" fontSize="12" fontFamily="monospace" fontWeight="700" letterSpacing="1">
-                  FEED IN
+                  {t("ruminants_diagram_feed_label")}
                 </text>
                 <text x="0" y="18" fill="#26382D" fontSize="12" fontFamily="monospace" opacity="0.8">
-                  fibre · starch · protein
+                  {t("ruminants_diagram_feed_components")}
                 </text>
 
                 {/* Animated Flow pathway into Petri dish */}
@@ -95,7 +95,7 @@ export default function RuminantsRumenFactory() {
               <g transform="translate(260, 10)">
                 {/* Top Label */}
                 <text x="200" y="18" textAnchor="middle" fill="#167A4A" fontSize="11" fontFamily="monospace" fontWeight="700" letterSpacing="1">
-                  RUMEN · NO OXYGEN · ~39 °C
+                  {t("ruminants_diagram_rumen")}
                 </text>
 
                 {/* Inner Pulse Group — Stationary center at local (200px, 115px) */}
@@ -125,7 +125,7 @@ export default function RuminantsRumenFactory() {
 
                 {/* Bottom Label */}
                 <text x="200" y="222" textAnchor="middle" fill="#26382D" fontSize="11" fontFamily="monospace" opacity="0.8">
-                  bacteria · protozoa · fungi · archaea
+                  {t("ruminants_diagram_microbes")}
                 </text>
               </g>
 
@@ -135,7 +135,7 @@ export default function RuminantsRumenFactory() {
                 <path className="flow am" d="M -80 75 Q 5 35, 65 20" fill="none" stroke="#C88A35" strokeWidth="1.6" />
                 <polygon points="62,15 72,17 67,25" fill="#C88A35" className="ah" />
                 <text x="80" y="22" fill="#C88A35" fontSize="12" fontFamily="monospace" fontWeight="700" letterSpacing="0.5">
-                  METHANE · ENERGY LOST
+                  {t("ruminants_diagram_methane")}
                 </text>
               </g>
 
@@ -144,10 +144,10 @@ export default function RuminantsRumenFactory() {
                 <path className="flow gn" d="M -80 35 Q 5 20, 65 15" fill="none" stroke="#167A4A" strokeWidth="1.6" />
                 <polygon points="65,10 73,15 65,20" fill="#167A4A" className="ah" />
                 <text x="80" y="14" fill="#167A4A" fontSize="12" fontFamily="monospace" fontWeight="700" letterSpacing="0.5">
-                  VOLATILE FATTY ACIDS
+                  {t("ruminants_diagram_vfa")}
                 </text>
                 <text x="80" y="30" fill="#26382D" fontSize="11" fontFamily="sans-serif" opacity="0.85">
-                  the cow’s main energy source
+                  {t("ruminants_diagram_vfa_desc")}
                 </text>
               </g>
 
@@ -156,10 +156,10 @@ export default function RuminantsRumenFactory() {
                 <path className="flow gn" d="M -80 -10 Q 5 5, 65 15" fill="none" stroke="#047857" strokeWidth="1.6" />
                 <polygon points="65,10 73,15 65,20" fill="#047857" className="ah" />
                 <text x="80" y="14" fill="#047857" fontSize="12" fontFamily="monospace" fontWeight="700" letterSpacing="0.5">
-                  MICROBIAL PROTEIN
+                  {t("ruminants_diagram_protein")}
                 </text>
                 <text x="80" y="30" fill="#26382D" fontSize="11" fontFamily="sans-serif" opacity="0.85">
-                  digested further down the gut
+                  {t("ruminants_diagram_protein_desc")}
                 </text>
               </g>
 
@@ -168,7 +168,7 @@ export default function RuminantsRumenFactory() {
                 <path className="flow pk" d="M -80 -45 Q 5 0, 65 15" fill="none" stroke="#C96F82" strokeWidth="1.6" />
                 <polygon points="62,10 72,12 67,20" fill="#C96F82" className="ah" />
                 <text x="80" y="18" fill="#C96F82" fontSize="12" fontFamily="monospace" fontWeight="700" letterSpacing="0.5">
-                  LACTIC ACID · IF STARCH OVERLOADS
+                  {t("ruminants_diagram_lactic")}
                 </text>
               </g>
             </svg>

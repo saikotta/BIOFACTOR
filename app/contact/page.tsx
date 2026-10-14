@@ -750,7 +750,7 @@ export default function ContactPage() {
             <canvas id="spores" ref={canvasRef} />
             <div className="scan" />
             <i className="k k1" /><i className="k k2" /><i className="k k3" /><i className="k k4" />
-            <div className="hud">FIELD SCAN · ACTIVE</div>
+            <div className="hud">{t("contact_field_scan_active", "FIELD SCAN · ACTIVE")}</div>
           </div>
         </section>
 

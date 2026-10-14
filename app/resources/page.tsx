@@ -235,6 +235,9 @@ export default function ResourcesPage() {
     return researchPapers.find(p => p.id === selectedPaperId) || researchPapers[0];
   }, [selectedPaperId, researchPapers]);
 
+  const paperText = (paperId: number, field: string, fallback: string) =>
+    t(`resources_paper_${paperId}_${field}`, fallback);
+
   const handleOpenPdf = (pdfUrl: string) => {
     window.open(pdfUrl, '_blank', 'noopener,noreferrer');
   };
@@ -387,7 +390,7 @@ export default function ResourcesPage() {
                             data-tag
                             className="px-2.5 py-1 bg-[#2D6A4F]/90 text-white rounded-lg text-[10px] font-mono font-bold uppercase tracking-wider shadow-sm"
                           >
-                            {item.type}
+                            {t("resources_type_research_paper", item.type)}
                           </span>
                         </div>
                       </div>
@@ -401,7 +404,7 @@ export default function ResourcesPage() {
                         
                         {/* Description */}
                         <p className="text-[#173522]/80 text-xs mb-4 line-clamp-2 flex-grow font-sans leading-relaxed">
-                          {item.description}
+                          {paperText(item.id, "description", item.description)}
                         </p>
 
                         {/* Author + Date Meta */}
@@ -411,9 +414,9 @@ export default function ResourcesPage() {
                             <span className="truncate">{item.journal}</span>
                           </div>
                           <div className="flex items-center justify-between text-[11px] font-mono text-[#173522]/65">
-                            <span>{new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                            <span>{new Date(item.date).toLocaleDateString(language === "hi" ? "hi-IN" : language === "te" ? "te-IN" : "en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
                             <span data-count data-count-target={item.downloads}>
-                              {item.downloads.toLocaleString()} downloads
+                              {item.downloads.toLocaleString(language === "hi" ? "hi-IN" : language === "te" ? "te-IN" : "en-US")} {t("resources_downloads", "downloads")}
                             </span>
                           </div>
                         </div>
@@ -512,11 +515,11 @@ export default function ResourcesPage() {
                               {activePaper.journal}
                             </div>
                             <div className="text-[9px] font-mono text-slate-400">
-                              Published {activePaper.date} • DOI: {activePaper.doi}
+                              {t("resources_published", "Published")} {activePaper.date} • DOI: {activePaper.doi}
                             </div>
                           </div>
                           <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-900 text-[10px] font-mono font-bold">
-                            PEER-REVIEWED
+                            {t("resources_peer_reviewed", "PEER-REVIEWED")}
                           </span>
                         </div>
 
@@ -528,32 +531,32 @@ export default function ResourcesPage() {
                         {/* Authors */}
                         <div className="text-xs text-[#2D6A4F] font-semibold mb-4 font-sans">
                           {activePaper.author} <br />
-                          <span className="text-[10px] text-slate-500 font-normal">Biofactor Biologicals R&D Center</span>
+                          <span className="text-[10px] text-slate-500 font-normal">{t("resources_rd_center", "Biofactor Biologicals R&D Center")}</span>
                         </div>
 
                         {/* Abstract Box */}
                         <div className="bg-emerald-50/70 border-l-4 border-[#2D6A4F] p-3.5 rounded-r-lg mb-4 text-xs text-slate-700 leading-relaxed font-sans">
                           <div className="font-bold text-[#173522] uppercase tracking-wider text-[10px] mb-1 font-mono">{t("resources_abstract", "Abstract")}</div>
-                          {activePaper.description}
+                          {paperText(activePaper.id, "description", activePaper.description)}
                         </div>
 
                         {/* Graphical Chart */}
                         <div className="bg-emerald-950 text-white rounded-lg p-4 mb-4 shadow-sm">
                           <div className="flex items-center justify-between text-[11px] font-mono text-emerald-300 mb-2">
-                            <span>{activePaper.figureTitle}</span>
+                            <span>{paperText(activePaper.id, "figure", activePaper.figureTitle)}</span>
                             <span className="text-[#7CC242] font-bold">{activePaper.chartStats.highlightGain}</span>
                           </div>
                           <div className="h-24 w-full flex items-end justify-between gap-2 pt-4 px-2 border-b border-emerald-800">
                             <div className="w-1/3 bg-emerald-800/90 rounded-t text-[9px] text-center font-mono text-emerald-200 pt-1" style={{ height: activePaper.chartStats.controlHeight }}>
-                              {activePaper.chartStats.controlLabel}
+                              {paperText(activePaper.id, "control_label", activePaper.chartStats.controlLabel)}
                               <div className="text-[8px] opacity-75">{activePaper.chartStats.controlValue}</div>
                             </div>
                             <div className="w-1/3 bg-emerald-700 rounded-t text-[9px] text-center font-mono text-emerald-200 pt-1" style={{ height: activePaper.chartStats.treatmentAHeight }}>
-                              {activePaper.chartStats.treatmentALabel}
+                              {paperText(activePaper.id, "treatment_label", activePaper.chartStats.treatmentALabel)}
                               <div className="text-[8px] opacity-75">{activePaper.chartStats.treatmentAValue}</div>
                             </div>
                             <div className="w-1/3 bg-[#7CC242] rounded-t text-[9px] text-center font-mono text-emerald-950 font-bold pt-1" style={{ height: activePaper.chartStats.biofactorHeight }}>
-                              {activePaper.chartStats.biofactorLabel}
+                              {paperText(activePaper.id, "biofactor_label", activePaper.chartStats.biofactorLabel)}
                               <div className="text-[8px] text-emerald-950 font-extrabold">{activePaper.chartStats.biofactorValue}</div>
                             </div>
                           </div>
@@ -565,7 +568,7 @@ export default function ResourcesPage() {
                           {activePaper.keyFindings.map((finding, idx) => (
                             <div key={idx} className="flex items-start gap-2">
                               <FiCheckCircle className="text-[#2D6A4F] shrink-0 mt-0.5" />
-                              <span>{finding}</span>
+                              <span>{paperText(activePaper.id, `finding_${idx + 1}`, finding)}</span>
                             </div>
                           ))}
                         </div>
@@ -574,7 +577,7 @@ export default function ResourcesPage() {
                       {/* Document Page 2 */}
                       <div className="bg-white text-slate-900 rounded-xl shadow-md p-6 border border-slate-200 relative overflow-hidden">
                         <div className="border-b border-slate-200 pb-3 mb-4 flex items-center justify-between">
-                          <span className="text-[10px] font-mono text-slate-400">Page 2 — Experimental Results</span>
+                          <span className="text-[10px] font-mono text-slate-400">{t("resources_page_2_results", "Page 2 — Experimental Results")}</span>
                           <span className="text-[10px] font-mono text-[#2D6A4F] font-bold">Biofactor Research</span>
                         </div>
 
@@ -583,15 +586,15 @@ export default function ResourcesPage() {
                           <table className="w-full text-left border-collapse">
                             <thead className="bg-[#173522] text-white font-mono">
                               <tr>
-                                <th className="p-2">Parameter</th>
-                                <th className="p-2">Control</th>
+                                <th className="p-2">{t("resources_parameter", "Parameter")}</th>
+                                <th className="p-2">{t("resources_control", "Control")}</th>
                                 <th className="p-2 text-[#7CC242]">Biofactor</th>
                               </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-200 text-slate-700">
                               {activePaper.tableData.map((row, rIdx) => (
                                 <tr key={rIdx}>
-                                  <td className="p-2 font-medium">{row.parameter}</td>
+                                  <td className="p-2 font-medium">{paperText(activePaper.id, `parameter_${rIdx + 1}`, row.parameter)}</td>
                                   <td className="p-2 text-slate-500">{row.control}</td>
                                   <td className="p-2 font-bold text-[#2D6A4F]">{row.biofactor}</td>
                                 </tr>
@@ -602,7 +605,7 @@ export default function ResourcesPage() {
 
                         <div className="pt-3 border-t border-slate-200 flex items-center justify-between">
                           <div className="text-[10px] text-slate-500 font-mono">
-                            Approved Publication • Biofactor R&D
+                            {t("resources_approved_publication", "Approved Publication • Biofactor R&D")}
                           </div>
                           <span className="px-2 py-0.5 rounded border border-[#2D6A4F] text-[#2D6A4F] text-[10px] font-mono font-bold">
                             ✓ {t("resources_verified", "VERIFIED")}
@@ -619,7 +622,7 @@ export default function ResourcesPage() {
                             </div>
                           </div>
                           <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-900 text-[10px] font-mono font-bold">
-                            PEER-REVIEWED
+                            {t("resources_peer_reviewed", "PEER-REVIEWED")}
                           </span>
                         </div>
 
@@ -628,7 +631,7 @@ export default function ResourcesPage() {
                         </h4>
 
                         <div className="bg-emerald-50/70 border-l-4 border-[#2D6A4F] p-3.5 rounded-r-lg mb-4 text-xs text-slate-700 leading-relaxed font-sans">
-                          <div className="font-bold text-[#173522] uppercase tracking-wider text-[10px] mb-1 font-mono">Abstract Summary</div>
+                          <div className="font-bold text-[#173522] uppercase tracking-wider text-[10px] mb-1 font-mono">{t("resources_abstract_summary", "Abstract Summary")}</div>
                           {activePaper.description}
                         </div>
                       </div>
