@@ -349,9 +349,9 @@ export default function NutrientsMatrix() {
                 {NUTRIENT_STAGES.map((stage, colIdx) => (
                   <div
                     key={colIdx}
-                    className={`br-mx-col relative grid grid-rows-[150px_repeat(3,135px)] rounded-[90px] border shadow-[0_12px_28px_rgba(23,53,34,0.18)] transition-all duration-300 ease-out hover:scale-[1.035] hover:-translate-y-2 hover:shadow-[0_22px_44px_rgba(23,53,34,0.22)] hover:z-20 cursor-pointer group/capsule group-hover/matrix:opacity-70 group-hover/matrix:hover:opacity-100 ${
+                    className={`br-mx-col relative grid grid-rows-[150px_repeat(3,135px)] rounded-[90px] border shadow-[0_12px_28px_rgba(23,53,34,0.18)] ${
                       stage.darkText 
-                        ? "text-[#F4FAEC] border-[#F4FAEC]/40" 
+                        ? "text-[#F4FAEC] border-[#173522]/40"
                         : "text-[#173522] border-[#173522]/30"
                     }`}
                     style={{ backgroundColor: stage.bg, "--c": colIdx } as React.CSSProperties}
@@ -363,7 +363,7 @@ export default function NutrientsMatrix() {
                       </span>
                       <strong className="font-display font-extrabold text-xs sm:text-sm lg:text-[15px] uppercase leading-tight block relative">
                         {t(stage.nameKey, stage.defaultName)}
-                        <span className="block w-8 h-[1px] bg-current mx-auto mt-2 opacity-55 scale-x-0 group-hover/capsule:scale-x-100 transition-transform duration-300" />
+                        <span className="block w-8 h-[1px] bg-current mx-auto mt-2 opacity-55" />
                       </strong>
                     </div>
 
@@ -422,7 +422,7 @@ export default function NutrientsMatrix() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-lg space-y-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-[#2D6A4F]/40 cursor-pointer">
+            <div className="p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-lg space-y-2">
               <span className="font-mono text-xs font-bold text-[#2D6A4F] uppercase">{t("nutrients_valid_card1_label", "NUTRIENT ENABLER")}</span>
               <div className="font-display font-extrabold text-4xl text-[#173522]">+{<span data-cu>20</span>}%</div>
               <p className="text-xs sm:text-sm text-[#173522]/85 font-sans">
@@ -431,7 +431,7 @@ export default function NutrientsMatrix() {
               <div className="pt-2 text-[11px] font-mono text-[#2D6A4F] font-semibold">{t("nutrients_valid_card1_ref", "171 publications · Global meta-analysis")}</div>
             </div>
 
-            <div className="p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-lg space-y-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-[#2D6A4F]/40 cursor-pointer">
+            <div className="p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-lg space-y-2">
               <span className="font-mono text-xs font-bold text-[#C25975] uppercase">{t("nutrients_valid_card2_label", "DISEASE MANAGER")}</span>
               <div className="font-display font-extrabold text-4xl text-[#173522]"><span data-cu>60</span>%</div>
               <p className="text-xs sm:text-sm text-[#173522]/85 font-sans">
@@ -440,7 +440,7 @@ export default function NutrientsMatrix() {
               <div className="pt-2 text-[11px] font-mono text-[#C25975] font-semibold">{t("nutrients_valid_card2_ref", "399 studies · Meta-analysis")}</div>
             </div>
 
-            <div className="p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-lg space-y-2 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-[#2D6A4F]/40 cursor-pointer">
+            <div className="p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-lg space-y-2">
               <span className="font-mono text-xs font-bold text-[#D97706] uppercase">{t("nutrients_valid_card3_label", "QUALITY & SHELF LIFE")}</span>
               <div className="font-display font-extrabold text-4xl text-[#173522]">50–<span data-cu>70</span>%</div>
               <p className="text-xs sm:text-sm text-[#173522]/85 font-sans">
@@ -454,7 +454,7 @@ export default function NutrientsMatrix() {
         {/* ==========================================
             SECTION 5: YIELD RESPONSE BY CLIMATE CHART
             ========================================== */}
-        <div className="p-8 rounded-2xl bg-white/90 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-xl space-y-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:border-[#2D6A4F]/40 cursor-pointer">
+        <div className="p-8 rounded-2xl bg-white/90 backdrop-blur-sm border border-[#2D6A4F]/20 shadow-xl space-y-6">
           <div>
             <h4 className="font-display font-bold text-xl text-[#173522] uppercase">
               {t("nutrients_yield_heading", "Yield response to biofertilisers, by climate")}

@@ -87,7 +87,7 @@
 }
 
 .matrixHeader > div:nth-child(5),
-.matrixHeader > div:nth-child(6) { border-color: rgba(244, 250, 236, 0.5); }
+.matrixHeader > div:nth-child(6) { border-color: rgba(20, 48, 31, 0.42); }
 
 .matrixHeader > div:nth-child(n + 2) span:first-child {
   color: inherit;
@@ -162,7 +162,7 @@
 }
 
 .matrixRow > div:nth-child(5),
-.matrixRow > div:nth-child(6) { border-color: rgba(244, 250, 236, 0.5); }
+.matrixRow > div:nth-child(6) { border-color: rgba(20, 48, 31, 0.42); }
 
 .matrixRow[data-row="0"] > div:nth-child(n + 5) {
   --bar-color: #a8e6bf;
@@ -234,7 +234,7 @@
   border-radius: 0 0 90px 90px;
 }
 .matrixRow[data-row="2"] > div:nth-child(5),
-.matrixRow[data-row="2"] > div:nth-child(6) { border-color: rgba(244, 250, 236, 0.5); }
+.matrixRow[data-row="2"] > div:nth-child(6) { border-color: rgba(20, 48, 31, 0.42); }
 
 @media (prefers-reduced-motion: no-preference) {
   .matrixHeader > div:nth-child(n + 2),

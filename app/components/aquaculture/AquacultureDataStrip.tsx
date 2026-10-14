@@ -14,7 +14,7 @@ export default function AquacultureDataStrip() {
       sup: "1",
     },
     {
-      value: "A few mm",
+      value: t("aqua_data_mm_value", "A few mm"),
       desc: t("aqua_data_mm_desc"),
       source: t("aqua_data_mm_source"),
       sup: "14",

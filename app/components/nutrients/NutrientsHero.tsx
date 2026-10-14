@@ -41,42 +41,18 @@ export default function NutrientsHero() {
       });
     };
 
-    // Count-up animation
-    const initCountUp = () => {
-      document.querySelectorAll<HTMLElement>("[data-cu]").forEach((el) => {
-        if (el.hasAttribute("data-obs")) return;
-        el.setAttribute("data-obs", "1");
-        const text = el.textContent || "";
-        new IntersectionObserver((entries, observer) => {
-          if (!entries[0].isIntersecting) return;
-          observer.disconnect();
-          const t0 = performance.now();
-          const animate = (now: number) => {
-            const p = reduce ? 1 : Math.min(1, (now - t0) / 1500);
-            const k = 1 - Math.pow(1 - p, 3);
-            el.textContent = text.replace(/\d+(?:\.\d+)?/g, (n) =>
-              n.includes('.') ? (Number(n) * k).toFixed(1) : Math.round(Number(n) * k).toString()
-            );
-            if (p < 1) requestAnimationFrame(animate);
-          };
-          requestAnimationFrame(animate);
-        }, { threshold: 0.5 }).observe(el);
-      });
-    };
-
     // Hero elements in viewport — trigger after paint
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         triggerAboveFold();
         initObservers();
-        initCountUp();
       });
     });
 
     // Re-run for late-rendered components
-    setTimeout(() => { initObservers(); initCountUp(); }, 300);
-    setTimeout(() => { initObservers(); initCountUp(); }, 800);
-    setTimeout(() => { initObservers(); initCountUp(); }, 1800);
+    setTimeout(initObservers, 300);
+    setTimeout(initObservers, 800);
+    setTimeout(initObservers, 1800);
 
     // ── Progress bar ──
     let tk = false;

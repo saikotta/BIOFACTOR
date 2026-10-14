@@ -1,7 +1,12 @@
+"use client";
+
 import React from "react";
 import BiofactorFooter from "../BiofactorFooter";
+import { useTranslation } from "../../i18n";
 
 export default function AquacultureFooter() {
+  const { t } = useTranslation();
+
   return (
     <footer className="w-full" data-pm-section="footer" data-n="Closing" data-motion>
       {/* Top quote band */}
@@ -9,10 +14,10 @@ export default function AquacultureFooter() {
         <div className="w-full max-w-[1440px] mx-auto">
           <div className="flex items-center justify-between mb-7 md:mb-9 rv">
             <span className="font-mono text-[11px] font-semibold tracking-[0.2em] uppercase text-white/50">
-              BIOFACTOR · AQUACULTURE
+              {t("aqua_footer_label", "BIOFACTOR · AQUACULTURE")}
             </span>
             <span className="font-mono text-[11px] font-semibold tracking-[0.2em] uppercase text-white/50">
-              FOCUS · <span className="text-white font-bold">POND HEALTH</span>
+              {t("aqua_footer_focus_label", "FOCUS ·")} <span className="text-white font-bold">{t("aqua_footer_focus", "POND HEALTH")}</span>
             </span>
           </div>
 
@@ -20,8 +25,10 @@ export default function AquacultureFooter() {
             <div className="call rv d1 flex max-w-[780px] lg:col-span-7 xl:col-span-8">
               <div className="mr-5 w-[2px] flex-shrink-0 self-stretch rounded-full bg-[#B8E986]/60 sm:mr-6 lg:mr-8" aria-hidden="true" />
               <h2 className="font-inter-tight text-[30px] leading-[1.02] font-extrabold text-[#F8FAFC] sm:text-[38px] md:text-[44px] lg:text-[48px] xl:text-[50px]">
-                Manage the bottom, <br className="hidden sm:block" />
-                <span className="font-newsreader font-normal text-[#B8E986] italic">and the water follows.</span>
+                {t("aqua_footer_headline_first", "Manage the bottom,")} <br className="hidden sm:block" />
+                <span className="font-newsreader font-normal text-[#B8E986] italic">
+                  {t("aqua_footer_headline_second", "and the water follows.")}
+                </span>
               </h2>
             </div>
 
@@ -30,7 +37,7 @@ export default function AquacultureFooter() {
                 BIOFACTOR <span className="text-[#B8E986]">BIOLOGICALS</span>
               </p>
               <p className="font-newsreader max-w-sm text-sm leading-relaxed text-white/70 italic sm:text-[16px] lg:text-[17px]">
-                Turning microbial functions into measurable biological impact.
+                {t("aqua_footer_description", "Turning microbial functions into measurable biological impact.")}
               </p>
             </div>
           </div>

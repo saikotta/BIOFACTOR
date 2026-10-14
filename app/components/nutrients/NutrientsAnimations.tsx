@@ -35,25 +35,18 @@ export default function NutrientsAnimations() {
       });
 
     // ------------------------------------------------------------------
-    // 1b. Matrix Entrance Observer (.br-mx-wrap) — Strict Parity with Ruminants
-    // Triggers staggered rising capsule-fill from bottom and light sweep
+    // 1b. Matrix Entrance Observer (.br-mx-wrap)
+    // Reveal the matrix once so scrolling back through it does not restart the animation.
     // ------------------------------------------------------------------
     const matrixWraps = Array.from(document.querySelectorAll<HTMLElement>(".br-mx-wrap"));
-    let matrixTimer: number | null = null;
 
     const matrixObserver = new IntersectionObserver(
-      (entries) => {
+      (entries, observer) => {
         entries.forEach((entry) => {
           const el = entry.target as HTMLElement;
           if (entry.isIntersecting) {
             el.classList.add("is-animated", "sweep-active", "br-in", "in", "visible");
-            if (matrixTimer) window.clearTimeout(matrixTimer);
-            matrixTimer = window.setTimeout(() => {
-              el.classList.remove("is-animated", "sweep-active");
-            }, 3600);
-          } else if (entry.intersectionRatio < 0.05) {
-            el.classList.remove("is-animated", "sweep-active", "br-in", "in", "visible");
-            if (matrixTimer) window.clearTimeout(matrixTimer);
+            observer.unobserve(el);
           }
         });
       },
@@ -66,7 +59,7 @@ export default function NutrientsAnimations() {
     matrixWraps.forEach((el) => matrixObserver.observe(el));
 
     // ------------------------------------------------------------------
-    // 2. Count-Up Observer ([data-cu]) — Replays cleanly on scroll entry
+    // 2. Count-Up Observer ([data-cu]) — Counts once and remains at its final value
     // ------------------------------------------------------------------
     const cuElements = Array.from(document.querySelectorAll<HTMLElement>("[data-cu]"));
     const cuMap = new Map<HTMLElement, { targetText: string; isCounting: boolean; hasCounted: boolean }>();
@@ -108,9 +101,7 @@ export default function NutrientsAnimations() {
                 }
               })(t0);
             }
-          } else if (entry.intersectionRatio === 0) {
-            data.hasCounted = false;
-            el.textContent = data.targetText;
+            cuObserver.unobserve(el);
           }
         });
       },
@@ -156,7 +147,6 @@ export default function NutrientsAnimations() {
     return () => {
       revealObserver.disconnect();
       matrixObserver.disconnect();
-      if (matrixTimer) window.clearTimeout(matrixTimer);
       cuObserver.disconnect();
       window.removeEventListener("scroll", onScroll);
     };
