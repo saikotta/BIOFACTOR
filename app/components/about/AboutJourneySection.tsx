@@ -198,6 +198,23 @@ export default function AboutJourneySection() {
           text-align: center;
           z-index: 10;
         }
+        .journey-scroll {
+          overflow-x: auto;
+          overflow-y: hidden;
+          overscroll-behavior-x: contain;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-color: rgba(20, 112, 58, 0.45) transparent;
+          scrollbar-width: thin;
+        }
+        .journey-stage {
+          min-width: 0;
+        }
+        @media (max-width: 900px) {
+          .journey-stage {
+            width: 1100px;
+            max-width: none;
+          }
+        }
         .card-journey .card-inner {
           background: #ffffff;
           border-radius: 16px;
@@ -278,8 +295,8 @@ export default function AboutJourneySection() {
           </div>
         </header>
 
-        <div className="w-full pt-8 pb-10" style={{ overflowX: "clip", overflowY: "visible" }}>
-          <div ref={stageRef} className="relative w-full aspect-[1500/700]">
+        <div className="journey-scroll w-full pt-8 pb-10">
+          <div ref={stageRef} className="journey-stage relative w-full aspect-[1500/700]">
             <svg
               className="absolute inset-0 w-full h-full"
               viewBox="0 0 1500 700"
