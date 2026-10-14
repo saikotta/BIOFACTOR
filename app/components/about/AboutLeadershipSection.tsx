@@ -5,7 +5,6 @@ import { useTranslation } from "../../i18n";
 
 const TEAM = [
   { nameKey: "about_lead_name_1", defaultName: "Dr. L.N. Reddy", roleKey: "about_lead_role_ceo", defaultRole: "Founder & CEO", initials: "LR" },
-  { nameKey: "about_lead_name_2", defaultName: "Dr. Anil Ahire", roleKey: "about_lead_role_director", defaultRole: "Director", initials: "AA" },
   { nameKey: "about_lead_name_3", defaultName: "Krishna Murali", roleKey: "about_lead_role_director", defaultRole: "Director", initials: "KM" },
   { nameKey: "about_lead_name_4", defaultName: "S. Reddy", roleKey: "about_lead_role_rnd", defaultRole: "Director, R&D", initials: "SR" },
 ];
@@ -37,7 +36,7 @@ const STYLES = `
   }
   .bio-leadership-team {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 40px;
     margin: 72px 0 0;
     padding: 0;
@@ -152,6 +151,11 @@ const STYLES = `
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 56px 24px;
       margin-top: 48px;
+    }
+    .bio-leadership-member:last-child:nth-child(3) {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: calc((100% - 24px) / 2);
     }
   }
   @media (max-width: 520px) {
