@@ -157,7 +157,7 @@ export default function HowWeThinkSection() {
                 >
                   {t("how_we_think_systems_tag", "SYSTEMS")}
                 </div>
-                <div className="text-2xl sm:text-[26px] lg:text-[28px] font-normal text-[#F4F5EC] tracking-[-0.025em] leading-[1.1]">
+                <div className="text-xl sm:text-[22px] lg:text-2xl font-normal text-[#F4F5EC] tracking-[-0.025em] leading-[1.2]">
                   {t("how_we_think_systems_desc", "Chemical, Biological & Organic")}
                 </div>
               </div>
@@ -173,7 +173,7 @@ export default function HowWeThinkSection() {
                 >
                   {t("how_we_think_signal_tag", "SIGNAL")}
                 </div>
-                <div className="text-2xl sm:text-[26px] lg:text-[28px] font-normal text-[#F4F5EC] tracking-[-0.025em] leading-[1.1]">
+                <div className="text-xl sm:text-[22px] lg:text-2xl font-normal text-[#F4F5EC] tracking-[-0.025em] leading-[1.2]">
                   {t("how_we_think_signal_desc", "Microbial intelligence.")}
                 </div>
               </div>
@@ -189,7 +189,7 @@ export default function HowWeThinkSection() {
                 >
                   {t("how_we_think_scale_tag", "SCALE")}
                 </div>
-                <div className="text-2xl sm:text-[26px] lg:text-[28px] font-normal text-[#F4F5EC] tracking-[-0.025em] leading-[1.1]">
+                <div className="text-xl sm:text-[22px] lg:text-2xl font-normal text-[#F4F5EC] tracking-[-0.025em] leading-[1.2]">
                   {t("how_we_think_scale_desc", "Biological potential.")}
                 </div>
               </div>
