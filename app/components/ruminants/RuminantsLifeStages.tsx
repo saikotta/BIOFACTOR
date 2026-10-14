@@ -118,10 +118,10 @@ export default function RuminantsLifeStages() {
             <div className="lg:col-span-7 flex flex-col justify-center space-y-6">
               <div className="space-y-4 pt-2 rv">
                 <h4 className="font-serif font-semibold text-2xl sm:text-3xl text-[#173522] leading-snug">
-                  The critical weeks around calving.
+                  {t("ruminants_trans_h4")}
                 </h4>
                 <p className="text-base sm:text-lg text-[#26382D]/85 leading-relaxed max-w-2xl font-sans">
-                  The transition period (3 weeks pre-calving to 3 weeks post-calving) is the highest metabolic risk window in a dairy cow&apos;s life. Rapid diet changes, immune suppression, and energy deficits create severe ruminal dysbiosis if not actively managed.
+                  {t("ruminants_trans_desc")}
                 </p>
               </div>
 
@@ -129,18 +129,18 @@ export default function RuminantsLifeStages() {
               <div className="pt-6 border-t border-[#173522]/12 space-y-5 rv d1">
                 <div className="trow grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-6 items-baseline p-3 rounded-lg transition-all">
                   <span className="tl font-mono text-xs font-bold tracking-widest text-[#2D6A4F] uppercase">
-                    METABOLIC STABILITY
+                    {t("ruminants_trans_metabolic_title")}
                   </span>
                   <p className="td text-sm sm:text-base text-[#173522]/90 leading-relaxed font-sans">
-                    Reduced incidence of subclinical ketosis and displaced abomasum by keeping ruminal pH stable.
+                    {t("ruminants_trans_metabolic_desc")}
                   </p>
                 </div>
                 <div className="trow grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-6 items-baseline p-3 rounded-lg transition-all pt-4 border-t border-[#173522]/08">
                   <span className="tl font-mono text-xs font-bold tracking-widest text-[#2D6A4F] uppercase">
-                    DRY MATTER INTAKE
+                    {t("ruminants_trans_dmi_title")}
                   </span>
                   <p className="td text-sm sm:text-base text-[#173522]/90 leading-relaxed font-sans">
-                    1.2–1.8 kg higher daily dry matter intake during early lactation post-calving recovery.
+                    {t("ruminants_trans_dmi_desc")}
                   </p>
                 </div>
               </div>
@@ -148,10 +148,10 @@ export default function RuminantsLifeStages() {
               {/* Key Programming Note - Refined Pull-Quote Style */}
               <div className="call rv d2 pt-6 border-l-2 border-[#2D6A4F] pl-6 my-2">
                 <span className="font-mono text-[11px] font-bold tracking-widest text-[#2D6A4F] uppercase block mb-1">
-                  INFLAMMATION CONTROL
+                  {t("ruminants_trans_inflam_title")}
                 </span>
                 <p className="font-serif italic text-sm sm:text-base text-[#173522]/90 leading-relaxed">
-                  Targeted biologicals reduce systemic inflammatory response after calving, redirecting energy from immune activation toward milk synthesis and rapid reproductive recovery.
+                  {t("ruminants_trans_inflam_desc")}
                 </p>
               </div>
             </div>
@@ -160,13 +160,13 @@ export default function RuminantsLifeStages() {
             <div className="lg:col-span-5 flex flex-col space-y-6 rv d1">
               <div>
                 <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase block mb-2">
-                  STAGE 02 — PERIPARTURIENT
+                  {t("ruminants_trans_stage")}
                 </span>
                 <h3 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-[#173522] tracking-tight uppercase mb-3" data-stage-heading>
-                  TRANSITION
+                  {t("ruminants_trans_title")}
                 </h3>
                 <p className="font-mono text-xs sm:text-sm text-[#26382D]/70 tracking-wide uppercase">
-                  Periparturient metabolic balance &amp; dry matter intake recovery.
+                  {t("ruminants_trans_short_desc")}
                 </p>
               </div>
 
@@ -190,13 +190,13 @@ export default function RuminantsLifeStages() {
             <div className="lg:col-span-5 flex flex-col space-y-6 rv">
               <div>
                 <span className="font-mono text-xs font-semibold tracking-widest text-[#2D6A4F] uppercase block mb-2">
-                  STAGE 03 — PRODUCTION
+                  {t("ruminants_lact_stage")}
                 </span>
                 <h3 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-[#173522] tracking-tight uppercase mb-3" data-stage-heading>
-                  LACTATION
+                  {t("ruminants_lact_title")}
                 </h3>
                 <p className="font-mono text-xs sm:text-sm text-[#26382D]/70 tracking-wide uppercase">
-                  Peak milk production &amp; sustained feed efficiency.
+                  {t("ruminants_lact_short_desc")}
                 </p>
               </div>
 
@@ -217,10 +217,10 @@ export default function RuminantsLifeStages() {
             <div className="lg:col-span-7 flex flex-col justify-center space-y-6">
               <div className="space-y-4 pt-2 rv d1">
                 <h4 className="font-serif font-semibold text-2xl sm:text-3xl text-[#173522] leading-snug">
-                  A more efficient rumen turns more food into milk.
+                  {t("ruminants_lact_h4")}
                 </h4>
                 <p className="text-base sm:text-lg text-[#26382D]/85 leading-relaxed max-w-2xl font-sans">
-                  During peak lactation, the cow&apos;s metabolic demand is extreme. Optimising the ratio of propionate to acetate in the rumen unlocks additional energy for milk fat and protein synthesis without increasing feed intake.
+                  {t("ruminants_lact_desc")}
                 </p>
               </div>
 
@@ -228,18 +228,18 @@ export default function RuminantsLifeStages() {
               <div className="pt-6 border-t border-[#173522]/12 space-y-5 rv d2">
                 <div className="trow grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-6 items-baseline p-3 rounded-lg transition-all">
                   <span className="tl font-mono text-xs font-bold tracking-widest text-[#2D6A4F] uppercase">
-                    MILK YIELD &amp; QUALITY
+                    {t("ruminants_lact_milk_title")}
                   </span>
                   <p className="td text-sm sm:text-base text-[#173522]/90 leading-relaxed font-sans">
-                    +1.4–2.2 L/hd/day increase in energy-corrected milk yield with improved fat and protein ratio.
+                    {t("ruminants_lact_milk_desc")}
                   </p>
                 </div>
                 <div className="trow grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-6 items-baseline p-3 rounded-lg transition-all pt-4 border-t border-[#173522]/08">
                   <span className="tl font-mono text-xs font-bold tracking-widest text-[#2D6A4F] uppercase">
-                    FEED CONVERSION RATIO
+                    {t("ruminants_lact_fcr_title")}
                   </span>
                   <p className="td text-sm sm:text-base text-[#173522]/90 leading-relaxed font-sans">
-                    4.8–6.5% improvement in overall herd feed efficiency across total lactation length.
+                    {t("ruminants_lact_fcr_desc")}
                   </p>
                 </div>
               </div>
@@ -247,10 +247,10 @@ export default function RuminantsLifeStages() {
               {/* Key Programming Note - Refined Pull-Quote Style */}
               <div className="call rv d2 pt-6 border-l-2 border-[#2D6A4F] pl-6 my-2">
                 <span className="font-mono text-[11px] font-bold tracking-widest text-[#2D6A4F] uppercase block mb-1">
-                  SUSTAINED PRODUCTION
+                  {t("ruminants_lact_sus_title")}
                 </span>
                 <p className="font-serif italic text-sm sm:text-base text-[#173522]/90 leading-relaxed">
-                  Maintains peak milk yield for 3–5 weeks longer while reducing body condition loss during negative energy balance in early lactation.
+                  {t("ruminants_lact_sus_desc")}
                 </p>
               </div>
             </div>

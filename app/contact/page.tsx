@@ -944,7 +944,7 @@ export default function ContactPage() {
             </div>
           </div>
           <footer>
-            <span>© 2026 Biofactor Biologicals. All rights reserved.</span>
+            <span>© {new Date().getFullYear()} Biofactor Biologicals. {t("footer_rights_reserved", "All rights reserved.")}</span>
             <span>info@biofactor.in · +91 7013074400</span>
           </footer>
         </section>
