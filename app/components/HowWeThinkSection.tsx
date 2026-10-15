@@ -150,12 +150,12 @@ export default function HowWeThinkSection() {
             }}
           />
         </div>
-        <div className="relative z-10 space-y-8 sm:space-y-10 lg:space-y-12">
+        <div className="relative z-10">
         {/* ================================================== */}
         {/* 3. TRUE FULL-BLEED TRANSLUCENT BOTANICAL STRIP/RIBBON */}
         {/* ================================================== */}
         <div
-          className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] my-6 sm:my-8 border-t border-b border-[rgba(190,232,190,0.12)] rounded-none backdrop-blur-[8px]"
+          className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] my-0 border-t border-b border-[rgba(190,232,190,0.12)] rounded-none backdrop-blur-[8px]"
           style={{ backgroundColor: "rgba(5, 48, 34, 0.82)" }}
         >
           <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-6 lg:px-12 py-5 sm:py-6 lg:py-7 min-h-[118px] md:min-h-[130px] flex items-center">
@@ -214,7 +214,7 @@ export default function HowWeThinkSection() {
         {/* ================================================== */}
         {/* 5. BRAND / CTA ROW */}
         {/* ================================================== */}
-        <div className="mx-auto flex w-full max-w-[1400px] flex-row items-center justify-end gap-6 border-t border-[rgba(244,245,236,0.18)] px-8 pt-6 mb-4 sm:px-12 lg:px-20 mt-10 sm:mt-12">
+        <div className="mx-auto flex w-full max-w-[1400px] flex-row items-center justify-end gap-6 px-8 pt-6 pb-6 sm:px-12 lg:px-20">
           {/* Right: CTA Button */}
           <div className="flex items-center gap-3 flex-wrap">
             <a
