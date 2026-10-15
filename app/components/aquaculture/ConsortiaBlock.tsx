@@ -9,7 +9,7 @@ export default function ConsortiaBlock() {
 
   return (
     <section
-      className="relative w-full py-20"
+      className="relative w-full pt-20 pb-16"
       data-n="Consortia"
       data-motion
       style={{ background: "linear-gradient(180deg, #D9EBC4 0%, #EDF7DF 50%, #E5F0D4 100%)" }}
@@ -83,42 +83,6 @@ export default function ConsortiaBlock() {
       </div>
 
       {/* ── STAT CALLOUT ── */}
-      <div
-        className="rv d2 mx-auto mt-12 w-full bg-[#0F2A1A] px-8 py-10 sm:px-12 sm:py-12"
-        style={{ width: "calc(100% - 2 * clamp(20px, 5vw, 72px))", maxWidth: "1280px" }}
-      >
-        <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-10">
-
-          {/* Big number */}
-          <div className="flex-shrink-0 border-r-0 pr-0 sm:border-r sm:border-[#1F8A57]/30 sm:pr-10">
-            <span
-              className="font-inter-tight font-extrabold leading-none text-[#6FCB5A]"
-              data-cu="93%"
-              style={{ fontSize: "clamp(4rem,8vw,6rem)", letterSpacing: "-0.035em" }}
-            >
-              93%
-            </span>
-            <p className="mt-1 font-jetbrains text-[10px] font-medium uppercase tracking-[0.18em] text-[#6fbf73]/60">
-              {t("aqua_consortia_stat_sub")}
-            </p>
-          </div>
-
-          {/* Divider — horizontal on mobile */}
-          <div className="h-px w-full bg-[#2f8f4e]/30 sm:hidden" aria-hidden="true" />
-
-          {/* Explanation */}
-          <div>
-            <p className="font-newsreader text-[16.5px] leading-[1.65] text-[#FFFFFF]">
-              {t("aqua_consortia_stat_desc")}
-            </p>
-            <p className="mt-3 font-jetbrains text-[10px] uppercase tracking-[0.14em] text-[#cfe6bd]/50">
-              Xu &amp; Pan 2013,{" "}
-              <em className="not-italic normal-case text-[#cfe6bd]/40">Aquaculture</em>
-            </p>
-          </div>
-
-        </div>
-      </div>
     </section>
   );
 }

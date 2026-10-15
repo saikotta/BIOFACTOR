@@ -23,6 +23,8 @@ const PTS: [number, number][] = [
   [400, 690]
 ];
 
+const ROUTE_PTS = [...PTS].reverse();
+
 const TRAVEL = 1100;
 const PAUSE = 450;
 const FIRST = 900;
@@ -48,8 +50,8 @@ export default function AboutVisionMissionSection() {
       return `C${m} ${a[1]} ${m} ${b[1]} ${b[0]} ${b[1]}`;
     };
 
-    let d = `M${PTS[0][0]} ${PTS[0][1]}`;
-    PTS.slice(1).forEach((p, i) => (d += seg(PTS[i], p)));
+    let d = `M${ROUTE_PTS[0][0]} ${ROUTE_PTS[0][1]}`;
+    ROUTE_PTS.slice(1).forEach((p, i) => (d += seg(ROUTE_PTS[i], p)));
 
     line.setAttribute("d", d);
     track.setAttribute("d", d);
@@ -62,8 +64,8 @@ export default function AboutVisionMissionSection() {
     const tmp = document.createElementNS(NS, "path");
     let acc = 0;
     const STOPS: number[] = [0];
-    PTS.slice(1).forEach((p, i) => {
-      tmp.setAttribute("d", `M${PTS[i][0]} ${PTS[i][1]}${seg(PTS[i], p)}`);
+    ROUTE_PTS.slice(1).forEach((p, i) => {
+      tmp.setAttribute("d", `M${ROUTE_PTS[i][0]} ${ROUTE_PTS[i][1]}${seg(ROUTE_PTS[i], p)}`);
       acc += tmp.getTotalLength();
       STOPS.push(acc);
     });
@@ -106,7 +108,7 @@ export default function AboutVisionMissionSection() {
     }
 
     const reveal = (n: number) =>
-      nodeEls.forEach((e, i) => e.classList.toggle("on", i < n));
+      nodeEls.forEach((e, i) => e.classList.toggle("on", i >= CHAIN_KEYS.length - n));
     const ease = (u: number) => 0.5 - Math.cos(Math.PI * u) / 2;
 
     const segs: Array<{

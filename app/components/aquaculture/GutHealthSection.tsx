@@ -19,7 +19,7 @@ function fitGutFrame(frame: HTMLIFrameElement | null) {
     stage.style.left = "0px";
     stage.style.top = "0px";
     stage.style.transform = "none";
-    const height = Math.max(800, Math.ceil(stage.scrollHeight));
+    const height = Math.ceil(stage.scrollHeight);
     if (frame.style.height !== `${height}px`) frame.style.height = `${height}px`;
     return;
   }
@@ -90,7 +90,7 @@ export default function GutHealthSection() {
         src={frameSrc}
         title="A healthy gut is the first line of disease defence"
         loading="eager"
-        style={{ height: "760px" }}
+        style={{ height: "640px" }}
         onLoad={(event) => {
           const frame = event.currentTarget;
           fitGutFrame(frame);

@@ -64,16 +64,16 @@ sup { color: var(--green); font-weight: 600; font-size: .75em; vertical-align: s
 #wrap {
   position: relative; z-index: 1;
   display: flex; align-items: center; justify-content: center;
-  width: 1280px; min-height: 800px;
+  width: 1280px; min-height: 0;
   transform-origin: center center;
 }
 
 .stage, #stage {
-  width: 1280px; min-height: 800px;
+  width: 1280px; min-height: 0;
   padding: 38px calc(max(0px, (100vw - 1440px) / 2) + clamp(20px, 5vw, 72px)) 32px;
   display: grid;
   grid-template-columns: 480px 1fr;
-  grid-template-rows: auto auto auto auto;
+  grid-template-rows: auto auto auto;
   column-gap: 36px;
   row-gap: 14px;
 }
@@ -333,7 +333,6 @@ h1 {
 }
 
 /* ══════════════════════════════════════════
-   ROW 4: CHART (Full width, bottom)
 ══════════════════════════════════════════ */
 .sec-chart {
   grid-column: 1 / -1;
@@ -591,31 +590,7 @@ h1 {
     </div>
   </div>
 
-  <!-- ── ROW 4: CHART (Full width, at bottom) ── -->
-  <section class="panel sec-chart rise" id="chart" style="--t:.30s" aria-label="Pooled shrimp probiotic trial results">
-    <div class="cleft">
-      <h3 class="ctit">What pooled shrimp studies show</h3>
-      <p class="csub">Meta-analysis of probiotic trials. Every pooled effect was in the beneficial direction.</p>
-      <p class="csrc">Toledo et al. 2019, <em>Aquaculture</em>.</p>
-    </div>
-    <div class="cright">
-      <div class="bbar">
-        <div class="blbl">Survival<span>improvement ↑</span></div>
-        <div class="btrk"><div class="bfil" id="bf0" style="--w:100%"></div></div>
-        <div class="bcnt" id="bc0">0 exp.</div>
-      </div>
-      <div class="bbar">
-        <div class="blbl">Growth rate<span>improvement ↑</span></div>
-        <div class="btrk"><div class="bfil" id="bf1" style="--w:60%"></div></div>
-        <div class="bcnt" id="bc1">0 exp.</div>
-      </div>
-      <div class="bbar">
-        <div class="blbl">FCR<span>improvement ↓</span></div>
-        <div class="btrk"><div class="bfil" id="bf2" style="--w:49%"></div></div>
-        <div class="bcnt" id="bc2">0 exp.</div>
-      </div>
-    </div>
-  </section>
+
 
 </div><!-- /stage -->
 </div><!-- /wrap -->
@@ -638,35 +613,9 @@ h1 {
   scale();
   window.addEventListener('resize', scale);
 
-  /* ── ANIMATE BARS & COUNTERS ── */
-  var bars = [
-    { fill: 'bf0', cnt: 'bc0', maxW: 100, maxN: 100 },
-    { fill: 'bf1', cnt: 'bc1', maxW: 60,  maxN: 60  },
-    { fill: 'bf2', cnt: 'bc2', maxW: 49,  maxN: 49  }
-  ];
-  function ease(t){ return 1-Math.pow(1-t,3); }
-
-  var ran = false;
   function runBars(){
     var stage = document.getElementById('stage') || document.querySelector('.stage') || document.body;
     if (stage) stage.classList.add('is-animated');
-    if (ran) return;
-    ran = true;
-    var dur = 1400, stag = 180;
-    bars.forEach(function(b, i){
-      var fill = document.getElementById(b.fill);
-      var cnt  = document.getElementById(b.cnt);
-      if (!fill || !cnt) return;
-      var t0 = performance.now() + i * stag;
-      function step(now){
-        var p = Math.min(Math.max(0, now - t0) / dur, 1);
-        var e = ease(p);
-        fill.style.width = (e * b.maxW) + '%';
-        cnt.textContent  = Math.round(e * b.maxN) + ' exp.';
-        if (p < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    });
   }
 
   function resetBars(){

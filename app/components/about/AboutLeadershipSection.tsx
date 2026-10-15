@@ -232,7 +232,6 @@ export default function AboutLeadershipSection() {
     <section className="w-full bg-[#edf3ec]">
       <style>{STYLES}</style>
       <div className="bio-leadership">
-        <span className="bio-leadership-kicker">{t("about_leadership_kicker", "Leadership")}</span>
         <h2 className="bio-leadership-title">{t("about_leadership_title", "The People Behind the Platform")}</h2>
 
         <ul

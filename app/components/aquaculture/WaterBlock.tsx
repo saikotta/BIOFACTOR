@@ -24,7 +24,7 @@ export default function WaterBlock() {
 
   return (
     <section
-      className="relative w-full pb-16 pt-28 md:pb-16 md:pt-32 lg:pb-20 lg:pt-36"
+      className="relative w-full pb-16 pt-4 md:pb-16 md:pt-6 lg:pb-20 lg:pt-8"
       data-n="Water Column"
       data-motion
       aria-label="Water column section"

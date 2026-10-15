@@ -87,7 +87,10 @@ export default function AboutJourneySection() {
       const metaYear = t(m.yearKey, m.defaultYear);
       const metaTag = m.tagKey ? t(m.tagKey, m.defaultTag) : "";
       const metaDesc = t(m.descKey, m.defaultDesc);
-      const metaHtml = metaTag ? `${metaYear} <i class="meta-i">•</i> ${metaTag}` : metaYear;
+      const milestoneNumber = String(i + 1).padStart(2, "0");
+      const metaHtml = metaTag
+        ? `${milestoneNumber} <i class="meta-i">•</i> ${metaYear} <i class="meta-i">•</i> ${metaTag}`
+        : `${milestoneNumber} <i class="meta-i">•</i> ${metaYear}`;
       c.innerHTML = `<div class="card-inner"><p class="meta-journey">${metaHtml}</p><p class="ttl-journey">${metaDesc}</p></div>`;
       stage.appendChild(c);
       cardEls.push(c);

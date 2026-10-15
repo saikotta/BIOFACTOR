@@ -221,8 +221,8 @@ const baseEnglish = {
   // --- AQUACULTURE ---
   "aqua_hero_title": "BIOLOGY THAT BALANCES THE POND.",
   "aqua_hero_subtitle": "Most pond problems start at the bottom. Our targeted consortia manage organic load, eliminate toxic gases, and maintain water stability throughout the culture cycle.",
-  "aqua_data_phosphorus": "of the phosphorus added to a vannamei pond settles into the sediment. Only about a third of the nitrogen leaves as harvested shrimp.",
-  "aqua_data_oxygen": "below the sediment surface, pore water usually holds no oxygen at all.",
+  "aqua_data_phosphorus": "of the phosphorus added to a vannamei pond settles into the sediment.",
+  "aqua_data_oxygen": "below the sediment surface, water usually holds no oxygen at all.",
   "aqua_data_sulphide": "is the safe limit for hydrogen sulphide in brackish-water ponds. At 50–500 µg/L, half of exposed marine animals can die within 96 hours.",
   "aqua_water_above": "ABOVE THE BOTTOM",
   "aqua_water_title": "WATER",

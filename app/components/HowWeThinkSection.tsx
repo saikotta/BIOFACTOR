@@ -8,42 +8,36 @@ export default function HowWeThinkSection() {
   return (
     <section
       id="how-we-think-section"
-      className="relative z-20 w-full py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 overflow-hidden select-none"
+      className="relative z-20 w-full overflow-hidden select-none"
     >
-      {/* ================================================== */}
-      {/* SINGLE ROOT WHEAT BACKGROUND LAYER WITH CINEMATIC OVERLAY */}
-      {/* ================================================== */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <img
-          src="/images/how-we-think-wheat.jpg"
-          alt="Biofactor Biologicals Wheat Field Background"
-          className="w-full h-full object-cover object-center"
-        />
-        {/* Layered cinematic gradient overlay */}
+      {/* About-style light green hero with the ecosystem artwork integrated behind the copy. */}
+      <div
+        className="relative isolate overflow-hidden"
+        style={{ backgroundColor: "#B8DDA3" }}
+      >
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="pointer-events-none absolute inset-0 z-0"
           style={{
-            background: `
-              linear-gradient(90deg, rgba(4, 28, 19, 0.52) 0%, rgba(4, 28, 19, 0.32) 42%, rgba(4, 28, 19, 0.24) 70%, rgba(4, 28, 19, 0.36) 100%),
-              linear-gradient(180deg, rgba(3, 24, 16, 0.10) 0%, rgba(3, 24, 16, 0.18) 100%)
-            `,
+            background:
+              "radial-gradient(ellipse at 42% 42%, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.08) 34%, transparent 68%)",
           }}
         />
-      </div>
-
-      {/* ================================================== */}
-      {/* SECTION CONTENT CONTAINER (z-index 1 over wheat) */}
-      {/* ================================================== */}
-      <div className="relative z-10 max-w-[1400px] mx-auto w-full space-y-8 sm:space-y-10 lg:space-y-12">
+        <img
+          src="/images/about-ecosystem.png"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute right-0 bottom-0 z-0 w-[92vw] max-w-[1080px] opacity-35 sm:w-[82vw] lg:w-[78vw]"
+        />
+        <div className="relative z-10 mx-auto w-full max-w-[1700px] px-6 pt-16 pb-2 sm:px-12 md:px-16 md:pt-20 lg:px-20">
         {/* ================================================== */}
         {/* 1. MAIN TWO-COLUMN AREA (Upper 50/50 Desktop) */}
         {/* ================================================== */}
-        <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-12 w-full">
+        <div className="relative flex min-h-[340px] flex-col items-start gap-8 md:min-h-[390px] lg:flex-row lg:gap-12">
           {/* LEFT COLUMN (~50% Width) */}
-          <div className="w-full lg:w-1/2 flex flex-col justify-start gap-3 sm:gap-4">
+          <div className="flex w-full max-w-[780px] flex-col justify-center gap-3 sm:gap-4 lg:w-[62%]">
             {/* Technical Mono Eyebrow */}
             <div
-              className="text-[11px] sm:text-xs lg:text-[13px] font-medium uppercase tracking-[0.2em] text-[#A9E889] mb-3"
+              className="mb-3 text-[11px] font-medium uppercase tracking-[0.2em] text-[#147A46] sm:text-xs lg:text-[13px]"
               style={{
                 fontFamily:
                   'ui-monospace, "SFMono-Regular", "Cascadia Code", "Roboto Mono", monospace',
@@ -54,7 +48,7 @@ export default function HowWeThinkSection() {
 
             {/* Editorial Serif Sentence 1 */}
             <p
-              className="text-[clamp(24px,2.5vw,43px)] font-normal text-[#F4F5EC] tracking-[-0.02em] leading-[1.2]"
+              className="text-[clamp(24px,2.5vw,43px)] font-normal tracking-[-0.02em] leading-[1.2] text-[#173522]"
               style={{
                 fontFamily: 'Georgia, "Times New Roman", serif',
               }}
@@ -63,13 +57,13 @@ export default function HowWeThinkSection() {
             </p>
 
             {/* Oversized Sans Word */}
-            <div className="text-[clamp(48px,7vw,130px)] font-bold text-[#F4F5EC] tracking-[-0.04em] leading-[1] my-1 sm:my-2">
+            <div className="my-1 text-[clamp(48px,7vw,130px)] font-bold tracking-[-0.04em] leading-[1] text-[#147A46] sm:my-2">
               {t("how_we_think_larger", "larger.")}
             </div>
 
             {/* Editorial Serif Sentence 2 */}
             <p
-              className="text-[clamp(24px,2.5vw,43px)] font-normal text-[#F4F5EC] tracking-[-0.02em] leading-[1.2]"
+              className="text-[clamp(24px,2.5vw,43px)] font-normal tracking-[-0.02em] leading-[1.2] text-[#173522]"
               style={{
                 fontFamily: 'Georgia, "Times New Roman", serif',
               }}
@@ -78,18 +72,16 @@ export default function HowWeThinkSection() {
             </p>
           </div>
 
-          {/* RIGHT COLUMN (~50% Width): Structurally Reserved for Future Image */}
-          <div className="w-full lg:w-1/2 pointer-events-none" />
         </div>
 
         {/* ================================================== */}
         {/* 2. FULL-WIDTH 0–5 µm MEASURING SCALE */}
         {/* ================================================== */}
-        <div className="w-full pt-2 sm:pt-4 pb-2">
+        <div className="w-full max-w-[1400px] pt-2 pb-2 sm:pt-4">
           <div className="relative w-full">
             {/* Baseline & Ticks SVG */}
             <svg
-              className="w-full h-7 text-[#F4F5EC]"
+              className="h-7 w-full text-[#06271A]"
               viewBox="0 0 1000 28"
               preserveAspectRatio="none"
             >
@@ -126,7 +118,7 @@ export default function HowWeThinkSection() {
               })}
             </svg>
             {/* Ticks Labels: 0 through 5 µm */}
-            <div className="flex justify-between text-xs sm:text-sm font-mono font-bold text-[#A9E889]/85 pt-1 px-0.5">
+            <div className="flex justify-between px-0.5 pt-1 font-mono text-xs font-bold text-[#06271A] sm:text-sm">
               <span>0</span>
               <span>1 µm</span>
               <span>2 µm</span>
@@ -137,6 +129,28 @@ export default function HowWeThinkSection() {
           </div>
         </div>
 
+        </div>
+      </div>
+
+      <div className="relative isolate overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 z-0">
+          <img
+            src="/images/how-we-think-wheat.jpg"
+            alt=""
+            aria-hidden="true"
+            className="h-full w-full object-cover object-center"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background: `
+                linear-gradient(90deg, rgba(4, 28, 19, 0.68) 0%, rgba(4, 28, 19, 0.52) 42%, rgba(4, 28, 19, 0.42) 70%, rgba(4, 28, 19, 0.58) 100%),
+                linear-gradient(180deg, rgba(3, 24, 16, 0.22) 0%, rgba(3, 24, 16, 0.34) 100%)
+              `,
+            }}
+          />
+        </div>
+        <div className="relative z-10 space-y-8 sm:space-y-10 lg:space-y-12">
         {/* ================================================== */}
         {/* 3. TRUE FULL-BLEED TRANSLUCENT BOTANICAL STRIP/RIBBON */}
         {/* ================================================== */}
@@ -200,7 +214,7 @@ export default function HowWeThinkSection() {
         {/* ================================================== */}
         {/* 5. BRAND / CTA ROW */}
         {/* ================================================== */}
-        <div className="w-full flex flex-row items-center justify-end gap-6 pt-6 mb-4 border-t border-[rgba(244,245,236,0.18)] mt-10 sm:mt-12">
+        <div className="mx-auto flex w-full max-w-[1400px] flex-row items-center justify-end gap-6 border-t border-[rgba(244,245,236,0.18)] px-8 pt-6 mb-4 sm:px-12 lg:px-20 mt-10 sm:mt-12">
           {/* Right: CTA Button */}
           <div className="flex items-center gap-3 flex-wrap">
             <a
@@ -210,6 +224,7 @@ export default function HowWeThinkSection() {
               {t("nav_science_tech", "EXPLORE OUR SCIENCE")}
             </a>
           </div>
+        </div>
         </div>
       </div>
     </section>
