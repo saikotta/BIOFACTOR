@@ -28,11 +28,11 @@ export default function HowWeThinkSection() {
           aria-hidden="true"
           className="pointer-events-none absolute right-0 bottom-0 z-0 w-[92vw] max-w-[1080px] opacity-35 sm:w-[82vw] lg:w-[78vw]"
         />
-        <div className="relative z-10 mx-auto w-full max-w-[1700px] px-6 pt-16 pb-2 sm:px-12 md:px-16 md:pt-20 lg:px-20">
+        <div className="relative z-10 mx-auto w-full max-w-[1700px] px-6 pt-10 pb-1 sm:px-12 md:px-16 md:pt-12 lg:px-20">
         {/* ================================================== */}
         {/* 1. MAIN TWO-COLUMN AREA (Upper 50/50 Desktop) */}
         {/* ================================================== */}
-        <div className="relative flex min-h-[340px] flex-col items-start gap-8 md:min-h-[390px] lg:flex-row lg:gap-12">
+        <div className="relative flex min-h-0 flex-col items-start gap-8 pb-3 lg:min-h-[300px] lg:flex-row lg:items-center lg:gap-12 lg:pb-0">
           {/* LEFT COLUMN (~50% Width) */}
           <div className="flex w-full max-w-[780px] flex-col justify-center gap-3 sm:gap-4 lg:w-[62%]">
             {/* Technical Mono Eyebrow */}
