@@ -3,7 +3,7 @@
 import React from "react";
 
 /* ================================================================ */
-/*  CSS — icon animation keyframes (same as the orbit, oho- scoped)  */
+/*  CSS â€” icon animation keyframes (same as the orbit, oho- scoped)  */
 /*  Plus chapter-icon-specific sizing & entrance animation.          */
 /* ================================================================ */
 const CSS = `
@@ -114,18 +114,7 @@ const PEOPLE_ICON = `
 `;
 
 /* ---- Planet: globe (r=85) instead of node circle (r=70) ---------- */
-const PLANET_SVG =
-  `<svg viewBox="-90 -90 180 180" role="img" aria-label="Planet">` +
-  `<defs>${COMMON_DEFS}<linearGradient id="oho-ch-ocean" x1=".18" y1=".08" x2=".84" y2=".94"><stop stop-color="#63c8c1"/><stop offset=".5" stop-color="#21839a"/><stop offset="1" stop-color="#123e68"/></linearGradient><radialGradient id="oho-ch-atmos" cx=".28" cy=".22" r=".82"><stop offset=".62" stop-color="#fff" stop-opacity="0"/><stop offset=".88" stop-color="#c4f3e8" stop-opacity=".25"/><stop offset="1" stop-color="#80d8d1" stop-opacity=".85"/></radialGradient></defs>` +
-  `<g clip-path="url(#oho-ch-gc)">` +
-  `<circle r="85" fill="url(#oho-ch-ocean)"/>` +
-  `<path d="M-60-39l15-13 17 3 8 12 14 4 4 12-10 8-7 18-13 8-8-10-15-3-7-14-13-8 4-11 14-6zM-21 5l13 3 11 15-4 21-11 16-9-12 3-17-9-12zM5-36l18-11 20 7 11 14-10 13-15-3-6 12-12-6-11 6-8-13zM29 8l17-8 14 11-2 18-13 11-14-8-8-13z" fill="#8fb87a"/>` +
-  `<path d="M-52-33q12-10 23-2t21 2M-5-28q11-9 24-2t20 1M-43 8q10-7 18 0M17 28q12-8 24 0" fill="none" stroke="#c8d5a2" stroke-width="4" opacity=".62" stroke-linecap="round"/>` +
-  `<circle r="85" fill="url(#oho-ch-atmos)"/><ellipse cx="-28" cy="-48" rx="20" ry="5" fill="#fff" opacity=".22" transform="rotate(-35 -28 -48)"/>` +
-  `</g>` +
-  `<circle r="85" fill="none" stroke="#c4f3e8" stroke-width="2.5" opacity=".85"/>` +
-  `</svg>`;
-
+const PLANET_SVG = `<svg viewBox="-90 -90 180 180" role="img" aria-label="Planet Earth with softly moving continents and clouds"><image href="/images/one-health/earth-design.svg" x="-90" y="-90" width="180" height="180" preserveAspectRatio="xMidYMid meet"/></svg>`;
 /* ---- Map chapter IDs to full SVG strings --------------------------- */
 const CHAPTER_SVGS: Record<string, string> = {
   soil: nodeSvg("Soil", "#efd9b8", "#dfe3d6", "#c9a37a", "scale(1.12)", SOIL_ICON),
@@ -157,7 +146,7 @@ export function getChapterIconSvg(chapterId: string): string {
 }
 
 /* ================================================================ */
-/*  Component — sticky chapter icon that swaps with the active       */
+/*  Component â€” sticky chapter icon that swaps with the active       */
 /*  chapter, with an accent-coloured glow behind it.                   */
 /* ================================================================ */
 interface OneHealthChapterIconProps {
@@ -183,7 +172,7 @@ export default function OneHealthChapterIcon({
           background: `radial-gradient(circle, ${accentColor}2E 0%, ${accentColor}1A 40%, rgba(237,244,237,0) 70%)`,
         }}
       />
-      {/* The active chapter's node icon — key forces remount → entrance anim */}
+      {/* The active chapter's node icon â€” key forces remount â†’ entrance anim */}
       <div
         key={activeChapterId}
         className="oho-chapter-icon-enter relative z-10 w-full h-full flex items-center justify-center"
