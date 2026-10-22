@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import OneHealthOrbit2D from "./OneHealthOrbit2D";
 import { useTranslation } from "../../i18n";
 
 export default function OneHealthHero() {
@@ -33,30 +32,11 @@ export default function OneHealthHero() {
   const headlineWords = headlineText.split(" ");
 
   return (
-    <section className="relative w-full min-h-screen bg-[#EDF4ED] text-[#173522] font-sans overflow-visible flex flex-col justify-start select-none">
-      {/* 1. Biological Atmosphere & Hero Radial Background Glow Layers */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse at 50% 45%, #F5FAF5 0%, #E8F2E8 55%, #DCECDC 100%)",
-          }}
-        />
-        {/* Soft Radial Glow of pale green (#CFE8CF at 55%) & warm cream behind planet */}
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[520px] rounded-full pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse at 50% 50%, rgba(207, 232, 207, 0.55) 0%, rgba(237, 233, 218, 0.35) 45%, transparent 75%)",
-          }}
-        />
-        {/* 3 Concentric Ripple Rings scaled to fit within 1.15x orbit half-width */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] rounded-full border border-[#147A46] opacity-[0.08]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[460px] h-[460px] rounded-full border border-[#147A46] opacity-[0.08]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-[#147A46] opacity-[0.08]" />
+    <section className="relative w-full min-h-screen bg-[#fcfcf8] text-[#173522] font-sans overflow-visible flex flex-col justify-start select-none">
+      <div className="one-health-atmosphere absolute inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <i className="one-health-blob one-health-blob-green" />
+        <i className="one-health-blob one-health-blob-peach" />
       </div>
-
       {/* Main Content Layout Wrapper (pt-20 md:pt-24 for floating capsule header clearance) */}
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-8 pt-20 md:pt-24 pb-10 flex-1 flex flex-col items-center justify-start text-center overflow-visible">
 
@@ -114,16 +94,22 @@ export default function OneHealthHero() {
           </p>
         </div>
 
-        {/* CENTERED SVG ORBIT DIAGRAM (One Planet — There is no Planet B) */}
-        <div className="w-full mx-auto flex items-center justify-center mt-0 pt-12 sm:pt-16 h-[clamp(640px,86svh,940px)] relative z-10 overflow-visible">
+        {/* Self-contained One Planet scene from the supplied design */}
+        <div className="w-full mx-auto flex items-center justify-center mt-0 pt-12 sm:pt-16 relative z-10 overflow-visible">
           <div
-            className={`relative w-full h-full flex items-center justify-center overflow-visible transition-all duration-1000 delay-300 ease-out transform ${
+            className={`relative w-full max-w-[1100px] aspect-[1100/780] flex items-center justify-center overflow-visible transition-all duration-1000 delay-300 ease-out transform ${
               hasEntered
                 ? "opacity-100 scale-100"
                 : "opacity-0 scale-95"
             }`}
           >
-            <OneHealthOrbit2D />
+            <iframe
+              src="/one-health-planet-b.html"
+              title="There is no Planet B: soil, plants, animals, food and people share one planet"
+              className="absolute inset-0 h-full w-full border-0"
+              style={{ backgroundColor: "transparent" }}
+              loading="eager"
+            />
           </div>
         </div>
 

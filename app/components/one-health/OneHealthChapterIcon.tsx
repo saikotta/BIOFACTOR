@@ -80,6 +80,7 @@ function nodeSvg(
   return (
     `<svg viewBox="-90 -90 180 180" role="img" aria-label="${label}">` +
     `<defs>${COMMON_DEFS}</defs>` +
+    `<circle r="75" fill="#fff" filter="drop-shadow(0 8px 12px rgba(23,61,51,.16))"/>` +
     `<circle r="70" fill="${fill}" stroke="${stroke}" stroke-width="2"/>` +
     `<circle r="70" fill="url(#oho-ch-shine)"/>` +
     `<circle class="oho-dz" r="62" fill="none" stroke="${dotColor}" stroke-width="1.6" stroke-dasharray="2 8" stroke-linecap="round"/>` +
@@ -91,86 +92,57 @@ function nodeSvg(
 /* ---- Icon content per chapter (gradient refs use oho-ch- prefix) -- */
 
 const SOIL_ICON = `
-<rect x="-30" y="-2" width="60" height="38" rx="6" fill="url(#oho-ch-soilG)" class="oho-ink"/>
-<path d="M-30 12Q-15 6 0 12T30 12M-30 24Q-15 18 0 24T30 24" fill="none" stroke="#6b4527" stroke-width="1.6" opacity=".6"/>
-<path d="M-30 4Q-26 -4-20 -2Q-14 -8-8 -2Q0 -8 8 -2Q16 -8 22 -2Q28 -4 30 4V-2H-30Z" fill="#6fae57" class="oho-ink" stroke-width="2.2"/>
-<path class="oho-rootpath" pathLength="1" d="M0 -2V10M0 10L-12 22M0 10L10 20M-12 22L-21 20M-12 22L-8 31M10 20L21 17"/>
-<circle class="oho-mb" cx="-20" cy="10" r="2.6" fill="#b6f09a"/><circle class="oho-mb" style="animation-delay:-1s" cx="20" cy="8" r="2.6" fill="#b6f09a"/><circle class="oho-mb" style="animation-delay:-2s" cx="14" cy="28" r="2.4" fill="#b6f09a"/><circle cx="-22" cy="28" r="3" fill="#a07a52"/>
-<g class="oho-sprout"><path d="M0 -2V-24" class="oho-ink"/><path d="M0 -24C-4 -40-24 -40-26 -34C-24 -22-8 -20 0 -24Z" fill="url(#oho-ch-leafG)" class="oho-ink" stroke-width="2.4"/><path d="M0 -26C2 -40 16 -46 26 -40C24 -28 8 -24 0 -26Z" fill="url(#oho-ch-leafG2)" class="oho-ink" stroke-width="2.4"/><path d="M-4 -26L-18 -33M4 -28L16 -37" stroke="#fff" stroke-width="1.4" stroke-linecap="round" opacity=".7"/></g>
+<ellipse cx="0" cy="42" rx="30" ry="4.5" fill="#173d33" opacity=".14"/>
+<path d="M-34 8h68v26a8 8 0 0 1-8 8h-52a8 8 0 0 1-8-8z" fill="#a8713a"/><path d="M-34 15V12a6 6 0 0 1 6-6h56a6 6 0 0 1 6 6v3z" fill="#6aa35a"/><path d="M-34 27h68v3h-68z" fill="#8a5a2b" opacity=".45"/>
+<g fill="#6e4521"><circle cx="-22" cy="23" r="2.2"/><circle cx="-6" cy="34" r="2.6"/><circle cx="14" cy="25" r="2"/><circle cx="25" cy="35" r="2.4"/></g><path d="M0 16V30M0 22C-6 26-9 30-10 35M0 24C6 28 9 31 10 36" stroke="#f0dfb8" stroke-width="2.6" stroke-linecap="round" fill="none"/><path d="M0 8V-20" stroke="#4f8a43" stroke-width="4.5" stroke-linecap="round"/><path d="M0-12C-16-12-26-22-24-34-10-34-1-26 0-12z" fill="#7fc06a"/><path d="M0-20C12-20 22-28 22-40 8-40 0-32 0-20z" fill="#5fa84f"/><path d="M-2-14C-9-19-14-25-19-30" stroke="#c4ebb0" stroke-width="1.6" fill="none" stroke-linecap="round"/>
 `;
 
 const PLANT_ICON = `
-<ellipse cx="0" cy="32" rx="26" ry="5" fill="#b9d3a6"/>
-<g class="oho-sway"><path d="M0 32C-2 18 2 6 0 -6" fill="none" class="oho-ink"/>
-<path d="M0 12C-4 -4-18-12-34-10C-32 8-16 18 0 12Z" fill="url(#oho-ch-leafG2)" class="oho-ink"/><path d="M-4 8C-14 2-22-2-28-6" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>
-<path d="M0 2C2-18 16-32 36-30C38-10 22 4 0 2Z" fill="url(#oho-ch-leafG)" class="oho-ink"/><path d="M6-2C16-10 24-18 30-26" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>
-<path d="M0-6C-8-18-6-30 0-38C6-30 8-18 0-6Z" fill="#c5e6a8" class="oho-ink" stroke-width="2.4"/>
-<path class="oho-drop" d="M20-4q-5 8 0 11q5-3 0-11z" fill="#8fd3f0" stroke="#17402f" stroke-width="1.6"/></g>
-<g fill="#ffd96b"><path class="oho-tw" d="M-30-26l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/><path class="oho-tw" style="animation-delay:-1.2s" d="M32 14l1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5z"/></g>
+<ellipse cx="0" cy="42" rx="30" ry="4.5" fill="#173d33" opacity=".14"/><path d="M0 42C-1 26-2 8 3-16" stroke="#3f7d46" stroke-width="4.5" stroke-linecap="round" fill="none"/><path d="M-1 28C-26 30-38 14-35-2-17-1-3 10-1 28z" fill="#6dbb63"/><path d="M1 14C24 16 38 2 36-16 17-14 3-4 1 14z" fill="#93d67c"/><path d="M3-16C-8-24-4-38 6-44 16-36 13-24 3-16z" fill="#4f9d52"/><g stroke="#e2f6d4" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".85"><path d="M-3 24C-14 18-24 10-31 2M5 10C16 8 26 2 32-10M5-18C7-26 8-32 8-38"/></g>
 `;
 
 const ANIMAL_ICON = `
-<path d="M-34 32H34" stroke="#7fb868" stroke-width="5" stroke-linecap="round"/><path d="M-26 32l-3-8M-22 32l1-9M26 32l3-8" stroke="#5f9f4f" stroke-width="2.4" stroke-linecap="round"/>
-<path class="oho-tail oho-ink" fill="none" d="M-30 -2C-40 0-40 12-37 22"/><circle cx="-37" cy="23" r="3" fill="#17402f"/>
-<rect x="-24" y="14" width="9" height="18" rx="3" fill="#fff" class="oho-ink" stroke-width="2.4"/><rect x="2" y="14" width="9" height="18" rx="3" fill="#fff" class="oho-ink" stroke-width="2.4"/>
-<rect x="-32" y="-12" width="52" height="32" rx="14" fill="#fff" class="oho-ink"/>
-<path d="M-22-8Q-12-14-8-4Q-10 6-22 4Z" fill="#8bb27d"/><circle cx="6" cy="10" r="6" fill="#8bb27d"/>
-<g class="oho-nod"><path d="M10-26L5-36M34-26L39-36" class="oho-ink" stroke-width="3.2"/>
-<ellipse cx="6" cy="-18" rx="8" ry="5" fill="#f6b8b0" class="oho-ink" stroke-width="2.2" transform="rotate(-24 6 -18)"/><ellipse cx="38" cy="-18" rx="8" ry="5" fill="#f6b8b0" class="oho-ink" stroke-width="2.2" transform="rotate(24 38 -18)"/>
-<rect x="10" y="-30" width="28" height="34" rx="13" fill="#fff" class="oho-ink"/><path d="M10-14Q16-26 22-24Q18-12 10-10Z" fill="#8bb27d"/>
-<rect x="13" y="-6" width="22" height="14" rx="7" fill="#f6b8b0" class="oho-ink" stroke-width="2.4"/><circle cx="19" cy="1" r="1.8" fill="#17402f"/><circle cx="29" cy="1" r="1.8" fill="#17402f"/>
-<g class="oho-blink"><circle cx="18" cy="-15" r="3.4" fill="#17402f"/><circle cx="30" cy="-15" r="3.4" fill="#17402f"/><circle cx="17" cy="-16.2" r="1.1" fill="#fff"/><circle cx="29" cy="-16.2" r="1.1" fill="#fff"/></g>
-<circle cx="24" cy="6" r="2.4" fill="#ffd96b" stroke="#17402f" stroke-width="1.4"/></g>
+<g transform="translate(-4 0)"><ellipse cx="2" cy="42" rx="36" ry="4.5" fill="#173d33" opacity=".14"/><g fill="#fdfdf8"><rect x="-26" y="12" width="8" height="26" rx="3"/><rect x="18" y="12" width="8" height="26" rx="3"/></g><g fill="#e3e9e0"><rect x="-12" y="14" width="8" height="24" rx="3"/><rect x="6" y="14" width="8" height="24" rx="3"/></g><g fill="#3a4a42"><rect x="-26" y="34" width="8" height="5" rx="2"/><rect x="18" y="34" width="8" height="5" rx="2"/><rect x="-12" y="34" width="8" height="5" rx="2"/><rect x="6" y="34" width="8" height="5" rx="2"/></g><path d="M-34-4C-44 0-44 12-39 22" stroke="#5c7266" stroke-width="3" fill="none" stroke-linecap="round"/><rect x="-34" y="-14" width="66" height="32" rx="15" fill="#fdfdf8"/><path d="M-22-10c8-4 14 2 10 10s-14 6-10-10zM6-12c8-2 14 6 8 12s-14-2-8-12z" fill="#5c7266"/><g transform="translate(30 -10)"><path d="M-2-14C-6-22-2-27 2-27M12-14C16-22 12-27 8-27" stroke="#e8c98a" stroke-width="3.5" fill="none" stroke-linecap="round"/><rect x="-6" y="-14" width="26" height="30" rx="11" fill="#fdfdf8"/><ellipse cx="-8" cy="-7" rx="7" ry="4" fill="#5c7266" transform="rotate(-20 -8 -7)"/><rect x="0" y="4" width="22" height="14" rx="7" fill="#f2b9a8"/><circle cx="15" cy="11" r="1.8" fill="#8a4a3a"/><circle cx="8" cy="-4" r="2.4" fill="#173d33"/></g></g>
 `;
 
 const FOOD_ICON = `
-<g class="oho-bob"><path d="M-22 0L-30-22Q-26-26-22-22Z" fill="#f08a2a" class="oho-ink" stroke-width="2.4"/><path d="M-26-24l-5-8M-26-24l2-9M-26-24l7-5" stroke="#5f8e57" stroke-width="2.6" stroke-linecap="round"/></g>
-<g class="oho-bob" style="animation-delay:.5s"><path d="M12-22C-4-26-6-4 4-2C8 0 14 -2 20-2C30-4 28-24 12-22Z" fill="url(#oho-ch-appleG)" class="oho-ink" stroke-width="2.6"/><path d="M12-22Q12-30 18-32" fill="none" class="oho-ink" stroke-width="2.4"/><path d="M14-30C20-36 28-34 28-34C26-28 20-26 14-30Z" fill="#6fae57" class="oho-ink" stroke-width="2"/><path d="M4-14Q5-8 8-6" stroke="#fff" stroke-width="2.4" stroke-linecap="round" fill="none" opacity=".75"/></g>
-<g class="oho-bob" style="animation-delay:1s"><circle cx="28" cy="-6" r="8" fill="#e5533a" class="oho-ink" stroke-width="2.4"/><path d="M24-12l4 3 4-3" stroke="#2f7a45" stroke-width="2.2" fill="none" stroke-linecap="round"/></g>
-<path d="M-32-4H32L26 32H-26Z" fill="#f3d08a" class="oho-ink"/>
-<path d="M-29 8H29M-27 20H27M-16-4L-13 32M0-4V32M16-4L13 32" fill="none" stroke="#a8691f" stroke-width="2"/><path d="M-36-4H36" class="oho-ink" stroke-width="4"/>
+<ellipse cx="0" cy="42" rx="30" ry="4.5" fill="#173d33" opacity=".14"/><path d="M-24 4C-24-26 24-26 24 4" stroke="#b9803c" stroke-width="4.5" fill="none" stroke-linecap="round"/><circle cx="-8" cy="-8" r="14" fill="#8fd17a"/><path d="M-8-22V4M-8-8l-9-8M-8-8l9-8" stroke="#6bb25a" stroke-width="2" fill="none"/><circle cx="14" cy="-6" r="13" fill="#e05b4a"/><path d="M14-19c0-5 3-7 6-8" stroke="#6b4a2b" stroke-width="2.6" fill="none"/><path d="M16-18c4-5 9-4 10-3-1 4-6 6-10 3z" fill="#6dbb63"/><path d="M-30-12L-20-6L-30 14Z" fill="#f08a2c"/><path d="M-27-13l-3-9M-24-11l2-10" stroke="#5fa84f" stroke-width="3" stroke-linecap="round"/><path d="M-34 3h68l-8 33a6 6 0 0 1-6 5H-20a6 6 0 0 1-6-5z" fill="#d9a35f"/><path d="M-31 15h62M-28 26h56M-26 35h52M-14 4l4 37M0 4v37M14 4l-4 37" stroke="#b9803c" stroke-width="2" opacity=".8"/><rect x="-37" y="-1" width="74" height="9" rx="4.5" fill="#c98f4a"/>
 `;
 
 const PEOPLE_ICON = `
-<path class="oho-pu" d="M0-30c-5-10-20-4-12 8l12 12 12-12c8-12-7-18-12-8z" fill="#e5533a" class="oho-ink" stroke="#17402f" stroke-width="2.2"/>
-<g class="oho-bob"><circle cx="-20" cy="-8" r="8" fill="#fff3dc" class="oho-ink"/><circle cx="-23" cy="-9" r="1.2" fill="#17402f"/><circle cx="-17" cy="-9" r="1.2" fill="#17402f"/><path d="M-23-5Q-20-2-17-5" fill="none" stroke="#17402f" stroke-width="1.4" stroke-linecap="round"/></g>
-<path d="M-36 30V12C-36 4-30 2-20 2C-10 2-6 4-6 12V30Z" fill="#7fb6c2" class="oho-ink"/>
-<g class="oho-bob" style="animation-delay:.6s"><circle cx="20" cy="-8" r="8" fill="#fff3dc" class="oho-ink"/><circle cx="17" cy="-9" r="1.2" fill="#17402f"/><circle cx="23" cy="-9" r="1.2" fill="#17402f"/><path d="M17-5Q20-2 23-5" fill="none" stroke="#17402f" stroke-width="1.4" stroke-linecap="round"/></g>
-<path d="M36 30V12C36 4 30 2 20 2C10 2 6 4 6 12V30Z" fill="#e3b35c" class="oho-ink"/>
-<g class="oho-bob" style="animation-delay:.3s"><circle cx="0" cy="8" r="8.5" fill="#fff3dc" class="oho-ink"/><circle cx="-3" cy="7" r="1.2" fill="#17402f"/><circle cx="3" cy="7" r="1.2" fill="#17402f"/><path d="M-3 11Q0 14 3 11" fill="none" stroke="#17402f" stroke-width="1.4" stroke-linecap="round"/></g>
-<path d="M-13 34V22C-13 17-9 17 0 17C9 17 13 17 13 22V34Z" fill="#8fc67a" class="oho-ink"/>
+<ellipse cx="0" cy="42" rx="34" ry="4.5" fill="#173d33" opacity=".14"/><path d="M-36 34c0-14 6-24 14-24s14 10 14 24z" fill="#7fb6d6"/><circle cx="-22" cy="-6" r="9" fill="#f1c9a5"/><path d="M-31-7a9 9 0 0 1 18 0c-6-4-12-4-18 0z" fill="#3b2a20"/><path d="M8 34c0-14 6-24 14-24s14 10 14 24z" fill="#e8b86a"/><circle cx="22" cy="-6" r="9" fill="#c98e62"/><path d="M13-7a9 9 0 0 1 18 0c-6-4-12-4-18 0z" fill="#2a1c15"/><path d="M-13 42c0-13 5-22 13-22s13 9 13 22z" fill="#8fcf8a" stroke="#fff" stroke-width="2.5"/><circle cx="0" cy="8" r="8" fill="#e3b48c" stroke="#fff" stroke-width="2.5"/><path d="M-8 6a8 8 0 0 1 16 0c-5-3-11-3-16 0z" fill="#4a3426"/>
 `;
 
 /* ---- Planet: globe (r=85) instead of node circle (r=70) ---------- */
 const PLANET_SVG =
   `<svg viewBox="-90 -90 180 180" role="img" aria-label="Planet">` +
-  `<defs>${COMMON_DEFS}</defs>` +
+  `<defs>${COMMON_DEFS}<linearGradient id="oho-ch-ocean" x1=".18" y1=".08" x2=".84" y2=".94"><stop stop-color="#63c8c1"/><stop offset=".5" stop-color="#21839a"/><stop offset="1" stop-color="#123e68"/></linearGradient><radialGradient id="oho-ch-atmos" cx=".28" cy=".22" r=".82"><stop offset=".62" stop-color="#fff" stop-opacity="0"/><stop offset=".88" stop-color="#c4f3e8" stop-opacity=".25"/><stop offset="1" stop-color="#80d8d1" stop-opacity=".85"/></radialGradient></defs>` +
   `<g clip-path="url(#oho-ch-gc)">` +
-  `<rect x="-90" y="-90" width="180" height="180" fill="#dbe9e8"/>` +
-  `<g class="oho-land"><use href="#oho-ch-land"/><use href="#oho-ch-land" x="260"/></g>` +
-  `<g fill="none" stroke="#9fb9b6" stroke-width="1" opacity=".7"><ellipse rx="85" ry="30"/><ellipse rx="85" ry="62"/><ellipse rx="40" ry="85"/><path d="M-85 0H85M0 -85V85"/></g>` +
-  `<circle r="85" fill="url(#oho-ch-sh)"/>` +
+  `<circle r="85" fill="url(#oho-ch-ocean)"/>` +
+  `<path d="M-60-39l15-13 17 3 8 12 14 4 4 12-10 8-7 18-13 8-8-10-15-3-7-14-13-8 4-11 14-6zM-21 5l13 3 11 15-4 21-11 16-9-12 3-17-9-12zM5-36l18-11 20 7 11 14-10 13-15-3-6 12-12-6-11 6-8-13zM29 8l17-8 14 11-2 18-13 11-14-8-8-13z" fill="#8fb87a"/>` +
+  `<path d="M-52-33q12-10 23-2t21 2M-5-28q11-9 24-2t20 1M-43 8q10-7 18 0M17 28q12-8 24 0" fill="none" stroke="#c8d5a2" stroke-width="4" opacity=".62" stroke-linecap="round"/>` +
+  `<circle r="85" fill="url(#oho-ch-atmos)"/><ellipse cx="-28" cy="-48" rx="20" ry="5" fill="#fff" opacity=".22" transform="rotate(-35 -28 -48)"/>` +
   `</g>` +
-  `<circle r="85" fill="none" stroke="#c9dad7" stroke-width="2"/>` +
+  `<circle r="85" fill="none" stroke="#c4f3e8" stroke-width="2.5" opacity=".85"/>` +
   `</svg>`;
 
 /* ---- Map chapter IDs to full SVG strings --------------------------- */
 const CHAPTER_SVGS: Record<string, string> = {
-  soil: nodeSvg("Soil", "#f6e9dc", "#e2d8c9", "#c9a37a", "scale(1.12)", SOIL_ICON),
-  plant: nodeSvg("Plants", "#e8f0dc", "#d3dfc3", "#8fb97d", "scale(1.1)", PLANT_ICON),
+  soil: nodeSvg("Soil", "#efd9b8", "#dfe3d6", "#c9a37a", "scale(1.12)", SOIL_ICON),
+  plant: nodeSvg("Plants", "#d3e9c6", "#dfe3d6", "#8fb97d", "scale(1.1)", PLANT_ICON),
   animal: nodeSvg(
     "Animals",
-    "#e8eeea",
-    "#d3ddd6",
+    "#d3dfd3",
+    "#dfe3d6",
     "#9db4a6",
     "translate(0 4) scale(1.12)",
     ANIMAL_ICON
   ),
-  food: nodeSvg("Food", "#f8ecdb", "#ecdcc3", "#d9b98a", "scale(1.1)", FOOD_ICON),
+  food: nodeSvg("Food", "#f6dfbb", "#dfe3d6", "#d9b98a", "scale(1.1)", FOOD_ICON),
   people: nodeSvg(
     "People",
-    "#e5eef0",
-    "#d1dfe2",
+    "#d1e3ee",
+    "#dfe3d6",
     "#8fb3b9",
     "translate(0 4) scale(1.12)",
     PEOPLE_ICON
