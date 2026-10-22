@@ -1,73 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import OneHealthOrbit3D from "./OneHealthOrbit3D";
+import OneHealthOrbit2D from "./OneHealthOrbit2D";
 import { useTranslation } from "../../i18n";
 
-export interface DomainSlotConfig {
-  id: "soil" | "plant" | "animal" | "food" | "people";
-  name: string;
-  baseAngleDeg: number;
-  imgSrc: string;
-}
-
-export interface CoreSlotConfig {
-  name: string;
-  tagline: string;
-  imgSrc: string;
-}
-
-const DEFAULT_DOMAINS: DomainSlotConfig[] = [
-  {
-    id: "soil",
-    name: "SOIL",
-    baseAngleDeg: 270, // Top / Back
-    imgSrc: "/images/one-health/soil.webp",
-  },
-  {
-    id: "plant",
-    name: "PLANT",
-    baseAngleDeg: 342, // Top-Right
-    imgSrc: "/images/one-health/plant.webp",
-  },
-  {
-    id: "animal",
-    name: "ANIMAL",
-    baseAngleDeg: 54, // Bottom-Right
-    imgSrc: "/images/one-health/animal.webp",
-  },
-  {
-    id: "food",
-    name: "FOOD",
-    baseAngleDeg: 126, // Bottom-Left
-    imgSrc: "/images/one-health/food.webp",
-  },
-  {
-    id: "people",
-    name: "PEOPLE",
-    baseAngleDeg: 198, // Top-Left
-    imgSrc: "/images/one-health/people.webp",
-  },
-];
-
-const DEFAULT_CORE: CoreSlotConfig = {
-  name: "PLANET",
-  tagline: "ONE HEALTH CORE",
-  imgSrc: "/images/one-health/planet.png",
-};
-
-interface OneHealthHeroProps {
-  domains?: DomainSlotConfig[];
-  core?: CoreSlotConfig;
-}
-
-export default function OneHealthHero({
-  domains = DEFAULT_DOMAINS,
-  core = DEFAULT_CORE,
-}: OneHealthHeroProps) {
+export default function OneHealthHero() {
   const { t, language } = useTranslation();
   const [hasEntered, setHasEntered] = useState(false);
-  const [entranceProgress, setEntranceProgress] = useState(0);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
@@ -78,7 +17,6 @@ export default function OneHealthHero({
   useEffect(() => {
     if (prefersReducedMotion) {
       setHasEntered(true);
-      setEntranceProgress(1);
       return;
     }
 
@@ -86,22 +24,8 @@ export default function OneHealthHero({
       setHasEntered(true);
     }, 100);
 
-    // Entrance animation progress over ~2.2 seconds
-    const startTime = Date.now();
-    const duration = 2200;
-
-    const interval = setInterval(() => {
-      const elapsed = Date.now() - startTime;
-      const progress = Math.min(1, elapsed / duration);
-      setEntranceProgress(progress);
-      if (progress >= 1) {
-        clearInterval(interval);
-      }
-    }, 16);
-
     return () => {
       clearTimeout(timer);
-      clearInterval(interval);
     };
   }, [prefersReducedMotion]);
 
@@ -190,8 +114,8 @@ export default function OneHealthHero({
           </p>
         </div>
 
-        {/* CENTERED THREE.JS ORBIT ANIMATION (Height clamp(720px, 92svh, 980px), pt-16 padding-top, mt-0 margin-top, relative z-10) */}
-        <div className="w-full mx-auto flex items-center justify-center mt-0 pt-16 h-[clamp(720px,92svh,980px)] relative z-10 overflow-visible">
+        {/* CENTERED SVG ORBIT DIAGRAM (One Planet — There is no Planet B) */}
+        <div className="w-full mx-auto flex items-center justify-center mt-0 pt-12 sm:pt-16 h-[clamp(640px,86svh,940px)] relative z-10 overflow-visible">
           <div
             className={`relative w-full h-full flex items-center justify-center overflow-visible transition-all duration-1000 delay-300 ease-out transform ${
               hasEntered
@@ -199,12 +123,7 @@ export default function OneHealthHero({
                 : "opacity-0 scale-95"
             }`}
           >
-            {/* Real Three.js 3D Orbital Carousel with Orchestrated Entrance */}
-            <OneHealthOrbit3D
-              domains={domains}
-              core={core}
-              entranceProgress={entranceProgress}
-            />
+            <OneHealthOrbit2D />
           </div>
         </div>
 

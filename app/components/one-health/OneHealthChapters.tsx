@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import OneHealthChapterSphere from "./OneHealthChapterSphere";
+import OneHealthChapterIcon from "./OneHealthChapterIcon";
 import OneHealthChainBand from "./OneHealthChainBand";
 import { useTranslation } from "@/app/i18n/useTranslation";
 
@@ -512,11 +512,11 @@ export default function OneHealthChapters() {
             })}
           </div>
 
-          {/* Right Column: Desktop Sticky Sphere Container (will-change: transform) */}
+          {/* Right Column: Desktop Sticky Icon Container (will-change: transform) */}
           <div className="relative h-full pointer-events-none">
             <div className="sticky top-0 h-screen flex items-center justify-center will-change-transform">
-              <div className="w-[min(44vw,560px)] aspect-square flex items-center justify-center pointer-events-none relative">
-                <OneHealthChapterSphere
+              <div className="w-[min(44vw,520px)] aspect-square flex items-center justify-center pointer-events-none relative">
+                <OneHealthChapterIcon
                   activeChapterId={activeChapter.id}
                   accentColor={activeChapter.accent}
                   prefersReducedMotion={prefersReducedMotion}
@@ -529,9 +529,9 @@ export default function OneHealthChapters() {
 
         {/* MOBILE LAYOUT (<768px) */}
         <div className="md:hidden flex flex-col relative">
-          {/* Sticky Mobile Sphere */}
+          {/* Sticky Mobile Icon */}
           <div className="sticky top-16 z-0 w-[60vw] max-w-[320px] aspect-square mx-auto flex items-center justify-center pointer-events-none py-4 will-change-transform">
-            <OneHealthChapterSphere
+            <OneHealthChapterIcon
               activeChapterId={activeChapter.id}
               accentColor={activeChapter.accent}
               prefersReducedMotion={prefersReducedMotion}

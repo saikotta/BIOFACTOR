@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Poppins, Sora } from "next/font/google";
 import "./globals.css";
 import BiofactorHeader from "./components/BiofactorHeader";
 import ClientProviders from "./components/ClientProviders";
@@ -8,6 +8,12 @@ const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
+});
+
+const sora = Sora({
+  variable: "--font-sora",
+  subsets: ["latin"],
+  weight: ["500", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -62,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="en" className={`${poppins.variable} h-full antialiased overflow-x-clip`} style={{ maxWidth: '100vw' }} suppressHydrationWarning>
+    <html lang="en" className={`${poppins.variable} ${sora.variable} h-full antialiased overflow-x-clip`} style={{ maxWidth: '100vw' }} suppressHydrationWarning>
       <body className="min-h-full bg-[#EDF4ED] text-[#143324] font-sans selection:bg-emerald-500 selection:text-black overflow-x-clip" suppressHydrationWarning>
         <script
           type="application/ld+json"
