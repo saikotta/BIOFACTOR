@@ -2,9 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "../../i18n";
+import { useIframeSrc } from "../useIframeSrc";
 
 export default function OneHealthHero() {
   const { t, language } = useTranslation();
+  const frameSrc = useIframeSrc("/planet-b-orbit.html");
   const [hasEntered, setHasEntered] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
@@ -104,7 +106,7 @@ export default function OneHealthHero() {
             }`}
           >
             <iframe
-              src="/one-health-planet-b.html"
+              src={frameSrc}
               title="There is no Planet B: soil, plants, animals, food and people share one planet"
               className="absolute inset-0 h-full w-full border-0"
               style={{ backgroundColor: "transparent" }}
