@@ -299,12 +299,7 @@ export default function CareersPage() {
     setIsSendingOtp(true);
     try {
       const resp = await axios.post(getApiUrl('applications/send-otp'), { email: applicationForm.email });
-      if (resp.data?.dev_otp) {
-        setOtp(resp.data.dev_otp);
-        setToast({ message: "Verification code sent! (Dev OTP auto-filled: " + resp.data.dev_otp + ")", type: "success" });
-      } else {
-        setToast({ message: t("careers_otp_sent", "OTP sent to your email!"), type: "success" });
-      }
+      setToast({ message: t("careers_otp_sent", "OTP sent to your email. Please check your inbox."), type: "success" });
       setShowOtpInput(true);
     } catch (error: any) {
       let msg = error.response?.data?.detail;
