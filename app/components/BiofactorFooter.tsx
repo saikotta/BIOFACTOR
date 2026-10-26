@@ -78,6 +78,7 @@ export default function BiofactorFooter() {
                 { key: "nav_science_tech", defaultLabel: "Science & Technology", href: "/science-technology/" },
                 { key: "nav_resources", defaultLabel: "Resources", href: "/resources/" },
                 { key: "nav_careers", defaultLabel: "Careers", href: "/careers/" },
+                { key: "nav_booking", defaultLabel: "Book Conference Room", href: "/booking/" },
               ].map((item) => (
                 <Link
                   key={item.key}
