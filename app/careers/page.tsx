@@ -12,7 +12,8 @@ import {
   FiX,
   FiCheckCircle,
   FiLoader,
-  FiMapPin
+  FiMapPin,
+  FiUpload
 } from 'react-icons/fi';
 import { FaLeaf, FaHandsHelping, FaChartLine } from 'react-icons/fa';
 import { motion, type Variants } from 'framer-motion';
@@ -99,6 +100,12 @@ const DEMO_JOBS: JobOpening[] = [
     is_demo: true,
   },
 ];
+
+const getMinExperience = (expStr?: string) => {
+  if (!expStr) return 0;
+  const match = expStr.match(/\d+/);
+  return match ? parseInt(match[0]) : 0;
+};
 
 export default function CareersPage() {
   const { t, language } = useTranslation();
@@ -263,6 +270,12 @@ export default function CareersPage() {
     return () => clearInterval(pollInterval);
   }, []);
 
+  const [emailVerified, setEmailVerified] = useState(false);
+  const [showOtpInput, setShowOtpInput] = useState(false);
+  const [otp, setOtp] = useState('');
+  const [isSendingOtp, setIsSendingOtp] = useState(false);
+  const [isVerifyingOtp, setIsVerifyingOtp] = useState(false);
+
   const [applicationForm, setApplicationForm] = useState({
     full_name: '', email: '', phone: '', current_company: '', experience_years: '', linkedin_url: '', cover_letter: '', resume: null as File | null,
     course: '', course_other: '', domain: '', skills: '', languages_known: '', location: '', referred_by: ''
@@ -278,8 +291,58 @@ export default function CareersPage() {
     }
   }, [toast.message]);
 
+    const handleSendOtp = async () => {
+    if (!applicationForm.email) {
+      setToast({ message: t("careers_enter_email_first", "Please enter your email first."), type: "error" });
+      return;
+    }
+    setIsSendingOtp(true);
+    try {
+      await axios.post(getApiUrl('applications/send-otp'), { email: applicationForm.email });
+      setToast({ message: t("careers_otp_sent", "OTP sent to your email!"), type: "success" });
+      setShowOtpInput(true);
+    } catch (error: any) {
+      let msg = error.response?.data?.detail;
+      if (Array.isArray(msg)) {
+        msg = msg.map((err: any) => err.msg || JSON.stringify(err)).join(", ");
+      } else if (typeof msg === 'object') {
+        msg = JSON.stringify(msg);
+      }
+      setToast({ message: msg || t("careers_otp_failed", "Failed to send OTP. Please check your internet connection."), type: "error" });
+    } finally {
+      setIsSendingOtp(false);
+    }
+  };
+
+  const handleVerifyOtp = async () => {
+    if (!otp) return;
+    setIsVerifyingOtp(true);
+    try {
+      await axios.post(getApiUrl('applications/verify-otp'), { email: applicationForm.email, otp });
+      setToast({ message: t("careers_email_verified", "Email verified successfully!"), type: "success" });
+      setEmailVerified(true);
+      setShowOtpInput(false);
+    } catch (error: any) {
+      let msg = error.response?.data?.detail;
+      if (Array.isArray(msg)) {
+        msg = msg.map((err: any) => err.msg || JSON.stringify(err)).join(", ");
+      }
+      setToast({ message: msg || t("careers_invalid_otp", "Invalid or expired OTP"), type: "error" });
+    } finally {
+      setIsVerifyingOtp(false);
+    }
+  };
+
   const handleApplicationSubmit = async (e: React.FormEvent) => {
     if (e && e.preventDefault) e.preventDefault();
+
+    if (!emailVerified) {
+      setToast({
+        message: t("careers_verify_email_prompt", "Please verify your email with OTP before submitting."),
+        type: "error"
+      });
+      return;
+    }
 
     if (selectedJob?.is_demo) {
       setToast({
@@ -340,6 +403,9 @@ export default function CareersPage() {
           experience_years: '', linkedin_url: '', cover_letter: '', resume: null,
           course: '', course_other: '', domain: '', skills: '', languages_known: '', location: '', referred_by: ''
         });
+        setEmailVerified(false);
+        setShowOtpInput(false);
+        setOtp('');
         setToast({ message: '', type: '' });
       }, 4000);
     } catch (error: any) {
@@ -716,124 +782,336 @@ export default function CareersPage() {
         {/* Application Modal */}
         {isApplying && selectedJob && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto">
-            <div className="bg-white rounded-3xl max-w-2xl w-full p-6 md:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <div className="bg-white rounded-3xl max-w-4xl w-full my-8 p-6 md:p-10 shadow-2xl relative max-h-[90vh] overflow-y-auto">
               <button 
                 onClick={() => setIsApplying(false)}
-                className="absolute top-6 right-6 text-gray-400 hover:text-gray-600 text-2xl cursor-pointer"
+                className="absolute top-6 right-6 text-gray-400 hover:text-gray-600 text-2xl cursor-pointer p-1 rounded-full hover:bg-gray-100 transition-colors"
+                aria-label="Close modal"
               >
                 <FiX />
               </button>
 
-              <h2 className="text-2xl font-bold text-[#173522] mb-2">{t("careers_apply_for", "Apply for")} {jobText(selectedJob, "title", selectedJob.title)}</h2>
-              <p className="text-[#173522]/70 mb-6 text-sm">{t("careers_application_intro", "Fill in your details to submit your application.")}</p>
-
-              <form onSubmit={handleApplicationSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-semibold text-[#173522] mb-1">{t("careers_full_name", "Full Name")} *</label>
-                  <input 
-                    type="text" 
-                    required
-                    value={applicationForm.full_name}
-                    onChange={(e) => setApplicationForm({...applicationForm, full_name: e.target.value})}
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] outline-none text-[#173522]"
-                  />
+              <div className="mb-6">
+                <span className="text-xs font-mono font-bold tracking-widest text-[#2D6A4F] uppercase">{t("careers_apply_for", "Apply For")}</span>
+                <h2 className="text-2xl md:text-3xl font-extrabold text-[#173522] mt-1">{jobText(selectedJob, "title", selectedJob.title)}</h2>
+                <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-[#173522]/70 mt-2 font-medium">
+                  <span className="flex items-center gap-1.5"><FiMapPin className="text-[#2D6A4F]" /> {selectedJob.location}</span>
+                  <span>•</span>
+                  <span className="flex items-center gap-1.5"><FiBriefcase className="text-[#2D6A4F]" /> {selectedJob.job_type || selectedJob.department}</span>
                 </div>
+              </div>
 
-                <div className="grid md:grid-cols-2 gap-4">
+              <form onSubmit={handleApplicationSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  {/* Full Name */}
                   <div>
-                    <label className="block text-sm font-semibold text-[#173522] mb-1">{t("careers_email_address", "Email Address")} *</label>
+                    <label className="block text-xs font-bold font-mono uppercase tracking-wider text-[#173522] mb-1.5">{t("careers_full_name", "Full Name")} *</label>
                     <input 
-                      type="email" 
+                      type="text" 
                       required
-                      value={applicationForm.email}
-                      onChange={(e) => setApplicationForm({...applicationForm, email: e.target.value})}
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] outline-none text-[#173522]"
+                      value={applicationForm.full_name}
+                      onChange={(e) => setApplicationForm({...applicationForm, full_name: e.target.value})}
+                      placeholder="e.g. Rahul Sharma"
+                      className="w-full px-4 py-2.5 text-sm bg-[#EAF3EA]/40 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:bg-white outline-none text-[#173522] transition-all"
                     />
                   </div>
 
+                  {/* Email Address with OTP Verification */}
                   <div>
-                    <label className="block text-sm font-semibold text-[#173522] mb-1">{t("careers_phone_number", "Phone Number")} *</label>
+                    <label className="block text-xs font-bold font-mono uppercase tracking-wider text-[#173522] mb-1.5">{t("careers_email_address", "Email Address")} *</label>
+                    <div className="flex gap-2">
+                      <input 
+                        type="email" 
+                        required
+                        disabled={emailVerified}
+                        value={applicationForm.email}
+                        onChange={(e) => {
+                          setApplicationForm({...applicationForm, email: e.target.value});
+                          if (emailVerified) {
+                            setEmailVerified(false);
+                            setShowOtpInput(false);
+                            setOtp('');
+                          }
+                        }}
+                        placeholder="your@email.com"
+                        className={`flex-1 px-4 py-2.5 text-sm border rounded-xl outline-none transition-all ${
+                          emailVerified 
+                            ? 'border-emerald-500 bg-emerald-50 text-emerald-800' 
+                            : 'border-gray-200 bg-[#EAF3EA]/40 focus:ring-2 focus:ring-[#2D6A4F] focus:bg-white text-[#173522]'
+                        }`}
+                      />
+                      {emailVerified ? (
+                        <div className="flex items-center gap-1 px-3.5 py-2 bg-emerald-100 text-emerald-800 rounded-xl text-xs font-bold border border-emerald-300 whitespace-nowrap">
+                          <FiCheckCircle className="text-emerald-600" />
+                          {t("careers_verified", "Verified")}
+                        </div>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={handleSendOtp}
+                          disabled={isSendingOtp || !applicationForm.email}
+                          className="px-4 py-2 bg-[#2D6A4F] hover:bg-[#173522] text-white text-xs font-bold rounded-xl transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-1.5 whitespace-nowrap shadow-sm cursor-pointer"
+                        >
+                          {isSendingOtp ? (
+                            <><FiLoader className="animate-spin text-xs" /> {t("careers_sending_otp", "Sending...")}</>
+                          ) : (
+                            <><FiMail /> {t("careers_verify_email", "Verify Mail")}</>
+                          )}
+                        </button>
+                      )}
+                    </div>
+
+                    {/* OTP Input Card */}
+                    {showOtpInput && !emailVerified && (
+                      <div className="mt-2.5 p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl">
+                        <p className="text-xs text-emerald-900 font-medium mb-2">
+                          📧 {t("careers_otp_sent_to", "OTP sent to")} <strong>{applicationForm.email}</strong>. Check your inbox.
+                        </p>
+                        <div className="flex gap-2">
+                          <input
+                            type="text"
+                            maxLength={6}
+                            value={otp}
+                            onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
+                            placeholder="6-digit OTP"
+                            className="flex-1 px-3 py-1.5 rounded-lg border border-emerald-300 focus:outline-none focus:ring-2 focus:ring-[#2D6A4F] bg-white text-center text-base font-bold tracking-[0.3em] text-gray-800"
+                          />
+                          <button
+                            type="button"
+                            onClick={handleVerifyOtp}
+                            disabled={isVerifyingOtp || otp.length !== 6}
+                            className="px-4 py-1.5 bg-[#2D6A4F] hover:bg-[#173522] text-white text-xs font-bold rounded-lg transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-1 whitespace-nowrap cursor-pointer"
+                          >
+                            {isVerifyingOtp ? (
+                              <><FiLoader className="animate-spin text-xs" /> {t("careers_verifying", "Verifying...")}</>
+                            ) : (
+                              t("careers_verify_otp", "Verify OTP")
+                            )}
+                          </button>
+                        </div>
+                        <div className="flex justify-between items-center mt-1.5">
+                          <p className="text-[11px] text-gray-500">{t("careers_otp_hint", "Valid for 10 minutes.")}</p>
+                          <button
+                            type="button"
+                            onClick={handleSendOtp}
+                            disabled={isSendingOtp}
+                            className="text-[11px] text-[#2D6A4F] hover:underline font-semibold disabled:opacity-60 cursor-pointer"
+                          >
+                            {isSendingOtp ? t("careers_sending_otp", "Sending...") : t("careers_resend_otp", "Resend OTP")}
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Phone Number */}
+                  <div>
+                    <label className="block text-xs font-bold font-mono uppercase tracking-wider text-[#173522] mb-1.5">{t("careers_phone_number", "Phone Number")} *</label>
                     <input 
                       type="tel" 
                       required
                       value={applicationForm.phone}
                       onChange={(e) => setApplicationForm({...applicationForm, phone: e.target.value})}
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] outline-none text-[#173522]"
+                      placeholder="+91 98765 43210"
+                      className="w-full px-4 py-2.5 text-sm bg-[#EAF3EA]/40 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:bg-white outline-none text-[#173522] transition-all"
                     />
                   </div>
-                </div>
 
-                <div className="grid md:grid-cols-2 gap-4">
+                  {/* Current Company */}
                   <div>
-                    <label className="block text-sm font-semibold text-[#173522] mb-1">{t("careers_current_company", "Current Company")}</label>
+                    <label className="block text-xs font-bold font-mono uppercase tracking-wider text-[#173522] mb-1.5">{t("careers_current_company", "Current Company")}</label>
                     <input 
                       type="text" 
                       value={applicationForm.current_company}
                       onChange={(e) => setApplicationForm({...applicationForm, current_company: e.target.value})}
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] outline-none text-[#173522]"
+                      placeholder="e.g. Current Employer"
+                      className="w-full px-4 py-2.5 text-sm bg-[#EAF3EA]/40 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:bg-white outline-none text-[#173522] transition-all"
                     />
                   </div>
 
+                  {/* Years of Experience */}
                   <div>
-                    <label className="block text-sm font-semibold text-[#173522] mb-1">{t("careers_years_experience", "Years of Experience")}</label>
+                    <label className="block text-xs font-bold font-mono uppercase tracking-wider text-[#173522] mb-1.5">{t("careers_years_experience", "Years of Experience")} *</label>
                     <input 
-                      type="text" 
+                      type="number" 
+                      required
+                      min={0}
+                      step={0.5}
                       value={applicationForm.experience_years}
                       onChange={(e) => setApplicationForm({...applicationForm, experience_years: e.target.value})}
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] outline-none text-[#173522]"
+                      placeholder="e.g. 3"
+                      className="w-full px-4 py-2.5 text-sm bg-[#EAF3EA]/40 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:bg-white outline-none text-[#173522] transition-all"
+                    />
+                    <p className="text-[11px] text-[#173522]/60 mt-1 italic">
+                      {t("careers_min_exp_note", "Minimum requirement for this job is")} {getMinExperience(selectedJob.experience)} {t("careers_years", "years")}
+                    </p>
+                    {applicationForm.experience_years && parseInt(applicationForm.experience_years) < getMinExperience(selectedJob.experience) && (
+                      <p className="text-[11px] text-red-600 mt-0.5 font-medium">
+                        {t("careers_less_exp_warn", "You have less than the required minimum experience.")}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* LinkedIn URL */}
+                  <div>
+                    <label className="block text-xs font-bold font-mono uppercase tracking-wider text-[#173522] mb-1.5">{t("careers_linkedin_url", "LinkedIn Profile URL")}</label>
+                    <input 
+                      type="url" 
+                      value={applicationForm.linkedin_url}
+                      onChange={(e) => setApplicationForm({...applicationForm, linkedin_url: e.target.value})}
+                      placeholder="https://linkedin.com/in/..."
+                      className="w-full px-4 py-2.5 text-sm bg-[#EAF3EA]/40 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:bg-white outline-none text-[#173522] transition-all"
+                    />
+                  </div>
+
+                  {/* Highest Course / Degree */}
+                  <div>
+                    <label className="block text-xs font-bold font-mono uppercase tracking-wider text-[#173522] mb-1.5">{t("careers_highest_course", "Highest Course / Degree")}</label>
+                    <select 
+                      value={applicationForm.course} 
+                      onChange={(e) => setApplicationForm({...applicationForm, course: e.target.value})}
+                      className="w-full px-4 py-2.5 text-sm bg-[#EAF3EA]/40 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:bg-white outline-none text-[#173522] transition-all"
+                    >
+                      <option value="">{t("careers_select_course", "Select Course")}</option>
+                      <option value="B.Tech">B.Tech</option>
+                      <option value="M.Tech">M.Tech</option>
+                      <option value="B.Sc">B.Sc</option>
+                      <option value="M.Sc">M.Sc</option>
+                      <option value="MBA">MBA</option>
+                      <option value="PhD">PhD</option>
+                      <option value="Other">Other</option>
+                    </select>
+                    {applicationForm.course === 'Other' && (
+                      <textarea
+                        rows={2}
+                        value={applicationForm.course_other}
+                        onChange={(e) => setApplicationForm({...applicationForm, course_other: e.target.value})}
+                        placeholder={t("careers_other_course_placeholder", "Enter your course details...")}
+                        className="w-full mt-2 px-4 py-2 text-sm bg-[#EAF3EA]/40 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:bg-white outline-none text-[#173522] resize-none"
+                      />
+                    )}
+                  </div>
+
+                  {/* Professional Domain */}
+                  <div>
+                    <label className="block text-xs font-bold font-mono uppercase tracking-wider text-[#173522] mb-1.5">{t("careers_domain", "Professional Domain")}</label>
+                    <input 
+                      type="text" 
+                      value={applicationForm.domain}
+                      onChange={(e) => setApplicationForm({...applicationForm, domain: e.target.value})}
+                      placeholder={t("careers_domain_placeholder", "e.g. Research, Agronomy, Quality Control")}
+                      className="w-full px-4 py-2.5 text-sm bg-[#EAF3EA]/40 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:bg-white outline-none text-[#173522] transition-all"
+                    />
+                  </div>
+
+                  {/* Languages Known */}
+                  <div>
+                    <label className="block text-xs font-bold font-mono uppercase tracking-wider text-[#173522] mb-1.5">{t("careers_languages", "Languages Known")} *</label>
+                    <input 
+                      type="text" 
+                      required
+                      value={applicationForm.languages_known}
+                      onChange={(e) => setApplicationForm({...applicationForm, languages_known: e.target.value})}
+                      placeholder={t("careers_languages_placeholder", "e.g. English, Telugu, Hindi")}
+                      className="w-full px-4 py-2.5 text-sm bg-[#EAF3EA]/40 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:bg-white outline-none text-[#173522] transition-all"
+                    />
+                  </div>
+
+                  {/* Your Location */}
+                  <div>
+                    <label className="block text-xs font-bold font-mono uppercase tracking-wider text-[#173522] mb-1.5">{t("careers_location_label", "Your Location")} *</label>
+                    <input 
+                      type="text" 
+                      required
+                      value={applicationForm.location}
+                      onChange={(e) => setApplicationForm({...applicationForm, location: e.target.value})}
+                      placeholder={t("careers_location_placeholder", "City, State")}
+                      className="w-full px-4 py-2.5 text-sm bg-[#EAF3EA]/40 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:bg-white outline-none text-[#173522] transition-all"
+                    />
+                  </div>
+
+                  {/* Resume / CV */}
+                  <div className="md:col-span-2">
+                    <label className="block text-xs font-bold font-mono uppercase tracking-wider text-[#173522] mb-1.5">{t("careers_upload_resume", "Resume / CV (PDF / DOC / DOCX, max 5MB)")} *</label>
+                    <div className="relative">
+                      <input 
+                        type="file" 
+                        required
+                        id="resume-file-input"
+                        accept=".pdf,.doc,.docx"
+                        onChange={(e) => setApplicationForm({...applicationForm, resume: e.target.files ? e.target.files[0] : null})}
+                        className="hidden"
+                      />
+                      <label 
+                        htmlFor="resume-file-input"
+                        className="flex items-center gap-3 w-full px-4 py-3 rounded-xl border border-dashed border-[#2D6A4F]/40 hover:border-[#2D6A4F] bg-[#EAF3EA]/30 hover:bg-[#EAF3EA]/60 cursor-pointer transition-all text-[#173522]"
+                      >
+                        <FiUpload className="text-[#2D6A4F] text-lg shrink-0" />
+                        <span className="truncate text-sm font-medium">
+                          {applicationForm.resume ? applicationForm.resume.name : t("careers_upload_placeholder", "Click to browse and upload resume (PDF, DOC, DOCX)")}
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Key Skills */}
+                  <div className="md:col-span-2">
+                    <label className="block text-xs font-bold font-mono uppercase tracking-wider text-[#173522] mb-1.5">{t("careers_key_skills_label", "Key Skills")} *</label>
+                    <input 
+                      type="text" 
+                      required
+                      value={applicationForm.skills}
+                      onChange={(e) => setApplicationForm({...applicationForm, skills: e.target.value})}
+                      placeholder={t("careers_key_skills_placeholder", "e.g. Microbiology, Lab Assays, Quality Assurance")}
+                      className="w-full px-4 py-2.5 text-sm bg-[#EAF3EA]/40 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:bg-white outline-none text-[#173522] transition-all"
+                    />
+                  </div>
+
+                  {/* Referred By */}
+                  <div className="md:col-span-2">
+                    <label className="block text-xs font-bold font-mono uppercase tracking-wider text-[#173522] mb-1.5">{t("careers_referred_by", "Referred By")}</label>
+                    <input 
+                      type="text" 
+                      value={applicationForm.referred_by}
+                      onChange={(e) => setApplicationForm({...applicationForm, referred_by: e.target.value})}
+                      placeholder={t("careers_referred_by_placeholder", "Name of person who referred you (if any)...")}
+                      className="w-full px-4 py-2.5 text-sm bg-[#EAF3EA]/40 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:bg-white outline-none text-[#173522] transition-all"
+                    />
+                  </div>
+
+                  {/* Cover Letter */}
+                  <div className="md:col-span-2">
+                    <label className="block text-xs font-bold font-mono uppercase tracking-wider text-[#173522] mb-1.5">{t("careers_cover_letter", "Cover Letter / Note")}</label>
+                    <textarea 
+                      rows={3}
+                      value={applicationForm.cover_letter}
+                      onChange={(e) => setApplicationForm({...applicationForm, cover_letter: e.target.value})}
+                      placeholder={t("careers_cover_letter_placeholder", "Tell us why you are a great fit for Biofactor...")}
+                      className="w-full px-4 py-2.5 text-sm bg-[#EAF3EA]/40 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] focus:bg-white outline-none text-[#173522] resize-none transition-all"
                     />
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-semibold text-[#173522] mb-1">{t("careers_linkedin_url", "LinkedIn Profile URL")}</label>
-                  <input 
-                    type="url" 
-                    value={applicationForm.linkedin_url}
-                    onChange={(e) => setApplicationForm({...applicationForm, linkedin_url: e.target.value})}
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] outline-none text-[#173522]"
-                    placeholder="https://linkedin.com/in/yourprofile"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-[#173522] mb-1">{t("careers_upload_resume", "Upload Resume (PDF / DOCX, max 5MB)")}</label>
-                  <input 
-                    type="file" 
-                    accept=".pdf,.doc,.docx"
-                    onChange={(e) => setApplicationForm({...applicationForm, resume: e.target.files ? e.target.files[0] : null})}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-xl text-sm text-[#173522] file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-[#EAF3EA] file:text-[#2D6A4F] hover:file:bg-[#2D6A4F]/20 cursor-pointer"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-[#173522] mb-1">{t("careers_cover_letter", "Cover Letter / Note")}</label>
-                  <textarea 
-                    rows={3}
-                    value={applicationForm.cover_letter}
-                    onChange={(e) => setApplicationForm({...applicationForm, cover_letter: e.target.value})}
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2D6A4F] outline-none text-[#173522] resize-none"
-                    placeholder="Tell us why you are interested in this position..."
-                  />
-                </div>
-
-                <div className="pt-4 flex justify-end gap-3">
+                {/* Modal Action Buttons */}
+                <div className="pt-4 flex flex-col sm:flex-row justify-end items-center gap-3 border-t border-gray-100">
                   <button 
                     type="button" 
                     onClick={() => setIsApplying(false)}
-                    className="px-6 py-2.5 border border-gray-300 rounded-xl text-gray-700 font-semibold hover:bg-gray-50 cursor-pointer"
+                    className="w-full sm:w-auto px-6 py-2.5 border border-gray-300 rounded-xl text-gray-700 font-semibold hover:bg-gray-50 transition-colors cursor-pointer text-sm"
                   >
                     {t("careers_cancel", "Cancel")}
                   </button>
                   <button 
                     type="submit" 
-                    disabled={isSubmitting}
-                    className="px-6 py-2.5 bg-[#2D6A4F] hover:bg-[#173522] text-white font-semibold rounded-xl transition-all flex items-center gap-2 cursor-pointer"
+                    disabled={isSubmitting || !emailVerified}
+                    className="w-full sm:w-auto px-8 py-2.5 bg-[#2D6A4F] hover:bg-[#173522] text-white font-bold rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed text-sm"
                   >
                     {isSubmitting ? (
                       <>
-                        <FiLoader className="animate-spin" /> {t("careers_submitting", "Submitting...")}
+                        <FiLoader className="animate-spin text-base" /> {t("careers_upload_and_submit", "Uploading & Submitting...")}
                       </>
+                    ) : !emailVerified ? (
+                      t("careers_verify_first", "Verify Email First")
                     ) : (
                       t("careers_submit_application", "Submit Application")
                     )}
@@ -876,7 +1154,7 @@ export default function CareersPage() {
                   <h2 id="hr-dialog-title" className="text-lg font-bold text-[#173522] leading-snug">
                     {t("careers_contact_hr", "Contact HR Department")}
                   </h2>
-                  <p className="text-xs text-[#173522]/65 font-medium">Biofactor Biologicals</p>
+                  <p className="text-xs text-[#173522]/65 font-medium">Biofactor Global</p>
                 </div>
               </div>
 
