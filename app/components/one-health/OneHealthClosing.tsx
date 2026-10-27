@@ -53,7 +53,7 @@ export default function OneHealthClosing() {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-[#EDE9DA] text-[#173522] py-20 md:py-28 px-6 relative z-20 font-sans overflow-hidden"
+      className="w-full bg-[#EDF4ED] text-[#173522] pt-4 sm:pt-6 lg:pt-8 pb-16 md:pb-24 px-6 relative z-20 font-sans overflow-hidden"
     >
       {/* 1. Large Faint Outlined Ghost Text Behind Content */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 select-none overflow-hidden">
@@ -72,7 +72,7 @@ export default function OneHealthClosing() {
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] pointer-events-none z-0 rounded-full"
         style={{
           background:
-            "radial-gradient(circle, rgba(20, 122, 70, 0.12) 0%, rgba(237, 233, 218, 0) 70%)",
+            "radial-gradient(circle, rgba(20, 122, 70, 0.12) 0%, rgba(237, 244, 237, 0) 70%)",
         }}
       />
 

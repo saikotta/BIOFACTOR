@@ -154,7 +154,7 @@ export default function OneHealthCentresHero() {
             className={`${styles.ctaRow} ${styles.fadeUp} ${entered ? styles.entered : ""}`}
             style={{ transitionDelay: "360ms" }}
           >
-            <Link href="/booking/" className={styles.btnPrimary}>
+            <Link href="#find-centre" className={styles.btnPrimary}>
               {t("ohc_cta_find", "Find a centre")}
             </Link>
             <Link href="/booking/" className={styles.btnSecondary}>

@@ -4,6 +4,9 @@ import OneHealthCentresHero from "../components/one-health/OneHealthCentresHero"
 import OneHealthAbout from "../components/one-health/OneHealthAbout";
 import OneHealthHero from "../components/one-health/OneHealthHero";
 import OneHealthChapters from "../components/one-health/OneHealthChapters";
+import OneHealthServices from "../components/one-health/OneHealthServices";
+import OneHealthFindCentre from "../components/one-health/OneHealthFindCentre";
+import OneHealthFranchise from "../components/one-health/OneHealthFranchise";
 import OneHealthClosing from "../components/one-health/OneHealthClosing";
 import BiofactorFooter from "../components/BiofactorFooter";
 
@@ -33,6 +36,12 @@ export default function OneHealthPage() {
       {/* Orbit Hero — 2-Column Split: Interactive 3D Orbit on Left, 3 Value Cards on Right */}
       <OneHealthHero />
       <OneHealthChapters />
+      {/* What every centre offers — 3x3 Grid of 9 Services with staggered entrance & hover pop-up */}
+      <OneHealthServices />
+      {/* Find a One Health Centre — Search, state dropdown filter, interactive centre cards */}
+      <OneHealthFindCentre />
+      {/* Open a One Health Centre — Franchise enquiry form & benefits */}
+      <OneHealthFranchise />
       <OneHealthClosing />
       <BiofactorFooter />
     </main>

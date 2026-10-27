@@ -412,12 +412,14 @@ export default function OneHealthChapters() {
               className="health-panel flex items-center justify-center py-6 sm:py-8 lg:py-10 relative"
             >
               {/* 2-Column Grid Row for Each Chapter */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-center w-full relative">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 xl:gap-14 items-center w-full relative">
                 
                 {/* TEXT COLUMN */}
                 <div
                   className={`${
-                    isEven ? "md:order-1" : "md:order-2"
+                    isEven
+                      ? "md:order-1 md:pl-10 lg:pl-16 xl:pl-20"
+                      : "md:order-2 md:pr-4"
                   } relative flex flex-col items-start text-left transition-all duration-1000 ease-out z-10 ${
                     isRevealed || prefersReducedMotion
                       ? "opacity-100 translate-y-0"
@@ -426,7 +428,9 @@ export default function OneHealthChapters() {
                 >
                   {/* Outlined Huge Ghost Number behind the text block */}
                   <div
-                    className="absolute left-0 -bottom-8 -z-10 font-serif font-bold text-[clamp(120px,18vw,230px)] leading-none select-none pointer-events-none transition-colors duration-700"
+                    className={`absolute ${
+                      isEven ? "left-10 lg:left-16 xl:left-20" : "left-0"
+                    } -bottom-8 -z-10 font-serif font-bold text-[clamp(120px,18vw,230px)] leading-none select-none pointer-events-none transition-colors duration-700`}
                     style={{
                       WebkitTextStroke: `1.5px ${ch.accent}1F`,
                       color: "transparent",
@@ -496,7 +500,9 @@ export default function OneHealthChapters() {
                 {/* IMAGE / ILLUSTRATION COLUMN (With Dynamic Alternating Entrance & Float Animations) */}
                 <div
                   className={`${
-                    isEven ? "md:order-2" : "md:order-1"
+                    isEven
+                      ? "md:order-2 md:justify-start"
+                      : "md:order-1 md:justify-center"
                   } flex items-center justify-center py-4 lg:py-0 transition-all duration-1000 ease-out ${
                     isRevealed || prefersReducedMotion
                       ? "opacity-100 translate-x-0 scale-100 rotate-0"
@@ -535,9 +541,6 @@ export default function OneHealthChapters() {
 
       {/* 6. Chain Band Marquee */}
       <OneHealthChainBand />
-
-      {/* 7. Smooth 120px Transition Gradient from #EDF4ED to #EDE9DA */}
-      <div className="w-full h-[120px] bg-gradient-to-b from-[#EDF4ED] to-[#EDE9DA] pointer-events-none -mb-1" />
     </div>
   );
 }
