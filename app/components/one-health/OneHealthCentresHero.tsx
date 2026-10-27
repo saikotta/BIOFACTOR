@@ -126,14 +126,14 @@ export default function OneHealthCentresHero() {
           </div>
 
           {/* Headline — single slide-up reveal so it NEVER breaks mid-line */}
-          <h1 className={styles.headline} aria-label="Plant to Planet – 1 Health">
+          <h1 className={styles.headline} aria-label={`${t("ohc_headline_pre", "Plant to Planet")} – ${t("ohc_headline_accent", "1 Health")}`}>
             <span className={styles.wordWrap}>
               <span
                 className={`${styles.word} ${entered ? styles.entered : ""}`}
                 style={{ transitionDelay: "60ms" }}
               >
-                Plant to Planet&nbsp;&ndash;{" "}
-                <span className={styles.headlineAccent}>1&nbsp;Health</span>
+                {t("ohc_headline_pre", "Plant to Planet")}&nbsp;&ndash;{" "}
+                <span className={styles.headlineAccent}>{t("ohc_headline_accent", "1 Health")}</span>
               </span>
             </span>
           </h1>
@@ -171,7 +171,11 @@ export default function OneHealthCentresHero() {
               role="list"
               aria-label="One Health Centres key figures"
             >
-              {STATS.map((stat) => (
+              {[
+                { target: 120, suffix: "+", label: t("ohc_stat_centres", "Centres") },
+                { target: 50, suffix: "K+", label: t("ohc_stat_farmers", "Farmers served") },
+                { target: 9, suffix: "", label: t("ohc_stat_states", "States") },
+              ].map((stat) => (
                 <div key={stat.label} role="listitem">
                   <StatItem
                     target={stat.target}

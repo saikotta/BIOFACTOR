@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 interface Centre {
   id: string;
@@ -86,6 +87,7 @@ interface ModalState {
 }
 
 export default function OneHealthFindCentre() {
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const [isRevealed, setIsRevealed] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -155,7 +157,7 @@ export default function OneHealthFindCentre() {
       id="find-centre"
       className="relative w-full bg-[#0C2619] text-white py-20 lg:py-28 px-6 sm:px-10 lg:px-14 overflow-hidden"
     >
-      {/* Subtle background glow */}
+      {/* Background Decorative Gradient Aura */}
       <div
         className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[600px] rounded-full pointer-events-none opacity-20 blur-3xl"
         style={{
@@ -167,10 +169,10 @@ export default function OneHealthFindCentre() {
         {/* Header */}
         <div className="text-center mb-10 lg:mb-12">
           <h2 className="text-[clamp(32px,4.5vw,54px)] font-serif font-bold text-white leading-tight tracking-tight">
-            Find a <span className="text-[#CBEA7B]">One Health Centre</span>
+            {t("ohc_find_heading", "Find a One Health Centre")}
           </h2>
           <p className="mt-3 text-base sm:text-lg text-[#A3C2B0] italic font-sans">
-            Search by district, village or state.
+            {t("ohc_find_subtitle", "Search by district, village or state.")}
           </p>
         </div>
 
@@ -182,7 +184,7 @@ export default function OneHealthFindCentre() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search district or centre..."
+              placeholder={t("ohc_find_search_placeholder", "Search district or centre...")}
               className="w-full bg-white text-[#173522] placeholder-[#173522]/50 text-sm sm:text-base rounded-xl px-5 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#CBEA7B] shadow-sm transition-all"
             />
             {searchQuery && (
@@ -204,7 +206,7 @@ export default function OneHealthFindCentre() {
             >
               {states.map((st) => (
                 <option key={st} value={st}>
-                  {st}
+                  {st === "All" ? t("ohc_find_all_states", "All States") : st}
                 </option>
               ))}
             </select>
@@ -249,7 +251,7 @@ export default function OneHealthFindCentre() {
                       {centre.name}
                     </h3>
                     <span className="inline-block px-3 py-0.5 rounded-full bg-[#CBEA7B] text-[#0C2619] font-mono text-[11px] font-bold tracking-wider">
-                      {centre.status}
+                      {centre.status === "OPEN" ? t("ohc_find_status_open", "OPEN") : t("ohc_find_status_coming", "COMING SOON")}
                     </span>
                   </div>
 
@@ -270,13 +272,13 @@ export default function OneHealthFindCentre() {
                     onClick={() => openModal(centre, "call")}
                     className="inline-flex items-center justify-center px-5 py-1.5 rounded-full bg-[#CBEA7B] text-[#0C2619] text-xs font-semibold hover:bg-[#bce067] hover:scale-105 transition-all duration-200 shadow-sm cursor-pointer"
                   >
-                    Call
+                    {t("ohc_find_btn_call", "Call")}
                   </button>
                   <button
                     onClick={() => openModal(centre, "service")}
                     className="inline-flex items-center justify-center px-4 py-1.5 rounded-full border border-white/35 text-white text-xs font-semibold hover:border-[#CBEA7B] hover:text-[#CBEA7B] hover:scale-105 transition-all duration-200 cursor-pointer"
                   >
-                    Request service
+                    {t("ohc_find_btn_request", "Request service")}
                   </button>
                 </div>
               </div>
@@ -316,7 +318,7 @@ export default function OneHealthFindCentre() {
             {/* Modal Header */}
             <div className="mb-5 pr-8">
               <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#CBEA7B] text-[#0C2619] font-mono text-[10px] font-bold tracking-wider mb-2">
-                {activeModal.centre.status}
+                {activeModal.centre.status === "OPEN" ? t("ohc_find_status_open", "OPEN") : t("ohc_find_status_coming", "COMING SOON")}
               </span>
               <h3 className="text-xl sm:text-2xl font-serif font-bold text-white">
                 {activeModal.centre.name}
@@ -330,20 +332,22 @@ export default function OneHealthFindCentre() {
               /* CALL MODAL CONTENT — ONLY THE NUMBER AS REQUESTED */
               <div className="space-y-4">
                 <p className="text-xs sm:text-sm text-white/85 leading-relaxed">
-                  Call the agronomy coordinator at {activeModal.centre.name}:
+                  {t("ohc_modal_call_title", "Call the agronomy coordinator at")} {activeModal.centre.name}:
                 </p>
 
                 {/* Direct Phone Card with Footer Number */}
                 <div className="bg-[#1A4230] border border-[#27533E] rounded-2xl p-4 flex items-center justify-between gap-3">
                   <div>
-                    <span className="text-[10px] text-[#A3C2B0] uppercase font-mono block">Contact Number</span>
+                    <span className="text-[10px] text-[#A3C2B0] uppercase font-mono block">
+                      {t("ohc_modal_contact_num", "Contact Number")}
+                    </span>
                     <span className="text-base sm:text-lg font-bold font-mono text-[#CBEA7B]">{OFFICIAL_PHONE}</span>
                   </div>
                   <button
                     onClick={() => copyToClipboard(OFFICIAL_PHONE)}
                     className="px-3 py-1.5 rounded-xl bg-[#CBEA7B] text-[#0C2619] text-xs font-semibold hover:bg-[#bce067] transition-colors cursor-pointer shrink-0"
                   >
-                    {copiedPhone ? "Copied!" : "Copy"}
+                    {copiedPhone ? t("ohc_modal_btn_copied", "Copied!") : t("ohc_modal_btn_copy", "Copy")}
                   </button>
                 </div>
 
@@ -352,7 +356,7 @@ export default function OneHealthFindCentre() {
                     onClick={closeModal}
                     className="w-full py-2.5 rounded-full bg-white/10 text-white text-xs font-semibold hover:bg-white/20 transition-colors cursor-pointer"
                   >
-                    Close
+                    {t("ohc_modal_btn_close", "Close")}
                   </button>
                 </div>
               </div>
@@ -365,12 +369,14 @@ export default function OneHealthFindCentre() {
                       ✓
                     </div>
                     {/* Compact "Request Received" as requested */}
-                    <h4 className="text-lg font-serif font-bold text-white">Request Received</h4>
+                    <h4 className="text-lg font-serif font-bold text-white">
+                      {t("ohc_modal_req_received", "Request Received")}
+                    </h4>
                     <button
                       onClick={closeModal}
                       className="mt-3 px-6 py-2 rounded-full bg-[#CBEA7B] text-[#0C2619] text-xs font-bold hover:bg-[#bce067] transition-colors cursor-pointer"
                     >
-                      Close
+                      {t("ohc_modal_btn_close", "Close")}
                     </button>
                   </div>
                 ) : (
@@ -382,29 +388,33 @@ export default function OneHealthFindCentre() {
                     className="space-y-3.5"
                   >
                     <p className="text-xs text-white/80">
-                      Services: <span className="text-[#CBEA7B] font-medium">{activeModal.centre.services}</span>
+                      {t("ohc_find_services_label", "Services:")} <span className="text-[#CBEA7B] font-medium">{activeModal.centre.services}</span>
                     </p>
 
                     <div>
-                      <label className="block text-xs font-semibold text-[#A3C2B0] mb-1">Your Name</label>
+                      <label className="block text-xs font-semibold text-[#A3C2B0] mb-1">
+                        {t("ohc_modal_request_name", "Your Name")}
+                      </label>
                       <input
                         type="text"
                         required
                         value={farmerName}
                         onChange={(e) => setFarmerName(e.target.value)}
-                        placeholder="Enter your name"
+                        placeholder={t("ohc_modal_name_placeholder", "Enter your name")}
                         className="w-full bg-[#1A4230] border border-[#27533E] rounded-xl px-3.5 py-2 text-sm text-white placeholder-white/40 focus:outline-none focus:border-[#CBEA7B]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-[#A3C2B0] mb-1">Mobile Number</label>
+                      <label className="block text-xs font-semibold text-[#A3C2B0] mb-1">
+                        {t("ohc_modal_request_mobile", "Mobile Number")}
+                      </label>
                       <input
                         type="tel"
                         required
                         value={farmerMobile}
                         onChange={(e) => setFarmerMobile(e.target.value)}
-                        placeholder="Enter mobile number"
+                        placeholder={t("ohc_modal_mobile_placeholder", "Enter mobile number")}
                         className="w-full bg-[#1A4230] border border-[#27533E] rounded-xl px-3.5 py-2 text-sm text-white placeholder-white/40 focus:outline-none focus:border-[#CBEA7B]"
                       />
                     </div>
@@ -413,11 +423,11 @@ export default function OneHealthFindCentre() {
                       type="submit"
                       className="w-full py-2.5 rounded-full bg-[#CBEA7B] text-[#0C2619] text-xs sm:text-sm font-bold hover:bg-[#bce067] transition-all shadow-md cursor-pointer mt-1"
                     >
-                      Submit Service Request
+                      {t("ohc_modal_submit_req", "Submit Service Request")}
                     </button>
 
                     <p className="text-[11px] text-[#A3C2B0]/70 text-center">
-                      Or contact directly: <span className="text-white font-mono">{OFFICIAL_PHONE}</span>
+                      {t("ohc_modal_contact_direct", "Or contact directly:")} <span className="text-white font-mono">{OFFICIAL_PHONE}</span>
                     </p>
                   </form>
                 )}

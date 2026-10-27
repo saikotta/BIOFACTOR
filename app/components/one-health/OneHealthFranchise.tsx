@@ -1,26 +1,10 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-
-const BENEFITS = [
-  "Low investment, quick setup",
-  "Agronomy & lab training",
-  "Assured product supply",
-  "Digital centre-management tools",
-  "Marketing & brand support",
-  "Recurring service revenue",
-];
-
-// Options derived from Slide 11 partner profiles
-const BACKGROUND_OPTIONS = [
-  "Agri-input dealer",
-  "Progressive farmer",
-  "Agronomist / Agriculture graduate",
-  "Rural entrepreneur",
-  "Other",
-];
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 export default function OneHealthFranchise() {
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const [isRevealed, setIsRevealed] = useState(false);
 
@@ -34,6 +18,23 @@ export default function OneHealthFranchise() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const BENEFITS = [
+    t("ohc_benefit_1", "Low investment, quick setup"),
+    t("ohc_benefit_2", "Agronomy & lab training"),
+    t("ohc_benefit_3", "Assured product supply"),
+    t("ohc_benefit_4", "Digital centre-management tools"),
+    t("ohc_benefit_5", "Marketing & brand support"),
+    t("ohc_benefit_6", "Recurring service revenue"),
+  ];
+
+  const BACKGROUND_OPTIONS = [
+    { value: "Agri-input dealer", label: t("ohc_bg_dealer", "Agri-input dealer") },
+    { value: "Progressive farmer", label: t("ohc_bg_farmer", "Progressive farmer") },
+    { value: "Agronomist / Agriculture graduate", label: t("ohc_bg_agronomist", "Agronomist / Agriculture graduate") },
+    { value: "Rural entrepreneur", label: t("ohc_bg_entrepreneur", "Rural entrepreneur") },
+    { value: "Other", label: t("ohc_bg_other", "Other") },
+  ];
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -82,27 +83,27 @@ export default function OneHealthFranchise() {
             {/* Eyebrow Badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#173522]/10 text-[#173522] text-xs font-mono font-semibold tracking-wider uppercase mb-5 shadow-sm">
               <span className="w-2 h-2 rounded-full bg-[#3F7D4B] animate-pulse" />
-              FRANCHISE
+              {t("ohc_franchise_eyebrow", "FRANCHISE")}
             </div>
 
             {/* Headline */}
             <h2 className="text-[clamp(34px,4.5vw,56px)] font-serif font-bold text-[#173522] leading-[1.08] tracking-tight mb-4">
-              Open a One Health Centre
+              {t("ohc_franchise_heading", "Open a One Health Centre")}
             </h2>
 
             {/* Subtitle */}
             <p className="text-[16px] sm:text-[18px] text-[#173522]/80 leading-relaxed font-sans mb-10 max-w-[500px]">
-              Build a purposeful rural business backed by Biofactor&apos;s science, products and brand.
+              {t("ohc_franchise_subtitle", "Build a purposeful rural business backed by Biofactor's science, products and brand.")}
             </p>
 
-            {/* 6 Benefit Pills: 2 columns x 3 rows grid with original sizing */}
+            {/* 6 Benefit Pills: 2 columns x 3 rows grid with uniform sizing */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 w-full">
               {BENEFITS.map((benefit, idx) => {
                 const delayMs = 120 + idx * 70;
 
                 return (
                   <div
-                    key={benefit}
+                    key={idx}
                     className="h-[74px] sm:h-[76px] flex items-center gap-3.5 bg-white rounded-2xl px-5 border border-[#173522]/8 shadow-[0_2px_12px_rgba(23,53,34,0.03)] hover:shadow-[0_8px_24px_rgba(23,53,34,0.08)] hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 cursor-default"
                     style={{
                       opacity: isRevealed ? 1 : 0,
@@ -140,10 +141,14 @@ export default function OneHealthFranchise() {
                     ✓
                   </div>
                   <h3 className="text-xl font-serif font-bold text-[#173522]">
-                    Application Submitted!
+                    {t("ohc_form_success_title", "Application Submitted!")}
                   </h3>
                   <p className="text-[#173522]/75 max-w-sm mx-auto text-sm leading-relaxed font-sans">
-                    Thank you, <span className="font-semibold text-[#173522]">{formData.name}</span>. Our franchise operations director will review your enquiry for <span className="font-semibold text-[#173522]">{formData.proposedLocation || "your location"}</span> and contact you shortly.
+                    {t("ohc_form_success_pre", "Thank you,")}{" "}
+                    <span className="font-semibold text-[#173522]">{formData.name}</span>.{" "}
+                    {t("ohc_form_success_mid", "Our franchise operations director will review your enquiry for")}{" "}
+                    <span className="font-semibold text-[#173522]">{formData.proposedLocation || "your location"}</span>{" "}
+                    {t("ohc_form_success_post", "and contact you shortly.")}
                   </p>
                   <button
                     onClick={() => {
@@ -158,7 +163,7 @@ export default function OneHealthFranchise() {
                     }}
                     className="mt-2 px-5 py-2 rounded-full border border-[#173522]/20 text-[#173522] text-xs font-semibold hover:bg-[#EDF4ED] transition-colors cursor-pointer"
                   >
-                    Submit another enquiry
+                    {t("ohc_form_another", "Submit another enquiry")}
                   </button>
                 </div>
               ) : (
@@ -167,7 +172,7 @@ export default function OneHealthFranchise() {
                   {/* Name */}
                   <div>
                     <label className="block text-xs sm:text-sm font-semibold text-[#173522] mb-1 font-sans">
-                      Name
+                      {t("ohc_form_name", "Name")}
                     </label>
                     <input
                       type="text"
@@ -182,7 +187,7 @@ export default function OneHealthFranchise() {
                   {/* Mobile */}
                   <div>
                     <label className="block text-xs sm:text-sm font-semibold text-[#173522] mb-1 font-sans">
-                      Mobile
+                      {t("ohc_form_mobile", "Mobile")}
                     </label>
                     <input
                       type="tel"
@@ -197,7 +202,7 @@ export default function OneHealthFranchise() {
                   {/* Email */}
                   <div>
                     <label className="block text-xs sm:text-sm font-semibold text-[#173522] mb-1 font-sans">
-                      Email
+                      {t("ohc_form_email", "Email")}
                     </label>
                     <input
                       type="email"
@@ -212,7 +217,7 @@ export default function OneHealthFranchise() {
                   {/* Proposed location */}
                   <div>
                     <label className="block text-xs sm:text-sm font-semibold text-[#173522] mb-1 font-sans">
-                      Proposed location
+                      {t("ohc_form_location", "Proposed location")}
                     </label>
                     <input
                       type="text"
@@ -227,7 +232,7 @@ export default function OneHealthFranchise() {
                   {/* Background */}
                   <div>
                     <label className="block text-xs sm:text-sm font-semibold text-[#173522] mb-1 font-sans">
-                      Background
+                      {t("ohc_form_background", "Background")}
                     </label>
                     <div className="relative">
                       <select
@@ -236,8 +241,8 @@ export default function OneHealthFranchise() {
                         className="w-full rounded-2xl border border-[#173522]/20 px-4 py-2.5 sm:py-3 pr-10 text-sm text-[#173522] font-medium bg-white focus:outline-none focus:ring-2 focus:ring-[#3F7D4B] focus:border-transparent appearance-none cursor-pointer transition-all shadow-sm"
                       >
                         {BACKGROUND_OPTIONS.map((opt) => (
-                          <option key={opt} value={opt}>
-                            {opt}
+                          <option key={opt.value} value={opt.value}>
+                            {opt.label}
                           </option>
                         ))}
                       </select>
@@ -262,7 +267,7 @@ export default function OneHealthFranchise() {
                       disabled={isSubmitting}
                       className="w-full py-3 sm:py-3.5 rounded-full bg-[#17402F] hover:bg-[#0F2D1F] text-white font-semibold text-sm sm:text-base tracking-wide transition-all duration-300 shadow-md hover:shadow-lg hover:scale-[1.01] cursor-pointer disabled:opacity-70"
                     >
-                      {isSubmitting ? "Submitting..." : "Apply for franchise"}
+                      {isSubmitting ? t("ohc_form_submitting", "Submitting...") : t("ohc_form_btn_apply", "Apply for franchise")}
                     </button>
                   </div>
                 </form>

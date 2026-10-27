@@ -1,62 +1,84 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "@/app/i18n/useTranslation";
 
 interface ServiceItem {
   num: string;
-  title: string;
-  description: string;
+  titleKey: string;
+  defaultTitle: string;
+  descKey: string;
+  defaultDesc: string;
 }
 
 const SERVICES: ServiceItem[] = [
   {
     num: "01",
-    title: "Soil & Water Testing",
-    description: "Lab-backed nutrient and microbial health reports for every field.",
+    titleKey: "ohc_service_1_title",
+    defaultTitle: "Soil & Water Testing",
+    descKey: "ohc_service_1_desc",
+    defaultDesc: "Lab-backed nutrient and microbial health reports for every field.",
   },
   {
     num: "02",
-    title: "Crop Advisory",
-    description: "Agronomists guide you from sowing to harvest, season after season.",
+    titleKey: "ohc_service_2_title",
+    defaultTitle: "Crop Advisory",
+    descKey: "ohc_service_2_desc",
+    defaultDesc: "Agronomists guide you from sowing to harvest, season after season.",
   },
   {
     num: "03",
-    title: "Biological Inputs",
-    description: "Genuine Biofactor bio-fertilisers and bio-stimulants, at the right dose.",
+    titleKey: "ohc_service_3_title",
+    defaultTitle: "Biological Inputs",
+    descKey: "ohc_service_3_desc",
+    defaultDesc: "Genuine Biofactor bio-fertilisers and bio-stimulants, at the right dose.",
   },
   {
     num: "04",
-    title: "Pest & Disease Diagnosis",
-    description: "Quick field diagnosis with safe, residue-free solutions.",
+    titleKey: "ohc_service_4_title",
+    defaultTitle: "Pest & Disease Diagnosis",
+    descKey: "ohc_service_4_desc",
+    defaultDesc: "Quick field diagnosis with safe, residue-free solutions.",
   },
   {
     num: "05",
-    title: "Training & Field Days",
-    description: "Hands-on demos on regenerative and sustainable practices.",
+    titleKey: "ohc_service_5_title",
+    defaultTitle: "Training & Field Days",
+    descKey: "ohc_service_5_desc",
+    defaultDesc: "Hands-on demos on regenerative and sustainable practices.",
   },
   {
     num: "06",
-    title: "Market Linkages",
-    description: "Connect healthy produce to buyers who value quality.",
+    titleKey: "ohc_service_6_title",
+    defaultTitle: "Market Linkages",
+    descKey: "ohc_service_6_desc",
+    defaultDesc: "Connect healthy produce to buyers who value quality.",
   },
   {
     num: "07",
-    title: "Pre & Post-Harvest Machinery",
-    description: "Access harvesters, threshers and other farm machinery on hire, before and after harvest.",
+    titleKey: "ohc_service_7_title",
+    defaultTitle: "Pre & Post-Harvest Machinery",
+    descKey: "ohc_service_7_desc",
+    defaultDesc: "Access harvesters, threshers and other farm machinery on hire, before and after harvest.",
   },
   {
     num: "08",
-    title: "IoT & Smart Farming",
-    description: "Get connected to trusted IoT vendors for sensors, weather stations and farm monitoring.",
+    titleKey: "ohc_service_8_title",
+    defaultTitle: "IoT & Smart Farming",
+    descKey: "ohc_service_8_desc",
+    defaultDesc: "Get connected to trusted IoT vendors for sensors, weather stations and farm monitoring.",
   },
   {
     num: "09",
-    title: "Crop Insurance",
-    description: "Guidance and enrolment support for crop and farm insurance schemes.",
+    titleKey: "ohc_service_9_title",
+    defaultTitle: "Crop Insurance",
+    descKey: "ohc_service_9_desc",
+    defaultDesc: "Guidance and enrolment support for crop and farm insurance schemes.",
   },
 ];
 
 export default function OneHealthServices() {
+  const { t } = useTranslation();
   const [revealedCards, setRevealedCards] = useState<boolean[]>(
     new Array(SERVICES.length).fill(false)
   );
@@ -105,10 +127,10 @@ export default function OneHealthServices() {
         <div className="flex flex-col items-center text-center mb-12 lg:mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#173522]/10 text-[#173522] text-xs font-mono font-semibold tracking-wider uppercase mb-4 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-[#3F7D4B] animate-pulse" />
-            SERVICES
+            {t("ohc_services_eyebrow", "SERVICES")}
           </div>
           <h2 className="text-[clamp(30px,4vw,50px)] font-serif font-bold text-[#173522] leading-[1.1] tracking-tight max-w-[800px]">
-            What every centre offers
+            {t("ohc_services_heading", "What every centre offers")}
           </h2>
         </div>
 
@@ -146,12 +168,12 @@ export default function OneHealthServices() {
 
                 {/* Service Title */}
                 <h3 className="font-serif font-bold text-[17px] sm:text-[19px] text-[#173522] leading-snug mb-2 group-hover:text-[#255236] transition-colors duration-300">
-                  {srv.title}
+                  {t(srv.titleKey, srv.defaultTitle)}
                 </h3>
 
                 {/* Service Description */}
                 <p className="font-sans text-[13px] sm:text-[14px] text-[#173522]/75 leading-relaxed">
-                  {srv.description}
+                  {t(srv.descKey, srv.defaultDesc)}
                 </p>
               </div>
             );
