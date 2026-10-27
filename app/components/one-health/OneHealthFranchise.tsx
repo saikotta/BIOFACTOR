@@ -103,7 +103,7 @@ export default function OneHealthFranchise() {
                 return (
                   <div
                     key={benefit}
-                    className="flex items-center gap-3 bg-white rounded-2xl px-5 py-4 border border-[#173522]/8 shadow-[0_2px_12px_rgba(23,53,34,0.03)] hover:shadow-[0_8px_24px_rgba(23,53,34,0.08)] hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 cursor-default"
+                    className="h-[74px] sm:h-[76px] flex items-center gap-3.5 bg-white rounded-2xl px-5 border border-[#173522]/8 shadow-[0_2px_12px_rgba(23,53,34,0.03)] hover:shadow-[0_8px_24px_rgba(23,53,34,0.08)] hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 cursor-default"
                     style={{
                       opacity: isRevealed ? 1 : 0,
                       transform: isRevealed ? "translateY(0)" : "translateY(20px)",
