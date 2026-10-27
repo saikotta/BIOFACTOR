@@ -1,0 +1,301 @@
+/* ─────────────────────────────────────────────
+   OneHealthCentresHero — Scoped CSS Module
+   Photo-hero for One Health Centres section
+   PDF page 1 design: full image visible from
+   top, text in lower-left, stats scroll into view
+───────────────────────────────────────────── */
+
+/* Section — taller than viewport so stats are below the fold */
+.heroSection {
+  position: relative;
+  width: 100%;
+  /* ~140vh so the stats bar sits below the initial viewport,
+     just like the PDF where you scroll to reach the numbers */
+  min-height: 140vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: #071a0e;
+}
+
+/* Background image wrapper — covers the entire tall section */
+.bgWrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Show full image — sky at top, farmers in middle, crops at bottom */
+.bgImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* top-aligned so the sky + BIOFACTOR GLOBAL OHC sign shows */
+  object-position: center top;
+  display: block;
+}
+
+/* Dark green gradient overlay
+   — lighter in the top half so the photo breathes
+   — darker in the lower third for text readability */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(5, 20, 10, 0.30) 0%,      /* light at top — sky shows */
+      rgba(5, 20, 10, 0.08) 30%,     /* near-transparent mid — image visible */
+      rgba(5, 20, 10, 0.45) 58%,     /* starting to darken */
+      rgba(5, 20, 10, 0.82) 80%,     /* dark behind text */
+      rgba(5, 20, 10, 0.90) 100%     /* solid dark at bottom for stats */
+    );
+}
+
+/* ── Content container
+   Uses flex column with spacer to push text to ~65% down ── */
+.container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  /* top padding accounts for the fixed navbar (~80px) */
+  padding-top: clamp(80px, 10vh, 110px);
+  padding-left: clamp(20px, 5vw, 72px);
+  padding-right: clamp(20px, 5vw, 72px);
+  padding-bottom: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Spacer pushes the text block down to roughly 55–60% of the viewport */
+.spacer {
+  /* On 100vh the text starts at ~55vh from top */
+  flex: 0 0 clamp(180px, 38vh, 380px);
+}
+
+/* Text block — left aligned */
+.contentBlock {
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* ── Eyebrow pill ── */
+.eyebrowWrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.875rem;
+  border: 1px solid rgba(184, 233, 134, 0.4);
+  border-radius: 9999px;
+  margin-bottom: 1rem;
+}
+
+.eyebrowDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #b8e986;
+  flex-shrink: 0;
+}
+
+.eyebrowText {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #b8e986;
+  white-space: nowrap;
+}
+
+/* ── Headline ── */
+.headline {
+  font-family: var(--font-bricolage), var(--font-poppins), sans-serif;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  margin-bottom: 1rem;
+  /* Single-line: scale with viewport, capped so it never wraps on desktop */
+  font-size: clamp(1.6rem, 3.8vw, 3.6rem);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .headline {
+    /* Mobile: allow wrap, just reduce size */
+    white-space: normal;
+    font-size: clamp(1.8rem, 8vw, 2.6rem);
+  }
+}
+
+.headlineAccent {
+  color: #cbea7b;
+}
+
+/* ── Subtitle ── */
+.subtitle {
+  font-family: var(--font-poppins), sans-serif;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.5;
+  max-width: 560px;
+  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+  margin-bottom: 1.75rem;
+}
+
+/* ── CTA Buttons ── */
+.ctaRow {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  flex-wrap: wrap;
+  margin-bottom: 0;
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.6rem;
+  border-radius: 9999px;
+  background-color: #cbea7b;
+  color: #0a2814;
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+
+.btnPrimary:hover {
+  background-color: #d9f08e;
+  transform: translateY(-1px);
+}
+
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.675rem 1.6rem;
+  border-radius: 9999px;
+  background-color: transparent;
+  color: #ffffff;
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+
+.btnSecondary:hover {
+  border-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+/* ── Stats section
+   Sits after the CTA row with enough gap to fall below 100vh ── */
+.statsSection {
+  margin-top: clamp(3rem, 8vh, 6rem);
+  padding-bottom: clamp(2rem, 4vh, 3rem);
+}
+
+.statsDivider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.18);
+  margin-bottom: 0;
+}
+
+.statsBar {
+  display: flex;
+  align-items: flex-start;
+  gap: 3rem;
+  padding-top: 1.5rem;
+  padding-bottom: clamp(1.5rem, 3vh, 2.25rem);
+  flex-wrap: wrap;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.statNumber {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: clamp(1.85rem, 3.5vw, 2.75rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.statLabel {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 0.01em;
+}
+
+/* ── Word slide-up reveal ── */
+.wordWrap {
+  overflow: hidden;
+  display: block; /* block so the clip works cleanly on the single-line headline */
+}
+
+.word {
+  display: block;
+  transform: translateY(110%);
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.word.entered {
+  transform: translateY(0);
+}
+
+/* ── Fade-in-up for eyebrow, subtitle, CTAs ── */
+.fadeUp {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fadeUp.entered {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Responsive tweaks ── */
+@media (max-width: 640px) {
+  .spacer {
+    flex: 0 0 clamp(120px, 32vh, 240px);
+  }
+
+  .heroSection {
+    min-height: 150vh;
+  }
+}

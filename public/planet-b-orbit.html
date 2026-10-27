@@ -25,11 +25,11 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .node:hover .lb em,.node:focus-visible .lb em{opacity:1;transform:none}
 .abs{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap}
 .pill{top:calc(var(--u)*380);z-index:2;background:#173d33;color:#fff;font-weight:600;font-size:calc(var(--u)*14);letter-spacing:.42em;padding:calc(var(--u)*11) calc(var(--u)*26) calc(var(--u)*11) calc(var(--u)*30);border-radius:99px;box-shadow:0 calc(var(--u)*10) calc(var(--u)*24) rgba(23,61,51,.3)}
-.there{top:calc(var(--u)*606);display:flex;align-items:center;gap:calc(var(--u)*22);font-weight:600;font-size:calc(var(--u)*17);letter-spacing:.6em;margin-right:-.6em}
+.there{top:calc(var(--u)*612);display:flex;align-items:center;gap:calc(var(--u)*20);font-weight:600;font-size:calc(var(--u)*15);letter-spacing:.55em;margin-right:-.55em}
 .there i{display:block;height:1px;width:calc(var(--u)*90);background:#9fb3a0;transform:scaleX(0);animation:ln 1.4s cubic-bezier(.7,0,.2,1) 2.4s forwards}
 .there i:first-child{transform-origin:right}.there i:last-child{transform-origin:left}
 @keyframes ln{to{transform:scaleX(1)}}
-h1{margin:0;top:calc(var(--u)*628);font:700 calc(var(--u)*118)/1.05 'Cormorant Garamond',Georgia,serif;letter-spacing:.03em}
+h1{margin:0;top:calc(var(--u)*634);font:700 calc(var(--u)*98)/1.05 'Cormorant Garamond',Georgia,serif;letter-spacing:.03em}
 h1 .w{position:relative;display:inline-block;background:linear-gradient(100deg,#7a4d0e 0%,#d9a24a 38%,#f5dc9a 50%,#d9a24a 62%,#7a4d0e 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sh 6s linear infinite}
 h1 small{font-size:.36em;letter-spacing:0;margin:0 -.04em 0 .02em}
 @keyframes sh{to{background-position:-260% 0}}
@@ -41,7 +41,6 @@ h1 small{font-size:.36em;letter-spacing:0;margin:0 -.04em 0 .02em}
 <div id="stage" role="img" aria-label="There is no Planet B: one planet connects soil, plants, animals, food and people">
 <canvas id="cb"></canvas><canvas id="cg"></canvas>
 <div id="nodes"></div>
-<div class="abs pill rv" style="animation-delay:2s">ONE PLANET</div>
 <div class="abs there rv" style="animation-delay:1.6s"><i></i><span>THERE IS NO</span><i></i></div>
 <h1 class="abs rv" style="animation-delay:2.2s"><span class="w">PLAN<small>et</small> B</span></h1>
 </div>
@@ -115,7 +114,7 @@ const nw=$('nodes'),it=D.map((d,i)=>{const e=document.createElement('div');e.cla
 let hover=-1,accC=[47,107,79],accT=[47,107,79],waveT=2,accM=0;
 function setH(i){hover=i;it.forEach((o,j)=>o.e.style.setProperty('--a',j===i?`rgb(${D[j].a})`:'#dfe3d6'));if(i>=0){accT=D[i].a}else accT=[47,107,79]}
 const st=$('stage'),cb=$('cb'),cg=$('cg'),xb=cb.getContext('2d'),xg=cg.getContext('2d');let u=1,dpr=1;
-function lay(){u=Math.min(innerWidth/1000,innerHeight/780);dpr=devicePixelRatio||1;const w=1100*u,h=780*u;st.style.width=w+'px';st.style.height=h+'px';document.documentElement.style.setProperty('--u',u+'px');
+function lay(){u=Math.min(innerWidth/1000,innerHeight/765);dpr=devicePixelRatio||1;const w=1100*u,h=765*u;st.style.width=w+'px';st.style.height=h+'px';document.documentElement.style.setProperty('--u',u+'px');
  [cb,cg].forEach(c=>{c.width=w*dpr;c.height=h*dpr});[xb,xg].forEach(x=>x.setTransform(dpr,0,0,dpr,0,0))}
 lay();addEventListener('resize',lay);
 let tx=0,ty=0,px=0,py=0;addEventListener('pointermove',e=>{tx=e.clientX/innerWidth*2-1;ty=e.clientY/innerHeight*2-1});
@@ -133,7 +132,7 @@ function frame(now){
  px+=(tx-px)*Math.min(1,dt*3);py+=(ty-py)*Math.min(1,dt*3);
  st.style.transform=`perspective(1700px) rotateY(${px*3}deg) rotateX(${-py*2}deg)`;
  waveT+=dt/1.6;for(let c=0;c<3;c++)accC[c]=mx(accC[c],accT[c],Math.min(1,dt*5));
- const Rg=150*u,gx=550*u,gy=330*u,W=1100*u,H=780*u,ge=eo(cl(t/1.6)),rev=eo(cl((t-.3)/2.4))*2*Math.PI;
+ const Rg=150*u,gx=550*u,gy=330*u,W=1100*u,H=765*u,ge=eo(cl(t/1.6)),rev=eo(cl((t-.3)/2.4))*2*Math.PI;
  xb.clearRect(0,0,W,H);xg.clearRect(0,0,W,H);
  let g=xb.createRadialGradient(gx,gy,Rg*.9,gx,gy,Rg*1.5);g.addColorStop(0,`rgba(111,168,138,${.4*ge})`);g.addColorStop(1,'rgba(111,168,138,0)');xb.fillStyle=g;xb.beginPath();xb.arc(gx,gy,Rg*1.5,0,7);xb.fill();
  ring(xb,false,1,rev,1);ring(xb,false,1.07,rev,.5);

@@ -29,9 +29,11 @@ export default function OneHealthChapters() {
     {
       id: "soil",
       num: "01",
-      title: t("one_health_chapter_soil_title"),
-      headline: t("one_health_chapter_soil_headline"),
-      paragraph: t("one_health_chapter_soil_para"),
+      title: t("one_health_chapter_soil_title") || "Soil",
+      headline: t("one_health_chapter_soil_headline") || "Where It Starts",
+      paragraph:
+        t("one_health_chapter_soil_para") ||
+        "Healthy soil is alive — full of microbes, minerals, and structure that let roots do their job. Everything else in this chain depends on getting soil right first.",
       accent: "#8B5E34",
       iconPath: (
         <>
@@ -43,9 +45,11 @@ export default function OneHealthChapters() {
     {
       id: "plant",
       num: "02",
-      title: t("one_health_chapter_plant_title"),
-      headline: t("one_health_chapter_plant_headline"),
-      paragraph: t("one_health_chapter_plant_para"),
+      title: t("one_health_chapter_plant_title") || "Plant",
+      headline: t("one_health_chapter_plant_headline") || "The First Beneficiary",
+      paragraph:
+        t("one_health_chapter_plant_para") ||
+        "A plant grown in healthy soil is stronger before it's ever sprayed, fed, or harvested. Plant health starts underground, long before it shows above it.",
       accent: "#3F7D4B",
       iconPath: (
         <>
@@ -58,9 +62,11 @@ export default function OneHealthChapters() {
     {
       id: "animal",
       num: "03",
-      title: t("one_health_chapter_animal_title"),
-      headline: t("one_health_chapter_animal_headline"),
-      paragraph: t("one_health_chapter_animal_para"),
+      title: t("one_health_chapter_animal_title") || "Animal",
+      headline: t("one_health_chapter_animal_headline") || "Sharing the Same Foundation",
+      paragraph:
+        t("one_health_chapter_animal_para") ||
+        "Animals raised on healthy feed and healthy land carry that health forward — into growth, into resistance to disease, into what they eventually become.",
       accent: "#9A6B2E",
       iconPath: (
         <>
@@ -74,9 +80,11 @@ export default function OneHealthChapters() {
     {
       id: "food",
       num: "04",
-      title: t("one_health_chapter_food_title"),
-      headline: t("one_health_chapter_food_headline"),
-      paragraph: t("one_health_chapter_food_para"),
+      title: t("one_health_chapter_food_title") || "Food",
+      headline: t("one_health_chapter_food_headline") || "What All of This Becomes",
+      paragraph:
+        t("one_health_chapter_food_para") ||
+        "Every meal traces back through this chain — soil, plant, and animal all show up on a plate, whether anyone thinks about it or not.",
       accent: "#B8482A",
       iconPath: (
         <>
@@ -88,9 +96,11 @@ export default function OneHealthChapters() {
     {
       id: "people",
       num: "05",
-      title: t("one_health_chapter_people_title"),
-      headline: t("one_health_chapter_people_headline"),
-      paragraph: t("one_health_chapter_people_para"),
+      title: t("one_health_chapter_people_title") || "People",
+      headline: t("one_health_chapter_people_headline") || "The Point of All of It",
+      paragraph:
+        t("one_health_chapter_people_para") ||
+        "Food quality isn't separate from soil quality. When the chain holds up from the start, it shows up in the people eating at the end of it.",
       accent: "#9B6B43",
       iconPath: (
         <>
@@ -102,9 +112,11 @@ export default function OneHealthChapters() {
     {
       id: "planet",
       num: "06",
-      title: t("one_health_chapter_planet_title"),
-      headline: t("one_health_chapter_planet_headline"),
-      paragraph: t("one_health_chapter_planet_para"),
+      title: t("one_health_chapter_planet_title") || "Planet",
+      headline: t("one_health_chapter_planet_headline") || "What Holds the Whole Chain",
+      paragraph:
+        t("one_health_chapter_planet_para") ||
+        "Every link here draws on the same land, water, and climate. A chain that only works for one link at a time isn't sustainable — it has to hold across all of them, or it doesn't really hold.",
       accent: "#2F8A9C",
       iconPath: (
         <>
@@ -122,7 +134,6 @@ export default function OneHealthChapters() {
   // Direct DOM Refs for 60fps Zero-Re-render Scroll Performance
   const progressBarRef = useRef<HTMLDivElement>(null);
   const ambientGlowRef = useRef<HTMLDivElement>(null);
-  const railProgressRef = useRef<HTMLDivElement>(null);
   const navContainerRef = useRef<HTMLDivElement>(null);
   const blob1Ref = useRef<HTMLDivElement>(null);
   const blob2Ref = useRef<HTMLDivElement>(null);
@@ -144,7 +155,6 @@ export default function OneHealthChapters() {
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
-  // Sync activeIndexRef
   useEffect(() => {
     activeIndexRef.current = activeIndex;
   }, [activeIndex]);
@@ -162,7 +172,7 @@ export default function OneHealthChapters() {
       const viewportHeight = window.innerHeight;
       const scrollY = window.scrollY;
 
-      // 1. Update Top Scroll Progress Bar & Chain Rail Fill via Direct Ref (No React re-renders)
+      // 1. Update Top Scroll Progress Bar
       const totalScrollable = rect.height - viewportHeight;
       if (totalScrollable > 0) {
         const currentScroll = Math.max(0, -rect.top);
@@ -171,14 +181,11 @@ export default function OneHealthChapters() {
         if (progressBarRef.current) {
           progressBarRef.current.style.width = `${progress}%`;
         }
-        if (railProgressRef.current) {
-          railProgressRef.current.style.height = `${progress}%`;
-        }
       }
 
       // 2. Show/Hide Dot Navigator via Ref Class Manipulation
       if (navContainerRef.current) {
-        const show = rect.top <= viewportHeight * 0.4;
+        const show = rect.top <= viewportHeight * 0.4 && rect.bottom >= viewportHeight * 0.2;
         navContainerRef.current.style.opacity = show ? "1" : "0";
         navContainerRef.current.style.pointerEvents = show ? "auto" : "none";
         navContainerRef.current.style.transform = show
@@ -186,20 +193,20 @@ export default function OneHealthChapters() {
           : "translate3d(24px, -50%, 0)";
       }
 
-      // 3. Parallax Blobs: Direct translate3d Transform Update
+      // 3. Parallax Blobs
       if (!prefersReducedMotion) {
         if (blob1Ref.current) {
-          blob1Ref.current.style.transform = `translate3d(0, ${scrollY * 0.1}px, 0)`;
+          blob1Ref.current.style.transform = `translate3d(0, ${scrollY * 0.08}px, 0)`;
         }
         if (blob2Ref.current) {
-          blob2Ref.current.style.transform = `translate3d(0, ${-scrollY * 0.07}px, 0)`;
+          blob2Ref.current.style.transform = `translate3d(0, ${-scrollY * 0.05}px, 0)`;
         }
         if (blob3Ref.current) {
-          blob3Ref.current.style.transform = `translate3d(0, ${scrollY * 0.05}px, 0)`;
+          blob3Ref.current.style.transform = `translate3d(0, ${scrollY * 0.04}px, 0)`;
         }
       }
 
-      // 4. Find Chapter Nearest to Viewport Center & Trigger React State ONLY on Change
+      // 4. Find Chapter Nearest to Viewport Center
       let closestIdx = 0;
       let minDistance = Infinity;
 
@@ -238,17 +245,17 @@ export default function OneHealthChapters() {
     const observers: IntersectionObserver[] = [];
     const container = containerRef.current;
     if (!container) return;
-    
-    const panels = container.querySelectorAll('.health-panel');
+
+    const panels = container.querySelectorAll(".health-panel");
 
     panels.forEach((panel) => {
-      const idxStr = panel.getAttribute('data-idx');
+      const idxStr = panel.getAttribute("data-idx");
       if (idxStr === null) return;
       const idx = parseInt(idxStr, 10);
-      
+
       const observer = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.2) {
             setRevealedPanels((prev) => {
               if (prev[idx]) return prev;
               const next = [...prev];
@@ -257,7 +264,7 @@ export default function OneHealthChapters() {
             });
           }
         },
-        { threshold: [0.3] }
+        { threshold: [0.2] }
       );
       observer.observe(panel);
       observers.push(observer);
@@ -271,7 +278,7 @@ export default function OneHealthChapters() {
   const scrollToChapter = (idx: number) => {
     const panel = panelRefs.current[idx];
     if (panel) {
-      panel.scrollIntoView({ behavior: "smooth" });
+      panel.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   };
 
@@ -280,7 +287,23 @@ export default function OneHealthChapters() {
       ref={containerRef}
       className="relative w-full bg-[#EDF4ED] text-[#173522] overflow-x-clip"
     >
-      {/* 1. Static Radial Gradient Parallax Background Blobs (8% opacity, will-change: transform) */}
+      {/* Keyframe styles for gentle organic floating */}
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            @keyframes ohoFloatSlow {
+              0%, 100% { transform: translateY(0px) rotate(0deg); }
+              50% { transform: translateY(-10px) rotate(0.8deg); }
+            }
+            @keyframes ohoFloatSlowReverse {
+              0%, 100% { transform: translateY(0px) rotate(0deg); }
+              50% { transform: translateY(-10px) rotate(-0.8deg); }
+            }
+          `,
+        }}
+      />
+
+      {/* 1. Static Radial Gradient Parallax Background Blobs */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div
           ref={blob1Ref}
@@ -324,10 +347,10 @@ export default function OneHealthChapters() {
         }}
       />
 
-      {/* 4. Fixed Vertical Dot Navigator on Right Side */}
+      {/* 4. Fixed Vertical Dot Navigator on Right Side (As requested: "keep the second ss") */}
       <div
         ref={navContainerRef}
-        className="fixed right-3 sm:right-6 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center gap-[14px] transition-all duration-500 opacity-0 pointer-events-none"
+        className="fixed right-3 sm:right-6 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center gap-[14px] transition-all duration-500 opacity-0 pointer-events-none"
       >
         {CHAPTERS.map((ch, idx) => {
           const isActive = activeIndex === idx;
@@ -336,306 +359,178 @@ export default function OneHealthChapters() {
               key={ch.id}
               onClick={() => scrollToChapter(idx)}
               aria-label={`Scroll to chapter ${ch.num} - ${ch.title}`}
-              className="group relative p-1 focus:outline-none"
+              className="group relative p-1.5 focus:outline-none pointer-events-auto"
             >
               <span
                 className={`block rounded-full transition-all duration-300 ${
                   isActive
-                    ? "w-[7px] h-[7px] scale-[1.6]"
+                    ? "w-[9px] h-[9px] scale-[1.4]"
                     : "w-[7px] h-[7px] bg-[#173522]/25 group-hover:bg-[#173522]/60"
                 }`}
                 style={{
                   backgroundColor: isActive ? ch.accent : undefined,
+                  boxShadow: isActive ? `0 0 10px ${ch.accent}80` : undefined,
                 }}
               />
-              <span className="absolute right-6 top-1/2 -translate-y-1/2 px-2 py-1 rounded bg-[#173522] text-[#EDF4ED] text-[10px] font-mono whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                {ch.num} — {ch.title}
+              <span
+                className={`absolute right-7 top-1/2 -translate-y-1/2 px-2 py-0.5 rounded font-mono text-[10px] tracking-wider uppercase whitespace-nowrap transition-all duration-300 pointer-events-none ${
+                  isActive
+                    ? "opacity-100 font-bold translate-x-0"
+                    : "opacity-0 group-hover:opacity-100 translate-x-1"
+                }`}
+                style={{
+                  color: isActive ? ch.accent : "#173522",
+                }}
+              >
+                {ch.num} {ch.title}
               </span>
             </button>
           );
         })}
       </div>
 
-      {/* 5. Centred Container (max-width 1180px, margin auto, padding 0 32px desktop / 20px mobile) */}
-      <div className="relative z-10 w-full max-w-[1180px] mx-auto px-5 sm:px-8">
-        
-        {/* DESKTOP LAYOUT (md:grid grid-cols-2 gap-[24px]) */}
-        <div className="hidden md:grid md:grid-cols-2 gap-6 relative">
-          
-          {/* Left Column: 6 Scrollable Chapter Panels */}
-          <div className="relative flex flex-col">
-            
-            {/* Chain Progress Rail on Left Edge */}
-            <div className="absolute -left-12 lg:-left-20 top-0 bottom-0 pointer-events-none hidden md:flex flex-col items-center justify-between py-24 z-20">
-              <div className="absolute top-24 bottom-24 w-[2px] bg-[#173522]/15 left-1/2 -translate-x-1/2 -z-10 overflow-hidden">
+      {/* 5. Main Content: 6 Alternating Chapters (Comfortable spacing, no large empty gaps) */}
+      <div className="relative z-10 w-full max-w-[1240px] mx-auto px-6 sm:px-10 lg:px-14">
+        {CHAPTERS.map((ch, idx) => {
+          const isRevealed = revealedPanels[idx];
+          const headlineLines = splitHeadlineIntoLines(ch.headline);
+          // 01 Soil (idx=0, even)   -> Text LEFT  (order-1), Image RIGHT (order-2)
+          // 02 Plant (idx=1, odd)   -> Image LEFT (order-1), Text RIGHT (order-2)
+          // 03 Animal (idx=2, even) -> Text LEFT  (order-1), Image RIGHT (order-2)
+          // 04 Food (idx=3, odd)    -> Image LEFT (order-1), Text RIGHT (order-2)
+          // 05 People (idx=4, even) -> Text LEFT  (order-1), Image RIGHT (order-2)
+          // 06 Planet (idx=5, odd)  -> Image LEFT (order-1), Text RIGHT (order-2)
+          const isEven = idx % 2 === 0;
+
+          return (
+            <div
+              key={ch.id}
+              data-idx={idx}
+              ref={(el) => {
+                panelRefs.current[idx] = el;
+              }}
+              className="health-panel flex items-center justify-center py-6 sm:py-8 lg:py-10 relative"
+            >
+              {/* 2-Column Grid Row for Each Chapter */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-center w-full relative">
+                
+                {/* TEXT COLUMN */}
                 <div
-                  ref={railProgressRef}
-                  className="w-full transition-colors duration-300 ease-out"
-                  style={{
-                    height: "0%",
-                    backgroundColor: activeChapter.accent,
-                  }}
-                />
-              </div>
-
-              {CHAPTERS.map((ch, idx) => {
-                const isCurrent = activeIndex === idx;
-                const isPast = idx < activeIndex;
-
-                return (
-                  <button
-                    key={`rail-${ch.id}`}
-                    onClick={() => scrollToChapter(idx)}
-                    aria-label={`Go to chapter ${ch.num} ${ch.title}`}
-                    className="group pointer-events-auto relative flex items-center focus:outline-none"
+                  className={`${
+                    isEven ? "md:order-1" : "md:order-2"
+                  } relative flex flex-col items-start text-left transition-all duration-1000 ease-out z-10 ${
+                    isRevealed || prefersReducedMotion
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-15 translate-y-[28px]"
+                  }`}
+                >
+                  {/* Outlined Huge Ghost Number behind the text block */}
+                  <div
+                    className="absolute left-0 -bottom-8 -z-10 font-serif font-bold text-[clamp(120px,18vw,230px)] leading-none select-none pointer-events-none transition-colors duration-700"
+                    style={{
+                      WebkitTextStroke: `1.5px ${ch.accent}1F`,
+                      color: "transparent",
+                    }}
                   >
-                    <span
-                      className={`block rounded-full transition-all duration-300 ${
-                        isCurrent
-                          ? "w-3.5 h-3.5 scale-125 shadow-md"
-                          : isPast
-                          ? "w-2.5 h-2.5 bg-[#173522]/70"
-                          : "w-2.5 h-2.5 border-2 border-[#173522]/35 bg-[#EDF4ED]"
-                      }`}
-                      style={{
-                        backgroundColor: isCurrent ? ch.accent : isPast ? "#173522" : undefined,
-                      }}
-                    />
-                    <span
-                      className={`absolute left-6 font-mono text-[10px] tracking-wider uppercase whitespace-nowrap transition-all duration-300 ${
-                        isCurrent
-                          ? "opacity-100 font-bold translate-x-0"
-                          : "opacity-45 group-hover:opacity-100 translate-x-0"
-                      }`}
-                      style={{
-                        color: isCurrent ? ch.accent : "#173522",
-                      }}
+                    {ch.num}
+                  </div>
+
+                  {/* Badge (48px) & Mono Label Header (Clean start without duplicate corner bullet) */}
+                  <div className="relative z-10 flex items-center gap-3.5">
+                    <div
+                      className="w-12 h-12 rounded-full border border-current flex items-center justify-center shrink-0 transition-colors duration-500 bg-white/40 shadow-sm"
+                      style={{ color: ch.accent }}
                     >
-                      {ch.num} {ch.title}
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="w-6 h-6 fill-none stroke-current"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        {ch.iconPath}
+                      </svg>
+                    </div>
+                    <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-[#173522]/60 font-semibold">
+                      {ch.num} — {ch.title}
                     </span>
-                  </button>
-                );
-              })}
-            </div>
+                  </div>
 
-            {CHAPTERS.map((ch, idx) => {
-              const isRevealed = revealedPanels[idx];
-              const headlineLines = splitHeadlineIntoLines(ch.headline);
-
-              return (
-                <div
-                  key={`desktop-${ch.id}`}
-                  data-idx={idx}
-                  ref={(el) => {
-                    panelRefs.current[idx] = el;
-                  }}
-                  className="health-panel min-h-screen flex flex-col justify-center py-20 relative z-10"
-                >
-                  {/* Text Block Container */}
-                  <div
-                    className={`relative z-10 max-w-[440px] flex flex-col items-start text-left transition-all duration-1000 ease-out ${
-                      isRevealed
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-12 translate-y-[26px]"
-                    }`}
-                  >
-                    {/* Outlined Huge Ghost Number */}
-                    <div
-                      className="absolute left-0 -bottom-10 -z-10 font-serif font-bold text-[clamp(120px,18vw,240px)] leading-none select-none pointer-events-none transition-colors duration-700"
-                      style={{
-                        WebkitTextStroke: `1.5px ${ch.accent}1F`,
-                        color: "transparent",
-                      }}
-                    >
-                      {ch.num}
-                    </div>
-
-                    {/* Badge (48px) & Mono Label Header */}
-                    <div className="relative z-10 flex items-center gap-3.5">
-                      <div
-                        className="w-12 h-12 rounded-full border border-current flex items-center justify-center shrink-0 transition-colors duration-500"
-                        style={{ color: ch.accent }}
-                      >
-                        <svg
-                          viewBox="0 0 24 24"
-                          className="w-6 h-6 fill-none stroke-current"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
+                  {/* Chapter H2 Title with Masked Line-by-Line Reveal */}
+                  <h2 className="relative z-10 font-serif font-bold text-[clamp(34px,4.4vw,58px)] leading-[1.05] max-w-[460px] text-[#173522] mt-4 flex flex-col items-start">
+                    {headlineLines.map((lineText, lineIdx) => (
+                      <span key={lineIdx} className="overflow-hidden inline-block w-full py-0.5">
+                        <span
+                          className="block transition-transform duration-800 ease-out"
+                          style={{
+                            transform:
+                              isRevealed || prefersReducedMotion
+                                ? "translateY(0)"
+                                : "translateY(100%)",
+                            transitionDuration: "800ms",
+                            transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+                            transitionDelay: prefersReducedMotion ? "0ms" : `${lineIdx * 90}ms`,
+                          }}
                         >
-                          {ch.iconPath}
-                        </svg>
-                      </div>
-                      <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-[#173522]/60">
-                        {ch.num} — {ch.title}
-                      </span>
-                    </div>
-
-                    {/* Chapter H2 Title with Masked Line-by-Line Reveal */}
-                    <h2 className="relative z-10 font-serif font-bold text-[clamp(34px,4.4vw,58px)] leading-[1.05] max-w-[440px] text-[#173522] mt-4 flex flex-col items-start">
-                      {headlineLines.map((lineText, lineIdx) => (
-                        <span key={lineIdx} className="overflow-hidden inline-block w-full py-0.5">
-                          <span
-                            className="block transition-transform duration-800 ease-out"
-                            style={{
-                              transform:
-                                isRevealed || prefersReducedMotion
-                                  ? "translateY(0)"
-                                  : "translateY(100%)",
-                              transitionDuration: "800ms",
-                              transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
-                              transitionDelay: prefersReducedMotion ? "0ms" : `${lineIdx * 90}ms`,
-                            }}
-                          >
-                            {lineText}
-                          </span>
+                          {lineText}
                         </span>
-                      ))}
-                    </h2>
+                      </span>
+                    ))}
+                  </h2>
 
-                    {/* Chapter Paragraph Description */}
-                    <p className="relative z-10 text-[15.5px] sm:text-[16px] max-w-[26em] text-[#173522]/86 leading-relaxed mt-4 font-sans font-normal">
-                      {ch.paragraph}
-                    </p>
+                  {/* Chapter Paragraph Description */}
+                  <p className="relative z-10 text-[15.5px] sm:text-[16.5px] max-w-[28em] text-[#173522]/86 leading-relaxed mt-4 font-sans font-normal">
+                    {ch.paragraph}
+                  </p>
 
-                    {/* Thin Accent Rule */}
-                    <div
-                      className="relative z-10 h-[1.5px] mt-6 transition-all duration-1000 ease-out"
-                      style={{
-                        width: isRevealed ? "110px" : "30px",
-                        backgroundColor: ch.accent,
-                      }}
+                  {/* Thin Accent Rule */}
+                  <div
+                    className="relative z-10 h-[2px] mt-6 transition-all duration-1000 ease-out rounded-full"
+                    style={{
+                      width: isRevealed ? "110px" : "30px",
+                      backgroundColor: ch.accent,
+                    }}
+                  />
+                </div>
+
+                {/* IMAGE / ILLUSTRATION COLUMN (With Dynamic Alternating Entrance & Float Animations) */}
+                <div
+                  className={`${
+                    isEven ? "md:order-2" : "md:order-1"
+                  } flex items-center justify-center py-4 lg:py-0 transition-all duration-1000 ease-out ${
+                    isRevealed || prefersReducedMotion
+                      ? "opacity-100 translate-x-0 scale-100 rotate-0"
+                      : isEven
+                      ? "opacity-0 translate-x-14 scale-90 rotate-3"
+                      : "opacity-0 -translate-x-14 scale-90 -rotate-3"
+                  }`}
+                  style={{
+                    transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+                  }}
+                >
+                  <div
+                    className="w-[min(44vw,500px)] aspect-square flex items-center justify-center relative transition-transform duration-700 hover:scale-[1.04]"
+                    style={{
+                      animation:
+                        isRevealed && !prefersReducedMotion
+                          ? isEven
+                            ? "ohoFloatSlow 7s ease-in-out infinite"
+                            : "ohoFloatSlowReverse 7s ease-in-out infinite"
+                          : "none",
+                    }}
+                  >
+                    <OneHealthChapterIcon
+                      activeChapterId={ch.id}
+                      accentColor={ch.accent}
+                      prefersReducedMotion={prefersReducedMotion}
                     />
                   </div>
                 </div>
-              );
-            })}
-          </div>
 
-          {/* Right Column: Desktop Sticky Icon Container (will-change: transform) */}
-          <div className="relative h-full pointer-events-none">
-            <div className="sticky top-0 h-screen flex items-center justify-center will-change-transform">
-              <div className="w-[min(44vw,520px)] aspect-square flex items-center justify-center pointer-events-none relative">
-                <OneHealthChapterIcon
-                  activeChapterId={activeChapter.id}
-                  accentColor={activeChapter.accent}
-                  prefersReducedMotion={prefersReducedMotion}
-                />
               </div>
             </div>
-          </div>
-
-        </div>
-
-        {/* MOBILE LAYOUT (<768px) */}
-        <div className="md:hidden flex flex-col relative">
-          {/* Sticky Mobile Icon */}
-          <div className="sticky top-16 z-0 w-[60vw] max-w-[320px] aspect-square mx-auto flex items-center justify-center pointer-events-none py-4 will-change-transform">
-            <OneHealthChapterIcon
-              activeChapterId={activeChapter.id}
-              accentColor={activeChapter.accent}
-              prefersReducedMotion={prefersReducedMotion}
-            />
-          </div>
-
-          {/* Scrollable Mobile Chapter Text Blocks */}
-          <div className="flex flex-col z-10 relative">
-            {CHAPTERS.map((ch, idx) => {
-              const isRevealed = revealedPanels[idx];
-              const headlineLines = splitHeadlineIntoLines(ch.headline);
-
-              return (
-                <div
-                  key={`mobile-${ch.id}`}
-                  data-idx={idx}
-                  ref={(el) => {
-                    if (!panelRefs.current[idx]) {
-                      panelRefs.current[idx] = el;
-                    }
-                  }}
-                  className="health-panel min-h-screen flex flex-col justify-center py-16 relative z-10"
-                >
-                  <div
-                    className={`relative z-10 max-w-[440px] flex flex-col items-start text-left transition-all duration-1000 ease-out ${
-                      isRevealed
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-12 translate-y-[26px]"
-                    }`}
-                  >
-                    {/* Outlined Huge Ghost Number */}
-                    <div
-                      className="absolute left-0 -bottom-8 -z-10 font-serif font-bold text-[clamp(120px,18vw,240px)] leading-none select-none pointer-events-none transition-colors duration-700"
-                      style={{
-                        WebkitTextStroke: `1.5px ${ch.accent}1F`,
-                        color: "transparent",
-                      }}
-                    >
-                      {ch.num}
-                    </div>
-
-                    {/* Badge & Mono Label Header */}
-                    <div className="relative z-10 flex items-center gap-3.5">
-                      <div
-                        className="w-12 h-12 rounded-full border border-current flex items-center justify-center shrink-0 transition-colors duration-500"
-                        style={{ color: ch.accent }}
-                      >
-                        <svg
-                          viewBox="0 0 24 24"
-                          className="w-6 h-6 fill-none stroke-current"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          {ch.iconPath}
-                        </svg>
-                      </div>
-                      <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-[#173522]/60">
-                        {ch.num} — {ch.title}
-                      </span>
-                    </div>
-
-                    {/* Chapter H2 Title with Masked Line-by-Line Reveal */}
-                    <h2 className="relative z-10 font-serif font-bold text-[clamp(34px,4.4vw,58px)] leading-[1.05] max-w-[440px] text-[#173522] mt-4 flex flex-col items-start">
-                      {headlineLines.map((lineText, lineIdx) => (
-                        <span key={lineIdx} className="overflow-hidden inline-block w-full py-0.5">
-                          <span
-                            className="block transition-transform duration-800 ease-out"
-                            style={{
-                              transform:
-                                isRevealed || prefersReducedMotion
-                                  ? "translateY(0)"
-                                  : "translateY(100%)",
-                              transitionDuration: "800ms",
-                              transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
-                              transitionDelay: prefersReducedMotion ? "0ms" : `${lineIdx * 90}ms`,
-                            }}
-                          >
-                            {lineText}
-                          </span>
-                        </span>
-                      ))}
-                    </h2>
-
-                    {/* Chapter Paragraph Description */}
-                    <p className="relative z-10 text-[15.5px] sm:text-[16px] max-w-[26em] text-[#173522]/86 leading-relaxed mt-4 font-sans font-normal">
-                      {ch.paragraph}
-                    </p>
-
-                    {/* Thin Accent Rule */}
-                    <div
-                      className="relative z-10 h-[1.5px] mt-6 transition-all duration-1000 ease-out"
-                      style={{
-                        width: isRevealed ? "110px" : "30px",
-                        backgroundColor: ch.accent,
-                      }}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
+          );
+        })}
       </div>
 
       {/* 6. Chain Band Marquee */}

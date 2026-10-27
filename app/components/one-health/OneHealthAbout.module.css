@@ -1,0 +1,169 @@
+/* ─────────────────────────────────────────────
+   OneHealthAbout — Scoped CSS Module
+   "Bringing Agricultural Science Closer to Farmers"
+   PDF Page 2 design — 3 cards with scroll + hover anim
+───────────────────────────────────────────── */
+
+.section {
+  width: 100%;
+  background-color: #edf4ed;
+  padding: clamp(4rem, 8vh, 6.5rem) clamp(20px, 5vw, 72px);
+}
+
+.inner {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Eyebrow ── */
+.eyebrowWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.eyebrowPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 1rem;
+  border: 1px solid rgba(22, 122, 74, 0.3);
+  border-radius: 9999px;
+  background-color: transparent;
+}
+
+.eyebrowDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #167a4a;
+  flex-shrink: 0;
+}
+
+.eyebrowText {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #167a4a;
+  white-space: nowrap;
+}
+
+/* ── Heading ── */
+.heading {
+  font-family: var(--font-poppins), sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  color: #0d2b1a;
+  text-align: center;
+  line-height: 1.15;
+  margin-bottom: clamp(2.5rem, 5vh, 4rem);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.headingAccent {
+  color: #167a4a;
+}
+
+/* ── Cards grid ── */
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+@media (max-width: 768px) {
+  .cardsGrid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .cardsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+}
+
+.cardWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ── Card ── */
+.card {
+  background-color: #ffffff;
+  border: 1px solid rgba(22, 122, 74, 0.12);
+  border-radius: 18px;
+  padding: 2rem 1.75rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  cursor: default;
+  height: 100%;
+  flex: 1;
+
+  /* Scroll-in: starts hidden, slides up */
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease,
+    scale 0.3s ease;
+}
+
+/* Scroll-in visible state */
+.card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hover: zoom-pop effect */
+.card:hover {
+  transform: translateY(-6px) scale(1.025);
+  box-shadow: 0 20px 48px rgba(22, 122, 74, 0.14), 0 4px 12px rgba(0, 0, 0, 0.06);
+  border-color: rgba(22, 122, 74, 0.25);
+}
+
+/* Keep hover scale separate from the visible transform (combine) */
+.card.visible:hover {
+  transform: translateY(-6px) scale(1.025);
+}
+
+/* ── Number badge ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #e4f1e9;
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #167a4a;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+/* ── Card body text ── */
+.cardText {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: #2d4a38;
+  line-height: 1.65;
+}
+
+/* ── Stagger delays (applied inline via style prop) ── */
