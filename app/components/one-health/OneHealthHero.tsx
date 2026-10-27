@@ -1,73 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import OneHealthOrbit3D from "./OneHealthOrbit3D";
 import { useTranslation } from "../../i18n";
+import { useIframeSrc } from "../useIframeSrc";
 
-export interface DomainSlotConfig {
-  id: "soil" | "plant" | "animal" | "food" | "people";
-  name: string;
-  baseAngleDeg: number;
-  imgSrc: string;
-}
-
-export interface CoreSlotConfig {
-  name: string;
-  tagline: string;
-  imgSrc: string;
-}
-
-const DEFAULT_DOMAINS: DomainSlotConfig[] = [
-  {
-    id: "soil",
-    name: "SOIL",
-    baseAngleDeg: 270, // Top / Back
-    imgSrc: "/images/one-health/soil.webp",
-  },
-  {
-    id: "plant",
-    name: "PLANT",
-    baseAngleDeg: 342, // Top-Right
-    imgSrc: "/images/one-health/plant.webp",
-  },
-  {
-    id: "animal",
-    name: "ANIMAL",
-    baseAngleDeg: 54, // Bottom-Right
-    imgSrc: "/images/one-health/animal.webp",
-  },
-  {
-    id: "food",
-    name: "FOOD",
-    baseAngleDeg: 126, // Bottom-Left
-    imgSrc: "/images/one-health/food.webp",
-  },
-  {
-    id: "people",
-    name: "PEOPLE",
-    baseAngleDeg: 198, // Top-Left
-    imgSrc: "/images/one-health/people.webp",
-  },
-];
-
-const DEFAULT_CORE: CoreSlotConfig = {
-  name: "PLANET",
-  tagline: "ONE HEALTH CORE",
-  imgSrc: "/images/one-health/planet.png",
-};
-
-interface OneHealthHeroProps {
-  domains?: DomainSlotConfig[];
-  core?: CoreSlotConfig;
-}
-
-export default function OneHealthHero({
-  domains = DEFAULT_DOMAINS,
-  core = DEFAULT_CORE,
-}: OneHealthHeroProps) {
+export default function OneHealthHero() {
   const { t, language } = useTranslation();
+  const frameSrc = useIframeSrc("/planet-b-orbit.html");
   const [hasEntered, setHasEntered] = useState(false);
-  const [entranceProgress, setEntranceProgress] = useState(0);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
@@ -78,7 +18,6 @@ export default function OneHealthHero({
   useEffect(() => {
     if (prefersReducedMotion) {
       setHasEntered(true);
-      setEntranceProgress(1);
       return;
     }
 
@@ -86,22 +25,8 @@ export default function OneHealthHero({
       setHasEntered(true);
     }, 100);
 
-    // Entrance animation progress over ~2.2 seconds
-    const startTime = Date.now();
-    const duration = 2200;
-
-    const interval = setInterval(() => {
-      const elapsed = Date.now() - startTime;
-      const progress = Math.min(1, elapsed / duration);
-      setEntranceProgress(progress);
-      if (progress >= 1) {
-        clearInterval(interval);
-      }
-    }, 16);
-
     return () => {
       clearTimeout(timer);
-      clearInterval(interval);
     };
   }, [prefersReducedMotion]);
 
@@ -109,30 +34,11 @@ export default function OneHealthHero({
   const headlineWords = headlineText.split(" ");
 
   return (
-    <section className="relative w-full min-h-screen bg-[#EDF4ED] text-[#173522] font-sans overflow-visible flex flex-col justify-start select-none">
-      {/* 1. Biological Atmosphere & Hero Radial Background Glow Layers */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse at 50% 45%, #F5FAF5 0%, #E8F2E8 55%, #DCECDC 100%)",
-          }}
-        />
-        {/* Soft Radial Glow of pale green (#CFE8CF at 55%) & warm cream behind planet */}
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[520px] rounded-full pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse at 50% 50%, rgba(207, 232, 207, 0.55) 0%, rgba(237, 233, 218, 0.35) 45%, transparent 75%)",
-          }}
-        />
-        {/* 3 Concentric Ripple Rings scaled to fit within 1.15x orbit half-width */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] rounded-full border border-[#147A46] opacity-[0.08]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[460px] h-[460px] rounded-full border border-[#147A46] opacity-[0.08]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-[#147A46] opacity-[0.08]" />
+    <section className="relative w-full min-h-screen bg-[#fcfcf8] text-[#173522] font-sans overflow-visible flex flex-col justify-start select-none">
+      <div className="one-health-atmosphere absolute inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <i className="one-health-blob one-health-blob-green" />
+        <i className="one-health-blob one-health-blob-peach" />
       </div>
-
       {/* Main Content Layout Wrapper (pt-20 md:pt-24 for floating capsule header clearance) */}
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-8 pt-20 md:pt-24 pb-10 flex-1 flex flex-col items-center justify-start text-center overflow-visible">
 
@@ -190,20 +96,21 @@ export default function OneHealthHero({
           </p>
         </div>
 
-        {/* CENTERED THREE.JS ORBIT ANIMATION (Height clamp(720px, 92svh, 980px), pt-16 padding-top, mt-0 margin-top, relative z-10) */}
-        <div className="w-full mx-auto flex items-center justify-center mt-0 pt-16 h-[clamp(720px,92svh,980px)] relative z-10 overflow-visible">
+        {/* Self-contained One Planet scene from the supplied design */}
+        <div className="w-full mx-auto flex items-center justify-center mt-0 pt-12 sm:pt-16 relative z-10 overflow-visible">
           <div
-            className={`relative w-full h-full flex items-center justify-center overflow-visible transition-all duration-1000 delay-300 ease-out transform ${
+            className={`relative w-full max-w-[1100px] aspect-[1100/780] flex items-center justify-center overflow-visible transition-all duration-1000 delay-300 ease-out transform ${
               hasEntered
                 ? "opacity-100 scale-100"
                 : "opacity-0 scale-95"
             }`}
           >
-            {/* Real Three.js 3D Orbital Carousel with Orchestrated Entrance */}
-            <OneHealthOrbit3D
-              domains={domains}
-              core={core}
-              entranceProgress={entranceProgress}
+            <iframe
+              src={frameSrc}
+              title="There is no Planet B: soil, plants, animals, food and people share one planet"
+              className="absolute inset-0 h-full w-full border-0"
+              style={{ backgroundColor: "transparent" }}
+              loading="eager"
             />
           </div>
         </div>

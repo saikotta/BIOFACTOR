@@ -3,11 +3,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useTranslation } from "@/app/i18n/useTranslation";
+import { getChapterIconSvg } from "./OneHealthChapterIcon";
 
 interface CycleNode {
   id: string;
   name: string;
-  imgSrc: string;
 }
 
 export default function OneHealthClosing() {
@@ -17,12 +17,12 @@ export default function OneHealthClosing() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   const CYCLE_NODES: CycleNode[] = [
-    { id: "soil", name: t("one_health_chapter_soil_title"), imgSrc: "/images/one-health/soil.webp" },
-    { id: "plant", name: t("one_health_chapter_plant_title"), imgSrc: "/images/one-health/plant.webp" },
-    { id: "animal", name: t("one_health_chapter_animal_title"), imgSrc: "/images/one-health/animal.webp" },
-    { id: "food", name: t("one_health_chapter_food_title"), imgSrc: "/images/one-health/food.webp" },
-    { id: "people", name: t("one_health_chapter_people_title"), imgSrc: "/images/one-health/people.webp" },
-    { id: "planet", name: t("one_health_chapter_planet_title"), imgSrc: "/images/one-health/planet.png" },
+    { id: "soil",   name: t("one_health_chapter_soil_title")   },
+    { id: "plant",  name: t("one_health_chapter_plant_title")  },
+    { id: "animal", name: t("one_health_chapter_animal_title") },
+    { id: "food",   name: t("one_health_chapter_food_title")   },
+    { id: "people", name: t("one_health_chapter_people_title") },
+    { id: "planet", name: t("one_health_chapter_planet_title") },
   ];
 
   useEffect(() => {
@@ -141,7 +141,7 @@ export default function OneHealthClosing() {
             />
           </svg>
 
-          {/* 6 Round Spherical Nodes */}
+          {/* 6 SVG Node Icons (matching the orbit design) */}
           {CYCLE_NODES.map((node, idx) => (
             <div
               key={node.id}
@@ -154,24 +154,11 @@ export default function OneHealthClosing() {
                 transitionDelay: prefersReducedMotion ? "0ms" : `${300 + idx * 100}ms`,
               }}
             >
-              {/* 72px Spherical Node Container */}
-              <div className="relative w-14 h-14 sm:w-[72px] sm:h-[72px] rounded-full overflow-hidden border border-[#147A46]/30 shadow-md group cursor-pointer transform transition-transform duration-300 hover:scale-110">
-                {/* Photo Image */}
-                <img
-                  src={node.imgSrc}
-                  alt={node.name}
-                  className="w-full h-full object-cover"
-                />
-                {/* Spherical Overlay Highlight */}
-                <div
-                  className="absolute inset-0 pointer-events-none rounded-full"
-                  style={{
-                    background:
-                      "radial-gradient(circle at 35% 35%, rgba(255,255,255,0.45) 0%, transparent 60%), inset 0 0 12px rgba(0,0,0,0.35)",
-                  }}
-                />
-              </div>
-
+              {/* SVG icon node — 72px circle, matching orbit style */}
+              <div
+                className="w-14 h-14 sm:w-[72px] sm:h-[72px] shrink-0 transform transition-transform duration-300 hover:scale-110 cursor-pointer"
+                dangerouslySetInnerHTML={{ __html: getChapterIconSvg(node.id) }}
+              />
               {/* Node Mono Label */}
               <span className="font-mono text-[10px] sm:text-[11px] font-bold tracking-widest text-[#173522]/80 uppercase">
                 {node.name}

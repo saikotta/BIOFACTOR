@@ -1791,3 +1791,34 @@ body {
   }
 }
 
+/* Shared One Health backdrop: kept outside the embedded diagram so it never
+   creates a visible rectangular edge around the orbit. */
+.one-health-blob {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: .55;
+  animation: one-health-drift 18s ease-in-out infinite alternate;
+}
+.one-health-blob-green {
+  width: 46vmax;
+  height: 46vmax;
+  left: -12vmax;
+  top: -14vmax;
+  background: #e1ecd6;
+}
+.one-health-blob-peach {
+  width: 40vmax;
+  height: 40vmax;
+  right: -10vmax;
+  bottom: -12vmax;
+  background: #f6e7d2;
+  animation-delay: -7s;
+}
+@keyframes one-health-drift {
+  to { transform: translate(6vmax, 4vmax) scale(1.12); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .one-health-blob { animation: none; }
+}
