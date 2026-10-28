@@ -39,7 +39,13 @@ ErrorDocument 404 /404.html
   RewriteCond %{DOCUMENT_ROOT}/$1.html -f
   RewriteRule ^(.*)$ $1.html [L]
 
-  # 6) Fallback for non-existent routes
+  # 6) Missing _next or static assets should return 404 header directly (prevents returning HTML as JS)
+  RewriteCond %{REQUEST_URI} ^/_next/ [OR]
+  RewriteCond %{REQUEST_URI} \.(js|css|json|png|jpe?g|gif|svg|webp|ico|woff2?)$ [NC]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^ - [R=404,L]
+
+  # 7) Fallback for non-existent page routes -> serve custom 404 page
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^ /404.html [L]
