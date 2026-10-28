@@ -145,42 +145,17 @@ export default function OneHealthClosing() {
             isHoveredRef.current = false;
           }}
         >
-          {/* Keyframe styles for orbit energy flow */}
-          <style
-            dangerouslySetInnerHTML={{
-              __html: `
-                @keyframes orbitFlowPulse {
-                  from { stroke-dashoffset: 0; }
-                  to { stroke-dashoffset: -1000px; }
-                }
-              `,
-            }}
-          />
-
-          {/* SVG Connecting Loop Path */}
+          {/* SVG Connecting Loop Path: single solid thick green line */}
           <svg
             className="absolute inset-0 w-full h-full pointer-events-none overflow-visible z-0"
             viewBox="0 0 1000 200"
             fill="none"
             preserveAspectRatio="none"
           >
-            {/* Base Pale Orbit Track */}
-            <path
-              d="M 70 100 C 200 48, 800 48, 930 100 C 800 152, 200 152, 70 100 Z"
-              stroke="rgba(20, 122, 70, 0.22)"
-              strokeWidth="2"
-            />
-            {/* Animated Flowing Energy Dashes */}
             <path
               d="M 70 100 C 200 48, 800 48, 930 100 C 800 152, 200 152, 70 100 Z"
               stroke="#147A46"
               strokeWidth="2.5"
-              strokeDasharray="16 22"
-              style={{
-                animation: prefersReducedMotion
-                  ? "none"
-                  : "orbitFlowPulse 20s linear infinite",
-              }}
             />
           </svg>
 
