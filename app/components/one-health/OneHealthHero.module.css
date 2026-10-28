@@ -83,13 +83,13 @@
   max-width: 780px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: clamp(2.5rem, 4vh, 3.5rem);
+  margin-bottom: clamp(0.6rem, 1.4vh, 1rem);
 }
 
 /* ── Split Grid: Left Orbit, Right Cards ── */
 .splitGrid {
   display: grid;
-  grid-template-columns: minmax(0, 1.85fr) minmax(310px, 1fr);
+  grid-template-columns: minmax(0, 1.7fr) minmax(360px, 1fr);
   gap: clamp(1.25rem, 2.5vw, 2.75rem);
   align-items: center;
 }
@@ -120,6 +120,7 @@
   align-items: center;
   justify-content: center;
   overflow: visible;
+  margin-top: clamp(-20px, -2vw, -10px);
   margin-left: clamp(-16px, -1.8vw, 0px);
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -137,9 +138,9 @@
 .cardsCol {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.85rem;
   width: 100%;
-  max-width: 375px;
+  max-width: 420px;
   justify-self: end;
 }
 
@@ -149,6 +150,7 @@
   }
   .orbitFrameWrapper {
     max-width: 100%;
+    margin-top: 0;
     margin-left: 0;
   }
   .cardsCol {
@@ -163,11 +165,11 @@
 .card {
   background-color: #ffffff;
   border: 1px solid rgba(22, 122, 74, 0.12);
-  border-radius: 12px;
-  padding: 0.95rem 1.15rem;
+  border-radius: 14px;
+  padding: 1.1rem 1.35rem;
   display: flex;
   align-items: flex-start;
-  gap: 0.9rem;
+  gap: 1rem;
   cursor: default;
 
   /* Animation: starts above (-30px) and transparent, then slides DOWN */
@@ -200,12 +202,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 9px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
   background-color: #e4f1e9;
   font-family: var(--font-poppins), sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.825rem;
   font-weight: 700;
   color: #167a4a;
   letter-spacing: 0.02em;
@@ -215,23 +217,23 @@
 .cardContent {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.25rem;
 }
 
 .cardTitle {
   font-family: var(--font-poppins), sans-serif;
   font-weight: 700;
-  font-size: 0.98rem;
+  font-size: 1.05rem;
   color: #0d2b1a;
   line-height: 1.25;
 }
 
 .cardDescription {
   font-family: var(--font-poppins), sans-serif;
-  font-size: 0.825rem;
+  font-size: 0.865rem;
   font-weight: 400;
   color: #2d4a38;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 /* Scroll hint at section bottom */
