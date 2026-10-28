@@ -33,7 +33,7 @@ const VALUE_CARDS = [
   },
 ];
 
-/* ─── Individual Card with Slide-Down Animation + Hover Pop-Up ────────────── */
+/* ─── Individual Card with 3D Tilt, Specular Lighting & Slide-Down Animation ─ */
 function AnimatedValueCard({
   number,
   title,
@@ -47,12 +47,15 @@ function AnimatedValueCard({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const [tilt, setTilt] = useState({ x: 0, y: 0, rx: 0, ry: 0, active: false });
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setReducedMotion(reduce);
     if (reduce) {
       setVisible(true);
       return;
@@ -73,15 +76,75 @@ function AnimatedValueCard({
     return () => observer.disconnect();
   }, [delay]);
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (reducedMotion || !visible) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    // 3D Tilt: +- 7 degrees
+    const rx = -((y - centerY) / centerY) * 7;
+    const ry = ((x - centerX) / centerX) * 7;
+
+    setTilt({ x, y, rx, ry, active: true });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt((prev) => ({ ...prev, rx: 0, ry: 0, active: false }));
+  };
+
   return (
     <div
       ref={ref}
-      className={`${styles.card} ${visible ? styles.visible : ""}`}
+      suppressHydrationWarning
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className={`group relative overflow-hidden ${styles.card} ${
+        visible ? styles.visible : ""
+      }`}
+      style={{
+        transform: visible
+          ? tilt.active
+            ? `perspective(800px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg) translateY(-6px) scale(1.02)`
+            : "perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1)"
+          : "perspective(800px) translateY(-30px) scale(0.96)",
+        boxShadow: tilt.active
+          ? "0 22px 48px -10px rgba(22, 122, 74, 0.20), 0 8px 18px -6px rgba(0, 0, 0, 0.06)"
+          : undefined,
+        borderColor: tilt.active ? "rgba(22, 122, 74, 0.32)" : undefined,
+        transition: tilt.active
+          ? "transform 0.12s ease-out, box-shadow 0.25s ease, border-color 0.25s ease"
+          : "transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.65s ease-out, box-shadow 0.3s ease, border-color 0.3s ease",
+      }}
     >
-      <span className={styles.badge} aria-hidden="true">
+      {/* Specular ambient light sheen following the cursor */}
+      <div
+        className="pointer-events-none absolute inset-0 rounded-[14px] opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-0"
+        style={{
+          background: tilt.active
+            ? `radial-gradient(circle 220px at ${tilt.x}px ${tilt.y}px, rgba(22, 122, 74, 0.14), transparent 70%)`
+            : "none",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Number Badge with parallax depth */}
+      <span
+        className={`relative z-10 ${styles.badge}`}
+        style={{
+          transform: tilt.active ? "scale(1.05)" : "scale(1)",
+          transition: "transform 0.2s ease-out, background-color 0.3s ease",
+          backgroundColor: tilt.active ? "#d4ebdc" : undefined,
+        }}
+        aria-hidden="true"
+      >
         {number}
       </span>
-      <div className={styles.cardContent}>
+
+      {/* Card Content with subtle depth */}
+      <div className={`relative z-10 ${styles.cardContent}`}>
         <h3 className={styles.cardTitle}>{title}</h3>
         <p className={styles.cardDescription}>{desc}</p>
       </div>

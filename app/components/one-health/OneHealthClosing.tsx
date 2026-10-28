@@ -10,6 +10,16 @@ interface CycleNode {
   name: string;
 }
 
+// Clean static initial coordinates for SSR hydration consistency
+const INITIAL_NODE_POSITIONS = [
+  { left: "7%", top: "50%", scale: 0.98, opacity: 0.9, zIndex: 10 },
+  { left: "28.5%", top: "72.5%", scale: 1.04, opacity: 0.99, zIndex: 20 },
+  { left: "71.5%", top: "72.5%", scale: 1.04, opacity: 0.99, zIndex: 20 },
+  { left: "93%", top: "50%", scale: 0.98, opacity: 0.9, zIndex: 10 },
+  { left: "71.5%", top: "27.5%", scale: 0.92, opacity: 0.81, zIndex: 10 },
+  { left: "28.5%", top: "27.5%", scale: 0.92, opacity: 0.81, zIndex: 10 },
+];
+
 export default function OneHealthClosing() {
   const { t } = useTranslation();
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -123,12 +133,26 @@ export default function OneHealthClosing() {
         </span>
       </div>
 
-      {/* 2. Soft Radial Green Atmosphere Glow */}
+      {/* Keyframe style for slow ambient atmosphere breathing */}
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            @keyframes ambientGlowPulse {
+              0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.12; }
+              50% { transform: translate(-50%, -50%) scale(1.18); opacity: 0.22; }
+            }
+          `,
+        }}
+      />
+
+      {/* 2. Soft Radial Green Atmosphere Glow with gentle breathing */}
       <div
+        suppressHydrationWarning
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] pointer-events-none z-0 rounded-full"
         style={{
           background:
-            "radial-gradient(circle, rgba(20, 122, 70, 0.12) 0%, rgba(237, 244, 237, 0) 70%)",
+            "radial-gradient(circle, rgba(20, 122, 70, 0.18) 0%, rgba(237, 244, 237, 0) 70%)",
+          animation: prefersReducedMotion ? "none" : "ambientGlowPulse 8s ease-in-out infinite",
         }}
       />
 
@@ -161,14 +185,7 @@ export default function OneHealthClosing() {
 
           {/* 6 Revolving Node Icons (continuous cycle around orbit) */}
           {CYCLE_NODES.map((node, idx) => {
-            // Initial SSR fallback coordinates
-            const thetaInit = Math.PI - idx * (Math.PI / 3);
-            const xInit = 50 + 43 * Math.cos(thetaInit);
-            const yInit = 50 + 26 * Math.sin(thetaInit);
-            const sinInit = Math.sin(thetaInit);
-            const scaleInit = 0.9 + 0.16 * ((sinInit + 1) / 2);
-            const opacityInit = 0.8 + 0.2 * ((sinInit + 1) / 2);
-            const zInit = sinInit > 0 ? 20 : 10;
+            const initial = INITIAL_NODE_POSITIONS[idx] || INITIAL_NODE_POSITIONS[0];
 
             return (
               <div
@@ -176,17 +193,18 @@ export default function OneHealthClosing() {
                 ref={(el) => {
                   nodeRefs.current[idx] = el;
                 }}
+                suppressHydrationWarning
                 className={`absolute flex flex-col items-center gap-1.5 cursor-pointer will-change-transform select-none ${
                   isRevealed || prefersReducedMotion
                     ? "opacity-100"
                     : "opacity-0 scale-75"
                 }`}
                 style={{
-                  left: `${xInit}%`,
-                  top: `${yInit}%`,
-                  transform: `translate(-50%, -50%) scale(${scaleInit})`,
-                  opacity: opacityInit,
-                  zIndex: zInit,
+                  left: initial.left,
+                  top: initial.top,
+                  transform: `translate(-50%, -50%) scale(${initial.scale})`,
+                  opacity: initial.opacity,
+                  zIndex: initial.zIndex,
                   transition: isRevealed
                     ? "opacity 0.5s ease-out, scale 0.5s ease-out"
                     : "none",

@@ -177,7 +177,8 @@ export default function OneHealthFindCentre() {
             return (
               <div
                 key={centre.id}
-                className="group relative rounded-2xl bg-[#133827] border border-[#1E4D37] p-4 sm:p-5 hover:border-[#CBEA7B]/60 hover:shadow-[0_12px_28px_rgba(0,0,0,0.25)] hover:-translate-y-1 hover:scale-[1.015] transition-all duration-300 ease-out flex flex-col justify-between"
+                suppressHydrationWarning
+                className="group relative rounded-2xl bg-[#133827] border border-[#1E4D37] p-4 sm:p-5 hover:border-[#CBEA7B] hover:shadow-[0_16px_36px_rgba(0,0,0,0.35),0_0_24px_rgba(203,234,123,0.18)] hover:-translate-y-2 hover:scale-[1.025] transition-all duration-300 ease-out flex flex-col justify-between overflow-hidden cursor-pointer"
                 style={{
                   opacity: isRevealed ? 1 : 0,
                   transform: isRevealed
@@ -189,13 +190,16 @@ export default function OneHealthFindCentre() {
                   transitionDelay: isRevealed ? `${delayMs}ms` : "0ms",
                 }}
               >
-                <div>
+                {/* Subtle ambient light sheen on card hover */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#CBEA7B]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                <div className="relative z-10">
                   {/* Top Row: Title + Status Badge */}
                   <div className="flex items-center justify-between mb-1.5">
-                    <h3 className="text-base sm:text-lg font-serif font-bold text-white tracking-tight">
+                    <h3 className="text-base sm:text-lg font-serif font-bold text-white tracking-tight group-hover:text-[#E8F8C8] transition-colors duration-200">
                       {centre.name}
                     </h3>
-                    <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#CBEA7B] text-[#0C2619] font-mono text-[10px] font-bold tracking-wider">
+                    <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#CBEA7B] text-[#0C2619] font-mono text-[10px] font-bold tracking-wider transform transition-transform duration-300 group-hover:scale-105 group-hover:shadow-[0_0_12px_rgba(203,234,123,0.4)]">
                       {centre.status === "OPEN"
                         ? t("ohc_find_status_open", "OPEN")
                         : t("ohc_find_status_coming", "COMING SOON")}
@@ -203,7 +207,8 @@ export default function OneHealthFindCentre() {
                   </div>
 
                   {/* Location */}
-                  <p className="text-xs sm:text-[13px] text-[#A3C2B0] font-sans mb-2">
+                  <p className="text-xs sm:text-[13px] text-[#A3C2B0] font-sans mb-2 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#CBEA7B]/60" />
                     {centre.location}
                   </p>
 

@@ -96,7 +96,7 @@ export default function OneHealthFranchise() {
               {t("ohc_franchise_subtitle", "Build a purposeful rural business backed by Biofactor's science, products and brand.")}
             </p>
 
-            {/* 6 Benefit Pills: 2 columns x 3 rows grid with uniform sizing */}
+            {/* 6 Benefit Pills: 2 columns x 3 rows grid with uniform sizing & light sweep */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 w-full">
               {BENEFITS.map((benefit, idx) => {
                 const delayMs = 120 + idx * 70;
@@ -104,7 +104,8 @@ export default function OneHealthFranchise() {
                 return (
                   <div
                     key={idx}
-                    className="h-[74px] sm:h-[76px] flex items-center gap-3.5 bg-white rounded-2xl px-5 border border-[#173522]/8 shadow-[0_2px_12px_rgba(23,53,34,0.03)] hover:shadow-[0_8px_24px_rgba(23,53,34,0.08)] hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 cursor-default"
+                    suppressHydrationWarning
+                    className="group relative overflow-hidden h-[74px] sm:h-[76px] flex items-center gap-3.5 bg-white rounded-2xl px-5 border border-[#173522]/8 hover:border-[#3F7D4B]/40 shadow-[0_2px_12px_rgba(23,53,34,0.03)] hover:shadow-[0_12px_28px_rgba(23,53,34,0.10)] hover:-translate-y-1.5 hover:scale-[1.02] transition-all duration-300 cursor-default"
                     style={{
                       opacity: isRevealed ? 1 : 0,
                       transform: isRevealed ? "translateY(0)" : "translateY(20px)",
@@ -113,8 +114,11 @@ export default function OneHealthFranchise() {
                       transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
                     }}
                   >
-                    <span className="w-2 h-2 rounded-full bg-[#3F7D4B] shrink-0" />
-                    <span className="text-[14px] sm:text-[14.5px] font-semibold text-[#173522] leading-snug">
+                    {/* Prismatic light sweep glint on card hover */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#3F7D4B]/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
+
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#3F7D4B] shrink-0 transform transition-transform duration-300 group-hover:scale-125" />
+                    <span className="relative z-10 text-[14px] sm:text-[14.5px] font-semibold text-[#173522] leading-snug group-hover:text-[#184529] transition-colors duration-200">
                       {benefit}
                     </span>
                   </div>
@@ -260,14 +264,18 @@ export default function OneHealthFranchise() {
                     </div>
                   </div>
 
-                  {/* Submit Button */}
+                  {/* Submit Button with 3D lift & light sweep */}
                   <div className="pt-2">
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full py-3 sm:py-3.5 rounded-full bg-[#17402F] hover:bg-[#0F2D1F] text-white font-semibold text-sm sm:text-base tracking-wide transition-all duration-300 shadow-md hover:shadow-lg hover:scale-[1.01] cursor-pointer disabled:opacity-70"
+                      className="group relative overflow-hidden w-full py-3.5 sm:py-4 rounded-full bg-[#17402F] hover:bg-[#0F2D1F] text-white font-semibold text-sm sm:text-base tracking-wide transition-all duration-300 shadow-md hover:shadow-[0_12px_28px_rgba(23,64,47,0.3)] hover:-translate-y-1 hover:scale-[1.01] cursor-pointer disabled:opacity-70"
                     >
-                      {isSubmitting ? t("ohc_form_submitting", "Submitting...") : t("ohc_form_btn_apply", "Apply for franchise")}
+                      {/* Button diagonal light sweep */}
+                      <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
+                      <span className="relative z-10">
+                        {isSubmitting ? t("ohc_form_submitting", "Submitting...") : t("ohc_form_btn_apply", "Apply for franchise")}
+                      </span>
                     </button>
                   </div>
                 </form>
