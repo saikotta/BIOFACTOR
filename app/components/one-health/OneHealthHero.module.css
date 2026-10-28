@@ -19,11 +19,11 @@
   position: relative;
   z-index: 10;
   width: 100%;
-  max-width: 1400px;
+  max-width: 1540px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: clamp(20px, 4vw, 56px);
-  padding-right: clamp(20px, 4vw, 56px);
+  padding-left: clamp(12px, 2.5vw, 36px);
+  padding-right: clamp(16px, 3vw, 48px);
 }
 
 /* ── Eyebrow ── */
@@ -89,15 +89,15 @@
 /* ── Split Grid: Left Orbit, Right Cards ── */
 .splitGrid {
   display: grid;
-  grid-template-columns: 1.35fr 1fr;
-  gap: clamp(1.5rem, 3.5vw, 3.5rem);
+  grid-template-columns: minmax(0, 1.85fr) minmax(310px, 1fr);
+  gap: clamp(1.25rem, 2.5vw, 2.75rem);
   align-items: center;
 }
 
 @media (max-width: 992px) {
   .splitGrid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 2rem;
   }
 }
 
@@ -106,7 +106,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   position: relative;
 }
@@ -114,12 +114,13 @@
 .orbitFrameWrapper {
   position: relative;
   width: 100%;
-  max-width: 760px;
+  max-width: 960px;
   aspect-ratio: 1100 / 765;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: visible;
+  margin-left: clamp(-16px, -1.8vw, 0px);
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -136,20 +137,37 @@
 .cardsCol {
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: 0.75rem;
   width: 100%;
-  max-width: 480px;
+  max-width: 375px;
+  justify-self: end;
+}
+
+@media (max-width: 992px) {
+  .orbitCol {
+    align-items: center;
+  }
+  .orbitFrameWrapper {
+    max-width: 100%;
+    margin-left: 0;
+  }
+  .cardsCol {
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-self: center;
+  }
 }
 
 /* ── Card (comes down from top, pop up on hover) ── */
 .card {
   background-color: #ffffff;
   border: 1px solid rgba(22, 122, 74, 0.12);
-  border-radius: 14px;
-  padding: 1.15rem 1.4rem;
+  border-radius: 12px;
+  padding: 0.95rem 1.15rem;
   display: flex;
   align-items: flex-start;
-  gap: 1.1rem;
+  gap: 0.9rem;
   cursor: default;
 
   /* Animation: starts above (-30px) and transparent, then slides DOWN */
@@ -182,12 +200,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
   background-color: #e4f1e9;
   font-family: var(--font-poppins), sans-serif;
-  font-size: 0.825rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: #167a4a;
   letter-spacing: 0.02em;
@@ -197,23 +215,23 @@
 .cardContent {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.2rem;
 }
 
 .cardTitle {
   font-family: var(--font-poppins), sans-serif;
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 0.98rem;
   color: #0d2b1a;
   line-height: 1.25;
 }
 
 .cardDescription {
   font-family: var(--font-poppins), sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.825rem;
   font-weight: 400;
   color: #2d4a38;
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
 /* Scroll hint at section bottom */
