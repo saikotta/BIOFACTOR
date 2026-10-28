@@ -389,7 +389,7 @@ export default function OneHealthChapters() {
       </div>
 
       {/* 5. Main Content: 6 Alternating Chapters (Comfortable spacing, no large empty gaps) */}
-      <div className="relative z-10 w-full max-w-[1240px] mx-auto px-6 sm:px-10 lg:px-14">
+      <div className="relative z-10 w-full max-w-[1240px] mx-auto px-6 sm:px-10 lg:px-14 py-4 sm:py-6 lg:py-8">
         {CHAPTERS.map((ch, idx) => {
           const isRevealed = revealedPanels[idx];
           const headlineLines = splitHeadlineIntoLines(ch.headline);
@@ -408,7 +408,7 @@ export default function OneHealthChapters() {
               ref={(el) => {
                 panelRefs.current[idx] = el;
               }}
-              className="health-panel flex items-center justify-center py-6 sm:py-8 lg:py-10 relative"
+              className="health-panel flex items-center justify-center py-2 sm:py-3 lg:py-3.5 relative"
             >
               {/* 2-Column Grid Row for Each Chapter */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 xl:gap-14 items-center w-full relative">
@@ -502,7 +502,7 @@ export default function OneHealthChapters() {
                     isEven
                       ? "md:order-2 md:justify-start"
                       : "md:order-1 md:justify-center"
-                  } flex items-center justify-center py-4 lg:py-0 transition-all duration-1000 ease-out ${
+                  } flex items-center justify-center py-2 lg:py-0 transition-all duration-1000 ease-out ${
                     isRevealed || prefersReducedMotion
                       ? "opacity-100 translate-x-0 scale-100 rotate-0"
                       : isEven
