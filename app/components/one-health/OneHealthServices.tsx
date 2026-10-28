@@ -113,7 +113,7 @@ export default function OneHealthServices() {
   }, []);
 
   return (
-    <section className="relative w-full bg-[#EDF4ED] text-[#173522] py-16 lg:py-24 overflow-hidden">
+    <section className="relative w-full bg-[#EDF4ED] text-[#173522] pt-8 sm:pt-10 lg:pt-12 pb-16 lg:pb-24 overflow-hidden">
       {/* Ambient background glow */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none opacity-30 blur-3xl -z-0"

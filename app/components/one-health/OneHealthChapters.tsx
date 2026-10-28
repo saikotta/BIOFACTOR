@@ -389,7 +389,7 @@ export default function OneHealthChapters() {
       </div>
 
       {/* 5. Main Content: 6 Alternating Chapters (Comfortable spacing, no large empty gaps) */}
-      <div className="relative z-10 w-full max-w-[1240px] mx-auto px-6 sm:px-10 lg:px-14 py-4 sm:py-6 lg:py-8">
+      <div className="relative z-10 w-full max-w-[1240px] mx-auto px-6 sm:px-10 lg:px-14 pt-1 sm:pt-2 lg:pt-2 pb-4 sm:pb-6 lg:pb-8">
         {CHAPTERS.map((ch, idx) => {
           const isRevealed = revealedPanels[idx];
           const headlineLines = splitHeadlineIntoLines(ch.headline);

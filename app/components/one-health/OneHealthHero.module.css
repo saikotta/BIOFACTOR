@@ -12,7 +12,7 @@
   font-family: var(--font-poppins), sans-serif;
   overflow: visible;
   padding-top: clamp(2.5rem, 5vh, 4rem);
-  padding-bottom: clamp(3rem, 6vh, 5rem);
+  padding-bottom: clamp(1rem, 2vh, 1.75rem);
 }
 
 .inner {
@@ -89,8 +89,8 @@
 /* ── Split Grid: Left Orbit, Right Cards ── */
 .splitGrid {
   display: grid;
-  grid-template-columns: minmax(0, 1.7fr) minmax(360px, 1fr);
-  gap: clamp(1.25rem, 2.5vw, 2.75rem);
+  grid-template-columns: minmax(0, 1.95fr) minmax(350px, 420px);
+  gap: clamp(0.75rem, 1.5vw, 1.75rem);
   align-items: center;
 }
 
@@ -114,7 +114,7 @@
 .orbitFrameWrapper {
   position: relative;
   width: 100%;
-  max-width: 960px;
+  max-width: 1040px;
   aspect-ratio: 1100 / 765;
   display: flex;
   align-items: center;
@@ -238,7 +238,7 @@
 
 /* Scroll hint at section bottom */
 .scrollHint {
-  margin-top: 3rem;
+  margin-top: clamp(1rem, 1.8vh, 1.5rem);
   display: flex;
   flex-direction: column;
   align-items: center;
