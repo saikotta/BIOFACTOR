@@ -48,12 +48,10 @@ export default function OneHealthClosing() {
     return () => observer.disconnect();
   }, []);
 
-  const marqueeText = "SOIL · PLANT · ANIMAL · FOOD · PEOPLE · PLANET · ";
-
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-[#EDF4ED] text-[#173522] pt-4 sm:pt-6 lg:pt-8 pb-16 md:pb-24 px-6 relative z-20 font-sans overflow-hidden"
+      className="w-full bg-[#EDF4ED] text-[#173522] py-14 sm:py-18 lg:py-20 px-6 relative z-20 font-sans overflow-hidden"
     >
       {/* 1. Large Faint Outlined Ghost Text Behind Content */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 select-none overflow-hidden">
@@ -75,39 +73,6 @@ export default function OneHealthClosing() {
             "radial-gradient(circle, rgba(20, 122, 70, 0.12) 0%, rgba(237, 244, 237, 0) 70%)",
         }}
       />
-
-      {/* 3. Slow Looping Marquee Above Content (~40s per loop) */}
-      <div className="w-full overflow-hidden mb-12 relative z-10 pointer-events-none select-none">
-        <div
-          className="flex whitespace-nowrap"
-          style={{
-            animation: prefersReducedMotion ? "none" : "marqueeLoop 40s linear infinite",
-          }}
-        >
-          {[0, 1, 2].map((groupIdx) => (
-            <span
-              key={groupIdx}
-              className="font-serif font-bold text-[clamp(48px,8vw,110px)] tracking-tight text-transparent opacity-25 px-4"
-              style={{
-                WebkitTextStroke: "1px #147A46",
-              }}
-            >
-              {marqueeText}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <style jsx>{`
-        @keyframes marqueeLoop {
-          0% {
-            transform: translate3d(0, 0, 0);
-          }
-          100% {
-            transform: translate3d(-33.333%, 0, 0);
-          }
-        }
-      `}</style>
 
       {/* Main Content Layout Container */}
       <div className="max-w-[840px] mx-auto text-center flex flex-col items-center relative z-10">

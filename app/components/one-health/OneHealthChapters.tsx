@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import OneHealthChapterIcon from "./OneHealthChapterIcon";
-import OneHealthChainBand from "./OneHealthChainBand";
 import { useTranslation } from "@/app/i18n/useTranslation";
 
 interface ChapterData {
@@ -538,9 +537,6 @@ export default function OneHealthChapters() {
           );
         })}
       </div>
-
-      {/* 6. Chain Band Marquee */}
-      <OneHealthChainBand />
     </div>
   );
 }
