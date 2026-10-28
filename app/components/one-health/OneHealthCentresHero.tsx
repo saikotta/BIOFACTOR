@@ -1,82 +1,10 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "./OneHealthCentresHero.module.css";
 import { useTranslation } from "../../i18n";
 
-/* ─── Stat definitions ─────────────────────────────────────────────────────── */
-const STATS = [
-  { target: 120, suffix: "+",  label: "Centres" },
-  { target: 50,  suffix: "K+", label: "Farmers served" },
-  { target: 9,   suffix: "",   label: "States" },
-];
-
-/* ─── Animated count-up hook ──────────────────────────────────────────────── */
-function useCountUp(target: number, duration = 1800) {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-  const started = useRef(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (!entries[0].isIntersecting || started.current) return;
-        started.current = true;
-        observer.disconnect();
-
-        if (reduce) {
-          setCount(target);
-          return;
-        }
-
-        const start = performance.now();
-        const tick = (now: number) => {
-          const progress = Math.min(1, (now - start) / duration);
-          const eased = 1 - Math.pow(1 - progress, 3); // cubic ease-out
-          setCount(Math.round(target * eased));
-          if (progress < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-      },
-      { threshold: 0.4 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [target, duration]);
-
-  return { count, ref };
-}
-
-/* ─── Individual stat item ────────────────────────────────────────────────── */
-function StatItem({
-  target,
-  suffix,
-  label,
-}: {
-  target: number;
-  suffix: string;
-  label: string;
-}) {
-  const { count, ref } = useCountUp(target);
-  return (
-    <div className={styles.statItem}>
-      <span className={styles.statNumber} ref={ref}>
-        {count}
-        {suffix}
-      </span>
-      <span className={styles.statLabel}>{label}</span>
-    </div>
-  );
-}
-
-/* ─── Main component ──────────────────────────────────────────────────────── */
 export default function OneHealthCentresHero() {
   const { t } = useTranslation();
   const [entered, setEntered] = useState(false);
@@ -105,10 +33,10 @@ export default function OneHealthCentresHero() {
       {/* ── Gradient overlay ── */}
       <div className={styles.overlay} aria-hidden="true" />
 
-      {/* ── Main content ── */}
+      {/* ── Main content (exactly 1 screen, content anchored at bottom-left) ── */}
       <div className={styles.container}>
 
-        {/* Flexible spacer — pushes text down so sky + sign at top is fully visible */}
+        {/* Flexible spacer — lets the photo, agronomist and OHC signage breathe */}
         <div className={styles.spacer} aria-hidden="true" />
 
         {/* Text block (bottom-left) */}
@@ -125,7 +53,7 @@ export default function OneHealthCentresHero() {
             </span>
           </div>
 
-          {/* Headline — single slide-up reveal so it NEVER breaks mid-line */}
+          {/* Headline — single slide-up reveal */}
           <h1 className={styles.headline} aria-label={`${t("ohc_headline_pre", "Plant to Planet")} – ${t("ohc_headline_accent", "1 Health")}`}>
             <span className={styles.wordWrap}>
               <span
@@ -145,7 +73,7 @@ export default function OneHealthCentresHero() {
           >
             {t(
               "ohc_subtitle",
-              "Connecting farmers with science, solutions and sustainable agriculture\u00a0\u2014 right in your village."
+              "Connecting farmers with science, solutions and sustainable agriculture — right in your village."
             )}
           </p>
 
@@ -160,31 +88,6 @@ export default function OneHealthCentresHero() {
             <Link href="/booking/" className={styles.btnSecondary}>
               {t("ohc_cta_request", "Request a service")}
             </Link>
-          </div>
-
-          {/* Stats — divider + animated count-up numbers
-              These sit ~30–40vh below the CTA, scrolling into view just like the PDF */}
-          <div className={styles.statsSection}>
-            <div className={styles.statsDivider} />
-            <div
-              className={styles.statsBar}
-              role="list"
-              aria-label="One Health Centres key figures"
-            >
-              {[
-                { target: 120, suffix: "+", label: t("ohc_stat_centres", "Centres") },
-                { target: 50, suffix: "K+", label: t("ohc_stat_farmers", "Farmers served") },
-                { target: 9, suffix: "", label: t("ohc_stat_states", "States") },
-              ].map((stat) => (
-                <div key={stat.label} role="listitem">
-                  <StatItem
-                    target={stat.target}
-                    suffix={stat.suffix}
-                    label={stat.label}
-                  />
-                </div>
-              ))}
-            </div>
           </div>
 
         </div>
