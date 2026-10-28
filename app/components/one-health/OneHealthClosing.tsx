@@ -16,6 +16,11 @@ export default function OneHealthClosing() {
   const [isRevealed, setIsRevealed] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
+  const nodeRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const isHoveredRef = useRef(false);
+  const angleRef = useRef(0);
+  const animFrameRef = useRef<number | null>(null);
+
   const CYCLE_NODES: CycleNode[] = [
     { id: "soil",   name: t("one_health_chapter_soil_title")   },
     { id: "plant",  name: t("one_health_chapter_plant_title")  },
@@ -48,6 +53,59 @@ export default function OneHealthClosing() {
     return () => observer.disconnect();
   }, []);
 
+  // Continuous revolving orbit animation along the ellipse track
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+
+    let lastTime = performance.now();
+
+    const update = (now: number) => {
+      const dt = Math.min(0.1, (now - lastTime) / 1000);
+      lastTime = now;
+
+      if (!isHoveredRef.current && isRevealed) {
+        // Smooth revolution: complete loop every 22 seconds
+        angleRef.current = (angleRef.current + dt * ((2 * Math.PI) / 22)) % (2 * Math.PI);
+      }
+
+      const curAngle = angleRef.current;
+
+      nodeRefs.current.forEach((el, idx) => {
+        if (!el) return;
+
+        // 6 nodes spaced by 60 degrees (PI / 3)
+        // Clockwise motion: Soil starts at left (PI), revolving smoothly
+        const theta = Math.PI - idx * (Math.PI / 3) - curAngle;
+
+        // Parametric coordinates along ellipse in percentages
+        const xPct = 50 + 43 * Math.cos(theta);
+        const yPct = 50 + 26 * Math.sin(theta);
+
+        // 3D depth scaling and opacity
+        const sinVal = Math.sin(theta);
+        const scale = 0.9 + 0.16 * ((sinVal + 1) / 2);
+        const opacity = 0.8 + 0.2 * ((sinVal + 1) / 2);
+        const zIndex = sinVal > 0 ? 20 : 10;
+
+        el.style.left = `${xPct}%`;
+        el.style.top = `${yPct}%`;
+        el.style.transform = `translate(-50%, -50%) scale(${scale})`;
+        el.style.opacity = `${opacity}`;
+        el.style.zIndex = `${zIndex}`;
+      });
+
+      animFrameRef.current = requestAnimationFrame(update);
+    };
+
+    animFrameRef.current = requestAnimationFrame(update);
+
+    return () => {
+      if (animFrameRef.current) {
+        cancelAnimationFrame(animFrameRef.current);
+      }
+    };
+  }, [prefersReducedMotion, isRevealed]);
+
   return (
     <section
       ref={sectionRef}
@@ -77,59 +135,100 @@ export default function OneHealthClosing() {
       {/* Main Content Layout Container */}
       <div className="max-w-[840px] mx-auto text-center flex flex-col items-center relative z-10">
 
-        {/* 4. Chain of 6 Round Photo Nodes (72px) joined by Curved Cycle Path */}
-        <div className="w-full max-w-[760px] mb-14 relative flex items-center justify-between px-2 sm:px-6">
+        {/* 4. Chain of 6 Round Photo Nodes joined by Animated Orbit Path */}
+        <div
+          className="w-full max-w-[780px] h-[150px] sm:h-[175px] mb-12 sm:mb-14 relative"
+          onMouseEnter={() => {
+            isHoveredRef.current = true;
+          }}
+          onMouseLeave={() => {
+            isHoveredRef.current = false;
+          }}
+        >
+          {/* Keyframe styles for orbit energy flow */}
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `
+                @keyframes orbitFlowPulse {
+                  from { stroke-dashoffset: 0; }
+                  to { stroke-dashoffset: -1000px; }
+                }
+              `,
+            }}
+          />
+
           {/* SVG Connecting Loop Path */}
           <svg
             className="absolute inset-0 w-full h-full pointer-events-none overflow-visible z-0"
-            viewBox="0 0 760 120"
+            viewBox="0 0 1000 200"
             fill="none"
             preserveAspectRatio="none"
           >
-            {/* Base Pale Line */}
+            {/* Base Pale Orbit Track */}
             <path
-              d="M 40 45 C 160 15, 600 15, 720 45 C 600 105, 160 105, 40 45"
-              stroke="rgba(20, 122, 70, 0.2)"
-              strokeWidth="1.5"
-              strokeDasharray="4 4"
-            />
-            {/* Animated Draw Line */}
-            <path
-              d="M 40 45 C 160 15, 600 15, 720 45 C 600 105, 160 105, 40 45"
-              stroke="#147A46"
+              d="M 70 100 C 200 48, 800 48, 930 100 C 800 152, 200 152, 70 100 Z"
+              stroke="rgba(20, 122, 70, 0.22)"
               strokeWidth="2"
-              strokeDasharray="1600"
-              strokeDashoffset={isRevealed || prefersReducedMotion ? "0" : "1600"}
+            />
+            {/* Animated Flowing Energy Dashes */}
+            <path
+              d="M 70 100 C 200 48, 800 48, 930 100 C 800 152, 200 152, 70 100 Z"
+              stroke="#147A46"
+              strokeWidth="2.5"
+              strokeDasharray="16 22"
               style={{
-                transition: prefersReducedMotion ? "none" : "stroke-dashoffset 1.2s ease-out",
+                animation: prefersReducedMotion
+                  ? "none"
+                  : "orbitFlowPulse 20s linear infinite",
               }}
             />
           </svg>
 
-          {/* 6 SVG Node Icons (matching the orbit design) */}
-          {CYCLE_NODES.map((node, idx) => (
-            <div
-              key={node.id}
-              className={`relative z-10 flex flex-col items-center gap-2 transition-all duration-700 ease-out ${
-                isRevealed || prefersReducedMotion
-                  ? "opacity-100 scale-100 translate-y-0"
-                  : "opacity-0 scale-75 translate-y-4"
-              }`}
-              style={{
-                transitionDelay: prefersReducedMotion ? "0ms" : `${300 + idx * 100}ms`,
-              }}
-            >
-              {/* SVG icon node — 72px circle, matching orbit style */}
+          {/* 6 Revolving Node Icons (continuous cycle around orbit) */}
+          {CYCLE_NODES.map((node, idx) => {
+            // Initial SSR fallback coordinates
+            const thetaInit = Math.PI - idx * (Math.PI / 3);
+            const xInit = 50 + 43 * Math.cos(thetaInit);
+            const yInit = 50 + 26 * Math.sin(thetaInit);
+            const sinInit = Math.sin(thetaInit);
+            const scaleInit = 0.9 + 0.16 * ((sinInit + 1) / 2);
+            const opacityInit = 0.8 + 0.2 * ((sinInit + 1) / 2);
+            const zInit = sinInit > 0 ? 20 : 10;
+
+            return (
               <div
-                className="w-14 h-14 sm:w-[72px] sm:h-[72px] shrink-0 transform transition-transform duration-300 hover:scale-110 cursor-pointer"
-                dangerouslySetInnerHTML={{ __html: getChapterIconSvg(node.id) }}
-              />
-              {/* Node Mono Label */}
-              <span className="font-mono text-[10px] sm:text-[11px] font-bold tracking-widest text-[#173522]/80 uppercase">
-                {node.name}
-              </span>
-            </div>
-          ))}
+                key={node.id}
+                ref={(el) => {
+                  nodeRefs.current[idx] = el;
+                }}
+                className={`absolute flex flex-col items-center gap-1.5 cursor-pointer will-change-transform select-none ${
+                  isRevealed || prefersReducedMotion
+                    ? "opacity-100"
+                    : "opacity-0 scale-75"
+                }`}
+                style={{
+                  left: `${xInit}%`,
+                  top: `${yInit}%`,
+                  transform: `translate(-50%, -50%) scale(${scaleInit})`,
+                  opacity: opacityInit,
+                  zIndex: zInit,
+                  transition: isRevealed
+                    ? "opacity 0.5s ease-out, scale 0.5s ease-out"
+                    : "none",
+                }}
+              >
+                {/* SVG icon node circle (68px) with hover pop-up */}
+                <div
+                  className="w-13 h-13 sm:w-16 sm:h-16 shrink-0 transform transition-transform duration-300 hover:scale-115 drop-shadow-sm"
+                  dangerouslySetInnerHTML={{ __html: getChapterIconSvg(node.id) }}
+                />
+                {/* Node Mono Label */}
+                <span className="font-mono text-[9px] sm:text-[11px] font-bold tracking-widest text-[#173522]/85 uppercase select-none whitespace-nowrap bg-[#EDF4ED]/85 px-2 py-0.5 rounded-full shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
+                  {node.name}
+                </span>
+              </div>
+            );
+          })}
         </div>
 
         {/* 5. Main Closing Statement Paragraph with Masked Line Reveal */}
