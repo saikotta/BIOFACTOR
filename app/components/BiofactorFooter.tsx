@@ -165,7 +165,7 @@ export default function BiofactorFooter() {
             <Link href="#" className="font-mono text-xs text-[#26382D]/70 hover:text-[#167A4A] tracking-wide transition-colors font-medium">
               {t("footer_terms", "Terms of Service")}
             </Link>
-            <Link href="#" className="font-mono text-xs text-[#26382D]/70 hover:text-[#167A4A] tracking-wide transition-colors font-medium">
+            <Link href="/privacy-policy" className="font-mono text-xs text-[#26382D]/70 hover:text-[#167A4A] tracking-wide transition-colors font-medium">
               {t("footer_privacy", "Privacy Policy")}
             </Link>
           </div>
